@@ -123,10 +123,12 @@ class ExportSwift {
         }
 
         private func visitFunction(node: FunctionDeclSyntax) -> ExportedFunction? {
-            guard node.attributes.hasJSAttribute() else {
+            guard let jsAttribute = node.attributes.firstJSAttribute else {
                 return nil
             }
-            let name = node.name.text
+            
+            let (baseName, namespace) = extractNameAndNamespace(from: node, jsAttribute: jsAttribute)
+            
             var parameters: [Parameter] = []
             for param in node.signature.parameterClause.parameters {
                 guard let type = self.parent.lookupType(for: param.type) else {
@@ -151,9 +153,9 @@ class ExportSwift {
             let abiName: String
             switch state {
             case .topLevel:
-                abiName = "bjs_\(name)"
+                abiName = "bjs_\(baseName)"
             case .classBody(let className):
-                abiName = "bjs_\(className)_\(name)"
+                abiName = "bjs_\(className)_\(baseName)"
             }
 
             guard let effects = collectEffects(signature: node.signature) else {
@@ -161,11 +163,12 @@ class ExportSwift {
             }
 
             return ExportedFunction(
-                name: name,
+                name: baseName,
                 abiName: abiName,
                 parameters: parameters,
                 returnType: returnType,
-                effects: effects
+                effects: effects,
+                namespace: namespace
             )
         }
 
@@ -191,6 +194,19 @@ class ExportSwift {
                 isThrows = true
             }
             return Effects(isAsync: isAsync, isThrows: isThrows)
+        }
+        
+        private func extractNameAndNamespace(
+            from node: FunctionDeclSyntax,
+            jsAttribute: AttributeSyntax
+        ) -> (name: String, namespace: [String]?) {
+            guard let arguments = jsAttribute.arguments?.as(LabeledExprListSyntax.self),
+                  let firstArg = arguments.first?.expression.as(StringLiteralExprSyntax.self),
+                  let namespaceString = firstArg.segments.first?.as(StringSegmentSyntax.self)?.content.text else {
+                return (node.name.text, nil)
+            }
+            let namespaces = namespaceString.split(separator: ".").map(String.init)
+            return (node.name.text, namespaces)
         }
 
         override func visit(_ node: InitializerDeclSyntax) -> SyntaxVisitorContinueKind {
@@ -227,11 +243,13 @@ class ExportSwift {
             let name = node.name.text
             stateStack.push(state: .classBody(name: name))
 
-            guard node.attributes.hasJSAttribute() else { return .skipChildren }
+            guard let jsAttribute = node.attributes.firstJSAttribute else { return .skipChildren }
+            
             exportedClassByName[name] = ExportedClass(
                 name: name,
                 constructor: nil,
-                methods: []
+                methods: [],
+                namespace: nil
             )
             exportedClassNames.append(name)
             return .visitChildren
@@ -635,9 +653,13 @@ class ExportSwift {
 
 extension AttributeListSyntax {
     fileprivate func hasJSAttribute() -> Bool {
-        return first(where: {
+        firstJSAttribute != nil
+    }
+    
+    fileprivate var firstJSAttribute: AttributeSyntax? {
+        first(where: {
             $0.as(AttributeSyntax.self)?.attributeName.trimmedDescription == "JS"
-        }) != nil
+        })?.as(AttributeSyntax.self)
     }
 }
 
