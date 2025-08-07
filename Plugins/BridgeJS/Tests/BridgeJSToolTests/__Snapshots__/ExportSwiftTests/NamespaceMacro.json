@@ -1,0 +1,73 @@
+{
+  "classes" : [
+
+  ],
+  "functions" : [
+    {
+      "abiName" : "bjs_create",
+      "effects" : {
+        "isAsync" : false,
+        "isThrows" : false
+      },
+      "name" : "create",
+      "namespace" : [
+        "__Swift",
+        "Foundation",
+        "UUID"
+      ],
+      "parameters" : [
+
+      ],
+      "returnType" : {
+        "string" : {
+
+        }
+      }
+    },
+    {
+      "abiName" : "bjs_validate",
+      "effects" : {
+        "isAsync" : false,
+        "isThrows" : false
+      },
+      "name" : "validate",
+      "namespace" : [
+        "__Swift",
+        "Foundation",
+        "UUID"
+      ],
+      "parameters" : [
+        {
+          "label" : "uuid",
+          "name" : "uuid",
+          "type" : {
+            "string" : {
+
+            }
+          }
+        }
+      ],
+      "returnType" : {
+        "bool" : {
+
+        }
+      }
+    },
+    {
+      "abiName" : "bjs_plainFunction",
+      "effects" : {
+        "isAsync" : false,
+        "isThrows" : false
+      },
+      "name" : "plainFunction",
+      "parameters" : [
+
+      ],
+      "returnType" : {
+        "string" : {
+
+        }
+      }
+    }
+  ]
+}

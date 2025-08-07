@@ -127,7 +127,7 @@ class ExportSwift {
                 return nil
             }
             
-            let (baseName, namespace) = extractNameAndNamespace(from: node, jsAttribute: jsAttribute)
+            let (name, namespace) = extractNameAndNamespace(from: node, jsAttribute: jsAttribute)
             
             var parameters: [Parameter] = []
             for param in node.signature.parameterClause.parameters {
@@ -153,9 +153,9 @@ class ExportSwift {
             let abiName: String
             switch state {
             case .topLevel:
-                abiName = "bjs_\(baseName)"
+                abiName = "bjs_\(name)"
             case .classBody(let className):
-                abiName = "bjs_\(className)_\(baseName)"
+                abiName = "bjs_\(className)_\(name)"
             }
 
             guard let effects = collectEffects(signature: node.signature) else {
@@ -163,7 +163,7 @@ class ExportSwift {
             }
 
             return ExportedFunction(
-                name: baseName,
+                name: name,
                 abiName: abiName,
                 parameters: parameters,
                 returnType: returnType,
@@ -243,7 +243,7 @@ class ExportSwift {
             let name = node.name.text
             stateStack.push(state: .classBody(name: name))
 
-            guard let jsAttribute = node.attributes.firstJSAttribute else { return .skipChildren }
+            guard node.attributes.hasJSAttribute() else { return .skipChildren }
             
             exportedClassByName[name] = ExportedClass(
                 name: name,

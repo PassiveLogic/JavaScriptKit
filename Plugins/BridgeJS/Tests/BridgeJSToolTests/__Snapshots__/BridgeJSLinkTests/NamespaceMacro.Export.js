@@ -46,34 +46,7 @@ export async function createInstantiator(options, swift) {
             bjs["swift_js_release"] = function(id) {
                 swift.memory.release(id);
             }
-            const TestModule = importObject["TestModule"] = {};
-            TestModule["bjs_returnAnimatable"] = function bjs_returnAnimatable() {
-                try {
-                    let ret = options.imports.returnAnimatable();
-                    return swift.memory.retain(ret);
-                } catch (error) {
-                    setException(error);
-                    return 0
-                }
-            }
-            TestModule["bjs_Animatable_animate"] = function bjs_Animatable_animate(self, keyframes, options) {
-                try {
-                    let ret = swift.memory.getObject(self).animate(swift.memory.getObject(keyframes), swift.memory.getObject(options));
-                    return swift.memory.retain(ret);
-                } catch (error) {
-                    setException(error);
-                    return 0
-                }
-            }
-            TestModule["bjs_Animatable_getAnimations"] = function bjs_Animatable_getAnimations(self, options) {
-                try {
-                    let ret = swift.memory.getObject(self).getAnimations(swift.memory.getObject(options));
-                    return swift.memory.retain(ret);
-                } catch (error) {
-                    setException(error);
-                    return 0
-                }
-            }
+
         },
         setInstance: (i) => {
             instance = i;
@@ -85,10 +58,42 @@ export async function createInstantiator(options, swift) {
         /** @param {WebAssembly.Instance} instance */
         createExports: (instance) => {
             const js = swift.memory.heap;
-        
-            return {
 
+            const exports = {
+                create: function bjs_create() {
+                    instance.exports.bjs_create();
+                    const ret = tmpRetString;
+                    tmpRetString = undefined;
+                    return ret;
+                },
+                validate: function bjs_validate(uuid) {
+                    const uuidBytes = textEncoder.encode(uuid);
+                    const uuidId = swift.memory.retain(uuidBytes);
+                    const ret = instance.exports.bjs_validate(uuidId, uuidBytes.length) !== 0;
+                    swift.memory.release(uuidId);
+                    return ret;
+                },
+                plainFunction: function bjs_plainFunction() {
+                    instance.exports.bjs_plainFunction();
+                    const ret = tmpRetString;
+                    tmpRetString = undefined;
+                    return ret;
+                },
             };
+
+            if (typeof globalThis.__Swift === 'undefined') {
+                globalThis.__Swift = {};
+            }
+            if (typeof globalThis.__Swift.Foundation === 'undefined') {
+                globalThis.__Swift.Foundation = {};
+            }
+            if (typeof globalThis.__Swift.Foundation.UUID === 'undefined') {
+                globalThis.__Swift.Foundation.UUID = {};
+            }
+            globalThis.__Swift.Foundation.UUID.create = exports.create;
+            globalThis.__Swift.Foundation.UUID.validate = exports.validate;
+
+            return exports;
         },
     }
 }
