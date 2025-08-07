@@ -62,6 +62,7 @@ struct BridgeJSLink {
         var classLines: [String] = []
         var dtsExportLines: [String] = []
         var dtsClassLines: [String] = []
+        var namespacedFunctions: [ExportedFunction] = []
 
         if exportedSkeletons.contains(where: { $0.classes.count > 0 }) {
             classLines.append(
@@ -87,9 +88,15 @@ struct BridgeJSLink {
 
             for function in skeleton.functions {
                 var (js, dts) = renderExportedFunction(function: function)
+                
+                if function.namespace != nil {
+                    namespacedFunctions.append(function)
+                }
+                
                 js[0] = "\(function.name): " + js[0]
                 js[js.count - 1] += ","
                 exportsLines.append(contentsOf: js)
+                
                 dtsExportLines.append(contentsOf: dts)
             }
         }
@@ -106,6 +113,33 @@ struct BridgeJSLink {
                 }
             }
             importObjectBuilders.append(importObjectBuilder)
+        }
+
+        let hasNamespacedFunctions = !namespacedFunctions.isEmpty
+
+        let exportsSection: String
+        if hasNamespacedFunctions {
+            let setupLines = renderGlobalNamespace(namespacedFunctions: namespacedFunctions)
+            let namespaceSetupCode = setupLines.map { $0.indent(count: 12) }.joined(separator: "\n")
+            exportsSection = """
+            \(classLines.map { $0.indent(count: 12) }.joined(separator: "\n"))
+                        const exports = {
+            \(exportsLines.map { $0.indent(count: 16) }.joined(separator: "\n"))
+                        };
+            
+            \(namespaceSetupCode)
+            
+                        return exports;
+                    },
+            """
+        } else {
+            exportsSection = """
+            \(classLines.map { $0.indent(count: 12) }.joined(separator: "\n"))
+                        return {
+            \(exportsLines.map { $0.indent(count: 16) }.joined(separator: "\n"))
+                        };
+                    },
+            """
         }
 
         let outputJs = """
@@ -169,15 +203,67 @@ struct BridgeJSLink {
                     /** @param {WebAssembly.Instance} instance */
                     createExports: (instance) => {
                         const js = swift.memory.heap;
-            \(classLines.map { $0.indent(count: 12) }.joined(separator: "\n"))
-                        return {
-            \(exportsLines.map { $0.indent(count: 16) }.joined(separator: "\n"))
-                        };
-                    },
+                    \(exportsSection)
                 }
             }
             """
+        
+        // Collect namespace declarations for TypeScript
+        var namespaceDeclarations: [String: [(name: String, parameters: [Parameter], returnType: BridgeType)]] = [:]
+        
+        for skeleton in exportedSkeletons {
+            for function in skeleton.functions {
+                if let namespace = function.namespace {
+                    let namespaceKey = namespace.joined(separator: ".")
+                    if namespaceDeclarations[namespaceKey] == nil {
+                        namespaceDeclarations[namespaceKey] = []
+                    }
+                    namespaceDeclarations[namespaceKey]?.append((function.name, function.parameters, function.returnType))
+                }
+            }
+        }
+        
+        // Generate namespace declarations in TypeScript
         var dtsLines: [String] = []
+        
+        // Only add export {} and declare global block if we have namespace declarations
+        let hasNamespaceDeclarations = !namespaceDeclarations.isEmpty
+        
+        if hasNamespaceDeclarations {
+            dtsLines.append("export {};")
+            dtsLines.append("")
+            dtsLines.append("declare global {")
+        }
+        
+        // Generate namespace structure using nested declarations
+        for (namespacePath, functions) in namespaceDeclarations.sorted(by: { $0.key < $1.key }) {
+            let parts = namespacePath.split(separator: ".").map(String.init)
+            
+            // Open namespaces with proper indentation
+            for i in 0..<parts.count {
+                dtsLines.append("namespace \(parts[i]) {".indent(count: 4*(hasNamespaceDeclarations ? i + 1: 1)) )
+            }
+            
+            // Add function signatures with proper indentation
+            let functionIndentationLevel = hasNamespaceDeclarations ? parts.count + 1 : parts.count
+            for (name, parameters, returnType) in functions {
+                let signature = "function \(name)\(renderTSSignature(parameters: parameters, returnType: returnType));"
+                dtsLines.append("\(signature)".indent(count: 4*functionIndentationLevel))
+            }
+            
+            // Close namespaces with proper indentation (in reverse order)
+            for i in (0..<parts.count).reversed() {
+                let indentationLevel = hasNamespaceDeclarations ? i + 1 : i
+                dtsLines.append("}".indent(count: 4*indentationLevel))
+            }
+        }
+        
+        if hasNamespaceDeclarations {
+            dtsLines.append("}")
+            dtsLines.append("")
+        }
+        
+        // Add remaining class lines
         dtsLines.append(contentsOf: dtsClassLines)
         dtsLines.append("export type Exports = {")
         dtsLines.append(contentsOf: dtsExportLines.map { $0.indent(count: 4) })
@@ -394,6 +480,47 @@ struct BridgeJSLink {
         dtsExportEntryLines.append("}")
 
         return (jsLines, dtsTypeLines, dtsExportEntryLines)
+    }
+    
+    // __Swift.Foundation.UUID
+    
+    // [__Swift, Foundation, UUID]
+    // [[__Swift, Foundation, UUID], [__Swift, Foundation]]
+    
+    // __Swift
+    // __Swift.Foundation
+    // __Swift.Foundation.UUID
+    
+    func renderGlobalNamespace(namespacedFunctions: [ExportedFunction]) -> [String] {
+        var lines: [String] = []
+        var uniqueNamespaces: [String] = []
+        
+        var namespacePaths: Set<[String]> = Set(namespacedFunctions
+            .compactMap { $0.namespace })
+
+        namespacePaths.forEach { namespacePath in
+            namespacePath.makeIterator().enumerated().forEach { (index, element) in
+                let path = namespacePath[0...index].joined(separator: ".")
+                if !uniqueNamespaces.contains(path) {
+                    uniqueNamespaces.append(path)
+                }
+            }
+        }
+        
+        uniqueNamespaces.map { namespace in
+            lines.append("if (typeof globalThis.\(namespace) === 'undefined') {")
+            lines.append("    globalThis.\(namespace) = {};")
+            lines.append("}")
+        }
+
+        for function in namespacedFunctions {
+            if let namespace = function.namespace {
+                let namespacePath = namespace.joined(separator: ".")
+                lines.append("globalThis.\(namespacePath).\(function.name) = exports.\(function.name);")
+            }
+        }
+        
+        return lines
     }
 
     class ImportedThunkBuilder {
