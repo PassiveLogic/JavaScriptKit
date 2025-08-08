@@ -43,6 +43,7 @@ struct ExportedConstructor: Codable {
     var abiName: String
     var parameters: [Parameter]
     var effects: Effects
+    var namespace: [String]?
 }
 
 struct ExportedSkeleton: Codable {

@@ -6,7 +6,7 @@ struct BridgeJSLink {
     var exportedSkeletons: [ExportedSkeleton] = []
     var importedSkeletons: [ImportedModuleSkeleton] = []
     let sharedMemory: Bool
-
+    
     init(
         exportedSkeletons: [ExportedSkeleton] = [],
         importedSkeletons: [ImportedModuleSkeleton] = [],
@@ -16,17 +16,17 @@ struct BridgeJSLink {
         self.importedSkeletons = importedSkeletons
         self.sharedMemory = sharedMemory
     }
-
+    
     mutating func addExportedSkeletonFile(data: Data) throws {
         let skeleton = try JSONDecoder().decode(ExportedSkeleton.self, from: data)
         exportedSkeletons.append(skeleton)
     }
-
+    
     mutating func addImportedSkeletonFile(data: Data) throws {
         let skeletons = try JSONDecoder().decode(ImportedModuleSkeleton.self, from: data)
         importedSkeletons.append(skeletons)
     }
-
+    
     let swiftHeapObjectClassDts = """
         /// Represents a Swift heap object like a class instance or an actor instance.
         export interface SwiftHeapObject {
@@ -36,7 +36,7 @@ struct BridgeJSLink {
             release(): void;
         }
         """
-
+    
     let swiftHeapObjectClassJs = """
         /// Represents a Swift heap object like a class instance or an actor instance.
         class SwiftHeapObject {
@@ -49,21 +49,22 @@ struct BridgeJSLink {
                 });
                 this.registry.register(this, this.pointer);
             }
-
+        
             release() {
                 this.registry.unregister(this);
                 this.deinit(this.pointer);
             }
         }
         """
-
+    
     func link() throws -> (outputJs: String, outputDts: String) {
         var exportsLines: [String] = []
         var classLines: [String] = []
         var dtsExportLines: [String] = []
         var dtsClassLines: [String] = []
         var namespacedFunctions: [ExportedFunction] = []
-
+        var namespacedClasses: [ExportedClass] = []
+        
         if exportedSkeletons.contains(where: { $0.classes.count > 0 }) {
             classLines.append(
                 contentsOf: swiftHeapObjectClassJs.split(separator: "\n", omittingEmptySubsequences: false).map {
@@ -76,7 +77,7 @@ struct BridgeJSLink {
                 }
             )
         }
-
+        
         for skeleton in exportedSkeletons {
             for klass in skeleton.classes {
                 let (jsType, dtsType, dtsExportEntry) = renderExportedClass(klass)
@@ -84,8 +85,12 @@ struct BridgeJSLink {
                 exportsLines.append("\(klass.name),")
                 dtsExportLines.append(contentsOf: dtsExportEntry)
                 dtsClassLines.append(contentsOf: dtsType)
+                
+                if klass.namespace != nil {
+                    namespacedClasses.append(klass)
+                }
             }
-
+            
             for function in skeleton.functions {
                 var (js, dts) = renderExportedFunction(function: function)
                 
@@ -99,7 +104,7 @@ struct BridgeJSLink {
                 dtsExportLines.append(contentsOf: dts)
             }
         }
-
+        
         var importObjectBuilders: [ImportObjectBuilder] = []
         for skeletonSet in importedSkeletons {
             let importObjectBuilder = ImportObjectBuilder(moduleName: skeletonSet.moduleName)
@@ -113,12 +118,12 @@ struct BridgeJSLink {
             }
             importObjectBuilders.append(importObjectBuilder)
         }
-
-        let hasNamespacedFunctions = !namespacedFunctions.isEmpty
-
+        
+        let hasNamespacedItems = !namespacedFunctions.isEmpty || !namespacedClasses.isEmpty
+        
         let exportsSection: String
-        if hasNamespacedFunctions {
-            let namespaceSetupCode = renderGlobalNamespace(namespacedFunctions: namespacedFunctions)
+        if hasNamespacedItems {
+            let namespaceSetupCode = renderGlobalNamespace(namespacedFunctions: namespacedFunctions, namespacedClasses: namespacedClasses)
                 .map { $0.indent(count: 12) }.joined(separator: "\n")
             exportsSection = """
             \(classLines.map { $0.indent(count: 12) }.joined(separator: "\n"))
@@ -140,21 +145,21 @@ struct BridgeJSLink {
                     },
             """
         }
-
+        
         let outputJs = """
             // NOTICE: This is auto-generated code by BridgeJS from JavaScriptKit,
             // DO NOT EDIT.
             //
             // To update this file, just rebuild your project or run
             // `swift package bridge-js`.
-
+            
             export async function createInstantiator(options, swift) {
                 let instance;
                 let memory;
                 let setException;
                 const textDecoder = new TextDecoder("utf-8");
                 const textEncoder = new TextEncoder("utf-8");
-
+            
                 let tmpRetString;
                 let tmpRetBytes;
                 let tmpRetException;
@@ -206,7 +211,7 @@ struct BridgeJSLink {
                 }
             }
             """
-
+        
         var dtsLines: [String] = []
         dtsLines.append(contentsOf: namespaceDeclarations())
         dtsLines.append(contentsOf: dtsClassLines)
@@ -222,7 +227,7 @@ struct BridgeJSLink {
             //
             // To update this file, just rebuild your project or run
             // `swift package bridge-js`.
-
+            
             \(dtsLines.joined(separator: "\n"))
             export function createInstantiator(options: {
                 imports: Imports;
@@ -237,41 +242,88 @@ struct BridgeJSLink {
     
     private func namespaceDeclarations() -> [String] {
         var dtsLines: [String] = []
-        var namespaceDeclarations: [String: [(name: String, parameters: [Parameter], returnType: BridgeType)]] = [:]
+        var namespaceFunctions: [String: [ExportedFunction]] = [:]
+        var namespaceClasses: [String: [ExportedClass]] = [:]
         
         for skeleton in exportedSkeletons {
             for function in skeleton.functions {
                 if let namespace = function.namespace {
                     let namespaceKey = namespace.joined(separator: ".")
-                    if namespaceDeclarations[namespaceKey] == nil {
-                        namespaceDeclarations[namespaceKey] = []
+                    if namespaceFunctions[namespaceKey] == nil {
+                        namespaceFunctions[namespaceKey] = []
                     }
-                    namespaceDeclarations[namespaceKey]?.append((function.name, function.parameters, function.returnType))
+                    namespaceFunctions[namespaceKey]?.append(function)
+                }
+            }
+            
+            for klass in skeleton.classes {
+                if let classNamespace = klass.namespace {
+                    let namespaceKey = classNamespace.joined(separator: ".")
+                    if namespaceClasses[namespaceKey] == nil {
+                        namespaceClasses[namespaceKey] = []
+                    }
+                    namespaceClasses[namespaceKey]?.append(klass)
                 }
             }
         }
         
-        guard !namespaceDeclarations.isEmpty else { return dtsLines }
+        guard !namespaceFunctions.isEmpty || !namespaceClasses.isEmpty else { return dtsLines }
         
         dtsLines.append("export {};")
         dtsLines.append("")
         dtsLines.append("declare global {")
         
         let identBaseSize = 4
-        for (namespacePath, functions) in namespaceDeclarations.sorted(by: { $0.key < $1.key }) {
+        
+        for (namespacePath, classes) in namespaceClasses.sorted(by: { $0.key < $1.key }) {
             let parts = namespacePath.split(separator: ".").map(String.init)
             
             for i in 0..<parts.count {
                 dtsLines.append("namespace \(parts[i]) {".indent(count: identBaseSize*(i + 1)) )
             }
             
-            for (name, parameters, returnType) in functions {
-                let signature = "function \(name)\(renderTSSignature(parameters: parameters, returnType: returnType));"
-                dtsLines.append("\(signature)".indent(count: identBaseSize*(parts.count + 1)))
+            for klass in classes {
+                dtsLines.append("class \(klass.name) {".indent(count: identBaseSize*(parts.count + 1)))
+                                
+                if let constructor = klass.constructor {
+                    let constructorSignature = "constructor(\(constructor.parameters.map { "\($0.name): \($0.type.tsType)" }.joined(separator: ", ")));"
+                    dtsLines.append("\(constructorSignature)".indent(count: identBaseSize*(parts.count + 2)))
+                }
+                
+                for method in klass.methods {
+                    let methodSignature = "\(method.name)\(renderTSSignature(parameters: method.parameters, returnType: method.returnType));"
+                    dtsLines.append("\(methodSignature)".indent(count: identBaseSize*(parts.count + 2)))
+                }
+                
+                dtsLines.append("}".indent(count: identBaseSize*(parts.count + 1)))
             }
             
             for i in (0..<parts.count).reversed() {
                 dtsLines.append("}".indent(count: identBaseSize*(i+1)))
+            }
+        }
+        
+        for (namespacePath, functions) in namespaceFunctions.sorted(by: { $0.key < $1.key }) {
+            let parts = namespacePath.split(separator: ".").map(String.init)
+            
+            var namespaceExists = false
+            if namespaceClasses[namespacePath] != nil {
+                namespaceExists = true
+            } else {
+                for i in 0..<parts.count {
+                    dtsLines.append("namespace \(parts[i]) {".indent(count: identBaseSize*(i + 1)) )
+                }
+            }
+            
+            for function in functions {
+                let signature = "function \(function.name)\(renderTSSignature(parameters: function.parameters, returnType: function.returnType));"
+                dtsLines.append("\(signature)".indent(count: identBaseSize*(parts.count + 1)))
+            }
+            
+            if !namespaceExists {
+                for i in (0..<parts.count).reversed() {
+                    dtsLines.append("}".indent(count: identBaseSize*(i+1)))
+                }
             }
         }
         
@@ -280,17 +332,17 @@ struct BridgeJSLink {
         
         return dtsLines
     }
-
+    
     class ExportedThunkBuilder {
         var bodyLines: [String] = []
         var cleanupLines: [String] = []
         var parameterForwardings: [String] = []
         let effects: Effects
-
+        
         init(effects: Effects) {
             self.effects = effects
         }
-
+        
         func lowerParameter(param: Parameter) {
             switch param.type {
             case .void: return
@@ -310,15 +362,15 @@ struct BridgeJSLink {
                 parameterForwardings.append("\(param.name).pointer")
             }
         }
-
+        
         func lowerSelf() {
             parameterForwardings.append("this.pointer")
         }
-
+        
         func call(abiName: String, returnType: BridgeType) -> String? {
             let call = "instance.exports.\(abiName)(\(parameterForwardings.joined(separator: ", ")))"
             var returnExpr: String?
-
+            
             switch returnType {
             case .void:
                 bodyLines.append("\(call);")
@@ -345,13 +397,13 @@ struct BridgeJSLink {
             }
             return returnExpr
         }
-
+        
         func callConstructor(abiName: String) -> String {
             let call = "instance.exports.\(abiName)(\(parameterForwardings.joined(separator: ", ")))"
             bodyLines.append("const ret = \(call);")
             return "ret"
         }
-
+        
         func checkExceptionLines() -> [String] {
             guard effects.isThrows else {
                 return []
@@ -366,7 +418,7 @@ struct BridgeJSLink {
                 "}",
             ]
         }
-
+        
         func renderFunction(
             name: String,
             parameters: [Parameter],
@@ -388,11 +440,11 @@ struct BridgeJSLink {
             return funcLines
         }
     }
-
+    
     private func renderTSSignature(parameters: [Parameter], returnType: BridgeType) -> String {
         return "(\(parameters.map { "\($0.name): \($0.type.tsType)" }.joined(separator: ", "))): \(returnType.tsType)"
     }
-
+    
     func renderExportedFunction(function: ExportedFunction) -> (js: [String], dts: [String]) {
         let thunkBuilder = ExportedThunkBuilder(effects: function.effects)
         for param in function.parameters {
@@ -410,19 +462,19 @@ struct BridgeJSLink {
         dtsLines.append(
             "\(function.name)\(renderTSSignature(parameters: function.parameters, returnType: function.returnType));"
         )
-
+        
         return (funcLines, dtsLines)
     }
-
+    
     func renderExportedClass(_ klass: ExportedClass) -> (js: [String], dtsType: [String], dtsExportEntry: [String]) {
         var jsLines: [String] = []
         var dtsTypeLines: [String] = []
         var dtsExportEntryLines: [String] = []
-
+        
         dtsTypeLines.append("export interface \(klass.name) extends SwiftHeapObject {")
         dtsExportEntryLines.append("\(klass.name): {")
         jsLines.append("class \(klass.name) extends SwiftHeapObject {")
-
+        
         if let constructor: ExportedConstructor = klass.constructor {
             let thunkBuilder = ExportedThunkBuilder(effects: constructor.effects)
             for param in constructor.parameters {
@@ -437,13 +489,13 @@ struct BridgeJSLink {
             funcLines.append("super(\(returnExpr), instance.exports.bjs_\(klass.name)_deinit);".indent(count: 4))
             funcLines.append("}")
             jsLines.append(contentsOf: funcLines.map { $0.indent(count: 4) })
-
+            
             dtsExportEntryLines.append(
                 "new\(renderTSSignature(parameters: constructor.parameters, returnType: .swiftHeapObject(klass.name)));"
                     .indent(count: 4)
             )
         }
-
+        
         for method in klass.methods {
             let thunkBuilder = ExportedThunkBuilder(effects: method.effects)
             thunkBuilder.lowerSelf()
@@ -466,54 +518,63 @@ struct BridgeJSLink {
             )
         }
         jsLines.append("}")
-
+        
         dtsTypeLines.append("}")
         dtsExportEntryLines.append("}")
-
+        
         return (jsLines, dtsTypeLines, dtsExportEntryLines)
     }
     
-    func renderGlobalNamespace(namespacedFunctions: [ExportedFunction]) -> [String] {
+    func renderGlobalNamespace(namespacedFunctions: [ExportedFunction], namespacedClasses: [ExportedClass]) -> [String] {
         var lines: [String] = []
         var uniqueNamespaces: [String] = []
-        
-        let namespacePaths: Set<[String]> = Set(namespacedFunctions
-            .compactMap { $0.namespace })
+        var seen = Set<String>()
 
-        namespacePaths.forEach { namespacePath in
-            namespacePath.makeIterator().enumerated().forEach { (index, element) in
+        let functionNamespacePaths: Set<[String]> = Set(namespacedFunctions
+            .compactMap { $0.namespace })
+        let classNamespacePaths: Set<[String]> = Set(namespacedClasses
+            .compactMap { $0.namespace })
+        
+        let allNamespacePaths = functionNamespacePaths
+            .union(classNamespacePaths)
+        
+        allNamespacePaths.forEach { namespacePath in
+            namespacePath.makeIterator().enumerated().forEach { (index, _) in
                 let path = namespacePath[0...index].joined(separator: ".")
-                if !uniqueNamespaces.contains(path) {
+                if seen.insert(path).inserted {
                     uniqueNamespaces.append(path)
                 }
             }
         }
         
-        uniqueNamespaces.forEach { namespace in
+        uniqueNamespaces.sorted().forEach { namespace in
             lines.append("if (typeof globalThis.\(namespace) === 'undefined') {")
             lines.append("    globalThis.\(namespace) = {};")
             lines.append("}")
         }
-
-        for function in namespacedFunctions {
-            if let namespace = function.namespace {
-                let namespacePath = namespace.joined(separator: ".")
-                lines.append("globalThis.\(namespacePath).\(function.name) = exports.\(function.name);")
-            }
+        
+        namespacedClasses.forEach { klass in
+            let namespacePath: String = klass.namespace?.joined(separator: ".") ?? ""
+            lines.append("globalThis.\(namespacePath).\(klass.name) = exports.\(klass.name);")
+        }
+        
+        namespacedFunctions.forEach { function in
+            let namespacePath: String = function.namespace?.joined(separator: ".") ?? ""
+            lines.append("globalThis.\(namespacePath).\(function.name) = exports.\(function.name);")
         }
         
         return lines
     }
-
+    
     class ImportedThunkBuilder {
         var bodyLines: [String] = []
         var parameterNames: [String] = []
         var parameterForwardings: [String] = []
-
+        
         func liftSelf() {
             parameterNames.append("self")
         }
-
+        
         func liftParameter(param: Parameter) {
             parameterNames.append(param.name)
             switch param.type {
@@ -529,7 +590,7 @@ struct BridgeJSLink {
                 parameterForwardings.append(param.name)
             }
         }
-
+        
         func renderFunction(
             name: String,
             returnExpr: String?,
@@ -553,7 +614,7 @@ struct BridgeJSLink {
             funcLines.append("}")
             return funcLines
         }
-
+        
         func call(name: String, returnType: BridgeType) {
             let call = "options.imports.\(name)(\(parameterForwardings.joined(separator: ", ")))"
             if returnType == .void {
@@ -562,12 +623,12 @@ struct BridgeJSLink {
                 bodyLines.append("let ret = \(call);")
             }
         }
-
+        
         func callConstructor(name: String) {
             let call = "new options.imports.\(name)(\(parameterForwardings.joined(separator: ", ")))"
             bodyLines.append("let ret = \(call);")
         }
-
+        
         func callMethod(name: String, returnType: BridgeType) {
             let call = "swift.memory.getObject(self).\(name)(\(parameterForwardings.joined(separator: ", ")))"
             if returnType == .void {
@@ -576,17 +637,17 @@ struct BridgeJSLink {
                 bodyLines.append("let ret = \(call);")
             }
         }
-
+        
         func callPropertyGetter(name: String, returnType: BridgeType) {
             let call = "swift.memory.getObject(self).\(name)"
             bodyLines.append("let ret = \(call);")
         }
-
+        
         func callPropertySetter(name: String, returnType: BridgeType) {
             let call = "swift.memory.getObject(self).\(name) = \(parameterForwardings.joined(separator: ", "))"
             bodyLines.append("\(call);")
         }
-
+        
         func lowerReturnValue(returnType: BridgeType) throws -> String? {
             switch returnType {
             case .void:
@@ -605,28 +666,28 @@ struct BridgeJSLink {
             }
         }
     }
-
+    
     class ImportObjectBuilder {
         var moduleName: String
         var importedLines: [String] = []
         var dtsImportLines: [String] = []
-
+        
         init(moduleName: String) {
             self.moduleName = moduleName
             importedLines.append("const \(moduleName) = importObject[\"\(moduleName)\"] = {};")
         }
-
+        
         func assignToImportObject(name: String, function: [String]) {
             var js = function
             js[0] = "\(moduleName)[\"\(name)\"] = " + js[0]
             importedLines.append(contentsOf: js)
         }
-
+        
         func appendDts(_ lines: [String]) {
             dtsImportLines.append(contentsOf: lines)
         }
     }
-
+    
     func renderImportedFunction(
         importObjectBuilder: ImportObjectBuilder,
         function: ImportedFunctionSkeleton
@@ -649,7 +710,7 @@ struct BridgeJSLink {
         )
         importObjectBuilder.assignToImportObject(name: function.abiName(context: nil), function: funcLines)
     }
-
+    
     func renderImportedType(
         importObjectBuilder: ImportObjectBuilder,
         type: ImportedTypeSkeleton
@@ -673,7 +734,7 @@ struct BridgeJSLink {
             )
             importObjectBuilder.assignToImportObject(name: getterAbiName, function: js)
             importObjectBuilder.appendDts(dts)
-
+            
             if !property.isReadonly {
                 let setterAbiName = property.setterAbiName(context: type)
                 let (js, dts) = try renderImportedProperty(
@@ -697,7 +758,7 @@ struct BridgeJSLink {
             importObjectBuilder.appendDts(dts)
         }
     }
-
+    
     func renderImportedConstructor(
         importObjectBuilder: ImportObjectBuilder,
         type: ImportedTypeSkeleton,
@@ -723,7 +784,7 @@ struct BridgeJSLink {
             "}",
         ])
     }
-
+    
     func renderImportedProperty(
         property: ImportedPropertySkeleton,
         abiName: String,
@@ -739,7 +800,7 @@ struct BridgeJSLink {
         )
         return (funcLines, [])
     }
-
+    
     func renderImportedMethod(
         context: ImportedTypeSkeleton,
         method: ImportedFunctionSkeleton

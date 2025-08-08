@@ -127,7 +127,8 @@ class ExportSwift {
                 return nil
             }
             
-            let (name, namespace) = extractNameAndNamespace(from: node, jsAttribute: jsAttribute)
+            let name = node.name.text
+            let namespace = extractNamespace(from: jsAttribute)
             
             var parameters: [Parameter] = []
             for param in node.signature.parameterClause.parameters {
@@ -196,17 +197,15 @@ class ExportSwift {
             return Effects(isAsync: isAsync, isThrows: isThrows)
         }
         
-        private func extractNameAndNamespace(
-            from node: FunctionDeclSyntax,
-            jsAttribute: AttributeSyntax
-        ) -> (name: String, namespace: [String]?) {
+        private func extractNamespace(
+            from jsAttribute: AttributeSyntax
+        ) -> [String]? {
             guard let arguments = jsAttribute.arguments?.as(LabeledExprListSyntax.self),
                   let firstArg = arguments.first?.expression.as(StringLiteralExprSyntax.self),
                   let namespaceString = firstArg.segments.first?.as(StringSegmentSyntax.self)?.content.text else {
-                return (node.name.text, nil)
+                return  nil
             }
-            let namespaces = namespaceString.split(separator: ".").map(String.init)
-            return (node.name.text, namespaces)
+            return namespaceString.split(separator: ".").map(String.init)
         }
 
         override func visit(_ node: InitializerDeclSyntax) -> SyntaxVisitorContinueKind {
@@ -241,15 +240,17 @@ class ExportSwift {
 
         override func visit(_ node: ClassDeclSyntax) -> SyntaxVisitorContinueKind {
             let name = node.name.text
+            
             stateStack.push(state: .classBody(name: name))
 
-            guard node.attributes.hasJSAttribute() else { return .skipChildren }
-            
+            guard let jsAttribute = node.attributes.firstJSAttribute else { return .skipChildren }
+
+            let namespace = extractNamespace(from: jsAttribute)
             exportedClassByName[name] = ExportedClass(
                 name: name,
                 constructor: nil,
                 methods: [],
-                namespace: nil
+                namespace: namespace
             )
             exportedClassNames.append(name)
             return .visitChildren

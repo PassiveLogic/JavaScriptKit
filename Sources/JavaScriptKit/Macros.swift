@@ -34,36 +34,63 @@
 @attached(peer)
 public macro JS() = Builtin.ExternalMacro
 
-/// A macro that exposes Swift functions to JavaScript with a custom namespace.
+/// A macro that exposes Swift functions, classes, and methods to JavaScript.
+/// Additionally defines namespaces defined by `namespace` parameter
 ///
-/// This variant of the `@JS` macro allows you to specify a custom namespace for your exported Swift declarations.
-/// This is useful for organizing your JavaScript API or matching existing JavaScript project naming conventions.
-///
-/// Apply this macro to Swift declarations that you want to make callable from JavaScript with a specific namespace:
+/// Apply this macro to Swift declarations that you want to make callable from JavaScript:
 ///
 /// ```swift
-/// @JS("__Swift.Foundation.UUID") public func createUUID() -> String {
-///     return UUID().uuidString
+/// // Export a function to JavaScript with a custom namespace
+/// @JS("__Swift.Foundation.UUID") public func create() -> String {
+///     UUID().uuidString
+/// }
+/// 
+/// // Export a class with a custom namespace (note that each method needs to specify the namespace)
+/// @JS("Utils.Greeters") class Greeter {
+///     var name: String
+///
+///     @JS("Utils.Greeters") init(name: String) {
+///         self.name = name
+///     }
+///     
+///     @JS("Utils.Greeters") func greet() -> String {
+///         return "Hello, " + self.name + "!"
+///     }
+///     
+///     @JS("Utils.Greeters") func changeName(name: String) {
+///         self.name = name
+///     }
 /// }
 /// ```
-///
-/// The above Swift function will be accessible in Typescript as:
-/// ```typescript
-/// const uuid = globalThis.__Swift.Foundation.UUID.create();
-/// ```
-///
 /// And the corresponding TypeScript declaration will be generated as:
-/// ```typescript
+/// ```javascript
 /// declare global {
+///     namespace Utils {
+///         namespace Greeters {
+///             class Greeter {
+///                 constructor(name: string);
+///                 greet(): string;
+///                 changeName(name: string): void;
+///             }
+///         }
+///     }
 ///     namespace __Swift {
 ///         namespace Foundation {
 ///             namespace UUID {
 ///                 function create(): string;
-///                 function validate(uuid: string): boolean;
 ///             }
 ///         }
 ///     }
 /// }
+/// ```
+/// The above Swift class will be accessible in JavaScript as:
+/// ```javascript
+/// const greeter = new globalThis.Utils.Greeters.Greeter("World");
+/// console.log(greeter.greet()); // "Hello, World!"
+/// greeter.changeName("JavaScript");
+/// console.log(greeter.greet()); // "Hello, JavaScript!"
+///
+/// const uuid = new globalThis.__Swift.Foundation.UUID.create(); // "1A83F0E0-F7F2-4FD1-8873-01A68CF79AF4"
 /// ```
 ///
 /// - Parameter namespace: A dot-separated string that defines the namespace hierarchy in JavaScript.

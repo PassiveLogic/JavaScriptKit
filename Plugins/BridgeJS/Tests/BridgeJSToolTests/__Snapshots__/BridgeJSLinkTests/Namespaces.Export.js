@@ -58,8 +58,59 @@ export async function createInstantiator(options, swift) {
         /** @param {WebAssembly.Instance} instance */
         createExports: (instance) => {
             const js = swift.memory.heap;
-
+            /// Represents a Swift heap object like a class instance or an actor instance.
+            class SwiftHeapObject {
+                constructor(pointer, deinit) {
+                    this.pointer = pointer;
+                    this.hasReleased = false;
+                    this.deinit = deinit;
+                    this.registry = new FinalizationRegistry((pointer) => {
+                        deinit(pointer);
+                    });
+                    this.registry.register(this, this.pointer);
+                }
+            
+                release() {
+                    this.registry.unregister(this);
+                    this.deinit(this.pointer);
+                }
+            }
+            class Greeter extends SwiftHeapObject {
+                constructor(name) {
+                    const nameBytes = textEncoder.encode(name);
+                    const nameId = swift.memory.retain(nameBytes);
+                    const ret = instance.exports.bjs_Greeter_init(nameId, nameBytes.length);
+                    swift.memory.release(nameId);
+                    super(ret, instance.exports.bjs_Greeter_deinit);
+                }
+                greet() {
+                    instance.exports.bjs_Greeter_greet(this.pointer);
+                    const ret = tmpRetString;
+                    tmpRetString = undefined;
+                    return ret;
+                }
+                changeName(name) {
+                    const nameBytes = textEncoder.encode(name);
+                    const nameId = swift.memory.retain(nameBytes);
+                    instance.exports.bjs_Greeter_changeName(this.pointer, nameId, nameBytes.length);
+                    swift.memory.release(nameId);
+                }
+            }
+            class Converter extends SwiftHeapObject {
+                constructor() {
+                    const ret = instance.exports.bjs_Converter_init();
+                    super(ret, instance.exports.bjs_Converter_deinit);
+                }
+                toString(value) {
+                    instance.exports.bjs_Converter_toString(this.pointer, value);
+                    const ret = tmpRetString;
+                    tmpRetString = undefined;
+                    return ret;
+                }
+            }
             const exports = {
+                Greeter,
+                Converter,
                 create: function bjs_create() {
                     instance.exports.bjs_create();
                     const ret = tmpRetString;
@@ -81,6 +132,12 @@ export async function createInstantiator(options, swift) {
                 },
             };
 
+            if (typeof globalThis.Utils === 'undefined') {
+                globalThis.Utils = {};
+            }
+            if (typeof globalThis.Utils.Converters === 'undefined') {
+                globalThis.Utils.Converters = {};
+            }
             if (typeof globalThis.__Swift === 'undefined') {
                 globalThis.__Swift = {};
             }
@@ -90,6 +147,8 @@ export async function createInstantiator(options, swift) {
             if (typeof globalThis.__Swift.Foundation.UUID === 'undefined') {
                 globalThis.__Swift.Foundation.UUID = {};
             }
+            globalThis.__Swift.Foundation.Greeter = exports.Greeter;
+            globalThis.Utils.Converters.Converter = exports.Converter;
             globalThis.__Swift.Foundation.UUID.create = exports.create;
             globalThis.__Swift.Foundation.UUID.validate = exports.validate;
 

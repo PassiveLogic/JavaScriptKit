@@ -1,0 +1,194 @@
+{
+  "classes" : [
+    {
+      "constructor" : {
+        "abiName" : "bjs_Greeter_init",
+        "effects" : {
+          "isAsync" : false,
+          "isThrows" : false
+        },
+        "parameters" : [
+          {
+            "label" : "name",
+            "name" : "name",
+            "type" : {
+              "string" : {
+
+              }
+            }
+          }
+        ]
+      },
+      "methods" : [
+        {
+          "abiName" : "bjs_Greeter_greet",
+          "effects" : {
+            "isAsync" : false,
+            "isThrows" : false
+          },
+          "name" : "greet",
+          "namespace" : [
+            "__Swift",
+            "Foundation"
+          ],
+          "parameters" : [
+
+          ],
+          "returnType" : {
+            "string" : {
+
+            }
+          }
+        },
+        {
+          "abiName" : "bjs_Greeter_changeName",
+          "effects" : {
+            "isAsync" : false,
+            "isThrows" : false
+          },
+          "name" : "changeName",
+          "namespace" : [
+            "__Swift",
+            "Foundation"
+          ],
+          "parameters" : [
+            {
+              "label" : "name",
+              "name" : "name",
+              "type" : {
+                "string" : {
+
+                }
+              }
+            }
+          ],
+          "returnType" : {
+            "void" : {
+
+            }
+          }
+        }
+      ],
+      "name" : "Greeter",
+      "namespace" : [
+        "__Swift",
+        "Foundation"
+      ]
+    },
+    {
+      "constructor" : {
+        "abiName" : "bjs_Converter_init",
+        "effects" : {
+          "isAsync" : false,
+          "isThrows" : false
+        },
+        "parameters" : [
+
+        ]
+      },
+      "methods" : [
+        {
+          "abiName" : "bjs_Converter_toString",
+          "effects" : {
+            "isAsync" : false,
+            "isThrows" : false
+          },
+          "name" : "toString",
+          "namespace" : [
+            "Utils",
+            "Converters"
+          ],
+          "parameters" : [
+            {
+              "label" : "value",
+              "name" : "value",
+              "type" : {
+                "int" : {
+
+                }
+              }
+            }
+          ],
+          "returnType" : {
+            "string" : {
+
+            }
+          }
+        }
+      ],
+      "name" : "Converter",
+      "namespace" : [
+        "Utils",
+        "Converters"
+      ]
+    }
+  ],
+  "functions" : [
+    {
+      "abiName" : "bjs_create",
+      "effects" : {
+        "isAsync" : false,
+        "isThrows" : false
+      },
+      "name" : "create",
+      "namespace" : [
+        "__Swift",
+        "Foundation",
+        "UUID"
+      ],
+      "parameters" : [
+
+      ],
+      "returnType" : {
+        "string" : {
+
+        }
+      }
+    },
+    {
+      "abiName" : "bjs_validate",
+      "effects" : {
+        "isAsync" : false,
+        "isThrows" : false
+      },
+      "name" : "validate",
+      "namespace" : [
+        "__Swift",
+        "Foundation",
+        "UUID"
+      ],
+      "parameters" : [
+        {
+          "label" : "uuid",
+          "name" : "uuid",
+          "type" : {
+            "string" : {
+
+            }
+          }
+        }
+      ],
+      "returnType" : {
+        "bool" : {
+
+        }
+      }
+    },
+    {
+      "abiName" : "bjs_plainFunction",
+      "effects" : {
+        "isAsync" : false,
+        "isThrows" : false
+      },
+      "name" : "plainFunction",
+      "parameters" : [
+
+      ],
+      "returnType" : {
+        "string" : {
+
+        }
+      }
+    }
+  ]
+}
