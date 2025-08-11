@@ -1,6 +1,3 @@
-@JS("__Swift.Foundation.UUID") func create() -> String { UUID().uuidString }
-@JS("__Swift.Foundation.UUID") func validate(uuid: String) -> Bool { true }
-
 @JS func plainFunction() -> String { "plain" }
 
 @JS("__Swift.Foundation") class Greeter {
@@ -24,5 +21,13 @@
     
     @JS("Utils.Converters") func toString(value: Int) -> String {
         return String(value)
+    }
+}
+
+@JS("__Swift.Foundation")
+class UUID {
+    @JS("__Swift.Foundation")
+    @JS func uuidString() -> String {
+         Foundation.UUID().uuidString
     }
 }

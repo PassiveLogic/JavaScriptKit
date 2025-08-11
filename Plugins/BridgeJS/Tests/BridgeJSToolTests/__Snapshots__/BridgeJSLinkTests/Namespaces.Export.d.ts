@@ -22,13 +22,8 @@ declare global {
                 greet(): string;
                 changeName(name: string): void;
             }
-        }
-    }
-    namespace __Swift {
-        namespace Foundation {
-            namespace UUID {
-                function create(): string;
-                function validate(uuid: string): boolean;
+            class UUID {
+                uuidString(): string;
             }
         }
     }
@@ -48,6 +43,9 @@ export interface Greeter extends SwiftHeapObject {
 export interface Converter extends SwiftHeapObject {
     toString(value: number): string;
 }
+export interface UUID extends SwiftHeapObject {
+    uuidString(): string;
+}
 export type Exports = {
     Greeter: {
         new(name: string): Greeter;
@@ -55,8 +53,8 @@ export type Exports = {
     Converter: {
         new(): Converter;
     }
-    create(): string;
-    validate(uuid: string): boolean;
+    UUID: {
+    }
     plainFunction(): string;
 }
 export type Imports = {

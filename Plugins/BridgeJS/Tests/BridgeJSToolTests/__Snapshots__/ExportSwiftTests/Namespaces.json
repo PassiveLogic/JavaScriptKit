@@ -121,59 +121,38 @@
         "Utils",
         "Converters"
       ]
-    }
-  ],
-  "functions" : [
-    {
-      "abiName" : "bjs_create",
-      "effects" : {
-        "isAsync" : false,
-        "isThrows" : false
-      },
-      "name" : "create",
-      "namespace" : [
-        "__Swift",
-        "Foundation",
-        "UUID"
-      ],
-      "parameters" : [
-
-      ],
-      "returnType" : {
-        "string" : {
-
-        }
-      }
     },
     {
-      "abiName" : "bjs_validate",
-      "effects" : {
-        "isAsync" : false,
-        "isThrows" : false
-      },
-      "name" : "validate",
-      "namespace" : [
-        "__Swift",
-        "Foundation",
-        "UUID"
-      ],
-      "parameters" : [
+      "methods" : [
         {
-          "label" : "uuid",
-          "name" : "uuid",
-          "type" : {
+          "abiName" : "bjs_UUID_uuidString",
+          "effects" : {
+            "isAsync" : false,
+            "isThrows" : false
+          },
+          "name" : "uuidString",
+          "namespace" : [
+            "__Swift",
+            "Foundation"
+          ],
+          "parameters" : [
+
+          ],
+          "returnType" : {
             "string" : {
 
             }
           }
         }
       ],
-      "returnType" : {
-        "bool" : {
-
-        }
-      }
-    },
+      "name" : "UUID",
+      "namespace" : [
+        "__Swift",
+        "Foundation"
+      ]
+    }
+  ],
+  "functions" : [
     {
       "abiName" : "bjs_plainFunction",
       "effects" : {

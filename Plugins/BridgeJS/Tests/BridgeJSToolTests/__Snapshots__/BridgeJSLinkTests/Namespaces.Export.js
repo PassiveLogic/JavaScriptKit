@@ -108,22 +108,18 @@ export async function createInstantiator(options, swift) {
                     return ret;
                 }
             }
-            const exports = {
-                Greeter,
-                Converter,
-                create: function bjs_create() {
-                    instance.exports.bjs_create();
+            class UUID extends SwiftHeapObject {
+                uuidString() {
+                    instance.exports.bjs_UUID_uuidString(this.pointer);
                     const ret = tmpRetString;
                     tmpRetString = undefined;
                     return ret;
-                },
-                validate: function bjs_validate(uuid) {
-                    const uuidBytes = textEncoder.encode(uuid);
-                    const uuidId = swift.memory.retain(uuidBytes);
-                    const ret = instance.exports.bjs_validate(uuidId, uuidBytes.length) !== 0;
-                    swift.memory.release(uuidId);
-                    return ret;
-                },
+                }
+            }
+            const exports = {
+                Greeter,
+                Converter,
+                UUID,
                 plainFunction: function bjs_plainFunction() {
                     instance.exports.bjs_plainFunction();
                     const ret = tmpRetString;
@@ -144,13 +140,9 @@ export async function createInstantiator(options, swift) {
             if (typeof globalThis.__Swift.Foundation === 'undefined') {
                 globalThis.__Swift.Foundation = {};
             }
-            if (typeof globalThis.__Swift.Foundation.UUID === 'undefined') {
-                globalThis.__Swift.Foundation.UUID = {};
-            }
             globalThis.__Swift.Foundation.Greeter = exports.Greeter;
             globalThis.Utils.Converters.Converter = exports.Converter;
-            globalThis.__Swift.Foundation.UUID.create = exports.create;
-            globalThis.__Swift.Foundation.UUID.validate = exports.validate;
+            globalThis.__Swift.Foundation.UUID = exports.UUID;
 
             return exports;
         },
