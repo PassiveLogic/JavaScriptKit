@@ -827,15 +827,15 @@ struct StackCodegen {
         accessor: String,
         varPrefix: String
     ) -> [CodeBlockItemSyntax] {
-        var statements: [CodeBlockItemSyntax] = []
         let elemVar = "__bjs_elem_\(varPrefix)"
-        statements.append("for \(raw: elemVar) in \(raw: accessor) {")
-        statements.append(
-            "    _swift_js_push_i32((\(raw: elemVar) as! _BridgedSwiftProtocolExportable).bridgeJSLowerAsProtocolReturn())"
-        )
-        statements.append("}")
-        statements.append("_swift_js_push_i32(Int32(\(raw: accessor).count))")
-        return statements
+        return [
+            """
+            for \(raw: elemVar) in \(raw: accessor) {
+                _swift_js_push_i32((\(raw: elemVar) as! _BridgedSwiftProtocolExportable).bridgeJSLowerAsProtocolReturn())
+            }
+            """,
+            "_swift_js_push_i32(Int32(\(raw: accessor).count))",
+        ]
     }
 
     private func lowerDictionaryStatements(

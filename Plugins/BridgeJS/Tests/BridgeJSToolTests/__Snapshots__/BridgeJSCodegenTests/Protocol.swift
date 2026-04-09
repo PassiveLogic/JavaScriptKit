@@ -698,7 +698,8 @@ public func _bjs_processDelegates() -> Void {
     #if arch(wasm32)
     let ret = processDelegates(_: [AnyMyViewControllerDelegate].bridgeJSStackPop())
     for __bjs_elem_ret in ret {
-    _swift_js_push_i32((__bjs_elem_ret as! _BridgedSwiftProtocolExportable).bridgeJSLowerAsProtocolReturn())}
+        _swift_js_push_i32((__bjs_elem_ret as! _BridgedSwiftProtocolExportable).bridgeJSLowerAsProtocolReturn())
+    }
     _swift_js_push_i32(Int32(ret.count))
     #else
     fatalError("Only available on WebAssembly")
@@ -955,7 +956,8 @@ public func _bjs_DelegateManager_delegates_get(_ _self: UnsafeMutableRawPointer)
     #if arch(wasm32)
     let ret = DelegateManager.bridgeJSLiftParameter(_self).delegates
     for __bjs_elem_ret in ret {
-    _swift_js_push_i32((__bjs_elem_ret as! _BridgedSwiftProtocolExportable).bridgeJSLowerAsProtocolReturn())}
+        _swift_js_push_i32((__bjs_elem_ret as! _BridgedSwiftProtocolExportable).bridgeJSLowerAsProtocolReturn())
+    }
     _swift_js_push_i32(Int32(ret.count))
     #else
     fatalError("Only available on WebAssembly")
