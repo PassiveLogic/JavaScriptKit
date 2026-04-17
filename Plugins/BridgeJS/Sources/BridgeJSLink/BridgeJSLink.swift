@@ -983,7 +983,7 @@ public struct BridgeJSLink {
 
         try printer.indent {
             printer.write(lines: generateVariableDeclarations())
-            let configIdentityMode = skeletons.compactMap(\.exported).first?.identityMode ?? "none"
+            let configIdentityMode = skeletons.compactMap(\.exported).compactMap(\.identityMode).first ?? "none"
             printer.write("const identityMode = options.identityMode ?? \"\(configIdentityMode)\";")
             printer.write(
                 "const shouldUseIdentityMap = identityMode === \"pointer\" && typeof WeakRef !== \"undefined\" && typeof FinalizationRegistry !== \"undefined\";"
