@@ -9,9 +9,10 @@ import { defaultBrowserSetup /* #if USE_SHARED_MEMORY */, createDefaultWorkerFac
 /* #if TARGET_DEFAULT_PLATFORM_NODE */
 /** @type {import('./index.d').init} */
 async function initNode(_options) {
+    const { identityMode: _identityMode, ...rest } = _options || {};
     /** @type {import('./platforms/node.d.ts').DefaultNodeSetupOptions} */
     const options = {
-        ...(_options || {}),
+        ...rest,
 /* #if USE_SHARED_MEMORY */
         spawnWorker: createDefaultWorkerFactoryForNode(),
 /* #endif */
