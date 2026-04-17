@@ -35,7 +35,7 @@ export async function createInstantiator(options, swift) {
 
     let _exports = null;
     let bjs = null;
-    const identityMode = options.identityMode === "pointer" ? "pointer" : "none";
+    const identityMode = options.identityMode ?? "none";
     const shouldUseIdentityMap = identityMode === "pointer" && typeof WeakRef !== "undefined" && typeof FinalizationRegistry !== "undefined";
 
     return {

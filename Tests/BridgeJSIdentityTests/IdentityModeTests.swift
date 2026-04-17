@@ -1,13 +1,13 @@
 import XCTest
 import JavaScriptKit
 
-@JSClass struct IdentityModeSupportImports {
-    @JSFunction static func runJsIdentityModeSupportTests() throws(JSException)
+@JSClass struct IdentityModeTestImports {
+    @JSFunction static func runJsIdentityModeTests() throws(JSException)
 }
 
-final class IdentityModeSupportTests: XCTestCase {
-    func testRunJsIdentityModeSupportTests() throws {
-        try IdentityModeSupportImports.runJsIdentityModeSupportTests()
+final class IdentityModeTests: XCTestCase {
+    func testRunJsIdentityModeTests() throws {
+        try IdentityModeTestImports.runJsIdentityModeTests()
     }
 }
 

@@ -890,13 +890,20 @@ public struct ExportedSkeleton: Codable {
     /// through the exports object.
     public var exposeToGlobal: Bool
 
+    /// The identity mode for exported Swift heap objects.
+    ///
+    /// When `"pointer"`, Swift heap objects are tracked by pointer identity.
+    /// When `"none"` or `nil`, no identity tracking is performed.
+    public var identityMode: String?
+
     public init(
         functions: [ExportedFunction],
         classes: [ExportedClass],
         enums: [ExportedEnum],
         structs: [ExportedStruct] = [],
         protocols: [ExportedProtocol] = [],
-        exposeToGlobal: Bool
+        exposeToGlobal: Bool,
+        identityMode: String? = nil
     ) {
         self.functions = functions
         self.classes = classes
@@ -904,6 +911,7 @@ public struct ExportedSkeleton: Codable {
         self.structs = structs
         self.protocols = protocols
         self.exposeToGlobal = exposeToGlobal
+        self.identityMode = identityMode
     }
 
     public mutating func append(_ other: ExportedSkeleton) {
@@ -913,6 +921,7 @@ public struct ExportedSkeleton: Codable {
         self.structs.append(contentsOf: other.structs)
         self.protocols.append(contentsOf: other.protocols)
         assert(self.exposeToGlobal == other.exposeToGlobal)
+        assert(self.identityMode == other.identityMode)
     }
 
     public var isEmpty: Bool {

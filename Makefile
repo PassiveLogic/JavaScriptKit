@@ -21,18 +21,6 @@ unittest:
 	    --disable-sandbox \
 	    js test --prelude ./Tests/prelude.mjs -Xnode --expose-gc
 
-.PHONY: unittest-pointer
-unittest-pointer:
-	@echo Running unit tests with identityMode=pointer
-	@test -n "$(SWIFT_SDK_ID)" || { \
-		echo "SWIFT_SDK_ID is not set. Run 'swift sdk list' and pass a matching SDK, e.g. 'make unittest-pointer SWIFT_SDK_ID=<id>'."; \
-		exit 2; \
-	}
-	IDENTITY_MODE=pointer swift package --swift-sdk "$(SWIFT_SDK_ID)" \
-	    $(TRACING_ARGS) \
-	    --disable-sandbox \
-	    js test --prelude ./Tests/prelude.mjs -Xnode --expose-gc
-
 .PHONY: regenerate_swiftpm_resources
 regenerate_swiftpm_resources:
 	npm run build

@@ -124,7 +124,7 @@ import Testing
 
         #expect(outputDts.contains("identityMode?: \"none\" | \"pointer\";"))
         #expect(
-            outputJs.contains("const identityMode = options.identityMode === \"pointer\" ? \"pointer\" : \"none\";")
+            outputJs.contains("const identityMode = options.identityMode ?? \"none\";")
         )
         #expect(
             outputJs.contains(

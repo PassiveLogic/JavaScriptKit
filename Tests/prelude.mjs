@@ -14,14 +14,13 @@ import { getImports as getDefaultArgumentImports } from './BridgeJSRuntimeTests/
 import { getImports as getJSClassSupportImports, JSClassWithArrayMembers } from './BridgeJSRuntimeTests/JavaScript/JSClassSupportTests.mjs';
 import { getImports as getIntegerTypesSupportImports } from './BridgeJSRuntimeTests/JavaScript/IntegerTypesSupportTests.mjs';
 import { getImports as getAsyncImportImports, runAsyncWorksTests } from './BridgeJSRuntimeTests/JavaScript/AsyncImportTests.mjs';
-import { getImports as getIdentityModeSupportImports } from './BridgeJSRuntimeTests/JavaScript/IdentityModeSupportTests.mjs';
+import { getImports as getIdentityModeTestImports } from './BridgeJSIdentityTests/JavaScript/IdentityModeTests.mjs';
 
 /** @type {import('../.build/plugins/PackageToJS/outputs/PackageTests/test.d.ts').SetupOptionsFn} */
 export async function setupOptions(options, context) {
     Error.stackTraceLimit = 100;
     setupTestGlobals(globalThis);
 
-    const identityMode = process.env.IDENTITY_MODE || undefined;
 
     class StaticBox {
         constructor(value) {
@@ -46,7 +45,6 @@ export async function setupOptions(options, context) {
 
     return {
         ...options,
-        ...(identityMode ? { instantiateOptions: { identityMode } } : {}),
         getImports: (importsContext) => {
             return {
                 "jsRoundTripVoid": () => {
@@ -159,7 +157,7 @@ export async function setupOptions(options, context) {
                 DefaultArgumentImports: getDefaultArgumentImports(importsContext),
                 JSClassSupportImports: getJSClassSupportImports(importsContext),
                 IntegerTypesSupportImports: getIntegerTypesSupportImports(importsContext),
-                IdentityModeSupportImports: getIdentityModeSupportImports(importsContext),
+                IdentityModeTestImports: getIdentityModeTestImports(importsContext),
             };
         },
         addToCoreImports(importObject, importsContext) {
