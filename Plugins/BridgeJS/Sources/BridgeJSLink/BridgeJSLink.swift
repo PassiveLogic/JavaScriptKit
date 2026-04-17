@@ -74,7 +74,7 @@ public struct BridgeJSLink {
             output += lifetimeTrackingClassJs + "\n"
         }
         output += """
-            const swiftHeapObjectFinalizationRegistry = (typeof FinalizationRegistry === "undefined") ? { register: () => {}, unregister: () => {} } : new FinalizationRegistry((state) => {
+            const swiftHeapObjectFinalizationRegistry = (typeof FinalizationRegistry === "undefined") ? null : new FinalizationRegistry((state) => {
 
             """
         if enableLifetimeTracking {
@@ -90,26 +90,81 @@ public struct BridgeJSLink {
 
             /// Represents a Swift heap object like a class instance or an actor instance.
             class SwiftHeapObject {
-                static __wrap(pointer, deinit, prototype) {
-                    const obj = Object.create(prototype);
-                    const state = { pointer, deinit, hasReleased: false };
+                static identityCacheByDeinit = new WeakMap();
+                static finalizerByDeinit = new WeakMap();
+
+                static __getFinalizer(deinit) {
+                    let finalizer = SwiftHeapObject.finalizerByDeinit.get(deinit);
+                    if (finalizer) {
+                        return finalizer;
+                    }
+
+                    const created = new FinalizationRegistry((state) => {
 
             """
         if enableLifetimeTracking {
-            output += "        TRACKING.wrap(pointer, deinit, prototype, state);\n"
+            output += "            TRACKING.finalization(state);\n"
         }
         output += """
-                    obj.pointer = pointer;
-                    obj.__swiftHeapObjectState = state;
-                    swiftHeapObjectFinalizationRegistry.register(obj, state, state);
-                    return obj;
+                        if (state.hasReleased) {
+                            return;
+                        }
+                        state.hasReleased = true;
+                        state.identityMap?.delete(state.pointer);
+                        state.deinit(state.pointer);
+                    });
+                    SwiftHeapObject.finalizerByDeinit.set(deinit, created);
+                    return created;
+                }
+
+                static __wrap(pointer, deinit, prototype) {
+                    const makeFresh = (identityMap, finalizer) => {
+                        const obj = Object.create(prototype);
+                        const state = { pointer, deinit, hasReleased: false, identityMap, finalizer };
+
+            """
+        if enableLifetimeTracking {
+            output += "            TRACKING.wrap(pointer, deinit, prototype, state);\n"
+        }
+        output += """
+                        obj.pointer = pointer;
+                        obj.__swiftHeapObjectState = state;
+                        if (finalizer) {
+                            finalizer.register(obj, state, state);
+                        }
+                        if (identityMap) {
+                            identityMap.set(pointer, new WeakRef(obj));
+                        }
+                        return obj;
+                    };
+
+                    if (!shouldUseIdentityMap) {
+                        return makeFresh(null, swiftHeapObjectFinalizationRegistry);
+                    }
+
+                    let identityMap = SwiftHeapObject.identityCacheByDeinit.get(deinit);
+                    if (!identityMap) {
+                        identityMap = new Map();
+                        SwiftHeapObject.identityCacheByDeinit.set(deinit, identityMap);
+                    }
+
+                    const cached = identityMap.get(pointer)?.deref();
+                    if (cached && !cached.__swiftHeapObjectState.hasReleased) {
+                        return cached;
+                    }
+                    if (!cached) {
+                        identityMap.delete(pointer);
+                    }
+
+                    const finalizer = SwiftHeapObject.__getFinalizer(deinit);
+                    return makeFresh(identityMap, finalizer);
                 }
 
                 release() {
 
             """
         if enableLifetimeTracking {
-            output += "        TRACKING.release(this);\n"
+            output += "            TRACKING.release(this);\n"
         }
         output += """
                     const state = this.__swiftHeapObjectState;
@@ -117,7 +172,8 @@ public struct BridgeJSLink {
                         return;
                     }
                     state.hasReleased = true;
-                    swiftHeapObjectFinalizationRegistry.unregister(state);
+                    state.finalizer?.unregister(state);
+                    state.identityMap?.delete(state.pointer);
                     state.deinit(state.pointer);
                 }
             }
@@ -915,6 +971,7 @@ public struct BridgeJSLink {
         printer.write("export function createInstantiator(options: {")
         printer.indent {
             printer.write("imports: Imports;")
+            printer.write("identityMode?: \"none\" | \"pointer\";")
         }
         printer.write("}, swift: any): Promise<{")
         printer.indent {
@@ -960,6 +1017,10 @@ public struct BridgeJSLink {
 
         try printer.indent {
             printer.write(lines: generateVariableDeclarations())
+            printer.write("const identityMode = options.identityMode === \"pointer\" ? \"pointer\" : \"none\";")
+            printer.write(
+                "const shouldUseIdentityMap = identityMode === \"pointer\" && typeof WeakRef !== \"undefined\" && typeof FinalizationRegistry !== \"undefined\";"
+            )
 
             let bodyPrinter = CodeFragmentPrinter()
             let allStructs = exportedSkeletons.flatMap { $0.structs }

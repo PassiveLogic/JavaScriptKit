@@ -30,6 +30,8 @@ export async function createInstantiator(options, swift) {
 
     let _exports = null;
     let bjs = null;
+    const identityMode = options.identityMode === "pointer" ? "pointer" : "none";
+    const shouldUseIdentityMap = identityMode === "pointer" && typeof WeakRef !== "undefined" && typeof FinalizationRegistry !== "undefined";
     const swiftClosureRegistry = (typeof FinalizationRegistry === "undefined") ? { register: () => {}, unregister: () => {} } : new FinalizationRegistry((state) => {
         if (state.unregistered) { return; }
         instance?.exports?.bjs_release_swift_closure(state.pointer);

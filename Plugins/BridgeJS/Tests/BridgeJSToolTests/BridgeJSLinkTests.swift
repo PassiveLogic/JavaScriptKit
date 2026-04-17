@@ -105,4 +105,32 @@ import Testing
         )
         try snapshot(bridgeJSLink: bridgeJSLink, name: "MixedModules")
     }
+
+    @Test
+    func emitsIdentityModeOptionAndRuntimeScaffolding() throws {
+        let url = Self.inputsDirectory.appendingPathComponent("SwiftClass.swift")
+        let sourceFile = Parser.parse(source: try String(contentsOf: url, encoding: .utf8))
+        let swiftAPI = SwiftToSkeleton(progress: .silent, moduleName: "TestModule", exposeToGlobal: false)
+        swiftAPI.addSourceFile(sourceFile, inputFilePath: "SwiftClass.swift")
+        let outputSkeleton = try swiftAPI.finalize()
+        let bridgeJSLink = BridgeJSLink(
+            skeletons: [
+                outputSkeleton
+            ],
+            sharedMemory: false
+        )
+
+        let (outputJs, outputDts) = try bridgeJSLink.link()
+
+        #expect(outputDts.contains("identityMode?: \"none\" | \"pointer\";"))
+        #expect(
+            outputJs.contains("const identityMode = options.identityMode === \"pointer\" ? \"pointer\" : \"none\";")
+        )
+        #expect(
+            outputJs.contains(
+                "const shouldUseIdentityMap = identityMode === \"pointer\" && typeof WeakRef !== \"undefined\" && typeof FinalizationRegistry !== \"undefined\";"
+            )
+        )
+        #expect(outputJs.contains("if (!shouldUseIdentityMap) {"))
+    }
 }

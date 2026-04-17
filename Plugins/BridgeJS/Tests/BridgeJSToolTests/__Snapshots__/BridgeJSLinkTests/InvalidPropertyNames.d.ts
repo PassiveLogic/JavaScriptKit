@@ -30,6 +30,7 @@ export type Imports = {
 }
 export function createInstantiator(options: {
     imports: Imports;
+    identityMode?: "none" | "pointer";
 }, swift: any): Promise<{
     addImports: (importObject: WebAssembly.Imports) => void;
     setInstance: (instance: WebAssembly.Instance) => void;

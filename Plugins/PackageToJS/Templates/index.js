@@ -17,6 +17,9 @@ async function initNode(_options) {
 /* #endif */
     };
     const instantiateOptions = await defaultNodeSetup(options);
+    if (_options?.identityMode) {
+        instantiateOptions.identityMode = _options.identityMode;
+    }
     return await instantiate(instantiateOptions);
 }
 
@@ -44,6 +47,9 @@ async function initBrowser(_options) {
         spawnWorker: createDefaultWorkerFactoryForBrowser()
 /* #endif */
     })
+    if (options?.identityMode) {
+        instantiateOptions.identityMode = options.identityMode;
+    }
     return await instantiate(instantiateOptions);
 }
 
