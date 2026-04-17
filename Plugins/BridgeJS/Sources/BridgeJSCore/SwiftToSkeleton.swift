@@ -44,7 +44,13 @@ public final class SwiftToSkeleton {
     public func finalize() throws -> BridgeJSSkeleton {
         var perSourceErrors: [(inputFilePath: String, errors: [DiagnosticError])] = []
         var importedFiles: [ImportedFileSkeleton] = []
-        var exported = ExportedSkeleton(functions: [], classes: [], enums: [], exposeToGlobal: exposeToGlobal, identityMode: identityMode)
+        var exported = ExportedSkeleton(
+            functions: [],
+            classes: [],
+            enums: [],
+            exposeToGlobal: exposeToGlobal,
+            identityMode: identityMode
+        )
         var exportCollectors: [ExportSwiftAPICollector] = []
 
         for (sourceFile, inputFilePath) in sourceFiles {
