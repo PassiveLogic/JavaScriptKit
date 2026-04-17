@@ -256,6 +256,7 @@ export async function createInstantiator(options, swift) {
 
                     const cached = identityCache.get(pointer)?.deref();
                     if (cached && !cached.__swiftHeapObjectState.hasReleased) {
+                        deinit(pointer);
                         return cached;
                     }
                     if (!cached) {
@@ -280,7 +281,7 @@ export async function createInstantiator(options, swift) {
                 static __identityCache = new Map();
 
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_Greeter_deinit, Greeter.prototype, Greeter.__identityCache);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs___Swift_Foundation_Greeter_deinit, Greeter.prototype, Greeter.__identityCache);
                 }
 
                 constructor(name) {
@@ -310,7 +311,7 @@ export async function createInstantiator(options, swift) {
                 static __identityCache = new Map();
 
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_Converter_deinit, Converter.prototype, Converter.__identityCache);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_Utils_Converters_Converter_deinit, Converter.prototype, Converter.__identityCache);
                 }
 
                 constructor() {
@@ -328,7 +329,7 @@ export async function createInstantiator(options, swift) {
                 static __identityCache = new Map();
 
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_UUID_deinit, UUID.prototype, UUID.__identityCache);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs___Swift_Foundation_UUID_deinit, UUID.prototype, UUID.__identityCache);
                 }
 
                 uuidString() {
@@ -342,7 +343,7 @@ export async function createInstantiator(options, swift) {
                 static __identityCache = new Map();
 
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_Container_deinit, Container.prototype, Container.__identityCache);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_Collections_Container_deinit, Container.prototype, Container.__identityCache);
                 }
 
                 constructor() {

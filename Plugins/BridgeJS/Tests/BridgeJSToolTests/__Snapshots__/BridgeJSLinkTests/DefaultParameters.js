@@ -308,6 +308,7 @@ export async function createInstantiator(options, swift) {
 
                     const cached = identityCache.get(pointer)?.deref();
                     if (cached && !cached.__swiftHeapObjectState.hasReleased) {
+                        deinit(pointer);
                         return cached;
                     }
                     if (!cached) {

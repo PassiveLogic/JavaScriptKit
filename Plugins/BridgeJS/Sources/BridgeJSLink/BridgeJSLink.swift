@@ -118,6 +118,7 @@ public struct BridgeJSLink {
 
                     const cached = identityCache.get(pointer)?.deref();
                     if (cached && !cached.__swiftHeapObjectState.hasReleased) {
+                        deinit(pointer);
                         return cached;
                     }
                     if (!cached) {
@@ -2000,7 +2001,7 @@ extension BridgeJSLink {
             jsPrinter.write("static __construct(ptr) {")
             jsPrinter.indent {
                 jsPrinter.write(
-                    "return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_\(klass.name)_deinit, \(klass.name).prototype, \(klass.name).__identityCache);"
+                    "return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_\(klass.abiName)_deinit, \(klass.name).prototype, \(klass.name).__identityCache);"
                 )
             }
             jsPrinter.write("}")

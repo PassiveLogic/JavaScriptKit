@@ -281,6 +281,7 @@ export async function createInstantiator(options, swift) {
 
                     const cached = identityCache.get(pointer)?.deref();
                     if (cached && !cached.__swiftHeapObjectState.hasReleased) {
+                        deinit(pointer);
                         return cached;
                     }
                     if (!cached) {
@@ -305,7 +306,7 @@ export async function createInstantiator(options, swift) {
                 static __identityCache = new Map();
 
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_Converter_deinit, Converter.prototype, Converter.__identityCache);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_Utils_Converter_deinit, Converter.prototype, Converter.__identityCache);
                 }
 
                 constructor() {
@@ -330,7 +331,7 @@ export async function createInstantiator(options, swift) {
                 static __identityCache = new Map();
 
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_HTTPServer_deinit, HTTPServer.prototype, HTTPServer.__identityCache);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_Networking_API_HTTPServer_deinit, HTTPServer.prototype, HTTPServer.__identityCache);
                 }
 
                 constructor() {
@@ -345,7 +346,7 @@ export async function createInstantiator(options, swift) {
                 static __identityCache = new Map();
 
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_TestServer_deinit, TestServer.prototype, TestServer.__identityCache);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_Networking_APIV2_Internal_TestServer_deinit, TestServer.prototype, TestServer.__identityCache);
                 }
 
                 constructor() {
@@ -360,7 +361,7 @@ export async function createInstantiator(options, swift) {
                 static __identityCache = new Map();
 
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_Converter_deinit, Converter.prototype, Converter.__identityCache);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_Formatting_Converter_deinit, Converter.prototype, Converter.__identityCache);
                 }
 
                 constructor() {

@@ -252,6 +252,7 @@ export async function createInstantiator(options, swift) {
 
                     const cached = identityCache.get(pointer)?.deref();
                     if (cached && !cached.__swiftHeapObjectState.hasReleased) {
+                        deinit(pointer);
                         return cached;
                     }
                     if (!cached) {
@@ -276,7 +277,7 @@ export async function createInstantiator(options, swift) {
                 static __identityCache = new Map();
 
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_GlobalClass_deinit, GlobalClass.prototype, GlobalClass.__identityCache);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_GlobalAPI_GlobalClass_deinit, GlobalClass.prototype, GlobalClass.__identityCache);
                 }
 
                 constructor() {
@@ -294,7 +295,7 @@ export async function createInstantiator(options, swift) {
                 static __identityCache = new Map();
 
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_PrivateClass_deinit, PrivateClass.prototype, PrivateClass.__identityCache);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_PrivateAPI_PrivateClass_deinit, PrivateClass.prototype, PrivateClass.__identityCache);
                 }
 
                 constructor() {
