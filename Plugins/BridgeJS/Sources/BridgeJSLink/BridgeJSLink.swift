@@ -85,39 +85,13 @@ public struct BridgeJSLink {
                     return;
                 }
                 state.hasReleased = true;
+                state.identityMap?.delete(state.pointer);
                 state.deinit(state.pointer);
             });
 
             /// Represents a Swift heap object like a class instance or an actor instance.
             class SwiftHeapObject {
-                static identityCacheByDeinit = new WeakMap();
-                static finalizerByDeinit = new WeakMap();
-
-                static __getFinalizer(deinit) {
-                    let finalizer = SwiftHeapObject.finalizerByDeinit.get(deinit);
-                    if (finalizer) {
-                        return finalizer;
-                    }
-
-                    const created = new FinalizationRegistry((state) => {
-
-            """
-        if enableLifetimeTracking {
-            output += "            TRACKING.finalization(state);\n"
-        }
-        output += """
-                        if (state.hasReleased) {
-                            return;
-                        }
-                        state.hasReleased = true;
-                        state.identityMap?.delete(state.pointer);
-                        state.deinit(state.pointer);
-                    });
-                    SwiftHeapObject.finalizerByDeinit.set(deinit, created);
-                    return created;
-                }
-
-                static __wrap(pointer, deinit, prototype) {
+                static __wrap(pointer, deinit, prototype, identityCache) {
                     const makeFresh = (identityMap, finalizer) => {
                         const obj = Object.create(prototype);
                         const state = { pointer, deinit, hasReleased: false, identityMap, finalizer };
@@ -142,22 +116,15 @@ public struct BridgeJSLink {
                         return makeFresh(null, swiftHeapObjectFinalizationRegistry);
                     }
 
-                    let identityMap = SwiftHeapObject.identityCacheByDeinit.get(deinit);
-                    if (!identityMap) {
-                        identityMap = new Map();
-                        SwiftHeapObject.identityCacheByDeinit.set(deinit, identityMap);
-                    }
-
-                    const cached = identityMap.get(pointer)?.deref();
+                    const cached = identityCache.get(pointer)?.deref();
                     if (cached && !cached.__swiftHeapObjectState.hasReleased) {
                         return cached;
                     }
                     if (!cached) {
-                        identityMap.delete(pointer);
+                        identityCache.delete(pointer);
                     }
 
-                    const finalizer = SwiftHeapObject.__getFinalizer(deinit);
-                    return makeFresh(identityMap, finalizer);
+                    return makeFresh(identityCache, swiftHeapObjectFinalizationRegistry);
                 }
 
                 release() {
@@ -2028,10 +1995,12 @@ extension BridgeJSLink {
 
         // Always add __construct and constructor methods for all classes
         jsPrinter.indent {
+            jsPrinter.write("static __identityCache = new Map();")
+            jsPrinter.nextLine()
             jsPrinter.write("static __construct(ptr) {")
             jsPrinter.indent {
                 jsPrinter.write(
-                    "return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_\(klass.abiName)_deinit, \(klass.name).prototype);"
+                    "return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_\(klass.name)_deinit, \(klass.name).prototype, \(klass.name).__identityCache);"
                 )
             }
             jsPrinter.write("}")

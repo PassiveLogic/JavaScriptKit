@@ -132,5 +132,18 @@ import Testing
             )
         )
         #expect(outputJs.contains("if (!shouldUseIdentityMap) {"))
+        #expect(outputJs.contains("state.identityMap?.delete(state.pointer);"))
+        #expect(!outputJs.contains("static finalizerByDeinit"))
+        #expect(!outputJs.contains("static __getFinalizer"))
+        #expect(!outputJs.contains("static identityCache = new Map();"))
+        #expect(!outputJs.contains("identityCacheByDeinit"))
+        #expect(!outputJs.contains("identityCache ??"))
+        #expect(outputJs.contains("static __wrap(pointer, deinit, prototype, identityCache)"))
+        #expect(outputJs.contains("static __identityCache = new Map();"))
+        #expect(
+            outputJs.contains(
+                "return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_Greeter_deinit, Greeter.prototype, Greeter.__identityCache);"
+            )
+        )
     }
 }
