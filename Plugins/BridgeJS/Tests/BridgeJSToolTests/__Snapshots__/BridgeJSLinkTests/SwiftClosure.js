@@ -899,7 +899,7 @@ export async function createInstantiator(options, swift) {
         /** @param {WebAssembly.Instance} instance */
         createExports: (instance) => {
             const js = swift.memory.heap;
-            const swiftHeapObjectFinalizationRegistry = (typeof FinalizationRegistry === "undefined") ? null : new FinalizationRegistry((state) => {
+            const swiftHeapObjectFinalizationRegistry = (typeof FinalizationRegistry === "undefined") ? { register: () => {}, unregister: () => {} } : new FinalizationRegistry((state) => {
                 if (state.hasReleased) {
                     return;
                 }
@@ -911,14 +911,12 @@ export async function createInstantiator(options, swift) {
             /// Represents a Swift heap object like a class instance or an actor instance.
             class SwiftHeapObject {
                 static __wrap(pointer, deinit, prototype, identityCache) {
-                    const makeFresh = (identityMap, finalizer) => {
+                    const makeFresh = (identityMap) => {
                         const obj = Object.create(prototype);
-                        const state = { pointer, deinit, hasReleased: false, identityMap, finalizer };
+                        const state = { pointer, deinit, hasReleased: false, identityMap };
                         obj.pointer = pointer;
                         obj.__swiftHeapObjectState = state;
-                        if (finalizer) {
-                            finalizer.register(obj, state, state);
-                        }
+                        swiftHeapObjectFinalizationRegistry.register(obj, state, state);
                         if (identityMap) {
                             identityMap.set(pointer, new WeakRef(obj));
                         }
@@ -926,7 +924,7 @@ export async function createInstantiator(options, swift) {
                     };
 
                     if (!shouldUseIdentityMap) {
-                        return makeFresh(null, swiftHeapObjectFinalizationRegistry);
+                        return makeFresh(null);
                     }
 
                     const cached = identityCache.get(pointer)?.deref();
@@ -934,11 +932,11 @@ export async function createInstantiator(options, swift) {
                         deinit(pointer);
                         return cached;
                     }
-                    if (!cached) {
+                    if (identityCache.has(pointer)) {
                         identityCache.delete(pointer);
                     }
 
-                    return makeFresh(identityCache, swiftHeapObjectFinalizationRegistry);
+                    return makeFresh(identityCache);
                 }
 
                 release() {
@@ -947,7 +945,7 @@ export async function createInstantiator(options, swift) {
                         return;
                     }
                     state.hasReleased = true;
-                    state.finalizer?.unregister(state);
+                    swiftHeapObjectFinalizationRegistry.unregister(state);
                     state.identityMap?.delete(state.pointer);
                     state.deinit(state.pointer);
                 }

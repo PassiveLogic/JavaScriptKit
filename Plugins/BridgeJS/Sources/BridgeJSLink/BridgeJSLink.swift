@@ -74,7 +74,7 @@ public struct BridgeJSLink {
             output += lifetimeTrackingClassJs + "\n"
         }
         output += """
-            const swiftHeapObjectFinalizationRegistry = (typeof FinalizationRegistry === "undefined") ? null : new FinalizationRegistry((state) => {
+            const swiftHeapObjectFinalizationRegistry = (typeof FinalizationRegistry === "undefined") ? { register: () => {}, unregister: () => {} } : new FinalizationRegistry((state) => {
 
             """
         if enableLifetimeTracking {
@@ -92,9 +92,9 @@ public struct BridgeJSLink {
             /// Represents a Swift heap object like a class instance or an actor instance.
             class SwiftHeapObject {
                 static __wrap(pointer, deinit, prototype, identityCache) {
-                    const makeFresh = (identityMap, finalizer) => {
+                    const makeFresh = (identityMap) => {
                         const obj = Object.create(prototype);
-                        const state = { pointer, deinit, hasReleased: false, identityMap, finalizer };
+                        const state = { pointer, deinit, hasReleased: false, identityMap };
 
             """
         if enableLifetimeTracking {
@@ -103,9 +103,7 @@ public struct BridgeJSLink {
         output += """
                         obj.pointer = pointer;
                         obj.__swiftHeapObjectState = state;
-                        if (finalizer) {
-                            finalizer.register(obj, state, state);
-                        }
+                        swiftHeapObjectFinalizationRegistry.register(obj, state, state);
                         if (identityMap) {
                             identityMap.set(pointer, new WeakRef(obj));
                         }
@@ -113,7 +111,7 @@ public struct BridgeJSLink {
                     };
 
                     if (!shouldUseIdentityMap) {
-                        return makeFresh(null, swiftHeapObjectFinalizationRegistry);
+                        return makeFresh(null);
                     }
 
                     const cached = identityCache.get(pointer)?.deref();
@@ -121,11 +119,11 @@ public struct BridgeJSLink {
                         deinit(pointer);
                         return cached;
                     }
-                    if (!cached) {
+                    if (identityCache.has(pointer)) {
                         identityCache.delete(pointer);
                     }
 
-                    return makeFresh(identityCache, swiftHeapObjectFinalizationRegistry);
+                    return makeFresh(identityCache);
                 }
 
                 release() {
@@ -140,7 +138,7 @@ public struct BridgeJSLink {
                         return;
                     }
                     state.hasReleased = true;
-                    state.finalizer?.unregister(state);
+                    swiftHeapObjectFinalizationRegistry.unregister(state);
                     state.identityMap?.delete(state.pointer);
                     state.deinit(state.pointer);
                 }
