@@ -16,14 +16,16 @@ public final class SwiftToSkeleton {
     public let progress: ProgressReporting
     public let moduleName: String
     public let exposeToGlobal: Bool
+    public let identityMode: String?
 
     private var sourceFiles: [(sourceFile: SourceFileSyntax, inputFilePath: String)] = []
     let typeDeclResolver: TypeDeclResolver
 
-    public init(progress: ProgressReporting, moduleName: String, exposeToGlobal: Bool) {
+    public init(progress: ProgressReporting, moduleName: String, exposeToGlobal: Bool, identityMode: String? = nil) {
         self.progress = progress
         self.moduleName = moduleName
         self.exposeToGlobal = exposeToGlobal
+        self.identityMode = identityMode
         self.typeDeclResolver = TypeDeclResolver()
 
         // Index known types provided by JavaScriptKit
@@ -42,7 +44,13 @@ public final class SwiftToSkeleton {
     public func finalize() throws -> BridgeJSSkeleton {
         var perSourceErrors: [(inputFilePath: String, errors: [DiagnosticError])] = []
         var importedFiles: [ImportedFileSkeleton] = []
-        var exported = ExportedSkeleton(functions: [], classes: [], enums: [], exposeToGlobal: exposeToGlobal)
+        var exported = ExportedSkeleton(
+            functions: [],
+            classes: [],
+            enums: [],
+            exposeToGlobal: exposeToGlobal,
+            identityMode: identityMode
+        )
         var exportCollectors: [ExportSwiftAPICollector] = []
 
         for (sourceFile, inputFilePath) in sourceFiles {

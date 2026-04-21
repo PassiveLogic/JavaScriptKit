@@ -74,6 +74,8 @@ export async function createInstantiator(options, swift) {
 
     let _exports = null;
     let bjs = null;
+    const identityMode = options.identityMode ?? "none";
+    const shouldUseIdentityMap = identityMode === "pointer" && typeof WeakRef !== "undefined" && typeof FinalizationRegistry !== "undefined";
 
     return {
         /**
@@ -271,18 +273,39 @@ export async function createInstantiator(options, swift) {
                     return;
                 }
                 state.hasReleased = true;
+                state.identityMap?.delete(state.pointer);
                 state.deinit(state.pointer);
             });
 
             /// Represents a Swift heap object like a class instance or an actor instance.
             class SwiftHeapObject {
-                static __wrap(pointer, deinit, prototype) {
-                    const obj = Object.create(prototype);
-                    const state = { pointer, deinit, hasReleased: false };
-                    obj.pointer = pointer;
-                    obj.__swiftHeapObjectState = state;
-                    swiftHeapObjectFinalizationRegistry.register(obj, state, state);
-                    return obj;
+                static __wrap(pointer, deinit, prototype, identityCache) {
+                    const makeFresh = (identityMap) => {
+                        const obj = Object.create(prototype);
+                        const state = { pointer, deinit, hasReleased: false, identityMap };
+                        obj.pointer = pointer;
+                        obj.__swiftHeapObjectState = state;
+                        swiftHeapObjectFinalizationRegistry.register(obj, state, state);
+                        if (identityMap) {
+                            identityMap.set(pointer, new WeakRef(obj));
+                        }
+                        return obj;
+                    };
+
+                    if (!shouldUseIdentityMap) {
+                        return makeFresh(null);
+                    }
+
+                    const cached = identityCache.get(pointer)?.deref();
+                    if (cached && !cached.__swiftHeapObjectState.hasReleased) {
+                        deinit(pointer);
+                        return cached;
+                    }
+                    if (identityCache.has(pointer)) {
+                        identityCache.delete(pointer);
+                    }
+
+                    return makeFresh(identityCache);
                 }
 
                 release() {
@@ -292,12 +315,15 @@ export async function createInstantiator(options, swift) {
                     }
                     state.hasReleased = true;
                     swiftHeapObjectFinalizationRegistry.unregister(state);
+                    state.identityMap?.delete(state.pointer);
                     state.deinit(state.pointer);
                 }
             }
             class Converter extends SwiftHeapObject {
+                static __identityCache = new Map();
+
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_Utils_Converter_deinit, Converter.prototype);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_Utils_Converter_deinit, Converter.prototype, Converter.__identityCache);
                 }
 
                 constructor() {
@@ -319,8 +345,10 @@ export async function createInstantiator(options, swift) {
                 }
             }
             class HTTPServer extends SwiftHeapObject {
+                static __identityCache = new Map();
+
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_Networking_API_HTTPServer_deinit, HTTPServer.prototype);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_Networking_API_HTTPServer_deinit, HTTPServer.prototype, HTTPServer.__identityCache);
                 }
 
                 constructor() {
@@ -332,8 +360,10 @@ export async function createInstantiator(options, swift) {
                 }
             }
             class TestServer extends SwiftHeapObject {
+                static __identityCache = new Map();
+
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_Networking_APIV2_Internal_TestServer_deinit, TestServer.prototype);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_Networking_APIV2_Internal_TestServer_deinit, TestServer.prototype, TestServer.__identityCache);
                 }
 
                 constructor() {
@@ -345,8 +375,10 @@ export async function createInstantiator(options, swift) {
                 }
             }
             class Converter extends SwiftHeapObject {
+                static __identityCache = new Map();
+
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_Formatting_Converter_deinit, Converter.prototype);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_Formatting_Converter_deinit, Converter.prototype, Converter.__identityCache);
                 }
 
                 constructor() {

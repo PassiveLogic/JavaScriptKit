@@ -85,31 +85,52 @@ public struct BridgeJSLink {
                     return;
                 }
                 state.hasReleased = true;
+                state.identityMap?.delete(state.pointer);
                 state.deinit(state.pointer);
             });
 
             /// Represents a Swift heap object like a class instance or an actor instance.
             class SwiftHeapObject {
-                static __wrap(pointer, deinit, prototype) {
-                    const obj = Object.create(prototype);
-                    const state = { pointer, deinit, hasReleased: false };
+                static __wrap(pointer, deinit, prototype, identityCache) {
+                    const makeFresh = (identityMap) => {
+                        const obj = Object.create(prototype);
+                        const state = { pointer, deinit, hasReleased: false, identityMap };
 
             """
         if enableLifetimeTracking {
-            output += "        TRACKING.wrap(pointer, deinit, prototype, state);\n"
+            output += "            TRACKING.wrap(pointer, deinit, prototype, state);\n"
         }
         output += """
-                    obj.pointer = pointer;
-                    obj.__swiftHeapObjectState = state;
-                    swiftHeapObjectFinalizationRegistry.register(obj, state, state);
-                    return obj;
+                        obj.pointer = pointer;
+                        obj.__swiftHeapObjectState = state;
+                        swiftHeapObjectFinalizationRegistry.register(obj, state, state);
+                        if (identityMap) {
+                            identityMap.set(pointer, new WeakRef(obj));
+                        }
+                        return obj;
+                    };
+
+                    if (!shouldUseIdentityMap) {
+                        return makeFresh(null);
+                    }
+
+                    const cached = identityCache.get(pointer)?.deref();
+                    if (cached && !cached.__swiftHeapObjectState.hasReleased) {
+                        deinit(pointer);
+                        return cached;
+                    }
+                    if (identityCache.has(pointer)) {
+                        identityCache.delete(pointer);
+                    }
+
+                    return makeFresh(identityCache);
                 }
 
                 release() {
 
             """
         if enableLifetimeTracking {
-            output += "        TRACKING.release(this);\n"
+            output += "            TRACKING.release(this);\n"
         }
         output += """
                     const state = this.__swiftHeapObjectState;
@@ -118,6 +139,7 @@ public struct BridgeJSLink {
                     }
                     state.hasReleased = true;
                     swiftHeapObjectFinalizationRegistry.unregister(state);
+                    state.identityMap?.delete(state.pointer);
                     state.deinit(state.pointer);
                 }
             }
@@ -915,6 +937,7 @@ public struct BridgeJSLink {
         printer.write("export function createInstantiator(options: {")
         printer.indent {
             printer.write("imports: Imports;")
+            printer.write("identityMode?: \"none\" | \"pointer\";")
         }
         printer.write("}, swift: any): Promise<{")
         printer.indent {
@@ -960,6 +983,11 @@ public struct BridgeJSLink {
 
         try printer.indent {
             printer.write(lines: generateVariableDeclarations())
+            let configIdentityMode = skeletons.compactMap(\.exported).compactMap(\.identityMode).first ?? "none"
+            printer.write("const identityMode = options.identityMode ?? \"\(configIdentityMode)\";")
+            printer.write(
+                "const shouldUseIdentityMap = identityMode === \"pointer\" && typeof WeakRef !== \"undefined\" && typeof FinalizationRegistry !== \"undefined\";"
+            )
 
             let bodyPrinter = CodeFragmentPrinter()
             let allStructs = exportedSkeletons.flatMap { $0.structs }
@@ -1967,10 +1995,12 @@ extension BridgeJSLink {
 
         // Always add __construct and constructor methods for all classes
         jsPrinter.indent {
+            jsPrinter.write("static __identityCache = new Map();")
+            jsPrinter.nextLine()
             jsPrinter.write("static __construct(ptr) {")
             jsPrinter.indent {
                 jsPrinter.write(
-                    "return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_\(klass.abiName)_deinit, \(klass.name).prototype);"
+                    "return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_\(klass.abiName)_deinit, \(klass.name).prototype, \(klass.name).__identityCache);"
                 )
             }
             jsPrinter.write("}")

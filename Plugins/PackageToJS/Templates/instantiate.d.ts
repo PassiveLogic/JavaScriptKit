@@ -129,6 +129,12 @@ export type InstantiateOptions = {
             _swift: SwiftRuntime
         }
     ) => WebAssembly.Instance
+
+    /**
+     * Controls whether exported Swift class instances use pointer-based identity mapping.
+     * When set to "pointer", the same Swift heap pointer will always return the same JS wrapper object.
+     */
+    identityMode?: "none" | "pointer"
 }
 
 /**

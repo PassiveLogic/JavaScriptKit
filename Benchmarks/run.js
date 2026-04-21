@@ -3,6 +3,7 @@ import { defaultNodeSetup } from "./.build/plugins/PackageToJS/outputs/Package/p
 import fs from 'fs';
 import path from 'path';
 import { parseArgs } from "util";
+import { parseIdentityModes, parseIdentityReusePools, runIdentityModeBenchmarks, summarizeIdentityMemory } from "./lib/identity-benchmarks.js"
 import { APIResultValues as APIResult, ComplexResultValues as ComplexResult } from "./.build/plugins/PackageToJS/outputs/Package/bridge-js.js";
 
 /**
@@ -62,17 +63,44 @@ function createNameFilter(arg) {
  * @returns {number} Coefficient of variation as a percentage
  */
 function calculateCV(values) {
-    if (values.length < 2) return 0;
+    if (values.length < 2) return 0
+    const filtered = removeOutliers(values)
+    const sum = filtered.reduce((a, b) => a + b, 0)
+    const mean = sum / filtered.length
+    if (mean === 0) return 0
+    const variance = filtered.reduce((a, b) => a + Math.pow(b - mean, 2), 0) / filtered.length
+    const stdDev = Math.sqrt(variance)
+    return (stdDev / mean) * 100
+}
 
-    const sum = values.reduce((a, b) => a + b, 0);
-    const mean = sum / values.length;
+/**
+ * Remove outliers using the IQR (interquartile range) method.
+ * Discards values below Q1-1.5*IQR or above Q3+1.5*IQR.
+ * Returns the filtered array (or the original if too few samples).
+ * @param {Array<number>} values - Array of measurement values
+ * @returns {Array<number>} Values with outliers removed
+ */
+function removeOutliers(values) {
+    if (values.length < 4) return values
+    const sorted = [...values].sort((a, b) => a - b)
+    const q1 = sorted[Math.floor(sorted.length * 0.25)]
+    const q3 = sorted[Math.floor(sorted.length * 0.75)]
+    const iqr = q3 - q1
+    const lower = q1 - 1.5 * iqr
+    const upper = q3 + 1.5 * iqr
+    const filtered = values.filter(v => v >= lower && v <= upper)
+    return filtered.length > 0 ? filtered : values
+}
 
-    if (mean === 0) return 0;
-
-    const variance = values.reduce((a, b) => a + Math.pow(b - mean, 2), 0) / values.length;
-    const stdDev = Math.sqrt(variance);
-
-    return (stdDev / mean) * 100; // Return as percentage
+/**
+ * Calculate the median of an array of numbers
+ * @param {Array<number>} values - Array of measurement values
+ * @returns {number} Median value
+ */
+function median(values) {
+    const sorted = [...values].sort((a, b) => a - b)
+    const mid = Math.floor(sorted.length / 2)
+    return sorted.length % 2 !== 0 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2
 }
 
 /**
@@ -85,33 +113,38 @@ function calculateStatistics(results) {
     const consoleTable = [];
 
     for (const [name, times] of Object.entries(results)) {
-        const sum = times.reduce((a, b) => a + b, 0);
-        const avg = sum / times.length;
-        const min = Math.min(...times);
-        const max = Math.max(...times);
-        const variance = times.reduce((a, b) => a + Math.pow(b - avg, 2), 0) / times.length;
-        const stdDev = Math.sqrt(variance);
-        const cv = (stdDev / avg) * 100; // Coefficient of variation as percentage
+        const filtered = removeOutliers(times)
+        const sum = filtered.reduce((a, b) => a + b, 0)
+        const avg = sum / filtered.length
+        const med = median(filtered)
+        const min = Math.min(...filtered)
+        const max = Math.max(...filtered)
+        const variance = filtered.reduce((a, b) => a + Math.pow(b - avg, 2), 0) / filtered.length
+        const stdDev = Math.sqrt(variance)
+        const cv = (stdDev / avg) * 100
+        const outliers = times.length - filtered.length
 
         formattedResults[name] = {
             "avg_ms": parseFloat(avg.toFixed(2)),
+            "median_ms": parseFloat(med.toFixed(2)),
             "min_ms": parseFloat(min.toFixed(2)),
             "max_ms": parseFloat(max.toFixed(2)),
             "stdDev_ms": parseFloat(stdDev.toFixed(2)),
             "cv_percent": parseFloat(cv.toFixed(2)),
-            "samples": times.length,
+            "samples": filtered.length,
+            "outliers_removed": outliers,
             "rawTimes_ms": times.map(t => parseFloat(t.toFixed(2)))
-        };
+        }
 
         consoleTable.push({
             Test: name,
+            'Median (ms)': med.toFixed(2),
             'Avg (ms)': avg.toFixed(2),
             'Min (ms)': min.toFixed(2),
             'Max (ms)': max.toFixed(2),
-            'StdDev (ms)': stdDev.toFixed(2),
             'CV (%)': cv.toFixed(2),
-            'Samples': times.length
-        });
+            'Samples': filtered.length + (outliers > 0 ? ` (-${outliers})` : '')
+        })
     }
 
     return { formattedResults, consoleTable };
@@ -275,14 +308,14 @@ function saveJsonResults(filePath, data) {
  * @param {number} iterations - Loop iterations per JS benchmark
  * @returns {Promise<void>}
  */
-async function singleRun(results, nameFilter, iterations) {
+async function singleRun(results, nameFilter, iterations, identityConfig) {
     const options = await defaultNodeSetup({})
     const benchmarkRunner = (name, body) => {
         if (nameFilter && !nameFilter(name)) {
             return;
         }
         // Warmup to reduce JIT/IC noise.
-        body();
+        body()
         if (typeof globalThis.gc === "function") {
             globalThis.gc();
         }
@@ -869,6 +902,8 @@ async function singleRun(results, nameFilter, iterations) {
             arrayRoundtrip.roundtripOptionalArray(null)
         }
     })
+
+    await runIdentityModeBenchmarks(results, nameFilter, identityConfig, benchmarkRunner)
 }
 
 /**
@@ -878,7 +913,7 @@ async function singleRun(results, nameFilter, iterations) {
  * @param {number} iterations - Loop iterations per JS benchmark
  * @returns {Promise<void>}
  */
-async function runUntilStable(results, options, width, nameFilter, filterArg, iterations) {
+async function runUntilStable(results, options, width, nameFilter, filterArg, iterations, identityConfig) {
     const {
         minRuns = 5,
         maxRuns = 50,
@@ -897,7 +932,7 @@ async function runUntilStable(results, options, width, nameFilter, filterArg, it
         // Update progress with estimated completion
         updateProgress(runs, maxRuns, "Benchmark Progress:", width);
 
-        await singleRun(results, nameFilter, iterations);
+        await singleRun(results, nameFilter, iterations, identityConfig);
         runs++;
 
         if (runs === 1 && Object.keys(results).length === 0) {
@@ -968,6 +1003,10 @@ Options:
   --max-runs=NUMBER     Maximum runs for adaptive sampling (default: 50)
   --target-cv=NUMBER    Target coefficient of variation % (default: 5)
   --filter=PATTERN      Filter benchmarks by name (substring or /regex/flags)
+  --identity-mode=MODE  Identity benchmarks: off, none, pointer, both (default: off)
+  --identity-iterations=N  Iterations for identity benchmarks (default: 1000000)
+  --identity-reuse-pools=N,N  Pool sizes for reuse scenarios (default: 1,8,64)
+  --identity-memory     Enable memory profiling for identity benchmarks
   --help                Show this help message
 `);
 }
@@ -984,7 +1023,11 @@ async function main() {
             'min-runs': { type: 'string', default: '5' },
             'max-runs': { type: 'string', default: '50' },
             'target-cv': { type: 'string', default: '5' },
-            filter: { type: 'string' }
+            filter: { type: 'string' },
+            'identity-mode': { type: 'string', default: 'off' },
+            'identity-iterations': { type: 'string', default: '1000000' },
+            'identity-reuse-pools': { type: 'string' },
+            'identity-memory': { type: 'boolean', default: false }
         }
     });
 
@@ -997,6 +1040,17 @@ async function main() {
     const width = 30;
     const filterArg = args.values.filter;
     const nameFilter = createNameFilter(filterArg);
+
+    const identityModes = parseIdentityModes(args.values['identity-mode'])
+    const identityIterations = parseInt(args.values['identity-iterations'], 10)
+    const identityConfig = identityModes.length > 0 ? {
+        modes: identityModes,
+        iterations: identityIterations,
+        reusePools: parseIdentityReusePools(args.values['identity-reuse-pools']),
+        memory: args.values['identity-memory'],
+        memorySamples: {},
+        sampleInterval: 10000,
+    } : null
 
     const iterations = parseInt(args.values.iterations, 10);
     if (isNaN(iterations) || iterations <= 0) {
@@ -1017,7 +1071,7 @@ async function main() {
             console.log(`Results will be saved to: ${args.values.output}`);
         }
 
-        await runUntilStable(results, options, width, nameFilter, filterArg, iterations);
+        await runUntilStable(results, options, width, nameFilter, filterArg, iterations, identityConfig)
     } else {
         // Fixed number of runs mode
         const runs = parseInt(args.values.runs, 10);
@@ -1039,7 +1093,7 @@ async function main() {
         console.log("\nOverall Progress:");
         for (let i = 0; i < runs; i++) {
             updateProgress(i, runs, "Benchmark Runs:", width);
-            await singleRun(results, nameFilter, iterations);
+            await singleRun(results, nameFilter, iterations, identityConfig)
             if (i === 0 && Object.keys(results).length === 0) {
                 process.stdout.write("\n");
                 console.error(`No benchmarks matched filter: ${filterArg}`);
@@ -1068,6 +1122,15 @@ async function main() {
             printComparisonResults(comparisonResults);
         } else {
             console.error(`Could not load baseline file: ${args.values.baseline}`);
+        }
+    }
+
+    // Identity memory summary
+    if (identityConfig?.memory) {
+        const memoryRows = summarizeIdentityMemory(identityConfig)
+        if (memoryRows.length > 0) {
+            console.log("\n=== Identity Mode Memory Profile ===")
+            console.table(memoryRows)
         }
     }
 

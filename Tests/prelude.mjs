@@ -14,11 +14,13 @@ import { getImports as getDefaultArgumentImports } from './BridgeJSRuntimeTests/
 import { getImports as getJSClassSupportImports, JSClassWithArrayMembers } from './BridgeJSRuntimeTests/JavaScript/JSClassSupportTests.mjs';
 import { getImports as getIntegerTypesSupportImports } from './BridgeJSRuntimeTests/JavaScript/IntegerTypesSupportTests.mjs';
 import { getImports as getAsyncImportImports, runAsyncWorksTests } from './BridgeJSRuntimeTests/JavaScript/AsyncImportTests.mjs';
+import { getImports as getIdentityModeTestImports } from './BridgeJSIdentityTests/JavaScript/IdentityModeTests.mjs';
 
 /** @type {import('../.build/plugins/PackageToJS/outputs/PackageTests/test.d.ts').SetupOptionsFn} */
 export async function setupOptions(options, context) {
     Error.stackTraceLimit = 100;
     setupTestGlobals(globalThis);
+
 
     class StaticBox {
         constructor(value) {
@@ -155,6 +157,7 @@ export async function setupOptions(options, context) {
                 DefaultArgumentImports: getDefaultArgumentImports(importsContext),
                 JSClassSupportImports: getJSClassSupportImports(importsContext),
                 IntegerTypesSupportImports: getIntegerTypesSupportImports(importsContext),
+                IdentityModeTestImports: getIdentityModeTestImports(importsContext),
             };
         },
         addToCoreImports(importObject, importsContext) {

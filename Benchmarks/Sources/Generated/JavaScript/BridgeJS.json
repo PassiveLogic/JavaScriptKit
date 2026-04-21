@@ -1272,6 +1272,227 @@
       },
       {
         "constructor" : {
+          "abiName" : "bjs_ClassArrayRoundtrip_init",
+          "effects" : {
+            "isAsync" : false,
+            "isStatic" : false,
+            "isThrows" : false
+          },
+          "parameters" : [
+
+          ]
+        },
+        "methods" : [
+          {
+            "abiName" : "bjs_ClassArrayRoundtrip_setupPool",
+            "effects" : {
+              "isAsync" : false,
+              "isStatic" : false,
+              "isThrows" : false
+            },
+            "name" : "setupPool",
+            "parameters" : [
+              {
+                "label" : "_",
+                "name" : "count",
+                "type" : {
+                  "integer" : {
+                    "_0" : {
+                      "isSigned" : true,
+                      "width" : "word"
+                    }
+                  }
+                }
+              }
+            ],
+            "returnType" : {
+              "void" : {
+
+              }
+            }
+          },
+          {
+            "abiName" : "bjs_ClassArrayRoundtrip_getPool",
+            "effects" : {
+              "isAsync" : false,
+              "isStatic" : false,
+              "isThrows" : false
+            },
+            "name" : "getPool",
+            "parameters" : [
+
+            ],
+            "returnType" : {
+              "array" : {
+                "_0" : {
+                  "swiftHeapObject" : {
+                    "_0" : "SimpleClass"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "abiName" : "bjs_ClassArrayRoundtrip_makeClassArray",
+            "effects" : {
+              "isAsync" : false,
+              "isStatic" : false,
+              "isThrows" : false
+            },
+            "name" : "makeClassArray",
+            "parameters" : [
+
+            ],
+            "returnType" : {
+              "array" : {
+                "_0" : {
+                  "swiftHeapObject" : {
+                    "_0" : "SimpleClass"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "abiName" : "bjs_ClassArrayRoundtrip_takeClassArray",
+            "effects" : {
+              "isAsync" : false,
+              "isStatic" : false,
+              "isThrows" : false
+            },
+            "name" : "takeClassArray",
+            "parameters" : [
+              {
+                "label" : "_",
+                "name" : "values",
+                "type" : {
+                  "array" : {
+                    "_0" : {
+                      "swiftHeapObject" : {
+                        "_0" : "SimpleClass"
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "returnType" : {
+              "void" : {
+
+              }
+            }
+          },
+          {
+            "abiName" : "bjs_ClassArrayRoundtrip_roundtripClassArray",
+            "effects" : {
+              "isAsync" : false,
+              "isStatic" : false,
+              "isThrows" : false
+            },
+            "name" : "roundtripClassArray",
+            "parameters" : [
+              {
+                "label" : "_",
+                "name" : "values",
+                "type" : {
+                  "array" : {
+                    "_0" : {
+                      "swiftHeapObject" : {
+                        "_0" : "SimpleClass"
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "returnType" : {
+              "array" : {
+                "_0" : {
+                  "swiftHeapObject" : {
+                    "_0" : "SimpleClass"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "name" : "ClassArrayRoundtrip",
+        "properties" : [
+
+        ],
+        "swiftCallName" : "ClassArrayRoundtrip"
+      },
+      {
+        "constructor" : {
+          "abiName" : "bjs_IdentityCacheBenchmark_init",
+          "effects" : {
+            "isAsync" : false,
+            "isStatic" : false,
+            "isThrows" : false
+          },
+          "parameters" : [
+
+          ]
+        },
+        "methods" : [
+          {
+            "abiName" : "bjs_IdentityCacheBenchmark_setupPool",
+            "effects" : {
+              "isAsync" : false,
+              "isStatic" : false,
+              "isThrows" : false
+            },
+            "name" : "setupPool",
+            "parameters" : [
+              {
+                "label" : "_",
+                "name" : "count",
+                "type" : {
+                  "integer" : {
+                    "_0" : {
+                      "isSigned" : true,
+                      "width" : "word"
+                    }
+                  }
+                }
+              }
+            ],
+            "returnType" : {
+              "void" : {
+
+              }
+            }
+          },
+          {
+            "abiName" : "bjs_IdentityCacheBenchmark_getPoolRepeated",
+            "effects" : {
+              "isAsync" : false,
+              "isStatic" : false,
+              "isThrows" : false
+            },
+            "name" : "getPoolRepeated",
+            "parameters" : [
+
+            ],
+            "returnType" : {
+              "array" : {
+                "_0" : {
+                  "swiftHeapObject" : {
+                    "_0" : "SimpleClass"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "name" : "IdentityCacheBenchmark",
+        "properties" : [
+
+        ],
+        "swiftCallName" : "IdentityCacheBenchmark"
+      },
+      {
+        "constructor" : {
           "abiName" : "bjs_ArrayRoundtrip_init",
           "effects" : {
             "isAsync" : false,
