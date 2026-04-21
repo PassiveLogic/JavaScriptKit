@@ -257,6 +257,54 @@ enum ComplexResult {
     }
 }
 
+// MARK: - Class Array Performance Tests
+
+nonisolated(unsafe) var _classArrayPool: [SimpleClass] = []
+
+@JS class ClassArrayRoundtrip {
+    @JS init() {}
+
+    @JS func setupPool(_ count: Int) {
+        _classArrayPool = (0..<count).map {
+            SimpleClass(name: "Item \($0)", count: $0, flag: true, rate: 0.5, precise: 3.14)
+        }
+    }
+
+    @JS func getPool() -> [SimpleClass] {
+        return _classArrayPool
+    }
+
+    @JS func makeClassArray() -> [SimpleClass] {
+        return (0..<100).map {
+            SimpleClass(name: "Item \($0)", count: $0, flag: true, rate: 0.5, precise: 3.14)
+        }
+    }
+
+    @JS func takeClassArray(_ values: [SimpleClass]) {}
+
+    @JS func roundtripClassArray(_ values: [SimpleClass]) -> [SimpleClass] {
+        return values
+    }
+}
+
+// MARK: - Identity Cache Benchmark
+
+nonisolated(unsafe) var _cachedPool: [SimpleClass] = []
+
+@JS class IdentityCacheBenchmark {
+    @JS init() {}
+
+    @JS func setupPool(_ count: Int) {
+        _cachedPool = (0..<count).map {
+            SimpleClass(name: "Item \($0)", count: $0, flag: true, rate: 0.5, precise: 3.14)
+        }
+    }
+
+    @JS func getPoolRepeated() -> [SimpleClass] {
+        return _cachedPool
+    }
+}
+
 // MARK: - Array Performance Tests
 
 @JS struct Point {
