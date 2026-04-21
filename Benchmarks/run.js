@@ -2,7 +2,8 @@ import { instantiate } from "./.build/plugins/PackageToJS/outputs/Package/instan
 import { defaultNodeSetup } from "./.build/plugins/PackageToJS/outputs/Package/platforms/node.js"
 import fs from 'fs';
 import path from 'path';
-import { parseArgs } from "util";
+import { parseArgs } from "util"
+import { parseIdentityModes, parseIdentityReusePools, runIdentityModeBenchmarks, summarizeIdentityMemory } from "./lib/identity-benchmarks.js"
 import { APIResultValues as APIResult, ComplexResultValues as ComplexResult } from "./.build/plugins/PackageToJS/outputs/Package/bridge-js.js";
 
 /**
@@ -275,7 +276,7 @@ function saveJsonResults(filePath, data) {
  * @param {number} iterations - Loop iterations per JS benchmark
  * @returns {Promise<void>}
  */
-async function singleRun(results, nameFilter, iterations) {
+async function singleRun(results, nameFilter, iterations, identityConfig) {
     const options = await defaultNodeSetup({})
     const benchmarkRunner = (name, body) => {
         if (nameFilter && !nameFilter(name)) {
@@ -869,6 +870,8 @@ async function singleRun(results, nameFilter, iterations) {
             arrayRoundtrip.roundtripOptionalArray(null)
         }
     })
+
+    await runIdentityModeBenchmarks(results, nameFilter, identityConfig, benchmarkRunner)
 }
 
 /**
@@ -878,7 +881,7 @@ async function singleRun(results, nameFilter, iterations) {
  * @param {number} iterations - Loop iterations per JS benchmark
  * @returns {Promise<void>}
  */
-async function runUntilStable(results, options, width, nameFilter, filterArg, iterations) {
+async function runUntilStable(results, options, width, nameFilter, filterArg, iterations, identityConfig) {
     const {
         minRuns = 5,
         maxRuns = 50,
@@ -897,7 +900,7 @@ async function runUntilStable(results, options, width, nameFilter, filterArg, it
         // Update progress with estimated completion
         updateProgress(runs, maxRuns, "Benchmark Progress:", width);
 
-        await singleRun(results, nameFilter, iterations);
+        await singleRun(results, nameFilter, iterations, identityConfig)
         runs++;
 
         if (runs === 1 && Object.keys(results).length === 0) {
@@ -968,6 +971,10 @@ Options:
   --max-runs=NUMBER     Maximum runs for adaptive sampling (default: 50)
   --target-cv=NUMBER    Target coefficient of variation % (default: 5)
   --filter=PATTERN      Filter benchmarks by name (substring or /regex/flags)
+  --identity-mode=MODE  Identity benchmarks: off, none, pointer, both (default: off)
+  --identity-iterations=N  Iterations for identity benchmarks (default: 1000000)
+  --identity-reuse-pools=N,N  Pool sizes for reuse scenarios (default: 1)
+  --identity-memory     Enable memory profiling for identity benchmarks
   --help                Show this help message
 `);
 }
@@ -984,7 +991,11 @@ async function main() {
             'min-runs': { type: 'string', default: '5' },
             'max-runs': { type: 'string', default: '50' },
             'target-cv': { type: 'string', default: '5' },
-            filter: { type: 'string' }
+            filter: { type: 'string' },
+            'identity-mode': { type: 'string', default: 'off' },
+            'identity-iterations': { type: 'string', default: '1000000' },
+            'identity-reuse-pools': { type: 'string' },
+            'identity-memory': { type: 'boolean', default: false }
         }
     });
 
@@ -997,6 +1008,17 @@ async function main() {
     const width = 30;
     const filterArg = args.values.filter;
     const nameFilter = createNameFilter(filterArg);
+
+    const identityModes = parseIdentityModes(args.values['identity-mode'])
+    const identityIterations = parseInt(args.values['identity-iterations'], 10)
+    const identityConfig = identityModes.length > 0 ? {
+        modes: identityModes,
+        iterations: identityIterations,
+        reusePools: parseIdentityReusePools(args.values['identity-reuse-pools']),
+        memory: args.values['identity-memory'],
+        memorySamples: {},
+        sampleInterval: 10000,
+    } : null
 
     const iterations = parseInt(args.values.iterations, 10);
     if (isNaN(iterations) || iterations <= 0) {
@@ -1017,7 +1039,7 @@ async function main() {
             console.log(`Results will be saved to: ${args.values.output}`);
         }
 
-        await runUntilStable(results, options, width, nameFilter, filterArg, iterations);
+        await runUntilStable(results, options, width, nameFilter, filterArg, iterations, identityConfig)
     } else {
         // Fixed number of runs mode
         const runs = parseInt(args.values.runs, 10);
@@ -1039,7 +1061,7 @@ async function main() {
         console.log("\nOverall Progress:");
         for (let i = 0; i < runs; i++) {
             updateProgress(i, runs, "Benchmark Runs:", width);
-            await singleRun(results, nameFilter, iterations);
+            await singleRun(results, nameFilter, iterations, identityConfig)
             if (i === 0 && Object.keys(results).length === 0) {
                 process.stdout.write("\n");
                 console.error(`No benchmarks matched filter: ${filterArg}`);
@@ -1068,6 +1090,15 @@ async function main() {
             printComparisonResults(comparisonResults);
         } else {
             console.error(`Could not load baseline file: ${args.values.baseline}`);
+        }
+    }
+
+    // Identity memory summary
+    if (identityConfig?.memory) {
+        const memoryRows = summarizeIdentityMemory(identityConfig)
+        if (memoryRows.length > 0) {
+            console.log("\n=== Identity Mode Memory Profile ===")
+            console.table(memoryRows)
         }
     }
 
