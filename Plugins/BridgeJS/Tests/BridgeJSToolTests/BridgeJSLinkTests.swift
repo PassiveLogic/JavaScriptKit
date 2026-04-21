@@ -107,43 +107,51 @@ import Testing
     }
 
     @Test
-    func emitsIdentityModeOptionAndRuntimeScaffolding() throws {
-        let url = Self.inputsDirectory.appendingPathComponent("SwiftClass.swift")
+    func perClassIdentityModeFromAnnotation() throws {
+        let url = Self.inputsDirectory.appendingPathComponent("IdentityModeClass.swift")
         let sourceFile = Parser.parse(source: try String(contentsOf: url, encoding: .utf8))
-        let swiftAPI = SwiftToSkeleton(progress: .silent, moduleName: "TestModule", exposeToGlobal: false)
-        swiftAPI.addSourceFile(sourceFile, inputFilePath: "SwiftClass.swift")
+        let swiftAPI = SwiftToSkeleton(
+            progress: .silent,
+            moduleName: "TestModule",
+            exposeToGlobal: false,
+            identityMode: nil  // no config default
+        )
+        swiftAPI.addSourceFile(sourceFile, inputFilePath: "IdentityModeClass.swift")
         let outputSkeleton = try swiftAPI.finalize()
-        let bridgeJSLink = BridgeJSLink(
-            skeletons: [
-                outputSkeleton
-            ],
-            sharedMemory: false
-        )
 
-        let (outputJs, outputDts) = try bridgeJSLink.link()
+        // Verify skeleton has per-class identity mode (not captured by snapshots)
+        let cachedClass = outputSkeleton.exported!.classes.first { $0.name == "CachedModel" }
+        let uncachedClass = outputSkeleton.exported!.classes.first { $0.name == "UncachedModel" }
+        let explicitlyUncachedClass = outputSkeleton.exported!.classes.first { $0.name == "ExplicitlyUncachedModel" }
+        #expect(cachedClass?.identityMode == true)
+        #expect(uncachedClass?.identityMode == nil)
+        #expect(explicitlyUncachedClass?.identityMode == false)
 
-        #expect(outputDts.contains("identityMode?: \"none\" | \"pointer\";"))
-        #expect(
-            outputJs.contains("const identityMode = options.identityMode ?? \"none\";")
+        // Verify generated JS via snapshot
+        let bridgeJSLink = BridgeJSLink(skeletons: [outputSkeleton], sharedMemory: false)
+        try snapshot(bridgeJSLink: bridgeJSLink, name: "IdentityModeClass.PerClass")
+    }
+
+    @Test
+    func perClassIdentityModeWithConfigOverride() throws {
+        let url = Self.inputsDirectory.appendingPathComponent("IdentityModeClass.swift")
+        let sourceFile = Parser.parse(source: try String(contentsOf: url, encoding: .utf8))
+        let swiftAPI = SwiftToSkeleton(
+            progress: .silent,
+            moduleName: "TestModule",
+            exposeToGlobal: false,
+            identityMode: "pointer"  // config says pointer for all classes
         )
-        #expect(
-            outputJs.contains(
-                "const shouldUseIdentityMap = identityMode === \"pointer\" && typeof WeakRef !== \"undefined\" && typeof FinalizationRegistry !== \"undefined\";"
-            )
-        )
-        #expect(outputJs.contains("if (!shouldUseIdentityMap) {"))
-        #expect(outputJs.contains("state.identityMap?.delete(state.pointer);"))
-        #expect(!outputJs.contains("static finalizerByDeinit"))
-        #expect(!outputJs.contains("static __getFinalizer"))
-        #expect(!outputJs.contains("static identityCache = new Map();"))
-        #expect(!outputJs.contains("identityCacheByDeinit"))
-        #expect(!outputJs.contains("identityCache ??"))
-        #expect(outputJs.contains("static __wrap(pointer, deinit, prototype, identityCache)"))
-        #expect(outputJs.contains("static __identityCache = new Map();"))
-        #expect(
-            outputJs.contains(
-                "return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_Greeter_deinit, Greeter.prototype, Greeter.__identityCache);"
-            )
-        )
+        swiftAPI.addSourceFile(sourceFile, inputFilePath: "IdentityModeClass.swift")
+        let outputSkeleton = try swiftAPI.finalize()
+
+        // When config says "pointer", classes without annotation get identity mode from config.
+        // But @JS(identityMode: false) should still override to "without identity".
+        let explicitlyUncachedClass = outputSkeleton.exported!.classes.first { $0.name == "ExplicitlyUncachedModel" }
+        #expect(explicitlyUncachedClass?.identityMode == false)
+
+        // Verify generated JS via snapshot
+        let bridgeJSLink = BridgeJSLink(skeletons: [outputSkeleton], sharedMemory: false)
+        try snapshot(bridgeJSLink: bridgeJSLink, name: "IdentityModeClass.ConfigPointer")
     }
 }

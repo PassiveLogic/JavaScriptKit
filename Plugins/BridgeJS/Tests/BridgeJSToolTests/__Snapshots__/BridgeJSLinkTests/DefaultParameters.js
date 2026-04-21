@@ -36,8 +36,6 @@ export async function createInstantiator(options, swift) {
 
     let _exports = null;
     let bjs = null;
-    const identityMode = options.identityMode ?? "none";
-    const shouldUseIdentityMap = identityMode === "pointer" && typeof WeakRef !== "undefined" && typeof FinalizationRegistry !== "undefined";
     const __bjs_createConfigHelpers = () => ({
         lower: (value) => {
             const bytes = textEncoder.encode(value.name);
@@ -300,7 +298,7 @@ export async function createInstantiator(options, swift) {
                         return obj;
                     };
 
-                    if (!shouldUseIdentityMap) {
+                    if (!identityCache) {
                         return makeFresh(null);
                     }
 
@@ -328,10 +326,8 @@ export async function createInstantiator(options, swift) {
                 }
             }
             class DefaultGreeter extends SwiftHeapObject {
-                static __identityCache = new Map();
-
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_DefaultGreeter_deinit, DefaultGreeter.prototype, DefaultGreeter.__identityCache);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_DefaultGreeter_deinit, DefaultGreeter.prototype, null);
                 }
 
                 constructor(name) {
@@ -353,10 +349,8 @@ export async function createInstantiator(options, swift) {
                 }
             }
             class EmptyGreeter extends SwiftHeapObject {
-                static __identityCache = new Map();
-
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_EmptyGreeter_deinit, EmptyGreeter.prototype, EmptyGreeter.__identityCache);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_EmptyGreeter_deinit, EmptyGreeter.prototype, null);
                 }
 
                 constructor() {
@@ -365,10 +359,8 @@ export async function createInstantiator(options, swift) {
                 }
             }
             class ConstructorDefaults extends SwiftHeapObject {
-                static __identityCache = new Map();
-
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_ConstructorDefaults_deinit, ConstructorDefaults.prototype, ConstructorDefaults.__identityCache);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_ConstructorDefaults_deinit, ConstructorDefaults.prototype, null);
                 }
 
                 constructor(name = "Default", count = 42, enabled = true, status = StatusValues.Active, tag = null) {

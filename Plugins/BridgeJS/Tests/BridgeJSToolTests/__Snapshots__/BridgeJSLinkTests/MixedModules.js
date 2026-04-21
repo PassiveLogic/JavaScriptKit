@@ -30,8 +30,6 @@ export async function createInstantiator(options, swift) {
 
     let _exports = null;
     let bjs = null;
-    const identityMode = options.identityMode ?? "none";
-    const shouldUseIdentityMap = identityMode === "pointer" && typeof WeakRef !== "undefined" && typeof FinalizationRegistry !== "undefined";
 
     return {
         /**
@@ -244,7 +242,7 @@ export async function createInstantiator(options, swift) {
                         return obj;
                     };
 
-                    if (!shouldUseIdentityMap) {
+                    if (!identityCache) {
                         return makeFresh(null);
                     }
 
@@ -272,10 +270,8 @@ export async function createInstantiator(options, swift) {
                 }
             }
             class GlobalClass extends SwiftHeapObject {
-                static __identityCache = new Map();
-
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_GlobalAPI_GlobalClass_deinit, GlobalClass.prototype, GlobalClass.__identityCache);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_GlobalAPI_GlobalClass_deinit, GlobalClass.prototype, null);
                 }
 
                 constructor() {
@@ -290,10 +286,8 @@ export async function createInstantiator(options, swift) {
                 }
             }
             class PrivateClass extends SwiftHeapObject {
-                static __identityCache = new Map();
-
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_PrivateAPI_PrivateClass_deinit, PrivateClass.prototype, PrivateClass.__identityCache);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_PrivateAPI_PrivateClass_deinit, PrivateClass.prototype, null);
                 }
 
                 constructor() {

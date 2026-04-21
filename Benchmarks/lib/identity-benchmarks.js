@@ -1,6 +1,3 @@
-import { instantiate } from "../.build/plugins/PackageToJS/outputs/Package/instantiate.js"
-import { defaultNodeSetup } from "../.build/plugins/PackageToJS/outputs/Package/platforms/node.js"
-
 /**
  * Force a garbage collection cycle if available
  */
@@ -23,9 +20,14 @@ function formatBytes(bytes) {
 }
 
 /**
- * Parse the --identity-mode CLI argument into a list of modes to benchmark
+ * Parse the --identity-mode CLI argument into mode labels.
+ *
+ * Both class variants (with and without identity mode) are compiled into the
+ * same WASM build via per-class `@JS(identityMode: true)` annotations, so
+ * "both" mode works in a single run.
+ *
  * @param {string} modeArg - Mode argument: off, none, pointer, or both
- * @returns {string[]} List of identity modes to run
+ * @returns {string[]} Array of mode labels, or empty for "off"
  */
 function parseIdentityModes(modeArg) {
     if (!modeArg || modeArg === 'off') return []
@@ -73,14 +75,13 @@ function parseIdentityReusePools(value) {
 /**
  * Capture a memory profile sample for identity mode benchmarks.
  * Measures heap cost of holding roundtrip results in an array.
- * In pointer mode, retained entries reference the same wrapper; in none mode, each is distinct.
- * @param {object} classRoundtrip - ClassRoundtrip instance
- * @param {object} baseObject - Base SimpleClass instance
+ * @param {function} roundtrip - Function that roundtrips an object
+ * @param {object} baseObject - Base object instance
  * @param {number} iterations - Number of roundtrip iterations
  * @param {number} sampleInterval - How often to sample heap usage
  * @returns {Promise<object>} Memory profile sample
  */
-async function captureIdentityMemorySample(classRoundtrip, baseObject, iterations, sampleInterval) {
+async function captureIdentityMemorySample(roundtrip, baseObject, iterations, sampleInterval) {
     const v8 = await import('v8')
     forceGC()
     const before = process.memoryUsage()
@@ -91,7 +92,7 @@ async function captureIdentityMemorySample(classRoundtrip, baseObject, iteration
     let current = baseObject
     const startedAt = performance.now()
     for (let i = 0; i < iterations; i++) {
-        current = classRoundtrip.roundtripSimpleClass(current)
+        current = roundtrip(current)
         retained.push(current)
         if ((i + 1) % sampleInterval === 0) {
             peakHeapUsed = Math.max(peakHeapUsed, process.memoryUsage().heapUsed)
@@ -124,34 +125,47 @@ async function captureIdentityMemorySample(classRoundtrip, baseObject, iteration
 }
 
 /**
- * Run identity mode benchmarks for each configured mode.
- * Creates a separate WASM instance per mode to isolate identity cache state.
+ * Run identity mode benchmarks using dual-class strategy.
+ *
+ * Both class variants live in the same WASM build:
+ * - "none" mode uses: SimpleClass, ClassRoundtrip, IdentityCacheBenchmark
+ * - "pointer" mode uses: SimpleClassIdentity, ClassRoundtripIdentity, IdentityCacheBenchmarkIdentity
+ *
  * @param {object} results - Results object to accumulate benchmark data
  * @param {function|null} nameFilter - Optional filter for benchmark names
  * @param {object|null} identityConfig - Identity benchmark configuration
  * @param {function} benchmarkRunner - Benchmark runner function from singleRun
+ * @param {object} exports - Exports from the main WASM instance
  */
-async function runIdentityModeBenchmarks(results, nameFilter, identityConfig, benchmarkRunner) {
+async function runIdentityModeBenchmarks(results, nameFilter, identityConfig, benchmarkRunner, exports) {
     if (!identityConfig || identityConfig.modes.length === 0) return
 
     for (const mode of identityConfig.modes) {
-        const options = await defaultNodeSetup({})
-        const { exports } = await instantiate({
-            ...options,
-            identityMode: mode,
-            getImports: () => ({
-                benchmarkHelperNoop: () => {},
-                benchmarkHelperNoopWithNumber: () => {},
-                benchmarkRunner: () => {},
-            }),
-        })
+        // Select the right class set based on mode
+        let classRoundtrip, baseObject, roundtrip, makeSimple, takeSimple
+        let SimpleClassCtor, IdentityCacheCtor
 
-        const classRoundtrip = new exports.ClassRoundtrip()
-        const baseObject = new exports.SimpleClass('Hello', 42, true, 0.5, 3.14159)
+        if (mode === 'pointer') {
+            classRoundtrip = new exports.ClassRoundtripIdentity()
+            baseObject = new exports.SimpleClassIdentity('Hello', 42, true, 0.5, 3.14159)
+            SimpleClassCtor = exports.SimpleClassIdentity
+            IdentityCacheCtor = exports.IdentityCacheBenchmarkIdentity
+            roundtrip = (obj) => classRoundtrip.roundtripSimpleClassIdentity(obj)
+            makeSimple = () => classRoundtrip.makeSimpleClassIdentity()
+            takeSimple = (obj) => classRoundtrip.takeSimpleClassIdentity(obj)
+        } else {
+            classRoundtrip = new exports.ClassRoundtrip()
+            baseObject = new exports.SimpleClass('Hello', 42, true, 0.5, 3.14159)
+            SimpleClassCtor = exports.SimpleClass
+            IdentityCacheCtor = exports.IdentityCacheBenchmark
+            roundtrip = (obj) => classRoundtrip.roundtripSimpleClass(obj)
+            makeSimple = () => classRoundtrip.makeSimpleClass()
+            takeSimple = (obj) => classRoundtrip.takeSimpleClass(obj)
+        }
 
         for (const poolSize of identityConfig.reusePools) {
             const pool = Array.from({ length: poolSize }, (_, i) => {
-                return new exports.SimpleClass(`Hello ${i}`, i, true, 0.5, 3.14159)
+                return new SimpleClassCtor(`Hello ${i}`, i, true, 0.5, 3.14159)
             })
             const testName = poolSize === 1
                 ? `IdentityMode/${mode}/passBothWaysRoundtrip`
@@ -159,7 +173,7 @@ async function runIdentityModeBenchmarks(results, nameFilter, identityConfig, be
             benchmarkRunner(testName, () => {
                 for (let i = 0; i < identityConfig.iterations; i++) {
                     const index = i % poolSize
-                    pool[index] = classRoundtrip.roundtripSimpleClass(pool[index])
+                    pool[index] = roundtrip(pool[index])
                 }
             })
             for (const object of pool) {
@@ -169,27 +183,21 @@ async function runIdentityModeBenchmarks(results, nameFilter, identityConfig, be
 
         benchmarkRunner(`IdentityMode/${mode}/swiftConsumesSameObject`, () => {
             for (let i = 0; i < identityConfig.iterations; i++) {
-                classRoundtrip.takeSimpleClass(baseObject)
+                takeSimple(baseObject)
             }
         })
 
-
         // Churn scenario: create, roundtrip, release in a tight loop.
-        // Tests FinalizationRegistry cleanup overhead when objects are
-        // constantly created and dropped. In pointer mode, the identity
-        // cache accumulates WeakRef entries that must be cleaned up.
         benchmarkRunner(`IdentityMode/${mode}/churnObjects`, () => {
             for (let i = 0; i < identityConfig.iterations; i++) {
-                const obj = new exports.SimpleClass(`temp ${i}`, i, true, 0.5, 3.14159)
-                classRoundtrip.roundtripSimpleClass(obj)
+                const obj = new SimpleClassCtor(`temp ${i}`, i, true, 0.5, 3.14159)
+                roundtrip(obj)
                 obj.release()
             }
         })
 
         // Bulk array return: Swift returns same cached array of 100 objects.
-        // Tests the common pattern of returning model collections (e.g. building.floors).
-        // Uses fewer iterations since each call returns 100 objects.
-        const identityCacheBench = new exports.IdentityCacheBenchmark()
+        const identityCacheBench = new IdentityCacheCtor()
         identityCacheBench.setupPool(100)
         identityCacheBench.getPoolRepeated() // warm the cache
         benchmarkRunner(`IdentityMode/${mode}/getPoolRepeated_100`, () => {
@@ -201,13 +209,13 @@ async function runIdentityModeBenchmarks(results, nameFilter, identityConfig, be
 
         benchmarkRunner(`IdentityMode/${mode}/swiftCreatesObject`, () => {
             for (let i = 0; i < identityConfig.iterations; i++) {
-                classRoundtrip.makeSimpleClass()
+                makeSimple()
             }
         })
 
         if (identityConfig.memory) {
             const sample = await captureIdentityMemorySample(
-                classRoundtrip, baseObject,
+                roundtrip, baseObject,
                 identityConfig.iterations, identityConfig.sampleInterval
             )
             if (!identityConfig.memorySamples[mode]) {

@@ -38,7 +38,6 @@ export async function createInstantiator(options, swift) {
         addImports: (importObject, importsContext) => {
             bjs = {};
             importObject["bjs"] = bjs;
-            const imports = options.getImports(importsContext);
             bjs["swift_js_return_string"] = function(ptr, len) {
                 tmpRetString = decodeString(ptr, len);
             }
@@ -189,23 +188,22 @@ export async function createInstantiator(options, swift) {
                 return pointer || 0;
             }
             bjs["swift_js_closure_unregister"] = function(funcRef) {}
-            const TestModule = importObject["TestModule"] = importObject["TestModule"] || {};
-            TestModule["bjs_checkString"] = function bjs_checkString(aBytes, aCount) {
-                try {
-                    const string = decodeString(aBytes, aCount);
-                    imports.checkString(string);
-                } catch (error) {
-                    setException(error);
-                }
+            // Wrapper functions for module: TestModule
+            if (!importObject["TestModule"]) {
+                importObject["TestModule"] = {};
             }
-            TestModule["bjs_checkStringWithLength"] = function bjs_checkStringWithLength(aBytes, aCount, b) {
-                try {
-                    const string = decodeString(aBytes, aCount);
-                    imports.checkStringWithLength(string, b);
-                } catch (error) {
-                    setException(error);
-                }
-            }
+            importObject["TestModule"]["bjs_CachedModel_wrap"] = function(pointer) {
+                const obj = _exports['CachedModel'].__construct(pointer);
+                return swift.memory.retain(obj);
+            };
+            importObject["TestModule"]["bjs_ExplicitlyUncachedModel_wrap"] = function(pointer) {
+                const obj = _exports['ExplicitlyUncachedModel'].__construct(pointer);
+                return swift.memory.retain(obj);
+            };
+            importObject["TestModule"]["bjs_UncachedModel_wrap"] = function(pointer) {
+                const obj = _exports['UncachedModel'].__construct(pointer);
+                return swift.memory.retain(obj);
+            };
         },
         setInstance: (i) => {
             instance = i;
@@ -220,20 +218,142 @@ export async function createInstantiator(options, swift) {
         /** @param {WebAssembly.Instance} instance */
         createExports: (instance) => {
             const js = swift.memory.heap;
-            const exports = {
-                checkString: function bjs_checkString(a) {
-                    const aBytes = textEncoder.encode(a);
-                    const aId = swift.memory.retain(aBytes);
-                    instance.exports.bjs_checkString(aId, aBytes.length);
-                },
-                roundtripString: function bjs_roundtripString(a) {
-                    const aBytes = textEncoder.encode(a);
-                    const aId = swift.memory.retain(aBytes);
-                    instance.exports.bjs_roundtripString(aId, aBytes.length);
+            const swiftHeapObjectFinalizationRegistry = (typeof FinalizationRegistry === "undefined") ? { register: () => {}, unregister: () => {} } : new FinalizationRegistry((state) => {
+                if (state.hasReleased) {
+                    return;
+                }
+                state.hasReleased = true;
+                state.identityMap?.delete(state.pointer);
+                state.deinit(state.pointer);
+            });
+
+            /// Represents a Swift heap object like a class instance or an actor instance.
+            class SwiftHeapObject {
+                static __wrap(pointer, deinit, prototype, identityCache) {
+                    const makeFresh = (identityMap) => {
+                        const obj = Object.create(prototype);
+                        const state = { pointer, deinit, hasReleased: false, identityMap };
+                        obj.pointer = pointer;
+                        obj.__swiftHeapObjectState = state;
+                        swiftHeapObjectFinalizationRegistry.register(obj, state, state);
+                        if (identityMap) {
+                            identityMap.set(pointer, new WeakRef(obj));
+                        }
+                        return obj;
+                    };
+
+                    if (!identityCache) {
+                        return makeFresh(null);
+                    }
+
+                    const cached = identityCache.get(pointer)?.deref();
+                    if (cached && !cached.__swiftHeapObjectState.hasReleased) {
+                        deinit(pointer);
+                        return cached;
+                    }
+                    if (identityCache.has(pointer)) {
+                        identityCache.delete(pointer);
+                    }
+
+                    return makeFresh(identityCache);
+                }
+
+                release() {
+                    const state = this.__swiftHeapObjectState;
+                    if (state.hasReleased) {
+                        return;
+                    }
+                    state.hasReleased = true;
+                    swiftHeapObjectFinalizationRegistry.unregister(state);
+                    state.identityMap?.delete(state.pointer);
+                    state.deinit(state.pointer);
+                }
+            }
+            class CachedModel extends SwiftHeapObject {
+                static __identityCache = new Map();
+
+                static __construct(ptr) {
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_CachedModel_deinit, CachedModel.prototype, CachedModel.__identityCache);
+                }
+
+                static __constructFresh(ptr) {
+                    const obj = Object.create(CachedModel.prototype);
+                    const state = { pointer: ptr, deinit: instance.exports.bjs_CachedModel_deinit, hasReleased: false, identityMap: CachedModel.__identityCache };
+                    obj.pointer = ptr;
+                    obj.__swiftHeapObjectState = state;
+                    swiftHeapObjectFinalizationRegistry.register(obj, state, state);
+                    CachedModel.__identityCache.set(ptr, new WeakRef(obj));
+                    return obj;
+                }
+
+                constructor(name) {
+                    const nameBytes = textEncoder.encode(name);
+                    const nameId = swift.memory.retain(nameBytes);
+                    const ret = instance.exports.bjs_CachedModel_init(nameId, nameBytes.length);
+                    return CachedModel.__constructFresh(ret);
+                }
+                get name() {
+                    instance.exports.bjs_CachedModel_name_get(this.pointer);
                     const ret = tmpRetString;
                     tmpRetString = undefined;
                     return ret;
-                },
+                }
+                set name(value) {
+                    const valueBytes = textEncoder.encode(value);
+                    const valueId = swift.memory.retain(valueBytes);
+                    instance.exports.bjs_CachedModel_name_set(this.pointer, valueId, valueBytes.length);
+                }
+            }
+            class UncachedModel extends SwiftHeapObject {
+                static __identityCache = new Map();
+
+                static __construct(ptr) {
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_UncachedModel_deinit, UncachedModel.prototype, UncachedModel.__identityCache);
+                }
+
+                static __constructFresh(ptr) {
+                    const obj = Object.create(UncachedModel.prototype);
+                    const state = { pointer: ptr, deinit: instance.exports.bjs_UncachedModel_deinit, hasReleased: false, identityMap: UncachedModel.__identityCache };
+                    obj.pointer = ptr;
+                    obj.__swiftHeapObjectState = state;
+                    swiftHeapObjectFinalizationRegistry.register(obj, state, state);
+                    UncachedModel.__identityCache.set(ptr, new WeakRef(obj));
+                    return obj;
+                }
+
+                constructor(value) {
+                    const ret = instance.exports.bjs_UncachedModel_init(value);
+                    return UncachedModel.__constructFresh(ret);
+                }
+                get value() {
+                    const ret = instance.exports.bjs_UncachedModel_value_get(this.pointer);
+                    return ret;
+                }
+                set value(value) {
+                    instance.exports.bjs_UncachedModel_value_set(this.pointer, value);
+                }
+            }
+            class ExplicitlyUncachedModel extends SwiftHeapObject {
+                static __construct(ptr) {
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_ExplicitlyUncachedModel_deinit, ExplicitlyUncachedModel.prototype, null);
+                }
+
+                constructor(count) {
+                    const ret = instance.exports.bjs_ExplicitlyUncachedModel_init(count);
+                    return ExplicitlyUncachedModel.__construct(ret);
+                }
+                get count() {
+                    const ret = instance.exports.bjs_ExplicitlyUncachedModel_count_get(this.pointer);
+                    return ret;
+                }
+                set count(value) {
+                    instance.exports.bjs_ExplicitlyUncachedModel_count_set(this.pointer, value);
+                }
+            }
+            const exports = {
+                CachedModel,
+                UncachedModel,
+                ExplicitlyUncachedModel,
             };
             _exports = exports;
             return exports;

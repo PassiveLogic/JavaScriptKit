@@ -903,7 +903,7 @@ async function singleRun(results, nameFilter, iterations, identityConfig) {
         }
     })
 
-    await runIdentityModeBenchmarks(results, nameFilter, identityConfig, benchmarkRunner)
+    await runIdentityModeBenchmarks(results, nameFilter, identityConfig, benchmarkRunner, exports)
 }
 
 /**
@@ -1004,6 +1004,8 @@ Options:
   --target-cv=NUMBER    Target coefficient of variation % (default: 5)
   --filter=PATTERN      Filter benchmarks by name (substring or /regex/flags)
   --identity-mode=MODE  Identity benchmarks: off, none, pointer, both (default: off)
+                        Both class variants are in the same build via per-class
+                        @JS(identityMode: true). Use 'both' to compare side-by-side.
   --identity-iterations=N  Iterations for identity benchmarks (default: 1000000)
   --identity-reuse-pools=N,N  Pool sizes for reuse scenarios (default: 1,8,64)
   --identity-memory     Enable memory profiling for identity benchmarks

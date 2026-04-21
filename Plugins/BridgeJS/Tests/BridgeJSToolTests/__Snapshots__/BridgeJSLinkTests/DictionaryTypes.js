@@ -30,8 +30,6 @@ export async function createInstantiator(options, swift) {
 
     let _exports = null;
     let bjs = null;
-    const identityMode = options.identityMode ?? "none";
-    const shouldUseIdentityMap = identityMode === "pointer" && typeof WeakRef !== "undefined" && typeof FinalizationRegistry !== "undefined";
     const __bjs_createCountersHelpers = () => ({
         lower: (value) => {
             const bytes = textEncoder.encode(value.name);
@@ -309,7 +307,7 @@ export async function createInstantiator(options, swift) {
                         return obj;
                     };
 
-                    if (!shouldUseIdentityMap) {
+                    if (!identityCache) {
                         return makeFresh(null);
                     }
 
@@ -337,10 +335,8 @@ export async function createInstantiator(options, swift) {
                 }
             }
             class Box extends SwiftHeapObject {
-                static __identityCache = new Map();
-
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_Box_deinit, Box.prototype, Box.__identityCache);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_Box_deinit, Box.prototype, null);
                 }
 
             }

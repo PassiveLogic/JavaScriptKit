@@ -35,8 +35,6 @@ export async function createInstantiator(options, swift) {
 
     let _exports = null;
     let bjs = null;
-    const identityMode = options.identityMode ?? "none";
-    const shouldUseIdentityMap = identityMode === "pointer" && typeof WeakRef !== "undefined" && typeof FinalizationRegistry !== "undefined";
 
     return {
         /**
@@ -241,7 +239,7 @@ export async function createInstantiator(options, swift) {
                         return obj;
                     };
 
-                    if (!shouldUseIdentityMap) {
+                    if (!identityCache) {
                         return makeFresh(null);
                     }
 
@@ -269,10 +267,8 @@ export async function createInstantiator(options, swift) {
                 }
             }
             class PropertyClass extends SwiftHeapObject {
-                static __identityCache = new Map();
-
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_PropertyClass_deinit, PropertyClass.prototype, PropertyClass.__identityCache);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_PropertyClass_deinit, PropertyClass.prototype, null);
                 }
 
                 constructor() {

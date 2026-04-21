@@ -60,8 +60,6 @@ export async function createInstantiator(options, swift) {
 
     let _exports = null;
     let bjs = null;
-    const identityMode = options.identityMode ?? "none";
-    const shouldUseIdentityMap = identityMode === "pointer" && typeof WeakRef !== "undefined" && typeof FinalizationRegistry !== "undefined";
     const swiftClosureRegistry = (typeof FinalizationRegistry === "undefined") ? { register: () => {}, unregister: () => {} } : new FinalizationRegistry((state) => {
         if (state.unregistered) { return; }
         instance?.exports?.bjs_release_swift_closure(state.pointer);
@@ -923,7 +921,7 @@ export async function createInstantiator(options, swift) {
                         return obj;
                     };
 
-                    if (!shouldUseIdentityMap) {
+                    if (!identityCache) {
                         return makeFresh(null);
                     }
 
@@ -951,10 +949,8 @@ export async function createInstantiator(options, swift) {
                 }
             }
             class Person extends SwiftHeapObject {
-                static __identityCache = new Map();
-
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_Person_deinit, Person.prototype, Person.__identityCache);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_Person_deinit, Person.prototype, null);
                 }
 
                 constructor(name) {
@@ -965,10 +961,8 @@ export async function createInstantiator(options, swift) {
                 }
             }
             class TestProcessor extends SwiftHeapObject {
-                static __identityCache = new Map();
-
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_TestProcessor_deinit, TestProcessor.prototype, TestProcessor.__identityCache);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_TestProcessor_deinit, TestProcessor.prototype, null);
                 }
 
                 constructor(transform) {
