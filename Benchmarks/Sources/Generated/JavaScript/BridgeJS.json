@@ -1483,28 +1483,6 @@
                 }
               }
             }
-          },
-          {
-            "abiName" : "bjs_IdentityCacheBenchmark_getSingleRepeated",
-            "effects" : {
-              "isAsync" : false,
-              "isStatic" : false,
-              "isThrows" : false
-            },
-            "name" : "getSingleRepeated",
-            "parameters" : [
-
-            ],
-            "returnType" : {
-              "nullable" : {
-                "_0" : {
-                  "swiftHeapObject" : {
-                    "_0" : "SimpleClass"
-                  }
-                },
-                "_1" : "null"
-              }
-            }
           }
         ],
         "name" : "IdentityCacheBenchmark",

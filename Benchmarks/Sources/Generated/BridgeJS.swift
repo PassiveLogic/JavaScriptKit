@@ -1500,17 +1500,6 @@ public func _bjs_IdentityCacheBenchmark_getPoolRepeated(_ _self: UnsafeMutableRa
     #endif
 }
 
-@_expose(wasm, "bjs_IdentityCacheBenchmark_getSingleRepeated")
-@_cdecl("bjs_IdentityCacheBenchmark_getSingleRepeated")
-public func _bjs_IdentityCacheBenchmark_getSingleRepeated(_ _self: UnsafeMutableRawPointer) -> Void {
-    #if arch(wasm32)
-    let ret = IdentityCacheBenchmark.bridgeJSLiftParameter(_self).getSingleRepeated()
-    return ret.bridgeJSLowerReturn()
-    #else
-    fatalError("Only available on WebAssembly")
-    #endif
-}
-
 @_expose(wasm, "bjs_IdentityCacheBenchmark_deinit")
 @_cdecl("bjs_IdentityCacheBenchmark_deinit")
 public func _bjs_IdentityCacheBenchmark_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
