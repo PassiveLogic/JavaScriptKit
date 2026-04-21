@@ -55,8 +55,6 @@ export async function createInstantiator(options, swift) {
 
     let _exports = null;
     let bjs = null;
-    const identityMode = options.identityMode ?? "none";
-    const shouldUseIdentityMap = identityMode === "pointer" && typeof WeakRef !== "undefined" && typeof FinalizationRegistry !== "undefined";
 
     return {
         /**
@@ -273,7 +271,7 @@ export async function createInstantiator(options, swift) {
                         return obj;
                     };
 
-                    if (!shouldUseIdentityMap) {
+                    if (!identityCache) {
                         return makeFresh(null);
                     }
 
@@ -301,10 +299,8 @@ export async function createInstantiator(options, swift) {
                 }
             }
             class Converter extends SwiftHeapObject {
-                static __identityCache = new Map();
-
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_Utils_Converter_deinit, Converter.prototype, Converter.__identityCache);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_Utils_Converter_deinit, Converter.prototype, null);
                 }
 
                 constructor() {
@@ -326,10 +322,8 @@ export async function createInstantiator(options, swift) {
                 }
             }
             class HTTPServer extends SwiftHeapObject {
-                static __identityCache = new Map();
-
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_Networking_API_HTTPServer_deinit, HTTPServer.prototype, HTTPServer.__identityCache);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_Networking_API_HTTPServer_deinit, HTTPServer.prototype, null);
                 }
 
                 constructor() {
@@ -341,10 +335,8 @@ export async function createInstantiator(options, swift) {
                 }
             }
             class TestServer extends SwiftHeapObject {
-                static __identityCache = new Map();
-
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_Networking_APIV2_Internal_TestServer_deinit, TestServer.prototype, TestServer.__identityCache);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_Networking_APIV2_Internal_TestServer_deinit, TestServer.prototype, null);
                 }
 
                 constructor() {
@@ -356,10 +348,8 @@ export async function createInstantiator(options, swift) {
                 }
             }
             class Converter extends SwiftHeapObject {
-                static __identityCache = new Map();
-
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_Formatting_Converter_deinit, Converter.prototype, Converter.__identityCache);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_Formatting_Converter_deinit, Converter.prototype, null);
                 }
 
                 constructor() {

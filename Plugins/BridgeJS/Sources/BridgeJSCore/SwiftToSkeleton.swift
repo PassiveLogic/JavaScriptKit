@@ -1197,6 +1197,14 @@ private final class ExportSwiftAPICollector: SyntaxAnyVisitor {
         return nil
     }
 
+    private func extractIdentityMode(from jsAttribute: AttributeSyntax) -> Bool? {
+        guard let arguments = jsAttribute.arguments?.as(LabeledExprListSyntax.self),
+            let identityArg = arguments.first(where: { $0.label?.text == "identityMode" })
+        else { return nil }
+        let text = identityArg.expression.trimmedDescription
+        return text == "true"
+    }
+
     override func visit(_ node: InitializerDeclSyntax) -> SyntaxVisitorContinueKind {
         guard let jsAttribute = node.attributes.firstJSAttribute else { return .skipChildren }
 
@@ -1384,6 +1392,7 @@ private final class ExportSwiftAPICollector: SyntaxAnyVisitor {
             for: node,
             message: "Class visibility must be at least internal"
         )
+        let classIdentityMode = extractIdentityMode(from: jsAttribute)
         let exportedClass = ExportedClass(
             name: name,
             swiftCallName: swiftCallName,
@@ -1391,7 +1400,8 @@ private final class ExportSwiftAPICollector: SyntaxAnyVisitor {
             constructor: nil,
             methods: [],
             properties: [],
-            namespace: namespaceResult.namespace
+            namespace: namespaceResult.namespace,
+            identityMode: classIdentityMode
         )
         let uniqueKey = makeKey(name: name, namespace: namespaceResult.namespace)
 

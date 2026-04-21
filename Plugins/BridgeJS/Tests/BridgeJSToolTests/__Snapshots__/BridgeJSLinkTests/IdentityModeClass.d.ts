@@ -11,16 +11,25 @@ export interface SwiftHeapObject {
     /// Note: Calling this method will release the heap object and it will no longer be accessible.
     release(): void;
 }
-export interface PrivateClass extends SwiftHeapObject {
-    greet(): string;
+export interface CachedModel extends SwiftHeapObject {
+    name: string;
+}
+export interface UncachedModel extends SwiftHeapObject {
+    value: number;
+}
+export interface ExplicitlyUncachedModel extends SwiftHeapObject {
+    count: number;
 }
 export type Exports = {
-    PrivateAPI: {
-        PrivateClass: {
-            new(): PrivateClass;
-        }
-        privateFunction(): string;
-    },
+    CachedModel: {
+        new(name: string): CachedModel;
+    }
+    UncachedModel: {
+        new(value: number): UncachedModel;
+    }
+    ExplicitlyUncachedModel: {
+        new(count: number): ExplicitlyUncachedModel;
+    }
 }
 export type Imports = {
 }

@@ -30,8 +30,6 @@ export async function createInstantiator(options, swift) {
 
     let _exports = null;
     let bjs = null;
-    const identityMode = options.identityMode ?? "none";
-    const shouldUseIdentityMap = identityMode === "pointer" && typeof WeakRef !== "undefined" && typeof FinalizationRegistry !== "undefined";
     function __bjs_jsValueLower(value) {
         let kind;
         let payload1;
@@ -363,7 +361,7 @@ export async function createInstantiator(options, swift) {
                         return obj;
                     };
 
-                    if (!shouldUseIdentityMap) {
+                    if (!identityCache) {
                         return makeFresh(null);
                     }
 
@@ -391,10 +389,8 @@ export async function createInstantiator(options, swift) {
                 }
             }
             class JSValueHolder extends SwiftHeapObject {
-                static __identityCache = new Map();
-
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_JSValueHolder_deinit, JSValueHolder.prototype, JSValueHolder.__identityCache);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_JSValueHolder_deinit, JSValueHolder.prototype, null);
                 }
 
                 constructor(value, optionalValue) {

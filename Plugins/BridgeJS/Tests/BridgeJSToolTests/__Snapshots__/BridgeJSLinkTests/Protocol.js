@@ -54,8 +54,6 @@ export async function createInstantiator(options, swift) {
 
     let _exports = null;
     let bjs = null;
-    const identityMode = options.identityMode ?? "none";
-    const shouldUseIdentityMap = identityMode === "pointer" && typeof WeakRef !== "undefined" && typeof FinalizationRegistry !== "undefined";
     const __bjs_createResultValuesHelpers = () => ({
         lower: (value) => {
             const enumTag = value.tag;
@@ -596,7 +594,7 @@ export async function createInstantiator(options, swift) {
                         return obj;
                     };
 
-                    if (!shouldUseIdentityMap) {
+                    if (!identityCache) {
                         return makeFresh(null);
                     }
 
@@ -624,10 +622,8 @@ export async function createInstantiator(options, swift) {
                 }
             }
             class Helper extends SwiftHeapObject {
-                static __identityCache = new Map();
-
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_Helper_deinit, Helper.prototype, Helper.__identityCache);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_Helper_deinit, Helper.prototype, null);
                 }
 
                 constructor(value) {
@@ -646,10 +642,8 @@ export async function createInstantiator(options, swift) {
                 }
             }
             class MyViewController extends SwiftHeapObject {
-                static __identityCache = new Map();
-
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_MyViewController_deinit, MyViewController.prototype, MyViewController.__identityCache);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_MyViewController_deinit, MyViewController.prototype, null);
                 }
 
                 constructor(delegate) {
@@ -709,10 +703,8 @@ export async function createInstantiator(options, swift) {
                 }
             }
             class DelegateManager extends SwiftHeapObject {
-                static __identityCache = new Map();
-
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_DelegateManager_deinit, DelegateManager.prototype, DelegateManager.__identityCache);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_DelegateManager_deinit, DelegateManager.prototype, null);
                 }
 
                 constructor(delegates) {

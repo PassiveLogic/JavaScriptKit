@@ -15,12 +15,6 @@ export type Options = {
      */
     getImports: () => Imports;
     /* #endif */
-    /**
-     * Controls whether exported Swift class instances use pointer-based identity mapping.
-     * When set to "pointer", the same Swift heap pointer will always return the same JS wrapper object.
-     * Defaults to "none".
-     */
-    identityMode?: "none" | "pointer";
 };
 
 /**

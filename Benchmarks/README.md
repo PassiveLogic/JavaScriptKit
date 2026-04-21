@@ -38,15 +38,35 @@ node run.js --filter=/string/i
 
 ## Identity Mode Benchmarks
 
-Compare `identityMode: "pointer"` vs default (`"none"`) for SwiftHeapObject wrapper caching. Requires `--expose-gc` for memory benchmarks.
+Compare `identityMode: "pointer"` vs default (`"none"`) for SwiftHeapObject wrapper caching. Both class variants are compiled into the **same build** via per-class `@JS(identityMode: true)` annotations, so no separate builds or config files are needed.
+
+Requires `--expose-gc` for memory benchmarks.
+
+### Build once
 
 ```bash
-# Run identity benchmarks comparing both modes
-node --expose-gc run.js --identity-mode=both
+swift package --swift-sdk $SWIFT_SDK_ID js -c release
+```
 
-# Pointer mode only
-node --expose-gc run.js --identity-mode=pointer
+### Compare both modes in one run
 
+```bash
+node --expose-gc run.js --identity-mode=both --identity-iterations=1000000
+```
+
+### Run only one mode
+
+```bash
+# Only pointer (identity-cached) classes
+node --expose-gc run.js --identity-mode=pointer --identity-iterations=1000000
+
+# Only non-identity classes
+node --expose-gc run.js --identity-mode=none --identity-iterations=1000000
+```
+
+### Additional options
+
+```bash
 # Control iteration count (default: 1000000)
 node --expose-gc run.js --identity-mode=both --identity-iterations=500000
 
@@ -59,8 +79,8 @@ node --expose-gc run.js --identity-mode=both --identity-memory
 # Combine with adaptive sampling
 node --expose-gc run.js --identity-mode=both --adaptive
 
-# Save identity results
-node --expose-gc run.js --identity-mode=both --output=results/identity-mode/results.json
+# Filter to specific identity benchmarks
+node --expose-gc run.js --adaptive --filter=passBothWaysRoundtrip --identity-mode=both --identity-iterations=1000000
 ```
 
 ### Identity Mode Scenarios

@@ -784,6 +784,7 @@ public struct ExportedClass: Codable, NamespacedExportedType {
     public var methods: [ExportedFunction]
     public var properties: [ExportedProperty]
     public var namespace: [String]?
+    public var identityMode: Bool?  // nil = use config default, true/false = override
 
     public init(
         name: String,
@@ -792,7 +793,8 @@ public struct ExportedClass: Codable, NamespacedExportedType {
         constructor: ExportedConstructor? = nil,
         methods: [ExportedFunction],
         properties: [ExportedProperty] = [],
-        namespace: [String]? = nil
+        namespace: [String]? = nil,
+        identityMode: Bool? = nil
     ) {
         self.name = name
         self.swiftCallName = swiftCallName
@@ -801,6 +803,7 @@ public struct ExportedClass: Codable, NamespacedExportedType {
         self.methods = methods
         self.properties = properties
         self.namespace = namespace
+        self.identityMode = identityMode
     }
 }
 

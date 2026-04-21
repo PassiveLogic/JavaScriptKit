@@ -30,8 +30,6 @@ export async function createInstantiator(options, swift) {
 
     let _exports = null;
     let bjs = null;
-    const identityMode = options.identityMode ?? "none";
-    const shouldUseIdentityMap = identityMode === "pointer" && typeof WeakRef !== "undefined" && typeof FinalizationRegistry !== "undefined";
 
     return {
         /**
@@ -248,7 +246,7 @@ export async function createInstantiator(options, swift) {
                         return obj;
                     };
 
-                    if (!shouldUseIdentityMap) {
+                    if (!identityCache) {
                         return makeFresh(null);
                     }
 
@@ -276,10 +274,8 @@ export async function createInstantiator(options, swift) {
                 }
             }
             class Greeter extends SwiftHeapObject {
-                static __identityCache = new Map();
-
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs___Swift_Foundation_Greeter_deinit, Greeter.prototype, Greeter.__identityCache);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs___Swift_Foundation_Greeter_deinit, Greeter.prototype, null);
                 }
 
                 constructor(name) {
@@ -306,10 +302,8 @@ export async function createInstantiator(options, swift) {
                 }
             }
             class Converter extends SwiftHeapObject {
-                static __identityCache = new Map();
-
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_Utils_Converters_Converter_deinit, Converter.prototype, Converter.__identityCache);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_Utils_Converters_Converter_deinit, Converter.prototype, null);
                 }
 
                 constructor() {
@@ -324,10 +318,8 @@ export async function createInstantiator(options, swift) {
                 }
             }
             class UUID extends SwiftHeapObject {
-                static __identityCache = new Map();
-
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs___Swift_Foundation_UUID_deinit, UUID.prototype, UUID.__identityCache);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs___Swift_Foundation_UUID_deinit, UUID.prototype, null);
                 }
 
                 uuidString() {
@@ -338,10 +330,8 @@ export async function createInstantiator(options, swift) {
                 }
             }
             class Container extends SwiftHeapObject {
-                static __identityCache = new Map();
-
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_Collections_Container_deinit, Container.prototype, Container.__identityCache);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_Collections_Container_deinit, Container.prototype, null);
                 }
 
                 constructor() {

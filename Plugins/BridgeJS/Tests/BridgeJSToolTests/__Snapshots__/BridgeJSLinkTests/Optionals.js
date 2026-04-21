@@ -30,8 +30,6 @@ export async function createInstantiator(options, swift) {
 
     let _exports = null;
     let bjs = null;
-    const identityMode = options.identityMode ?? "none";
-    const shouldUseIdentityMap = identityMode === "pointer" && typeof WeakRef !== "undefined" && typeof FinalizationRegistry !== "undefined";
 
     return {
         /**
@@ -492,7 +490,7 @@ export async function createInstantiator(options, swift) {
                         return obj;
                     };
 
-                    if (!shouldUseIdentityMap) {
+                    if (!identityCache) {
                         return makeFresh(null);
                     }
 
@@ -520,10 +518,8 @@ export async function createInstantiator(options, swift) {
                 }
             }
             class Greeter extends SwiftHeapObject {
-                static __identityCache = new Map();
-
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_Greeter_deinit, Greeter.prototype, Greeter.__identityCache);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_Greeter_deinit, Greeter.prototype, null);
                 }
 
                 constructor(name) {
@@ -583,10 +579,8 @@ export async function createInstantiator(options, swift) {
                 }
             }
             class OptionalPropertyHolder extends SwiftHeapObject {
-                static __identityCache = new Map();
-
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_OptionalPropertyHolder_deinit, OptionalPropertyHolder.prototype, OptionalPropertyHolder.__identityCache);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_OptionalPropertyHolder_deinit, OptionalPropertyHolder.prototype, null);
                 }
 
                 constructor() {
