@@ -138,13 +138,7 @@ public func _bjs_clearArrayPool() -> Void {
 public func _bjs_getSharedSwiftSubject() -> UnsafeMutableRawPointer {
     #if arch(wasm32)
     let ret = getSharedSwiftSubject()
-    return withExtendedLifetime(ret) {
-        let ptr = Unmanaged.passUnretained(ret).toOpaque()
-        if _SwiftIdentityTestSubject_identityTable.insert(ptr).inserted {
-            _ = Unmanaged.passRetained(ret)
-        }
-        return ptr
-    }
+    return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
@@ -165,13 +159,7 @@ public func _bjs_resetSharedSwiftSubject() -> Void {
 public func _bjs_getRetainLeakSubjectSwift() -> UnsafeMutableRawPointer {
     #if arch(wasm32)
     let ret = getRetainLeakSubjectSwift()
-    return withExtendedLifetime(ret) {
-        let ptr = Unmanaged.passUnretained(ret).toOpaque()
-        if _SwiftRetainLeakSubject_identityTable.insert(ptr).inserted {
-            _ = Unmanaged.passRetained(ret)
-        }
-        return ptr
-    }
+    return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
@@ -459,13 +447,7 @@ nonisolated(unsafe) var _SwiftIdentityTestSubject_identityTable: Set<UnsafeMutab
 public func _bjs_SwiftIdentityTestSubject_init(_ value: Int32) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
     let ret = SwiftIdentityTestSubject(value: Int.bridgeJSLiftParameter(value))
-    return withExtendedLifetime(ret) {
-        let ptr = Unmanaged.passUnretained(ret).toOpaque()
-        if _SwiftIdentityTestSubject_identityTable.insert(ptr).inserted {
-            _ = Unmanaged.passRetained(ret)
-        }
-        return ptr
-    }
+    return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
@@ -476,13 +458,7 @@ public func _bjs_SwiftIdentityTestSubject_init(_ value: Int32) -> UnsafeMutableR
 public func _bjs_SwiftIdentityTestSubject_self_(_ _self: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
     let ret = SwiftIdentityTestSubject.bridgeJSLiftParameter(_self).self_()
-    return withExtendedLifetime(ret) {
-        let ptr = Unmanaged.passUnretained(ret).toOpaque()
-        if _SwiftIdentityTestSubject_identityTable.insert(ptr).inserted {
-            _ = Unmanaged.passRetained(ret)
-        }
-        return ptr
-    }
+    return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
@@ -542,6 +518,16 @@ public func _bjs_SwiftIdentityTestSubject_release_wrapper(_ pointer: UnsafeMutab
 }
 
 extension SwiftIdentityTestSubject {
+    @_spi(BridgeJS) @_transparent
+    public consuming func bridgeJSLowerReturn() -> UnsafeMutableRawPointer {
+        return withExtendedLifetime(self) {
+            let ptr = Unmanaged.passUnretained(self).toOpaque()
+            if _SwiftIdentityTestSubject_identityTable.insert(ptr).inserted {
+                _ = Unmanaged.passRetained(self)
+            }
+            return ptr
+        }
+    }
     @_spi(BridgeJS) public consuming func bridgeJSStackPush() {
         let ptr: UnsafeMutableRawPointer = withExtendedLifetime(self) {
             let ptr = Unmanaged.passUnretained(self).toOpaque()
@@ -582,13 +568,7 @@ nonisolated(unsafe) var _SwiftRetainLeakSubject_identityTable: Set<UnsafeMutable
 public func _bjs_SwiftRetainLeakSubject_init(_ tag: Int32) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
     let ret = SwiftRetainLeakSubject(tag: Int.bridgeJSLiftParameter(tag))
-    return withExtendedLifetime(ret) {
-        let ptr = Unmanaged.passUnretained(ret).toOpaque()
-        if _SwiftRetainLeakSubject_identityTable.insert(ptr).inserted {
-            _ = Unmanaged.passRetained(ret)
-        }
-        return ptr
-    }
+    return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
@@ -637,6 +617,16 @@ public func _bjs_SwiftRetainLeakSubject_release_wrapper(_ pointer: UnsafeMutable
 }
 
 extension SwiftRetainLeakSubject {
+    @_spi(BridgeJS) @_transparent
+    public consuming func bridgeJSLowerReturn() -> UnsafeMutableRawPointer {
+        return withExtendedLifetime(self) {
+            let ptr = Unmanaged.passUnretained(self).toOpaque()
+            if _SwiftRetainLeakSubject_identityTable.insert(ptr).inserted {
+                _ = Unmanaged.passRetained(self)
+            }
+            return ptr
+        }
+    }
     @_spi(BridgeJS) public consuming func bridgeJSStackPush() {
         let ptr: UnsafeMutableRawPointer = withExtendedLifetime(self) {
             let ptr = Unmanaged.passUnretained(self).toOpaque()
@@ -677,13 +667,7 @@ nonisolated(unsafe) var _SwiftChurnSubject_identityTable: Set<UnsafeMutableRawPo
 public func _bjs_SwiftChurnSubject_init(_ tag: Int32) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
     let ret = SwiftChurnSubject(tag: Int.bridgeJSLiftParameter(tag))
-    return withExtendedLifetime(ret) {
-        let ptr = Unmanaged.passUnretained(ret).toOpaque()
-        if _SwiftChurnSubject_identityTable.insert(ptr).inserted {
-            _ = Unmanaged.passRetained(ret)
-        }
-        return ptr
-    }
+    return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
@@ -732,6 +716,16 @@ public func _bjs_SwiftChurnSubject_release_wrapper(_ pointer: UnsafeMutableRawPo
 }
 
 extension SwiftChurnSubject {
+    @_spi(BridgeJS) @_transparent
+    public consuming func bridgeJSLowerReturn() -> UnsafeMutableRawPointer {
+        return withExtendedLifetime(self) {
+            let ptr = Unmanaged.passUnretained(self).toOpaque()
+            if _SwiftChurnSubject_identityTable.insert(ptr).inserted {
+                _ = Unmanaged.passRetained(self)
+            }
+            return ptr
+        }
+    }
     @_spi(BridgeJS) public consuming func bridgeJSStackPush() {
         let ptr: UnsafeMutableRawPointer = withExtendedLifetime(self) {
             let ptr = Unmanaged.passUnretained(self).toOpaque()

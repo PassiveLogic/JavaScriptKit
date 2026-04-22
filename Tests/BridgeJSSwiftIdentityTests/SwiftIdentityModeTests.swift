@@ -1,15 +1,9 @@
 import XCTest
 import JavaScriptKit
 
-// Config-default identity mode test target.
-//
-// The target's bridge-js.config.json sets `"identityMode": "swift"`. Every
-// `@JS class` in this file OMITS the per-class `identityMode:` argument so
-// we exercise the config-default resolution path in
-// `ExportSwift.isSwiftIdentityMode` / `BridgeJSLink.shouldUseSwiftIdentityCache`.
-//
-// See Docs/superpowers/specs/2026-04-21-swift-side-identity-cache-design.md §3.2
-// and plan Task 5 Part B.
+// Tests the config-default identityMode: "swift" resolution path.
+// bridge-js.config.json in this target sets the default, and none of the
+// @JS class declarations below opt in explicitly.
 
 @JSClass struct SwiftIdentityModeTestImports {
     @JSFunction static func runJsSwiftIdentityModeTests() throws(JSException)
@@ -21,7 +15,6 @@ final class SwiftIdentityModeTests: XCTestCase {
     }
 }
 
-// NOTE: No `identityMode:` argument — inherits "swift" from bridge-js.config.json.
 @JS class ConfigSwiftSubject {
     @JS var value: Int
 
@@ -47,7 +40,7 @@ nonisolated(unsafe) private var _configSwiftSubject: ConfigSwiftSubject?
     _configSwiftSubject = nil
 }
 
-// Dedicated class with a deinit counter for scenarios (b), (c).
+// Dedicated class with a deinit counter for release-related tests.
 @JS class ConfigSwiftRetainLeakSubject {
     nonisolated(unsafe) static var deinits: Int = 0
 
@@ -83,8 +76,8 @@ nonisolated(unsafe) private var _configSwiftRetainLeakSubject: ConfigSwiftRetain
     ConfigSwiftRetainLeakSubject.deinits = 0
 }
 
-// Scenario (d): dedicated churn class + introspection getter gated behind
-// ENABLE_TEST_INTROSPECTION so it is not part of the public test surface.
+// Dedicated churn class so its identity-table assertions aren't perturbed by
+// the shared subjects above.
 @JS class ConfigSwiftChurnSubject {
     @JS var tag: Int
 
@@ -93,13 +86,10 @@ nonisolated(unsafe) private var _configSwiftRetainLeakSubject: ConfigSwiftRetain
     }
 }
 
-#if ENABLE_TEST_INTROSPECTION
 @JS func getConfigSwiftIdentityTableSizeForChurn() -> Int {
     _ConfigSwiftChurnSubject_identityTable.count
 }
-#endif
 
-// Scenario (e): array returns preserving cross-element identity.
 @JS func makeConfigSwiftArray(
     _ a: ConfigSwiftSubject,
     _ b: ConfigSwiftSubject
@@ -107,7 +97,6 @@ nonisolated(unsafe) private var _configSwiftRetainLeakSubject: ConfigSwiftRetain
     return [a, b, a]
 }
 
-// Scenario (h): optional identity.
 @JS func maybeConfigSwiftSubject(_ present: Bool) -> ConfigSwiftSubject? {
     if _configSwiftSubject == nil {
         _configSwiftSubject = ConfigSwiftSubject(value: 99)

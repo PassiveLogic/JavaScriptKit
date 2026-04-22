@@ -113,11 +113,6 @@ nonisolated(unsafe) private var _arrayPool: [ArrayIdentityElement] = []
 }
 
 // MARK: - identityMode: .swift per-class opt-in (coexists with .pointer classes above)
-//
-// These classes explicitly opt INTO Swift-owned identity caching. The target's
-// bridge-js.config.json default is "pointer", so the existing classes above stay
-// on the pointer path; adding these .swift classes verifies mode coexistence.
-// See Docs/superpowers/specs/2026-04-21-swift-side-identity-cache-design.md §5, §6.2.
 
 @JS(identityMode: .swift) class SwiftIdentityTestSubject {
     @JS var value: Int
@@ -144,8 +139,6 @@ nonisolated(unsafe) private var _sharedSwiftSubject: SwiftIdentityTestSubject?
     _sharedSwiftSubject = nil
 }
 
-// Deinit counter used for scenario (b) "explicit release frees heap object"
-// and scenario (c) "double release is idempotent".
 @JS(identityMode: .swift) class SwiftRetainLeakSubject {
     nonisolated(unsafe) static var deinits: Int = 0
 
@@ -181,20 +174,10 @@ nonisolated(unsafe) private var _swiftRetainLeakSubject: SwiftRetainLeakSubject?
     SwiftRetainLeakSubject.deinits = 0
 }
 
-// Scenario (d): identity-table size introspection.
-//
-// Post-D18 the Swift-side state is a Set<pointer> (no ids). The analogous
-// "compactness" check is: after N allocate+release cycles, the Set is empty.
-// Gated behind `ENABLE_TEST_INTROSPECTION` so the debug-only getter does not
-// become part of the public test surface.
-#if ENABLE_TEST_INTROSPECTION
 @JS func getSwiftIdentityTableSizeForSharedSubject() -> Int {
     _SwiftIdentityTestSubject_identityTable.count
 }
-#endif
 
-// Scenario (e): array returns — Swift returns `[a, b, a]` so JS can assert
-// `result[0] === result[2]` preserves identity across array elements.
 @JS func makeSwiftIdentityArray(
     _ a: SwiftIdentityTestSubject,
     _ b: SwiftIdentityTestSubject
@@ -202,8 +185,6 @@ nonisolated(unsafe) private var _swiftRetainLeakSubject: SwiftRetainLeakSubject?
     return [a, b, a]
 }
 
-// Scenario (h): optional identity — `.some(x)` returns cached wrapper, `.none`
-// returns null.
 @JS func maybeSwiftSubject(_ present: Bool) -> SwiftIdentityTestSubject? {
     if _sharedSwiftSubject == nil {
         _sharedSwiftSubject = SwiftIdentityTestSubject(value: 99)
@@ -211,8 +192,8 @@ nonisolated(unsafe) private var _swiftRetainLeakSubject: SwiftRetainLeakSubject?
     return present ? _sharedSwiftSubject : nil
 }
 
-// Scenario (d) support: a dedicated "churn" class so id-recycling assertions
-// are not perturbed by the shared-subject lifetime used in (a), (f), (h).
+// Dedicated churn class so its identity-table assertions aren't perturbed by
+// the shared subjects above.
 @JS(identityMode: .swift) class SwiftChurnSubject {
     @JS var tag: Int
 
@@ -221,8 +202,6 @@ nonisolated(unsafe) private var _swiftRetainLeakSubject: SwiftRetainLeakSubject?
     }
 }
 
-#if ENABLE_TEST_INTROSPECTION
 @JS func getSwiftIdentityTableSizeForChurn() -> Int {
     _SwiftChurnSubject_identityTable.count
 }
-#endif

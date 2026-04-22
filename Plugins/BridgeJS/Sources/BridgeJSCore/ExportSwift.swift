@@ -31,16 +31,8 @@ public class ExportSwift {
         self.skeleton = skeleton
     }
 
-    /// Resolves whether a class is configured for `identityMode: "swift"`.
-    ///
-    /// Per-class `@JS(identityMode:)` takes priority over the skeleton-wide
-    /// default from `bridge-js.config.json`. Matches the resolution order in
-    /// `BridgeJSLink.shouldUseIdentityCache` but checks for the `"swift"` value
-    /// rather than `"pointer"`.
-    ///
-    /// Looks up by either the `name` or `swiftCallName` of an exported class —
-    /// the return-type's `.swiftHeapObject(String)` payload can be either
-    /// depending on how the type was referenced.
+    /// Whether a class resolves to `identityMode: "swift"`. Per-class annotation
+    /// wins over the skeleton-wide config default.
     func isSwiftIdentityMode(_ className: String) -> Bool {
         guard
             let klass = skeleton.classes.first(where: {
@@ -125,15 +117,9 @@ public class ExportSwift {
         var abiReturnType: WasmCoreType?
         var externDecls: [DeclSyntax] = []
         let effects: Effects
-        /// Predicate that resolves whether a class-name corresponds to an
-        /// `identityMode: "swift"` class. Default: always false. Threaded
-        /// through from `ExportSwift.isSwiftIdentityMode(_:)` at construction
-        /// time so return-lowering can emit the per-class cache glue.
-        let isSwiftIdentityMode: (String) -> Bool
 
-        init(effects: Effects, isSwiftIdentityMode: @escaping (String) -> Bool = { _ in false }) {
+        init(effects: Effects) {
             self.effects = effects
-            self.isSwiftIdentityMode = isSwiftIdentityMode
         }
 
         private func append(_ item: CodeBlockItemSyntax) {
@@ -351,26 +337,6 @@ public class ExportSwift {
                     }
                     """
                 )
-            case .swiftHeapObject(let className) where isSwiftIdentityMode(className):
-                // identityMode: "swift" — Swift's per-class Set tracks which
-                // pointers have been retained. On miss, retain once; on hit,
-                // skip. No signalling to JS needed: JS checks its own
-                // `Map<pointer, wrapper>` and derives hit/miss symmetrically.
-                // (See DECISIONS.md D20 for why dropping freshBit is safe:
-                // the Swift Set and the JS Map stay in lockstep by
-                // construction — both are keyed by pointer and updated at
-                // the same cache boundaries.)
-                append(
-                    """
-                    return withExtendedLifetime(ret) {
-                        let ptr = Unmanaged.passUnretained(ret).toOpaque()
-                        if _\(raw: className)_identityTable.insert(ptr).inserted {
-                            _ = Unmanaged.passRetained(ret)
-                        }
-                        return ptr
-                    }
-                    """
-                )
             default:
                 append("return ret.bridgeJSLowerReturn()")
             }
@@ -506,8 +472,7 @@ public class ExportSwift {
         let isStatic = context.isStatic
 
         let getterBuilder = ExportedThunkBuilder(
-            effects: Effects(isAsync: false, isThrows: false, isStatic: isStatic),
-            isSwiftIdentityMode: isSwiftIdentityMode
+            effects: Effects(isAsync: false, isThrows: false, isStatic: isStatic)
         )
 
         if !isStatic {
@@ -528,8 +493,7 @@ public class ExportSwift {
         // Generate property setter if not readonly
         if !property.isReadonly {
             let setterBuilder = ExportedThunkBuilder(
-                effects: Effects(isAsync: false, isThrows: false, isStatic: isStatic),
-                isSwiftIdentityMode: isSwiftIdentityMode
+                effects: Effects(isAsync: false, isThrows: false, isStatic: isStatic)
             )
 
             // Lift parameters based on property type
@@ -559,7 +523,7 @@ public class ExportSwift {
     }
 
     func renderSingleExportedFunction(function: ExportedFunction) throws -> DeclSyntax {
-        let builder = ExportedThunkBuilder(effects: function.effects, isSwiftIdentityMode: isSwiftIdentityMode)
+        let builder = ExportedThunkBuilder(effects: function.effects)
         for param in function.parameters {
             try builder.liftParameter(param: param)
         }
@@ -588,7 +552,7 @@ public class ExportSwift {
         callName: String,
         returnType: BridgeType
     ) throws -> DeclSyntax {
-        let builder = ExportedThunkBuilder(effects: constructor.effects, isSwiftIdentityMode: isSwiftIdentityMode)
+        let builder = ExportedThunkBuilder(effects: constructor.effects)
         for param in constructor.parameters {
             try builder.liftParameter(param: param)
         }
@@ -602,7 +566,7 @@ public class ExportSwift {
         ownerTypeName: String,
         instanceSelfType: BridgeType
     ) throws -> DeclSyntax {
-        let builder = ExportedThunkBuilder(effects: method.effects, isSwiftIdentityMode: isSwiftIdentityMode)
+        let builder = ExportedThunkBuilder(effects: method.effects)
         if !method.effects.isStatic {
             try builder.liftParameter(param: Parameter(label: nil, name: "_self", type: instanceSelfType))
         }
@@ -704,10 +668,7 @@ public class ExportSwift {
     func renderSingleExportedClass(klass: ExportedClass) throws -> [DeclSyntax] {
         var decls: [DeclSyntax] = []
 
-        // identityMode: "swift" — per-class state. Post-D19: Swift no longer
-        // holds the JS wrapper ref; JS keeps the wrapper alive in its own
-        // strong `Map<pointer, wrapper>`. Swift only tracks "have I already
-        // issued a wrapper for this pointer?" via a Set.
+        // .swift identity mode: Swift tracks which pointers have been retained.
         if isSwiftIdentityMode(klass.name) {
             decls.append(
                 "nonisolated(unsafe) var _\(raw: klass.name)_identityTable: Set<UnsafeMutableRawPointer> = []"
@@ -753,10 +714,8 @@ public class ExportSwift {
             decls.append(DeclSyntax(funcDecl))
         }
 
-        // identityMode: "swift" — emit the release thunk. Post-D19 there is
-        // no separate register thunk: Swift does not hold the JS ref, JS does
-        // (via its `Map<pointer, wrapper>`). Release just drops the Set entry
-        // and deallocates the Swift heap object.
+        // .swift identity mode: release thunk + overrides that route every
+        // return shape (scalar, array element, Optional) through the cache.
         if isSwiftIdentityMode(klass.name) {
             do {
                 let releaseDecl = SwiftCodePattern.buildExposedFunctionDecl(
@@ -772,12 +731,18 @@ public class ExportSwift {
                 decls.append(DeclSyntax(releaseDecl))
             }
 
-            // Override the default `_BridgedSwiftHeapObject.bridgeJSStackPush`
-            // so array-element returns (`[SwiftCached]`) go through the same
-            // identity-cache handshake. Post-D20: no `freshBit` push — JS
-            // checks its own Map for hit/miss.
-            let stackPushExt: DeclSyntax = """
+            let swiftIdentityOverridesExt: DeclSyntax = """
                 extension \(raw: klass.swiftCallName) {
+                    @_spi(BridgeJS) @_transparent
+                    public consuming func bridgeJSLowerReturn() -> UnsafeMutableRawPointer {
+                        return withExtendedLifetime(self) {
+                            let ptr = Unmanaged.passUnretained(self).toOpaque()
+                            if _\(raw: klass.name)_identityTable.insert(ptr).inserted {
+                                _ = Unmanaged.passRetained(self)
+                            }
+                            return ptr
+                        }
+                    }
                     @_spi(BridgeJS) public consuming func bridgeJSStackPush() {
                         let ptr: UnsafeMutableRawPointer = withExtendedLifetime(self) {
                             let ptr = Unmanaged.passUnretained(self).toOpaque()
@@ -790,7 +755,7 @@ public class ExportSwift {
                     }
                 }
                 """
-            decls.append(stackPushExt)
+            decls.append(swiftIdentityOverridesExt)
         }
 
         // Generate ConvertibleToJSValue extension

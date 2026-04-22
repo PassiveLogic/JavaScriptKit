@@ -346,10 +346,9 @@ public struct BridgeJSConfig: Codable {
     ///
     /// Valid values: `"none"` | `"pointer"` | `"swift"`.
     ///
-    /// - `"none"` (or `nil`): No identity tracking. Each boundary crossing produces a fresh JS wrapper.
+    /// - `"none"` (or `nil`): no identity tracking; each boundary crossing produces a fresh JS wrapper.
     /// - `"pointer"`: JS-side identity cache keyed by the Swift pointer (weak refs + `FinalizationRegistry`).
-    /// - `"swift"`: Swift-side identity cache (opt-in; strong retention of the JS wrapper for the
-    ///   lifetime of the Swift heap object). See spec §3.
+    /// - `"swift"`: Swift-owned strong identity cache; wrappers live until explicit `release()`.
     ///
     /// A per-class `@JS(identityMode: ...)` annotation overrides this default.
     ///

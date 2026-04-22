@@ -5,13 +5,7 @@ nonisolated(unsafe) var _SwiftCached_identityTable: Set<UnsafeMutableRawPointer>
 public func _bjs_SwiftCached_init(_ nameBytes: Int32, _ nameLength: Int32) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
     let ret = SwiftCached(name: String.bridgeJSLiftParameter(nameBytes, nameLength))
-    return withExtendedLifetime(ret) {
-        let ptr = Unmanaged.passUnretained(ret).toOpaque()
-        if _SwiftCached_identityTable.insert(ptr).inserted {
-            _ = Unmanaged.passRetained(ret)
-        }
-        return ptr
-    }
+    return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
@@ -60,6 +54,16 @@ public func _bjs_SwiftCached_release_wrapper(_ pointer: UnsafeMutableRawPointer)
 }
 
 extension SwiftCached {
+    @_spi(BridgeJS) @_transparent
+    public consuming func bridgeJSLowerReturn() -> UnsafeMutableRawPointer {
+        return withExtendedLifetime(self) {
+            let ptr = Unmanaged.passUnretained(self).toOpaque()
+            if _SwiftCached_identityTable.insert(ptr).inserted {
+                _ = Unmanaged.passRetained(self)
+            }
+            return ptr
+        }
+    }
     @_spi(BridgeJS) public consuming func bridgeJSStackPush() {
         let ptr: UnsafeMutableRawPointer = withExtendedLifetime(self) {
             let ptr = Unmanaged.passUnretained(self).toOpaque()

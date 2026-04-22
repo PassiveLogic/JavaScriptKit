@@ -29,11 +29,7 @@ function runIdentityModeTests(exports) {
     testArrayElementMatchesSingleGetter(exports);
     testArrayRetainLeak(exports);
 
-    // identityMode: .swift per-class tests (Task 5 Part A).
-    //
-    // These exercise the Swift-owned identity cache in coexistence with the
-    // pointer-mode classes above. Each function is self-contained (resets
-    // state, releases wrappers) so tests stay independent.
+    // identityMode: .swift tests (coexist with the pointer-mode classes above).
     testSwiftModeIdentity(exports);
     testSwiftModeSelfMethodIdentity(exports);
     testSwiftModeReleaseFreesHeapObject(exports);
@@ -215,16 +211,10 @@ function testDifferentClassesDontCollide(exports) {
     subject2.release();
 }
 
-// =========================================================================
-// identityMode: .swift — per-class opt-in tests (Task 5 Part A)
-//
-// These tests exercise classes annotated with `@JS(identityMode: .swift)` in
-// Tests/BridgeJSIdentityTests/IdentityModeTests.swift. The target's config
-// default is "pointer" so any `.swift` annotation is an explicit opt-in.
-// =========================================================================
+// ---------- identityMode: .swift tests ----------
 
 /**
- * (a) Identity on re-export.
+ * Identity on re-export.
  *
  * @param {import('../../../.build/plugins/PackageToJS/outputs/PackageTests/bridge-js.d.ts').Exports} exports
  */
@@ -264,7 +254,7 @@ function testSwiftModeSelfMethodIdentity(exports) {
 }
 
 /**
- * (b) Explicit release frees the underlying Swift heap object.
+ * Explicit release frees the underlying Swift heap object.
  *
  * @param {import('../../../.build/plugins/PackageToJS/outputs/PackageTests/bridge-js.d.ts').Exports} exports
  */
@@ -286,7 +276,7 @@ function testSwiftModeReleaseFreesHeapObject(exports) {
 }
 
 /**
- * (c) Double-release is idempotent. No crash, no over-release.
+ * Double-release is idempotent. No crash, no over-release.
  *
  * @param {import('../../../.build/plugins/PackageToJS/outputs/PackageTests/bridge-js.d.ts').Exports} exports
  */
@@ -310,24 +300,13 @@ function testSwiftModeDoubleReleaseIdempotent(exports) {
 }
 
 /**
- * (d) Identity-table cleanup — the Swift-side `Set<pointer>` returns to size 0
- * after allocating N wrappers and releasing all of them.
- *
- * Post-D18 there is no id allocation to recycle; the equivalent correctness
- * check is that `release_wrapper` drops its entry from `_<Class>_identityTable`
- * so the Set doesn't grow unboundedly over a churn loop.
- *
- * Uses the dedicated SwiftChurnSubject class so this assertion is not
- * perturbed by other tests' allocations.
+ * Identity-table cleanup — the Swift-side Set<pointer> returns to size 0
+ * after allocating N wrappers and releasing all of them, so it can't grow
+ * unboundedly over a churn loop.
  *
  * @param {import('../../../.build/plugins/PackageToJS/outputs/PackageTests/bridge-js.d.ts').Exports} exports
  */
 function testSwiftModeIdentityTableCleanup(exports) {
-    if (typeof exports.getSwiftIdentityTableSizeForChurn !== "function") {
-        // ENABLE_TEST_INTROSPECTION not set — skip silently.
-        return;
-    }
-
     const POOL = 10;
     const first = [];
     for (let i = 0; i < POOL; i++) {
@@ -355,7 +334,7 @@ function testSwiftModeIdentityTableCleanup(exports) {
 }
 
 /**
- * (e) Array of the same wrapper preserves cross-element identity.
+ * Array of the same wrapper preserves cross-element identity.
  *
  * @param {import('../../../.build/plugins/PackageToJS/outputs/PackageTests/bridge-js.d.ts').Exports} exports
  */
@@ -376,7 +355,7 @@ function testSwiftModeArrayCrossElementIdentity(exports) {
 }
 
 /**
- * (f) GC survivability — wrapper survives forced GC because Swift holds a
+ * GC survivability — wrapper survives forced GC because Swift holds a
  * strong JS ref via `swift.memory.retain`.
  *
  * Requires node to be launched with `--expose-gc`. `make unittest` does so
@@ -437,16 +416,7 @@ function testSwiftModeGcSurvivability(exports) {
 }
 
 /**
- * (h) Optional identity — `.some(x)` returns a valid wrapper; `.none` → null.
- *
- * v1 LIMITATION (see DECISIONS.md D16): the scalar Optional<SwiftIdentityClass>
- * return path does NOT preserve `===` identity. `.some(x)` returns a fresh JS
- * wrapper each time because the Optional bridge calls the default
- * `_BridgedSwiftHeapObject.bridgeJSLowerReturn` (passRetained + pointer)
- * rather than the per-class identity-cache handshake. Lifecycle is still
- * correct; only the strong-cache invariant is relaxed for this specific
- * return type. A follow-up can emit a per-class `bridgeJSLowerReturn`
- * override to fix this.
+ * Optional identity — `.some(x)` returns the cached wrapper; `.none` → null.
  *
  * @param {import('../../../.build/plugins/PackageToJS/outputs/PackageTests/bridge-js.d.ts').Exports} exports
  */
@@ -455,23 +425,15 @@ function testSwiftModeOptionalIdentity(exports) {
     const direct = exports.getSharedSwiftSubject();
     const viaOptional = exports.maybeSwiftSubject(true);
 
-    // v1: only verify the call works and the value is observable — NOT `===`.
-    assert.ok(
-        viaOptional != null,
-        "swift mode: Optional.some returns a wrapper (v1: identity not preserved — see D16)",
-    );
-    assert.equal(
-        viaOptional.currentValue,
-        direct.currentValue,
-        "swift mode: Optional.some wrapper observes the same underlying value",
+    assert.strictEqual(
+        direct,
+        viaOptional,
+        "swift mode: Optional.some returns the same cached wrapper",
     );
 
     const absent = exports.maybeSwiftSubject(false);
     assert.strictEqual(absent, null, "swift mode: Optional.none returns null");
 
-    // The extra wrapper from viaOptional needs its own release since it's
-    // a fresh id (v1 limitation).
-    viaOptional.release();
     direct.release();
     exports.resetSharedSwiftSubject();
 }
@@ -496,8 +458,10 @@ function testSwiftModeReleaseGuardsMembers(exports) {
 }
 
 /**
- * (i) Mode coexistence — .swift class and .pointer class in the same build,
+ * Mode coexistence — .swift class and .pointer class in the same build,
  * disjoint tables.
+ *
+ * Swift-mode and pointer-mode classes coexist without cross-talk.
  *
  * The target's config default is "pointer", so IdentityTestSubject (no
  * per-class annotation) is a pointer-mode class. SwiftIdentityTestSubject is

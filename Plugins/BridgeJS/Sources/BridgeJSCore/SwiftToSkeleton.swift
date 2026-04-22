@@ -1202,13 +1202,11 @@ private final class ExportSwiftAPICollector: SyntaxAnyVisitor {
             let identityArg = arguments.first(where: { $0.label?.text == "identityMode" })
         else { return nil }
         let text = identityArg.expression.trimmedDescription
-        // Enum member-access form (current `JSIdentityMode` API).
+        // Enum member-access (current API).
         if text.contains(".swift") { return "swift" }
         if text.contains(".pointer") { return "pointer" }
         if text.contains(".none") { return "none" }
-        // Legacy Bool literals (pre-D8.1 spelling — map for forward compatibility
-        // during the transition; the macro itself no longer accepts these, but
-        // fixtures and third-party sources may still spell it this way.)
+        // Legacy Bool literals, kept for backward compatibility.
         if text == "true" { return "pointer" }
         if text == "false" { return "none" }
         return nil

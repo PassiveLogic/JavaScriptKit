@@ -1,12 +1,7 @@
 // @ts-check
 
-// Config-default identity mode test harness (Task 5 Part B).
-//
-// Parallel of Tests/BridgeJSIdentityTests/JavaScript/IdentityModeTests.mjs,
-// but every @JS class in the companion Swift file has NO per-class
-// identityMode argument — the `"swift"` mode is inherited from the target's
-// bridge-js.config.json. We reuse the same assertions as Part A minus the
-// mode-coexistence scenario (only one mode is active in this target).
+// Tests for identityMode: "swift" inherited from the target's
+// bridge-js.config.json (no per-class annotations).
 
 import assert from "node:assert";
 
@@ -41,7 +36,7 @@ function runSwiftIdentityModeTests(exports) {
 }
 
 /**
- * (a) Identity on re-export (config-default swift mode).
+ * Identity on re-export (config-default swift mode).
  *
  * @param {import('../../../.build/plugins/PackageToJS/outputs/PackageTests/bridge-js.d.ts').Exports} exports
  */
@@ -80,7 +75,7 @@ function testConfigSwiftSelfMethodIdentity(exports) {
 }
 
 /**
- * (b) Explicit release frees underlying Swift heap object.
+ * Explicit release frees underlying Swift heap object.
  *
  * @param {import('../../../.build/plugins/PackageToJS/outputs/PackageTests/bridge-js.d.ts').Exports} exports
  */
@@ -100,7 +95,7 @@ function testConfigSwiftReleaseFreesHeapObject(exports) {
 }
 
 /**
- * (c) Double-release is idempotent.
+ * Double-release is idempotent.
  *
  * @param {import('../../../.build/plugins/PackageToJS/outputs/PackageTests/bridge-js.d.ts').Exports} exports
  */
@@ -123,16 +118,11 @@ function testConfigSwiftDoubleReleaseIdempotent(exports) {
 }
 
 /**
- * (d) Identity-table cleanup — `Set<pointer>` returns to empty after release
- * (post-D18; no ids to recycle, so the analogous check is size-based).
+ * Identity-table cleanup — Set<pointer> returns to empty after release.
  *
  * @param {import('../../../.build/plugins/PackageToJS/outputs/PackageTests/bridge-js.d.ts').Exports} exports
  */
 function testConfigSwiftIdentityTableCleanup(exports) {
-    if (typeof exports.getConfigSwiftIdentityTableSizeForChurn !== "function") {
-        return; // ENABLE_TEST_INTROSPECTION not defined
-    }
-
     const POOL = 10;
     const first = [];
     for (let i = 0; i < POOL; i++) {
@@ -153,7 +143,7 @@ function testConfigSwiftIdentityTableCleanup(exports) {
 }
 
 /**
- * (e) Array returns preserve cross-element identity.
+ * Array returns preserve cross-element identity.
  *
  * @param {import('../../../.build/plugins/PackageToJS/outputs/PackageTests/bridge-js.d.ts').Exports} exports
  */
@@ -174,7 +164,7 @@ function testConfigSwiftArrayCrossElementIdentity(exports) {
 }
 
 /**
- * (f) GC survivability.
+ * GC survivability.
  *
  * @param {import('../../../.build/plugins/PackageToJS/outputs/PackageTests/bridge-js.d.ts').Exports} exports
  */
@@ -210,11 +200,7 @@ function testConfigSwiftGcSurvivability(exports) {
 }
 
 /**
- * (h) Optional identity.
- *
- * v1 LIMITATION (see DECISIONS.md D16): `.some(x)` returns a fresh wrapper —
- * the scalar-Optional path bypasses the identity cache. Lifecycle is still
- * correct.
+ * Optional identity — `.some(x)` returns the cached wrapper; `.none` → null.
  *
  * @param {import('../../../.build/plugins/PackageToJS/outputs/PackageTests/bridge-js.d.ts').Exports} exports
  */
@@ -223,18 +209,11 @@ function testConfigSwiftOptionalIdentity(exports) {
     const direct = exports.getConfigSwiftSubject();
     const viaOptional = exports.maybeConfigSwiftSubject(true);
 
-    // v1: only verify the call works (see D16 — identity not preserved for Optional).
-    assert.ok(viaOptional != null, "config-swift: Optional.some returns a wrapper");
-    assert.equal(
-        viaOptional.currentValue,
-        direct.currentValue,
-        "config-swift: Optional.some wrapper observes the same value",
-    );
+    assert.strictEqual(direct, viaOptional, "config-swift: Optional.some preserves identity");
 
     const absent = exports.maybeConfigSwiftSubject(false);
     assert.strictEqual(absent, null, "config-swift: Optional.none returns null");
 
-    viaOptional.release();
     direct.release();
     exports.resetConfigSwiftSubject();
 }

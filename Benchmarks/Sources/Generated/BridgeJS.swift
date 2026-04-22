@@ -1822,13 +1822,7 @@ nonisolated(unsafe) var _SimpleClassSwiftIdentity_identityTable: Set<UnsafeMutab
 public func _bjs_SimpleClassSwiftIdentity_init(_ nameBytes: Int32, _ nameLength: Int32, _ count: Int32, _ flag: Int32, _ rate: Float32, _ precise: Float64) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
     let ret = SimpleClassSwiftIdentity(name: String.bridgeJSLiftParameter(nameBytes, nameLength), count: Int.bridgeJSLiftParameter(count), flag: Bool.bridgeJSLiftParameter(flag), rate: Float.bridgeJSLiftParameter(rate), precise: Double.bridgeJSLiftParameter(precise))
-    return withExtendedLifetime(ret) {
-        let ptr = Unmanaged.passUnretained(ret).toOpaque()
-        if _SimpleClassSwiftIdentity_identityTable.insert(ptr).inserted {
-            _ = Unmanaged.passRetained(ret)
-        }
-        return ptr
-    }
+    return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
@@ -1961,6 +1955,16 @@ public func _bjs_SimpleClassSwiftIdentity_release_wrapper(_ pointer: UnsafeMutab
 }
 
 extension SimpleClassSwiftIdentity {
+    @_spi(BridgeJS) @_transparent
+    public consuming func bridgeJSLowerReturn() -> UnsafeMutableRawPointer {
+        return withExtendedLifetime(self) {
+            let ptr = Unmanaged.passUnretained(self).toOpaque()
+            if _SimpleClassSwiftIdentity_identityTable.insert(ptr).inserted {
+                _ = Unmanaged.passRetained(self)
+            }
+            return ptr
+        }
+    }
     @_spi(BridgeJS) public consuming func bridgeJSStackPush() {
         let ptr: UnsafeMutableRawPointer = withExtendedLifetime(self) {
             let ptr = Unmanaged.passUnretained(self).toOpaque()
@@ -2001,13 +2005,7 @@ nonisolated(unsafe) var _ClassRoundtripSwiftIdentity_identityTable: Set<UnsafeMu
 public func _bjs_ClassRoundtripSwiftIdentity_init() -> UnsafeMutableRawPointer {
     #if arch(wasm32)
     let ret = ClassRoundtripSwiftIdentity()
-    return withExtendedLifetime(ret) {
-        let ptr = Unmanaged.passUnretained(ret).toOpaque()
-        if _ClassRoundtripSwiftIdentity_identityTable.insert(ptr).inserted {
-            _ = Unmanaged.passRetained(ret)
-        }
-        return ptr
-    }
+    return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
@@ -2018,13 +2016,7 @@ public func _bjs_ClassRoundtripSwiftIdentity_init() -> UnsafeMutableRawPointer {
 public func _bjs_ClassRoundtripSwiftIdentity_roundtripSimpleClassSwiftIdentity(_ _self: UnsafeMutableRawPointer, _ obj: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
     let ret = ClassRoundtripSwiftIdentity.bridgeJSLiftParameter(_self).roundtripSimpleClassSwiftIdentity(_: SimpleClassSwiftIdentity.bridgeJSLiftParameter(obj))
-    return withExtendedLifetime(ret) {
-        let ptr = Unmanaged.passUnretained(ret).toOpaque()
-        if _SimpleClassSwiftIdentity_identityTable.insert(ptr).inserted {
-            _ = Unmanaged.passRetained(ret)
-        }
-        return ptr
-    }
+    return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
@@ -2035,13 +2027,7 @@ public func _bjs_ClassRoundtripSwiftIdentity_roundtripSimpleClassSwiftIdentity(_
 public func _bjs_ClassRoundtripSwiftIdentity_makeSimpleClassSwiftIdentity(_ _self: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
     let ret = ClassRoundtripSwiftIdentity.bridgeJSLiftParameter(_self).makeSimpleClassSwiftIdentity()
-    return withExtendedLifetime(ret) {
-        let ptr = Unmanaged.passUnretained(ret).toOpaque()
-        if _SimpleClassSwiftIdentity_identityTable.insert(ptr).inserted {
-            _ = Unmanaged.passRetained(ret)
-        }
-        return ptr
-    }
+    return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
@@ -2079,6 +2065,16 @@ public func _bjs_ClassRoundtripSwiftIdentity_release_wrapper(_ pointer: UnsafeMu
 }
 
 extension ClassRoundtripSwiftIdentity {
+    @_spi(BridgeJS) @_transparent
+    public consuming func bridgeJSLowerReturn() -> UnsafeMutableRawPointer {
+        return withExtendedLifetime(self) {
+            let ptr = Unmanaged.passUnretained(self).toOpaque()
+            if _ClassRoundtripSwiftIdentity_identityTable.insert(ptr).inserted {
+                _ = Unmanaged.passRetained(self)
+            }
+            return ptr
+        }
+    }
     @_spi(BridgeJS) public consuming func bridgeJSStackPush() {
         let ptr: UnsafeMutableRawPointer = withExtendedLifetime(self) {
             let ptr = Unmanaged.passUnretained(self).toOpaque()
@@ -2119,13 +2115,7 @@ nonisolated(unsafe) var _IdentityCacheBenchmarkSwiftIdentity_identityTable: Set<
 public func _bjs_IdentityCacheBenchmarkSwiftIdentity_init() -> UnsafeMutableRawPointer {
     #if arch(wasm32)
     let ret = IdentityCacheBenchmarkSwiftIdentity()
-    return withExtendedLifetime(ret) {
-        let ptr = Unmanaged.passUnretained(ret).toOpaque()
-        if _IdentityCacheBenchmarkSwiftIdentity_identityTable.insert(ptr).inserted {
-            _ = Unmanaged.passRetained(ret)
-        }
-        return ptr
-    }
+    return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
@@ -2174,6 +2164,16 @@ public func _bjs_IdentityCacheBenchmarkSwiftIdentity_release_wrapper(_ pointer: 
 }
 
 extension IdentityCacheBenchmarkSwiftIdentity {
+    @_spi(BridgeJS) @_transparent
+    public consuming func bridgeJSLowerReturn() -> UnsafeMutableRawPointer {
+        return withExtendedLifetime(self) {
+            let ptr = Unmanaged.passUnretained(self).toOpaque()
+            if _IdentityCacheBenchmarkSwiftIdentity_identityTable.insert(ptr).inserted {
+                _ = Unmanaged.passRetained(self)
+            }
+            return ptr
+        }
+    }
     @_spi(BridgeJS) public consuming func bridgeJSStackPush() {
         let ptr: UnsafeMutableRawPointer = withExtendedLifetime(self) {
             let ptr = Unmanaged.passUnretained(self).toOpaque()

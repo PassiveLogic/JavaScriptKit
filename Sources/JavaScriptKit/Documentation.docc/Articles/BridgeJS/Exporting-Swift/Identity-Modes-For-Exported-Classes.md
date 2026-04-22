@@ -69,11 +69,19 @@ The key differences vs `.pointer`:
 ```javascript
 const b = exports.getBuilding();  // allocates a wrapper (if fresh)
 b.name;                           // stable === with any future getBuilding() that returns the same Swift object
-b.release();                      // mandatory for swift mode — frees the Swift heap object and the wrapper slot
+b.release();                      // frees the Swift heap object and the wrapper slot
 // after release(): b.name throws "Attempted to call a member on a released Building"
 ```
 
 Double-release is a safe no-op. Static members (class-level methods, constructors) are not affected by release.
+
+### Why `release()` is required
+
+`.pointer` mode uses a `WeakRef` and a `FinalizationRegistry` to let the JS garbage collector reclaim wrappers whose users have dropped all references. That safety net is exactly what makes `.pointer` mode's miss path expensive — `FinalizationRegistry.register` and `new WeakRef` allocations account for ~88% of the per-miss cost. `.swift` mode removes both, which is where its performance comes from. The tradeoff is that the JS garbage collector no longer has any hook to trigger cleanup; Swift holds a strong retain until you explicitly release.
+
+In practice this is the same discipline as any manually-managed resource (file handles, network sockets, native-backed buffers). Use `try { … } finally { x.release() }` for scopes that can throw, or wrap long-lived objects in application code that owns their release.
+
+If you can't live with explicit release, stay on `.pointer` mode.
 
 ## Benchmarks (summary)
 
@@ -91,8 +99,7 @@ Full results in [`Benchmarks/results/swift-side-cache/Benchmarks.md`](../../../.
 
 ## Known limitations
 
-- **Optional<SwiftIdentityClass> identity is not preserved.** If your Swift API returns `SomeClass?`, `.some(x)` produces a fresh wrapper each call even with `.swift` mode. Lifecycle is still correct, but `a === b` where both come from an optional return will be `false`. Workaround: wrap in `[SomeClass]` (array element identity IS preserved).
-- **No automatic cleanup.** You must call `release()` explicitly. A future version may add a Swift-side timeout or GC-assisted cleanup.
+- **No GC-driven cleanup.** Wrappers live until `release()` is called. Dropping all JS references to a wrapper without releasing leaks the Swift heap object. See "Why `release()` is required" above.
 - **Wasm-only.** Like all of BridgeJS, identity modes only activate on `wasm32`. On the host, the macro expands to no-op code paths so your test harness can still compile.
 
 ## Choosing a mode
