@@ -352,35 +352,27 @@ public class ExportSwift {
                     """
                 )
             case .swiftHeapObject(let className) where isSwiftIdentityMode(className):
-                // identityMode: "swift" — Swift owns the wrapper lifetime and
-                // the authoritative pointer→id table. On hit, skip the
-                // passRetained; on miss, retain once and reserve a wrapper
-                // slot. JS pops (id, freshBit) from the i32 stack after the
-                // return pointer and either returns the cached wrapper or
-                // builds a fresh one and calls back via
-                // `bjs_<Class>_register_wrapper` to install the strong JS ref.
+                // identityMode: "swift" — Swift tracks which pointers have
+                // an associated JS wrapper via a per-class Set. On hit, skip
+                // the passRetained; JS keeps the wrapper alive via its
+                // strong `Map<pointer, wrapper>`. On miss, retain once and
+                // signal freshBit=1 so JS builds the wrapper.
+                //
+                // ABI: one i32 push after the return pointer — `freshBit`.
+                // JS pops `freshBit` and either returns its cached wrapper
+                // (0) or builds a fresh one and calls `register_wrapper` to
+                // give Swift the retained JS ref (1).
                 append(
                     """
                     return withExtendedLifetime(ret) {
                         let ptr = Unmanaged.passUnretained(ret).toOpaque()
-                        if let id = _\(raw: className)_identityTable[ptr] {
-                            // Cache hit: do NOT retain. JS keeps the wrapper alive via _wrapperRefs[id].
-                            _swift_js_push_i32(id)
+                        if _\(raw: className)_identityTable.contains(ptr) {
+                            // Cache hit: do NOT retain. JS has the wrapper cached.
                             _swift_js_push_i32(0)
                             return ptr
                         }
                         _ = Unmanaged.passRetained(ret)
-                        let id: Int32
-                        if let recycled = _\(raw: className)_freeIds.popLast() {
-                            id = recycled
-                        } else {
-                            id = _\(raw: className)_nextId
-                            _\(raw: className)_nextId += 1
-                            _\(raw: className)_wrapperRefs.append(0)
-                        }
-                        _\(raw: className)_identityTable[ptr] = id
-                        _\(raw: className)_idToPointer[id] = ptr
-                        _swift_js_push_i32(id)
+                        _\(raw: className)_identityTable.insert(ptr)
                         _swift_js_push_i32(1)
                         return ptr
                     }
@@ -719,25 +711,19 @@ public class ExportSwift {
     func renderSingleExportedClass(klass: ExportedClass) throws -> [DeclSyntax] {
         var decls: [DeclSyntax] = []
 
-        // identityMode: "swift" — emit the per-class Swift-owned identity cache
-        // state (pointer→id forward map, id→pointer reverse map for O(1)
-        // release, dense wrapper-ref array, free-id stack, monotonic counter).
-        // See Docs/superpowers/specs/2026-04-21-swift-side-identity-cache-design.md §5.1.
+        // identityMode: "swift" — per-class state. Simpler than the original
+        // id-based design: the JS-side cache is keyed directly by pointer (as
+        // a strong Map), so Swift only needs:
+        //   - a Set of pointers that already have a JS wrapper
+        //   - a Map of pointer → JS ref (so Swift can release the JS ref
+        //     when the wrapper is released)
+        // See DECISIONS.md D18 for why this supersedes the 5-global design.
         if isSwiftIdentityMode(klass.name) {
             decls.append(
-                "nonisolated(unsafe) var _\(raw: klass.name)_identityTable: [UnsafeMutableRawPointer: Int32] = [:]"
+                "nonisolated(unsafe) var _\(raw: klass.name)_identityTable: Set<UnsafeMutableRawPointer> = []"
             )
             decls.append(
-                "nonisolated(unsafe) var _\(raw: klass.name)_idToPointer: [Int32: UnsafeMutableRawPointer] = [:]"
-            )
-            decls.append(
-                "nonisolated(unsafe) var _\(raw: klass.name)_wrapperRefs: [Int32] = []"
-            )
-            decls.append(
-                "nonisolated(unsafe) var _\(raw: klass.name)_freeIds: [Int32] = []"
-            )
-            decls.append(
-                "nonisolated(unsafe) var _\(raw: klass.name)_nextId: Int32 = 0"
+                "nonisolated(unsafe) var _\(raw: klass.name)_wrapperRefs: [UnsafeMutableRawPointer: Int32] = [:]"
             )
         }
 
@@ -781,18 +767,18 @@ public class ExportSwift {
         }
 
         // identityMode: "swift" — emit the register/release thunks that pair
-        // with the JS-side fresh-wrapper handshake. See spec §5.3 and §5.4.
-        // Per D8.3, release uses the reverse dictionary (O(1) drop).
+        // with the JS-side fresh-wrapper handshake. Both thunks are keyed by
+        // raw pointer — no id indirection. See DECISIONS.md D18.
         if isSwiftIdentityMode(klass.name) {
             do {
                 let registerDecl = SwiftCodePattern.buildExposedFunctionDecl(
                     abiName: "bjs_\(klass.abiName)_register_wrapper",
                     signature: SwiftSignatureBuilder.buildABIFunctionSignature(
-                        abiParameters: [("id", .i32), ("jsRef", .i32)],
+                        abiParameters: [("pointer", .pointer), ("jsRef", .i32)],
                         returnType: nil
                     )
                 ) { printer in
-                    printer.write("_\(klass.name)_wrapperRefs[Int(id)] = jsRef")
+                    printer.write("_\(klass.name)_wrapperRefs[pointer] = jsRef")
                 }
                 decls.append(DeclSyntax(registerDecl))
             }
@@ -801,59 +787,33 @@ public class ExportSwift {
                 let releaseDecl = SwiftCodePattern.buildExposedFunctionDecl(
                     abiName: "bjs_\(klass.abiName)_release_wrapper",
                     signature: SwiftSignatureBuilder.buildABIFunctionSignature(
-                        abiParameters: [("id", .i32)],
+                        abiParameters: [("pointer", .pointer)],
                         returnType: nil
                     )
                 ) { printer in
-                    printer.write("let slot = Int(id)")
-                    printer.write("let jsRef = _\(klass.name)_wrapperRefs[slot]")
-                    printer.write("guard jsRef != 0 else { return }")
-                    printer.write("_\(klass.name)_wrapperRefs[slot] = 0")
-                    printer.write("if let ptr = _\(klass.name)_idToPointer.removeValue(forKey: id) {")
-                    printer.write("    _\(klass.name)_identityTable.removeValue(forKey: ptr)")
-                    printer.write("    Unmanaged<\(klass.swiftCallName)>.fromOpaque(ptr).release()")
-                    printer.write("}")
-                    printer.write("_\(klass.name)_freeIds.append(id)")
+                    printer.write("guard let jsRef = _\(klass.name)_wrapperRefs.removeValue(forKey: pointer) else { return }")
+                    printer.write("_\(klass.name)_identityTable.remove(pointer)")
+                    printer.write("Unmanaged<\(klass.swiftCallName)>.fromOpaque(pointer).release()")
                     printer.write("_swift_js_release_ref(jsRef)")
                 }
                 decls.append(DeclSyntax(releaseDecl))
             }
 
-            // Override the default `_BridgedSwiftHeapObject.bridgeJSStackPush` so
-            // array-element returns (`[SwiftCached]`) go through the same
-            // identity-cache handshake as scalar returns.
-            //
-            // See DECISIONS.md D15. The default in BridgeJSIntrinsics.swift just
-            // calls `_swift_js_push_pointer(Unmanaged.passRetained(self).toOpaque())`
-            // — that bypasses `_<Class>_identityTable` and leaves JS's `__wrap`
-            // popping garbage instead of `(id, freshBit)`.
-            //
-            // Push order: `(id, freshBit)` on the i32 stack first, then the
-            // pointer on the pointer stack. JS pops in reverse (pointer, then
-            // freshBit, then id), matching how the codegen-emitted `__wrap`
-            // already reads them.
+            // Override the default `_BridgedSwiftHeapObject.bridgeJSStackPush`
+            // so array-element returns (`[SwiftCached]`) go through the same
+            // identity-cache handshake. See DECISIONS.md D15 (still applies —
+            // only the internals changed; D18 simplified them).
             let stackPushExt: DeclSyntax = """
                 extension \(raw: klass.swiftCallName) {
                     @_spi(BridgeJS) public consuming func bridgeJSStackPush() {
                         let ptr: UnsafeMutableRawPointer = withExtendedLifetime(self) {
                             let ptr = Unmanaged.passUnretained(self).toOpaque()
-                            if let id = _\(raw: klass.name)_identityTable[ptr] {
-                                _swift_js_push_i32(id)
+                            if _\(raw: klass.name)_identityTable.contains(ptr) {
                                 _swift_js_push_i32(0)
                                 return ptr
                             }
                             _ = Unmanaged.passRetained(self)
-                            let id: Int32
-                            if let recycled = _\(raw: klass.name)_freeIds.popLast() {
-                                id = recycled
-                            } else {
-                                id = _\(raw: klass.name)_nextId
-                                _\(raw: klass.name)_nextId += 1
-                                _\(raw: klass.name)_wrapperRefs.append(0)
-                            }
-                            _\(raw: klass.name)_identityTable[ptr] = id
-                            _\(raw: klass.name)_idToPointer[id] = ptr
-                            _swift_js_push_i32(id)
+                            _\(raw: klass.name)_identityTable.insert(ptr)
                             _swift_js_push_i32(1)
                             return ptr
                         }

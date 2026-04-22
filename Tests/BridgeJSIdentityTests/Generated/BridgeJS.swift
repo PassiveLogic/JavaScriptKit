@@ -140,24 +140,13 @@ public func _bjs_getSharedSwiftSubject() -> UnsafeMutableRawPointer {
     let ret = getSharedSwiftSubject()
     return withExtendedLifetime(ret) {
         let ptr = Unmanaged.passUnretained(ret).toOpaque()
-        if let id = _SwiftIdentityTestSubject_identityTable[ptr] {
-            // Cache hit: do NOT retain. JS keeps the wrapper alive via _wrapperRefs[id].
-            _swift_js_push_i32(id)
+        if _SwiftIdentityTestSubject_identityTable.contains(ptr) {
+            // Cache hit: do NOT retain. JS has the wrapper cached.
             _swift_js_push_i32(0)
             return ptr
         }
         _ = Unmanaged.passRetained(ret)
-        let id: Int32
-        if let recycled = _SwiftIdentityTestSubject_freeIds.popLast() {
-            id = recycled
-        } else {
-            id = _SwiftIdentityTestSubject_nextId
-            _SwiftIdentityTestSubject_nextId += 1
-            _SwiftIdentityTestSubject_wrapperRefs.append(0)
-        }
-        _SwiftIdentityTestSubject_identityTable[ptr] = id
-        _SwiftIdentityTestSubject_idToPointer[id] = ptr
-        _swift_js_push_i32(id)
+        _SwiftIdentityTestSubject_identityTable.insert(ptr)
         _swift_js_push_i32(1)
         return ptr
     }
@@ -183,24 +172,13 @@ public func _bjs_getRetainLeakSubjectSwift() -> UnsafeMutableRawPointer {
     let ret = getRetainLeakSubjectSwift()
     return withExtendedLifetime(ret) {
         let ptr = Unmanaged.passUnretained(ret).toOpaque()
-        if let id = _SwiftRetainLeakSubject_identityTable[ptr] {
-            // Cache hit: do NOT retain. JS keeps the wrapper alive via _wrapperRefs[id].
-            _swift_js_push_i32(id)
+        if _SwiftRetainLeakSubject_identityTable.contains(ptr) {
+            // Cache hit: do NOT retain. JS has the wrapper cached.
             _swift_js_push_i32(0)
             return ptr
         }
         _ = Unmanaged.passRetained(ret)
-        let id: Int32
-        if let recycled = _SwiftRetainLeakSubject_freeIds.popLast() {
-            id = recycled
-        } else {
-            id = _SwiftRetainLeakSubject_nextId
-            _SwiftRetainLeakSubject_nextId += 1
-            _SwiftRetainLeakSubject_wrapperRefs.append(0)
-        }
-        _SwiftRetainLeakSubject_identityTable[ptr] = id
-        _SwiftRetainLeakSubject_idToPointer[id] = ptr
-        _swift_js_push_i32(id)
+        _SwiftRetainLeakSubject_identityTable.insert(ptr)
         _swift_js_push_i32(1)
         return ptr
     }
@@ -240,11 +218,11 @@ public func _bjs_resetRetainLeakDeinitsSwift() -> Void {
     #endif
 }
 
-@_expose(wasm, "bjs_getSwiftNextIdForSharedSubject")
-@_cdecl("bjs_getSwiftNextIdForSharedSubject")
-public func _bjs_getSwiftNextIdForSharedSubject() -> Int32 {
+@_expose(wasm, "bjs_getSwiftIdentityTableSizeForSharedSubject")
+@_cdecl("bjs_getSwiftIdentityTableSizeForSharedSubject")
+public func _bjs_getSwiftIdentityTableSizeForSharedSubject() -> Int32 {
     #if arch(wasm32)
-    let ret = getSwiftNextIdForSharedSubject()
+    let ret = getSwiftIdentityTableSizeForSharedSubject()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
@@ -273,11 +251,11 @@ public func _bjs_maybeSwiftSubject(_ present: Int32) -> Void {
     #endif
 }
 
-@_expose(wasm, "bjs_getSwiftNextIdForChurn")
-@_cdecl("bjs_getSwiftNextIdForChurn")
-public func _bjs_getSwiftNextIdForChurn() -> Int32 {
+@_expose(wasm, "bjs_getSwiftIdentityTableSizeForChurn")
+@_cdecl("bjs_getSwiftIdentityTableSizeForChurn")
+public func _bjs_getSwiftIdentityTableSizeForChurn() -> Int32 {
     #if arch(wasm32)
-    let ret = getSwiftNextIdForChurn()
+    let ret = getSwiftIdentityTableSizeForChurn()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
@@ -484,15 +462,9 @@ fileprivate func _bjs_ArrayIdentityElement_wrap_extern(_ pointer: UnsafeMutableR
     return _bjs_ArrayIdentityElement_wrap_extern(pointer)
 }
 
-nonisolated(unsafe) var _SwiftIdentityTestSubject_identityTable: [UnsafeMutableRawPointer: Int32] = [:]
+nonisolated(unsafe) var _SwiftIdentityTestSubject_identityTable: Set<UnsafeMutableRawPointer> = []
 
-nonisolated(unsafe) var _SwiftIdentityTestSubject_idToPointer: [Int32: UnsafeMutableRawPointer] = [:]
-
-nonisolated(unsafe) var _SwiftIdentityTestSubject_wrapperRefs: [Int32] = []
-
-nonisolated(unsafe) var _SwiftIdentityTestSubject_freeIds: [Int32] = []
-
-nonisolated(unsafe) var _SwiftIdentityTestSubject_nextId: Int32 = 0
+nonisolated(unsafe) var _SwiftIdentityTestSubject_wrapperRefs: [UnsafeMutableRawPointer: Int32] = [:]
 
 @_expose(wasm, "bjs_SwiftIdentityTestSubject_init")
 @_cdecl("bjs_SwiftIdentityTestSubject_init")
@@ -501,24 +473,13 @@ public func _bjs_SwiftIdentityTestSubject_init(_ value: Int32) -> UnsafeMutableR
     let ret = SwiftIdentityTestSubject(value: Int.bridgeJSLiftParameter(value))
     return withExtendedLifetime(ret) {
         let ptr = Unmanaged.passUnretained(ret).toOpaque()
-        if let id = _SwiftIdentityTestSubject_identityTable[ptr] {
-            // Cache hit: do NOT retain. JS keeps the wrapper alive via _wrapperRefs[id].
-            _swift_js_push_i32(id)
+        if _SwiftIdentityTestSubject_identityTable.contains(ptr) {
+            // Cache hit: do NOT retain. JS has the wrapper cached.
             _swift_js_push_i32(0)
             return ptr
         }
         _ = Unmanaged.passRetained(ret)
-        let id: Int32
-        if let recycled = _SwiftIdentityTestSubject_freeIds.popLast() {
-            id = recycled
-        } else {
-            id = _SwiftIdentityTestSubject_nextId
-            _SwiftIdentityTestSubject_nextId += 1
-            _SwiftIdentityTestSubject_wrapperRefs.append(0)
-        }
-        _SwiftIdentityTestSubject_identityTable[ptr] = id
-        _SwiftIdentityTestSubject_idToPointer[id] = ptr
-        _swift_js_push_i32(id)
+        _SwiftIdentityTestSubject_identityTable.insert(ptr)
         _swift_js_push_i32(1)
         return ptr
     }
@@ -534,24 +495,13 @@ public func _bjs_SwiftIdentityTestSubject_self_(_ _self: UnsafeMutableRawPointer
     let ret = SwiftIdentityTestSubject.bridgeJSLiftParameter(_self).self_()
     return withExtendedLifetime(ret) {
         let ptr = Unmanaged.passUnretained(ret).toOpaque()
-        if let id = _SwiftIdentityTestSubject_identityTable[ptr] {
-            // Cache hit: do NOT retain. JS keeps the wrapper alive via _wrapperRefs[id].
-            _swift_js_push_i32(id)
+        if _SwiftIdentityTestSubject_identityTable.contains(ptr) {
+            // Cache hit: do NOT retain. JS has the wrapper cached.
             _swift_js_push_i32(0)
             return ptr
         }
         _ = Unmanaged.passRetained(ret)
-        let id: Int32
-        if let recycled = _SwiftIdentityTestSubject_freeIds.popLast() {
-            id = recycled
-        } else {
-            id = _SwiftIdentityTestSubject_nextId
-            _SwiftIdentityTestSubject_nextId += 1
-            _SwiftIdentityTestSubject_wrapperRefs.append(0)
-        }
-        _SwiftIdentityTestSubject_identityTable[ptr] = id
-        _SwiftIdentityTestSubject_idToPointer[id] = ptr
-        _swift_js_push_i32(id)
+        _SwiftIdentityTestSubject_identityTable.insert(ptr)
         _swift_js_push_i32(1)
         return ptr
     }
@@ -604,9 +554,9 @@ public func _bjs_SwiftIdentityTestSubject_deinit(_ pointer: UnsafeMutableRawPoin
 
 @_expose(wasm, "bjs_SwiftIdentityTestSubject_register_wrapper")
 @_cdecl("bjs_SwiftIdentityTestSubject_register_wrapper")
-public func _bjs_SwiftIdentityTestSubject_register_wrapper(_ id: Int32, _ jsRef: Int32) -> Void {
+public func _bjs_SwiftIdentityTestSubject_register_wrapper(_ pointer: UnsafeMutableRawPointer, _ jsRef: Int32) -> Void {
     #if arch(wasm32)
-    _SwiftIdentityTestSubject_wrapperRefs[Int(id)] = jsRef
+    _SwiftIdentityTestSubject_wrapperRefs[pointer] = jsRef
     #else
     fatalError("Only available on WebAssembly")
     #endif
@@ -614,17 +564,11 @@ public func _bjs_SwiftIdentityTestSubject_register_wrapper(_ id: Int32, _ jsRef:
 
 @_expose(wasm, "bjs_SwiftIdentityTestSubject_release_wrapper")
 @_cdecl("bjs_SwiftIdentityTestSubject_release_wrapper")
-public func _bjs_SwiftIdentityTestSubject_release_wrapper(_ id: Int32) -> Void {
+public func _bjs_SwiftIdentityTestSubject_release_wrapper(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let slot = Int(id)
-    let jsRef = _SwiftIdentityTestSubject_wrapperRefs[slot]
-    guard jsRef != 0 else { return }
-    _SwiftIdentityTestSubject_wrapperRefs[slot] = 0
-    if let ptr = _SwiftIdentityTestSubject_idToPointer.removeValue(forKey: id) {
-        _SwiftIdentityTestSubject_identityTable.removeValue(forKey: ptr)
-        Unmanaged<SwiftIdentityTestSubject>.fromOpaque(ptr).release()
-    }
-    _SwiftIdentityTestSubject_freeIds.append(id)
+    guard let jsRef = _SwiftIdentityTestSubject_wrapperRefs.removeValue(forKey: pointer) else { return }
+    _SwiftIdentityTestSubject_identityTable.remove(pointer)
+    Unmanaged<SwiftIdentityTestSubject>.fromOpaque(pointer).release()
     _swift_js_release_ref(jsRef)
     #else
     fatalError("Only available on WebAssembly")
@@ -635,23 +579,12 @@ extension SwiftIdentityTestSubject {
     @_spi(BridgeJS) public consuming func bridgeJSStackPush() {
         let ptr: UnsafeMutableRawPointer = withExtendedLifetime(self) {
             let ptr = Unmanaged.passUnretained(self).toOpaque()
-            if let id = _SwiftIdentityTestSubject_identityTable[ptr] {
-                _swift_js_push_i32(id)
+            if _SwiftIdentityTestSubject_identityTable.contains(ptr) {
                 _swift_js_push_i32(0)
                 return ptr
             }
             _ = Unmanaged.passRetained(self)
-            let id: Int32
-            if let recycled = _SwiftIdentityTestSubject_freeIds.popLast() {
-                id = recycled
-            } else {
-                id = _SwiftIdentityTestSubject_nextId
-                _SwiftIdentityTestSubject_nextId += 1
-                _SwiftIdentityTestSubject_wrapperRefs.append(0)
-            }
-            _SwiftIdentityTestSubject_identityTable[ptr] = id
-            _SwiftIdentityTestSubject_idToPointer[id] = ptr
-            _swift_js_push_i32(id)
+            _SwiftIdentityTestSubject_identityTable.insert(ptr)
             _swift_js_push_i32(1)
             return ptr
         }
@@ -680,15 +613,9 @@ fileprivate func _bjs_SwiftIdentityTestSubject_wrap_extern(_ pointer: UnsafeMuta
     return _bjs_SwiftIdentityTestSubject_wrap_extern(pointer)
 }
 
-nonisolated(unsafe) var _SwiftRetainLeakSubject_identityTable: [UnsafeMutableRawPointer: Int32] = [:]
+nonisolated(unsafe) var _SwiftRetainLeakSubject_identityTable: Set<UnsafeMutableRawPointer> = []
 
-nonisolated(unsafe) var _SwiftRetainLeakSubject_idToPointer: [Int32: UnsafeMutableRawPointer] = [:]
-
-nonisolated(unsafe) var _SwiftRetainLeakSubject_wrapperRefs: [Int32] = []
-
-nonisolated(unsafe) var _SwiftRetainLeakSubject_freeIds: [Int32] = []
-
-nonisolated(unsafe) var _SwiftRetainLeakSubject_nextId: Int32 = 0
+nonisolated(unsafe) var _SwiftRetainLeakSubject_wrapperRefs: [UnsafeMutableRawPointer: Int32] = [:]
 
 @_expose(wasm, "bjs_SwiftRetainLeakSubject_init")
 @_cdecl("bjs_SwiftRetainLeakSubject_init")
@@ -697,24 +624,13 @@ public func _bjs_SwiftRetainLeakSubject_init(_ tag: Int32) -> UnsafeMutableRawPo
     let ret = SwiftRetainLeakSubject(tag: Int.bridgeJSLiftParameter(tag))
     return withExtendedLifetime(ret) {
         let ptr = Unmanaged.passUnretained(ret).toOpaque()
-        if let id = _SwiftRetainLeakSubject_identityTable[ptr] {
-            // Cache hit: do NOT retain. JS keeps the wrapper alive via _wrapperRefs[id].
-            _swift_js_push_i32(id)
+        if _SwiftRetainLeakSubject_identityTable.contains(ptr) {
+            // Cache hit: do NOT retain. JS has the wrapper cached.
             _swift_js_push_i32(0)
             return ptr
         }
         _ = Unmanaged.passRetained(ret)
-        let id: Int32
-        if let recycled = _SwiftRetainLeakSubject_freeIds.popLast() {
-            id = recycled
-        } else {
-            id = _SwiftRetainLeakSubject_nextId
-            _SwiftRetainLeakSubject_nextId += 1
-            _SwiftRetainLeakSubject_wrapperRefs.append(0)
-        }
-        _SwiftRetainLeakSubject_identityTable[ptr] = id
-        _SwiftRetainLeakSubject_idToPointer[id] = ptr
-        _swift_js_push_i32(id)
+        _SwiftRetainLeakSubject_identityTable.insert(ptr)
         _swift_js_push_i32(1)
         return ptr
     }
@@ -756,9 +672,9 @@ public func _bjs_SwiftRetainLeakSubject_deinit(_ pointer: UnsafeMutableRawPointe
 
 @_expose(wasm, "bjs_SwiftRetainLeakSubject_register_wrapper")
 @_cdecl("bjs_SwiftRetainLeakSubject_register_wrapper")
-public func _bjs_SwiftRetainLeakSubject_register_wrapper(_ id: Int32, _ jsRef: Int32) -> Void {
+public func _bjs_SwiftRetainLeakSubject_register_wrapper(_ pointer: UnsafeMutableRawPointer, _ jsRef: Int32) -> Void {
     #if arch(wasm32)
-    _SwiftRetainLeakSubject_wrapperRefs[Int(id)] = jsRef
+    _SwiftRetainLeakSubject_wrapperRefs[pointer] = jsRef
     #else
     fatalError("Only available on WebAssembly")
     #endif
@@ -766,17 +682,11 @@ public func _bjs_SwiftRetainLeakSubject_register_wrapper(_ id: Int32, _ jsRef: I
 
 @_expose(wasm, "bjs_SwiftRetainLeakSubject_release_wrapper")
 @_cdecl("bjs_SwiftRetainLeakSubject_release_wrapper")
-public func _bjs_SwiftRetainLeakSubject_release_wrapper(_ id: Int32) -> Void {
+public func _bjs_SwiftRetainLeakSubject_release_wrapper(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let slot = Int(id)
-    let jsRef = _SwiftRetainLeakSubject_wrapperRefs[slot]
-    guard jsRef != 0 else { return }
-    _SwiftRetainLeakSubject_wrapperRefs[slot] = 0
-    if let ptr = _SwiftRetainLeakSubject_idToPointer.removeValue(forKey: id) {
-        _SwiftRetainLeakSubject_identityTable.removeValue(forKey: ptr)
-        Unmanaged<SwiftRetainLeakSubject>.fromOpaque(ptr).release()
-    }
-    _SwiftRetainLeakSubject_freeIds.append(id)
+    guard let jsRef = _SwiftRetainLeakSubject_wrapperRefs.removeValue(forKey: pointer) else { return }
+    _SwiftRetainLeakSubject_identityTable.remove(pointer)
+    Unmanaged<SwiftRetainLeakSubject>.fromOpaque(pointer).release()
     _swift_js_release_ref(jsRef)
     #else
     fatalError("Only available on WebAssembly")
@@ -787,23 +697,12 @@ extension SwiftRetainLeakSubject {
     @_spi(BridgeJS) public consuming func bridgeJSStackPush() {
         let ptr: UnsafeMutableRawPointer = withExtendedLifetime(self) {
             let ptr = Unmanaged.passUnretained(self).toOpaque()
-            if let id = _SwiftRetainLeakSubject_identityTable[ptr] {
-                _swift_js_push_i32(id)
+            if _SwiftRetainLeakSubject_identityTable.contains(ptr) {
                 _swift_js_push_i32(0)
                 return ptr
             }
             _ = Unmanaged.passRetained(self)
-            let id: Int32
-            if let recycled = _SwiftRetainLeakSubject_freeIds.popLast() {
-                id = recycled
-            } else {
-                id = _SwiftRetainLeakSubject_nextId
-                _SwiftRetainLeakSubject_nextId += 1
-                _SwiftRetainLeakSubject_wrapperRefs.append(0)
-            }
-            _SwiftRetainLeakSubject_identityTable[ptr] = id
-            _SwiftRetainLeakSubject_idToPointer[id] = ptr
-            _swift_js_push_i32(id)
+            _SwiftRetainLeakSubject_identityTable.insert(ptr)
             _swift_js_push_i32(1)
             return ptr
         }
@@ -832,15 +731,9 @@ fileprivate func _bjs_SwiftRetainLeakSubject_wrap_extern(_ pointer: UnsafeMutabl
     return _bjs_SwiftRetainLeakSubject_wrap_extern(pointer)
 }
 
-nonisolated(unsafe) var _SwiftChurnSubject_identityTable: [UnsafeMutableRawPointer: Int32] = [:]
+nonisolated(unsafe) var _SwiftChurnSubject_identityTable: Set<UnsafeMutableRawPointer> = []
 
-nonisolated(unsafe) var _SwiftChurnSubject_idToPointer: [Int32: UnsafeMutableRawPointer] = [:]
-
-nonisolated(unsafe) var _SwiftChurnSubject_wrapperRefs: [Int32] = []
-
-nonisolated(unsafe) var _SwiftChurnSubject_freeIds: [Int32] = []
-
-nonisolated(unsafe) var _SwiftChurnSubject_nextId: Int32 = 0
+nonisolated(unsafe) var _SwiftChurnSubject_wrapperRefs: [UnsafeMutableRawPointer: Int32] = [:]
 
 @_expose(wasm, "bjs_SwiftChurnSubject_init")
 @_cdecl("bjs_SwiftChurnSubject_init")
@@ -849,24 +742,13 @@ public func _bjs_SwiftChurnSubject_init(_ tag: Int32) -> UnsafeMutableRawPointer
     let ret = SwiftChurnSubject(tag: Int.bridgeJSLiftParameter(tag))
     return withExtendedLifetime(ret) {
         let ptr = Unmanaged.passUnretained(ret).toOpaque()
-        if let id = _SwiftChurnSubject_identityTable[ptr] {
-            // Cache hit: do NOT retain. JS keeps the wrapper alive via _wrapperRefs[id].
-            _swift_js_push_i32(id)
+        if _SwiftChurnSubject_identityTable.contains(ptr) {
+            // Cache hit: do NOT retain. JS has the wrapper cached.
             _swift_js_push_i32(0)
             return ptr
         }
         _ = Unmanaged.passRetained(ret)
-        let id: Int32
-        if let recycled = _SwiftChurnSubject_freeIds.popLast() {
-            id = recycled
-        } else {
-            id = _SwiftChurnSubject_nextId
-            _SwiftChurnSubject_nextId += 1
-            _SwiftChurnSubject_wrapperRefs.append(0)
-        }
-        _SwiftChurnSubject_identityTable[ptr] = id
-        _SwiftChurnSubject_idToPointer[id] = ptr
-        _swift_js_push_i32(id)
+        _SwiftChurnSubject_identityTable.insert(ptr)
         _swift_js_push_i32(1)
         return ptr
     }
@@ -908,9 +790,9 @@ public func _bjs_SwiftChurnSubject_deinit(_ pointer: UnsafeMutableRawPointer) ->
 
 @_expose(wasm, "bjs_SwiftChurnSubject_register_wrapper")
 @_cdecl("bjs_SwiftChurnSubject_register_wrapper")
-public func _bjs_SwiftChurnSubject_register_wrapper(_ id: Int32, _ jsRef: Int32) -> Void {
+public func _bjs_SwiftChurnSubject_register_wrapper(_ pointer: UnsafeMutableRawPointer, _ jsRef: Int32) -> Void {
     #if arch(wasm32)
-    _SwiftChurnSubject_wrapperRefs[Int(id)] = jsRef
+    _SwiftChurnSubject_wrapperRefs[pointer] = jsRef
     #else
     fatalError("Only available on WebAssembly")
     #endif
@@ -918,17 +800,11 @@ public func _bjs_SwiftChurnSubject_register_wrapper(_ id: Int32, _ jsRef: Int32)
 
 @_expose(wasm, "bjs_SwiftChurnSubject_release_wrapper")
 @_cdecl("bjs_SwiftChurnSubject_release_wrapper")
-public func _bjs_SwiftChurnSubject_release_wrapper(_ id: Int32) -> Void {
+public func _bjs_SwiftChurnSubject_release_wrapper(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let slot = Int(id)
-    let jsRef = _SwiftChurnSubject_wrapperRefs[slot]
-    guard jsRef != 0 else { return }
-    _SwiftChurnSubject_wrapperRefs[slot] = 0
-    if let ptr = _SwiftChurnSubject_idToPointer.removeValue(forKey: id) {
-        _SwiftChurnSubject_identityTable.removeValue(forKey: ptr)
-        Unmanaged<SwiftChurnSubject>.fromOpaque(ptr).release()
-    }
-    _SwiftChurnSubject_freeIds.append(id)
+    guard let jsRef = _SwiftChurnSubject_wrapperRefs.removeValue(forKey: pointer) else { return }
+    _SwiftChurnSubject_identityTable.remove(pointer)
+    Unmanaged<SwiftChurnSubject>.fromOpaque(pointer).release()
     _swift_js_release_ref(jsRef)
     #else
     fatalError("Only available on WebAssembly")
@@ -939,23 +815,12 @@ extension SwiftChurnSubject {
     @_spi(BridgeJS) public consuming func bridgeJSStackPush() {
         let ptr: UnsafeMutableRawPointer = withExtendedLifetime(self) {
             let ptr = Unmanaged.passUnretained(self).toOpaque()
-            if let id = _SwiftChurnSubject_identityTable[ptr] {
-                _swift_js_push_i32(id)
+            if _SwiftChurnSubject_identityTable.contains(ptr) {
                 _swift_js_push_i32(0)
                 return ptr
             }
             _ = Unmanaged.passRetained(self)
-            let id: Int32
-            if let recycled = _SwiftChurnSubject_freeIds.popLast() {
-                id = recycled
-            } else {
-                id = _SwiftChurnSubject_nextId
-                _SwiftChurnSubject_nextId += 1
-                _SwiftChurnSubject_wrapperRefs.append(0)
-            }
-            _SwiftChurnSubject_identityTable[ptr] = id
-            _SwiftChurnSubject_idToPointer[id] = ptr
-            _swift_js_push_i32(id)
+            _SwiftChurnSubject_identityTable.insert(ptr)
             _swift_js_push_i32(1)
             return ptr
         }

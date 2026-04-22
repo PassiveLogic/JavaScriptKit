@@ -270,21 +270,19 @@ export async function createInstantiator(options, swift) {
                 }
             }
             class SwiftCached {
-                static __swiftIdentityWrappers = [];
+                static __swiftIdentityWrappers = new Map();
 
                 static __wrap(pointer) {
                     const freshBit = bjs.swift_js_pop_i32();
-                    const id = bjs.swift_js_pop_i32();
                     if (freshBit === 0) {
-                        return SwiftCached.__swiftIdentityWrappers[id];
+                        return SwiftCached.__swiftIdentityWrappers.get(pointer);
                     }
                     const obj = Object.create(SwiftCached.prototype);
                     obj.pointer = pointer;
-                    obj.__swiftIdentityId = id;
                     obj.__swiftIdentityHasReleased = false;
-                    SwiftCached.__swiftIdentityWrappers[id] = obj;
+                    SwiftCached.__swiftIdentityWrappers.set(pointer, obj);
                     const jsRef = swift.memory.retain(obj);
-                    instance.exports.bjs_SwiftCached_register_wrapper(id, jsRef);
+                    instance.exports.bjs_SwiftCached_register_wrapper(pointer, jsRef);
                     return obj;
                 }
 
@@ -295,9 +293,9 @@ export async function createInstantiator(options, swift) {
                 release() {
                     if (this.__swiftIdentityHasReleased) return;
                     this.__swiftIdentityHasReleased = true;
-                    const id = this.__swiftIdentityId;
-                    instance.exports.bjs_SwiftCached_release_wrapper(id);
-                    SwiftCached.__swiftIdentityWrappers[id] = undefined;
+                    const pointer = this.pointer;
+                    instance.exports.bjs_SwiftCached_release_wrapper(pointer);
+                    SwiftCached.__swiftIdentityWrappers.delete(pointer);
                 }
                 constructor(name) {
                     const nameBytes = textEncoder.encode(name);

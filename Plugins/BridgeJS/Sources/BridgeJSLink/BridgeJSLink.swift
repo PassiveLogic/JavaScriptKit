@@ -2060,42 +2060,37 @@ extension BridgeJSLink {
         dtsExportEntryPrinter.write("\(klass.name): {")
 
         if useSwiftIdentity {
-            // Spec §6.2: a `.swift`-mode class is STANDALONE — it does NOT extend
-            // `SwiftHeapObject`. It owns its own dense-array wrapper cache and lifetime
-            // (no `FinalizationRegistry`, no `WeakRef`). Swift holds wrappers strongly
-            // via `_<Class>_wrapperRefs`; JS clears the slot on `release()`.
+            // DECISIONS.md D18: the `.swift`-mode class is standalone — it does NOT
+            // extend `SwiftHeapObject`. It keeps a strong `Map<pointer, wrapper>` so
+            // re-exports of the same Swift pointer get the same JS wrapper. Swift
+            // signals "cache hit" via a single `freshBit` push on the i32 stack
+            // (0 = cached, 1 = fresh). No id indirection, no dense array.
             jsPrinter.write("class \(klass.name) {")
             jsPrinter.indent {
-                jsPrinter.write("static __swiftIdentityWrappers = [];")
+                jsPrinter.write("static __swiftIdentityWrappers = new Map();")
                 jsPrinter.nextLine()
                 jsPrinter.write("static __wrap(pointer) {")
                 jsPrinter.indent {
-                    // Swift pushes (id, freshBit) to the i32 stack AFTER returning the
-                    // pointer; JS pops LIFO — freshBit first, id second.
                     jsPrinter.write("const freshBit = bjs.swift_js_pop_i32();")
-                    jsPrinter.write("const id = bjs.swift_js_pop_i32();")
                     jsPrinter.write("if (freshBit === 0) {")
                     jsPrinter.indent {
-                        jsPrinter.write("return \(klass.name).__swiftIdentityWrappers[id];")
+                        jsPrinter.write("return \(klass.name).__swiftIdentityWrappers.get(pointer);")
                     }
                     jsPrinter.write("}")
                     jsPrinter.write("const obj = Object.create(\(klass.name).prototype);")
                     jsPrinter.write("obj.pointer = pointer;")
-                    jsPrinter.write("obj.__swiftIdentityId = id;")
                     jsPrinter.write("obj.__swiftIdentityHasReleased = false;")
-                    jsPrinter.write("\(klass.name).__swiftIdentityWrappers[id] = obj;")
+                    jsPrinter.write("\(klass.name).__swiftIdentityWrappers.set(pointer, obj);")
                     // Retain the wrapper in swift.memory so Swift can hold it strongly
-                    // via `_<Class>_wrapperRefs[id]` until release_wrapper fires.
+                    // via `_<Class>_wrapperRefs[pointer]` until release_wrapper fires.
                     jsPrinter.write("const jsRef = swift.memory.retain(obj);")
-                    jsPrinter.write("instance.exports.bjs_\(klass.abiName)_register_wrapper(id, jsRef);")
+                    jsPrinter.write("instance.exports.bjs_\(klass.abiName)_register_wrapper(pointer, jsRef);")
                     jsPrinter.write("return obj;")
                 }
                 jsPrinter.write("}")
                 jsPrinter.nextLine()
                 jsPrinter.write("static __construct(pointer) {")
                 jsPrinter.indent {
-                    // Swift's `_init` export pushed (id, freshBit) itself. `__wrap`
-                    // pops them and returns either the cached wrapper or a fresh one.
                     jsPrinter.write("return \(klass.name).__wrap(pointer);")
                 }
                 jsPrinter.write("}")
@@ -2104,11 +2099,11 @@ extension BridgeJSLink {
                 jsPrinter.indent {
                     jsPrinter.write("if (this.__swiftIdentityHasReleased) return;")
                     jsPrinter.write("this.__swiftIdentityHasReleased = true;")
-                    jsPrinter.write("const id = this.__swiftIdentityId;")
-                    jsPrinter.write("instance.exports.bjs_\(klass.abiName)_release_wrapper(id);")
-                    // Swift's release_wrapper already called `_swift_js_release_ref(jsRef)`,
-                    // so we just clear our JS-side slot so the id can be recycled.
-                    jsPrinter.write("\(klass.name).__swiftIdentityWrappers[id] = undefined;")
+                    jsPrinter.write("const pointer = this.pointer;")
+                    jsPrinter.write("instance.exports.bjs_\(klass.abiName)_release_wrapper(pointer);")
+                    // Swift's release_wrapper already released the JS ref; clear
+                    // the JS-side map entry.
+                    jsPrinter.write("\(klass.name).__swiftIdentityWrappers.delete(pointer);")
                 }
                 jsPrinter.write("}")
             }

@@ -305,21 +305,19 @@ export async function createInstantiator(options, swift) {
                 }
             }
             class UncachedModel {
-                static __swiftIdentityWrappers = [];
+                static __swiftIdentityWrappers = new Map();
 
                 static __wrap(pointer) {
                     const freshBit = bjs.swift_js_pop_i32();
-                    const id = bjs.swift_js_pop_i32();
                     if (freshBit === 0) {
-                        return UncachedModel.__swiftIdentityWrappers[id];
+                        return UncachedModel.__swiftIdentityWrappers.get(pointer);
                     }
                     const obj = Object.create(UncachedModel.prototype);
                     obj.pointer = pointer;
-                    obj.__swiftIdentityId = id;
                     obj.__swiftIdentityHasReleased = false;
-                    UncachedModel.__swiftIdentityWrappers[id] = obj;
+                    UncachedModel.__swiftIdentityWrappers.set(pointer, obj);
                     const jsRef = swift.memory.retain(obj);
-                    instance.exports.bjs_UncachedModel_register_wrapper(id, jsRef);
+                    instance.exports.bjs_UncachedModel_register_wrapper(pointer, jsRef);
                     return obj;
                 }
 
@@ -330,9 +328,9 @@ export async function createInstantiator(options, swift) {
                 release() {
                     if (this.__swiftIdentityHasReleased) return;
                     this.__swiftIdentityHasReleased = true;
-                    const id = this.__swiftIdentityId;
-                    instance.exports.bjs_UncachedModel_release_wrapper(id);
-                    UncachedModel.__swiftIdentityWrappers[id] = undefined;
+                    const pointer = this.pointer;
+                    instance.exports.bjs_UncachedModel_release_wrapper(pointer);
+                    UncachedModel.__swiftIdentityWrappers.delete(pointer);
                 }
                 constructor(value) {
                     const ret = instance.exports.bjs_UncachedModel_init(value);

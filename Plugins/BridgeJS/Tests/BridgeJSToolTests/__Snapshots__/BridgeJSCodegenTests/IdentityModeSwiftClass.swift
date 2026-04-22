@@ -1,12 +1,6 @@
-nonisolated(unsafe) var _SwiftCached_identityTable: [UnsafeMutableRawPointer: Int32] = [:]
+nonisolated(unsafe) var _SwiftCached_identityTable: Set<UnsafeMutableRawPointer> = []
 
-nonisolated(unsafe) var _SwiftCached_idToPointer: [Int32: UnsafeMutableRawPointer] = [:]
-
-nonisolated(unsafe) var _SwiftCached_wrapperRefs: [Int32] = []
-
-nonisolated(unsafe) var _SwiftCached_freeIds: [Int32] = []
-
-nonisolated(unsafe) var _SwiftCached_nextId: Int32 = 0
+nonisolated(unsafe) var _SwiftCached_wrapperRefs: [UnsafeMutableRawPointer: Int32] = [:]
 
 @_expose(wasm, "bjs_SwiftCached_init")
 @_cdecl("bjs_SwiftCached_init")
@@ -15,24 +9,13 @@ public func _bjs_SwiftCached_init(_ nameBytes: Int32, _ nameLength: Int32) -> Un
     let ret = SwiftCached(name: String.bridgeJSLiftParameter(nameBytes, nameLength))
     return withExtendedLifetime(ret) {
         let ptr = Unmanaged.passUnretained(ret).toOpaque()
-        if let id = _SwiftCached_identityTable[ptr] {
-            // Cache hit: do NOT retain. JS keeps the wrapper alive via _wrapperRefs[id].
-            _swift_js_push_i32(id)
+        if _SwiftCached_identityTable.contains(ptr) {
+            // Cache hit: do NOT retain. JS has the wrapper cached.
             _swift_js_push_i32(0)
             return ptr
         }
         _ = Unmanaged.passRetained(ret)
-        let id: Int32
-        if let recycled = _SwiftCached_freeIds.popLast() {
-            id = recycled
-        } else {
-            id = _SwiftCached_nextId
-            _SwiftCached_nextId += 1
-            _SwiftCached_wrapperRefs.append(0)
-        }
-        _SwiftCached_identityTable[ptr] = id
-        _SwiftCached_idToPointer[id] = ptr
-        _swift_js_push_i32(id)
+        _SwiftCached_identityTable.insert(ptr)
         _swift_js_push_i32(1)
         return ptr
     }
@@ -74,9 +57,9 @@ public func _bjs_SwiftCached_deinit(_ pointer: UnsafeMutableRawPointer) -> Void 
 
 @_expose(wasm, "bjs_SwiftCached_register_wrapper")
 @_cdecl("bjs_SwiftCached_register_wrapper")
-public func _bjs_SwiftCached_register_wrapper(_ id: Int32, _ jsRef: Int32) -> Void {
+public func _bjs_SwiftCached_register_wrapper(_ pointer: UnsafeMutableRawPointer, _ jsRef: Int32) -> Void {
     #if arch(wasm32)
-    _SwiftCached_wrapperRefs[Int(id)] = jsRef
+    _SwiftCached_wrapperRefs[pointer] = jsRef
     #else
     fatalError("Only available on WebAssembly")
     #endif
@@ -84,17 +67,11 @@ public func _bjs_SwiftCached_register_wrapper(_ id: Int32, _ jsRef: Int32) -> Vo
 
 @_expose(wasm, "bjs_SwiftCached_release_wrapper")
 @_cdecl("bjs_SwiftCached_release_wrapper")
-public func _bjs_SwiftCached_release_wrapper(_ id: Int32) -> Void {
+public func _bjs_SwiftCached_release_wrapper(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let slot = Int(id)
-    let jsRef = _SwiftCached_wrapperRefs[slot]
-    guard jsRef != 0 else { return }
-    _SwiftCached_wrapperRefs[slot] = 0
-    if let ptr = _SwiftCached_idToPointer.removeValue(forKey: id) {
-        _SwiftCached_identityTable.removeValue(forKey: ptr)
-        Unmanaged<SwiftCached>.fromOpaque(ptr).release()
-    }
-    _SwiftCached_freeIds.append(id)
+    guard let jsRef = _SwiftCached_wrapperRefs.removeValue(forKey: pointer) else { return }
+    _SwiftCached_identityTable.remove(pointer)
+    Unmanaged<SwiftCached>.fromOpaque(pointer).release()
     _swift_js_release_ref(jsRef)
     #else
     fatalError("Only available on WebAssembly")
@@ -105,23 +82,12 @@ extension SwiftCached {
     @_spi(BridgeJS) public consuming func bridgeJSStackPush() {
         let ptr: UnsafeMutableRawPointer = withExtendedLifetime(self) {
             let ptr = Unmanaged.passUnretained(self).toOpaque()
-            if let id = _SwiftCached_identityTable[ptr] {
-                _swift_js_push_i32(id)
+            if _SwiftCached_identityTable.contains(ptr) {
                 _swift_js_push_i32(0)
                 return ptr
             }
             _ = Unmanaged.passRetained(self)
-            let id: Int32
-            if let recycled = _SwiftCached_freeIds.popLast() {
-                id = recycled
-            } else {
-                id = _SwiftCached_nextId
-                _SwiftCached_nextId += 1
-                _SwiftCached_wrapperRefs.append(0)
-            }
-            _SwiftCached_identityTable[ptr] = id
-            _SwiftCached_idToPointer[id] = ptr
-            _swift_js_push_i32(id)
+            _SwiftCached_identityTable.insert(ptr)
             _swift_js_push_i32(1)
             return ptr
         }

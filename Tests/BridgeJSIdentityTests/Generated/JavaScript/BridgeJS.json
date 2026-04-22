@@ -663,13 +663,13 @@
         }
       },
       {
-        "abiName" : "bjs_getSwiftNextIdForSharedSubject",
+        "abiName" : "bjs_getSwiftIdentityTableSizeForSharedSubject",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
           "isThrows" : false
         },
-        "name" : "getSwiftNextIdForSharedSubject",
+        "name" : "getSwiftIdentityTableSizeForSharedSubject",
         "parameters" : [
 
         ],
@@ -751,13 +751,13 @@
         }
       },
       {
-        "abiName" : "bjs_getSwiftNextIdForChurn",
+        "abiName" : "bjs_getSwiftIdentityTableSizeForChurn",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
           "isThrows" : false
         },
-        "name" : "getSwiftNextIdForChurn",
+        "name" : "getSwiftIdentityTableSizeForChurn",
         "parameters" : [
 
         ],

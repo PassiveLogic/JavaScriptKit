@@ -94,8 +94,8 @@ nonisolated(unsafe) private var _configSwiftRetainLeakSubject: ConfigSwiftRetain
 }
 
 #if ENABLE_TEST_INTROSPECTION
-@JS func getConfigSwiftNextIdForChurn() -> Int {
-    Int(_ConfigSwiftChurnSubject_nextId)
+@JS func getConfigSwiftIdentityTableSizeForChurn() -> Int {
+    _ConfigSwiftChurnSubject_identityTable.count
 }
 #endif
 

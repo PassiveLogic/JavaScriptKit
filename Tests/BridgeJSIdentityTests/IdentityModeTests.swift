@@ -181,14 +181,15 @@ nonisolated(unsafe) private var _swiftRetainLeakSubject: SwiftRetainLeakSubject?
     SwiftRetainLeakSubject.deinits = 0
 }
 
-// Scenario (d): id-recycling introspection.
+// Scenario (d): identity-table size introspection.
 //
+// Post-D18 the Swift-side state is a Set<pointer> (no ids). The analogous
+// "compactness" check is: after N allocate+release cycles, the Set is empty.
 // Gated behind `ENABLE_TEST_INTROSPECTION` so the debug-only getter does not
-// become part of the public test surface (or, worse, add codegen weight to
-// release binaries). The test target defines this flag in its swiftSettings.
+// become part of the public test surface.
 #if ENABLE_TEST_INTROSPECTION
-@JS func getSwiftNextIdForSharedSubject() -> Int {
-    Int(_SwiftIdentityTestSubject_nextId)
+@JS func getSwiftIdentityTableSizeForSharedSubject() -> Int {
+    _SwiftIdentityTestSubject_identityTable.count
 }
 #endif
 
@@ -221,7 +222,7 @@ nonisolated(unsafe) private var _swiftRetainLeakSubject: SwiftRetainLeakSubject?
 }
 
 #if ENABLE_TEST_INTROSPECTION
-@JS func getSwiftNextIdForChurn() -> Int {
-    Int(_SwiftChurnSubject_nextId)
+@JS func getSwiftIdentityTableSizeForChurn() -> Int {
+    _SwiftChurnSubject_identityTable.count
 }
 #endif

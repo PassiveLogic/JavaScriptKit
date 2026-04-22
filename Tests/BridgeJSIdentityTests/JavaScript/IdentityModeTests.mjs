@@ -38,7 +38,7 @@ function runIdentityModeTests(exports) {
     testSwiftModeSelfMethodIdentity(exports);
     testSwiftModeReleaseFreesHeapObject(exports);
     testSwiftModeDoubleReleaseIdempotent(exports);
-    testSwiftModeIdRecycling(exports);
+    testSwiftModeIdentityTableCleanup(exports);
     testSwiftModeArrayCrossElementIdentity(exports);
     testSwiftModeGcSurvivability(exports);
     testSwiftModeOptionalIdentity(exports);
@@ -237,7 +237,7 @@ function testSwiftModeIdentity(exports) {
     assert.strictEqual(a, b, "swift mode: same Swift object returns same wrapper");
     assert.strictEqual(b, c, "swift mode: identity is transitive across re-exports");
     assert.equal(a.currentValue, 42);
-    assert.equal(typeof a.__swiftIdentityId, "number");
+    assert.equal(typeof a.pointer, "number");
 
     a.release();
     exports.resetSharedSwiftSubject();
@@ -310,15 +310,20 @@ function testSwiftModeDoubleReleaseIdempotent(exports) {
 }
 
 /**
- * (d) Id recycling — nextId does not grow past the pool size.
+ * (d) Identity-table cleanup — the Swift-side `Set<pointer>` returns to size 0
+ * after allocating N wrappers and releasing all of them.
+ *
+ * Post-D18 there is no id allocation to recycle; the equivalent correctness
+ * check is that `release_wrapper` drops its entry from `_<Class>_identityTable`
+ * so the Set doesn't grow unboundedly over a churn loop.
  *
  * Uses the dedicated SwiftChurnSubject class so this assertion is not
- * perturbed by id allocations performed by other tests.
+ * perturbed by other tests' allocations.
  *
  * @param {import('../../../.build/plugins/PackageToJS/outputs/PackageTests/bridge-js.d.ts').Exports} exports
  */
-function testSwiftModeIdRecycling(exports) {
-    if (typeof exports.getSwiftNextIdForChurn !== "function") {
+function testSwiftModeIdentityTableCleanup(exports) {
+    if (typeof exports.getSwiftIdentityTableSizeForChurn !== "function") {
         // ENABLE_TEST_INTROSPECTION not set — skip silently.
         return;
     }
@@ -328,23 +333,21 @@ function testSwiftModeIdRecycling(exports) {
     for (let i = 0; i < POOL; i++) {
         first.push(new exports.SwiftChurnSubject(i));
     }
-    const peakAfterFirst = exports.getSwiftNextIdForChurn();
+    const peakAfterFirst = exports.getSwiftIdentityTableSizeForChurn();
+    assert.strictEqual(peakAfterFirst, POOL, `swift mode: identity table should hold ${POOL} entries; got ${peakAfterFirst}`);
 
     for (const obj of first) {
         obj.release();
     }
+    const afterRelease = exports.getSwiftIdentityTableSizeForChurn();
+    assert.strictEqual(afterRelease, 0, `swift mode: identity table should empty after release; got ${afterRelease}`);
 
     const second = [];
     for (let i = 0; i < POOL; i++) {
         second.push(new exports.SwiftChurnSubject(100 + i));
     }
-    const peakAfterSecond = exports.getSwiftNextIdForChurn();
-
-    assert.strictEqual(
-        peakAfterSecond,
-        peakAfterFirst,
-        `swift mode: id recycling failed — nextId grew from ${peakAfterFirst} to ${peakAfterSecond} despite ${POOL} freed ids in between`,
-    );
+    const peakAfterSecond = exports.getSwiftIdentityTableSizeForChurn();
+    assert.strictEqual(peakAfterSecond, POOL, `swift mode: identity table should hold ${POOL} entries again; got ${peakAfterSecond}`);
 
     for (const obj of second) {
         obj.release();
@@ -389,7 +392,7 @@ function testSwiftModeGcSurvivability(exports) {
 
     exports.resetSharedSwiftSubject();
     let obj = exports.getSharedSwiftSubject();
-    const idBefore = obj.__swiftIdentityId;
+    const pointerBefore = obj.pointer;
     const weakProbe = new WeakRef(obj);
 
     // Drop the local reference and force GC twice with a microtask flush in
@@ -415,9 +418,9 @@ function testSwiftModeGcSurvivability(exports) {
     // yields (since Swift's retain on the JS ref keeps it alive).
     const again = exports.getSharedSwiftSubject();
     assert.strictEqual(
-        again.__swiftIdentityId,
-        idBefore,
-        "swift mode: id must be stable across GC (Swift still retains the heap object)",
+        again.pointer,
+        pointerBefore,
+        "swift mode: pointer must be stable across GC (Swift still retains the heap object)",
     );
     assert.strictEqual(
         weakProbe.deref(),
@@ -514,9 +517,12 @@ function testModeCoexistence(exports) {
     assert.equal(ptr1.currentValue, 10);
     assert.equal(swift1.currentValue, 30);
 
-    // Pointer-mode exposes no __swiftIdentityId; swift-mode does.
-    assert.equal(typeof swift1.__swiftIdentityId, "number");
-    assert.equal(typeof ptr1.__swiftIdentityId, "undefined");
+    // Pointer-mode wrappers have `__swiftHeapObjectState` from SwiftHeapObject;
+    // swift-mode standalone wrappers have `__swiftIdentityHasReleased` instead.
+    assert.equal(typeof swift1.__swiftIdentityHasReleased, "boolean");
+    assert.equal(typeof ptr1.__swiftIdentityHasReleased, "undefined");
+    assert.equal(typeof ptr1.__swiftHeapObjectState, "object");
+    assert.equal(typeof swift1.__swiftHeapObjectState, "undefined");
 
     ptr1.release();
     ptr2.release();

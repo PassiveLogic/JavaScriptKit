@@ -1815,15 +1815,9 @@ fileprivate func _bjs_IdentityCacheBenchmarkIdentity_wrap_extern(_ pointer: Unsa
     return _bjs_IdentityCacheBenchmarkIdentity_wrap_extern(pointer)
 }
 
-nonisolated(unsafe) var _SimpleClassSwiftIdentity_identityTable: [UnsafeMutableRawPointer: Int32] = [:]
+nonisolated(unsafe) var _SimpleClassSwiftIdentity_identityTable: Set<UnsafeMutableRawPointer> = []
 
-nonisolated(unsafe) var _SimpleClassSwiftIdentity_idToPointer: [Int32: UnsafeMutableRawPointer] = [:]
-
-nonisolated(unsafe) var _SimpleClassSwiftIdentity_wrapperRefs: [Int32] = []
-
-nonisolated(unsafe) var _SimpleClassSwiftIdentity_freeIds: [Int32] = []
-
-nonisolated(unsafe) var _SimpleClassSwiftIdentity_nextId: Int32 = 0
+nonisolated(unsafe) var _SimpleClassSwiftIdentity_wrapperRefs: [UnsafeMutableRawPointer: Int32] = [:]
 
 @_expose(wasm, "bjs_SimpleClassSwiftIdentity_init")
 @_cdecl("bjs_SimpleClassSwiftIdentity_init")
@@ -1832,24 +1826,13 @@ public func _bjs_SimpleClassSwiftIdentity_init(_ nameBytes: Int32, _ nameLength:
     let ret = SimpleClassSwiftIdentity(name: String.bridgeJSLiftParameter(nameBytes, nameLength), count: Int.bridgeJSLiftParameter(count), flag: Bool.bridgeJSLiftParameter(flag), rate: Float.bridgeJSLiftParameter(rate), precise: Double.bridgeJSLiftParameter(precise))
     return withExtendedLifetime(ret) {
         let ptr = Unmanaged.passUnretained(ret).toOpaque()
-        if let id = _SimpleClassSwiftIdentity_identityTable[ptr] {
-            // Cache hit: do NOT retain. JS keeps the wrapper alive via _wrapperRefs[id].
-            _swift_js_push_i32(id)
+        if _SimpleClassSwiftIdentity_identityTable.contains(ptr) {
+            // Cache hit: do NOT retain. JS has the wrapper cached.
             _swift_js_push_i32(0)
             return ptr
         }
         _ = Unmanaged.passRetained(ret)
-        let id: Int32
-        if let recycled = _SimpleClassSwiftIdentity_freeIds.popLast() {
-            id = recycled
-        } else {
-            id = _SimpleClassSwiftIdentity_nextId
-            _SimpleClassSwiftIdentity_nextId += 1
-            _SimpleClassSwiftIdentity_wrapperRefs.append(0)
-        }
-        _SimpleClassSwiftIdentity_identityTable[ptr] = id
-        _SimpleClassSwiftIdentity_idToPointer[id] = ptr
-        _swift_js_push_i32(id)
+        _SimpleClassSwiftIdentity_identityTable.insert(ptr)
         _swift_js_push_i32(1)
         return ptr
     }
@@ -1975,9 +1958,9 @@ public func _bjs_SimpleClassSwiftIdentity_deinit(_ pointer: UnsafeMutableRawPoin
 
 @_expose(wasm, "bjs_SimpleClassSwiftIdentity_register_wrapper")
 @_cdecl("bjs_SimpleClassSwiftIdentity_register_wrapper")
-public func _bjs_SimpleClassSwiftIdentity_register_wrapper(_ id: Int32, _ jsRef: Int32) -> Void {
+public func _bjs_SimpleClassSwiftIdentity_register_wrapper(_ pointer: UnsafeMutableRawPointer, _ jsRef: Int32) -> Void {
     #if arch(wasm32)
-    _SimpleClassSwiftIdentity_wrapperRefs[Int(id)] = jsRef
+    _SimpleClassSwiftIdentity_wrapperRefs[pointer] = jsRef
     #else
     fatalError("Only available on WebAssembly")
     #endif
@@ -1985,17 +1968,11 @@ public func _bjs_SimpleClassSwiftIdentity_register_wrapper(_ id: Int32, _ jsRef:
 
 @_expose(wasm, "bjs_SimpleClassSwiftIdentity_release_wrapper")
 @_cdecl("bjs_SimpleClassSwiftIdentity_release_wrapper")
-public func _bjs_SimpleClassSwiftIdentity_release_wrapper(_ id: Int32) -> Void {
+public func _bjs_SimpleClassSwiftIdentity_release_wrapper(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let slot = Int(id)
-    let jsRef = _SimpleClassSwiftIdentity_wrapperRefs[slot]
-    guard jsRef != 0 else { return }
-    _SimpleClassSwiftIdentity_wrapperRefs[slot] = 0
-    if let ptr = _SimpleClassSwiftIdentity_idToPointer.removeValue(forKey: id) {
-        _SimpleClassSwiftIdentity_identityTable.removeValue(forKey: ptr)
-        Unmanaged<SimpleClassSwiftIdentity>.fromOpaque(ptr).release()
-    }
-    _SimpleClassSwiftIdentity_freeIds.append(id)
+    guard let jsRef = _SimpleClassSwiftIdentity_wrapperRefs.removeValue(forKey: pointer) else { return }
+    _SimpleClassSwiftIdentity_identityTable.remove(pointer)
+    Unmanaged<SimpleClassSwiftIdentity>.fromOpaque(pointer).release()
     _swift_js_release_ref(jsRef)
     #else
     fatalError("Only available on WebAssembly")
@@ -2006,23 +1983,12 @@ extension SimpleClassSwiftIdentity {
     @_spi(BridgeJS) public consuming func bridgeJSStackPush() {
         let ptr: UnsafeMutableRawPointer = withExtendedLifetime(self) {
             let ptr = Unmanaged.passUnretained(self).toOpaque()
-            if let id = _SimpleClassSwiftIdentity_identityTable[ptr] {
-                _swift_js_push_i32(id)
+            if _SimpleClassSwiftIdentity_identityTable.contains(ptr) {
                 _swift_js_push_i32(0)
                 return ptr
             }
             _ = Unmanaged.passRetained(self)
-            let id: Int32
-            if let recycled = _SimpleClassSwiftIdentity_freeIds.popLast() {
-                id = recycled
-            } else {
-                id = _SimpleClassSwiftIdentity_nextId
-                _SimpleClassSwiftIdentity_nextId += 1
-                _SimpleClassSwiftIdentity_wrapperRefs.append(0)
-            }
-            _SimpleClassSwiftIdentity_identityTable[ptr] = id
-            _SimpleClassSwiftIdentity_idToPointer[id] = ptr
-            _swift_js_push_i32(id)
+            _SimpleClassSwiftIdentity_identityTable.insert(ptr)
             _swift_js_push_i32(1)
             return ptr
         }
@@ -2051,15 +2017,9 @@ fileprivate func _bjs_SimpleClassSwiftIdentity_wrap_extern(_ pointer: UnsafeMuta
     return _bjs_SimpleClassSwiftIdentity_wrap_extern(pointer)
 }
 
-nonisolated(unsafe) var _ClassRoundtripSwiftIdentity_identityTable: [UnsafeMutableRawPointer: Int32] = [:]
+nonisolated(unsafe) var _ClassRoundtripSwiftIdentity_identityTable: Set<UnsafeMutableRawPointer> = []
 
-nonisolated(unsafe) var _ClassRoundtripSwiftIdentity_idToPointer: [Int32: UnsafeMutableRawPointer] = [:]
-
-nonisolated(unsafe) var _ClassRoundtripSwiftIdentity_wrapperRefs: [Int32] = []
-
-nonisolated(unsafe) var _ClassRoundtripSwiftIdentity_freeIds: [Int32] = []
-
-nonisolated(unsafe) var _ClassRoundtripSwiftIdentity_nextId: Int32 = 0
+nonisolated(unsafe) var _ClassRoundtripSwiftIdentity_wrapperRefs: [UnsafeMutableRawPointer: Int32] = [:]
 
 @_expose(wasm, "bjs_ClassRoundtripSwiftIdentity_init")
 @_cdecl("bjs_ClassRoundtripSwiftIdentity_init")
@@ -2068,24 +2028,13 @@ public func _bjs_ClassRoundtripSwiftIdentity_init() -> UnsafeMutableRawPointer {
     let ret = ClassRoundtripSwiftIdentity()
     return withExtendedLifetime(ret) {
         let ptr = Unmanaged.passUnretained(ret).toOpaque()
-        if let id = _ClassRoundtripSwiftIdentity_identityTable[ptr] {
-            // Cache hit: do NOT retain. JS keeps the wrapper alive via _wrapperRefs[id].
-            _swift_js_push_i32(id)
+        if _ClassRoundtripSwiftIdentity_identityTable.contains(ptr) {
+            // Cache hit: do NOT retain. JS has the wrapper cached.
             _swift_js_push_i32(0)
             return ptr
         }
         _ = Unmanaged.passRetained(ret)
-        let id: Int32
-        if let recycled = _ClassRoundtripSwiftIdentity_freeIds.popLast() {
-            id = recycled
-        } else {
-            id = _ClassRoundtripSwiftIdentity_nextId
-            _ClassRoundtripSwiftIdentity_nextId += 1
-            _ClassRoundtripSwiftIdentity_wrapperRefs.append(0)
-        }
-        _ClassRoundtripSwiftIdentity_identityTable[ptr] = id
-        _ClassRoundtripSwiftIdentity_idToPointer[id] = ptr
-        _swift_js_push_i32(id)
+        _ClassRoundtripSwiftIdentity_identityTable.insert(ptr)
         _swift_js_push_i32(1)
         return ptr
     }
@@ -2101,24 +2050,13 @@ public func _bjs_ClassRoundtripSwiftIdentity_roundtripSimpleClassSwiftIdentity(_
     let ret = ClassRoundtripSwiftIdentity.bridgeJSLiftParameter(_self).roundtripSimpleClassSwiftIdentity(_: SimpleClassSwiftIdentity.bridgeJSLiftParameter(obj))
     return withExtendedLifetime(ret) {
         let ptr = Unmanaged.passUnretained(ret).toOpaque()
-        if let id = _SimpleClassSwiftIdentity_identityTable[ptr] {
-            // Cache hit: do NOT retain. JS keeps the wrapper alive via _wrapperRefs[id].
-            _swift_js_push_i32(id)
+        if _SimpleClassSwiftIdentity_identityTable.contains(ptr) {
+            // Cache hit: do NOT retain. JS has the wrapper cached.
             _swift_js_push_i32(0)
             return ptr
         }
         _ = Unmanaged.passRetained(ret)
-        let id: Int32
-        if let recycled = _SimpleClassSwiftIdentity_freeIds.popLast() {
-            id = recycled
-        } else {
-            id = _SimpleClassSwiftIdentity_nextId
-            _SimpleClassSwiftIdentity_nextId += 1
-            _SimpleClassSwiftIdentity_wrapperRefs.append(0)
-        }
-        _SimpleClassSwiftIdentity_identityTable[ptr] = id
-        _SimpleClassSwiftIdentity_idToPointer[id] = ptr
-        _swift_js_push_i32(id)
+        _SimpleClassSwiftIdentity_identityTable.insert(ptr)
         _swift_js_push_i32(1)
         return ptr
     }
@@ -2134,24 +2072,13 @@ public func _bjs_ClassRoundtripSwiftIdentity_makeSimpleClassSwiftIdentity(_ _sel
     let ret = ClassRoundtripSwiftIdentity.bridgeJSLiftParameter(_self).makeSimpleClassSwiftIdentity()
     return withExtendedLifetime(ret) {
         let ptr = Unmanaged.passUnretained(ret).toOpaque()
-        if let id = _SimpleClassSwiftIdentity_identityTable[ptr] {
-            // Cache hit: do NOT retain. JS keeps the wrapper alive via _wrapperRefs[id].
-            _swift_js_push_i32(id)
+        if _SimpleClassSwiftIdentity_identityTable.contains(ptr) {
+            // Cache hit: do NOT retain. JS has the wrapper cached.
             _swift_js_push_i32(0)
             return ptr
         }
         _ = Unmanaged.passRetained(ret)
-        let id: Int32
-        if let recycled = _SimpleClassSwiftIdentity_freeIds.popLast() {
-            id = recycled
-        } else {
-            id = _SimpleClassSwiftIdentity_nextId
-            _SimpleClassSwiftIdentity_nextId += 1
-            _SimpleClassSwiftIdentity_wrapperRefs.append(0)
-        }
-        _SimpleClassSwiftIdentity_identityTable[ptr] = id
-        _SimpleClassSwiftIdentity_idToPointer[id] = ptr
-        _swift_js_push_i32(id)
+        _SimpleClassSwiftIdentity_identityTable.insert(ptr)
         _swift_js_push_i32(1)
         return ptr
     }
@@ -2182,9 +2109,9 @@ public func _bjs_ClassRoundtripSwiftIdentity_deinit(_ pointer: UnsafeMutableRawP
 
 @_expose(wasm, "bjs_ClassRoundtripSwiftIdentity_register_wrapper")
 @_cdecl("bjs_ClassRoundtripSwiftIdentity_register_wrapper")
-public func _bjs_ClassRoundtripSwiftIdentity_register_wrapper(_ id: Int32, _ jsRef: Int32) -> Void {
+public func _bjs_ClassRoundtripSwiftIdentity_register_wrapper(_ pointer: UnsafeMutableRawPointer, _ jsRef: Int32) -> Void {
     #if arch(wasm32)
-    _ClassRoundtripSwiftIdentity_wrapperRefs[Int(id)] = jsRef
+    _ClassRoundtripSwiftIdentity_wrapperRefs[pointer] = jsRef
     #else
     fatalError("Only available on WebAssembly")
     #endif
@@ -2192,17 +2119,11 @@ public func _bjs_ClassRoundtripSwiftIdentity_register_wrapper(_ id: Int32, _ jsR
 
 @_expose(wasm, "bjs_ClassRoundtripSwiftIdentity_release_wrapper")
 @_cdecl("bjs_ClassRoundtripSwiftIdentity_release_wrapper")
-public func _bjs_ClassRoundtripSwiftIdentity_release_wrapper(_ id: Int32) -> Void {
+public func _bjs_ClassRoundtripSwiftIdentity_release_wrapper(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let slot = Int(id)
-    let jsRef = _ClassRoundtripSwiftIdentity_wrapperRefs[slot]
-    guard jsRef != 0 else { return }
-    _ClassRoundtripSwiftIdentity_wrapperRefs[slot] = 0
-    if let ptr = _ClassRoundtripSwiftIdentity_idToPointer.removeValue(forKey: id) {
-        _ClassRoundtripSwiftIdentity_identityTable.removeValue(forKey: ptr)
-        Unmanaged<ClassRoundtripSwiftIdentity>.fromOpaque(ptr).release()
-    }
-    _ClassRoundtripSwiftIdentity_freeIds.append(id)
+    guard let jsRef = _ClassRoundtripSwiftIdentity_wrapperRefs.removeValue(forKey: pointer) else { return }
+    _ClassRoundtripSwiftIdentity_identityTable.remove(pointer)
+    Unmanaged<ClassRoundtripSwiftIdentity>.fromOpaque(pointer).release()
     _swift_js_release_ref(jsRef)
     #else
     fatalError("Only available on WebAssembly")
@@ -2213,23 +2134,12 @@ extension ClassRoundtripSwiftIdentity {
     @_spi(BridgeJS) public consuming func bridgeJSStackPush() {
         let ptr: UnsafeMutableRawPointer = withExtendedLifetime(self) {
             let ptr = Unmanaged.passUnretained(self).toOpaque()
-            if let id = _ClassRoundtripSwiftIdentity_identityTable[ptr] {
-                _swift_js_push_i32(id)
+            if _ClassRoundtripSwiftIdentity_identityTable.contains(ptr) {
                 _swift_js_push_i32(0)
                 return ptr
             }
             _ = Unmanaged.passRetained(self)
-            let id: Int32
-            if let recycled = _ClassRoundtripSwiftIdentity_freeIds.popLast() {
-                id = recycled
-            } else {
-                id = _ClassRoundtripSwiftIdentity_nextId
-                _ClassRoundtripSwiftIdentity_nextId += 1
-                _ClassRoundtripSwiftIdentity_wrapperRefs.append(0)
-            }
-            _ClassRoundtripSwiftIdentity_identityTable[ptr] = id
-            _ClassRoundtripSwiftIdentity_idToPointer[id] = ptr
-            _swift_js_push_i32(id)
+            _ClassRoundtripSwiftIdentity_identityTable.insert(ptr)
             _swift_js_push_i32(1)
             return ptr
         }
@@ -2258,15 +2168,9 @@ fileprivate func _bjs_ClassRoundtripSwiftIdentity_wrap_extern(_ pointer: UnsafeM
     return _bjs_ClassRoundtripSwiftIdentity_wrap_extern(pointer)
 }
 
-nonisolated(unsafe) var _IdentityCacheBenchmarkSwiftIdentity_identityTable: [UnsafeMutableRawPointer: Int32] = [:]
+nonisolated(unsafe) var _IdentityCacheBenchmarkSwiftIdentity_identityTable: Set<UnsafeMutableRawPointer> = []
 
-nonisolated(unsafe) var _IdentityCacheBenchmarkSwiftIdentity_idToPointer: [Int32: UnsafeMutableRawPointer] = [:]
-
-nonisolated(unsafe) var _IdentityCacheBenchmarkSwiftIdentity_wrapperRefs: [Int32] = []
-
-nonisolated(unsafe) var _IdentityCacheBenchmarkSwiftIdentity_freeIds: [Int32] = []
-
-nonisolated(unsafe) var _IdentityCacheBenchmarkSwiftIdentity_nextId: Int32 = 0
+nonisolated(unsafe) var _IdentityCacheBenchmarkSwiftIdentity_wrapperRefs: [UnsafeMutableRawPointer: Int32] = [:]
 
 @_expose(wasm, "bjs_IdentityCacheBenchmarkSwiftIdentity_init")
 @_cdecl("bjs_IdentityCacheBenchmarkSwiftIdentity_init")
@@ -2275,24 +2179,13 @@ public func _bjs_IdentityCacheBenchmarkSwiftIdentity_init() -> UnsafeMutableRawP
     let ret = IdentityCacheBenchmarkSwiftIdentity()
     return withExtendedLifetime(ret) {
         let ptr = Unmanaged.passUnretained(ret).toOpaque()
-        if let id = _IdentityCacheBenchmarkSwiftIdentity_identityTable[ptr] {
-            // Cache hit: do NOT retain. JS keeps the wrapper alive via _wrapperRefs[id].
-            _swift_js_push_i32(id)
+        if _IdentityCacheBenchmarkSwiftIdentity_identityTable.contains(ptr) {
+            // Cache hit: do NOT retain. JS has the wrapper cached.
             _swift_js_push_i32(0)
             return ptr
         }
         _ = Unmanaged.passRetained(ret)
-        let id: Int32
-        if let recycled = _IdentityCacheBenchmarkSwiftIdentity_freeIds.popLast() {
-            id = recycled
-        } else {
-            id = _IdentityCacheBenchmarkSwiftIdentity_nextId
-            _IdentityCacheBenchmarkSwiftIdentity_nextId += 1
-            _IdentityCacheBenchmarkSwiftIdentity_wrapperRefs.append(0)
-        }
-        _IdentityCacheBenchmarkSwiftIdentity_identityTable[ptr] = id
-        _IdentityCacheBenchmarkSwiftIdentity_idToPointer[id] = ptr
-        _swift_js_push_i32(id)
+        _IdentityCacheBenchmarkSwiftIdentity_identityTable.insert(ptr)
         _swift_js_push_i32(1)
         return ptr
     }
@@ -2334,9 +2227,9 @@ public func _bjs_IdentityCacheBenchmarkSwiftIdentity_deinit(_ pointer: UnsafeMut
 
 @_expose(wasm, "bjs_IdentityCacheBenchmarkSwiftIdentity_register_wrapper")
 @_cdecl("bjs_IdentityCacheBenchmarkSwiftIdentity_register_wrapper")
-public func _bjs_IdentityCacheBenchmarkSwiftIdentity_register_wrapper(_ id: Int32, _ jsRef: Int32) -> Void {
+public func _bjs_IdentityCacheBenchmarkSwiftIdentity_register_wrapper(_ pointer: UnsafeMutableRawPointer, _ jsRef: Int32) -> Void {
     #if arch(wasm32)
-    _IdentityCacheBenchmarkSwiftIdentity_wrapperRefs[Int(id)] = jsRef
+    _IdentityCacheBenchmarkSwiftIdentity_wrapperRefs[pointer] = jsRef
     #else
     fatalError("Only available on WebAssembly")
     #endif
@@ -2344,17 +2237,11 @@ public func _bjs_IdentityCacheBenchmarkSwiftIdentity_register_wrapper(_ id: Int3
 
 @_expose(wasm, "bjs_IdentityCacheBenchmarkSwiftIdentity_release_wrapper")
 @_cdecl("bjs_IdentityCacheBenchmarkSwiftIdentity_release_wrapper")
-public func _bjs_IdentityCacheBenchmarkSwiftIdentity_release_wrapper(_ id: Int32) -> Void {
+public func _bjs_IdentityCacheBenchmarkSwiftIdentity_release_wrapper(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let slot = Int(id)
-    let jsRef = _IdentityCacheBenchmarkSwiftIdentity_wrapperRefs[slot]
-    guard jsRef != 0 else { return }
-    _IdentityCacheBenchmarkSwiftIdentity_wrapperRefs[slot] = 0
-    if let ptr = _IdentityCacheBenchmarkSwiftIdentity_idToPointer.removeValue(forKey: id) {
-        _IdentityCacheBenchmarkSwiftIdentity_identityTable.removeValue(forKey: ptr)
-        Unmanaged<IdentityCacheBenchmarkSwiftIdentity>.fromOpaque(ptr).release()
-    }
-    _IdentityCacheBenchmarkSwiftIdentity_freeIds.append(id)
+    guard let jsRef = _IdentityCacheBenchmarkSwiftIdentity_wrapperRefs.removeValue(forKey: pointer) else { return }
+    _IdentityCacheBenchmarkSwiftIdentity_identityTable.remove(pointer)
+    Unmanaged<IdentityCacheBenchmarkSwiftIdentity>.fromOpaque(pointer).release()
     _swift_js_release_ref(jsRef)
     #else
     fatalError("Only available on WebAssembly")
@@ -2365,23 +2252,12 @@ extension IdentityCacheBenchmarkSwiftIdentity {
     @_spi(BridgeJS) public consuming func bridgeJSStackPush() {
         let ptr: UnsafeMutableRawPointer = withExtendedLifetime(self) {
             let ptr = Unmanaged.passUnretained(self).toOpaque()
-            if let id = _IdentityCacheBenchmarkSwiftIdentity_identityTable[ptr] {
-                _swift_js_push_i32(id)
+            if _IdentityCacheBenchmarkSwiftIdentity_identityTable.contains(ptr) {
                 _swift_js_push_i32(0)
                 return ptr
             }
             _ = Unmanaged.passRetained(self)
-            let id: Int32
-            if let recycled = _IdentityCacheBenchmarkSwiftIdentity_freeIds.popLast() {
-                id = recycled
-            } else {
-                id = _IdentityCacheBenchmarkSwiftIdentity_nextId
-                _IdentityCacheBenchmarkSwiftIdentity_nextId += 1
-                _IdentityCacheBenchmarkSwiftIdentity_wrapperRefs.append(0)
-            }
-            _IdentityCacheBenchmarkSwiftIdentity_identityTable[ptr] = id
-            _IdentityCacheBenchmarkSwiftIdentity_idToPointer[id] = ptr
-            _swift_js_push_i32(id)
+            _IdentityCacheBenchmarkSwiftIdentity_identityTable.insert(ptr)
             _swift_js_push_i32(1)
             return ptr
         }

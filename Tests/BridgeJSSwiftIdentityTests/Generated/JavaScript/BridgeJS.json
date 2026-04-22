@@ -274,13 +274,13 @@
         }
       },
       {
-        "abiName" : "bjs_getConfigSwiftNextIdForChurn",
+        "abiName" : "bjs_getConfigSwiftIdentityTableSizeForChurn",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
           "isThrows" : false
         },
-        "name" : "getConfigSwiftNextIdForChurn",
+        "name" : "getConfigSwiftIdentityTableSizeForChurn",
         "parameters" : [
 
         ],

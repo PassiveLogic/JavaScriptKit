@@ -33,7 +33,7 @@ function runSwiftIdentityModeTests(exports) {
     testConfigSwiftSelfMethodIdentity(exports);
     testConfigSwiftReleaseFreesHeapObject(exports);
     testConfigSwiftDoubleReleaseIdempotent(exports);
-    testConfigSwiftIdRecycling(exports);
+    testConfigSwiftIdentityTableCleanup(exports);
     testConfigSwiftArrayCrossElementIdentity(exports);
     testConfigSwiftGcSurvivability(exports);
     testConfigSwiftOptionalIdentity(exports);
@@ -55,9 +55,9 @@ function testConfigSwiftIdentity(exports) {
     assert.strictEqual(b, c, "config-swift: re-export identity transitive");
     assert.equal(a.currentValue, 7);
     assert.equal(
-        typeof a.__swiftIdentityId,
-        "number",
-        "config-default `swift` mode should emit __swiftIdentityId — verify BridgeJSLink.shouldUseSwiftIdentityCache picks up the config",
+        typeof a.__swiftIdentityHasReleased,
+        "boolean",
+        "config-default `swift` mode should emit a standalone wrapper with __swiftIdentityHasReleased — verify BridgeJSLink.shouldUseSwiftIdentityCache picks up the config",
     );
 
     a.release();
@@ -123,12 +123,13 @@ function testConfigSwiftDoubleReleaseIdempotent(exports) {
 }
 
 /**
- * (d) Id recycling — nextId does not grow past the pool size.
+ * (d) Identity-table cleanup — `Set<pointer>` returns to empty after release
+ * (post-D18; no ids to recycle, so the analogous check is size-based).
  *
  * @param {import('../../../.build/plugins/PackageToJS/outputs/PackageTests/bridge-js.d.ts').Exports} exports
  */
-function testConfigSwiftIdRecycling(exports) {
-    if (typeof exports.getConfigSwiftNextIdForChurn !== "function") {
+function testConfigSwiftIdentityTableCleanup(exports) {
+    if (typeof exports.getConfigSwiftIdentityTableSizeForChurn !== "function") {
         return; // ENABLE_TEST_INTROSPECTION not defined
     }
 
@@ -137,21 +138,16 @@ function testConfigSwiftIdRecycling(exports) {
     for (let i = 0; i < POOL; i++) {
         first.push(new exports.ConfigSwiftChurnSubject(i));
     }
-    const peakAfterFirst = exports.getConfigSwiftNextIdForChurn();
+    assert.strictEqual(exports.getConfigSwiftIdentityTableSizeForChurn(), POOL);
 
     for (const o of first) o.release();
+    assert.strictEqual(exports.getConfigSwiftIdentityTableSizeForChurn(), 0);
 
     const second = [];
     for (let i = 0; i < POOL; i++) {
         second.push(new exports.ConfigSwiftChurnSubject(100 + i));
     }
-    const peakAfterSecond = exports.getConfigSwiftNextIdForChurn();
-
-    assert.strictEqual(
-        peakAfterSecond,
-        peakAfterFirst,
-        `config-swift: id recycling failed — nextId grew from ${peakAfterFirst} to ${peakAfterSecond}`,
-    );
+    assert.strictEqual(exports.getConfigSwiftIdentityTableSizeForChurn(), POOL);
 
     for (const o of second) o.release();
 }
@@ -190,7 +186,7 @@ function testConfigSwiftGcSurvivability(exports) {
 
     exports.resetConfigSwiftSubject();
     let obj = exports.getConfigSwiftSubject();
-    const idBefore = obj.__swiftIdentityId;
+    const pointerBefore = obj.pointer;
     const weakProbe = new WeakRef(obj);
 
     obj = null;
@@ -199,9 +195,9 @@ function testConfigSwiftGcSurvivability(exports) {
 
     const again = exports.getConfigSwiftSubject();
     assert.strictEqual(
-        again.__swiftIdentityId,
-        idBefore,
-        "config-swift: id stable across GC",
+        again.pointer,
+        pointerBefore,
+        "config-swift: pointer stable across GC",
     );
     assert.strictEqual(
         weakProbe.deref(),
