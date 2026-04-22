@@ -145,6 +145,170 @@
           }
         ],
         "swiftCallName" : "ArrayIdentityElement"
+      },
+      {
+        "constructor" : {
+          "abiName" : "bjs_SwiftIdentityTestSubject_init",
+          "effects" : {
+            "isAsync" : false,
+            "isStatic" : false,
+            "isThrows" : false
+          },
+          "parameters" : [
+            {
+              "label" : "value",
+              "name" : "value",
+              "type" : {
+                "integer" : {
+                  "_0" : {
+                    "isSigned" : true,
+                    "width" : "word"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "identityMode" : "swift",
+        "methods" : [
+          {
+            "abiName" : "bjs_SwiftIdentityTestSubject_self_",
+            "effects" : {
+              "isAsync" : false,
+              "isStatic" : false,
+              "isThrows" : false
+            },
+            "name" : "self_",
+            "parameters" : [
+
+            ],
+            "returnType" : {
+              "swiftHeapObject" : {
+                "_0" : "SwiftIdentityTestSubject"
+              }
+            }
+          }
+        ],
+        "name" : "SwiftIdentityTestSubject",
+        "properties" : [
+          {
+            "isReadonly" : false,
+            "isStatic" : false,
+            "name" : "value",
+            "type" : {
+              "integer" : {
+                "_0" : {
+                  "isSigned" : true,
+                  "width" : "word"
+                }
+              }
+            }
+          },
+          {
+            "isReadonly" : true,
+            "isStatic" : false,
+            "name" : "currentValue",
+            "type" : {
+              "integer" : {
+                "_0" : {
+                  "isSigned" : true,
+                  "width" : "word"
+                }
+              }
+            }
+          }
+        ],
+        "swiftCallName" : "SwiftIdentityTestSubject"
+      },
+      {
+        "constructor" : {
+          "abiName" : "bjs_SwiftRetainLeakSubject_init",
+          "effects" : {
+            "isAsync" : false,
+            "isStatic" : false,
+            "isThrows" : false
+          },
+          "parameters" : [
+            {
+              "label" : "tag",
+              "name" : "tag",
+              "type" : {
+                "integer" : {
+                  "_0" : {
+                    "isSigned" : true,
+                    "width" : "word"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "identityMode" : "swift",
+        "methods" : [
+
+        ],
+        "name" : "SwiftRetainLeakSubject",
+        "properties" : [
+          {
+            "isReadonly" : false,
+            "isStatic" : false,
+            "name" : "tag",
+            "type" : {
+              "integer" : {
+                "_0" : {
+                  "isSigned" : true,
+                  "width" : "word"
+                }
+              }
+            }
+          }
+        ],
+        "swiftCallName" : "SwiftRetainLeakSubject"
+      },
+      {
+        "constructor" : {
+          "abiName" : "bjs_SwiftChurnSubject_init",
+          "effects" : {
+            "isAsync" : false,
+            "isStatic" : false,
+            "isThrows" : false
+          },
+          "parameters" : [
+            {
+              "label" : "tag",
+              "name" : "tag",
+              "type" : {
+                "integer" : {
+                  "_0" : {
+                    "isSigned" : true,
+                    "width" : "word"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "identityMode" : "swift",
+        "methods" : [
+
+        ],
+        "name" : "SwiftChurnSubject",
+        "properties" : [
+          {
+            "isReadonly" : false,
+            "isStatic" : false,
+            "name" : "tag",
+            "type" : {
+              "integer" : {
+                "_0" : {
+                  "isSigned" : true,
+                  "width" : "word"
+                }
+              }
+            }
+          }
+        ],
+        "swiftCallName" : "SwiftChurnSubject"
       }
     ],
     "enums" : [
@@ -390,6 +554,219 @@
         "returnType" : {
           "void" : {
 
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_getSharedSwiftSubject",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "name" : "getSharedSwiftSubject",
+        "parameters" : [
+
+        ],
+        "returnType" : {
+          "swiftHeapObject" : {
+            "_0" : "SwiftIdentityTestSubject"
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_resetSharedSwiftSubject",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "name" : "resetSharedSwiftSubject",
+        "parameters" : [
+
+        ],
+        "returnType" : {
+          "void" : {
+
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_getRetainLeakSubjectSwift",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "name" : "getRetainLeakSubjectSwift",
+        "parameters" : [
+
+        ],
+        "returnType" : {
+          "swiftHeapObject" : {
+            "_0" : "SwiftRetainLeakSubject"
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_resetRetainLeakSubjectSwift",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "name" : "resetRetainLeakSubjectSwift",
+        "parameters" : [
+
+        ],
+        "returnType" : {
+          "void" : {
+
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_getRetainLeakDeinitsSwift",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "name" : "getRetainLeakDeinitsSwift",
+        "parameters" : [
+
+        ],
+        "returnType" : {
+          "integer" : {
+            "_0" : {
+              "isSigned" : true,
+              "width" : "word"
+            }
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_resetRetainLeakDeinitsSwift",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "name" : "resetRetainLeakDeinitsSwift",
+        "parameters" : [
+
+        ],
+        "returnType" : {
+          "void" : {
+
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_getSwiftNextIdForSharedSubject",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "name" : "getSwiftNextIdForSharedSubject",
+        "parameters" : [
+
+        ],
+        "returnType" : {
+          "integer" : {
+            "_0" : {
+              "isSigned" : true,
+              "width" : "word"
+            }
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_makeSwiftIdentityArray",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "name" : "makeSwiftIdentityArray",
+        "parameters" : [
+          {
+            "label" : "_",
+            "name" : "a",
+            "type" : {
+              "swiftHeapObject" : {
+                "_0" : "SwiftIdentityTestSubject"
+              }
+            }
+          },
+          {
+            "label" : "_",
+            "name" : "b",
+            "type" : {
+              "swiftHeapObject" : {
+                "_0" : "SwiftIdentityTestSubject"
+              }
+            }
+          }
+        ],
+        "returnType" : {
+          "array" : {
+            "_0" : {
+              "swiftHeapObject" : {
+                "_0" : "SwiftIdentityTestSubject"
+              }
+            }
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_maybeSwiftSubject",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "name" : "maybeSwiftSubject",
+        "parameters" : [
+          {
+            "label" : "_",
+            "name" : "present",
+            "type" : {
+              "bool" : {
+
+              }
+            }
+          }
+        ],
+        "returnType" : {
+          "nullable" : {
+            "_0" : {
+              "swiftHeapObject" : {
+                "_0" : "SwiftIdentityTestSubject"
+              }
+            },
+            "_1" : "null"
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_getSwiftNextIdForChurn",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "name" : "getSwiftNextIdForChurn",
+        "parameters" : [
+
+        ],
+        "returnType" : {
+          "integer" : {
+            "_0" : {
+              "isSigned" : true,
+              "width" : "word"
+            }
           }
         }
       }

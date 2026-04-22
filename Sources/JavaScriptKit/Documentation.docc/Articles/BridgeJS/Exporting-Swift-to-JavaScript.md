@@ -16,6 +16,7 @@ Configure your package and build for JavaScript as described in <doc:Setting-up-
 
 - <doc:Exporting-Swift-Function>
 - <doc:Exporting-Swift-Class>
+- <doc:Identity-Modes-For-Exported-Classes>
 - <doc:Exporting-Swift-Struct>
 - <doc:Exporting-Swift-Array>
 - <doc:Exporting-Swift-Enum>

@@ -22,20 +22,22 @@ function formatBytes(bytes) {
 /**
  * Parse the --identity-mode CLI argument into mode labels.
  *
- * Both class variants (with and without identity mode) are compiled into the
- * same WASM build via per-class `@JS(identityMode: true)` annotations, so
- * "both" mode works in a single run.
+ * Class variants for all three modes are compiled into the same WASM build
+ * via per-class `@JS(identityMode: .pointer)` and `@JS(identityMode: .swift)`
+ * annotations, so `both` and `both3` work in a single run.
  *
- * @param {string} modeArg - Mode argument: off, none, pointer, or both
+ * @param {string} modeArg - Mode argument: off, none, pointer, swift, both (none+pointer), or both3 (none+pointer+swift)
  * @returns {string[]} Array of mode labels, or empty for "off"
  */
 function parseIdentityModes(modeArg) {
     if (!modeArg || modeArg === 'off') return []
     if (modeArg === 'none') return ['none']
     if (modeArg === 'pointer') return ['pointer']
+    if (modeArg === 'swift') return ['swift']
     if (modeArg === 'both') return ['none', 'pointer']
+    if (modeArg === 'both3') return ['none', 'pointer', 'swift']
     console.error(
-        `Invalid --identity-mode value: ${modeArg}. Expected off, none, pointer, or both.`
+        `Invalid --identity-mode value: ${modeArg}. Expected off, none, pointer, swift, both, or both3.`
     )
     process.exit(1)
 }
@@ -153,6 +155,14 @@ async function runIdentityModeBenchmarks(results, nameFilter, identityConfig, be
             roundtrip = (obj) => classRoundtrip.roundtripSimpleClassIdentity(obj)
             makeSimple = () => classRoundtrip.makeSimpleClassIdentity()
             takeSimple = (obj) => classRoundtrip.takeSimpleClassIdentity(obj)
+        } else if (mode === 'swift') {
+            classRoundtrip = new exports.ClassRoundtripSwiftIdentity()
+            baseObject = new exports.SimpleClassSwiftIdentity('Hello', 42, true, 0.5, 3.14159)
+            SimpleClassCtor = exports.SimpleClassSwiftIdentity
+            IdentityCacheCtor = exports.IdentityCacheBenchmarkSwiftIdentity
+            roundtrip = (obj) => classRoundtrip.roundtripSimpleClassSwiftIdentity(obj)
+            makeSimple = () => classRoundtrip.makeSimpleClassSwiftIdentity()
+            takeSimple = (obj) => classRoundtrip.takeSimpleClassSwiftIdentity(obj)
         } else {
             classRoundtrip = new exports.ClassRoundtrip()
             baseObject = new exports.SimpleClass('Hello', 42, true, 0.5, 3.14159)

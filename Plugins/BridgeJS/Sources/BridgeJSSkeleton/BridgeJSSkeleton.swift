@@ -784,7 +784,9 @@ public struct ExportedClass: Codable, NamespacedExportedType {
     public var methods: [ExportedFunction]
     public var properties: [ExportedProperty]
     public var namespace: [String]?
-    public var identityMode: Bool?  // nil = use config default, true/false = override
+    /// Per-class identity-mode override. `nil` means "use the config default".
+    /// Valid values: `"none"`, `"pointer"`, `"swift"`. See `JSIdentityMode`.
+    public var identityMode: String?
 
     public init(
         name: String,
@@ -794,7 +796,7 @@ public struct ExportedClass: Codable, NamespacedExportedType {
         methods: [ExportedFunction],
         properties: [ExportedProperty] = [],
         namespace: [String]? = nil,
-        identityMode: Bool? = nil
+        identityMode: String? = nil
     ) {
         self.name = name
         self.swiftCallName = swiftCallName

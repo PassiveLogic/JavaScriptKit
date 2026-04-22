@@ -12,13 +12,13 @@ let package = Package(
         .macCatalyst(.v13),
     ],
     dependencies: [
-        .package(path: "../")
+        .package(name: "JavaScriptKit", path: "../")
     ],
     targets: [
         .executableTarget(
             name: "Benchmarks",
             dependencies: [
-                "JavaScriptKit",
+                .product(name: "JavaScriptKit", package: "JavaScriptKit"),
                 .product(name: "JavaScriptFoundationCompat", package: "JavaScriptKit"),
             ],
             exclude: ["Generated/JavaScript", "bridge-js.d.ts"],

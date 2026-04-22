@@ -1550,7 +1550,7 @@
             }
           ]
         },
-        "identityMode" : true,
+        "identityMode" : "pointer",
         "methods" : [
 
         ],
@@ -1624,7 +1624,7 @@
 
           ]
         },
-        "identityMode" : true,
+        "identityMode" : "pointer",
         "methods" : [
           {
             "abiName" : "bjs_ClassRoundtripIdentity_roundtripSimpleClassIdentity",
@@ -1712,7 +1712,7 @@
 
           ]
         },
-        "identityMode" : true,
+        "identityMode" : "pointer",
         "methods" : [
           {
             "abiName" : "bjs_IdentityCacheBenchmarkIdentity_setupPool",
@@ -1769,6 +1769,285 @@
 
         ],
         "swiftCallName" : "IdentityCacheBenchmarkIdentity"
+      },
+      {
+        "constructor" : {
+          "abiName" : "bjs_SimpleClassSwiftIdentity_init",
+          "effects" : {
+            "isAsync" : false,
+            "isStatic" : false,
+            "isThrows" : false
+          },
+          "parameters" : [
+            {
+              "label" : "name",
+              "name" : "name",
+              "type" : {
+                "string" : {
+
+                }
+              }
+            },
+            {
+              "label" : "count",
+              "name" : "count",
+              "type" : {
+                "integer" : {
+                  "_0" : {
+                    "isSigned" : true,
+                    "width" : "word"
+                  }
+                }
+              }
+            },
+            {
+              "label" : "flag",
+              "name" : "flag",
+              "type" : {
+                "bool" : {
+
+                }
+              }
+            },
+            {
+              "label" : "rate",
+              "name" : "rate",
+              "type" : {
+                "float" : {
+
+                }
+              }
+            },
+            {
+              "label" : "precise",
+              "name" : "precise",
+              "type" : {
+                "double" : {
+
+                }
+              }
+            }
+          ]
+        },
+        "identityMode" : "swift",
+        "methods" : [
+
+        ],
+        "name" : "SimpleClassSwiftIdentity",
+        "properties" : [
+          {
+            "isReadonly" : false,
+            "isStatic" : false,
+            "name" : "name",
+            "type" : {
+              "string" : {
+
+              }
+            }
+          },
+          {
+            "isReadonly" : false,
+            "isStatic" : false,
+            "name" : "count",
+            "type" : {
+              "integer" : {
+                "_0" : {
+                  "isSigned" : true,
+                  "width" : "word"
+                }
+              }
+            }
+          },
+          {
+            "isReadonly" : false,
+            "isStatic" : false,
+            "name" : "flag",
+            "type" : {
+              "bool" : {
+
+              }
+            }
+          },
+          {
+            "isReadonly" : false,
+            "isStatic" : false,
+            "name" : "rate",
+            "type" : {
+              "float" : {
+
+              }
+            }
+          },
+          {
+            "isReadonly" : false,
+            "isStatic" : false,
+            "name" : "precise",
+            "type" : {
+              "double" : {
+
+              }
+            }
+          }
+        ],
+        "swiftCallName" : "SimpleClassSwiftIdentity"
+      },
+      {
+        "constructor" : {
+          "abiName" : "bjs_ClassRoundtripSwiftIdentity_init",
+          "effects" : {
+            "isAsync" : false,
+            "isStatic" : false,
+            "isThrows" : false
+          },
+          "parameters" : [
+
+          ]
+        },
+        "identityMode" : "swift",
+        "methods" : [
+          {
+            "abiName" : "bjs_ClassRoundtripSwiftIdentity_roundtripSimpleClassSwiftIdentity",
+            "effects" : {
+              "isAsync" : false,
+              "isStatic" : false,
+              "isThrows" : false
+            },
+            "name" : "roundtripSimpleClassSwiftIdentity",
+            "parameters" : [
+              {
+                "label" : "_",
+                "name" : "obj",
+                "type" : {
+                  "swiftHeapObject" : {
+                    "_0" : "SimpleClassSwiftIdentity"
+                  }
+                }
+              }
+            ],
+            "returnType" : {
+              "swiftHeapObject" : {
+                "_0" : "SimpleClassSwiftIdentity"
+              }
+            }
+          },
+          {
+            "abiName" : "bjs_ClassRoundtripSwiftIdentity_makeSimpleClassSwiftIdentity",
+            "effects" : {
+              "isAsync" : false,
+              "isStatic" : false,
+              "isThrows" : false
+            },
+            "name" : "makeSimpleClassSwiftIdentity",
+            "parameters" : [
+
+            ],
+            "returnType" : {
+              "swiftHeapObject" : {
+                "_0" : "SimpleClassSwiftIdentity"
+              }
+            }
+          },
+          {
+            "abiName" : "bjs_ClassRoundtripSwiftIdentity_takeSimpleClassSwiftIdentity",
+            "effects" : {
+              "isAsync" : false,
+              "isStatic" : false,
+              "isThrows" : false
+            },
+            "name" : "takeSimpleClassSwiftIdentity",
+            "parameters" : [
+              {
+                "label" : "_",
+                "name" : "obj",
+                "type" : {
+                  "swiftHeapObject" : {
+                    "_0" : "SimpleClassSwiftIdentity"
+                  }
+                }
+              }
+            ],
+            "returnType" : {
+              "void" : {
+
+              }
+            }
+          }
+        ],
+        "name" : "ClassRoundtripSwiftIdentity",
+        "properties" : [
+
+        ],
+        "swiftCallName" : "ClassRoundtripSwiftIdentity"
+      },
+      {
+        "constructor" : {
+          "abiName" : "bjs_IdentityCacheBenchmarkSwiftIdentity_init",
+          "effects" : {
+            "isAsync" : false,
+            "isStatic" : false,
+            "isThrows" : false
+          },
+          "parameters" : [
+
+          ]
+        },
+        "identityMode" : "swift",
+        "methods" : [
+          {
+            "abiName" : "bjs_IdentityCacheBenchmarkSwiftIdentity_setupPool",
+            "effects" : {
+              "isAsync" : false,
+              "isStatic" : false,
+              "isThrows" : false
+            },
+            "name" : "setupPool",
+            "parameters" : [
+              {
+                "label" : "_",
+                "name" : "count",
+                "type" : {
+                  "integer" : {
+                    "_0" : {
+                      "isSigned" : true,
+                      "width" : "word"
+                    }
+                  }
+                }
+              }
+            ],
+            "returnType" : {
+              "void" : {
+
+              }
+            }
+          },
+          {
+            "abiName" : "bjs_IdentityCacheBenchmarkSwiftIdentity_getPoolRepeated",
+            "effects" : {
+              "isAsync" : false,
+              "isStatic" : false,
+              "isThrows" : false
+            },
+            "name" : "getPoolRepeated",
+            "parameters" : [
+
+            ],
+            "returnType" : {
+              "array" : {
+                "_0" : {
+                  "swiftHeapObject" : {
+                    "_0" : "SimpleClassSwiftIdentity"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "name" : "IdentityCacheBenchmarkSwiftIdentity",
+        "properties" : [
+
+        ],
+        "swiftCallName" : "IdentityCacheBenchmarkSwiftIdentity"
       },
       {
         "constructor" : {

@@ -225,7 +225,25 @@ let package = Package(
                 "Generated/JavaScript",
             ],
             swiftSettings: [
-                .enableExperimentalFeature("Extern")
+                .enableExperimentalFeature("Extern"),
+                // Exposes gated `@JS func getSwift*ForChurn() -> Int` helpers
+                // that let Task-5 id-recycling tests read `_<Class>_nextId`.
+                // Do NOT export these in non-test builds.
+                .define("ENABLE_TEST_INTROSPECTION"),
+            ],
+            linkerSettings: testingLinkerFlags
+        ),
+        .testTarget(
+            name: "BridgeJSSwiftIdentityTests",
+            dependencies: ["JavaScriptKit", "JavaScriptEventLoop"],
+            exclude: [
+                "bridge-js.config.json",
+                "Generated/JavaScript",
+            ],
+            swiftSettings: [
+                .enableExperimentalFeature("Extern"),
+                // Same id-recycling introspection knob as BridgeJSIdentityTests.
+                .define("ENABLE_TEST_INTROSPECTION"),
             ],
             linkerSettings: testingLinkerFlags
         ),

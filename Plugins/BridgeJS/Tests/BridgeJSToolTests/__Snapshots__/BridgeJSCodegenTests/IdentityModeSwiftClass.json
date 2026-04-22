@@ -3,7 +3,7 @@
     "classes" : [
       {
         "constructor" : {
-          "abiName" : "bjs_CachedModel_init",
+          "abiName" : "bjs_SwiftCached_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -21,11 +21,11 @@
             }
           ]
         },
-        "identityMode" : "pointer",
+        "identityMode" : "swift",
         "methods" : [
 
         ],
-        "name" : "CachedModel",
+        "name" : "SwiftCached",
         "properties" : [
           {
             "isReadonly" : false,
@@ -38,11 +38,11 @@
             }
           }
         ],
-        "swiftCallName" : "CachedModel"
+        "swiftCallName" : "SwiftCached"
       },
       {
         "constructor" : {
-          "abiName" : "bjs_UncachedModel_init",
+          "abiName" : "bjs_WeakCached_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -63,10 +63,11 @@
             }
           ]
         },
+        "identityMode" : "pointer",
         "methods" : [
 
         ],
-        "name" : "UncachedModel",
+        "name" : "WeakCached",
         "properties" : [
           {
             "isReadonly" : false,
@@ -82,11 +83,11 @@
             }
           }
         ],
-        "swiftCallName" : "UncachedModel"
+        "swiftCallName" : "WeakCached"
       },
       {
         "constructor" : {
-          "abiName" : "bjs_ExplicitlyUncachedModel_init",
+          "abiName" : "bjs_Untouched_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -94,8 +95,8 @@
           },
           "parameters" : [
             {
-              "label" : "count",
-              "name" : "count",
+              "label" : "v",
+              "name" : "v",
               "type" : {
                 "integer" : {
                   "_0" : {
@@ -107,16 +108,15 @@
             }
           ]
         },
-        "identityMode" : "none",
         "methods" : [
 
         ],
-        "name" : "ExplicitlyUncachedModel",
+        "name" : "Untouched",
         "properties" : [
           {
             "isReadonly" : false,
             "isStatic" : false,
-            "name" : "count",
+            "name" : "v",
             "type" : {
               "integer" : {
                 "_0" : {
@@ -127,7 +127,7 @@
             }
           }
         ],
-        "swiftCallName" : "ExplicitlyUncachedModel"
+        "swiftCallName" : "Untouched"
       }
     ],
     "enums" : [

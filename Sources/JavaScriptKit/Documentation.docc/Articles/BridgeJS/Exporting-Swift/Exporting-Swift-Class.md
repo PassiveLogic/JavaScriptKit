@@ -153,3 +153,7 @@ This differs from structs, which use copy semantics and transfer data by value.
 | Extension methods/properties | ✅ |
 | Subscripts: `subscript()` | ❌ |
 | Generics | ❌ |
+
+## Wrapper identity (`===` on re-export)
+
+By default, Swift→JS returns allocate a fresh JS wrapper every time, so `===` between two returns of the same Swift object is `false`. Opt into stable identity per class with `@JS(identityMode: .pointer)` (weak, JS-side cache) or `@JS(identityMode: .swift)` (strong, Swift-side cache — best for create-heavy workloads). See <doc:Identity-Modes-For-Exported-Classes>.

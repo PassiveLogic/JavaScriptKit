@@ -111,3 +111,117 @@ nonisolated(unsafe) private var _arrayPool: [ArrayIdentityElement] = []
 @JS func clearArrayPool() {
     _arrayPool = []
 }
+
+// MARK: - identityMode: .swift per-class opt-in (coexists with .pointer classes above)
+//
+// These classes explicitly opt INTO Swift-owned identity caching. The target's
+// bridge-js.config.json default is "pointer", so the existing classes above stay
+// on the pointer path; adding these .swift classes verifies mode coexistence.
+// See Docs/superpowers/specs/2026-04-21-swift-side-identity-cache-design.md §5, §6.2.
+
+@JS(identityMode: .swift) class SwiftIdentityTestSubject {
+    @JS var value: Int
+
+    @JS init(value: Int) {
+        self.value = value
+    }
+
+    @JS var currentValue: Int { value }
+
+    @JS func self_() -> SwiftIdentityTestSubject { self }
+}
+
+nonisolated(unsafe) private var _sharedSwiftSubject: SwiftIdentityTestSubject?
+
+@JS func getSharedSwiftSubject() -> SwiftIdentityTestSubject {
+    if _sharedSwiftSubject == nil {
+        _sharedSwiftSubject = SwiftIdentityTestSubject(value: 42)
+    }
+    return _sharedSwiftSubject!
+}
+
+@JS func resetSharedSwiftSubject() {
+    _sharedSwiftSubject = nil
+}
+
+// Deinit counter used for scenario (b) "explicit release frees heap object"
+// and scenario (c) "double release is idempotent".
+@JS(identityMode: .swift) class SwiftRetainLeakSubject {
+    nonisolated(unsafe) static var deinits: Int = 0
+
+    @JS var tag: Int
+
+    @JS init(tag: Int) {
+        self.tag = tag
+    }
+
+    deinit {
+        Self.deinits += 1
+    }
+}
+
+nonisolated(unsafe) private var _swiftRetainLeakSubject: SwiftRetainLeakSubject?
+
+@JS func getRetainLeakSubjectSwift() -> SwiftRetainLeakSubject {
+    if _swiftRetainLeakSubject == nil {
+        _swiftRetainLeakSubject = SwiftRetainLeakSubject(tag: 1)
+    }
+    return _swiftRetainLeakSubject!
+}
+
+@JS func resetRetainLeakSubjectSwift() {
+    _swiftRetainLeakSubject = nil
+}
+
+@JS func getRetainLeakDeinitsSwift() -> Int {
+    SwiftRetainLeakSubject.deinits
+}
+
+@JS func resetRetainLeakDeinitsSwift() {
+    SwiftRetainLeakSubject.deinits = 0
+}
+
+// Scenario (d): id-recycling introspection.
+//
+// Gated behind `ENABLE_TEST_INTROSPECTION` so the debug-only getter does not
+// become part of the public test surface (or, worse, add codegen weight to
+// release binaries). The test target defines this flag in its swiftSettings.
+#if ENABLE_TEST_INTROSPECTION
+@JS func getSwiftNextIdForSharedSubject() -> Int {
+    Int(_SwiftIdentityTestSubject_nextId)
+}
+#endif
+
+// Scenario (e): array returns — Swift returns `[a, b, a]` so JS can assert
+// `result[0] === result[2]` preserves identity across array elements.
+@JS func makeSwiftIdentityArray(
+    _ a: SwiftIdentityTestSubject,
+    _ b: SwiftIdentityTestSubject
+) -> [SwiftIdentityTestSubject] {
+    return [a, b, a]
+}
+
+// Scenario (h): optional identity — `.some(x)` returns cached wrapper, `.none`
+// returns null.
+@JS func maybeSwiftSubject(_ present: Bool) -> SwiftIdentityTestSubject? {
+    if _sharedSwiftSubject == nil {
+        _sharedSwiftSubject = SwiftIdentityTestSubject(value: 99)
+    }
+    return present ? _sharedSwiftSubject : nil
+}
+
+// Scenario (d) support: a dedicated "churn" class so id-recycling assertions
+// are not perturbed by the shared-subject lifetime used in (a), (f), (h).
+@JS(identityMode: .swift) class SwiftChurnSubject {
+    @JS var tag: Int
+
+    @JS init(tag: Int) {
+        self.tag = tag
+    }
+}
+
+#if ENABLE_TEST_INTROSPECTION
+@JS func getSwiftNextIdForChurn() -> Int {
+    Int(_SwiftChurnSubject_nextId)
+}
+#endif

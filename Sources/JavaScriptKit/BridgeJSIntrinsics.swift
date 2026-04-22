@@ -1060,6 +1060,22 @@ private func _swift_js_retain_extern(_ id: Int32) -> Int32 {
 }
 
 #if arch(wasm32)
+@_extern(wasm, module: "bjs", name: "swift_js_release")
+private func _swift_js_release_ref_extern(_ id: Int32)
+#else
+/// Releases a previously-retained JavaScript object reference, balancing a
+/// prior `_swift_js_retain` call. Used by `identityMode: "swift"` classes to
+/// drop Swift's strong hold on the JS wrapper ref when the Swift object is
+/// released.
+private func _swift_js_release_ref_extern(_ id: Int32) {
+    _onlyAvailableOnWasm()
+}
+#endif
+@_spi(BridgeJS) @inline(never) public func _swift_js_release_ref(_ id: Int32) {
+    _swift_js_release_ref_extern(id)
+}
+
+#if arch(wasm32)
 @_extern(wasm, module: "bjs", name: "swift_js_return_optional_bool")
 private func _swift_js_return_optional_bool_extern(_ isSome: Int32, _ value: Int32)
 #else

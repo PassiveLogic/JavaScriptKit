@@ -1,0 +1,415 @@
+{
+  "exported" : {
+    "classes" : [
+      {
+        "constructor" : {
+          "abiName" : "bjs_ConfigSwiftSubject_init",
+          "effects" : {
+            "isAsync" : false,
+            "isStatic" : false,
+            "isThrows" : false
+          },
+          "parameters" : [
+            {
+              "label" : "value",
+              "name" : "value",
+              "type" : {
+                "integer" : {
+                  "_0" : {
+                    "isSigned" : true,
+                    "width" : "word"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "methods" : [
+          {
+            "abiName" : "bjs_ConfigSwiftSubject_self_",
+            "effects" : {
+              "isAsync" : false,
+              "isStatic" : false,
+              "isThrows" : false
+            },
+            "name" : "self_",
+            "parameters" : [
+
+            ],
+            "returnType" : {
+              "swiftHeapObject" : {
+                "_0" : "ConfigSwiftSubject"
+              }
+            }
+          }
+        ],
+        "name" : "ConfigSwiftSubject",
+        "properties" : [
+          {
+            "isReadonly" : false,
+            "isStatic" : false,
+            "name" : "value",
+            "type" : {
+              "integer" : {
+                "_0" : {
+                  "isSigned" : true,
+                  "width" : "word"
+                }
+              }
+            }
+          },
+          {
+            "isReadonly" : true,
+            "isStatic" : false,
+            "name" : "currentValue",
+            "type" : {
+              "integer" : {
+                "_0" : {
+                  "isSigned" : true,
+                  "width" : "word"
+                }
+              }
+            }
+          }
+        ],
+        "swiftCallName" : "ConfigSwiftSubject"
+      },
+      {
+        "constructor" : {
+          "abiName" : "bjs_ConfigSwiftRetainLeakSubject_init",
+          "effects" : {
+            "isAsync" : false,
+            "isStatic" : false,
+            "isThrows" : false
+          },
+          "parameters" : [
+            {
+              "label" : "tag",
+              "name" : "tag",
+              "type" : {
+                "integer" : {
+                  "_0" : {
+                    "isSigned" : true,
+                    "width" : "word"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "methods" : [
+
+        ],
+        "name" : "ConfigSwiftRetainLeakSubject",
+        "properties" : [
+          {
+            "isReadonly" : false,
+            "isStatic" : false,
+            "name" : "tag",
+            "type" : {
+              "integer" : {
+                "_0" : {
+                  "isSigned" : true,
+                  "width" : "word"
+                }
+              }
+            }
+          }
+        ],
+        "swiftCallName" : "ConfigSwiftRetainLeakSubject"
+      },
+      {
+        "constructor" : {
+          "abiName" : "bjs_ConfigSwiftChurnSubject_init",
+          "effects" : {
+            "isAsync" : false,
+            "isStatic" : false,
+            "isThrows" : false
+          },
+          "parameters" : [
+            {
+              "label" : "tag",
+              "name" : "tag",
+              "type" : {
+                "integer" : {
+                  "_0" : {
+                    "isSigned" : true,
+                    "width" : "word"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "methods" : [
+
+        ],
+        "name" : "ConfigSwiftChurnSubject",
+        "properties" : [
+          {
+            "isReadonly" : false,
+            "isStatic" : false,
+            "name" : "tag",
+            "type" : {
+              "integer" : {
+                "_0" : {
+                  "isSigned" : true,
+                  "width" : "word"
+                }
+              }
+            }
+          }
+        ],
+        "swiftCallName" : "ConfigSwiftChurnSubject"
+      }
+    ],
+    "enums" : [
+
+    ],
+    "exposeToGlobal" : false,
+    "functions" : [
+      {
+        "abiName" : "bjs_getConfigSwiftSubject",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "name" : "getConfigSwiftSubject",
+        "parameters" : [
+
+        ],
+        "returnType" : {
+          "swiftHeapObject" : {
+            "_0" : "ConfigSwiftSubject"
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_resetConfigSwiftSubject",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "name" : "resetConfigSwiftSubject",
+        "parameters" : [
+
+        ],
+        "returnType" : {
+          "void" : {
+
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_getConfigSwiftRetainLeakSubject",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "name" : "getConfigSwiftRetainLeakSubject",
+        "parameters" : [
+
+        ],
+        "returnType" : {
+          "swiftHeapObject" : {
+            "_0" : "ConfigSwiftRetainLeakSubject"
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_resetConfigSwiftRetainLeakSubject",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "name" : "resetConfigSwiftRetainLeakSubject",
+        "parameters" : [
+
+        ],
+        "returnType" : {
+          "void" : {
+
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_getConfigSwiftRetainLeakDeinits",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "name" : "getConfigSwiftRetainLeakDeinits",
+        "parameters" : [
+
+        ],
+        "returnType" : {
+          "integer" : {
+            "_0" : {
+              "isSigned" : true,
+              "width" : "word"
+            }
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_resetConfigSwiftRetainLeakDeinits",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "name" : "resetConfigSwiftRetainLeakDeinits",
+        "parameters" : [
+
+        ],
+        "returnType" : {
+          "void" : {
+
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_getConfigSwiftNextIdForChurn",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "name" : "getConfigSwiftNextIdForChurn",
+        "parameters" : [
+
+        ],
+        "returnType" : {
+          "integer" : {
+            "_0" : {
+              "isSigned" : true,
+              "width" : "word"
+            }
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_makeConfigSwiftArray",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "name" : "makeConfigSwiftArray",
+        "parameters" : [
+          {
+            "label" : "_",
+            "name" : "a",
+            "type" : {
+              "swiftHeapObject" : {
+                "_0" : "ConfigSwiftSubject"
+              }
+            }
+          },
+          {
+            "label" : "_",
+            "name" : "b",
+            "type" : {
+              "swiftHeapObject" : {
+                "_0" : "ConfigSwiftSubject"
+              }
+            }
+          }
+        ],
+        "returnType" : {
+          "array" : {
+            "_0" : {
+              "swiftHeapObject" : {
+                "_0" : "ConfigSwiftSubject"
+              }
+            }
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_maybeConfigSwiftSubject",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "name" : "maybeConfigSwiftSubject",
+        "parameters" : [
+          {
+            "label" : "_",
+            "name" : "present",
+            "type" : {
+              "bool" : {
+
+              }
+            }
+          }
+        ],
+        "returnType" : {
+          "nullable" : {
+            "_0" : {
+              "swiftHeapObject" : {
+                "_0" : "ConfigSwiftSubject"
+              }
+            },
+            "_1" : "null"
+          }
+        }
+      }
+    ],
+    "identityMode" : "swift",
+    "protocols" : [
+
+    ],
+    "structs" : [
+
+    ]
+  },
+  "imported" : {
+    "children" : [
+      {
+        "functions" : [
+
+        ],
+        "types" : [
+          {
+            "getters" : [
+
+            ],
+            "methods" : [
+
+            ],
+            "name" : "SwiftIdentityModeTestImports",
+            "setters" : [
+
+            ],
+            "staticMethods" : [
+              {
+                "effects" : {
+                  "isAsync" : false,
+                  "isStatic" : false,
+                  "isThrows" : true
+                },
+                "name" : "runJsSwiftIdentityModeTests",
+                "parameters" : [
+
+                ],
+                "returnType" : {
+                  "void" : {
+
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "moduleName" : "BridgeJSSwiftIdentityTests"
+}

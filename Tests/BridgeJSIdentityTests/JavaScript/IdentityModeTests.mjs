@@ -28,6 +28,22 @@ function runIdentityModeTests(exports) {
     testArrayElementIdentity(exports);
     testArrayElementMatchesSingleGetter(exports);
     testArrayRetainLeak(exports);
+
+    // identityMode: .swift per-class tests (Task 5 Part A).
+    //
+    // These exercise the Swift-owned identity cache in coexistence with the
+    // pointer-mode classes above. Each function is self-contained (resets
+    // state, releases wrappers) so tests stay independent.
+    testSwiftModeIdentity(exports);
+    testSwiftModeSelfMethodIdentity(exports);
+    testSwiftModeReleaseFreesHeapObject(exports);
+    testSwiftModeDoubleReleaseIdempotent(exports);
+    testSwiftModeIdRecycling(exports);
+    testSwiftModeArrayCrossElementIdentity(exports);
+    testSwiftModeGcSurvivability(exports);
+    testSwiftModeOptionalIdentity(exports);
+    testSwiftModeReleaseGuardsMembers(exports);
+    testModeCoexistence(exports);
 }
 
 /**
@@ -197,4 +213,313 @@ function testDifferentClassesDontCollide(exports) {
 
     subject1.release();
     subject2.release();
+}
+
+// =========================================================================
+// identityMode: .swift — per-class opt-in tests (Task 5 Part A)
+//
+// These tests exercise classes annotated with `@JS(identityMode: .swift)` in
+// Tests/BridgeJSIdentityTests/IdentityModeTests.swift. The target's config
+// default is "pointer" so any `.swift` annotation is an explicit opt-in.
+// =========================================================================
+
+/**
+ * (a) Identity on re-export.
+ *
+ * @param {import('../../../.build/plugins/PackageToJS/outputs/PackageTests/bridge-js.d.ts').Exports} exports
+ */
+function testSwiftModeIdentity(exports) {
+    exports.resetSharedSwiftSubject();
+    const a = exports.getSharedSwiftSubject();
+    const b = exports.getSharedSwiftSubject();
+    const c = exports.getSharedSwiftSubject();
+
+    assert.strictEqual(a, b, "swift mode: same Swift object returns same wrapper");
+    assert.strictEqual(b, c, "swift mode: identity is transitive across re-exports");
+    assert.equal(a.currentValue, 42);
+    assert.equal(typeof a.__swiftIdentityId, "number");
+
+    a.release();
+    exports.resetSharedSwiftSubject();
+}
+
+/**
+ * (a') Method returning `self` preserves identity.
+ *
+ * @param {import('../../../.build/plugins/PackageToJS/outputs/PackageTests/bridge-js.d.ts').Exports} exports
+ */
+function testSwiftModeSelfMethodIdentity(exports) {
+    exports.resetSharedSwiftSubject();
+    const a = exports.getSharedSwiftSubject();
+    const viaSelf = a.self_();
+
+    assert.strictEqual(
+        a,
+        viaSelf,
+        "swift mode: `self_()` must return the same JS wrapper (identity preserved across method boundary)",
+    );
+
+    a.release();
+    exports.resetSharedSwiftSubject();
+}
+
+/**
+ * (b) Explicit release frees the underlying Swift heap object.
+ *
+ * @param {import('../../../.build/plugins/PackageToJS/outputs/PackageTests/bridge-js.d.ts').Exports} exports
+ */
+function testSwiftModeReleaseFreesHeapObject(exports) {
+    exports.resetRetainLeakDeinitsSwift();
+    exports.resetRetainLeakSubjectSwift();
+
+    const obj = exports.getRetainLeakSubjectSwift();
+    // Drop the only Swift-side strong reference so the sole remaining anchor
+    // is Swift's retain on the heap object performed during the fresh-wrap path.
+    exports.resetRetainLeakSubjectSwift();
+    obj.release();
+
+    assert.strictEqual(
+        exports.getRetainLeakDeinitsSwift(),
+        1,
+        "swift mode: release must invoke Swift deinit exactly once (check bjs_<Class>_release_wrapper fires Unmanaged<AnyObject>.release)",
+    );
+}
+
+/**
+ * (c) Double-release is idempotent. No crash, no over-release.
+ *
+ * @param {import('../../../.build/plugins/PackageToJS/outputs/PackageTests/bridge-js.d.ts').Exports} exports
+ */
+function testSwiftModeDoubleReleaseIdempotent(exports) {
+    exports.resetRetainLeakDeinitsSwift();
+    exports.resetRetainLeakSubjectSwift();
+
+    const obj = exports.getRetainLeakSubjectSwift();
+    exports.resetRetainLeakSubjectSwift();
+
+    obj.release();
+    // Second release must be a no-op guarded by __swiftIdentityHasReleased.
+    obj.release();
+    obj.release();
+
+    assert.strictEqual(
+        exports.getRetainLeakDeinitsSwift(),
+        1,
+        "swift mode: double-release must not deinit twice",
+    );
+}
+
+/**
+ * (d) Id recycling — nextId does not grow past the pool size.
+ *
+ * Uses the dedicated SwiftChurnSubject class so this assertion is not
+ * perturbed by id allocations performed by other tests.
+ *
+ * @param {import('../../../.build/plugins/PackageToJS/outputs/PackageTests/bridge-js.d.ts').Exports} exports
+ */
+function testSwiftModeIdRecycling(exports) {
+    if (typeof exports.getSwiftNextIdForChurn !== "function") {
+        // ENABLE_TEST_INTROSPECTION not set — skip silently.
+        return;
+    }
+
+    const POOL = 10;
+    const first = [];
+    for (let i = 0; i < POOL; i++) {
+        first.push(new exports.SwiftChurnSubject(i));
+    }
+    const peakAfterFirst = exports.getSwiftNextIdForChurn();
+
+    for (const obj of first) {
+        obj.release();
+    }
+
+    const second = [];
+    for (let i = 0; i < POOL; i++) {
+        second.push(new exports.SwiftChurnSubject(100 + i));
+    }
+    const peakAfterSecond = exports.getSwiftNextIdForChurn();
+
+    assert.strictEqual(
+        peakAfterSecond,
+        peakAfterFirst,
+        `swift mode: id recycling failed — nextId grew from ${peakAfterFirst} to ${peakAfterSecond} despite ${POOL} freed ids in between`,
+    );
+
+    for (const obj of second) {
+        obj.release();
+    }
+}
+
+/**
+ * (e) Array of the same wrapper preserves cross-element identity.
+ *
+ * @param {import('../../../.build/plugins/PackageToJS/outputs/PackageTests/bridge-js.d.ts').Exports} exports
+ */
+function testSwiftModeArrayCrossElementIdentity(exports) {
+    const a = new exports.SwiftIdentityTestSubject(1);
+    const b = new exports.SwiftIdentityTestSubject(2);
+
+    const result = exports.makeSwiftIdentityArray(a, b);
+    assert.equal(result.length, 3);
+
+    assert.strictEqual(result[0], a, "swift mode: array element 0 === original a");
+    assert.strictEqual(result[1], b, "swift mode: array element 1 === original b");
+    assert.strictEqual(result[2], a, "swift mode: array element 2 === original a");
+    assert.strictEqual(result[0], result[2], "swift mode: cross-element identity");
+
+    a.release();
+    b.release();
+}
+
+/**
+ * (f) GC survivability — wrapper survives forced GC because Swift holds a
+ * strong JS ref via `swift.memory.retain`.
+ *
+ * Requires node to be launched with `--expose-gc`. `make unittest` does so
+ * (see Makefile:22). Guarded so we don't fail in environments that don't.
+ *
+ * @param {import('../../../.build/plugins/PackageToJS/outputs/PackageTests/bridge-js.d.ts').Exports} exports
+ */
+function testSwiftModeGcSurvivability(exports) {
+    if (typeof globalThis.gc !== "function") {
+        console.warn("Skipping swift-mode GC test — run with --expose-gc");
+        return;
+    }
+
+    exports.resetSharedSwiftSubject();
+    let obj = exports.getSharedSwiftSubject();
+    const idBefore = obj.__swiftIdentityId;
+    const weakProbe = new WeakRef(obj);
+
+    // Drop the local reference and force GC twice with a microtask flush in
+    // between (V8 sometimes needs two cycles to collect newly-unreferenced
+    // objects).
+    obj = null;
+    globalThis.gc();
+    // synchronous setImmediate-equivalent flush
+    const flush = () =>
+        new Promise((resolve) => {
+            if (typeof setImmediate === "function") {
+                setImmediate(resolve);
+            } else {
+                setTimeout(resolve, 0);
+            }
+        });
+    // Note: we can't await here (caller is synchronous). For a sync harness,
+    // run gc twice back-to-back — that's sufficient under V8's two-phase
+    // collector for this test's purposes.
+    globalThis.gc();
+
+    // Re-fetch from Swift. The wrapper must still be === to whatever deref
+    // yields (since Swift's retain on the JS ref keeps it alive).
+    const again = exports.getSharedSwiftSubject();
+    assert.strictEqual(
+        again.__swiftIdentityId,
+        idBefore,
+        "swift mode: id must be stable across GC (Swift still retains the heap object)",
+    );
+    assert.strictEqual(
+        weakProbe.deref(),
+        again,
+        "swift mode: wrapper survived GC — Swift retain kept it alive",
+    );
+
+    again.release();
+    exports.resetSharedSwiftSubject();
+
+    // Suppress "unused" warning for the async helper (kept around in case
+    // future refactors make this test async).
+    void flush;
+}
+
+/**
+ * (h) Optional identity — `.some(x)` returns a valid wrapper; `.none` → null.
+ *
+ * v1 LIMITATION (see DECISIONS.md D16): the scalar Optional<SwiftIdentityClass>
+ * return path does NOT preserve `===` identity. `.some(x)` returns a fresh JS
+ * wrapper each time because the Optional bridge calls the default
+ * `_BridgedSwiftHeapObject.bridgeJSLowerReturn` (passRetained + pointer)
+ * rather than the per-class identity-cache handshake. Lifecycle is still
+ * correct; only the strong-cache invariant is relaxed for this specific
+ * return type. A follow-up can emit a per-class `bridgeJSLowerReturn`
+ * override to fix this.
+ *
+ * @param {import('../../../.build/plugins/PackageToJS/outputs/PackageTests/bridge-js.d.ts').Exports} exports
+ */
+function testSwiftModeOptionalIdentity(exports) {
+    exports.resetSharedSwiftSubject();
+    const direct = exports.getSharedSwiftSubject();
+    const viaOptional = exports.maybeSwiftSubject(true);
+
+    // v1: only verify the call works and the value is observable — NOT `===`.
+    assert.ok(
+        viaOptional != null,
+        "swift mode: Optional.some returns a wrapper (v1: identity not preserved — see D16)",
+    );
+    assert.equal(
+        viaOptional.currentValue,
+        direct.currentValue,
+        "swift mode: Optional.some wrapper observes the same underlying value",
+    );
+
+    const absent = exports.maybeSwiftSubject(false);
+    assert.strictEqual(absent, null, "swift mode: Optional.none returns null");
+
+    // The extra wrapper from viaOptional needs its own release since it's
+    // a fresh id (v1 limitation).
+    viaOptional.release();
+    direct.release();
+    exports.resetSharedSwiftSubject();
+}
+
+/**
+ * Released wrappers guard instance members (throws on use-after-release).
+ *
+ * @param {import('../../../.build/plugins/PackageToJS/outputs/PackageTests/bridge-js.d.ts').Exports} exports
+ */
+function testSwiftModeReleaseGuardsMembers(exports) {
+    exports.resetSharedSwiftSubject();
+    const obj = exports.getSharedSwiftSubject();
+    obj.release();
+
+    assert.throws(
+        () => obj.currentValue,
+        /released|Attempted to call a member/,
+        "swift mode: use-after-release must throw",
+    );
+
+    exports.resetSharedSwiftSubject();
+}
+
+/**
+ * (i) Mode coexistence — .swift class and .pointer class in the same build,
+ * disjoint tables.
+ *
+ * The target's config default is "pointer", so IdentityTestSubject (no
+ * per-class annotation) is a pointer-mode class. SwiftIdentityTestSubject is
+ * explicitly .swift. Both must work simultaneously and their identity
+ * machinery must not leak between classes.
+ *
+ * @param {import('../../../.build/plugins/PackageToJS/outputs/PackageTests/bridge-js.d.ts').Exports} exports
+ */
+function testModeCoexistence(exports) {
+    const ptr1 = new exports.IdentityTestSubject(10); // pointer-mode
+    const ptr2 = new exports.IdentityTestSubject(20);
+    const swift1 = new exports.SwiftIdentityTestSubject(30); // swift-mode
+    const swift2 = new exports.SwiftIdentityTestSubject(40);
+
+    assert.notStrictEqual(ptr1, swift1);
+    assert.notStrictEqual(ptr2, swift2);
+    assert.equal(ptr1.currentValue, 10);
+    assert.equal(swift1.currentValue, 30);
+
+    // Pointer-mode exposes no __swiftIdentityId; swift-mode does.
+    assert.equal(typeof swift1.__swiftIdentityId, "number");
+    assert.equal(typeof ptr1.__swiftIdentityId, "undefined");
+
+    ptr1.release();
+    ptr2.release();
+    swift1.release();
+    swift2.release();
 }

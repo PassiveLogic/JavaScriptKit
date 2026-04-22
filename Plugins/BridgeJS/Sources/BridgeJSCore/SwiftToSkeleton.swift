@@ -1197,12 +1197,21 @@ private final class ExportSwiftAPICollector: SyntaxAnyVisitor {
         return nil
     }
 
-    private func extractIdentityMode(from jsAttribute: AttributeSyntax) -> Bool? {
+    private func extractIdentityMode(from jsAttribute: AttributeSyntax) -> String? {
         guard let arguments = jsAttribute.arguments?.as(LabeledExprListSyntax.self),
             let identityArg = arguments.first(where: { $0.label?.text == "identityMode" })
         else { return nil }
         let text = identityArg.expression.trimmedDescription
-        return text == "true"
+        // Enum member-access form (current `JSIdentityMode` API).
+        if text.contains(".swift") { return "swift" }
+        if text.contains(".pointer") { return "pointer" }
+        if text.contains(".none") { return "none" }
+        // Legacy Bool literals (pre-D8.1 spelling — map for forward compatibility
+        // during the transition; the macro itself no longer accepts these, but
+        // fixtures and third-party sources may still spell it this way.)
+        if text == "true" { return "pointer" }
+        if text == "false" { return "none" }
+        return nil
     }
 
     override func visit(_ node: InitializerDeclSyntax) -> SyntaxVisitorContinueKind {

@@ -25,19 +25,49 @@ public struct BridgeJSLink {
         self.sharedMemory = sharedMemory
     }
 
-    /// The identity mode from the config file, resolved from skeletons.
-    var configIdentityMode: String {
-        skeletons.compactMap(\.exported).compactMap(\.identityMode).first ?? "none"
+    /// The identity mode config default that applies to a given class.
+    ///
+    /// Each `BridgeJSSkeleton` corresponds to one module (one `bridge-js.config.json`).
+    /// When several modules are linked together (e.g. multiple test targets in one
+    /// `swift test` invocation), their config defaults MUST NOT bleed across module
+    /// boundaries: `BridgeJSSwiftIdentityTests`' `"swift"` config default must apply
+    /// only to its own classes, never to classes in `BridgeJSRuntimeTests` or any
+    /// other module.
+    ///
+    /// We locate the owning skeleton by class identity (name + optional namespace)
+    /// and return its `exported.identityMode` directly. Fall-through default is
+    /// `"none"` — matching the pre-change baseline for unconfigured modules.
+    private func configIdentityMode(for klass: ExportedClass) -> String {
+        for unified in skeletons {
+            guard let exported = unified.exported else { continue }
+            if exported.classes.contains(where: { $0.name == klass.name && $0.namespace == klass.namespace }) {
+                return exported.identityMode ?? "none"
+            }
+        }
+        return "none"
     }
 
-    /// Whether a class should use identity caching based on its annotation and the config default.
+    /// Whether a class should use the JS-side pointer identity cache.
+    ///
+    /// Resolution order: per-class annotation beats config default. `"swift"` is
+    /// a *distinct* mode handled by a separate codegen path (see
+    /// `shouldUseSwiftIdentityCache`) and must NOT trigger the pointer-cache path
+    /// here — we return `false` for it so the `"pointer"`/`"none"` output remains
+    /// byte-identical to the pre-change baseline.
     private func shouldUseIdentityCache(for klass: ExportedClass) -> Bool {
-        // Per-class annotation takes priority
-        if let classOverride = klass.identityMode {
-            return classOverride
-        }
-        // Fall back to config default
-        return configIdentityMode == "pointer"
+        let resolved = klass.identityMode ?? configIdentityMode(for: klass)
+        return resolved == "pointer"
+    }
+
+    /// Whether a class should use the Swift-owned identity cache (dense-array fast path).
+    ///
+    /// Resolution order mirrors `shouldUseIdentityCache`: per-class annotation wins over
+    /// config default. Returns `true` only when the resolved value is `"swift"`, in which
+    /// case `renderExportedClass` emits the standalone `SwiftIdentityHeapObject`-style
+    /// template (no `SwiftHeapObject` inheritance, no `FinalizationRegistry`, no `WeakRef`).
+    private func shouldUseSwiftIdentityCache(for klass: ExportedClass) -> Bool {
+        let resolved = klass.identityMode ?? configIdentityMode(for: klass)
+        return resolved == "swift"
     }
 
     mutating func addSkeletonFile(data: Data) throws {
@@ -178,13 +208,31 @@ public struct BridgeJSLink {
     private func collectLinkData() throws -> LinkData {
         var data = LinkData()
 
-        // Swift heap object class definitions
-        if skeletons.contains(where: { $0.exported?.classes.isEmpty == false }) {
+        // Swift heap object class definitions.
+        //
+        // The JS-side `SwiftHeapObject` base class is only needed for classes that actually
+        // extend it (the `.none` and `.pointer` identity modes). `.swift`-mode classes are
+        // standalone and bring their own dense-array fast path, so if the module only has
+        // `.swift` classes (or no classes at all), we skip emitting `swiftHeapObjectClassJs`.
+        //
+        // The `.d.ts` output is kept byte-identical to the pre-change baseline (spec §6.4):
+        // `SwiftHeapObject` is still declared whenever the module has any class, because
+        // `.swift`-mode classes still render `extends SwiftHeapObject` in their interface.
+        let hasAnyPointerOrNoneClass = skeletons.contains { unified in
+            guard let exported = unified.exported else { return false }
+            return exported.classes.contains { klass in
+                !shouldUseSwiftIdentityCache(for: klass)
+            }
+        }
+        let hasAnyClass = skeletons.contains(where: { $0.exported?.classes.isEmpty == false })
+        if hasAnyPointerOrNoneClass {
             data.classLines.append(
                 contentsOf: swiftHeapObjectClassJs.split(separator: "\n", omittingEmptySubsequences: false).map {
                     String($0)
                 }
             )
+        }
+        if hasAnyClass {
             data.dtsClassLines.append(
                 contentsOf: swiftHeapObjectClassDts.split(separator: "\n", omittingEmptySubsequences: false).map {
                     String($0)
@@ -1998,48 +2046,111 @@ extension BridgeJSLink {
         let dtsTypePrinter = CodeFragmentPrinter()
         let dtsExportEntryPrinter = CodeFragmentPrinter()
 
+        // Per-class identity mode: determine at codegen time which cache strategy to emit.
+        //   - `.pointer` → JS-owned WeakRef/FinalizationRegistry cache keyed by pointer.
+        //   - `.swift`   → Swift-owned dense-array cache keyed by id (Task 4, spec §6.2).
+        //   - `.none`    → no caching (pre-change baseline).
+        let useIdentity = shouldUseIdentityCache(for: klass)
+        let useSwiftIdentity = shouldUseSwiftIdentityCache(for: klass)
+
+        // `.d.ts` output is kept byte-identical across all three modes (spec §6.4): the
+        // `.swift`-mode class still satisfies the `SwiftHeapObject` interface (it has a
+        // `release()` method), so the interface declaration stays the same.
         dtsTypePrinter.write("export interface \(klass.name) extends SwiftHeapObject {")
         dtsExportEntryPrinter.write("\(klass.name): {")
-        jsPrinter.write("class \(klass.name) extends SwiftHeapObject {")
 
-        // Per-class identity mode: determine at codegen time whether this class uses identity caching
-        let useIdentity = shouldUseIdentityCache(for: klass)
-        jsPrinter.indent {
-            if useIdentity {
-                jsPrinter.write("static __identityCache = new Map();")
-                jsPrinter.nextLine()
-            }
-            jsPrinter.write("static __construct(ptr) {")
+        if useSwiftIdentity {
+            // Spec §6.2: a `.swift`-mode class is STANDALONE — it does NOT extend
+            // `SwiftHeapObject`. It owns its own dense-array wrapper cache and lifetime
+            // (no `FinalizationRegistry`, no `WeakRef`). Swift holds wrappers strongly
+            // via `_<Class>_wrapperRefs`; JS clears the slot on `release()`.
+            jsPrinter.write("class \(klass.name) {")
             jsPrinter.indent {
-                if useIdentity {
-                    jsPrinter.write(
-                        "return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_\(klass.abiName)_deinit, \(klass.name).prototype, \(klass.name).__identityCache);"
-                    )
-                } else {
-                    jsPrinter.write(
-                        "return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_\(klass.abiName)_deinit, \(klass.name).prototype, null);"
-                    )
-                }
-            }
-            jsPrinter.write("}")
-            jsPrinter.nextLine()
-            // __constructFresh skips the identity cache lookup for newly created objects.
-            // Since the pointer is brand new, it cannot already be in the cache.
-            if useIdentity {
-                jsPrinter.write("static __constructFresh(ptr) {")
+                jsPrinter.write("static __swiftIdentityWrappers = [];")
+                jsPrinter.nextLine()
+                jsPrinter.write("static __wrap(pointer) {")
                 jsPrinter.indent {
+                    // Swift pushes (id, freshBit) to the i32 stack AFTER returning the
+                    // pointer; JS pops LIFO — freshBit first, id second.
+                    jsPrinter.write("const freshBit = bjs.swift_js_pop_i32();")
+                    jsPrinter.write("const id = bjs.swift_js_pop_i32();")
+                    jsPrinter.write("if (freshBit === 0) {")
+                    jsPrinter.indent {
+                        jsPrinter.write("return \(klass.name).__swiftIdentityWrappers[id];")
+                    }
+                    jsPrinter.write("}")
                     jsPrinter.write("const obj = Object.create(\(klass.name).prototype);")
-                    jsPrinter.write(
-                        "const state = { pointer: ptr, deinit: instance.exports.bjs_\(klass.abiName)_deinit, hasReleased: false, identityMap: \(klass.name).__identityCache };"
-                    )
-                    jsPrinter.write("obj.pointer = ptr;")
-                    jsPrinter.write("obj.__swiftHeapObjectState = state;")
-                    jsPrinter.write("swiftHeapObjectFinalizationRegistry.register(obj, state, state);")
-                    jsPrinter.write("\(klass.name).__identityCache.set(ptr, new WeakRef(obj));")
+                    jsPrinter.write("obj.pointer = pointer;")
+                    jsPrinter.write("obj.__swiftIdentityId = id;")
+                    jsPrinter.write("obj.__swiftIdentityHasReleased = false;")
+                    jsPrinter.write("\(klass.name).__swiftIdentityWrappers[id] = obj;")
+                    // Retain the wrapper in swift.memory so Swift can hold it strongly
+                    // via `_<Class>_wrapperRefs[id]` until release_wrapper fires.
+                    jsPrinter.write("const jsRef = swift.memory.retain(obj);")
+                    jsPrinter.write("instance.exports.bjs_\(klass.abiName)_register_wrapper(id, jsRef);")
                     jsPrinter.write("return obj;")
                 }
                 jsPrinter.write("}")
                 jsPrinter.nextLine()
+                jsPrinter.write("static __construct(pointer) {")
+                jsPrinter.indent {
+                    // Swift's `_init` export pushed (id, freshBit) itself. `__wrap`
+                    // pops them and returns either the cached wrapper or a fresh one.
+                    jsPrinter.write("return \(klass.name).__wrap(pointer);")
+                }
+                jsPrinter.write("}")
+                jsPrinter.nextLine()
+                jsPrinter.write("release() {")
+                jsPrinter.indent {
+                    jsPrinter.write("if (this.__swiftIdentityHasReleased) return;")
+                    jsPrinter.write("this.__swiftIdentityHasReleased = true;")
+                    jsPrinter.write("const id = this.__swiftIdentityId;")
+                    jsPrinter.write("instance.exports.bjs_\(klass.abiName)_release_wrapper(id);")
+                    // Swift's release_wrapper already called `_swift_js_release_ref(jsRef)`,
+                    // so we just clear our JS-side slot so the id can be recycled.
+                    jsPrinter.write("\(klass.name).__swiftIdentityWrappers[id] = undefined;")
+                }
+                jsPrinter.write("}")
+            }
+        } else {
+            jsPrinter.write("class \(klass.name) extends SwiftHeapObject {")
+            jsPrinter.indent {
+                if useIdentity {
+                    jsPrinter.write("static __identityCache = new Map();")
+                    jsPrinter.nextLine()
+                }
+                jsPrinter.write("static __construct(ptr) {")
+                jsPrinter.indent {
+                    if useIdentity {
+                        jsPrinter.write(
+                            "return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_\(klass.abiName)_deinit, \(klass.name).prototype, \(klass.name).__identityCache);"
+                        )
+                    } else {
+                        jsPrinter.write(
+                            "return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_\(klass.abiName)_deinit, \(klass.name).prototype, null);"
+                        )
+                    }
+                }
+                jsPrinter.write("}")
+                jsPrinter.nextLine()
+                // __constructFresh skips the identity cache lookup for newly created objects.
+                // Since the pointer is brand new, it cannot already be in the cache.
+                if useIdentity {
+                    jsPrinter.write("static __constructFresh(ptr) {")
+                    jsPrinter.indent {
+                        jsPrinter.write("const obj = Object.create(\(klass.name).prototype);")
+                        jsPrinter.write(
+                            "const state = { pointer: ptr, deinit: instance.exports.bjs_\(klass.abiName)_deinit, hasReleased: false, identityMap: \(klass.name).__identityCache };"
+                        )
+                        jsPrinter.write("obj.pointer = ptr;")
+                        jsPrinter.write("obj.__swiftHeapObjectState = state;")
+                        jsPrinter.write("swiftHeapObjectFinalizationRegistry.register(obj, state, state);")
+                        jsPrinter.write("\(klass.name).__identityCache.set(ptr, new WeakRef(obj));")
+                        jsPrinter.write("return obj;")
+                    }
+                    jsPrinter.write("}")
+                    jsPrinter.nextLine()
+                }
             }
         }
 
@@ -2057,10 +2168,16 @@ extension BridgeJSLink {
             jsPrinter.indent {
                 jsPrinter.write("constructor(\(constructorParamList)) {")
                 let returnExpr = thunkBuilder.callConstructor(abiName: constructor.abiName)
-                let constructCall =
-                    useIdentity
-                    ? "\(klass.name).__constructFresh(\(returnExpr))"
-                    : "\(klass.name).__construct(\(returnExpr))"
+                let constructCall: String
+                if useSwiftIdentity {
+                    // `.swift` mode: the init export itself pushed (id, freshBit).
+                    // `__wrap` pops them and deduplicates.
+                    constructCall = "\(klass.name).__wrap(\(returnExpr))"
+                } else if useIdentity {
+                    constructCall = "\(klass.name).__constructFresh(\(returnExpr))"
+                } else {
+                    constructCall = "\(klass.name).__construct(\(returnExpr))"
+                }
                 jsPrinter.indent {
                     thunkBuilder.renderFunctionBody(
                         into: jsPrinter,
@@ -2113,6 +2230,14 @@ extension BridgeJSLink {
                     effects: method.effects,
                     intrinsicRegistry: intrinsicRegistry
                 )
+                // Spec §6.2: for `.swift`-mode classes, every INSTANCE member must
+                // guard against use-after-release. Static members are exempt because
+                // `this` is the class, not the released wrapper. The guard is prepended
+                // to `body` BEFORE lowering/calling so it emits at the top of the
+                // generated function body.
+                if useSwiftIdentity {
+                    appendUseAfterReleaseGuard(to: thunkBuilder.body, className: klass.name)
+                }
                 thunkBuilder.lowerSelf()
                 for param in method.parameters {
                     try thunkBuilder.lowerParameter(param: param)
@@ -2143,7 +2268,9 @@ extension BridgeJSLink {
             try renderClassProperty(
                 property: property,
                 className: klass.abiName,
+                classJsName: klass.name,
                 isStatic: property.isStatic,
+                useSwiftIdentity: useSwiftIdentity,
                 jsPrinter: jsPrinter,
                 dtsPrinter: property.isStatic ? dtsExportEntryPrinter : dtsTypePrinter
             )
@@ -2156,10 +2283,25 @@ extension BridgeJSLink {
         return (jsPrinter.lines, dtsTypePrinter.lines, dtsExportEntryPrinter.lines)
     }
 
+    /// Writes the use-after-release guard for a `.swift`-mode class to the given printer.
+    /// Must be called before any other content is written so the guard appears at the top
+    /// of the generated function body.
+    private func appendUseAfterReleaseGuard(to printer: CodeFragmentPrinter, className: String) {
+        printer.write("if (this.__swiftIdentityHasReleased) {")
+        printer.indent {
+            printer.write(
+                "throw new Error(\"Attempted to call a member on a released \(className)\");"
+            )
+        }
+        printer.write("}")
+    }
+
     private func renderClassProperty(
         property: ExportedProperty,
         className: String,
+        classJsName: String,
         isStatic: Bool,
+        useSwiftIdentity: Bool,
         jsPrinter: CodeFragmentPrinter,
         dtsPrinter: CodeFragmentPrinter
     ) throws {
@@ -2167,6 +2309,11 @@ extension BridgeJSLink {
             effects: Effects(isAsync: false, isThrows: false),
             intrinsicRegistry: intrinsicRegistry
         )
+        // Spec §6.2: instance-property accessors on `.swift`-mode classes must also
+        // guard against use-after-release. Static accessors are exempt.
+        if !isStatic && useSwiftIdentity {
+            appendUseAfterReleaseGuard(to: getterThunkBuilder.body, className: classJsName)
+        }
         if !isStatic {
             getterThunkBuilder.lowerSelf()
         }
@@ -2192,6 +2339,9 @@ extension BridgeJSLink {
                 effects: Effects(isAsync: false, isThrows: false),
                 intrinsicRegistry: intrinsicRegistry
             )
+            if !isStatic && useSwiftIdentity {
+                appendUseAfterReleaseGuard(to: setterThunkBuilder.body, className: classJsName)
+            }
             if !isStatic {
                 setterThunkBuilder.lowerSelf()
             }

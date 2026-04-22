@@ -344,9 +344,14 @@ public struct BridgeJSConfig: Codable {
 
     /// The identity mode to use for exported Swift heap objects.
     ///
-    /// When `"pointer"`, Swift heap objects are tracked by pointer identity,
-    /// enabling identity-based caching. When `"none"` or `nil`, no identity
-    /// tracking is performed.
+    /// Valid values: `"none"` | `"pointer"` | `"swift"`.
+    ///
+    /// - `"none"` (or `nil`): No identity tracking. Each boundary crossing produces a fresh JS wrapper.
+    /// - `"pointer"`: JS-side identity cache keyed by the Swift pointer (weak refs + `FinalizationRegistry`).
+    /// - `"swift"`: Swift-side identity cache (opt-in; strong retention of the JS wrapper for the
+    ///   lifetime of the Swift heap object). See spec §3.
+    ///
+    /// A per-class `@JS(identityMode: ...)` annotation overrides this default.
     ///
     /// Default: `nil` (treated as `"none"`)
     public var identityMode: String?
@@ -368,7 +373,19 @@ public struct BridgeJSConfig: Codable {
         tools = try container.decodeIfPresent([String: String].self, forKey: .tools)
         exposeToGlobal = try container.decodeIfPresent(Bool.self, forKey: .exposeToGlobal) ?? false
         identityMode = try container.decodeIfPresent(String.self, forKey: .identityMode)
+        if let mode = identityMode, !BridgeJSConfig.validIdentityModes.contains(mode) {
+            throw DecodingError.dataCorruptedError(
+                forKey: .identityMode,
+                in: container,
+                debugDescription:
+                    "Invalid identityMode \"\(mode)\". Expected one of: \(BridgeJSConfig.validIdentityModes.sorted().map { "\"\($0)\"" }.joined(separator: ", "))."
+            )
+        }
     }
+
+    /// The set of accepted values for the top-level `identityMode` config field.
+    /// Keep in sync with `JSIdentityMode` in `Sources/JavaScriptKit/JSIdentityMode.swift`.
+    static let validIdentityModes: Set<String> = ["none", "pointer", "swift"]
 
     /// Load the configuration file from the SwiftPM package target directory.
     ///

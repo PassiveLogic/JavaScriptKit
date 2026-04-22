@@ -15,6 +15,7 @@ import { getImports as getJSClassSupportImports, JSClassWithArrayMembers } from 
 import { getImports as getIntegerTypesSupportImports } from './BridgeJSRuntimeTests/JavaScript/IntegerTypesSupportTests.mjs';
 import { getImports as getAsyncImportImports, runAsyncWorksTests } from './BridgeJSRuntimeTests/JavaScript/AsyncImportTests.mjs';
 import { getImports as getIdentityModeTestImports } from './BridgeJSIdentityTests/JavaScript/IdentityModeTests.mjs';
+import { getImports as getSwiftIdentityModeTestImports } from './BridgeJSSwiftIdentityTests/JavaScript/SwiftIdentityModeTests.mjs';
 
 /** @type {import('../.build/plugins/PackageToJS/outputs/PackageTests/test.d.ts').SetupOptionsFn} */
 export async function setupOptions(options, context) {
@@ -158,6 +159,7 @@ export async function setupOptions(options, context) {
                 JSClassSupportImports: getJSClassSupportImports(importsContext),
                 IntegerTypesSupportImports: getIntegerTypesSupportImports(importsContext),
                 IdentityModeTestImports: getIdentityModeTestImports(importsContext),
+                SwiftIdentityModeTestImports: getSwiftIdentityModeTestImports(importsContext),
             };
         },
         addToCoreImports(importObject, importsContext) {

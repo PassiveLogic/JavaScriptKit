@@ -305,11 +305,11 @@ nonisolated(unsafe) var _cachedPool: [SimpleClass] = []
     }
 }
 
-// MARK: - Identity Mode Benchmark Variants
-// These classes use @JS(identityMode: true) so that identity cache benchmarks
+// MARK: - Identity Mode Benchmark Variants (pointer mode)
+// These classes use @JS(identityMode: .pointer) so that identity cache benchmarks
 // can run in the SAME build alongside the non-identity classes above.
 
-@JS(identityMode: true)
+@JS(identityMode: .pointer)
 class SimpleClassIdentity {
     @JS var name: String
     @JS var count: Int
@@ -326,7 +326,7 @@ class SimpleClassIdentity {
     }
 }
 
-@JS(identityMode: true)
+@JS(identityMode: .pointer)
 class ClassRoundtripIdentity {
     @JS init() {}
 
@@ -345,7 +345,7 @@ class ClassRoundtripIdentity {
 
 nonisolated(unsafe) var _cachedPoolIdentity: [SimpleClassIdentity] = []
 
-@JS(identityMode: true)
+@JS(identityMode: .pointer)
 class IdentityCacheBenchmarkIdentity {
     @JS init() {}
 
@@ -357,6 +357,61 @@ class IdentityCacheBenchmarkIdentity {
 
     @JS func getPoolRepeated() -> [SimpleClassIdentity] {
         return _cachedPoolIdentity
+    }
+}
+
+// MARK: - Identity Mode Benchmark Variants (swift-owned cache)
+// Parallel set using @JS(identityMode: .swift) so the third mode can run
+// in the same build alongside the other two.
+
+@JS(identityMode: .swift)
+class SimpleClassSwiftIdentity {
+    @JS var name: String
+    @JS var count: Int
+    @JS var flag: Bool
+    @JS var rate: Float
+    @JS var precise: Double
+
+    @JS init(name: String, count: Int, flag: Bool, rate: Float, precise: Double) {
+        self.name = name
+        self.count = count
+        self.flag = flag
+        self.rate = rate
+        self.precise = precise
+    }
+}
+
+@JS(identityMode: .swift)
+class ClassRoundtripSwiftIdentity {
+    @JS init() {}
+
+    @JS func roundtripSimpleClassSwiftIdentity(_ obj: SimpleClassSwiftIdentity) -> SimpleClassSwiftIdentity {
+        return obj
+    }
+
+    @JS func makeSimpleClassSwiftIdentity() -> SimpleClassSwiftIdentity {
+        return SimpleClassSwiftIdentity(name: "Hello", count: 42, flag: true, rate: 0.5, precise: 3.14159)
+    }
+
+    @JS func takeSimpleClassSwiftIdentity(_ obj: SimpleClassSwiftIdentity) {
+        // consume without returning
+    }
+}
+
+nonisolated(unsafe) var _cachedPoolSwiftIdentity: [SimpleClassSwiftIdentity] = []
+
+@JS(identityMode: .swift)
+class IdentityCacheBenchmarkSwiftIdentity {
+    @JS init() {}
+
+    @JS func setupPool(_ count: Int) {
+        _cachedPoolSwiftIdentity = (0..<count).map {
+            SimpleClassSwiftIdentity(name: "Item \($0)", count: $0, flag: true, rate: 0.5, precise: 3.14)
+        }
+    }
+
+    @JS func getPoolRepeated() -> [SimpleClassSwiftIdentity] {
+        return _cachedPoolSwiftIdentity
     }
 }
 

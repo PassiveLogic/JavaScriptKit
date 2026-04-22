@@ -1815,6 +1815,601 @@ fileprivate func _bjs_IdentityCacheBenchmarkIdentity_wrap_extern(_ pointer: Unsa
     return _bjs_IdentityCacheBenchmarkIdentity_wrap_extern(pointer)
 }
 
+nonisolated(unsafe) var _SimpleClassSwiftIdentity_identityTable: [UnsafeMutableRawPointer: Int32] = [:]
+
+nonisolated(unsafe) var _SimpleClassSwiftIdentity_idToPointer: [Int32: UnsafeMutableRawPointer] = [:]
+
+nonisolated(unsafe) var _SimpleClassSwiftIdentity_wrapperRefs: [Int32] = []
+
+nonisolated(unsafe) var _SimpleClassSwiftIdentity_freeIds: [Int32] = []
+
+nonisolated(unsafe) var _SimpleClassSwiftIdentity_nextId: Int32 = 0
+
+@_expose(wasm, "bjs_SimpleClassSwiftIdentity_init")
+@_cdecl("bjs_SimpleClassSwiftIdentity_init")
+public func _bjs_SimpleClassSwiftIdentity_init(_ nameBytes: Int32, _ nameLength: Int32, _ count: Int32, _ flag: Int32, _ rate: Float32, _ precise: Float64) -> UnsafeMutableRawPointer {
+    #if arch(wasm32)
+    let ret = SimpleClassSwiftIdentity(name: String.bridgeJSLiftParameter(nameBytes, nameLength), count: Int.bridgeJSLiftParameter(count), flag: Bool.bridgeJSLiftParameter(flag), rate: Float.bridgeJSLiftParameter(rate), precise: Double.bridgeJSLiftParameter(precise))
+    return withExtendedLifetime(ret) {
+        let ptr = Unmanaged.passUnretained(ret).toOpaque()
+        if let id = _SimpleClassSwiftIdentity_identityTable[ptr] {
+            // Cache hit: do NOT retain. JS keeps the wrapper alive via _wrapperRefs[id].
+            _swift_js_push_i32(id)
+            _swift_js_push_i32(0)
+            return ptr
+        }
+        _ = Unmanaged.passRetained(ret)
+        let id: Int32
+        if let recycled = _SimpleClassSwiftIdentity_freeIds.popLast() {
+            id = recycled
+        } else {
+            id = _SimpleClassSwiftIdentity_nextId
+            _SimpleClassSwiftIdentity_nextId += 1
+            _SimpleClassSwiftIdentity_wrapperRefs.append(0)
+        }
+        _SimpleClassSwiftIdentity_identityTable[ptr] = id
+        _SimpleClassSwiftIdentity_idToPointer[id] = ptr
+        _swift_js_push_i32(id)
+        _swift_js_push_i32(1)
+        return ptr
+    }
+    #else
+    fatalError("Only available on WebAssembly")
+    #endif
+}
+
+@_expose(wasm, "bjs_SimpleClassSwiftIdentity_name_get")
+@_cdecl("bjs_SimpleClassSwiftIdentity_name_get")
+public func _bjs_SimpleClassSwiftIdentity_name_get(_ _self: UnsafeMutableRawPointer) -> Void {
+    #if arch(wasm32)
+    let ret = SimpleClassSwiftIdentity.bridgeJSLiftParameter(_self).name
+    return ret.bridgeJSLowerReturn()
+    #else
+    fatalError("Only available on WebAssembly")
+    #endif
+}
+
+@_expose(wasm, "bjs_SimpleClassSwiftIdentity_name_set")
+@_cdecl("bjs_SimpleClassSwiftIdentity_name_set")
+public func _bjs_SimpleClassSwiftIdentity_name_set(_ _self: UnsafeMutableRawPointer, _ valueBytes: Int32, _ valueLength: Int32) -> Void {
+    #if arch(wasm32)
+    SimpleClassSwiftIdentity.bridgeJSLiftParameter(_self).name = String.bridgeJSLiftParameter(valueBytes, valueLength)
+    #else
+    fatalError("Only available on WebAssembly")
+    #endif
+}
+
+@_expose(wasm, "bjs_SimpleClassSwiftIdentity_count_get")
+@_cdecl("bjs_SimpleClassSwiftIdentity_count_get")
+public func _bjs_SimpleClassSwiftIdentity_count_get(_ _self: UnsafeMutableRawPointer) -> Int32 {
+    #if arch(wasm32)
+    let ret = SimpleClassSwiftIdentity.bridgeJSLiftParameter(_self).count
+    return ret.bridgeJSLowerReturn()
+    #else
+    fatalError("Only available on WebAssembly")
+    #endif
+}
+
+@_expose(wasm, "bjs_SimpleClassSwiftIdentity_count_set")
+@_cdecl("bjs_SimpleClassSwiftIdentity_count_set")
+public func _bjs_SimpleClassSwiftIdentity_count_set(_ _self: UnsafeMutableRawPointer, _ value: Int32) -> Void {
+    #if arch(wasm32)
+    SimpleClassSwiftIdentity.bridgeJSLiftParameter(_self).count = Int.bridgeJSLiftParameter(value)
+    #else
+    fatalError("Only available on WebAssembly")
+    #endif
+}
+
+@_expose(wasm, "bjs_SimpleClassSwiftIdentity_flag_get")
+@_cdecl("bjs_SimpleClassSwiftIdentity_flag_get")
+public func _bjs_SimpleClassSwiftIdentity_flag_get(_ _self: UnsafeMutableRawPointer) -> Int32 {
+    #if arch(wasm32)
+    let ret = SimpleClassSwiftIdentity.bridgeJSLiftParameter(_self).flag
+    return ret.bridgeJSLowerReturn()
+    #else
+    fatalError("Only available on WebAssembly")
+    #endif
+}
+
+@_expose(wasm, "bjs_SimpleClassSwiftIdentity_flag_set")
+@_cdecl("bjs_SimpleClassSwiftIdentity_flag_set")
+public func _bjs_SimpleClassSwiftIdentity_flag_set(_ _self: UnsafeMutableRawPointer, _ value: Int32) -> Void {
+    #if arch(wasm32)
+    SimpleClassSwiftIdentity.bridgeJSLiftParameter(_self).flag = Bool.bridgeJSLiftParameter(value)
+    #else
+    fatalError("Only available on WebAssembly")
+    #endif
+}
+
+@_expose(wasm, "bjs_SimpleClassSwiftIdentity_rate_get")
+@_cdecl("bjs_SimpleClassSwiftIdentity_rate_get")
+public func _bjs_SimpleClassSwiftIdentity_rate_get(_ _self: UnsafeMutableRawPointer) -> Float32 {
+    #if arch(wasm32)
+    let ret = SimpleClassSwiftIdentity.bridgeJSLiftParameter(_self).rate
+    return ret.bridgeJSLowerReturn()
+    #else
+    fatalError("Only available on WebAssembly")
+    #endif
+}
+
+@_expose(wasm, "bjs_SimpleClassSwiftIdentity_rate_set")
+@_cdecl("bjs_SimpleClassSwiftIdentity_rate_set")
+public func _bjs_SimpleClassSwiftIdentity_rate_set(_ _self: UnsafeMutableRawPointer, _ value: Float32) -> Void {
+    #if arch(wasm32)
+    SimpleClassSwiftIdentity.bridgeJSLiftParameter(_self).rate = Float.bridgeJSLiftParameter(value)
+    #else
+    fatalError("Only available on WebAssembly")
+    #endif
+}
+
+@_expose(wasm, "bjs_SimpleClassSwiftIdentity_precise_get")
+@_cdecl("bjs_SimpleClassSwiftIdentity_precise_get")
+public func _bjs_SimpleClassSwiftIdentity_precise_get(_ _self: UnsafeMutableRawPointer) -> Float64 {
+    #if arch(wasm32)
+    let ret = SimpleClassSwiftIdentity.bridgeJSLiftParameter(_self).precise
+    return ret.bridgeJSLowerReturn()
+    #else
+    fatalError("Only available on WebAssembly")
+    #endif
+}
+
+@_expose(wasm, "bjs_SimpleClassSwiftIdentity_precise_set")
+@_cdecl("bjs_SimpleClassSwiftIdentity_precise_set")
+public func _bjs_SimpleClassSwiftIdentity_precise_set(_ _self: UnsafeMutableRawPointer, _ value: Float64) -> Void {
+    #if arch(wasm32)
+    SimpleClassSwiftIdentity.bridgeJSLiftParameter(_self).precise = Double.bridgeJSLiftParameter(value)
+    #else
+    fatalError("Only available on WebAssembly")
+    #endif
+}
+
+@_expose(wasm, "bjs_SimpleClassSwiftIdentity_deinit")
+@_cdecl("bjs_SimpleClassSwiftIdentity_deinit")
+public func _bjs_SimpleClassSwiftIdentity_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
+    #if arch(wasm32)
+    Unmanaged<SimpleClassSwiftIdentity>.fromOpaque(pointer).release()
+    #else
+    fatalError("Only available on WebAssembly")
+    #endif
+}
+
+@_expose(wasm, "bjs_SimpleClassSwiftIdentity_register_wrapper")
+@_cdecl("bjs_SimpleClassSwiftIdentity_register_wrapper")
+public func _bjs_SimpleClassSwiftIdentity_register_wrapper(_ id: Int32, _ jsRef: Int32) -> Void {
+    #if arch(wasm32)
+    _SimpleClassSwiftIdentity_wrapperRefs[Int(id)] = jsRef
+    #else
+    fatalError("Only available on WebAssembly")
+    #endif
+}
+
+@_expose(wasm, "bjs_SimpleClassSwiftIdentity_release_wrapper")
+@_cdecl("bjs_SimpleClassSwiftIdentity_release_wrapper")
+public func _bjs_SimpleClassSwiftIdentity_release_wrapper(_ id: Int32) -> Void {
+    #if arch(wasm32)
+    let slot = Int(id)
+    let jsRef = _SimpleClassSwiftIdentity_wrapperRefs[slot]
+    guard jsRef != 0 else { return }
+    _SimpleClassSwiftIdentity_wrapperRefs[slot] = 0
+    if let ptr = _SimpleClassSwiftIdentity_idToPointer.removeValue(forKey: id) {
+        _SimpleClassSwiftIdentity_identityTable.removeValue(forKey: ptr)
+        Unmanaged<SimpleClassSwiftIdentity>.fromOpaque(ptr).release()
+    }
+    _SimpleClassSwiftIdentity_freeIds.append(id)
+    _swift_js_release_ref(jsRef)
+    #else
+    fatalError("Only available on WebAssembly")
+    #endif
+}
+
+extension SimpleClassSwiftIdentity {
+    @_spi(BridgeJS) public consuming func bridgeJSStackPush() {
+        let ptr: UnsafeMutableRawPointer = withExtendedLifetime(self) {
+            let ptr = Unmanaged.passUnretained(self).toOpaque()
+            if let id = _SimpleClassSwiftIdentity_identityTable[ptr] {
+                _swift_js_push_i32(id)
+                _swift_js_push_i32(0)
+                return ptr
+            }
+            _ = Unmanaged.passRetained(self)
+            let id: Int32
+            if let recycled = _SimpleClassSwiftIdentity_freeIds.popLast() {
+                id = recycled
+            } else {
+                id = _SimpleClassSwiftIdentity_nextId
+                _SimpleClassSwiftIdentity_nextId += 1
+                _SimpleClassSwiftIdentity_wrapperRefs.append(0)
+            }
+            _SimpleClassSwiftIdentity_identityTable[ptr] = id
+            _SimpleClassSwiftIdentity_idToPointer[id] = ptr
+            _swift_js_push_i32(id)
+            _swift_js_push_i32(1)
+            return ptr
+        }
+        _swift_js_push_pointer(ptr)
+    }
+}
+
+extension SimpleClassSwiftIdentity: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
+    var jsValue: JSValue {
+        return .object(JSObject(id: UInt32(bitPattern: _bjs_SimpleClassSwiftIdentity_wrap(Unmanaged.passRetained(self).toOpaque()))))
+    }
+    consuming func bridgeJSLowerAsProtocolReturn() -> Int32 {
+        _bjs_SimpleClassSwiftIdentity_wrap(Unmanaged.passRetained(self).toOpaque())
+    }
+}
+
+#if arch(wasm32)
+@_extern(wasm, module: "Benchmarks", name: "bjs_SimpleClassSwiftIdentity_wrap")
+fileprivate func _bjs_SimpleClassSwiftIdentity_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
+#else
+fileprivate func _bjs_SimpleClassSwiftIdentity_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+    fatalError("Only available on WebAssembly")
+}
+#endif
+@inline(never) fileprivate func _bjs_SimpleClassSwiftIdentity_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+    return _bjs_SimpleClassSwiftIdentity_wrap_extern(pointer)
+}
+
+nonisolated(unsafe) var _ClassRoundtripSwiftIdentity_identityTable: [UnsafeMutableRawPointer: Int32] = [:]
+
+nonisolated(unsafe) var _ClassRoundtripSwiftIdentity_idToPointer: [Int32: UnsafeMutableRawPointer] = [:]
+
+nonisolated(unsafe) var _ClassRoundtripSwiftIdentity_wrapperRefs: [Int32] = []
+
+nonisolated(unsafe) var _ClassRoundtripSwiftIdentity_freeIds: [Int32] = []
+
+nonisolated(unsafe) var _ClassRoundtripSwiftIdentity_nextId: Int32 = 0
+
+@_expose(wasm, "bjs_ClassRoundtripSwiftIdentity_init")
+@_cdecl("bjs_ClassRoundtripSwiftIdentity_init")
+public func _bjs_ClassRoundtripSwiftIdentity_init() -> UnsafeMutableRawPointer {
+    #if arch(wasm32)
+    let ret = ClassRoundtripSwiftIdentity()
+    return withExtendedLifetime(ret) {
+        let ptr = Unmanaged.passUnretained(ret).toOpaque()
+        if let id = _ClassRoundtripSwiftIdentity_identityTable[ptr] {
+            // Cache hit: do NOT retain. JS keeps the wrapper alive via _wrapperRefs[id].
+            _swift_js_push_i32(id)
+            _swift_js_push_i32(0)
+            return ptr
+        }
+        _ = Unmanaged.passRetained(ret)
+        let id: Int32
+        if let recycled = _ClassRoundtripSwiftIdentity_freeIds.popLast() {
+            id = recycled
+        } else {
+            id = _ClassRoundtripSwiftIdentity_nextId
+            _ClassRoundtripSwiftIdentity_nextId += 1
+            _ClassRoundtripSwiftIdentity_wrapperRefs.append(0)
+        }
+        _ClassRoundtripSwiftIdentity_identityTable[ptr] = id
+        _ClassRoundtripSwiftIdentity_idToPointer[id] = ptr
+        _swift_js_push_i32(id)
+        _swift_js_push_i32(1)
+        return ptr
+    }
+    #else
+    fatalError("Only available on WebAssembly")
+    #endif
+}
+
+@_expose(wasm, "bjs_ClassRoundtripSwiftIdentity_roundtripSimpleClassSwiftIdentity")
+@_cdecl("bjs_ClassRoundtripSwiftIdentity_roundtripSimpleClassSwiftIdentity")
+public func _bjs_ClassRoundtripSwiftIdentity_roundtripSimpleClassSwiftIdentity(_ _self: UnsafeMutableRawPointer, _ obj: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
+    #if arch(wasm32)
+    let ret = ClassRoundtripSwiftIdentity.bridgeJSLiftParameter(_self).roundtripSimpleClassSwiftIdentity(_: SimpleClassSwiftIdentity.bridgeJSLiftParameter(obj))
+    return withExtendedLifetime(ret) {
+        let ptr = Unmanaged.passUnretained(ret).toOpaque()
+        if let id = _SimpleClassSwiftIdentity_identityTable[ptr] {
+            // Cache hit: do NOT retain. JS keeps the wrapper alive via _wrapperRefs[id].
+            _swift_js_push_i32(id)
+            _swift_js_push_i32(0)
+            return ptr
+        }
+        _ = Unmanaged.passRetained(ret)
+        let id: Int32
+        if let recycled = _SimpleClassSwiftIdentity_freeIds.popLast() {
+            id = recycled
+        } else {
+            id = _SimpleClassSwiftIdentity_nextId
+            _SimpleClassSwiftIdentity_nextId += 1
+            _SimpleClassSwiftIdentity_wrapperRefs.append(0)
+        }
+        _SimpleClassSwiftIdentity_identityTable[ptr] = id
+        _SimpleClassSwiftIdentity_idToPointer[id] = ptr
+        _swift_js_push_i32(id)
+        _swift_js_push_i32(1)
+        return ptr
+    }
+    #else
+    fatalError("Only available on WebAssembly")
+    #endif
+}
+
+@_expose(wasm, "bjs_ClassRoundtripSwiftIdentity_makeSimpleClassSwiftIdentity")
+@_cdecl("bjs_ClassRoundtripSwiftIdentity_makeSimpleClassSwiftIdentity")
+public func _bjs_ClassRoundtripSwiftIdentity_makeSimpleClassSwiftIdentity(_ _self: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
+    #if arch(wasm32)
+    let ret = ClassRoundtripSwiftIdentity.bridgeJSLiftParameter(_self).makeSimpleClassSwiftIdentity()
+    return withExtendedLifetime(ret) {
+        let ptr = Unmanaged.passUnretained(ret).toOpaque()
+        if let id = _SimpleClassSwiftIdentity_identityTable[ptr] {
+            // Cache hit: do NOT retain. JS keeps the wrapper alive via _wrapperRefs[id].
+            _swift_js_push_i32(id)
+            _swift_js_push_i32(0)
+            return ptr
+        }
+        _ = Unmanaged.passRetained(ret)
+        let id: Int32
+        if let recycled = _SimpleClassSwiftIdentity_freeIds.popLast() {
+            id = recycled
+        } else {
+            id = _SimpleClassSwiftIdentity_nextId
+            _SimpleClassSwiftIdentity_nextId += 1
+            _SimpleClassSwiftIdentity_wrapperRefs.append(0)
+        }
+        _SimpleClassSwiftIdentity_identityTable[ptr] = id
+        _SimpleClassSwiftIdentity_idToPointer[id] = ptr
+        _swift_js_push_i32(id)
+        _swift_js_push_i32(1)
+        return ptr
+    }
+    #else
+    fatalError("Only available on WebAssembly")
+    #endif
+}
+
+@_expose(wasm, "bjs_ClassRoundtripSwiftIdentity_takeSimpleClassSwiftIdentity")
+@_cdecl("bjs_ClassRoundtripSwiftIdentity_takeSimpleClassSwiftIdentity")
+public func _bjs_ClassRoundtripSwiftIdentity_takeSimpleClassSwiftIdentity(_ _self: UnsafeMutableRawPointer, _ obj: UnsafeMutableRawPointer) -> Void {
+    #if arch(wasm32)
+    ClassRoundtripSwiftIdentity.bridgeJSLiftParameter(_self).takeSimpleClassSwiftIdentity(_: SimpleClassSwiftIdentity.bridgeJSLiftParameter(obj))
+    #else
+    fatalError("Only available on WebAssembly")
+    #endif
+}
+
+@_expose(wasm, "bjs_ClassRoundtripSwiftIdentity_deinit")
+@_cdecl("bjs_ClassRoundtripSwiftIdentity_deinit")
+public func _bjs_ClassRoundtripSwiftIdentity_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
+    #if arch(wasm32)
+    Unmanaged<ClassRoundtripSwiftIdentity>.fromOpaque(pointer).release()
+    #else
+    fatalError("Only available on WebAssembly")
+    #endif
+}
+
+@_expose(wasm, "bjs_ClassRoundtripSwiftIdentity_register_wrapper")
+@_cdecl("bjs_ClassRoundtripSwiftIdentity_register_wrapper")
+public func _bjs_ClassRoundtripSwiftIdentity_register_wrapper(_ id: Int32, _ jsRef: Int32) -> Void {
+    #if arch(wasm32)
+    _ClassRoundtripSwiftIdentity_wrapperRefs[Int(id)] = jsRef
+    #else
+    fatalError("Only available on WebAssembly")
+    #endif
+}
+
+@_expose(wasm, "bjs_ClassRoundtripSwiftIdentity_release_wrapper")
+@_cdecl("bjs_ClassRoundtripSwiftIdentity_release_wrapper")
+public func _bjs_ClassRoundtripSwiftIdentity_release_wrapper(_ id: Int32) -> Void {
+    #if arch(wasm32)
+    let slot = Int(id)
+    let jsRef = _ClassRoundtripSwiftIdentity_wrapperRefs[slot]
+    guard jsRef != 0 else { return }
+    _ClassRoundtripSwiftIdentity_wrapperRefs[slot] = 0
+    if let ptr = _ClassRoundtripSwiftIdentity_idToPointer.removeValue(forKey: id) {
+        _ClassRoundtripSwiftIdentity_identityTable.removeValue(forKey: ptr)
+        Unmanaged<ClassRoundtripSwiftIdentity>.fromOpaque(ptr).release()
+    }
+    _ClassRoundtripSwiftIdentity_freeIds.append(id)
+    _swift_js_release_ref(jsRef)
+    #else
+    fatalError("Only available on WebAssembly")
+    #endif
+}
+
+extension ClassRoundtripSwiftIdentity {
+    @_spi(BridgeJS) public consuming func bridgeJSStackPush() {
+        let ptr: UnsafeMutableRawPointer = withExtendedLifetime(self) {
+            let ptr = Unmanaged.passUnretained(self).toOpaque()
+            if let id = _ClassRoundtripSwiftIdentity_identityTable[ptr] {
+                _swift_js_push_i32(id)
+                _swift_js_push_i32(0)
+                return ptr
+            }
+            _ = Unmanaged.passRetained(self)
+            let id: Int32
+            if let recycled = _ClassRoundtripSwiftIdentity_freeIds.popLast() {
+                id = recycled
+            } else {
+                id = _ClassRoundtripSwiftIdentity_nextId
+                _ClassRoundtripSwiftIdentity_nextId += 1
+                _ClassRoundtripSwiftIdentity_wrapperRefs.append(0)
+            }
+            _ClassRoundtripSwiftIdentity_identityTable[ptr] = id
+            _ClassRoundtripSwiftIdentity_idToPointer[id] = ptr
+            _swift_js_push_i32(id)
+            _swift_js_push_i32(1)
+            return ptr
+        }
+        _swift_js_push_pointer(ptr)
+    }
+}
+
+extension ClassRoundtripSwiftIdentity: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
+    var jsValue: JSValue {
+        return .object(JSObject(id: UInt32(bitPattern: _bjs_ClassRoundtripSwiftIdentity_wrap(Unmanaged.passRetained(self).toOpaque()))))
+    }
+    consuming func bridgeJSLowerAsProtocolReturn() -> Int32 {
+        _bjs_ClassRoundtripSwiftIdentity_wrap(Unmanaged.passRetained(self).toOpaque())
+    }
+}
+
+#if arch(wasm32)
+@_extern(wasm, module: "Benchmarks", name: "bjs_ClassRoundtripSwiftIdentity_wrap")
+fileprivate func _bjs_ClassRoundtripSwiftIdentity_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
+#else
+fileprivate func _bjs_ClassRoundtripSwiftIdentity_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+    fatalError("Only available on WebAssembly")
+}
+#endif
+@inline(never) fileprivate func _bjs_ClassRoundtripSwiftIdentity_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+    return _bjs_ClassRoundtripSwiftIdentity_wrap_extern(pointer)
+}
+
+nonisolated(unsafe) var _IdentityCacheBenchmarkSwiftIdentity_identityTable: [UnsafeMutableRawPointer: Int32] = [:]
+
+nonisolated(unsafe) var _IdentityCacheBenchmarkSwiftIdentity_idToPointer: [Int32: UnsafeMutableRawPointer] = [:]
+
+nonisolated(unsafe) var _IdentityCacheBenchmarkSwiftIdentity_wrapperRefs: [Int32] = []
+
+nonisolated(unsafe) var _IdentityCacheBenchmarkSwiftIdentity_freeIds: [Int32] = []
+
+nonisolated(unsafe) var _IdentityCacheBenchmarkSwiftIdentity_nextId: Int32 = 0
+
+@_expose(wasm, "bjs_IdentityCacheBenchmarkSwiftIdentity_init")
+@_cdecl("bjs_IdentityCacheBenchmarkSwiftIdentity_init")
+public func _bjs_IdentityCacheBenchmarkSwiftIdentity_init() -> UnsafeMutableRawPointer {
+    #if arch(wasm32)
+    let ret = IdentityCacheBenchmarkSwiftIdentity()
+    return withExtendedLifetime(ret) {
+        let ptr = Unmanaged.passUnretained(ret).toOpaque()
+        if let id = _IdentityCacheBenchmarkSwiftIdentity_identityTable[ptr] {
+            // Cache hit: do NOT retain. JS keeps the wrapper alive via _wrapperRefs[id].
+            _swift_js_push_i32(id)
+            _swift_js_push_i32(0)
+            return ptr
+        }
+        _ = Unmanaged.passRetained(ret)
+        let id: Int32
+        if let recycled = _IdentityCacheBenchmarkSwiftIdentity_freeIds.popLast() {
+            id = recycled
+        } else {
+            id = _IdentityCacheBenchmarkSwiftIdentity_nextId
+            _IdentityCacheBenchmarkSwiftIdentity_nextId += 1
+            _IdentityCacheBenchmarkSwiftIdentity_wrapperRefs.append(0)
+        }
+        _IdentityCacheBenchmarkSwiftIdentity_identityTable[ptr] = id
+        _IdentityCacheBenchmarkSwiftIdentity_idToPointer[id] = ptr
+        _swift_js_push_i32(id)
+        _swift_js_push_i32(1)
+        return ptr
+    }
+    #else
+    fatalError("Only available on WebAssembly")
+    #endif
+}
+
+@_expose(wasm, "bjs_IdentityCacheBenchmarkSwiftIdentity_setupPool")
+@_cdecl("bjs_IdentityCacheBenchmarkSwiftIdentity_setupPool")
+public func _bjs_IdentityCacheBenchmarkSwiftIdentity_setupPool(_ _self: UnsafeMutableRawPointer, _ count: Int32) -> Void {
+    #if arch(wasm32)
+    IdentityCacheBenchmarkSwiftIdentity.bridgeJSLiftParameter(_self).setupPool(_: Int.bridgeJSLiftParameter(count))
+    #else
+    fatalError("Only available on WebAssembly")
+    #endif
+}
+
+@_expose(wasm, "bjs_IdentityCacheBenchmarkSwiftIdentity_getPoolRepeated")
+@_cdecl("bjs_IdentityCacheBenchmarkSwiftIdentity_getPoolRepeated")
+public func _bjs_IdentityCacheBenchmarkSwiftIdentity_getPoolRepeated(_ _self: UnsafeMutableRawPointer) -> Void {
+    #if arch(wasm32)
+    let ret = IdentityCacheBenchmarkSwiftIdentity.bridgeJSLiftParameter(_self).getPoolRepeated()
+    ret.bridgeJSStackPush()
+    #else
+    fatalError("Only available on WebAssembly")
+    #endif
+}
+
+@_expose(wasm, "bjs_IdentityCacheBenchmarkSwiftIdentity_deinit")
+@_cdecl("bjs_IdentityCacheBenchmarkSwiftIdentity_deinit")
+public func _bjs_IdentityCacheBenchmarkSwiftIdentity_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
+    #if arch(wasm32)
+    Unmanaged<IdentityCacheBenchmarkSwiftIdentity>.fromOpaque(pointer).release()
+    #else
+    fatalError("Only available on WebAssembly")
+    #endif
+}
+
+@_expose(wasm, "bjs_IdentityCacheBenchmarkSwiftIdentity_register_wrapper")
+@_cdecl("bjs_IdentityCacheBenchmarkSwiftIdentity_register_wrapper")
+public func _bjs_IdentityCacheBenchmarkSwiftIdentity_register_wrapper(_ id: Int32, _ jsRef: Int32) -> Void {
+    #if arch(wasm32)
+    _IdentityCacheBenchmarkSwiftIdentity_wrapperRefs[Int(id)] = jsRef
+    #else
+    fatalError("Only available on WebAssembly")
+    #endif
+}
+
+@_expose(wasm, "bjs_IdentityCacheBenchmarkSwiftIdentity_release_wrapper")
+@_cdecl("bjs_IdentityCacheBenchmarkSwiftIdentity_release_wrapper")
+public func _bjs_IdentityCacheBenchmarkSwiftIdentity_release_wrapper(_ id: Int32) -> Void {
+    #if arch(wasm32)
+    let slot = Int(id)
+    let jsRef = _IdentityCacheBenchmarkSwiftIdentity_wrapperRefs[slot]
+    guard jsRef != 0 else { return }
+    _IdentityCacheBenchmarkSwiftIdentity_wrapperRefs[slot] = 0
+    if let ptr = _IdentityCacheBenchmarkSwiftIdentity_idToPointer.removeValue(forKey: id) {
+        _IdentityCacheBenchmarkSwiftIdentity_identityTable.removeValue(forKey: ptr)
+        Unmanaged<IdentityCacheBenchmarkSwiftIdentity>.fromOpaque(ptr).release()
+    }
+    _IdentityCacheBenchmarkSwiftIdentity_freeIds.append(id)
+    _swift_js_release_ref(jsRef)
+    #else
+    fatalError("Only available on WebAssembly")
+    #endif
+}
+
+extension IdentityCacheBenchmarkSwiftIdentity {
+    @_spi(BridgeJS) public consuming func bridgeJSStackPush() {
+        let ptr: UnsafeMutableRawPointer = withExtendedLifetime(self) {
+            let ptr = Unmanaged.passUnretained(self).toOpaque()
+            if let id = _IdentityCacheBenchmarkSwiftIdentity_identityTable[ptr] {
+                _swift_js_push_i32(id)
+                _swift_js_push_i32(0)
+                return ptr
+            }
+            _ = Unmanaged.passRetained(self)
+            let id: Int32
+            if let recycled = _IdentityCacheBenchmarkSwiftIdentity_freeIds.popLast() {
+                id = recycled
+            } else {
+                id = _IdentityCacheBenchmarkSwiftIdentity_nextId
+                _IdentityCacheBenchmarkSwiftIdentity_nextId += 1
+                _IdentityCacheBenchmarkSwiftIdentity_wrapperRefs.append(0)
+            }
+            _IdentityCacheBenchmarkSwiftIdentity_identityTable[ptr] = id
+            _IdentityCacheBenchmarkSwiftIdentity_idToPointer[id] = ptr
+            _swift_js_push_i32(id)
+            _swift_js_push_i32(1)
+            return ptr
+        }
+        _swift_js_push_pointer(ptr)
+    }
+}
+
+extension IdentityCacheBenchmarkSwiftIdentity: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
+    var jsValue: JSValue {
+        return .object(JSObject(id: UInt32(bitPattern: _bjs_IdentityCacheBenchmarkSwiftIdentity_wrap(Unmanaged.passRetained(self).toOpaque()))))
+    }
+    consuming func bridgeJSLowerAsProtocolReturn() -> Int32 {
+        _bjs_IdentityCacheBenchmarkSwiftIdentity_wrap(Unmanaged.passRetained(self).toOpaque())
+    }
+}
+
+#if arch(wasm32)
+@_extern(wasm, module: "Benchmarks", name: "bjs_IdentityCacheBenchmarkSwiftIdentity_wrap")
+fileprivate func _bjs_IdentityCacheBenchmarkSwiftIdentity_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
+#else
+fileprivate func _bjs_IdentityCacheBenchmarkSwiftIdentity_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+    fatalError("Only available on WebAssembly")
+}
+#endif
+@inline(never) fileprivate func _bjs_IdentityCacheBenchmarkSwiftIdentity_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+    return _bjs_IdentityCacheBenchmarkSwiftIdentity_wrap_extern(pointer)
+}
+
 @_expose(wasm, "bjs_ArrayRoundtrip_init")
 @_cdecl("bjs_ArrayRoundtrip_init")
 public func _bjs_ArrayRoundtrip_init() -> UnsafeMutableRawPointer {

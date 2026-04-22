@@ -73,6 +73,26 @@ const greeter = new exports.MyModule.Greeter("World");
 // globalThis.MyModule is undefined
 ```
 
+### `identityMode`
+
+Default wrapper-identity policy for `@JS class` returns in this module. Controls whether two Swift→JS returns of the same Swift object produce the same JS wrapper (`===`), and where the identity cache lives.
+
+| Value | Effect |
+|-------|--------|
+| `"none"` (default) | No cache. Every return allocates a fresh wrapper. |
+| `"pointer"` | JS-side `WeakRef` cache. `===` holds while reachable; wrapper may be GC'd. |
+| `"swift"` | Swift-owned strong cache. `===` holds until explicit `release()`. Best for create-heavy workloads. |
+
+Example:
+
+```json
+{
+    "identityMode": "swift"
+}
+```
+
+A per-class `@JS(identityMode: .none | .pointer | .swift)` annotation overrides the config default for a single class. See <doc:Identity-Modes-For-Exported-Classes> for the full comparison, tradeoffs, and benchmark results.
+
 ### `tools`
 
 Specify custom paths for external executables. This is particularly useful when working in environments like Xcode where the system PATH may not be inherited, or when you need to use a specific version of tools for your project.
