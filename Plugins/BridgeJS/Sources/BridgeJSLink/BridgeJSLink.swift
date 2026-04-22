@@ -2060,26 +2060,23 @@ extension BridgeJSLink {
         dtsExportEntryPrinter.write("\(klass.name): {")
 
         if useSwiftIdentity {
-            // DECISIONS.md D18 + D19: the `.swift`-mode class is standalone — it does NOT
-            // extend `SwiftHeapObject`. It keeps a strong `Map<pointer, wrapper>` so
-            // re-exports of the same Swift pointer get the same JS wrapper.
+            // DECISIONS.md D18 + D19 + D20: the `.swift`-mode class is standalone —
+            // it does NOT extend `SwiftHeapObject`. It keeps a strong
+            // `Map<pointer, wrapper>` so re-exports of the same Swift pointer get the
+            // same JS wrapper.
             //
-            // Swift signals "cache hit" via a single `freshBit` push on the i32 stack
-            // (0 = cached, 1 = fresh). Post-D19 the JS side owns the wrapper lifetime
-            // entirely — no `swift.memory.retain`, no `register_wrapper` callback.
-            // Swift only tracks a `Set<pointer>` of pointers it has retained.
+            // D20: no side-channel at all. JS's `Map.get(pointer)` serves as both
+            // the "is it cached?" test and the lookup: `undefined` ⇒ miss ⇒ build
+            // wrapper. Swift's per-class `Set<pointer>` stays in lockstep because
+            // Swift updates it at the same cache boundaries as JS updates its Map.
             jsPrinter.write("class \(klass.name) {")
             jsPrinter.indent {
                 jsPrinter.write("static __swiftIdentityWrappers = new Map();")
                 jsPrinter.nextLine()
                 jsPrinter.write("static __wrap(pointer) {")
                 jsPrinter.indent {
-                    jsPrinter.write("const freshBit = bjs.swift_js_pop_i32();")
-                    jsPrinter.write("if (freshBit === 0) {")
-                    jsPrinter.indent {
-                        jsPrinter.write("return \(klass.name).__swiftIdentityWrappers.get(pointer);")
-                    }
-                    jsPrinter.write("}")
+                    jsPrinter.write("const cached = \(klass.name).__swiftIdentityWrappers.get(pointer);")
+                    jsPrinter.write("if (cached !== undefined) return cached;")
                     jsPrinter.write("const obj = Object.create(\(klass.name).prototype);")
                     jsPrinter.write("obj.pointer = pointer;")
                     jsPrinter.write("obj.__swiftIdentityHasReleased = false;")

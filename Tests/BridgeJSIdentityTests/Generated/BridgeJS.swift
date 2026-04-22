@@ -140,14 +140,9 @@ public func _bjs_getSharedSwiftSubject() -> UnsafeMutableRawPointer {
     let ret = getSharedSwiftSubject()
     return withExtendedLifetime(ret) {
         let ptr = Unmanaged.passUnretained(ret).toOpaque()
-        if _SwiftIdentityTestSubject_identityTable.contains(ptr) {
-            // Cache hit: do NOT retain. JS has the wrapper cached.
-            _swift_js_push_i32(0)
-            return ptr
+        if _SwiftIdentityTestSubject_identityTable.insert(ptr).inserted {
+            _ = Unmanaged.passRetained(ret)
         }
-        _ = Unmanaged.passRetained(ret)
-        _SwiftIdentityTestSubject_identityTable.insert(ptr)
-        _swift_js_push_i32(1)
         return ptr
     }
     #else
@@ -172,14 +167,9 @@ public func _bjs_getRetainLeakSubjectSwift() -> UnsafeMutableRawPointer {
     let ret = getRetainLeakSubjectSwift()
     return withExtendedLifetime(ret) {
         let ptr = Unmanaged.passUnretained(ret).toOpaque()
-        if _SwiftRetainLeakSubject_identityTable.contains(ptr) {
-            // Cache hit: do NOT retain. JS has the wrapper cached.
-            _swift_js_push_i32(0)
-            return ptr
+        if _SwiftRetainLeakSubject_identityTable.insert(ptr).inserted {
+            _ = Unmanaged.passRetained(ret)
         }
-        _ = Unmanaged.passRetained(ret)
-        _SwiftRetainLeakSubject_identityTable.insert(ptr)
-        _swift_js_push_i32(1)
         return ptr
     }
     #else
@@ -471,14 +461,9 @@ public func _bjs_SwiftIdentityTestSubject_init(_ value: Int32) -> UnsafeMutableR
     let ret = SwiftIdentityTestSubject(value: Int.bridgeJSLiftParameter(value))
     return withExtendedLifetime(ret) {
         let ptr = Unmanaged.passUnretained(ret).toOpaque()
-        if _SwiftIdentityTestSubject_identityTable.contains(ptr) {
-            // Cache hit: do NOT retain. JS has the wrapper cached.
-            _swift_js_push_i32(0)
-            return ptr
+        if _SwiftIdentityTestSubject_identityTable.insert(ptr).inserted {
+            _ = Unmanaged.passRetained(ret)
         }
-        _ = Unmanaged.passRetained(ret)
-        _SwiftIdentityTestSubject_identityTable.insert(ptr)
-        _swift_js_push_i32(1)
         return ptr
     }
     #else
@@ -493,14 +478,9 @@ public func _bjs_SwiftIdentityTestSubject_self_(_ _self: UnsafeMutableRawPointer
     let ret = SwiftIdentityTestSubject.bridgeJSLiftParameter(_self).self_()
     return withExtendedLifetime(ret) {
         let ptr = Unmanaged.passUnretained(ret).toOpaque()
-        if _SwiftIdentityTestSubject_identityTable.contains(ptr) {
-            // Cache hit: do NOT retain. JS has the wrapper cached.
-            _swift_js_push_i32(0)
-            return ptr
+        if _SwiftIdentityTestSubject_identityTable.insert(ptr).inserted {
+            _ = Unmanaged.passRetained(ret)
         }
-        _ = Unmanaged.passRetained(ret)
-        _SwiftIdentityTestSubject_identityTable.insert(ptr)
-        _swift_js_push_i32(1)
         return ptr
     }
     #else
@@ -565,13 +545,9 @@ extension SwiftIdentityTestSubject {
     @_spi(BridgeJS) public consuming func bridgeJSStackPush() {
         let ptr: UnsafeMutableRawPointer = withExtendedLifetime(self) {
             let ptr = Unmanaged.passUnretained(self).toOpaque()
-            if _SwiftIdentityTestSubject_identityTable.contains(ptr) {
-                _swift_js_push_i32(0)
-                return ptr
+            if _SwiftIdentityTestSubject_identityTable.insert(ptr).inserted {
+                _ = Unmanaged.passRetained(self)
             }
-            _ = Unmanaged.passRetained(self)
-            _SwiftIdentityTestSubject_identityTable.insert(ptr)
-            _swift_js_push_i32(1)
             return ptr
         }
         _swift_js_push_pointer(ptr)
@@ -608,14 +584,9 @@ public func _bjs_SwiftRetainLeakSubject_init(_ tag: Int32) -> UnsafeMutableRawPo
     let ret = SwiftRetainLeakSubject(tag: Int.bridgeJSLiftParameter(tag))
     return withExtendedLifetime(ret) {
         let ptr = Unmanaged.passUnretained(ret).toOpaque()
-        if _SwiftRetainLeakSubject_identityTable.contains(ptr) {
-            // Cache hit: do NOT retain. JS has the wrapper cached.
-            _swift_js_push_i32(0)
-            return ptr
+        if _SwiftRetainLeakSubject_identityTable.insert(ptr).inserted {
+            _ = Unmanaged.passRetained(ret)
         }
-        _ = Unmanaged.passRetained(ret)
-        _SwiftRetainLeakSubject_identityTable.insert(ptr)
-        _swift_js_push_i32(1)
         return ptr
     }
     #else
@@ -669,13 +640,9 @@ extension SwiftRetainLeakSubject {
     @_spi(BridgeJS) public consuming func bridgeJSStackPush() {
         let ptr: UnsafeMutableRawPointer = withExtendedLifetime(self) {
             let ptr = Unmanaged.passUnretained(self).toOpaque()
-            if _SwiftRetainLeakSubject_identityTable.contains(ptr) {
-                _swift_js_push_i32(0)
-                return ptr
+            if _SwiftRetainLeakSubject_identityTable.insert(ptr).inserted {
+                _ = Unmanaged.passRetained(self)
             }
-            _ = Unmanaged.passRetained(self)
-            _SwiftRetainLeakSubject_identityTable.insert(ptr)
-            _swift_js_push_i32(1)
             return ptr
         }
         _swift_js_push_pointer(ptr)
@@ -712,14 +679,9 @@ public func _bjs_SwiftChurnSubject_init(_ tag: Int32) -> UnsafeMutableRawPointer
     let ret = SwiftChurnSubject(tag: Int.bridgeJSLiftParameter(tag))
     return withExtendedLifetime(ret) {
         let ptr = Unmanaged.passUnretained(ret).toOpaque()
-        if _SwiftChurnSubject_identityTable.contains(ptr) {
-            // Cache hit: do NOT retain. JS has the wrapper cached.
-            _swift_js_push_i32(0)
-            return ptr
+        if _SwiftChurnSubject_identityTable.insert(ptr).inserted {
+            _ = Unmanaged.passRetained(ret)
         }
-        _ = Unmanaged.passRetained(ret)
-        _SwiftChurnSubject_identityTable.insert(ptr)
-        _swift_js_push_i32(1)
         return ptr
     }
     #else
@@ -773,13 +735,9 @@ extension SwiftChurnSubject {
     @_spi(BridgeJS) public consuming func bridgeJSStackPush() {
         let ptr: UnsafeMutableRawPointer = withExtendedLifetime(self) {
             let ptr = Unmanaged.passUnretained(self).toOpaque()
-            if _SwiftChurnSubject_identityTable.contains(ptr) {
-                _swift_js_push_i32(0)
-                return ptr
+            if _SwiftChurnSubject_identityTable.insert(ptr).inserted {
+                _ = Unmanaged.passRetained(self)
             }
-            _ = Unmanaged.passRetained(self)
-            _SwiftChurnSubject_identityTable.insert(ptr)
-            _swift_js_push_i32(1)
             return ptr
         }
         _swift_js_push_pointer(ptr)

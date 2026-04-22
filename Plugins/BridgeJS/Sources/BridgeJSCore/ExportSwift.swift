@@ -352,28 +352,21 @@ public class ExportSwift {
                     """
                 )
             case .swiftHeapObject(let className) where isSwiftIdentityMode(className):
-                // identityMode: "swift" — Swift tracks which pointers have
-                // an associated JS wrapper via a per-class Set. On hit, skip
-                // the passRetained; JS keeps the wrapper alive via its
-                // strong `Map<pointer, wrapper>`. On miss, retain once and
-                // signal freshBit=1 so JS builds the wrapper.
-                //
-                // ABI: one i32 push after the return pointer — `freshBit`.
-                // JS pops `freshBit` and either returns its cached wrapper
-                // (0) or builds a fresh one and calls `register_wrapper` to
-                // give Swift the retained JS ref (1).
+                // identityMode: "swift" — Swift's per-class Set tracks which
+                // pointers have been retained. On miss, retain once; on hit,
+                // skip. No signalling to JS needed: JS checks its own
+                // `Map<pointer, wrapper>` and derives hit/miss symmetrically.
+                // (See DECISIONS.md D20 for why dropping freshBit is safe:
+                // the Swift Set and the JS Map stay in lockstep by
+                // construction — both are keyed by pointer and updated at
+                // the same cache boundaries.)
                 append(
                     """
                     return withExtendedLifetime(ret) {
                         let ptr = Unmanaged.passUnretained(ret).toOpaque()
-                        if _\(raw: className)_identityTable.contains(ptr) {
-                            // Cache hit: do NOT retain. JS has the wrapper cached.
-                            _swift_js_push_i32(0)
-                            return ptr
+                        if _\(raw: className)_identityTable.insert(ptr).inserted {
+                            _ = Unmanaged.passRetained(ret)
                         }
-                        _ = Unmanaged.passRetained(ret)
-                        _\(raw: className)_identityTable.insert(ptr)
-                        _swift_js_push_i32(1)
                         return ptr
                     }
                     """
@@ -781,20 +774,16 @@ public class ExportSwift {
 
             // Override the default `_BridgedSwiftHeapObject.bridgeJSStackPush`
             // so array-element returns (`[SwiftCached]`) go through the same
-            // identity-cache handshake. See DECISIONS.md D15 (still applies —
-            // only the internals changed; D18 simplified them).
+            // identity-cache handshake. Post-D20: no `freshBit` push — JS
+            // checks its own Map for hit/miss.
             let stackPushExt: DeclSyntax = """
                 extension \(raw: klass.swiftCallName) {
                     @_spi(BridgeJS) public consuming func bridgeJSStackPush() {
                         let ptr: UnsafeMutableRawPointer = withExtendedLifetime(self) {
                             let ptr = Unmanaged.passUnretained(self).toOpaque()
-                            if _\(raw: klass.name)_identityTable.contains(ptr) {
-                                _swift_js_push_i32(0)
-                                return ptr
+                            if _\(raw: klass.name)_identityTable.insert(ptr).inserted {
+                                _ = Unmanaged.passRetained(self)
                             }
-                            _ = Unmanaged.passRetained(self)
-                            _\(raw: klass.name)_identityTable.insert(ptr)
-                            _swift_js_push_i32(1)
                             return ptr
                         }
                         _swift_js_push_pointer(ptr)

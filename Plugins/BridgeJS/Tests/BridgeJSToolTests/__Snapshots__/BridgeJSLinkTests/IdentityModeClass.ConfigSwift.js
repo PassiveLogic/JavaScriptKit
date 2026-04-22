@@ -308,10 +308,8 @@ export async function createInstantiator(options, swift) {
                 static __swiftIdentityWrappers = new Map();
 
                 static __wrap(pointer) {
-                    const freshBit = bjs.swift_js_pop_i32();
-                    if (freshBit === 0) {
-                        return UncachedModel.__swiftIdentityWrappers.get(pointer);
-                    }
+                    const cached = UncachedModel.__swiftIdentityWrappers.get(pointer);
+                    if (cached !== undefined) return cached;
                     const obj = Object.create(UncachedModel.prototype);
                     obj.pointer = pointer;
                     obj.__swiftIdentityHasReleased = false;

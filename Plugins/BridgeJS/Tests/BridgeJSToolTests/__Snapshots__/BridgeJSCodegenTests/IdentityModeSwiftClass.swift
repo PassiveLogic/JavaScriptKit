@@ -7,14 +7,9 @@ public func _bjs_SwiftCached_init(_ nameBytes: Int32, _ nameLength: Int32) -> Un
     let ret = SwiftCached(name: String.bridgeJSLiftParameter(nameBytes, nameLength))
     return withExtendedLifetime(ret) {
         let ptr = Unmanaged.passUnretained(ret).toOpaque()
-        if _SwiftCached_identityTable.contains(ptr) {
-            // Cache hit: do NOT retain. JS has the wrapper cached.
-            _swift_js_push_i32(0)
-            return ptr
+        if _SwiftCached_identityTable.insert(ptr).inserted {
+            _ = Unmanaged.passRetained(ret)
         }
-        _ = Unmanaged.passRetained(ret)
-        _SwiftCached_identityTable.insert(ptr)
-        _swift_js_push_i32(1)
         return ptr
     }
     #else
@@ -68,13 +63,9 @@ extension SwiftCached {
     @_spi(BridgeJS) public consuming func bridgeJSStackPush() {
         let ptr: UnsafeMutableRawPointer = withExtendedLifetime(self) {
             let ptr = Unmanaged.passUnretained(self).toOpaque()
-            if _SwiftCached_identityTable.contains(ptr) {
-                _swift_js_push_i32(0)
-                return ptr
+            if _SwiftCached_identityTable.insert(ptr).inserted {
+                _ = Unmanaged.passRetained(self)
             }
-            _ = Unmanaged.passRetained(self)
-            _SwiftCached_identityTable.insert(ptr)
-            _swift_js_push_i32(1)
             return ptr
         }
         _swift_js_push_pointer(ptr)

@@ -1824,14 +1824,9 @@ public func _bjs_SimpleClassSwiftIdentity_init(_ nameBytes: Int32, _ nameLength:
     let ret = SimpleClassSwiftIdentity(name: String.bridgeJSLiftParameter(nameBytes, nameLength), count: Int.bridgeJSLiftParameter(count), flag: Bool.bridgeJSLiftParameter(flag), rate: Float.bridgeJSLiftParameter(rate), precise: Double.bridgeJSLiftParameter(precise))
     return withExtendedLifetime(ret) {
         let ptr = Unmanaged.passUnretained(ret).toOpaque()
-        if _SimpleClassSwiftIdentity_identityTable.contains(ptr) {
-            // Cache hit: do NOT retain. JS has the wrapper cached.
-            _swift_js_push_i32(0)
-            return ptr
+        if _SimpleClassSwiftIdentity_identityTable.insert(ptr).inserted {
+            _ = Unmanaged.passRetained(ret)
         }
-        _ = Unmanaged.passRetained(ret)
-        _SimpleClassSwiftIdentity_identityTable.insert(ptr)
-        _swift_js_push_i32(1)
         return ptr
     }
     #else
@@ -1969,13 +1964,9 @@ extension SimpleClassSwiftIdentity {
     @_spi(BridgeJS) public consuming func bridgeJSStackPush() {
         let ptr: UnsafeMutableRawPointer = withExtendedLifetime(self) {
             let ptr = Unmanaged.passUnretained(self).toOpaque()
-            if _SimpleClassSwiftIdentity_identityTable.contains(ptr) {
-                _swift_js_push_i32(0)
-                return ptr
+            if _SimpleClassSwiftIdentity_identityTable.insert(ptr).inserted {
+                _ = Unmanaged.passRetained(self)
             }
-            _ = Unmanaged.passRetained(self)
-            _SimpleClassSwiftIdentity_identityTable.insert(ptr)
-            _swift_js_push_i32(1)
             return ptr
         }
         _swift_js_push_pointer(ptr)
@@ -2012,14 +2003,9 @@ public func _bjs_ClassRoundtripSwiftIdentity_init() -> UnsafeMutableRawPointer {
     let ret = ClassRoundtripSwiftIdentity()
     return withExtendedLifetime(ret) {
         let ptr = Unmanaged.passUnretained(ret).toOpaque()
-        if _ClassRoundtripSwiftIdentity_identityTable.contains(ptr) {
-            // Cache hit: do NOT retain. JS has the wrapper cached.
-            _swift_js_push_i32(0)
-            return ptr
+        if _ClassRoundtripSwiftIdentity_identityTable.insert(ptr).inserted {
+            _ = Unmanaged.passRetained(ret)
         }
-        _ = Unmanaged.passRetained(ret)
-        _ClassRoundtripSwiftIdentity_identityTable.insert(ptr)
-        _swift_js_push_i32(1)
         return ptr
     }
     #else
@@ -2034,14 +2020,9 @@ public func _bjs_ClassRoundtripSwiftIdentity_roundtripSimpleClassSwiftIdentity(_
     let ret = ClassRoundtripSwiftIdentity.bridgeJSLiftParameter(_self).roundtripSimpleClassSwiftIdentity(_: SimpleClassSwiftIdentity.bridgeJSLiftParameter(obj))
     return withExtendedLifetime(ret) {
         let ptr = Unmanaged.passUnretained(ret).toOpaque()
-        if _SimpleClassSwiftIdentity_identityTable.contains(ptr) {
-            // Cache hit: do NOT retain. JS has the wrapper cached.
-            _swift_js_push_i32(0)
-            return ptr
+        if _SimpleClassSwiftIdentity_identityTable.insert(ptr).inserted {
+            _ = Unmanaged.passRetained(ret)
         }
-        _ = Unmanaged.passRetained(ret)
-        _SimpleClassSwiftIdentity_identityTable.insert(ptr)
-        _swift_js_push_i32(1)
         return ptr
     }
     #else
@@ -2056,14 +2037,9 @@ public func _bjs_ClassRoundtripSwiftIdentity_makeSimpleClassSwiftIdentity(_ _sel
     let ret = ClassRoundtripSwiftIdentity.bridgeJSLiftParameter(_self).makeSimpleClassSwiftIdentity()
     return withExtendedLifetime(ret) {
         let ptr = Unmanaged.passUnretained(ret).toOpaque()
-        if _SimpleClassSwiftIdentity_identityTable.contains(ptr) {
-            // Cache hit: do NOT retain. JS has the wrapper cached.
-            _swift_js_push_i32(0)
-            return ptr
+        if _SimpleClassSwiftIdentity_identityTable.insert(ptr).inserted {
+            _ = Unmanaged.passRetained(ret)
         }
-        _ = Unmanaged.passRetained(ret)
-        _SimpleClassSwiftIdentity_identityTable.insert(ptr)
-        _swift_js_push_i32(1)
         return ptr
     }
     #else
@@ -2106,13 +2082,9 @@ extension ClassRoundtripSwiftIdentity {
     @_spi(BridgeJS) public consuming func bridgeJSStackPush() {
         let ptr: UnsafeMutableRawPointer = withExtendedLifetime(self) {
             let ptr = Unmanaged.passUnretained(self).toOpaque()
-            if _ClassRoundtripSwiftIdentity_identityTable.contains(ptr) {
-                _swift_js_push_i32(0)
-                return ptr
+            if _ClassRoundtripSwiftIdentity_identityTable.insert(ptr).inserted {
+                _ = Unmanaged.passRetained(self)
             }
-            _ = Unmanaged.passRetained(self)
-            _ClassRoundtripSwiftIdentity_identityTable.insert(ptr)
-            _swift_js_push_i32(1)
             return ptr
         }
         _swift_js_push_pointer(ptr)
@@ -2149,14 +2121,9 @@ public func _bjs_IdentityCacheBenchmarkSwiftIdentity_init() -> UnsafeMutableRawP
     let ret = IdentityCacheBenchmarkSwiftIdentity()
     return withExtendedLifetime(ret) {
         let ptr = Unmanaged.passUnretained(ret).toOpaque()
-        if _IdentityCacheBenchmarkSwiftIdentity_identityTable.contains(ptr) {
-            // Cache hit: do NOT retain. JS has the wrapper cached.
-            _swift_js_push_i32(0)
-            return ptr
+        if _IdentityCacheBenchmarkSwiftIdentity_identityTable.insert(ptr).inserted {
+            _ = Unmanaged.passRetained(ret)
         }
-        _ = Unmanaged.passRetained(ret)
-        _IdentityCacheBenchmarkSwiftIdentity_identityTable.insert(ptr)
-        _swift_js_push_i32(1)
         return ptr
     }
     #else
@@ -2210,13 +2177,9 @@ extension IdentityCacheBenchmarkSwiftIdentity {
     @_spi(BridgeJS) public consuming func bridgeJSStackPush() {
         let ptr: UnsafeMutableRawPointer = withExtendedLifetime(self) {
             let ptr = Unmanaged.passUnretained(self).toOpaque()
-            if _IdentityCacheBenchmarkSwiftIdentity_identityTable.contains(ptr) {
-                _swift_js_push_i32(0)
-                return ptr
+            if _IdentityCacheBenchmarkSwiftIdentity_identityTable.insert(ptr).inserted {
+                _ = Unmanaged.passRetained(self)
             }
-            _ = Unmanaged.passRetained(self)
-            _IdentityCacheBenchmarkSwiftIdentity_identityTable.insert(ptr)
-            _swift_js_push_i32(1)
             return ptr
         }
         _swift_js_push_pointer(ptr)
