@@ -1531,12 +1531,23 @@ fileprivate func _bjs_IdentityCacheBenchmark_wrap_extern(_ pointer: UnsafeMutabl
     return _bjs_IdentityCacheBenchmark_wrap_extern(pointer)
 }
 
+nonisolated(unsafe) var _SimpleClassIdentity_identityExported: Set<UnsafeMutableRawPointer> = []
+
 @_expose(wasm, "bjs_SimpleClassIdentity_init")
 @_cdecl("bjs_SimpleClassIdentity_init")
 public func _bjs_SimpleClassIdentity_init(_ nameBytes: Int32, _ nameLength: Int32, _ count: Int32, _ flag: Int32, _ rate: Float32, _ precise: Float64) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
     let ret = SimpleClassIdentity(name: String.bridgeJSLiftParameter(nameBytes, nameLength), count: Int.bridgeJSLiftParameter(count), flag: Bool.bridgeJSLiftParameter(flag), rate: Float.bridgeJSLiftParameter(rate), precise: Double.bridgeJSLiftParameter(precise))
-    return ret.bridgeJSLowerReturn()
+    return withExtendedLifetime(ret) {
+        let pointer = Unmanaged.passUnretained(ret).toOpaque()
+        if _SimpleClassIdentity_identityExported.contains(pointer) {
+            _swift_js_set_identity_ref(1)
+            return pointer
+        }
+        _SimpleClassIdentity_identityExported.insert(pointer)
+        _ = Unmanaged.passRetained(ret)
+        return pointer
+    }
     #else
     fatalError("Only available on WebAssembly")
     #endif
@@ -1651,6 +1662,7 @@ public func _bjs_SimpleClassIdentity_precise_set(_ _self: UnsafeMutableRawPointe
 @_cdecl("bjs_SimpleClassIdentity_deinit")
 public func _bjs_SimpleClassIdentity_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
+    _SimpleClassIdentity_identityExported.remove(pointer)
     Unmanaged<SimpleClassIdentity>.fromOpaque(pointer).release()
     #else
     fatalError("Only available on WebAssembly")
@@ -1678,12 +1690,23 @@ fileprivate func _bjs_SimpleClassIdentity_wrap_extern(_ pointer: UnsafeMutableRa
     return _bjs_SimpleClassIdentity_wrap_extern(pointer)
 }
 
+nonisolated(unsafe) var _ClassRoundtripIdentity_identityExported: Set<UnsafeMutableRawPointer> = []
+
 @_expose(wasm, "bjs_ClassRoundtripIdentity_init")
 @_cdecl("bjs_ClassRoundtripIdentity_init")
 public func _bjs_ClassRoundtripIdentity_init() -> UnsafeMutableRawPointer {
     #if arch(wasm32)
     let ret = ClassRoundtripIdentity()
-    return ret.bridgeJSLowerReturn()
+    return withExtendedLifetime(ret) {
+        let pointer = Unmanaged.passUnretained(ret).toOpaque()
+        if _ClassRoundtripIdentity_identityExported.contains(pointer) {
+            _swift_js_set_identity_ref(1)
+            return pointer
+        }
+        _ClassRoundtripIdentity_identityExported.insert(pointer)
+        _ = Unmanaged.passRetained(ret)
+        return pointer
+    }
     #else
     fatalError("Only available on WebAssembly")
     #endif
@@ -1725,6 +1748,7 @@ public func _bjs_ClassRoundtripIdentity_takeSimpleClassIdentity(_ _self: UnsafeM
 @_cdecl("bjs_ClassRoundtripIdentity_deinit")
 public func _bjs_ClassRoundtripIdentity_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
+    _ClassRoundtripIdentity_identityExported.remove(pointer)
     Unmanaged<ClassRoundtripIdentity>.fromOpaque(pointer).release()
     #else
     fatalError("Only available on WebAssembly")
@@ -1752,12 +1776,23 @@ fileprivate func _bjs_ClassRoundtripIdentity_wrap_extern(_ pointer: UnsafeMutabl
     return _bjs_ClassRoundtripIdentity_wrap_extern(pointer)
 }
 
+nonisolated(unsafe) var _IdentityCacheBenchmarkIdentity_identityExported: Set<UnsafeMutableRawPointer> = []
+
 @_expose(wasm, "bjs_IdentityCacheBenchmarkIdentity_init")
 @_cdecl("bjs_IdentityCacheBenchmarkIdentity_init")
 public func _bjs_IdentityCacheBenchmarkIdentity_init() -> UnsafeMutableRawPointer {
     #if arch(wasm32)
     let ret = IdentityCacheBenchmarkIdentity()
-    return ret.bridgeJSLowerReturn()
+    return withExtendedLifetime(ret) {
+        let pointer = Unmanaged.passUnretained(ret).toOpaque()
+        if _IdentityCacheBenchmarkIdentity_identityExported.contains(pointer) {
+            _swift_js_set_identity_ref(1)
+            return pointer
+        }
+        _IdentityCacheBenchmarkIdentity_identityExported.insert(pointer)
+        _ = Unmanaged.passRetained(ret)
+        return pointer
+    }
     #else
     fatalError("Only available on WebAssembly")
     #endif
@@ -1788,6 +1823,7 @@ public func _bjs_IdentityCacheBenchmarkIdentity_getPoolRepeated(_ _self: UnsafeM
 @_cdecl("bjs_IdentityCacheBenchmarkIdentity_deinit")
 public func _bjs_IdentityCacheBenchmarkIdentity_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
+    _IdentityCacheBenchmarkIdentity_identityExported.remove(pointer)
     Unmanaged<IdentityCacheBenchmarkIdentity>.fromOpaque(pointer).release()
     #else
     fatalError("Only available on WebAssembly")

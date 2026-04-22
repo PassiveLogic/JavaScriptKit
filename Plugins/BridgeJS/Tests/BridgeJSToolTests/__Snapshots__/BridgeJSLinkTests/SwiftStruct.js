@@ -35,6 +35,7 @@ export async function createInstantiator(options, swift) {
 
     let _exports = null;
     let bjs = null;
+    let __bjs_identity_ref = 0;
     const __bjs_createDataPointHelpers = () => ({
         lower: (value) => {
             f64Stack.push(value.x);
@@ -305,6 +306,9 @@ export async function createInstantiator(options, swift) {
             bjs["swift_js_pop_pointer"] = function() {
                 return ptrStack.pop();
             }
+            bjs["swift_js_set_identity_ref"] = function(refId) {
+                __bjs_identity_ref = refId;
+            }
             bjs["swift_js_push_i64"] = function(v) {
                 i64Stack.push(v);
             }
@@ -509,7 +513,7 @@ export async function createInstantiator(options, swift) {
 
                     const cached = identityCache.get(pointer)?.deref();
                     if (cached && !cached.__swiftHeapObjectState.hasReleased) {
-                        deinit(pointer);
+                                    deinit(pointer);
                         return cached;
                     }
                     if (identityCache.has(pointer)) {

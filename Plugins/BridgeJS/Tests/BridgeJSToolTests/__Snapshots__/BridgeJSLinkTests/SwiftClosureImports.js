@@ -30,6 +30,7 @@ export async function createInstantiator(options, swift) {
 
     let _exports = null;
     let bjs = null;
+    let __bjs_identity_ref = 0;
     const swiftClosureRegistry = (typeof FinalizationRegistry === "undefined") ? { register: () => {}, unregister: () => {} } : new FinalizationRegistry((state) => {
         if (state.unregistered) { return; }
         instance?.exports?.bjs_release_swift_closure(state.pointer);
@@ -117,6 +118,9 @@ export async function createInstantiator(options, swift) {
             }
             bjs["swift_js_pop_pointer"] = function() {
                 return ptrStack.pop();
+            }
+            bjs["swift_js_set_identity_ref"] = function(refId) {
+                __bjs_identity_ref = refId;
             }
             bjs["swift_js_push_i64"] = function(v) {
                 i64Stack.push(v);

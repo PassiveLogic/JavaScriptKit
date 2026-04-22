@@ -133,12 +133,23 @@ public func _bjs_clearArrayPool() -> Void {
     #endif
 }
 
+nonisolated(unsafe) var _IdentityTestSubject_identityExported: Set<UnsafeMutableRawPointer> = []
+
 @_expose(wasm, "bjs_IdentityTestSubject_init")
 @_cdecl("bjs_IdentityTestSubject_init")
 public func _bjs_IdentityTestSubject_init(_ value: Int32) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
     let ret = IdentityTestSubject(value: Int.bridgeJSLiftParameter(value))
-    return ret.bridgeJSLowerReturn()
+    return withExtendedLifetime(ret) {
+        let pointer = Unmanaged.passUnretained(ret).toOpaque()
+        if _IdentityTestSubject_identityExported.contains(pointer) {
+            _swift_js_set_identity_ref(1)
+            return pointer
+        }
+        _IdentityTestSubject_identityExported.insert(pointer)
+        _ = Unmanaged.passRetained(ret)
+        return pointer
+    }
     #else
     fatalError("Only available on WebAssembly")
     #endif
@@ -180,6 +191,7 @@ public func _bjs_IdentityTestSubject_currentValue_get(_ _self: UnsafeMutableRawP
 @_cdecl("bjs_IdentityTestSubject_deinit")
 public func _bjs_IdentityTestSubject_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
+    _IdentityTestSubject_identityExported.remove(pointer)
     Unmanaged<IdentityTestSubject>.fromOpaque(pointer).release()
     #else
     fatalError("Only available on WebAssembly")
@@ -207,12 +219,23 @@ fileprivate func _bjs_IdentityTestSubject_wrap_extern(_ pointer: UnsafeMutableRa
     return _bjs_IdentityTestSubject_wrap_extern(pointer)
 }
 
+nonisolated(unsafe) var _RetainLeakSubject_identityExported: Set<UnsafeMutableRawPointer> = []
+
 @_expose(wasm, "bjs_RetainLeakSubject_init")
 @_cdecl("bjs_RetainLeakSubject_init")
 public func _bjs_RetainLeakSubject_init(_ tag: Int32) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
     let ret = RetainLeakSubject(tag: Int.bridgeJSLiftParameter(tag))
-    return ret.bridgeJSLowerReturn()
+    return withExtendedLifetime(ret) {
+        let pointer = Unmanaged.passUnretained(ret).toOpaque()
+        if _RetainLeakSubject_identityExported.contains(pointer) {
+            _swift_js_set_identity_ref(1)
+            return pointer
+        }
+        _RetainLeakSubject_identityExported.insert(pointer)
+        _ = Unmanaged.passRetained(ret)
+        return pointer
+    }
     #else
     fatalError("Only available on WebAssembly")
     #endif
@@ -243,6 +266,7 @@ public func _bjs_RetainLeakSubject_tag_set(_ _self: UnsafeMutableRawPointer, _ v
 @_cdecl("bjs_RetainLeakSubject_deinit")
 public func _bjs_RetainLeakSubject_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
+    _RetainLeakSubject_identityExported.remove(pointer)
     Unmanaged<RetainLeakSubject>.fromOpaque(pointer).release()
     #else
     fatalError("Only available on WebAssembly")
@@ -270,12 +294,23 @@ fileprivate func _bjs_RetainLeakSubject_wrap_extern(_ pointer: UnsafeMutableRawP
     return _bjs_RetainLeakSubject_wrap_extern(pointer)
 }
 
+nonisolated(unsafe) var _ArrayIdentityElement_identityExported: Set<UnsafeMutableRawPointer> = []
+
 @_expose(wasm, "bjs_ArrayIdentityElement_init")
 @_cdecl("bjs_ArrayIdentityElement_init")
 public func _bjs_ArrayIdentityElement_init(_ tag: Int32) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
     let ret = ArrayIdentityElement(tag: Int.bridgeJSLiftParameter(tag))
-    return ret.bridgeJSLowerReturn()
+    return withExtendedLifetime(ret) {
+        let pointer = Unmanaged.passUnretained(ret).toOpaque()
+        if _ArrayIdentityElement_identityExported.contains(pointer) {
+            _swift_js_set_identity_ref(1)
+            return pointer
+        }
+        _ArrayIdentityElement_identityExported.insert(pointer)
+        _ = Unmanaged.passRetained(ret)
+        return pointer
+    }
     #else
     fatalError("Only available on WebAssembly")
     #endif
@@ -306,6 +341,7 @@ public func _bjs_ArrayIdentityElement_tag_set(_ _self: UnsafeMutableRawPointer, 
 @_cdecl("bjs_ArrayIdentityElement_deinit")
 public func _bjs_ArrayIdentityElement_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
+    _ArrayIdentityElement_identityExported.remove(pointer)
     Unmanaged<ArrayIdentityElement>.fromOpaque(pointer).release()
     #else
     fatalError("Only available on WebAssembly")

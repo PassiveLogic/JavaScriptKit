@@ -30,6 +30,7 @@ export async function createInstantiator(options, swift) {
 
     let _exports = null;
     let bjs = null;
+    let __bjs_identity_ref = 0;
 
     return {
         /**
@@ -91,6 +92,9 @@ export async function createInstantiator(options, swift) {
             }
             bjs["swift_js_pop_pointer"] = function() {
                 return ptrStack.pop();
+            }
+            bjs["swift_js_set_identity_ref"] = function(refId) {
+                __bjs_identity_ref = refId;
             }
             bjs["swift_js_push_i64"] = function(v) {
                 i64Stack.push(v);
@@ -248,13 +252,26 @@ export async function createInstantiator(options, swift) {
 
                     const cached = identityCache.get(pointer)?.deref();
                     if (cached && !cached.__swiftHeapObjectState.hasReleased) {
-                        deinit(pointer);
+                        // __bjs_identity_ref is set by Swift via import call before returning
+                        // If non-zero, Swift didn't retain (cache hit on Swift side)
+                        if (__bjs_identity_ref !== 0) {
+                            __bjs_identity_ref = 0;  // reset for next call
+                            // Swift didn't retain, no deinit needed
+                        } else {
+                            deinit(pointer);  // Swift retained, balance it
+                        }
                         return cached;
                     }
                     if (identityCache.has(pointer)) {
                         identityCache.delete(pointer);
                     }
 
+                    {
+                        if (__bjs_identity_ref !== 0) {
+                            __bjs_identity_ref = 0;
+                            instance.exports.bjs_identity_retain(pointer);
+                        }
+                    }
                     return makeFresh(identityCache);
                 }
 

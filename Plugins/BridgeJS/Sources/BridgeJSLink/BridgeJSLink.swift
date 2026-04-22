@@ -83,6 +83,13 @@ public struct BridgeJSLink {
         };
         """
 
+    /// Whether any class across all skeletons uses identity caching.
+    private var hasAnyIdentityClass: Bool {
+        skeletons.compactMap(\.exported).contains { skeleton in
+            skeleton.classes.contains { shouldUseIdentityCache(for: $0) }
+        }
+    }
+
     var swiftHeapObjectClassJs: String {
         var output = ""
         if enableLifetimeTracking {
@@ -131,12 +138,43 @@ public struct BridgeJSLink {
 
                     const cached = identityCache.get(pointer)?.deref();
                     if (cached && !cached.__swiftHeapObjectState.hasReleased) {
-                        deinit(pointer);
+
+            """
+        if hasAnyIdentityClass {
+            output += """
+                            // __bjs_identity_ref is set by Swift via import call before returning
+                            // If non-zero, Swift didn't retain (cache hit on Swift side)
+                            if (__bjs_identity_ref !== 0) {
+                                __bjs_identity_ref = 0;  // reset for next call
+                                // Swift didn't retain, no deinit needed
+                            } else {
+                                deinit(pointer);  // Swift retained, balance it
+                            }
+
+                """
+        } else {
+            output += "                        deinit(pointer);\n"
+        }
+        output += """
                         return cached;
                     }
                     if (identityCache.has(pointer)) {
                         identityCache.delete(pointer);
                     }
+
+            """
+        if hasAnyIdentityClass {
+            output += """
+
+                        {
+                            if (__bjs_identity_ref !== 0) {
+                                __bjs_identity_ref = 0;
+                                \(JSGlueVariableScope.reservedInstance).exports.bjs_identity_retain(pointer);
+                            }
+                        }
+                """
+        }
+        output += """
 
                     return makeFresh(identityCache);
                 }
@@ -350,6 +388,7 @@ public struct BridgeJSLink {
             "",
             "let _exports = null;",
             "let bjs = null;",
+            "let __bjs_identity_ref = 0;",
         ]
     }
 
@@ -475,6 +514,11 @@ public struct BridgeJSLink {
                 printer.write("bjs[\"swift_js_pop_pointer\"] = function() {")
                 printer.indent {
                     printer.write("return \(JSGlueVariableScope.reservedPointerStack).pop();")
+                }
+                printer.write("}")
+                printer.write("bjs[\"swift_js_set_identity_ref\"] = function(refId) {")
+                printer.indent {
+                    printer.write("__bjs_identity_ref = refId;")
                 }
                 printer.write("}")
                 printer.write("bjs[\"swift_js_push_i64\"] = function(v) {")
@@ -981,6 +1025,9 @@ public struct BridgeJSLink {
         printer.write(lines: data.topLevelTypeLines)
 
         let exportedSkeletons = skeletons.compactMap(\.exported)
+        let hasAnyIdentityClass = exportedSkeletons.contains { skeleton in
+            skeleton.classes.contains { shouldUseIdentityCache(for: $0) }
+        }
         let topLevelNamespaceCode = namespaceBuilder.buildTopLevelNamespaceInitialization(
             exportedSkeletons: exportedSkeletons
         )
@@ -1087,6 +1134,7 @@ public struct BridgeJSLink {
                     )
                 }
                 printer.write("}")
+
             }
             printer.write("},")
         }

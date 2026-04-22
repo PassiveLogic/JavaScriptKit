@@ -54,6 +54,31 @@ private func _swift_js_throw_extern(_ id: Int32) {
     #endif
 }
 
+// MARK: Identity Cache Side Channel
+
+#if arch(wasm32)
+@_extern(wasm, module: "bjs", name: "swift_js_set_identity_ref")
+private func _swift_js_set_identity_ref_extern(_ refId: Int32)
+#else
+private func _swift_js_set_identity_ref_extern(_ refId: Int32) {
+    _onlyAvailableOnWasm()
+}
+#endif
+
+/// Tells JS to use a cached wrapper instead of creating a new one.
+/// Called by identity-mode thunks on cache hit. JS reads this before
+/// calling __construct — if non-zero, returns the cached wrapper directly.
+@_spi(BridgeJS) @inline(never) public func _swift_js_set_identity_ref(_ refId: Int32) {
+    _swift_js_set_identity_ref_extern(refId)
+}
+
+/// JS calls this when its cache is stale but Swift didn't retain (race recovery).
+@_expose(wasm, "bjs_identity_retain")
+@_cdecl("bjs_identity_retain")
+public func _bjs_identity_retain(_ pointer: UnsafeMutableRawPointer) {
+    _ = Unmanaged<AnyObject>.fromOpaque(pointer).retain()
+}
+
 /// Releases a Swift closure from the FinalizationRegistry
 ///
 /// This function is called by the BridgeJS code generator when a Swift closure is released.

@@ -1,9 +1,20 @@
+nonisolated(unsafe) var _CachedModel_identityExported: Set<UnsafeMutableRawPointer> = []
+
 @_expose(wasm, "bjs_CachedModel_init")
 @_cdecl("bjs_CachedModel_init")
 public func _bjs_CachedModel_init(_ nameBytes: Int32, _ nameLength: Int32) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
     let ret = CachedModel(name: String.bridgeJSLiftParameter(nameBytes, nameLength))
-    return ret.bridgeJSLowerReturn()
+    return withExtendedLifetime(ret) {
+        let pointer = Unmanaged.passUnretained(ret).toOpaque()
+        if _CachedModel_identityExported.contains(pointer) {
+            _swift_js_set_identity_ref(1)
+            return pointer
+        }
+        _CachedModel_identityExported.insert(pointer)
+        _ = Unmanaged.passRetained(ret)
+        return pointer
+    }
     #else
     fatalError("Only available on WebAssembly")
     #endif
@@ -34,6 +45,7 @@ public func _bjs_CachedModel_name_set(_ _self: UnsafeMutableRawPointer, _ valueB
 @_cdecl("bjs_CachedModel_deinit")
 public func _bjs_CachedModel_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
+    _CachedModel_identityExported.remove(pointer)
     Unmanaged<CachedModel>.fromOpaque(pointer).release()
     #else
     fatalError("Only available on WebAssembly")

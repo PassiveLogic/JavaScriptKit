@@ -31,6 +31,14 @@ public class ExportSwift {
         self.skeleton = skeleton
     }
 
+    /// Whether a class should use identity caching based on its annotation and the config default.
+    private func shouldUseIdentityCache(for klass: ExportedClass) -> Bool {
+        if let classOverride = klass.identityMode {
+            return classOverride
+        }
+        return skeleton.identityMode == "pointer"
+    }
+
     /// Finalizes the export process and generates the bridge code
     ///
     /// - Parameters:
@@ -103,6 +111,9 @@ public class ExportSwift {
         var abiReturnType: WasmCoreType?
         var externDecls: [DeclSyntax] = []
         let effects: Effects
+        /// When set, heap object returns use the per-class identity Set pattern
+        /// instead of the default `bridgeJSLowerReturn()`.
+        var identityClassName: String?
 
         init(effects: Effects) {
             self.effects = effects
@@ -323,6 +334,25 @@ public class ExportSwift {
                     }
                     """
                 )
+            case .swiftHeapObject(let className):
+                if let identityClass = identityClassName, identityClass == className {
+                    append(
+                        """
+                        return withExtendedLifetime(ret) {
+                            let pointer = Unmanaged.passUnretained(ret).toOpaque()
+                            if _\(raw: identityClass)_identityExported.contains(pointer) {
+                                _swift_js_set_identity_ref(1)
+                                return pointer
+                            }
+                            _\(raw: identityClass)_identityExported.insert(pointer)
+                            _ = Unmanaged.passRetained(ret)
+                            return pointer
+                        }
+                        """
+                    )
+                } else {
+                    append("return ret.bridgeJSLowerReturn()")
+                }
             default:
                 append("return ret.bridgeJSLowerReturn()")
             }
@@ -534,9 +564,11 @@ public class ExportSwift {
     private func renderSingleExportedConstructor(
         constructor: ExportedConstructor,
         callName: String,
-        returnType: BridgeType
+        returnType: BridgeType,
+        identityClassName: String? = nil
     ) throws -> DeclSyntax {
         let builder = ExportedThunkBuilder(effects: constructor.effects)
+        builder.identityClassName = identityClassName
         for param in constructor.parameters {
             try builder.liftParameter(param: param)
         }
@@ -548,9 +580,11 @@ public class ExportSwift {
     private func renderSingleExportedMethod(
         method: ExportedFunction,
         ownerTypeName: String,
-        instanceSelfType: BridgeType
+        instanceSelfType: BridgeType,
+        identityClassName: String? = nil
     ) throws -> DeclSyntax {
         let builder = ExportedThunkBuilder(effects: method.effects)
+        builder.identityClassName = identityClassName
         if !method.effects.isStatic {
             try builder.liftParameter(param: Parameter(label: nil, name: "_self", type: instanceSelfType))
         }
@@ -652,21 +686,31 @@ public class ExportSwift {
     func renderSingleExportedClass(klass: ExportedClass) throws -> [DeclSyntax] {
         var decls: [DeclSyntax] = []
 
-        if let constructor = klass.constructor {
+        let useIdentity = shouldUseIdentityCache(for: klass)
+
+        // For identity-mode classes, emit the per-class Set
+        if useIdentity {
             decls.append(
-                try renderSingleExportedConstructor(
-                    constructor: constructor,
-                    callName: klass.swiftCallName,
-                    returnType: .swiftHeapObject(klass.name)
-                )
+                "nonisolated(unsafe) var _\(raw: klass.name)_identityExported: Set<UnsafeMutableRawPointer> = []"
             )
+        }
+
+        if let constructor = klass.constructor {
+            let constructorDecl = try renderSingleExportedConstructor(
+                constructor: constructor,
+                callName: klass.swiftCallName,
+                returnType: .swiftHeapObject(klass.name),
+                identityClassName: useIdentity ? klass.name : nil
+            )
+            decls.append(constructorDecl)
         }
         for method in klass.methods {
             decls.append(
                 try renderSingleExportedMethod(
                     method: method,
                     ownerTypeName: klass.swiftCallName,
-                    instanceSelfType: .swiftHeapObject(klass.swiftCallName)
+                    instanceSelfType: .swiftHeapObject(klass.swiftCallName),
+                    identityClassName: useIdentity ? klass.name : nil
                 )
             )
         }
@@ -686,6 +730,9 @@ public class ExportSwift {
                     returnType: nil
                 )
             ) { printer in
+                if useIdentity {
+                    printer.write("_\(klass.name)_identityExported.remove(pointer)")
+                }
                 printer.write("Unmanaged<\(klass.swiftCallName)>.fromOpaque(pointer).release()")
             }
             decls.append(DeclSyntax(funcDecl))
