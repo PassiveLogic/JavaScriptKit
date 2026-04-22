@@ -127,8 +127,6 @@ public func _bjs_maybeConfigSwiftSubject(_ present: Int32) -> Void {
 
 nonisolated(unsafe) var _ConfigSwiftSubject_identityTable: Set<UnsafeMutableRawPointer> = []
 
-nonisolated(unsafe) var _ConfigSwiftSubject_wrapperRefs: [UnsafeMutableRawPointer: Int32] = [:]
-
 @_expose(wasm, "bjs_ConfigSwiftSubject_init")
 @_cdecl("bjs_ConfigSwiftSubject_init")
 public func _bjs_ConfigSwiftSubject_init(_ value: Int32) -> UnsafeMutableRawPointer {
@@ -215,24 +213,12 @@ public func _bjs_ConfigSwiftSubject_deinit(_ pointer: UnsafeMutableRawPointer) -
     #endif
 }
 
-@_expose(wasm, "bjs_ConfigSwiftSubject_register_wrapper")
-@_cdecl("bjs_ConfigSwiftSubject_register_wrapper")
-public func _bjs_ConfigSwiftSubject_register_wrapper(_ pointer: UnsafeMutableRawPointer, _ jsRef: Int32) -> Void {
-    #if arch(wasm32)
-    _ConfigSwiftSubject_wrapperRefs[pointer] = jsRef
-    #else
-    fatalError("Only available on WebAssembly")
-    #endif
-}
-
 @_expose(wasm, "bjs_ConfigSwiftSubject_release_wrapper")
 @_cdecl("bjs_ConfigSwiftSubject_release_wrapper")
 public func _bjs_ConfigSwiftSubject_release_wrapper(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    guard let jsRef = _ConfigSwiftSubject_wrapperRefs.removeValue(forKey: pointer) else { return }
-    _ConfigSwiftSubject_identityTable.remove(pointer)
+    guard _ConfigSwiftSubject_identityTable.remove(pointer) != nil else { return }
     Unmanaged<ConfigSwiftSubject>.fromOpaque(pointer).release()
-    _swift_js_release_ref(jsRef)
     #else
     fatalError("Only available on WebAssembly")
     #endif
@@ -277,8 +263,6 @@ fileprivate func _bjs_ConfigSwiftSubject_wrap_extern(_ pointer: UnsafeMutableRaw
 }
 
 nonisolated(unsafe) var _ConfigSwiftRetainLeakSubject_identityTable: Set<UnsafeMutableRawPointer> = []
-
-nonisolated(unsafe) var _ConfigSwiftRetainLeakSubject_wrapperRefs: [UnsafeMutableRawPointer: Int32] = [:]
 
 @_expose(wasm, "bjs_ConfigSwiftRetainLeakSubject_init")
 @_cdecl("bjs_ConfigSwiftRetainLeakSubject_init")
@@ -333,24 +317,12 @@ public func _bjs_ConfigSwiftRetainLeakSubject_deinit(_ pointer: UnsafeMutableRaw
     #endif
 }
 
-@_expose(wasm, "bjs_ConfigSwiftRetainLeakSubject_register_wrapper")
-@_cdecl("bjs_ConfigSwiftRetainLeakSubject_register_wrapper")
-public func _bjs_ConfigSwiftRetainLeakSubject_register_wrapper(_ pointer: UnsafeMutableRawPointer, _ jsRef: Int32) -> Void {
-    #if arch(wasm32)
-    _ConfigSwiftRetainLeakSubject_wrapperRefs[pointer] = jsRef
-    #else
-    fatalError("Only available on WebAssembly")
-    #endif
-}
-
 @_expose(wasm, "bjs_ConfigSwiftRetainLeakSubject_release_wrapper")
 @_cdecl("bjs_ConfigSwiftRetainLeakSubject_release_wrapper")
 public func _bjs_ConfigSwiftRetainLeakSubject_release_wrapper(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    guard let jsRef = _ConfigSwiftRetainLeakSubject_wrapperRefs.removeValue(forKey: pointer) else { return }
-    _ConfigSwiftRetainLeakSubject_identityTable.remove(pointer)
+    guard _ConfigSwiftRetainLeakSubject_identityTable.remove(pointer) != nil else { return }
     Unmanaged<ConfigSwiftRetainLeakSubject>.fromOpaque(pointer).release()
-    _swift_js_release_ref(jsRef)
     #else
     fatalError("Only available on WebAssembly")
     #endif
@@ -395,8 +367,6 @@ fileprivate func _bjs_ConfigSwiftRetainLeakSubject_wrap_extern(_ pointer: Unsafe
 }
 
 nonisolated(unsafe) var _ConfigSwiftChurnSubject_identityTable: Set<UnsafeMutableRawPointer> = []
-
-nonisolated(unsafe) var _ConfigSwiftChurnSubject_wrapperRefs: [UnsafeMutableRawPointer: Int32] = [:]
 
 @_expose(wasm, "bjs_ConfigSwiftChurnSubject_init")
 @_cdecl("bjs_ConfigSwiftChurnSubject_init")
@@ -451,24 +421,12 @@ public func _bjs_ConfigSwiftChurnSubject_deinit(_ pointer: UnsafeMutableRawPoint
     #endif
 }
 
-@_expose(wasm, "bjs_ConfigSwiftChurnSubject_register_wrapper")
-@_cdecl("bjs_ConfigSwiftChurnSubject_register_wrapper")
-public func _bjs_ConfigSwiftChurnSubject_register_wrapper(_ pointer: UnsafeMutableRawPointer, _ jsRef: Int32) -> Void {
-    #if arch(wasm32)
-    _ConfigSwiftChurnSubject_wrapperRefs[pointer] = jsRef
-    #else
-    fatalError("Only available on WebAssembly")
-    #endif
-}
-
 @_expose(wasm, "bjs_ConfigSwiftChurnSubject_release_wrapper")
 @_cdecl("bjs_ConfigSwiftChurnSubject_release_wrapper")
 public func _bjs_ConfigSwiftChurnSubject_release_wrapper(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    guard let jsRef = _ConfigSwiftChurnSubject_wrapperRefs.removeValue(forKey: pointer) else { return }
-    _ConfigSwiftChurnSubject_identityTable.remove(pointer)
+    guard _ConfigSwiftChurnSubject_identityTable.remove(pointer) != nil else { return }
     Unmanaged<ConfigSwiftChurnSubject>.fromOpaque(pointer).release()
-    _swift_js_release_ref(jsRef)
     #else
     fatalError("Only available on WebAssembly")
     #endif

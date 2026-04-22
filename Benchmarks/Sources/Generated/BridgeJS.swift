@@ -1817,8 +1817,6 @@ fileprivate func _bjs_IdentityCacheBenchmarkIdentity_wrap_extern(_ pointer: Unsa
 
 nonisolated(unsafe) var _SimpleClassSwiftIdentity_identityTable: Set<UnsafeMutableRawPointer> = []
 
-nonisolated(unsafe) var _SimpleClassSwiftIdentity_wrapperRefs: [UnsafeMutableRawPointer: Int32] = [:]
-
 @_expose(wasm, "bjs_SimpleClassSwiftIdentity_init")
 @_cdecl("bjs_SimpleClassSwiftIdentity_init")
 public func _bjs_SimpleClassSwiftIdentity_init(_ nameBytes: Int32, _ nameLength: Int32, _ count: Int32, _ flag: Int32, _ rate: Float32, _ precise: Float64) -> UnsafeMutableRawPointer {
@@ -1956,24 +1954,12 @@ public func _bjs_SimpleClassSwiftIdentity_deinit(_ pointer: UnsafeMutableRawPoin
     #endif
 }
 
-@_expose(wasm, "bjs_SimpleClassSwiftIdentity_register_wrapper")
-@_cdecl("bjs_SimpleClassSwiftIdentity_register_wrapper")
-public func _bjs_SimpleClassSwiftIdentity_register_wrapper(_ pointer: UnsafeMutableRawPointer, _ jsRef: Int32) -> Void {
-    #if arch(wasm32)
-    _SimpleClassSwiftIdentity_wrapperRefs[pointer] = jsRef
-    #else
-    fatalError("Only available on WebAssembly")
-    #endif
-}
-
 @_expose(wasm, "bjs_SimpleClassSwiftIdentity_release_wrapper")
 @_cdecl("bjs_SimpleClassSwiftIdentity_release_wrapper")
 public func _bjs_SimpleClassSwiftIdentity_release_wrapper(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    guard let jsRef = _SimpleClassSwiftIdentity_wrapperRefs.removeValue(forKey: pointer) else { return }
-    _SimpleClassSwiftIdentity_identityTable.remove(pointer)
+    guard _SimpleClassSwiftIdentity_identityTable.remove(pointer) != nil else { return }
     Unmanaged<SimpleClassSwiftIdentity>.fromOpaque(pointer).release()
-    _swift_js_release_ref(jsRef)
     #else
     fatalError("Only available on WebAssembly")
     #endif
@@ -2018,8 +2004,6 @@ fileprivate func _bjs_SimpleClassSwiftIdentity_wrap_extern(_ pointer: UnsafeMuta
 }
 
 nonisolated(unsafe) var _ClassRoundtripSwiftIdentity_identityTable: Set<UnsafeMutableRawPointer> = []
-
-nonisolated(unsafe) var _ClassRoundtripSwiftIdentity_wrapperRefs: [UnsafeMutableRawPointer: Int32] = [:]
 
 @_expose(wasm, "bjs_ClassRoundtripSwiftIdentity_init")
 @_cdecl("bjs_ClassRoundtripSwiftIdentity_init")
@@ -2107,24 +2091,12 @@ public func _bjs_ClassRoundtripSwiftIdentity_deinit(_ pointer: UnsafeMutableRawP
     #endif
 }
 
-@_expose(wasm, "bjs_ClassRoundtripSwiftIdentity_register_wrapper")
-@_cdecl("bjs_ClassRoundtripSwiftIdentity_register_wrapper")
-public func _bjs_ClassRoundtripSwiftIdentity_register_wrapper(_ pointer: UnsafeMutableRawPointer, _ jsRef: Int32) -> Void {
-    #if arch(wasm32)
-    _ClassRoundtripSwiftIdentity_wrapperRefs[pointer] = jsRef
-    #else
-    fatalError("Only available on WebAssembly")
-    #endif
-}
-
 @_expose(wasm, "bjs_ClassRoundtripSwiftIdentity_release_wrapper")
 @_cdecl("bjs_ClassRoundtripSwiftIdentity_release_wrapper")
 public func _bjs_ClassRoundtripSwiftIdentity_release_wrapper(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    guard let jsRef = _ClassRoundtripSwiftIdentity_wrapperRefs.removeValue(forKey: pointer) else { return }
-    _ClassRoundtripSwiftIdentity_identityTable.remove(pointer)
+    guard _ClassRoundtripSwiftIdentity_identityTable.remove(pointer) != nil else { return }
     Unmanaged<ClassRoundtripSwiftIdentity>.fromOpaque(pointer).release()
-    _swift_js_release_ref(jsRef)
     #else
     fatalError("Only available on WebAssembly")
     #endif
@@ -2169,8 +2141,6 @@ fileprivate func _bjs_ClassRoundtripSwiftIdentity_wrap_extern(_ pointer: UnsafeM
 }
 
 nonisolated(unsafe) var _IdentityCacheBenchmarkSwiftIdentity_identityTable: Set<UnsafeMutableRawPointer> = []
-
-nonisolated(unsafe) var _IdentityCacheBenchmarkSwiftIdentity_wrapperRefs: [UnsafeMutableRawPointer: Int32] = [:]
 
 @_expose(wasm, "bjs_IdentityCacheBenchmarkSwiftIdentity_init")
 @_cdecl("bjs_IdentityCacheBenchmarkSwiftIdentity_init")
@@ -2225,24 +2195,12 @@ public func _bjs_IdentityCacheBenchmarkSwiftIdentity_deinit(_ pointer: UnsafeMut
     #endif
 }
 
-@_expose(wasm, "bjs_IdentityCacheBenchmarkSwiftIdentity_register_wrapper")
-@_cdecl("bjs_IdentityCacheBenchmarkSwiftIdentity_register_wrapper")
-public func _bjs_IdentityCacheBenchmarkSwiftIdentity_register_wrapper(_ pointer: UnsafeMutableRawPointer, _ jsRef: Int32) -> Void {
-    #if arch(wasm32)
-    _IdentityCacheBenchmarkSwiftIdentity_wrapperRefs[pointer] = jsRef
-    #else
-    fatalError("Only available on WebAssembly")
-    #endif
-}
-
 @_expose(wasm, "bjs_IdentityCacheBenchmarkSwiftIdentity_release_wrapper")
 @_cdecl("bjs_IdentityCacheBenchmarkSwiftIdentity_release_wrapper")
 public func _bjs_IdentityCacheBenchmarkSwiftIdentity_release_wrapper(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    guard let jsRef = _IdentityCacheBenchmarkSwiftIdentity_wrapperRefs.removeValue(forKey: pointer) else { return }
-    _IdentityCacheBenchmarkSwiftIdentity_identityTable.remove(pointer)
+    guard _IdentityCacheBenchmarkSwiftIdentity_identityTable.remove(pointer) != nil else { return }
     Unmanaged<IdentityCacheBenchmarkSwiftIdentity>.fromOpaque(pointer).release()
-    _swift_js_release_ref(jsRef)
     #else
     fatalError("Only available on WebAssembly")
     #endif

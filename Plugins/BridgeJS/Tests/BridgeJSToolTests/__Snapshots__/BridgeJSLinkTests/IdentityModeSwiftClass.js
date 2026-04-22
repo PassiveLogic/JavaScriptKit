@@ -281,8 +281,6 @@ export async function createInstantiator(options, swift) {
                     obj.pointer = pointer;
                     obj.__swiftIdentityHasReleased = false;
                     SwiftCached.__swiftIdentityWrappers.set(pointer, obj);
-                    const jsRef = swift.memory.retain(obj);
-                    instance.exports.bjs_SwiftCached_register_wrapper(pointer, jsRef);
                     return obj;
                 }
 

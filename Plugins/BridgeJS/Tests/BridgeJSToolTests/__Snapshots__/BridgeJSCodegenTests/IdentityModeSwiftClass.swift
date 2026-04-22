@@ -1,7 +1,5 @@
 nonisolated(unsafe) var _SwiftCached_identityTable: Set<UnsafeMutableRawPointer> = []
 
-nonisolated(unsafe) var _SwiftCached_wrapperRefs: [UnsafeMutableRawPointer: Int32] = [:]
-
 @_expose(wasm, "bjs_SwiftCached_init")
 @_cdecl("bjs_SwiftCached_init")
 public func _bjs_SwiftCached_init(_ nameBytes: Int32, _ nameLength: Int32) -> UnsafeMutableRawPointer {
@@ -55,24 +53,12 @@ public func _bjs_SwiftCached_deinit(_ pointer: UnsafeMutableRawPointer) -> Void 
     #endif
 }
 
-@_expose(wasm, "bjs_SwiftCached_register_wrapper")
-@_cdecl("bjs_SwiftCached_register_wrapper")
-public func _bjs_SwiftCached_register_wrapper(_ pointer: UnsafeMutableRawPointer, _ jsRef: Int32) -> Void {
-    #if arch(wasm32)
-    _SwiftCached_wrapperRefs[pointer] = jsRef
-    #else
-    fatalError("Only available on WebAssembly")
-    #endif
-}
-
 @_expose(wasm, "bjs_SwiftCached_release_wrapper")
 @_cdecl("bjs_SwiftCached_release_wrapper")
 public func _bjs_SwiftCached_release_wrapper(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    guard let jsRef = _SwiftCached_wrapperRefs.removeValue(forKey: pointer) else { return }
-    _SwiftCached_identityTable.remove(pointer)
+    guard _SwiftCached_identityTable.remove(pointer) != nil else { return }
     Unmanaged<SwiftCached>.fromOpaque(pointer).release()
-    _swift_js_release_ref(jsRef)
     #else
     fatalError("Only available on WebAssembly")
     #endif

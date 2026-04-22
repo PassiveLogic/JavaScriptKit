@@ -711,19 +711,13 @@ public class ExportSwift {
     func renderSingleExportedClass(klass: ExportedClass) throws -> [DeclSyntax] {
         var decls: [DeclSyntax] = []
 
-        // identityMode: "swift" — per-class state. Simpler than the original
-        // id-based design: the JS-side cache is keyed directly by pointer (as
-        // a strong Map), so Swift only needs:
-        //   - a Set of pointers that already have a JS wrapper
-        //   - a Map of pointer → JS ref (so Swift can release the JS ref
-        //     when the wrapper is released)
-        // See DECISIONS.md D18 for why this supersedes the 5-global design.
+        // identityMode: "swift" — per-class state. Post-D19: Swift no longer
+        // holds the JS wrapper ref; JS keeps the wrapper alive in its own
+        // strong `Map<pointer, wrapper>`. Swift only tracks "have I already
+        // issued a wrapper for this pointer?" via a Set.
         if isSwiftIdentityMode(klass.name) {
             decls.append(
                 "nonisolated(unsafe) var _\(raw: klass.name)_identityTable: Set<UnsafeMutableRawPointer> = []"
-            )
-            decls.append(
-                "nonisolated(unsafe) var _\(raw: klass.name)_wrapperRefs: [UnsafeMutableRawPointer: Int32] = [:]"
             )
         }
 
@@ -766,23 +760,11 @@ public class ExportSwift {
             decls.append(DeclSyntax(funcDecl))
         }
 
-        // identityMode: "swift" — emit the register/release thunks that pair
-        // with the JS-side fresh-wrapper handshake. Both thunks are keyed by
-        // raw pointer — no id indirection. See DECISIONS.md D18.
+        // identityMode: "swift" — emit the release thunk. Post-D19 there is
+        // no separate register thunk: Swift does not hold the JS ref, JS does
+        // (via its `Map<pointer, wrapper>`). Release just drops the Set entry
+        // and deallocates the Swift heap object.
         if isSwiftIdentityMode(klass.name) {
-            do {
-                let registerDecl = SwiftCodePattern.buildExposedFunctionDecl(
-                    abiName: "bjs_\(klass.abiName)_register_wrapper",
-                    signature: SwiftSignatureBuilder.buildABIFunctionSignature(
-                        abiParameters: [("pointer", .pointer), ("jsRef", .i32)],
-                        returnType: nil
-                    )
-                ) { printer in
-                    printer.write("_\(klass.name)_wrapperRefs[pointer] = jsRef")
-                }
-                decls.append(DeclSyntax(registerDecl))
-            }
-
             do {
                 let releaseDecl = SwiftCodePattern.buildExposedFunctionDecl(
                     abiName: "bjs_\(klass.abiName)_release_wrapper",
@@ -791,10 +773,8 @@ public class ExportSwift {
                         returnType: nil
                     )
                 ) { printer in
-                    printer.write("guard let jsRef = _\(klass.name)_wrapperRefs.removeValue(forKey: pointer) else { return }")
-                    printer.write("_\(klass.name)_identityTable.remove(pointer)")
+                    printer.write("guard _\(klass.name)_identityTable.remove(pointer) != nil else { return }")
                     printer.write("Unmanaged<\(klass.swiftCallName)>.fromOpaque(pointer).release()")
-                    printer.write("_swift_js_release_ref(jsRef)")
                 }
                 decls.append(DeclSyntax(releaseDecl))
             }
