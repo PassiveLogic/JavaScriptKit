@@ -1964,6 +1964,139 @@ extension _BridgedAsOptional where Wrapped: _BridgedSwiftStruct {
     }
 }
 
+// MARK: - Typed Array Bulk Transfer
+
+/// Protocol for numeric types eligible for bulk TypedArray transfer.
+///
+/// Conforming types can use the optimized typed-array path for `[T]` bridging
+/// instead of element-by-element stack operations. The codegen detects when an
+/// array's element type conforms to this protocol and generates bulk transfer calls.
+public protocol _BridgeJSTypedArrayElement {
+    /// The TypedArray constructor kind index (matches `typedArrayConstructors` in JS glue).
+    @_spi(BridgeJS) static var _bridgeJSTypedArrayKind: Int32 { get }
+}
+
+extension Int8: _BridgeJSTypedArrayElement {
+    @_spi(BridgeJS) public static var _bridgeJSTypedArrayKind: Int32 { 0 }
+}
+extension UInt8: _BridgeJSTypedArrayElement {
+    @_spi(BridgeJS) public static var _bridgeJSTypedArrayKind: Int32 { 1 }
+}
+extension Int16: _BridgeJSTypedArrayElement {
+    @_spi(BridgeJS) public static var _bridgeJSTypedArrayKind: Int32 { 2 }
+}
+extension UInt16: _BridgeJSTypedArrayElement {
+    @_spi(BridgeJS) public static var _bridgeJSTypedArrayKind: Int32 { 3 }
+}
+extension Int32: _BridgeJSTypedArrayElement {
+    @_spi(BridgeJS) public static var _bridgeJSTypedArrayKind: Int32 { 4 }
+}
+extension UInt32: _BridgeJSTypedArrayElement {
+    @_spi(BridgeJS) public static var _bridgeJSTypedArrayKind: Int32 { 5 }
+}
+extension Int64: _BridgeJSTypedArrayElement {
+    @_spi(BridgeJS) public static var _bridgeJSTypedArrayKind: Int32 { 6 }
+}
+extension UInt64: _BridgeJSTypedArrayElement {
+    @_spi(BridgeJS) public static var _bridgeJSTypedArrayKind: Int32 { 7 }
+}
+extension Float: _BridgeJSTypedArrayElement {
+    @_spi(BridgeJS) public static var _bridgeJSTypedArrayKind: Int32 { 8 }
+}
+extension Double: _BridgeJSTypedArrayElement {
+    @_spi(BridgeJS) public static var _bridgeJSTypedArrayKind: Int32 { 9 }
+}
+extension Int: _BridgeJSTypedArrayElement {
+    @_spi(BridgeJS) public static var _bridgeJSTypedArrayKind: Int32 { 4 }  // Int is i32 on wasm32
+}
+extension UInt: _BridgeJSTypedArrayElement {
+    @_spi(BridgeJS) public static var _bridgeJSTypedArrayKind: Int32 { 5 }  // UInt is u32 on wasm32
+}
+
+// MARK: Typed Array WASM Externs
+
+#if arch(wasm32)
+@_extern(wasm, module: "bjs", name: "swift_js_push_typed_array")
+private func _swift_js_push_typed_array_extern(_ ptr: UnsafeRawPointer, _ count: Int32, _ kind: Int32)
+#else
+private func _swift_js_push_typed_array_extern(_ ptr: UnsafeRawPointer, _ count: Int32, _ kind: Int32) {
+    _onlyAvailableOnWasm()
+}
+#endif
+
+/// Pushes a typed array view onto the typed-array stack.
+/// JS side creates a view of WASM memory and converts to a plain Array immediately.
+@_spi(BridgeJS) @inline(never) public func _swift_js_push_typed_array(
+    _ ptr: UnsafeRawPointer,
+    _ count: Int32,
+    _ kind: Int32
+) {
+    _swift_js_push_typed_array_extern(ptr, count, kind)
+}
+
+#if arch(wasm32)
+@_extern(wasm, module: "bjs", name: "swift_js_init_typed_array_memory")
+private func _swift_js_init_typed_array_memory_extern(
+    _ sourceId: Int32,
+    _ destPtr: UnsafeMutableRawPointer,
+    _ count: Int32,
+    _ kind: Int32
+)
+#else
+private func _swift_js_init_typed_array_memory_extern(
+    _ sourceId: Int32,
+    _ destPtr: UnsafeMutableRawPointer,
+    _ count: Int32,
+    _ kind: Int32
+) {
+    _onlyAvailableOnWasm()
+}
+#endif
+
+/// Copies a JS TypedArray (retained by `sourceId`) into WASM memory at `destPtr`.
+/// The JS side releases the source object after copying.
+@_spi(BridgeJS) @inline(never) public func _swift_js_init_typed_array_memory(
+    _ sourceId: Int32,
+    _ destPtr: UnsafeMutableRawPointer,
+    _ count: Int32,
+    _ kind: Int32
+) {
+    _swift_js_init_typed_array_memory_extern(sourceId, destPtr, count, kind)
+}
+
+// MARK: Typed Array Bulk Push/Lift
+
+extension Array where Element: _BridgeJSTypedArrayElement {
+    /// Bulk push for numeric arrays — uses TypedArray transfer instead of element-by-element.
+    @_spi(BridgeJS) public consuming func bridgeJSTypedArrayPush() {
+        self.withUnsafeBufferPointer { buffer in
+            guard let baseAddress = buffer.baseAddress else {
+                _swift_js_push_typed_array(UnsafeRawPointer(bitPattern: 1)!, 0, Element._bridgeJSTypedArrayKind)
+                return
+            }
+            _swift_js_push_typed_array(
+                UnsafeRawPointer(baseAddress),
+                Int32(buffer.count),
+                Element._bridgeJSTypedArrayKind
+            )
+        }
+    }
+
+    /// Bulk lift for numeric array parameters — uses retain-allocate-callback pattern.
+    @_spi(BridgeJS) public static func bridgeJSTypedArrayLiftParameter(_ sourceId: Int32, _ count: Int32) -> [Element] {
+        guard count > 0 else { return [] }
+        return Array<Element>(unsafeUninitializedCapacity: Int(count)) { buffer, initializedCount in
+            _swift_js_init_typed_array_memory(
+                sourceId,
+                UnsafeMutableRawPointer(buffer.baseAddress!),
+                count,
+                Element._bridgeJSTypedArrayKind
+            )
+            initializedCount = Int(count)
+        }
+    }
+}
+
 // MARK: - Array Support
 
 extension Array: _BridgedSwiftTypeLoweredIntoVoidType

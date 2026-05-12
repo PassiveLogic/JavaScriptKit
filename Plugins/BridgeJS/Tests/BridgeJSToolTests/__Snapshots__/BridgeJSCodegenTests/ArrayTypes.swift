@@ -94,10 +94,10 @@ fileprivate func _bjs_struct_lift_Point_extern() -> Int32 {
 
 @_expose(wasm, "bjs_processIntArray")
 @_cdecl("bjs_processIntArray")
-public func _bjs_processIntArray() -> Void {
+public func _bjs_processIntArray(_ valuesSourceId: Int32, _ valuesCount: Int32) -> Void {
     #if arch(wasm32)
-    let ret = processIntArray(_: [Int].bridgeJSStackPop())
-    ret.bridgeJSStackPush()
+    let ret = processIntArray(_: [Int].bridgeJSTypedArrayLiftParameter(valuesSourceId, valuesCount))
+    ret.bridgeJSTypedArrayPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
@@ -116,10 +116,10 @@ public func _bjs_processStringArray() -> Void {
 
 @_expose(wasm, "bjs_processDoubleArray")
 @_cdecl("bjs_processDoubleArray")
-public func _bjs_processDoubleArray() -> Void {
+public func _bjs_processDoubleArray(_ valuesSourceId: Int32, _ valuesCount: Int32) -> Void {
     #if arch(wasm32)
-    let ret = processDoubleArray(_: [Double].bridgeJSStackPop())
-    ret.bridgeJSStackPush()
+    let ret = processDoubleArray(_: [Double].bridgeJSTypedArrayLiftParameter(valuesSourceId, valuesCount))
+    ret.bridgeJSTypedArrayPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
@@ -171,9 +171,9 @@ public func _bjs_processStatusArray() -> Void {
 
 @_expose(wasm, "bjs_sumIntArray")
 @_cdecl("bjs_sumIntArray")
-public func _bjs_sumIntArray() -> Int32 {
+public func _bjs_sumIntArray(_ valuesSourceId: Int32, _ valuesCount: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = sumIntArray(_: [Int].bridgeJSStackPop())
+    let ret = sumIntArray(_: [Int].bridgeJSTypedArrayLiftParameter(valuesSourceId, valuesCount))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
@@ -380,10 +380,10 @@ public func _bjs_processNestedJSObjectArray() -> Void {
 
 @_expose(wasm, "bjs_multiArrayParams")
 @_cdecl("bjs_multiArrayParams")
-public func _bjs_multiArrayParams() -> Int32 {
+public func _bjs_multiArrayParams(_ numsSourceId: Int32, _ numsCount: Int32) -> Int32 {
     #if arch(wasm32)
     let _tmp_strs = [String].bridgeJSStackPop()
-    let _tmp_nums = [Int].bridgeJSStackPop()
+    let _tmp_nums = [Int].bridgeJSTypedArrayLiftParameter(numsSourceId, numsCount)
     let ret = multiArrayParams(nums: _tmp_nums, strs: _tmp_strs)
     return ret.bridgeJSLowerReturn()
     #else
@@ -437,10 +437,10 @@ fileprivate func _bjs_Item_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> In
 
 @_expose(wasm, "bjs_MultiArrayContainer_init")
 @_cdecl("bjs_MultiArrayContainer_init")
-public func _bjs_MultiArrayContainer_init() -> UnsafeMutableRawPointer {
+public func _bjs_MultiArrayContainer_init(_ numsSourceId: Int32, _ numsCount: Int32) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
     let _tmp_strs = [String].bridgeJSStackPop()
-    let _tmp_nums = [Int].bridgeJSStackPop()
+    let _tmp_nums = [Int].bridgeJSTypedArrayLiftParameter(numsSourceId, numsCount)
     let ret = MultiArrayContainer(nums: _tmp_nums, strs: _tmp_strs)
     return ret.bridgeJSLowerReturn()
     #else
@@ -453,7 +453,7 @@ public func _bjs_MultiArrayContainer_init() -> UnsafeMutableRawPointer {
 public func _bjs_MultiArrayContainer_numbers_get(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
     let ret = MultiArrayContainer.bridgeJSLiftParameter(_self).numbers
-    ret.bridgeJSStackPush()
+    ret.bridgeJSTypedArrayPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
@@ -555,7 +555,7 @@ fileprivate func bjs_importProcessNumbers_extern() -> Void {
 }
 
 func _$importProcessNumbers(_ values: [Double]) throws(JSException) -> Void {
-    let _ = values.bridgeJSLowerParameter()
+    values.bridgeJSTypedArrayPush()
     bjs_importProcessNumbers()
     if let error = _swift_js_take_exception() {
         throw error
@@ -579,7 +579,9 @@ func _$importGetNumbers() throws(JSException) -> [Double] {
     if let error = _swift_js_take_exception() {
         throw error
     }
-    return [Double].bridgeJSLiftReturn()
+    let _count = _swift_js_pop_i32()
+    let _sourceId = _swift_js_pop_i32()
+    return [Double].bridgeJSTypedArrayLiftParameter(_sourceId, _count)
 }
 
 #if arch(wasm32)
@@ -595,12 +597,14 @@ fileprivate func bjs_importTransformNumbers_extern() -> Void {
 }
 
 func _$importTransformNumbers(_ values: [Double]) throws(JSException) -> [Double] {
-    let _ = values.bridgeJSLowerParameter()
+    values.bridgeJSTypedArrayPush()
     bjs_importTransformNumbers()
     if let error = _swift_js_take_exception() {
         throw error
     }
-    return [Double].bridgeJSLiftReturn()
+    let _count = _swift_js_pop_i32()
+    let _sourceId = _swift_js_pop_i32()
+    return [Double].bridgeJSTypedArrayLiftParameter(_sourceId, _count)
 }
 
 #if arch(wasm32)

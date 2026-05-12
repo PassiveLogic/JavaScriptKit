@@ -132,6 +132,19 @@ public struct ClosureCodegen {
 
         for (index, paramType) in signature.parameters.enumerated() {
             let paramName = "param\(index)"
+
+            // Numeric arrays use bulk TypedArray transfer with (sourceId, count) WASM params
+            if case .array(let elementType) = paramType, elementType.isNumericScalar {
+                let sourceIdName = "\(paramName)SourceId"
+                let countName = "\(paramName)Count"
+                abiParams.append((sourceIdName, .i32))
+                abiParams.append((countName, .i32))
+                liftedParams.append(
+                    "[\(elementType.swiftType)].bridgeJSTypedArrayLiftParameter(\(sourceIdName), \(countName))"
+                )
+                continue
+            }
+
             let liftInfo = try paramType.liftParameterInfo()
 
             for (argName, wasmType) in liftInfo.parameters {

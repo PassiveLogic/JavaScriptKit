@@ -275,6 +275,42 @@ public enum BridgeType: Codable, Equatable, Hashable, Sendable {
     indirect case closure(ClosureSignature, useJSTypedClosure: Bool)
 }
 
+extension BridgeType {
+    /// Returns true if this type is a numeric scalar eligible for bulk TypedArray transfer.
+    /// Used by codegen to route `[NumericType]` through the optimized typed-array path
+    /// instead of element-by-element stack operations.
+    public var isNumericScalar: Bool {
+        switch self {
+        case .integer, .float, .double: return true
+        default: return false
+        }
+    }
+
+    /// Returns the JavaScript TypedArray constructor kind index for numeric scalars.
+    /// The index matches the `typedArrayConstructors` table in JS glue code.
+    /// Returns nil for non-numeric types.
+    public var typedArrayKind: Int? {
+        switch self {
+        case .integer(let t):
+            switch (t.width, t.isSigned) {
+            case (.w8, true): return 0  // Int8Array
+            case (.w8, false): return 1  // Uint8Array
+            case (.w16, true): return 2  // Int16Array
+            case (.w16, false): return 3  // Uint16Array
+            case (.w32, true): return 4  // Int32Array
+            case (.w32, false): return 5  // Uint32Array
+            case (.w64, true): return 6  // BigInt64Array
+            case (.w64, false): return 7  // BigUint64Array
+            case (.word, true): return 4  // Int (i32 on wasm32) → Int32Array
+            case (.word, false): return 5  // UInt (u32 on wasm32) → Uint32Array
+            }
+        case .float: return 8  // Float32Array
+        case .double: return 9  // Float64Array
+        default: return nil
+        }
+    }
+}
+
 public enum WasmCoreType: String, Codable, Sendable {
     case i32, i64, f32, f64, pointer
 }

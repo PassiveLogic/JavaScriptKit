@@ -31,6 +31,8 @@ export async function createInstantiator(options, swift) {
     let f32Stack = [];
     let f64Stack = [];
     let ptrStack = [];
+    let taStack = [];
+    const typedArrayConstructors = [Int8Array, Uint8Array, Int16Array, Uint16Array, Int32Array, Uint32Array, BigInt64Array, BigUint64Array, Float32Array, Float64Array];
     const enumHelpers = {};
     const structHelpers = {};
 
@@ -139,6 +141,28 @@ export async function createInstantiator(options, swift) {
             }
             bjs["swift_js_pop_i64"] = function() {
                 return i64Stack.pop();
+            }
+            bjs["swift_js_push_typed_array"] = function(ptr, count, kind) {
+                const Constructor = typedArrayConstructors[kind];
+                const elemSize = Constructor.BYTES_PER_ELEMENT;
+                const totalBytes = count * elemSize;
+                const copy = new Uint8Array(totalBytes);
+                copy.set(new Uint8Array(memory.buffer, ptr, totalBytes));
+                taStack.push(new Constructor(copy.buffer));
+            }
+            bjs["swift_js_init_typed_array_memory"] = function(sourceId, destPtr, count, kind) {
+                const source = swift.memory.getObject(sourceId);
+                swift.memory.release(sourceId);
+                const Constructor = typedArrayConstructors[kind];
+                const elemSize = Constructor.BYTES_PER_ELEMENT;
+                if (destPtr % elemSize === 0) {
+                    const dest = new Constructor(memory.buffer, destPtr, count);
+                    dest.set(source);
+                } else {
+                    const dest = new Uint8Array(memory.buffer, destPtr, count * elemSize);
+                    const srcBytes = new Uint8Array(source.buffer, source.byteOffset, source.byteLength);
+                    dest.set(srcBytes);
+                }
             }
             bjs["swift_js_struct_lower_Config"] = function(objectId) {
                 structHelpers.Config.lower(swift.memory.getObject(objectId));
@@ -544,18 +568,12 @@ export async function createInstantiator(options, swift) {
                     return optResult;
                 },
                 testIntArrayDefault: function bjs_testIntArrayDefault(values = [1, 2, 3]) {
-                    for (const elem of values) {
-                        i32Stack.push((elem | 0));
-                    }
-                    i32Stack.push(values.length);
-                    instance.exports.bjs_testIntArrayDefault();
-                    const arrayLen = i32Stack.pop();
-                    const arrayResult = [];
-                    for (let i = 0; i < arrayLen; i++) {
-                        const int = i32Stack.pop();
-                        arrayResult.push(int);
-                    }
-                    arrayResult.reverse();
+                    const typedArr = new typedArrayConstructors[4](values);
+                    const typedArrId = swift.memory.retain(typedArr);
+                    instance.exports.bjs_testIntArrayDefault(typedArrId, typedArr.length);
+                    const taSrc = taStack.pop();
+                    const arrayResult = new Array(taSrc.length);
+                    for (let i = 0; i < taSrc.length; i++) arrayResult[i] = taSrc[i];
                     return arrayResult;
                 },
                 testStringArrayDefault: function bjs_testStringArrayDefault(names = ["a", "b", "c"]) {
@@ -577,18 +595,12 @@ export async function createInstantiator(options, swift) {
                     return arrayResult;
                 },
                 testDoubleArrayDefault: function bjs_testDoubleArrayDefault(values = [1.5, 2.5, 3.5]) {
-                    for (const elem of values) {
-                        f64Stack.push(elem);
-                    }
-                    i32Stack.push(values.length);
-                    instance.exports.bjs_testDoubleArrayDefault();
-                    const arrayLen = i32Stack.pop();
-                    const arrayResult = [];
-                    for (let i = 0; i < arrayLen; i++) {
-                        const f64 = f64Stack.pop();
-                        arrayResult.push(f64);
-                    }
-                    arrayResult.reverse();
+                    const typedArr = new typedArrayConstructors[9](values);
+                    const typedArrId = swift.memory.retain(typedArr);
+                    instance.exports.bjs_testDoubleArrayDefault(typedArrId, typedArr.length);
+                    const taSrc = taStack.pop();
+                    const arrayResult = new Array(taSrc.length);
+                    for (let i = 0; i < taSrc.length; i++) arrayResult[i] = taSrc[i];
                     return arrayResult;
                 },
                 testBoolArrayDefault: function bjs_testBoolArrayDefault(flags = [true, false, true]) {
@@ -607,28 +619,20 @@ export async function createInstantiator(options, swift) {
                     return arrayResult;
                 },
                 testEmptyArrayDefault: function bjs_testEmptyArrayDefault(items = []) {
-                    for (const elem of items) {
-                        i32Stack.push((elem | 0));
-                    }
-                    i32Stack.push(items.length);
-                    instance.exports.bjs_testEmptyArrayDefault();
-                    const arrayLen = i32Stack.pop();
-                    const arrayResult = [];
-                    for (let i = 0; i < arrayLen; i++) {
-                        const int = i32Stack.pop();
-                        arrayResult.push(int);
-                    }
-                    arrayResult.reverse();
+                    const typedArr = new typedArrayConstructors[4](items);
+                    const typedArrId = swift.memory.retain(typedArr);
+                    instance.exports.bjs_testEmptyArrayDefault(typedArrId, typedArr.length);
+                    const taSrc = taStack.pop();
+                    const arrayResult = new Array(taSrc.length);
+                    for (let i = 0; i < taSrc.length; i++) arrayResult[i] = taSrc[i];
                     return arrayResult;
                 },
                 testMixedWithArrayDefault: function bjs_testMixedWithArrayDefault(name = "test", values = [10, 20, 30], enabled = true) {
                     const nameBytes = textEncoder.encode(name);
                     const nameId = swift.memory.retain(nameBytes);
-                    for (const elem of values) {
-                        i32Stack.push((elem | 0));
-                    }
-                    i32Stack.push(values.length);
-                    instance.exports.bjs_testMixedWithArrayDefault(nameId, nameBytes.length, enabled);
+                    const typedArr = new typedArrayConstructors[4](values);
+                    const typedArrId = swift.memory.retain(typedArr);
+                    instance.exports.bjs_testMixedWithArrayDefault(nameId, nameBytes.length, typedArrId, typedArr.length, enabled);
                     const ret = tmpRetString;
                     tmpRetString = undefined;
                     return ret;

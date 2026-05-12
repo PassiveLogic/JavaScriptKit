@@ -34,6 +34,8 @@ final class JSGlueVariableScope {
     static let reservedStructHelpers = "structHelpers"
     static let reservedSwiftClosureRegistry = "swiftClosureRegistry"
     static let reservedMakeSwiftClosure = "makeClosure"
+    static let reservedTaStack = "taStack"
+    static let reservedTypedArrayConstructors = "typedArrayConstructors"
 
     private let intrinsicRegistry: JSIntrinsicRegistry
 
@@ -63,6 +65,8 @@ final class JSGlueVariableScope {
         reservedStructHelpers,
         reservedSwiftClosureRegistry,
         reservedMakeSwiftClosure,
+        reservedTaStack,
+        reservedTypedArrayConstructors,
     ]
 
     init(intrinsicRegistry: JSIntrinsicRegistry) {
@@ -1317,6 +1321,8 @@ struct IntrinsicJSFragment: Sendable {
             )
         case .namespaceEnum(let string):
             throw BridgeJSLinkError(message: "Namespace enums are not supported to be passed as parameters: \(string)")
+        case .array(let elementType) where elementType.isNumericScalar:
+            return numericArrayLower(elementType: elementType)
         case .array(let elementType):
             return try arrayLower(elementType: elementType)
         case .dictionary(let valueType):
@@ -1374,6 +1380,8 @@ struct IntrinsicJSFragment: Sendable {
             throw BridgeJSLinkError(
                 message: "Namespace enums are not supported to be returned from functions: \(string)"
             )
+        case .array(let elementType) where elementType.isNumericScalar:
+            return numericArrayLift(elementType: elementType)
         case .array(let elementType):
             return try arrayLift(elementType: elementType)
         case .dictionary(let valueType):
@@ -1472,6 +1480,8 @@ struct IntrinsicJSFragment: Sendable {
                 message:
                     "Namespace enums are not supported to be passed as parameters to imported JS functions: \(string)"
             )
+        case .array(let elementType) where elementType.isNumericScalar:
+            return numericArrayLift(elementType: elementType)
         case .array(let elementType):
             return try arrayLift(elementType: elementType)
         case .dictionary(let valueType):
@@ -1534,6 +1544,8 @@ struct IntrinsicJSFragment: Sendable {
             throw BridgeJSLinkError(
                 message: "Namespace enums are not supported to be returned from imported JS functions: \(string)"
             )
+        case .array(let elementType) where elementType.isNumericScalar:
+            return numericArrayLowerReturn(elementType: elementType)
         case .array(let elementType):
             return try arrayLower(elementType: elementType)
         case .dictionary(let valueType):
@@ -1827,6 +1839,72 @@ struct IntrinsicJSFragment: Sendable {
     }
 
     // MARK: - Array Helpers
+
+    /// Lowers a numeric array from JS to Swift via bulk TypedArray transfer.
+    /// Converts the JS Array to a TypedArray, retains it, and passes (sourceId, count) as WASM params.
+    static func numericArrayLower(elementType: BridgeType) -> IntrinsicJSFragment {
+        let kind = elementType.typedArrayKind!
+        return IntrinsicJSFragment(
+            parameters: ["arr"],
+            printCode: { arguments, context in
+                let (scope, printer) = (context.scope, context.printer)
+                let arr = arguments[0]
+                let typedArrVar = scope.variable("typedArr")
+                let idVar = scope.variable("typedArrId")
+                printer.write(
+                    "const \(typedArrVar) = new \(JSGlueVariableScope.reservedTypedArrayConstructors)[\(kind)](\(arr));"
+                )
+                printer.write(
+                    "const \(idVar) = \(JSGlueVariableScope.reservedSwift).memory.retain(\(typedArrVar));"
+                )
+                return [idVar, "\(typedArrVar).length"]
+            }
+        )
+    }
+
+    /// Lowers a numeric array from JS to Swift for return values (stack-based).
+    /// Pushes (sourceId, count) onto the i32 stack.
+    static func numericArrayLowerReturn(elementType: BridgeType) -> IntrinsicJSFragment {
+        let kind = elementType.typedArrayKind!
+        return IntrinsicJSFragment(
+            parameters: ["arr"],
+            printCode: { arguments, context in
+                let (scope, printer) = (context.scope, context.printer)
+                let arr = arguments[0]
+                let typedArrVar = scope.variable("typedArr")
+                let idVar = scope.variable("typedArrId")
+                printer.write(
+                    "const \(typedArrVar) = new \(JSGlueVariableScope.reservedTypedArrayConstructors)[\(kind)](\(arr));"
+                )
+                printer.write(
+                    "const \(idVar) = \(JSGlueVariableScope.reservedSwift).memory.retain(\(typedArrVar));"
+                )
+                scope.emitPushI32Parameter(idVar, printer: printer)
+                scope.emitPushI32Parameter("\(typedArrVar).length", printer: printer)
+                return []
+            }
+        )
+    }
+
+    /// Lifts a numeric array from Swift to JS via bulk TypedArray transfer.
+    /// Swift side pushed the typed array view onto taStack; JS pops and converts to plain Array.
+    static func numericArrayLift(elementType: BridgeType) -> IntrinsicJSFragment {
+        return IntrinsicJSFragment(
+            parameters: [],
+            printCode: { arguments, context in
+                let (scope, printer) = (context.scope, context.printer)
+                let srcVar = scope.variable("taSrc")
+                let resultVar = scope.variable("arrayResult")
+                let iVar = scope.variable("i")
+                printer.write("const \(srcVar) = \(JSGlueVariableScope.reservedTaStack).pop();")
+                printer.write("const \(resultVar) = new Array(\(srcVar).length);")
+                printer.write(
+                    "for (let \(iVar) = 0; \(iVar) < \(srcVar).length; \(iVar)++) \(resultVar)[\(iVar)] = \(srcVar)[\(iVar)];"
+                )
+                return [resultVar]
+            }
+        )
+    }
 
     /// Lowers an array from JS to Swift by iterating elements and pushing to stacks
     static func arrayLower(elementType: BridgeType) throws -> IntrinsicJSFragment {

@@ -11,12 +11,14 @@ fileprivate func bjs_roundtrip_extern() -> Void {
 }
 
 func _$roundtrip(_ items: [Int]) throws(JSException) -> [Int] {
-    let _ = items.bridgeJSLowerParameter()
+    items.bridgeJSTypedArrayPush()
     bjs_roundtrip()
     if let error = _swift_js_take_exception() {
         throw error
     }
-    return [Int].bridgeJSLiftReturn()
+    let _count = _swift_js_pop_i32()
+    let _sourceId = _swift_js_pop_i32()
+    return [Int].bridgeJSTypedArrayLiftParameter(_sourceId, _count)
 }
 
 #if arch(wasm32)

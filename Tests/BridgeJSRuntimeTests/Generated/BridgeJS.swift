@@ -2199,7 +2199,7 @@ private enum _BJS_Closure_20BridgeJSRuntimeTestssSaSd_y {
         return { [callback] param0 in
             #if arch(wasm32)
             let callbackValue = callback.bridgeJSLowerParameter()
-            let _ = param0.bridgeJSLowerParameter()
+            param0.bridgeJSTypedArrayPush()
             invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestssSaSd_y(callbackValue)
             #else
             fatalError("Only available on WebAssembly")
@@ -2221,10 +2221,10 @@ extension JSTypedClosure where Signature == (sending [Double]) -> Void {
 
 @_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestssSaSd_y")
 @_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestssSaSd_y")
-public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestssSaSd_y(_ boxPtr: UnsafeMutableRawPointer) -> Void {
+public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestssSaSd_y(_ boxPtr: UnsafeMutableRawPointer, _ param0SourceId: Int32, _ param0Count: Int32) -> Void {
     #if arch(wasm32)
     let closure = Unmanaged<_BridgeJSTypedClosureBox<(sending [Double]) -> Void>>.fromOpaque(boxPtr).takeUnretainedValue().closure
-    closure([Double].bridgeJSLiftParameter())
+    closure([Double].bridgeJSTypedArrayLiftParameter(param0SourceId, param0Count))
     #else
     fatalError("Only available on WebAssembly")
     #endif
@@ -3334,10 +3334,10 @@ fileprivate func bjs_DataProcessor_optionalHelper_set_extern(_ jsObject: Int32, 
 
 @_expose(wasm, "bjs_ArraySupportExports_static_roundTripIntArray")
 @_cdecl("bjs_ArraySupportExports_static_roundTripIntArray")
-public func _bjs_ArraySupportExports_static_roundTripIntArray() -> Void {
+public func _bjs_ArraySupportExports_static_roundTripIntArray(_ vSourceId: Int32, _ vCount: Int32) -> Void {
     #if arch(wasm32)
-    let ret = ArraySupportExports.roundTripIntArray(_: [Int].bridgeJSStackPop())
-    ret.bridgeJSStackPush()
+    let ret = ArraySupportExports.roundTripIntArray(_: [Int].bridgeJSTypedArrayLiftParameter(vSourceId, vCount))
+    ret.bridgeJSTypedArrayPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
@@ -3356,10 +3356,10 @@ public func _bjs_ArraySupportExports_static_roundTripStringArray() -> Void {
 
 @_expose(wasm, "bjs_ArraySupportExports_static_roundTripDoubleArray")
 @_cdecl("bjs_ArraySupportExports_static_roundTripDoubleArray")
-public func _bjs_ArraySupportExports_static_roundTripDoubleArray() -> Void {
+public func _bjs_ArraySupportExports_static_roundTripDoubleArray(_ vSourceId: Int32, _ vCount: Int32) -> Void {
     #if arch(wasm32)
-    let ret = ArraySupportExports.roundTripDoubleArray(_: [Double].bridgeJSStackPop())
-    ret.bridgeJSStackPush()
+    let ret = ArraySupportExports.roundTripDoubleArray(_: [Double].bridgeJSTypedArrayLiftParameter(vSourceId, vCount))
+    ret.bridgeJSTypedArrayPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
@@ -3766,12 +3766,12 @@ public func _bjs_ArraySupportExports_static_roundTripNestedSwiftClassArray() -> 
 
 @_expose(wasm, "bjs_ArraySupportExports_static_multiArrayFirst")
 @_cdecl("bjs_ArraySupportExports_static_multiArrayFirst")
-public func _bjs_ArraySupportExports_static_multiArrayFirst() -> Void {
+public func _bjs_ArraySupportExports_static_multiArrayFirst(_ aSourceId: Int32, _ aCount: Int32) -> Void {
     #if arch(wasm32)
     let _tmp_b = [String].bridgeJSStackPop()
-    let _tmp_a = [Int].bridgeJSStackPop()
+    let _tmp_a = [Int].bridgeJSTypedArrayLiftParameter(aSourceId, aCount)
     let ret = ArraySupportExports.multiArrayFirst(_: _tmp_a, _: _tmp_b)
-    ret.bridgeJSStackPush()
+    ret.bridgeJSTypedArrayPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
@@ -3779,10 +3779,10 @@ public func _bjs_ArraySupportExports_static_multiArrayFirst() -> Void {
 
 @_expose(wasm, "bjs_ArraySupportExports_static_multiArraySecond")
 @_cdecl("bjs_ArraySupportExports_static_multiArraySecond")
-public func _bjs_ArraySupportExports_static_multiArraySecond() -> Void {
+public func _bjs_ArraySupportExports_static_multiArraySecond(_ aSourceId: Int32, _ aCount: Int32) -> Void {
     #if arch(wasm32)
     let _tmp_b = [String].bridgeJSStackPop()
-    let _tmp_a = [Int].bridgeJSStackPop()
+    let _tmp_a = [Int].bridgeJSTypedArrayLiftParameter(aSourceId, aCount)
     let ret = ArraySupportExports.multiArraySecond(_: _tmp_a, _: _tmp_b)
     ret.bridgeJSStackPush()
     #else
@@ -3950,9 +3950,9 @@ public func _bjs_DefaultArgumentExports_static_describeConstructorDefaults(_ val
 
 @_expose(wasm, "bjs_DefaultArgumentExports_static_arrayWithDefault")
 @_cdecl("bjs_DefaultArgumentExports_static_arrayWithDefault")
-public func _bjs_DefaultArgumentExports_static_arrayWithDefault() -> Int32 {
+public func _bjs_DefaultArgumentExports_static_arrayWithDefault(_ valuesSourceId: Int32, _ valuesCount: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = DefaultArgumentExports.arrayWithDefault(_: [Int].bridgeJSStackPop())
+    let ret = DefaultArgumentExports.arrayWithDefault(_: [Int].bridgeJSTypedArrayLiftParameter(valuesSourceId, valuesCount))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
@@ -3972,9 +3972,9 @@ public func _bjs_DefaultArgumentExports_static_arrayWithOptionalDefault() -> Int
 
 @_expose(wasm, "bjs_DefaultArgumentExports_static_arrayMixedDefaults")
 @_cdecl("bjs_DefaultArgumentExports_static_arrayMixedDefaults")
-public func _bjs_DefaultArgumentExports_static_arrayMixedDefaults(_ prefixBytes: Int32, _ prefixLength: Int32, _ suffixBytes: Int32, _ suffixLength: Int32) -> Void {
+public func _bjs_DefaultArgumentExports_static_arrayMixedDefaults(_ prefixBytes: Int32, _ prefixLength: Int32, _ valuesSourceId: Int32, _ valuesCount: Int32, _ suffixBytes: Int32, _ suffixLength: Int32) -> Void {
     #if arch(wasm32)
-    let ret = DefaultArgumentExports.arrayMixedDefaults(prefix: String.bridgeJSLiftParameter(prefixBytes, prefixLength), values: [Int].bridgeJSStackPop(), suffix: String.bridgeJSLiftParameter(suffixBytes, suffixLength))
+    let ret = DefaultArgumentExports.arrayMixedDefaults(prefix: String.bridgeJSLiftParameter(prefixBytes, prefixLength), values: [Int].bridgeJSTypedArrayLiftParameter(valuesSourceId, valuesCount), suffix: String.bridgeJSLiftParameter(suffixBytes, suffixLength))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
@@ -6547,9 +6547,9 @@ fileprivate func _bjs_struct_lift_ArrayMembers_extern() -> Int32 {
 
 @_expose(wasm, "bjs_ArrayMembers_sumValues")
 @_cdecl("bjs_ArrayMembers_sumValues")
-public func _bjs_ArrayMembers_sumValues() -> Int32 {
+public func _bjs_ArrayMembers_sumValues(_ valuesSourceId: Int32, _ valuesCount: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = ArrayMembers.bridgeJSLiftParameter().sumValues(_: [Int].bridgeJSStackPop())
+    let ret = ArrayMembers.bridgeJSLiftParameter().sumValues(_: [Int].bridgeJSTypedArrayLiftParameter(valuesSourceId, valuesCount))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
@@ -7974,9 +7974,9 @@ public func _bjs_roundTripArrayMembers() -> Void {
 
 @_expose(wasm, "bjs_arrayMembersSum")
 @_cdecl("bjs_arrayMembersSum")
-public func _bjs_arrayMembersSum() -> Int32 {
+public func _bjs_arrayMembersSum(_ valuesSourceId: Int32, _ valuesCount: Int32) -> Int32 {
     #if arch(wasm32)
-    let _tmp_values = [Int].bridgeJSStackPop()
+    let _tmp_values = [Int].bridgeJSTypedArrayLiftParameter(valuesSourceId, valuesCount)
     let _tmp_value = ArrayMembers.bridgeJSLiftParameter()
     let ret = arrayMembersSum(_: _tmp_value, _: _tmp_values)
     return ret.bridgeJSLowerReturn()
@@ -11188,7 +11188,7 @@ fileprivate func bjs_ArraySupportImports_runJsArraySupportTests_static_extern() 
 }
 
 func _$ArraySupportImports_jsIntArrayLength(_ items: [Int]) throws(JSException) -> Int {
-    let _ = items.bridgeJSLowerParameter()
+    items.bridgeJSTypedArrayPush()
     let ret = bjs_ArraySupportImports_jsIntArrayLength_static()
     if let error = _swift_js_take_exception() {
         throw error
@@ -11197,21 +11197,25 @@ func _$ArraySupportImports_jsIntArrayLength(_ items: [Int]) throws(JSException) 
 }
 
 func _$ArraySupportImports_jsRoundTripIntArray(_ items: [Int]) throws(JSException) -> [Int] {
-    let _ = items.bridgeJSLowerParameter()
+    items.bridgeJSTypedArrayPush()
     bjs_ArraySupportImports_jsRoundTripIntArray_static()
     if let error = _swift_js_take_exception() {
         throw error
     }
-    return [Int].bridgeJSLiftReturn()
+    let _count = _swift_js_pop_i32()
+    let _sourceId = _swift_js_pop_i32()
+    return [Int].bridgeJSTypedArrayLiftParameter(_sourceId, _count)
 }
 
 func _$ArraySupportImports_jsRoundTripNumberArray(_ values: [Double]) throws(JSException) -> [Double] {
-    let _ = values.bridgeJSLowerParameter()
+    values.bridgeJSTypedArrayPush()
     bjs_ArraySupportImports_jsRoundTripNumberArray_static()
     if let error = _swift_js_take_exception() {
         throw error
     }
-    return [Double].bridgeJSLiftReturn()
+    let _count = _swift_js_pop_i32()
+    let _sourceId = _swift_js_pop_i32()
+    return [Double].bridgeJSTypedArrayLiftParameter(_sourceId, _count)
 }
 
 func _$ArraySupportImports_jsRoundTripStringArray(_ values: [String]) throws(JSException) -> [String] {
@@ -11314,7 +11318,7 @@ func _$ArraySupportImports_jsRoundTripOptionalJSClassArray(_ values: [Optional<A
 }
 
 func _$ArraySupportImports_jsSumNumberArray(_ values: [Double]) throws(JSException) -> Double {
-    let _ = values.bridgeJSLowerParameter()
+    values.bridgeJSTypedArrayPush()
     let ret = bjs_ArraySupportImports_jsSumNumberArray_static()
     if let error = _swift_js_take_exception() {
         throw error
@@ -11327,7 +11331,9 @@ func _$ArraySupportImports_jsCreateNumberArray() throws(JSException) -> [Double]
     if let error = _swift_js_take_exception() {
         throw error
     }
-    return [Double].bridgeJSLiftReturn()
+    let _count = _swift_js_pop_i32()
+    let _sourceId = _swift_js_pop_i32()
+    return [Double].bridgeJSTypedArrayLiftParameter(_sourceId, _count)
 }
 
 func _$ArraySupportImports_runJsArraySupportTests() throws(JSException) -> Void {
@@ -11547,7 +11553,7 @@ func _$AsyncImportImports_jsAsyncRoundTripIntArray(_ values: [Double]) async thr
         }, makeRejectClosure: {
             JSTypedClosure<(sending JSValue) -> Void>($0)
         }) { resolveRef, rejectRef in
-        let _ = values.bridgeJSLowerParameter()
+        values.bridgeJSTypedArrayPush()
         bjs_AsyncImportImports_jsAsyncRoundTripIntArray_static(resolveRef, rejectRef)
     }
     return resolved
@@ -13444,7 +13450,7 @@ fileprivate func bjs_JSClassWithArrayMembers_firstLabel_extern(_ self: Int32) ->
 
 func _$JSClassWithArrayMembers_init(_ numbers: [Int], _ labels: [String]) throws(JSException) -> JSObject {
     let _ = labels.bridgeJSLowerParameter()
-    let _ = numbers.bridgeJSLowerParameter()
+    numbers.bridgeJSTypedArrayPush()
     let ret = bjs_JSClassWithArrayMembers_init()
     if let error = _swift_js_take_exception() {
         throw error
@@ -13458,7 +13464,9 @@ func _$JSClassWithArrayMembers_numbers_get(_ self: JSObject) throws(JSException)
     if let error = _swift_js_take_exception() {
         throw error
     }
-    return [Int].bridgeJSLiftReturn()
+    let _count = _swift_js_pop_i32()
+    let _sourceId = _swift_js_pop_i32()
+    return [Int].bridgeJSTypedArrayLiftParameter(_sourceId, _count)
 }
 
 func _$JSClassWithArrayMembers_labels_get(_ self: JSObject) throws(JSException) -> [String] {
@@ -13472,7 +13480,7 @@ func _$JSClassWithArrayMembers_labels_get(_ self: JSObject) throws(JSException) 
 
 func _$JSClassWithArrayMembers_numbers_set(_ self: JSObject, _ newValue: [Int]) throws(JSException) -> Void {
     let selfValue = self.bridgeJSLowerParameter()
-    let _ = newValue.bridgeJSLowerParameter()
+    newValue.bridgeJSTypedArrayPush()
     bjs_JSClassWithArrayMembers_numbers_set(selfValue)
     if let error = _swift_js_take_exception() {
         throw error
@@ -13490,12 +13498,14 @@ func _$JSClassWithArrayMembers_labels_set(_ self: JSObject, _ newValue: [String]
 
 func _$JSClassWithArrayMembers_concatNumbers(_ self: JSObject, _ values: [Int]) throws(JSException) -> [Int] {
     let selfValue = self.bridgeJSLowerParameter()
-    let _ = values.bridgeJSLowerParameter()
+    values.bridgeJSTypedArrayPush()
     bjs_JSClassWithArrayMembers_concatNumbers(selfValue)
     if let error = _swift_js_take_exception() {
         throw error
     }
-    return [Int].bridgeJSLiftReturn()
+    let _count = _swift_js_pop_i32()
+    let _sourceId = _swift_js_pop_i32()
+    return [Int].bridgeJSTypedArrayLiftParameter(_sourceId, _count)
 }
 
 func _$JSClassWithArrayMembers_concatLabels(_ self: JSObject, _ values: [String]) throws(JSException) -> [String] {
@@ -13532,7 +13542,7 @@ fileprivate func bjs_JSClassSupportImports_makeJSClassWithArrayMembers_static_ex
 
 func _$JSClassSupportImports_makeJSClassWithArrayMembers(_ numbers: [Int], _ labels: [String]) throws(JSException) -> JSClassWithArrayMembers {
     let _ = labels.bridgeJSLowerParameter()
-    let _ = numbers.bridgeJSLowerParameter()
+    numbers.bridgeJSTypedArrayPush()
     let ret = bjs_JSClassSupportImports_makeJSClassWithArrayMembers_static()
     if let error = _swift_js_take_exception() {
         throw error

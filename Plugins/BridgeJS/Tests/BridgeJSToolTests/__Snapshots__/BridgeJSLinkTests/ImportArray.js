@@ -25,6 +25,8 @@ export async function createInstantiator(options, swift) {
     let f32Stack = [];
     let f64Stack = [];
     let ptrStack = [];
+    let taStack = [];
+    const typedArrayConstructors = [Int8Array, Uint8Array, Int16Array, Uint16Array, Int32Array, Uint32Array, BigInt64Array, BigUint64Array, Float32Array, Float64Array];
     const enumHelpers = {};
     const structHelpers = {};
 
@@ -98,6 +100,28 @@ export async function createInstantiator(options, swift) {
             }
             bjs["swift_js_pop_i64"] = function() {
                 return i64Stack.pop();
+            }
+            bjs["swift_js_push_typed_array"] = function(ptr, count, kind) {
+                const Constructor = typedArrayConstructors[kind];
+                const elemSize = Constructor.BYTES_PER_ELEMENT;
+                const totalBytes = count * elemSize;
+                const copy = new Uint8Array(totalBytes);
+                copy.set(new Uint8Array(memory.buffer, ptr, totalBytes));
+                taStack.push(new Constructor(copy.buffer));
+            }
+            bjs["swift_js_init_typed_array_memory"] = function(sourceId, destPtr, count, kind) {
+                const source = swift.memory.getObject(sourceId);
+                swift.memory.release(sourceId);
+                const Constructor = typedArrayConstructors[kind];
+                const elemSize = Constructor.BYTES_PER_ELEMENT;
+                if (destPtr % elemSize === 0) {
+                    const dest = new Constructor(memory.buffer, destPtr, count);
+                    dest.set(source);
+                } else {
+                    const dest = new Uint8Array(memory.buffer, destPtr, count * elemSize);
+                    const srcBytes = new Uint8Array(source.buffer, source.byteOffset, source.byteLength);
+                    dest.set(srcBytes);
+                }
             }
             bjs["swift_js_return_optional_bool"] = function(isSome, value) {
                 if (isSome === 0) {
@@ -192,18 +216,14 @@ export async function createInstantiator(options, swift) {
             const TestModule = importObject["TestModule"] = importObject["TestModule"] || {};
             TestModule["bjs_roundtrip"] = function bjs_roundtrip() {
                 try {
-                    const arrayLen = i32Stack.pop();
-                    const arrayResult = [];
-                    for (let i = 0; i < arrayLen; i++) {
-                        const int = i32Stack.pop();
-                        arrayResult.push(int);
-                    }
-                    arrayResult.reverse();
+                    const taSrc = taStack.pop();
+                    const arrayResult = new Array(taSrc.length);
+                    for (let i = 0; i < taSrc.length; i++) arrayResult[i] = taSrc[i];
                     let ret = imports.roundtrip(arrayResult);
-                    for (const elem of ret) {
-                        i32Stack.push((elem | 0));
-                    }
-                    i32Stack.push(ret.length);
+                    const typedArr = new typedArrayConstructors[4](ret);
+                    const typedArrId = swift.memory.retain(typedArr);
+                    i32Stack.push(typedArrId);
+                    i32Stack.push(typedArr.length);
                 } catch (error) {
                     setException(error);
                 }

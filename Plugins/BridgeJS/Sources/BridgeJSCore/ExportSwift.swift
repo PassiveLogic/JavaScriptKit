@@ -137,6 +137,18 @@ public class ExportSwift {
             case .swiftStruct(let structName):
                 typeNameForIntrinsic = structName
                 liftingExpr = ExprSyntax("\(raw: structName).bridgeJSLiftParameter()")
+            case .array(let elementType) where elementType.isNumericScalar:
+                // Numeric arrays use bulk TypedArray transfer with (sourceId, count) WASM params
+                let elementSwiftType = elementType.swiftType
+                typeNameForIntrinsic = param.type.swiftType
+                liftingExpr = ExprSyntax(
+                    "[\(raw: elementSwiftType)].bridgeJSTypedArrayLiftParameter(\(raw: param.name)SourceId, \(raw: param.name)Count)"
+                )
+                // Override the ABI signatures: two i32 params instead of stack-based
+                liftedParameterExprs.append(liftingExpr)
+                abiParameterSignatures.append(("\(param.name)SourceId", .i32))
+                abiParameterSignatures.append(("\(param.name)Count", .i32))
+                return
             case .array:
                 typeNameForIntrinsic = param.type.swiftType
                 liftingExpr = StackCodegen().liftExpression(for: param.type)
@@ -301,6 +313,8 @@ public class ExportSwift {
             switch returnType {
             case .closure(_, useJSTypedClosure: false):
                 append("return JSTypedClosure(ret).bridgeJSLowerReturn()")
+            case .array(let elementType) where elementType.isNumericScalar:
+                append("ret.bridgeJSTypedArrayPush()")
             case .array, .nullable(.array, _):
                 let stackCodegen = StackCodegen()
                 for stmt in stackCodegen.lowerStatements(for: returnType, accessor: "ret", varPrefix: "ret") {

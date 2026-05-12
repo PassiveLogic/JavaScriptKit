@@ -152,6 +152,10 @@ public struct ImportTS {
                 // The just created JSObject is not owned by the caller unlike those passed in parameters,
                 // so we need to extend its lifetime during the call to ensure the JSObject.id is valid.
                 valuesToExtendLifetimeDuringCall.append(param.name)
+            case .array(let elementType) where elementType.isNumericScalar:
+                // Numeric arrays use bulk TypedArray transfer instead of element-by-element
+                stackLoweringStmts.insert("\(param.name).bridgeJSTypedArrayPush()", at: 0)
+                return
             default:
                 break
             }
@@ -302,6 +306,12 @@ public struct ImportTS {
                 switch returnType {
                 case .closure(let signature, _):
                     liftExpr = "_BJS_Closure_\(signature.mangleName).bridgeJSLift(ret)"
+                case .array(let elementType) where elementType.isNumericScalar:
+                    // Numeric arrays: JS pushed (sourceId, count) onto i32 stack
+                    let swiftElementType = elementType.swiftType
+                    body.write("let _count = _swift_js_pop_i32()")
+                    body.write("let _sourceId = _swift_js_pop_i32()")
+                    liftExpr = "[\(swiftElementType)].bridgeJSTypedArrayLiftParameter(_sourceId, _count)"
                 default:
                     if liftingInfo.valueToLift != nil {
                         liftExpr = "\(returnType.swiftType).bridgeJSLiftReturn(ret)"

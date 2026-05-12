@@ -322,10 +322,10 @@ public func _bjs_testOptionalStructWithValueDefault() -> Void {
 
 @_expose(wasm, "bjs_testIntArrayDefault")
 @_cdecl("bjs_testIntArrayDefault")
-public func _bjs_testIntArrayDefault() -> Void {
+public func _bjs_testIntArrayDefault(_ valuesSourceId: Int32, _ valuesCount: Int32) -> Void {
     #if arch(wasm32)
-    let ret = testIntArrayDefault(values: [Int].bridgeJSStackPop())
-    ret.bridgeJSStackPush()
+    let ret = testIntArrayDefault(values: [Int].bridgeJSTypedArrayLiftParameter(valuesSourceId, valuesCount))
+    ret.bridgeJSTypedArrayPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
@@ -344,10 +344,10 @@ public func _bjs_testStringArrayDefault() -> Void {
 
 @_expose(wasm, "bjs_testDoubleArrayDefault")
 @_cdecl("bjs_testDoubleArrayDefault")
-public func _bjs_testDoubleArrayDefault() -> Void {
+public func _bjs_testDoubleArrayDefault(_ valuesSourceId: Int32, _ valuesCount: Int32) -> Void {
     #if arch(wasm32)
-    let ret = testDoubleArrayDefault(values: [Double].bridgeJSStackPop())
-    ret.bridgeJSStackPush()
+    let ret = testDoubleArrayDefault(values: [Double].bridgeJSTypedArrayLiftParameter(valuesSourceId, valuesCount))
+    ret.bridgeJSTypedArrayPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
@@ -366,10 +366,10 @@ public func _bjs_testBoolArrayDefault() -> Void {
 
 @_expose(wasm, "bjs_testEmptyArrayDefault")
 @_cdecl("bjs_testEmptyArrayDefault")
-public func _bjs_testEmptyArrayDefault() -> Void {
+public func _bjs_testEmptyArrayDefault(_ itemsSourceId: Int32, _ itemsCount: Int32) -> Void {
     #if arch(wasm32)
-    let ret = testEmptyArrayDefault(items: [Int].bridgeJSStackPop())
-    ret.bridgeJSStackPush()
+    let ret = testEmptyArrayDefault(items: [Int].bridgeJSTypedArrayLiftParameter(itemsSourceId, itemsCount))
+    ret.bridgeJSTypedArrayPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
@@ -377,9 +377,9 @@ public func _bjs_testEmptyArrayDefault() -> Void {
 
 @_expose(wasm, "bjs_testMixedWithArrayDefault")
 @_cdecl("bjs_testMixedWithArrayDefault")
-public func _bjs_testMixedWithArrayDefault(_ nameBytes: Int32, _ nameLength: Int32, _ enabled: Int32) -> Void {
+public func _bjs_testMixedWithArrayDefault(_ nameBytes: Int32, _ nameLength: Int32, _ valuesSourceId: Int32, _ valuesCount: Int32, _ enabled: Int32) -> Void {
     #if arch(wasm32)
-    let ret = testMixedWithArrayDefault(name: String.bridgeJSLiftParameter(nameBytes, nameLength), values: [Int].bridgeJSStackPop(), enabled: Bool.bridgeJSLiftParameter(enabled))
+    let ret = testMixedWithArrayDefault(name: String.bridgeJSLiftParameter(nameBytes, nameLength), values: [Int].bridgeJSTypedArrayLiftParameter(valuesSourceId, valuesCount), enabled: Bool.bridgeJSLiftParameter(enabled))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")

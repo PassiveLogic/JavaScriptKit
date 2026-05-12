@@ -345,6 +345,8 @@ public struct BridgeJSLink {
             "let \(JSGlueVariableScope.reservedF32Stack) = [];",
             "let \(JSGlueVariableScope.reservedF64Stack) = [];",
             "let \(JSGlueVariableScope.reservedPointerStack) = [];",
+            "let \(JSGlueVariableScope.reservedTaStack) = [];",
+            "const \(JSGlueVariableScope.reservedTypedArrayConstructors) = [Int8Array, Uint8Array, Int16Array, Uint16Array, Int32Array, Uint32Array, BigInt64Array, BigUint64Array, Float32Array, Float64Array];",
             "const \(JSGlueVariableScope.reservedEnumHelpers) = {};",
             "const \(JSGlueVariableScope.reservedStructHelpers) = {};",
             "",
@@ -485,6 +487,66 @@ public struct BridgeJSLink {
                 printer.write("bjs[\"swift_js_pop_i64\"] = function() {")
                 printer.indent {
                     printer.write("return \(JSGlueVariableScope.reservedI64Stack).pop();")
+                }
+                printer.write("}")
+                printer.write("bjs[\"swift_js_push_typed_array\"] = function(ptr, count, kind) {")
+                printer.indent {
+                    printer.write(
+                        "const Constructor = \(JSGlueVariableScope.reservedTypedArrayConstructors)[kind];"
+                    )
+                    printer.write(
+                        "const elemSize = Constructor.BYTES_PER_ELEMENT;"
+                    )
+                    printer.write(
+                        "const totalBytes = count * elemSize;"
+                    )
+                    printer.write(
+                        "const copy = new Uint8Array(totalBytes);"
+                    )
+                    printer.write(
+                        "copy.set(new Uint8Array(\(JSGlueVariableScope.reservedMemory).buffer, ptr, totalBytes));"
+                    )
+                    printer.write(
+                        "\(JSGlueVariableScope.reservedTaStack).push(new Constructor(copy.buffer));"
+                    )
+                }
+                printer.write("}")
+                printer.write("bjs[\"swift_js_init_typed_array_memory\"] = function(sourceId, destPtr, count, kind) {")
+                printer.indent {
+                    printer.write(
+                        "const source = \(JSGlueVariableScope.reservedSwift).\(JSGlueVariableScope.reservedMemory).getObject(sourceId);"
+                    )
+                    printer.write(
+                        "\(JSGlueVariableScope.reservedSwift).\(JSGlueVariableScope.reservedMemory).release(sourceId);"
+                    )
+                    printer.write(
+                        "const Constructor = \(JSGlueVariableScope.reservedTypedArrayConstructors)[kind];"
+                    )
+                    printer.write(
+                        "const elemSize = Constructor.BYTES_PER_ELEMENT;"
+                    )
+                    printer.write(
+                        "if (destPtr % elemSize === 0) {"
+                    )
+                    printer.indent {
+                        printer.write(
+                            "const dest = new Constructor(\(JSGlueVariableScope.reservedMemory).buffer, destPtr, count);"
+                        )
+                        printer.write("dest.set(source);")
+                    }
+                    printer.write(
+                        "} else {"
+                    )
+                    printer.indent {
+                        printer.write(
+                            "const dest = new Uint8Array(\(JSGlueVariableScope.reservedMemory).buffer, destPtr, count * elemSize);"
+                        )
+                        printer.write(
+                            "const srcBytes = new Uint8Array(source.buffer, source.byteOffset, source.byteLength);"
+                        )
+                        printer.write("dest.set(srcBytes);")
+                    }
+                    printer.write("}")
                 }
                 printer.write("}")
                 if !allStructs.isEmpty {

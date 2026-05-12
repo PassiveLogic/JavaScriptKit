@@ -38,6 +38,8 @@ export async function createInstantiator(options, swift) {
     let f32Stack = [];
     let f64Stack = [];
     let ptrStack = [];
+    let taStack = [];
+    const typedArrayConstructors = [Int8Array, Uint8Array, Int16Array, Uint16Array, Int32Array, Uint32Array, BigInt64Array, BigUint64Array, Float32Array, Float64Array];
     const enumHelpers = {};
     const structHelpers = {};
 
@@ -122,6 +124,28 @@ export async function createInstantiator(options, swift) {
             }
             bjs["swift_js_pop_i64"] = function() {
                 return i64Stack.pop();
+            }
+            bjs["swift_js_push_typed_array"] = function(ptr, count, kind) {
+                const Constructor = typedArrayConstructors[kind];
+                const elemSize = Constructor.BYTES_PER_ELEMENT;
+                const totalBytes = count * elemSize;
+                const copy = new Uint8Array(totalBytes);
+                copy.set(new Uint8Array(memory.buffer, ptr, totalBytes));
+                taStack.push(new Constructor(copy.buffer));
+            }
+            bjs["swift_js_init_typed_array_memory"] = function(sourceId, destPtr, count, kind) {
+                const source = swift.memory.getObject(sourceId);
+                swift.memory.release(sourceId);
+                const Constructor = typedArrayConstructors[kind];
+                const elemSize = Constructor.BYTES_PER_ELEMENT;
+                if (destPtr % elemSize === 0) {
+                    const dest = new Constructor(memory.buffer, destPtr, count);
+                    dest.set(source);
+                } else {
+                    const dest = new Uint8Array(memory.buffer, destPtr, count * elemSize);
+                    const srcBytes = new Uint8Array(source.buffer, source.byteOffset, source.byteLength);
+                    dest.set(srcBytes);
+                }
             }
             bjs["swift_js_struct_lower_Point"] = function(objectId) {
                 structHelpers.Point.lower(swift.memory.getObject(objectId));
@@ -249,13 +273,9 @@ export async function createInstantiator(options, swift) {
             }
             TestModule["bjs_importProcessNumbers"] = function bjs_importProcessNumbers() {
                 try {
-                    const arrayLen = i32Stack.pop();
-                    const arrayResult = [];
-                    for (let i = 0; i < arrayLen; i++) {
-                        const f64 = f64Stack.pop();
-                        arrayResult.push(f64);
-                    }
-                    arrayResult.reverse();
+                    const taSrc = taStack.pop();
+                    const arrayResult = new Array(taSrc.length);
+                    for (let i = 0; i < taSrc.length; i++) arrayResult[i] = taSrc[i];
                     imports.importProcessNumbers(arrayResult);
                 } catch (error) {
                     setException(error);
@@ -264,28 +284,24 @@ export async function createInstantiator(options, swift) {
             TestModule["bjs_importGetNumbers"] = function bjs_importGetNumbers() {
                 try {
                     let ret = imports.importGetNumbers();
-                    for (const elem of ret) {
-                        f64Stack.push(elem);
-                    }
-                    i32Stack.push(ret.length);
+                    const typedArr = new typedArrayConstructors[9](ret);
+                    const typedArrId = swift.memory.retain(typedArr);
+                    i32Stack.push(typedArrId);
+                    i32Stack.push(typedArr.length);
                 } catch (error) {
                     setException(error);
                 }
             }
             TestModule["bjs_importTransformNumbers"] = function bjs_importTransformNumbers() {
                 try {
-                    const arrayLen = i32Stack.pop();
-                    const arrayResult = [];
-                    for (let i = 0; i < arrayLen; i++) {
-                        const f64 = f64Stack.pop();
-                        arrayResult.push(f64);
-                    }
-                    arrayResult.reverse();
+                    const taSrc = taStack.pop();
+                    const arrayResult = new Array(taSrc.length);
+                    for (let i = 0; i < taSrc.length; i++) arrayResult[i] = taSrc[i];
                     let ret = imports.importTransformNumbers(arrayResult);
-                    for (const elem of ret) {
-                        f64Stack.push(elem);
-                    }
-                    i32Stack.push(ret.length);
+                    const typedArr = new typedArrayConstructors[9](ret);
+                    const typedArrId = swift.memory.retain(typedArr);
+                    i32Stack.push(typedArrId);
+                    i32Stack.push(typedArr.length);
                 } catch (error) {
                     setException(error);
                 }
@@ -406,29 +422,23 @@ export async function createInstantiator(options, swift) {
                 }
 
                 constructor(nums, strs) {
-                    for (const elem of nums) {
-                        i32Stack.push((elem | 0));
-                    }
-                    i32Stack.push(nums.length);
-                    for (const elem1 of strs) {
-                        const bytes = textEncoder.encode(elem1);
+                    const typedArr = new typedArrayConstructors[4](nums);
+                    const typedArrId = swift.memory.retain(typedArr);
+                    for (const elem of strs) {
+                        const bytes = textEncoder.encode(elem);
                         const id = swift.memory.retain(bytes);
                         i32Stack.push(bytes.length);
                         i32Stack.push(id);
                     }
                     i32Stack.push(strs.length);
-                    const ret = instance.exports.bjs_MultiArrayContainer_init();
+                    const ret = instance.exports.bjs_MultiArrayContainer_init(typedArrId, typedArr.length);
                     return MultiArrayContainer.__construct(ret);
                 }
                 get numbers() {
                     instance.exports.bjs_MultiArrayContainer_numbers_get(this.pointer);
-                    const arrayLen = i32Stack.pop();
-                    const arrayResult = [];
-                    for (let i = 0; i < arrayLen; i++) {
-                        const int = i32Stack.pop();
-                        arrayResult.push(int);
-                    }
-                    arrayResult.reverse();
+                    const taSrc = taStack.pop();
+                    const arrayResult = new Array(taSrc.length);
+                    for (let i = 0; i < taSrc.length; i++) arrayResult[i] = taSrc[i];
                     return arrayResult;
                 }
                 get strings() {
@@ -450,18 +460,12 @@ export async function createInstantiator(options, swift) {
                 Item,
                 MultiArrayContainer,
                 processIntArray: function bjs_processIntArray(values) {
-                    for (const elem of values) {
-                        i32Stack.push((elem | 0));
-                    }
-                    i32Stack.push(values.length);
-                    instance.exports.bjs_processIntArray();
-                    const arrayLen = i32Stack.pop();
-                    const arrayResult = [];
-                    for (let i = 0; i < arrayLen; i++) {
-                        const int = i32Stack.pop();
-                        arrayResult.push(int);
-                    }
-                    arrayResult.reverse();
+                    const typedArr = new typedArrayConstructors[4](values);
+                    const typedArrId = swift.memory.retain(typedArr);
+                    instance.exports.bjs_processIntArray(typedArrId, typedArr.length);
+                    const taSrc = taStack.pop();
+                    const arrayResult = new Array(taSrc.length);
+                    for (let i = 0; i < taSrc.length; i++) arrayResult[i] = taSrc[i];
                     return arrayResult;
                 },
                 processStringArray: function bjs_processStringArray(values) {
@@ -483,18 +487,12 @@ export async function createInstantiator(options, swift) {
                     return arrayResult;
                 },
                 processDoubleArray: function bjs_processDoubleArray(values) {
-                    for (const elem of values) {
-                        f64Stack.push(elem);
-                    }
-                    i32Stack.push(values.length);
-                    instance.exports.bjs_processDoubleArray();
-                    const arrayLen = i32Stack.pop();
-                    const arrayResult = [];
-                    for (let i = 0; i < arrayLen; i++) {
-                        const f64 = f64Stack.pop();
-                        arrayResult.push(f64);
-                    }
-                    arrayResult.reverse();
+                    const typedArr = new typedArrayConstructors[9](values);
+                    const typedArrId = swift.memory.retain(typedArr);
+                    instance.exports.bjs_processDoubleArray(typedArrId, typedArr.length);
+                    const taSrc = taStack.pop();
+                    const arrayResult = new Array(taSrc.length);
+                    for (let i = 0; i < taSrc.length; i++) arrayResult[i] = taSrc[i];
                     return arrayResult;
                 },
                 processBoolArray: function bjs_processBoolArray(values) {
@@ -558,11 +556,9 @@ export async function createInstantiator(options, swift) {
                     return arrayResult;
                 },
                 sumIntArray: function bjs_sumIntArray(values) {
-                    for (const elem of values) {
-                        i32Stack.push((elem | 0));
-                    }
-                    i32Stack.push(values.length);
-                    const ret = instance.exports.bjs_sumIntArray();
+                    const typedArr = new typedArrayConstructors[4](values);
+                    const typedArrId = swift.memory.retain(typedArr);
+                    const ret = instance.exports.bjs_sumIntArray(typedArrId, typedArr.length);
                     return ret;
                 },
                 findFirstPoint: function bjs_findFirstPoint(points, matching) {
@@ -971,18 +967,16 @@ export async function createInstantiator(options, swift) {
                     return arrayResult;
                 },
                 multiArrayParams: function bjs_multiArrayParams(nums, strs) {
-                    for (const elem of nums) {
-                        i32Stack.push((elem | 0));
-                    }
-                    i32Stack.push(nums.length);
-                    for (const elem1 of strs) {
-                        const bytes = textEncoder.encode(elem1);
+                    const typedArr = new typedArrayConstructors[4](nums);
+                    const typedArrId = swift.memory.retain(typedArr);
+                    for (const elem of strs) {
+                        const bytes = textEncoder.encode(elem);
                         const id = swift.memory.retain(bytes);
                         i32Stack.push(bytes.length);
                         i32Stack.push(id);
                     }
                     i32Stack.push(strs.length);
-                    const ret = instance.exports.bjs_multiArrayParams();
+                    const ret = instance.exports.bjs_multiArrayParams(typedArrId, typedArr.length);
                     return ret;
                 },
                 multiOptionalArrayParams: function bjs_multiOptionalArrayParams(a, b) {
