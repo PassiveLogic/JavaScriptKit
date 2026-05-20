@@ -19,6 +19,22 @@ export async function createInstantiator(options, swift) {
     let tmpRetOptionalFloat;
     let tmpRetOptionalDouble;
     let tmpRetOptionalHeapObject;
+    const _strEncCache = new Map();
+    const _strEncCacheMax = 4096;
+    function _cachedEncode(str) {
+        let encoded = _strEncCache.get(str);
+        if (encoded) {
+            _strEncCache.delete(str);
+            _strEncCache.set(str, encoded);
+            return encoded;
+        }
+        encoded = textEncoder.encode(str);
+        if (_strEncCache.size >= _strEncCacheMax) {
+            _strEncCache.delete(_strEncCache.keys().next().value);
+        }
+        _strEncCache.set(str, encoded);
+        return encoded;
+    }
     let strStack = [];
     let i32Stack = [];
     let i64Stack = [];
@@ -211,7 +227,7 @@ export async function createInstantiator(options, swift) {
             TestModule["bjs_Greeter_name_get"] = function bjs_Greeter_name_get(self) {
                 try {
                     let ret = swift.memory.getObject(self).name;
-                    tmpRetBytes = textEncoder.encode(ret);
+                    tmpRetBytes = _cachedEncode(ret);
                     return tmpRetBytes.length;
                 } catch (error) {
                     setException(error);
@@ -237,7 +253,7 @@ export async function createInstantiator(options, swift) {
             TestModule["bjs_Greeter_greet"] = function bjs_Greeter_greet(self) {
                 try {
                     let ret = swift.memory.getObject(self).greet();
-                    tmpRetBytes = textEncoder.encode(ret);
+                    tmpRetBytes = _cachedEncode(ret);
                     return tmpRetBytes.length;
                 } catch (error) {
                     setException(error);

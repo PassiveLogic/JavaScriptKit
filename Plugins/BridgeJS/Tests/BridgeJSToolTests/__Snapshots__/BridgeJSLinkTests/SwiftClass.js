@@ -19,6 +19,22 @@ export async function createInstantiator(options, swift) {
     let tmpRetOptionalFloat;
     let tmpRetOptionalDouble;
     let tmpRetOptionalHeapObject;
+    const _strEncCache = new Map();
+    const _strEncCacheMax = 4096;
+    function _cachedEncode(str) {
+        let encoded = _strEncCache.get(str);
+        if (encoded) {
+            _strEncCache.delete(str);
+            _strEncCache.set(str, encoded);
+            return encoded;
+        }
+        encoded = textEncoder.encode(str);
+        if (_strEncCache.size >= _strEncCacheMax) {
+            _strEncCache.delete(_strEncCache.keys().next().value);
+        }
+        _strEncCache.set(str, encoded);
+        return encoded;
+    }
     let strStack = [];
     let i32Stack = [];
     let i64Stack = [];
@@ -295,7 +311,7 @@ export async function createInstantiator(options, swift) {
                 }
 
                 constructor(name) {
-                    const nameBytes = textEncoder.encode(name);
+                    const nameBytes = _cachedEncode(name);
                     const nameId = swift.memory.retain(nameBytes);
                     const ret = instance.exports.bjs_Greeter_init(nameId, nameBytes.length);
                     return Greeter.__construct(ret);
@@ -307,7 +323,7 @@ export async function createInstantiator(options, swift) {
                     return ret;
                 }
                 changeName(name) {
-                    const nameBytes = textEncoder.encode(name);
+                    const nameBytes = _cachedEncode(name);
                     const nameId = swift.memory.retain(nameBytes);
                     instance.exports.bjs_Greeter_changeName(this.pointer, nameId, nameBytes.length);
                 }
@@ -330,7 +346,7 @@ export async function createInstantiator(options, swift) {
                     return ret;
                 }
                 set name(value) {
-                    const valueBytes = textEncoder.encode(value);
+                    const valueBytes = _cachedEncode(value);
                     const valueId = swift.memory.retain(valueBytes);
                     instance.exports.bjs_Greeter_name_set(this.pointer, valueId, valueBytes.length);
                 }

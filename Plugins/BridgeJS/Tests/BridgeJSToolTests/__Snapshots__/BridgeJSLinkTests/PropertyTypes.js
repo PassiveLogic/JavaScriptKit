@@ -19,6 +19,22 @@ export async function createInstantiator(options, swift) {
     let tmpRetOptionalFloat;
     let tmpRetOptionalDouble;
     let tmpRetOptionalHeapObject;
+    const _strEncCache = new Map();
+    const _strEncCacheMax = 4096;
+    function _cachedEncode(str) {
+        let encoded = _strEncCache.get(str);
+        if (encoded) {
+            _strEncCache.delete(str);
+            _strEncCache.set(str, encoded);
+            return encoded;
+        }
+        encoded = textEncoder.encode(str);
+        if (_strEncCache.size >= _strEncCacheMax) {
+            _strEncCache.delete(_strEncCache.keys().next().value);
+        }
+        _strEncCache.set(str, encoded);
+        return encoded;
+    }
     let strStack = [];
     let i32Stack = [];
     let i64Stack = [];
@@ -267,7 +283,7 @@ export async function createInstantiator(options, swift) {
                 }
 
                 constructor(intValue, floatValue, doubleValue, boolValue, stringValue, jsObject) {
-                    const stringValueBytes = textEncoder.encode(stringValue);
+                    const stringValueBytes = _cachedEncode(stringValue);
                     const stringValueId = swift.memory.retain(stringValueBytes);
                     const ret = instance.exports.bjs_PropertyHolder_init(intValue, floatValue, doubleValue, boolValue, stringValueId, stringValueBytes.length, swift.memory.retain(jsObject));
                     return PropertyHolder.__construct(ret);
@@ -313,7 +329,7 @@ export async function createInstantiator(options, swift) {
                     return ret;
                 }
                 set stringValue(value) {
-                    const valueBytes = textEncoder.encode(value);
+                    const valueBytes = _cachedEncode(value);
                     const valueId = swift.memory.retain(valueBytes);
                     instance.exports.bjs_PropertyHolder_stringValue_set(this.pointer, valueId, valueBytes.length);
                 }
@@ -362,7 +378,7 @@ export async function createInstantiator(options, swift) {
                     return ret;
                 }
                 set lazyValue(value) {
-                    const valueBytes = textEncoder.encode(value);
+                    const valueBytes = _cachedEncode(value);
                     const valueId = swift.memory.retain(valueBytes);
                     instance.exports.bjs_PropertyHolder_lazyValue_set(this.pointer, valueId, valueBytes.length);
                 }
@@ -377,7 +393,7 @@ export async function createInstantiator(options, swift) {
                     return ret;
                 }
                 set computedReadWrite(value) {
-                    const valueBytes = textEncoder.encode(value);
+                    const valueBytes = _cachedEncode(value);
                     const valueId = swift.memory.retain(valueBytes);
                     instance.exports.bjs_PropertyHolder_computedReadWrite_set(this.pointer, valueId, valueBytes.length);
                 }
@@ -392,7 +408,7 @@ export async function createInstantiator(options, swift) {
             const exports = {
                 PropertyHolder,
                 createPropertyHolder: function bjs_createPropertyHolder(intValue, floatValue, doubleValue, boolValue, stringValue, jsObject) {
-                    const stringValueBytes = textEncoder.encode(stringValue);
+                    const stringValueBytes = _cachedEncode(stringValue);
                     const stringValueId = swift.memory.retain(stringValueBytes);
                     const ret = instance.exports.bjs_createPropertyHolder(intValue, floatValue, doubleValue, boolValue, stringValueId, stringValueBytes.length, swift.memory.retain(jsObject));
                     return PropertyHolder.__construct(ret);

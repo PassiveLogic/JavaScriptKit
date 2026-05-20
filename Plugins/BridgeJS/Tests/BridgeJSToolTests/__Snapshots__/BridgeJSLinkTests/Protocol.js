@@ -43,6 +43,22 @@ export async function createInstantiator(options, swift) {
     let tmpRetOptionalFloat;
     let tmpRetOptionalDouble;
     let tmpRetOptionalHeapObject;
+    const _strEncCache = new Map();
+    const _strEncCacheMax = 4096;
+    function _cachedEncode(str) {
+        let encoded = _strEncCache.get(str);
+        if (encoded) {
+            _strEncCache.delete(str);
+            _strEncCache.set(str, encoded);
+            return encoded;
+        }
+        encoded = textEncoder.encode(str);
+        if (_strEncCache.size >= _strEncCacheMax) {
+            _strEncCache.delete(_strEncCache.keys().next().value);
+        }
+        _strEncCache.set(str, encoded);
+        return encoded;
+    }
     let strStack = [];
     let i32Stack = [];
     let i64Stack = [];
@@ -281,7 +297,7 @@ export async function createInstantiator(options, swift) {
             TestModule["bjs_MyViewControllerDelegate_delegateName_get"] = function bjs_MyViewControllerDelegate_delegateName_get(self) {
                 try {
                     let ret = swift.memory.getObject(self).delegateName;
-                    tmpRetBytes = textEncoder.encode(ret);
+                    tmpRetBytes = _cachedEncode(ret);
                     return tmpRetBytes.length;
                 } catch (error) {
                     setException(error);
@@ -334,7 +350,7 @@ export async function createInstantiator(options, swift) {
             TestModule["bjs_MyViewControllerDelegate_rawStringEnum_get"] = function bjs_MyViewControllerDelegate_rawStringEnum_get(self) {
                 try {
                     let ret = swift.memory.getObject(self).rawStringEnum;
-                    tmpRetBytes = textEncoder.encode(ret);
+                    tmpRetBytes = _cachedEncode(ret);
                     return tmpRetBytes.length;
                 } catch (error) {
                     setException(error);
@@ -533,7 +549,7 @@ export async function createInstantiator(options, swift) {
             TestModule["bjs_MyViewControllerDelegate_createEnum"] = function bjs_MyViewControllerDelegate_createEnum(self) {
                 try {
                     let ret = swift.memory.getObject(self).createEnum();
-                    tmpRetBytes = textEncoder.encode(ret);
+                    tmpRetBytes = _cachedEncode(ret);
                     return tmpRetBytes.length;
                 } catch (error) {
                     setException(error);
@@ -654,7 +670,7 @@ export async function createInstantiator(options, swift) {
                     instance.exports.bjs_MyViewController_triggerEvent(this.pointer);
                 }
                 updateValue(value) {
-                    const valueBytes = textEncoder.encode(value);
+                    const valueBytes = _cachedEncode(value);
                     const valueId = swift.memory.retain(valueBytes);
                     instance.exports.bjs_MyViewController_updateValue(this.pointer, valueId, valueBytes.length);
                 }
@@ -663,9 +679,9 @@ export async function createInstantiator(options, swift) {
                     return ret !== 0;
                 }
                 updateLabel(prefix, suffix) {
-                    const prefixBytes = textEncoder.encode(prefix);
+                    const prefixBytes = _cachedEncode(prefix);
                     const prefixId = swift.memory.retain(prefixBytes);
-                    const suffixBytes = textEncoder.encode(suffix);
+                    const suffixBytes = _cachedEncode(suffix);
                     const suffixId = swift.memory.retain(suffixBytes);
                     instance.exports.bjs_MyViewController_updateLabel(this.pointer, prefixId, prefixBytes.length, suffixId, suffixBytes.length);
                 }

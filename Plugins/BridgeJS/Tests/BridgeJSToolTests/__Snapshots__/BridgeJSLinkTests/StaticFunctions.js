@@ -30,6 +30,22 @@ export async function createInstantiator(options, swift) {
     let tmpRetOptionalFloat;
     let tmpRetOptionalDouble;
     let tmpRetOptionalHeapObject;
+    const _strEncCache = new Map();
+    const _strEncCacheMax = 4096;
+    function _cachedEncode(str) {
+        let encoded = _strEncCache.get(str);
+        if (encoded) {
+            _strEncCache.delete(str);
+            _strEncCache.set(str, encoded);
+            return encoded;
+        }
+        encoded = textEncoder.encode(str);
+        if (_strEncCache.size >= _strEncCacheMax) {
+            _strEncCache.delete(_strEncCache.keys().next().value);
+        }
+        _strEncCache.set(str, encoded);
+        return encoded;
+    }
     let strStack = [];
     let i32Stack = [];
     let i64Stack = [];
@@ -369,7 +385,7 @@ export async function createInstantiator(options, swift) {
                 Utils: {
                     String: {
                         uppercase: function bjs_Utils_String_static_uppercase(text) {
-                            const textBytes = textEncoder.encode(text);
+                            const textBytes = _cachedEncode(text);
                             const textId = swift.memory.retain(textBytes);
                             instance.exports.bjs_Utils_String_static_uppercase(textId, textBytes.length);
                             const ret = tmpRetString;

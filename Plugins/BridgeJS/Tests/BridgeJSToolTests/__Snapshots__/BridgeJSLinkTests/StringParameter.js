@@ -19,6 +19,22 @@ export async function createInstantiator(options, swift) {
     let tmpRetOptionalFloat;
     let tmpRetOptionalDouble;
     let tmpRetOptionalHeapObject;
+    const _strEncCache = new Map();
+    const _strEncCacheMax = 4096;
+    function _cachedEncode(str) {
+        let encoded = _strEncCache.get(str);
+        if (encoded) {
+            _strEncCache.delete(str);
+            _strEncCache.set(str, encoded);
+            return encoded;
+        }
+        encoded = textEncoder.encode(str);
+        if (_strEncCache.size >= _strEncCacheMax) {
+            _strEncCache.delete(_strEncCache.keys().next().value);
+        }
+        _strEncCache.set(str, encoded);
+        return encoded;
+    }
     let strStack = [];
     let i32Stack = [];
     let i64Stack = [];
@@ -222,12 +238,12 @@ export async function createInstantiator(options, swift) {
             const js = swift.memory.heap;
             const exports = {
                 checkString: function bjs_checkString(a) {
-                    const aBytes = textEncoder.encode(a);
+                    const aBytes = _cachedEncode(a);
                     const aId = swift.memory.retain(aBytes);
                     instance.exports.bjs_checkString(aId, aBytes.length);
                 },
                 roundtripString: function bjs_roundtripString(a) {
-                    const aBytes = textEncoder.encode(a);
+                    const aBytes = _cachedEncode(a);
                     const aId = swift.memory.retain(aBytes);
                     instance.exports.bjs_roundtripString(aId, aBytes.length);
                     const ret = tmpRetString;

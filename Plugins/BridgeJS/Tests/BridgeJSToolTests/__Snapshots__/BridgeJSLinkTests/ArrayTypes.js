@@ -32,6 +32,22 @@ export async function createInstantiator(options, swift) {
     let tmpRetOptionalFloat;
     let tmpRetOptionalDouble;
     let tmpRetOptionalHeapObject;
+    const _strEncCache = new Map();
+    const _strEncCacheMax = 4096;
+    function _cachedEncode(str) {
+        let encoded = _strEncCache.get(str);
+        if (encoded) {
+            _strEncCache.delete(str);
+            _strEncCache.set(str, encoded);
+            return encoded;
+        }
+        encoded = textEncoder.encode(str);
+        if (_strEncCache.size >= _strEncCacheMax) {
+            _strEncCache.delete(_strEncCache.keys().next().value);
+        }
+        _strEncCache.set(str, encoded);
+        return encoded;
+    }
     let strStack = [];
     let i32Stack = [];
     let i64Stack = [];
@@ -570,7 +586,7 @@ export async function createInstantiator(options, swift) {
                         structHelpers.Point.lower(elem);
                     }
                     i32Stack.push(points.length);
-                    const matchingBytes = textEncoder.encode(matching);
+                    const matchingBytes = _cachedEncode(matching);
                     const matchingId = swift.memory.retain(matchingBytes);
                     instance.exports.bjs_findFirstPoint(matchingId, matchingBytes.length);
                     const structValue = structHelpers.Point.lift();

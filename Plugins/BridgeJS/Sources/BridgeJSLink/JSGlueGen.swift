@@ -24,6 +24,9 @@ final class JSGlueVariableScope {
     static let reservedStorageToReturnOptionalHeapObject = "tmpRetOptionalHeapObject"
     static let reservedTextEncoder = "textEncoder"
     static let reservedTextDecoder = "textDecoder"
+    static let reservedCachedEncode = "_cachedEncode"
+    static let reservedStrEncCache = "_strEncCache"
+    static let reservedStrEncCacheMax = "_strEncCacheMax"
     static let reservedStringStack = "strStack"
     static let reservedI32Stack = "i32Stack"
     static let reservedI64Stack = "i64Stack"
@@ -53,6 +56,9 @@ final class JSGlueVariableScope {
         reservedStorageToReturnOptionalHeapObject,
         reservedTextEncoder,
         reservedTextDecoder,
+        reservedCachedEncode,
+        reservedStrEncCache,
+        reservedStrEncCacheMax,
         reservedStringStack,
         reservedI32Stack,
         reservedI64Stack,
@@ -263,7 +269,7 @@ struct IntrinsicJSFragment: Sendable {
             let argument = arguments[0]
             let bytesLabel = scope.variable("\(argument)Bytes")
             let bytesIdLabel = scope.variable("\(argument)Id")
-            printer.write("const \(bytesLabel) = \(JSGlueVariableScope.reservedTextEncoder).encode(\(argument));")
+            printer.write("const \(bytesLabel) = \(JSGlueVariableScope.reservedCachedEncode)(\(argument));")
             printer.write("const \(bytesIdLabel) = \(JSGlueVariableScope.reservedSwift).memory.retain(\(bytesLabel));")
             return [bytesIdLabel, "\(bytesLabel).length"]
         }
@@ -296,7 +302,7 @@ struct IntrinsicJSFragment: Sendable {
         printCode: { arguments, context in
             let printer = context.printer
             printer.write(
-                "\(JSGlueVariableScope.reservedStorageToReturnBytes) = \(JSGlueVariableScope.reservedTextEncoder).encode(\(arguments[0]));"
+                "\(JSGlueVariableScope.reservedStorageToReturnBytes) = \(JSGlueVariableScope.reservedCachedEncode)(\(arguments[0]));"
             )
             return ["\(JSGlueVariableScope.reservedStorageToReturnBytes).length"]
         }

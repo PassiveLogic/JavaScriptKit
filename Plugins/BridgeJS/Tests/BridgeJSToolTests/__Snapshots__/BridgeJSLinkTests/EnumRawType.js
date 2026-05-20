@@ -94,6 +94,22 @@ export async function createInstantiator(options, swift) {
     let tmpRetOptionalFloat;
     let tmpRetOptionalDouble;
     let tmpRetOptionalHeapObject;
+    const _strEncCache = new Map();
+    const _strEncCacheMax = 4096;
+    function _cachedEncode(str) {
+        let encoded = _strEncCache.get(str);
+        if (encoded) {
+            _strEncCache.delete(str);
+            _strEncCache.set(str, encoded);
+            return encoded;
+        }
+        encoded = textEncoder.encode(str);
+        if (_strEncCache.size >= _strEncCacheMax) {
+            _strEncCache.delete(_strEncCache.keys().next().value);
+        }
+        _strEncCache.set(str, encoded);
+        return encoded;
+    }
     let strStack = [];
     let i32Stack = [];
     let i64Stack = [];
@@ -276,7 +292,7 @@ export async function createInstantiator(options, swift) {
             TestModule["bjs_returnsFeatureFlag"] = function bjs_returnsFeatureFlag() {
                 try {
                     let ret = imports.returnsFeatureFlag();
-                    tmpRetBytes = textEncoder.encode(ret);
+                    tmpRetBytes = _cachedEncode(ret);
                     return tmpRetBytes.length;
                 } catch (error) {
                     setException(error);
@@ -298,7 +314,7 @@ export async function createInstantiator(options, swift) {
             const js = swift.memory.heap;
             const exports = {
                 setTheme: function bjs_setTheme(theme) {
-                    const themeBytes = textEncoder.encode(theme);
+                    const themeBytes = _cachedEncode(theme);
                     const themeId = swift.memory.retain(themeBytes);
                     instance.exports.bjs_setTheme(themeId, themeBytes.length);
                 },
@@ -312,7 +328,7 @@ export async function createInstantiator(options, swift) {
                     const isSome = input != null;
                     let result, result1;
                     if (isSome) {
-                        const inputBytes = textEncoder.encode(input);
+                        const inputBytes = _cachedEncode(input);
                         const inputId = swift.memory.retain(inputBytes);
                         result = inputId;
                         result1 = inputBytes.length;
@@ -326,7 +342,7 @@ export async function createInstantiator(options, swift) {
                     return optResult;
                 },
                 setTSTheme: function bjs_setTSTheme(theme) {
-                    const themeBytes = textEncoder.encode(theme);
+                    const themeBytes = _cachedEncode(theme);
                     const themeId = swift.memory.retain(themeBytes);
                     instance.exports.bjs_setTSTheme(themeId, themeBytes.length);
                 },
@@ -340,7 +356,7 @@ export async function createInstantiator(options, swift) {
                     const isSome = input != null;
                     let result, result1;
                     if (isSome) {
-                        const inputBytes = textEncoder.encode(input);
+                        const inputBytes = _cachedEncode(input);
                         const inputId = swift.memory.retain(inputBytes);
                         result = inputId;
                         result1 = inputBytes.length;
@@ -354,7 +370,7 @@ export async function createInstantiator(options, swift) {
                     return optResult;
                 },
                 setFeatureFlag: function bjs_setFeatureFlag(flag) {
-                    const flagBytes = textEncoder.encode(flag);
+                    const flagBytes = _cachedEncode(flag);
                     const flagId = swift.memory.retain(flagBytes);
                     instance.exports.bjs_setFeatureFlag(flagId, flagBytes.length);
                 },
@@ -368,7 +384,7 @@ export async function createInstantiator(options, swift) {
                     const isSome = input != null;
                     let result, result1;
                     if (isSome) {
-                        const inputBytes = textEncoder.encode(input);
+                        const inputBytes = _cachedEncode(input);
                         const inputId = swift.memory.retain(inputBytes);
                         result = inputId;
                         result1 = inputBytes.length;
@@ -520,7 +536,7 @@ export async function createInstantiator(options, swift) {
                     return optResult;
                 },
                 processTheme: function bjs_processTheme(theme) {
-                    const themeBytes = textEncoder.encode(theme);
+                    const themeBytes = _cachedEncode(theme);
                     const themeId = swift.memory.retain(themeBytes);
                     const ret = instance.exports.bjs_processTheme(themeId, themeBytes.length);
                     return ret;
