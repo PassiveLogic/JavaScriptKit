@@ -116,6 +116,7 @@ export async function createInstantiator(options, swift) {
         _strEncCache.set(str, encoded);
         return encoded;
     }
+    function _maxUTF8Len(str) { return str.length * 3; }
     let strStack = [];
     let i32Stack = [];
     let i64Stack = [];
@@ -143,9 +144,8 @@ export async function createInstantiator(options, swift) {
             const enumTag = value.tag;
             switch (enumTag) {
                 case APIResultValues.Tag.Success: {
-                    const bytes = textEncoder.encode(value.param0);
-                    const id = swift.memory.retain(bytes);
-                    i32Stack.push(bytes.length);
+                    const id = swift.memory.retain(value.param0);
+                    i32Stack.push(_maxUTF8Len(value.param0));
                     i32Stack.push(id);
                     return APIResultValues.Tag.Success;
                 }
@@ -204,24 +204,21 @@ export async function createInstantiator(options, swift) {
             const enumTag = value.tag;
             switch (enumTag) {
                 case ComplexResultValues.Tag.Success: {
-                    const bytes = textEncoder.encode(value.param0);
-                    const id = swift.memory.retain(bytes);
-                    i32Stack.push(bytes.length);
+                    const id = swift.memory.retain(value.param0);
+                    i32Stack.push(_maxUTF8Len(value.param0));
                     i32Stack.push(id);
                     return ComplexResultValues.Tag.Success;
                 }
                 case ComplexResultValues.Tag.Error: {
                     i32Stack.push((value.param1 | 0));
-                    const bytes = textEncoder.encode(value.param0);
-                    const id = swift.memory.retain(bytes);
-                    i32Stack.push(bytes.length);
+                    const id = swift.memory.retain(value.param0);
+                    i32Stack.push(_maxUTF8Len(value.param0));
                     i32Stack.push(id);
                     return ComplexResultValues.Tag.Error;
                 }
                 case ComplexResultValues.Tag.Status: {
-                    const bytes = textEncoder.encode(value.param2);
-                    const id = swift.memory.retain(bytes);
-                    i32Stack.push(bytes.length);
+                    const id = swift.memory.retain(value.param2);
+                    i32Stack.push(_maxUTF8Len(value.param2));
                     i32Stack.push(id);
                     i32Stack.push((value.param1 | 0));
                     i32Stack.push(value.param0 ? 1 : 0);
@@ -234,17 +231,14 @@ export async function createInstantiator(options, swift) {
                     return ComplexResultValues.Tag.Coordinates;
                 }
                 case ComplexResultValues.Tag.Comprehensive: {
-                    const bytes = textEncoder.encode(value.param8);
-                    const id = swift.memory.retain(bytes);
-                    i32Stack.push(bytes.length);
+                    const id = swift.memory.retain(value.param8);
+                    i32Stack.push(_maxUTF8Len(value.param8));
                     i32Stack.push(id);
-                    const bytes1 = textEncoder.encode(value.param7);
-                    const id1 = swift.memory.retain(bytes1);
-                    i32Stack.push(bytes1.length);
+                    const id1 = swift.memory.retain(value.param7);
+                    i32Stack.push(_maxUTF8Len(value.param7));
                     i32Stack.push(id1);
-                    const bytes2 = textEncoder.encode(value.param6);
-                    const id2 = swift.memory.retain(bytes2);
-                    i32Stack.push(bytes2.length);
+                    const id2 = swift.memory.retain(value.param6);
+                    i32Stack.push(_maxUTF8Len(value.param6));
                     i32Stack.push(id2);
                     f64Stack.push(value.param5);
                     f64Stack.push(value.param4);
@@ -306,24 +300,21 @@ export async function createInstantiator(options, swift) {
             const enumTag = value.tag;
             switch (enumTag) {
                 case ResultValues.Tag.Success: {
-                    const bytes = textEncoder.encode(value.param0);
-                    const id = swift.memory.retain(bytes);
-                    i32Stack.push(bytes.length);
+                    const id = swift.memory.retain(value.param0);
+                    i32Stack.push(_maxUTF8Len(value.param0));
                     i32Stack.push(id);
                     return ResultValues.Tag.Success;
                 }
                 case ResultValues.Tag.Failure: {
                     i32Stack.push((value.param1 | 0));
-                    const bytes = textEncoder.encode(value.param0);
-                    const id = swift.memory.retain(bytes);
-                    i32Stack.push(bytes.length);
+                    const id = swift.memory.retain(value.param0);
+                    i32Stack.push(_maxUTF8Len(value.param0));
                     i32Stack.push(id);
                     return ResultValues.Tag.Failure;
                 }
                 case ResultValues.Tag.Status: {
-                    const bytes = textEncoder.encode(value.param2);
-                    const id = swift.memory.retain(bytes);
-                    i32Stack.push(bytes.length);
+                    const id = swift.memory.retain(value.param2);
+                    i32Stack.push(_maxUTF8Len(value.param2));
                     i32Stack.push(id);
                     i32Stack.push((value.param1 | 0));
                     i32Stack.push(value.param0 ? 1 : 0);
@@ -359,17 +350,15 @@ export async function createInstantiator(options, swift) {
             const enumTag = value.tag;
             switch (enumTag) {
                 case NetworkingResultValues.Tag.Success: {
-                    const bytes = textEncoder.encode(value.param0);
-                    const id = swift.memory.retain(bytes);
-                    i32Stack.push(bytes.length);
+                    const id = swift.memory.retain(value.param0);
+                    i32Stack.push(_maxUTF8Len(value.param0));
                     i32Stack.push(id);
                     return NetworkingResultValues.Tag.Success;
                 }
                 case NetworkingResultValues.Tag.Failure: {
                     i32Stack.push((value.param1 | 0));
-                    const bytes = textEncoder.encode(value.param0);
-                    const id = swift.memory.retain(bytes);
-                    i32Stack.push(bytes.length);
+                    const id = swift.memory.retain(value.param0);
+                    i32Stack.push(_maxUTF8Len(value.param0));
                     i32Stack.push(id);
                     return NetworkingResultValues.Tag.Failure;
                 }
@@ -399,9 +388,8 @@ export async function createInstantiator(options, swift) {
                 case APIOptionalResultValues.Tag.Success: {
                     const isSome = value.param0 != null ? 1 : 0;
                     if (isSome) {
-                        const bytes = textEncoder.encode(value.param0);
-                        const id = swift.memory.retain(bytes);
-                        i32Stack.push(bytes.length);
+                        const id = swift.memory.retain(value.param0);
+                        i32Stack.push(_maxUTF8Len(value.param0));
                         i32Stack.push(id);
                     }
                     i32Stack.push(isSome);
@@ -423,9 +411,8 @@ export async function createInstantiator(options, swift) {
                 case APIOptionalResultValues.Tag.Status: {
                     const isSome = value.param2 != null ? 1 : 0;
                     if (isSome) {
-                        const bytes = textEncoder.encode(value.param2);
-                        const id = swift.memory.retain(bytes);
-                        i32Stack.push(bytes.length);
+                        const id = swift.memory.retain(value.param2);
+                        i32Stack.push(_maxUTF8Len(value.param2));
                         i32Stack.push(id);
                     }
                     i32Stack.push(isSome);
@@ -795,6 +782,13 @@ export async function createInstantiator(options, swift) {
                 swift.memory.release(sourceId);
                 const bytes = new Uint8Array(memory.buffer, bytesPtr);
                 bytes.set(source);
+            }
+            bjs["swift_js_init_memory_from_string"] = function(sourceId, bytesPtr) {
+                const str = swift.memory.getObject(sourceId);
+                swift.memory.release(sourceId);
+                const target = new Uint8Array(memory.buffer, bytesPtr);
+                const result = textEncoder.encodeInto(str, target);
+                return result.written;
             }
             bjs["swift_js_make_js_string"] = function(ptr, len) {
                 return swift.memory.retain(decodeString(ptr, len));

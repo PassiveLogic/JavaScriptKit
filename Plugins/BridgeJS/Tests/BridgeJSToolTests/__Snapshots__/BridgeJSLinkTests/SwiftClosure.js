@@ -65,6 +65,7 @@ export async function createInstantiator(options, swift) {
         _strEncCache.set(str, encoded);
         return encoded;
     }
+    function _maxUTF8Len(str) { return str.length * 3; }
     let strStack = [];
     let i32Stack = [];
     let i64Stack = [];
@@ -103,9 +104,8 @@ export async function createInstantiator(options, swift) {
 
     const __bjs_createAnimalHelpers = () => ({
         lower: (value) => {
-            const bytes = textEncoder.encode(value.type);
-            const id = swift.memory.retain(bytes);
-            i32Stack.push(bytes.length);
+            const id = swift.memory.retain(value.type);
+            i32Stack.push(_maxUTF8Len(value.type));
             i32Stack.push(id);
         },
         lift: () => {
@@ -118,9 +118,8 @@ export async function createInstantiator(options, swift) {
             const enumTag = value.tag;
             switch (enumTag) {
                 case APIResultValues.Tag.Success: {
-                    const bytes = textEncoder.encode(value.param0);
-                    const id = swift.memory.retain(bytes);
-                    i32Stack.push(bytes.length);
+                    const id = swift.memory.retain(value.param0);
+                    i32Stack.push(_maxUTF8Len(value.param0));
                     i32Stack.push(id);
                     return APIResultValues.Tag.Success;
                 }
@@ -190,6 +189,13 @@ export async function createInstantiator(options, swift) {
                 swift.memory.release(sourceId);
                 const bytes = new Uint8Array(memory.buffer, bytesPtr);
                 bytes.set(source);
+            }
+            bjs["swift_js_init_memory_from_string"] = function(sourceId, bytesPtr) {
+                const str = swift.memory.getObject(sourceId);
+                swift.memory.release(sourceId);
+                const target = new Uint8Array(memory.buffer, bytesPtr);
+                const result = textEncoder.encodeInto(str, target);
+                return result.written;
             }
             bjs["swift_js_make_js_string"] = function(ptr, len) {
                 return swift.memory.retain(decodeString(ptr, len));

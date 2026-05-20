@@ -27,6 +27,7 @@ final class JSGlueVariableScope {
     static let reservedCachedEncode = "_cachedEncode"
     static let reservedStrEncCache = "_strEncCache"
     static let reservedStrEncCacheMax = "_strEncCacheMax"
+    static let reservedMaxUTF8Len = "_maxUTF8Len"
     static let reservedStringStack = "strStack"
     static let reservedI32Stack = "i32Stack"
     static let reservedI64Stack = "i64Stack"
@@ -59,6 +60,7 @@ final class JSGlueVariableScope {
         reservedCachedEncode,
         reservedStrEncCache,
         reservedStrEncCacheMax,
+        reservedMaxUTF8Len,
         reservedStringStack,
         reservedI32Stack,
         reservedI64Stack,
@@ -2122,15 +2124,14 @@ struct IntrinsicJSFragment: Sendable {
                 printCode: { arguments, context in
                     let (scope, printer) = (context.scope, context.printer)
                     let value = arguments[0]
-                    let bytesVar = scope.variable("bytes")
                     let idVar = scope.variable("id")
                     printer.write(
-                        "const \(bytesVar) = \(JSGlueVariableScope.reservedTextEncoder).encode(\(value));"
+                        "const \(idVar) = \(JSGlueVariableScope.reservedSwift).memory.retain(\(value));"
                     )
-                    printer.write(
-                        "const \(idVar) = \(JSGlueVariableScope.reservedSwift).memory.retain(\(bytesVar));"
+                    scope.emitPushI32Parameter(
+                        "\(JSGlueVariableScope.reservedMaxUTF8Len)(\(value))",
+                        printer: printer
                     )
-                    scope.emitPushI32Parameter("\(bytesVar).length", printer: printer)
                     scope.emitPushI32Parameter(idVar, printer: printer)
                     return []
                 }

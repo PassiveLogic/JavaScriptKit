@@ -478,9 +478,14 @@ extension String: _BridgedSwiftStackType {
     }
 
     @_spi(BridgeJS) public static func bridgeJSStackPop() -> String {
-        let bytes = _swift_js_pop_i32()
-        let count = _swift_js_pop_i32()
-        return bridgeJSLiftParameter(bytes, count)
+        let sourceId = _swift_js_pop_i32()
+        let maxCount = _swift_js_pop_i32()
+        #if !arch(wasm32)
+        guard #available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *) else { _onlyAvailableOnWasm() }
+        #endif
+        return String(unsafeUninitializedCapacity: Int(maxCount)) { b in
+            Int(_swift_js_init_memory_from_string(sourceId, b.baseAddress.unsafelyUnwrapped))
+        }
     }
 
     @_spi(BridgeJS) public consuming func bridgeJSLowerReturn() -> Void {
@@ -915,6 +920,30 @@ private func _swift_js_init_memory_extern(_ sourceId: Int32, _ ptr: UnsafeMutabl
 @_spi(BridgeJS) @inline(never) public func _swift_js_init_memory(_ sourceId: Int32, _ ptr: UnsafeMutablePointer<UInt8>)
 {
     _swift_js_init_memory_extern(sourceId, ptr)
+}
+
+#if arch(wasm32)
+@_extern(wasm, module: "bjs", name: "swift_js_init_memory_from_string")
+private func _swift_js_init_memory_from_string_extern(_ sourceId: Int32, _ ptr: UnsafeMutablePointer<UInt8>) -> Int32
+#else
+private func _swift_js_init_memory_from_string_extern(
+    _ sourceId: Int32,
+    _ ptr: UnsafeMutablePointer<UInt8>
+) -> Int32 {
+    _onlyAvailableOnWasm()
+}
+#endif
+
+/// Encodes a JS string directly into WASM memory via `encodeInto()` and returns the actual byte count written.
+///
+/// - Parameter sourceId: The object ID of the source JS string.
+/// - Parameter ptr: The pointer to the WebAssembly memory to write into.
+/// - Returns: The number of bytes actually written.
+@_spi(BridgeJS) @inline(never) public func _swift_js_init_memory_from_string(
+    _ sourceId: Int32,
+    _ ptr: UnsafeMutablePointer<UInt8>
+) -> Int32 {
+    _swift_js_init_memory_from_string_extern(sourceId, ptr)
 }
 
 #if arch(wasm32)

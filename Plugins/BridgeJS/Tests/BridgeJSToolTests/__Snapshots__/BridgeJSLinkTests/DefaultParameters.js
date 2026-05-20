@@ -41,6 +41,7 @@ export async function createInstantiator(options, swift) {
         _strEncCache.set(str, encoded);
         return encoded;
     }
+    function _maxUTF8Len(str) { return str.length * 3; }
     let strStack = [];
     let i32Stack = [];
     let i64Stack = [];
@@ -54,9 +55,8 @@ export async function createInstantiator(options, swift) {
     let bjs = null;
     const __bjs_createConfigHelpers = () => ({
         lower: (value) => {
-            const bytes = textEncoder.encode(value.name);
-            const id = swift.memory.retain(bytes);
-            i32Stack.push(bytes.length);
+            const id = swift.memory.retain(value.name);
+            i32Stack.push(_maxUTF8Len(value.name));
             i32Stack.push(id);
             i32Stack.push((value.value | 0));
             i32Stack.push(value.enabled ? 1 : 0);
@@ -104,6 +104,13 @@ export async function createInstantiator(options, swift) {
                 swift.memory.release(sourceId);
                 const bytes = new Uint8Array(memory.buffer, bytesPtr);
                 bytes.set(source);
+            }
+            bjs["swift_js_init_memory_from_string"] = function(sourceId, bytesPtr) {
+                const str = swift.memory.getObject(sourceId);
+                swift.memory.release(sourceId);
+                const target = new Uint8Array(memory.buffer, bytesPtr);
+                const result = textEncoder.encodeInto(str, target);
+                return result.written;
             }
             bjs["swift_js_make_js_string"] = function(ptr, len) {
                 return swift.memory.retain(decodeString(ptr, len));
@@ -576,9 +583,8 @@ export async function createInstantiator(options, swift) {
                 },
                 testStringArrayDefault: function bjs_testStringArrayDefault(names = ["a", "b", "c"]) {
                     for (const elem of names) {
-                        const bytes = textEncoder.encode(elem);
-                        const id = swift.memory.retain(bytes);
-                        i32Stack.push(bytes.length);
+                        const id = swift.memory.retain(elem);
+                        i32Stack.push(_maxUTF8Len(elem));
                         i32Stack.push(id);
                     }
                     i32Stack.push(names.length);
