@@ -43,6 +43,23 @@ export async function createInstantiator(options, swift) {
     let tmpRetOptionalFloat;
     let tmpRetOptionalDouble;
     let tmpRetOptionalHeapObject;
+    const _strEncCache = new Map();
+    const _strEncCacheMax = 4096;
+    function _cachedEncode(str) {
+        let encoded = _strEncCache.get(str);
+        if (encoded) {
+            _strEncCache.delete(str);
+            _strEncCache.set(str, encoded);
+            return encoded;
+        }
+        encoded = textEncoder.encode(str);
+        if (_strEncCache.size >= _strEncCacheMax) {
+            _strEncCache.delete(_strEncCache.keys().next().value);
+        }
+        _strEncCache.set(str, encoded);
+        return encoded;
+    }
+    function _maxUTF8Len(str) { return str.length * 3; }
     let strStack = [];
     let i32Stack = [];
     let i64Stack = [];
@@ -71,6 +88,13 @@ export async function createInstantiator(options, swift) {
                 swift.memory.release(sourceId);
                 const bytes = new Uint8Array(memory.buffer, bytesPtr);
                 bytes.set(source);
+            }
+            bjs["swift_js_init_memory_from_string"] = function(sourceId, bytesPtr) {
+                const str = swift.memory.getObject(sourceId);
+                swift.memory.release(sourceId);
+                const target = new Uint8Array(memory.buffer, bytesPtr);
+                const result = textEncoder.encodeInto(str, target);
+                return result.written;
             }
             bjs["swift_js_make_js_string"] = function(ptr, len) {
                 return swift.memory.retain(decodeString(ptr, len));

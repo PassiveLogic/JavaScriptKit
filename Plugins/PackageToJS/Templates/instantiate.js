@@ -36,6 +36,7 @@ async function createInstantiator(options, swift) {
             importObject["bjs"] = {
                 swift_js_return_string: unexpectedBjsCall,
                 swift_js_init_memory: unexpectedBjsCall,
+                swift_js_init_memory_from_string: unexpectedBjsCall,
                 swift_js_make_js_string: unexpectedBjsCall,
                 swift_js_init_memory_with_result: unexpectedBjsCall,
                 swift_js_throw: unexpectedBjsCall,

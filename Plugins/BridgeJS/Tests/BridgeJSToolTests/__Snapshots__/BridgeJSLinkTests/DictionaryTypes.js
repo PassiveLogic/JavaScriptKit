@@ -19,6 +19,23 @@ export async function createInstantiator(options, swift) {
     let tmpRetOptionalFloat;
     let tmpRetOptionalDouble;
     let tmpRetOptionalHeapObject;
+    const _strEncCache = new Map();
+    const _strEncCacheMax = 4096;
+    function _cachedEncode(str) {
+        let encoded = _strEncCache.get(str);
+        if (encoded) {
+            _strEncCache.delete(str);
+            _strEncCache.set(str, encoded);
+            return encoded;
+        }
+        encoded = textEncoder.encode(str);
+        if (_strEncCache.size >= _strEncCacheMax) {
+            _strEncCache.delete(_strEncCache.keys().next().value);
+        }
+        _strEncCache.set(str, encoded);
+        return encoded;
+    }
+    function _maxUTF8Len(str) { return str.length * 3; }
     let strStack = [];
     let i32Stack = [];
     let i64Stack = [];
@@ -33,16 +50,14 @@ export async function createInstantiator(options, swift) {
     let bjs = null;
     const __bjs_createCountersHelpers = () => ({
         lower: (value) => {
-            const bytes = textEncoder.encode(value.name);
-            const id = swift.memory.retain(bytes);
-            i32Stack.push(bytes.length);
+            const id = swift.memory.retain(value.name);
+            i32Stack.push(_maxUTF8Len(value.name));
             i32Stack.push(id);
             const entries = Object.entries(value.counts);
             for (const entry of entries) {
                 const [key, value] = entry;
-                const bytes1 = textEncoder.encode(key);
-                const id1 = swift.memory.retain(bytes1);
-                i32Stack.push(bytes1.length);
+                const id1 = swift.memory.retain(key);
+                i32Stack.push(_maxUTF8Len(key));
                 i32Stack.push(id1);
                 const isSome = value != null ? 1 : 0;
                 if (isSome) {
@@ -88,6 +103,13 @@ export async function createInstantiator(options, swift) {
                 swift.memory.release(sourceId);
                 const bytes = new Uint8Array(memory.buffer, bytesPtr);
                 bytes.set(source);
+            }
+            bjs["swift_js_init_memory_from_string"] = function(sourceId, bytesPtr) {
+                const str = swift.memory.getObject(sourceId);
+                swift.memory.release(sourceId);
+                const target = new Uint8Array(memory.buffer, bytesPtr);
+                const result = textEncoder.encodeInto(str, target);
+                return result.written;
             }
             bjs["swift_js_make_js_string"] = function(ptr, len) {
                 return swift.memory.retain(decodeString(ptr, len));
@@ -273,9 +295,8 @@ export async function createInstantiator(options, swift) {
                     const entries = Object.entries(ret);
                     for (const entry of entries) {
                         const [key, value] = entry;
-                        const bytes = textEncoder.encode(key);
-                        const id = swift.memory.retain(bytes);
-                        i32Stack.push(bytes.length);
+                        const id = swift.memory.retain(key);
+                        i32Stack.push(_maxUTF8Len(key));
                         i32Stack.push(id);
                         f64Stack.push(value);
                     }
@@ -364,9 +385,8 @@ export async function createInstantiator(options, swift) {
                     const entries = Object.entries(values);
                     for (const entry of entries) {
                         const [key, value] = entry;
-                        const bytes = textEncoder.encode(key);
-                        const id = swift.memory.retain(bytes);
-                        i32Stack.push(bytes.length);
+                        const id = swift.memory.retain(key);
+                        i32Stack.push(_maxUTF8Len(key));
                         i32Stack.push(id);
                         i32Stack.push((value | 0));
                     }
@@ -387,13 +407,11 @@ export async function createInstantiator(options, swift) {
                         const entries = Object.entries(values);
                         for (const entry of entries) {
                             const [key, value] = entry;
-                            const bytes = textEncoder.encode(key);
-                            const id = swift.memory.retain(bytes);
-                            i32Stack.push(bytes.length);
+                            const id = swift.memory.retain(key);
+                            i32Stack.push(_maxUTF8Len(key));
                             i32Stack.push(id);
-                            const bytes1 = textEncoder.encode(value);
-                            const id1 = swift.memory.retain(bytes1);
-                            i32Stack.push(bytes1.length);
+                            const id1 = swift.memory.retain(value);
+                            i32Stack.push(_maxUTF8Len(value));
                             i32Stack.push(id1);
                         }
                         i32Stack.push(entries.length);
@@ -420,9 +438,8 @@ export async function createInstantiator(options, swift) {
                     const entries = Object.entries(values);
                     for (const entry of entries) {
                         const [key, value] = entry;
-                        const bytes = textEncoder.encode(key);
-                        const id = swift.memory.retain(bytes);
-                        i32Stack.push(bytes.length);
+                        const id = swift.memory.retain(key);
+                        i32Stack.push(_maxUTF8Len(key));
                         i32Stack.push(id);
                         for (const elem of value) {
                             i32Stack.push((elem | 0));
@@ -455,9 +472,8 @@ export async function createInstantiator(options, swift) {
                     const entries = Object.entries(boxes);
                     for (const entry of entries) {
                         const [key, value] = entry;
-                        const bytes = textEncoder.encode(key);
-                        const id = swift.memory.retain(bytes);
-                        i32Stack.push(bytes.length);
+                        const id = swift.memory.retain(key);
+                        i32Stack.push(_maxUTF8Len(key));
                         i32Stack.push(id);
                         ptrStack.push(value.pointer);
                     }
@@ -477,9 +493,8 @@ export async function createInstantiator(options, swift) {
                     const entries = Object.entries(boxes);
                     for (const entry of entries) {
                         const [key, value] = entry;
-                        const bytes = textEncoder.encode(key);
-                        const id = swift.memory.retain(bytes);
-                        i32Stack.push(bytes.length);
+                        const id = swift.memory.retain(key);
+                        i32Stack.push(_maxUTF8Len(key));
                         i32Stack.push(id);
                         const isSome = value != null ? 1 : 0;
                         if (isSome) {

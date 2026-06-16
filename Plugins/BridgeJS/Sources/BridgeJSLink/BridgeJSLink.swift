@@ -341,6 +341,26 @@ public struct BridgeJSLink {
             "let \(JSGlueVariableScope.reservedStorageToReturnOptionalFloat);",
             "let \(JSGlueVariableScope.reservedStorageToReturnOptionalDouble);",
             "let \(JSGlueVariableScope.reservedStorageToReturnOptionalHeapObject);",
+            "const \(JSGlueVariableScope.reservedStrEncCache) = new Map();",
+            "const \(JSGlueVariableScope.reservedStrEncCacheMax) = 4096;",
+            "function \(JSGlueVariableScope.reservedCachedEncode)(str) {",
+            "    let encoded = \(JSGlueVariableScope.reservedStrEncCache).get(str);",
+            "    if (encoded) {",
+            "        \(JSGlueVariableScope.reservedStrEncCache).delete(str);",
+            "        \(JSGlueVariableScope.reservedStrEncCache).set(str, encoded);",
+            "        return encoded;",
+            "    }",
+            "    encoded = \(JSGlueVariableScope.reservedTextEncoder).encode(str);",
+            "    if (\(JSGlueVariableScope.reservedStrEncCache).size >= \(JSGlueVariableScope.reservedStrEncCacheMax)) {",
+            "        \(JSGlueVariableScope.reservedStrEncCache).delete(\(JSGlueVariableScope.reservedStrEncCache).keys().next().value);",
+            "    }",
+            "    \(JSGlueVariableScope.reservedStrEncCache).set(str, encoded);",
+            "    return encoded;",
+            "}",
+            // Worst-case UTF-8 byte count: each UTF-16 code unit can expand
+            // to at most 3 bytes. Surrogate pairs (2 units) produce 4 bytes,
+            // so the per-unit ratio stays <= 3.
+            "function \(JSGlueVariableScope.reservedMaxUTF8Len)(str) { return str.length * 3; }",
             "let \(JSGlueVariableScope.reservedStringStack) = [];",
             "let \(JSGlueVariableScope.reservedI32Stack) = [];",
             "let \(JSGlueVariableScope.reservedI64Stack) = [];",
@@ -431,6 +451,23 @@ public struct BridgeJSLink {
                         "const bytes = new Uint8Array(\(JSGlueVariableScope.reservedMemory).buffer, bytesPtr);"
                     )
                     printer.write("bytes.set(source);")
+                }
+                printer.write("}")
+                printer.write("bjs[\"swift_js_init_memory_from_string\"] = function(sourceId, bytesPtr) {")
+                printer.indent {
+                    printer.write(
+                        "const str = \(JSGlueVariableScope.reservedSwift).\(JSGlueVariableScope.reservedMemory).getObject(sourceId);"
+                    )
+                    printer.write(
+                        "\(JSGlueVariableScope.reservedSwift).\(JSGlueVariableScope.reservedMemory).release(sourceId);"
+                    )
+                    printer.write(
+                        "const target = new Uint8Array(\(JSGlueVariableScope.reservedMemory).buffer, bytesPtr);"
+                    )
+                    printer.write(
+                        "const result = \(JSGlueVariableScope.reservedTextEncoder).encodeInto(str, target);"
+                    )
+                    printer.write("return result.written;")
                 }
                 printer.write("}")
                 printer.write("bjs[\"swift_js_make_js_string\"] = function(ptr, len) {")

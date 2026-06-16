@@ -24,6 +24,23 @@ export async function createInstantiator(options, swift) {
     let tmpRetOptionalFloat;
     let tmpRetOptionalDouble;
     let tmpRetOptionalHeapObject;
+    const _strEncCache = new Map();
+    const _strEncCacheMax = 4096;
+    function _cachedEncode(str) {
+        let encoded = _strEncCache.get(str);
+        if (encoded) {
+            _strEncCache.delete(str);
+            _strEncCache.set(str, encoded);
+            return encoded;
+        }
+        encoded = textEncoder.encode(str);
+        if (_strEncCache.size >= _strEncCacheMax) {
+            _strEncCache.delete(_strEncCache.keys().next().value);
+        }
+        _strEncCache.set(str, encoded);
+        return encoded;
+    }
+    function _maxUTF8Len(str) { return str.length * 3; }
     let strStack = [];
     let i32Stack = [];
     let i64Stack = [];
@@ -52,6 +69,13 @@ export async function createInstantiator(options, swift) {
                 swift.memory.release(sourceId);
                 const bytes = new Uint8Array(memory.buffer, bytesPtr);
                 bytes.set(source);
+            }
+            bjs["swift_js_init_memory_from_string"] = function(sourceId, bytesPtr) {
+                const str = swift.memory.getObject(sourceId);
+                swift.memory.release(sourceId);
+                const target = new Uint8Array(memory.buffer, bytesPtr);
+                const result = textEncoder.encodeInto(str, target);
+                return result.written;
             }
             bjs["swift_js_make_js_string"] = function(ptr, len) {
                 return swift.memory.retain(decodeString(ptr, len));
@@ -319,7 +343,7 @@ export async function createInstantiator(options, swift) {
                     return ret;
                 }
                 static set classVariable(value) {
-                    const valueBytes = textEncoder.encode(value);
+                    const valueBytes = _cachedEncode(value);
                     const valueId = swift.memory.retain(valueBytes);
                     instance.exports.bjs_PropertyClass_static_classVariable_set(valueId, valueBytes.length);
                 }
@@ -330,7 +354,7 @@ export async function createInstantiator(options, swift) {
                     return ret;
                 }
                 static set computedProperty(value) {
-                    const valueBytes = textEncoder.encode(value);
+                    const valueBytes = _cachedEncode(value);
                     const valueId = swift.memory.retain(valueBytes);
                     instance.exports.bjs_PropertyClass_static_computedProperty_set(valueId, valueBytes.length);
                 }
@@ -348,7 +372,7 @@ export async function createInstantiator(options, swift) {
                     const isSome = value != null;
                     let result, result1;
                     if (isSome) {
-                        const valueBytes = textEncoder.encode(value);
+                        const valueBytes = _cachedEncode(value);
                         const valueId = swift.memory.retain(valueBytes);
                         result = valueId;
                         result1 = valueBytes.length;
@@ -370,7 +394,7 @@ export async function createInstantiator(options, swift) {
                         return ret;
                     },
                     set enumProperty(value) {
-                        const valueBytes = textEncoder.encode(value);
+                        const valueBytes = _cachedEncode(value);
                         const valueId = swift.memory.retain(valueBytes);
                         instance.exports.bjs_PropertyEnum_static_enumProperty_set(valueId, valueBytes.length);
                     },
@@ -385,7 +409,7 @@ export async function createInstantiator(options, swift) {
                         return ret;
                     },
                     set computedEnum(value) {
-                        const valueBytes = textEncoder.encode(value);
+                        const valueBytes = _cachedEncode(value);
                         const valueId = swift.memory.retain(valueBytes);
                         instance.exports.bjs_PropertyEnum_static_computedEnum_set(valueId, valueBytes.length);
                     }
@@ -398,7 +422,7 @@ export async function createInstantiator(options, swift) {
                         return ret;
                     },
                     set namespaceProperty(value) {
-                        const valueBytes = textEncoder.encode(value);
+                        const valueBytes = _cachedEncode(value);
                         const valueId = swift.memory.retain(valueBytes);
                         instance.exports.bjs_PropertyNamespace_static_namespaceProperty_set(valueId, valueBytes.length);
                     },

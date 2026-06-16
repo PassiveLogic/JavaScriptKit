@@ -19,6 +19,23 @@ export async function createInstantiator(options, swift) {
     let tmpRetOptionalFloat;
     let tmpRetOptionalDouble;
     let tmpRetOptionalHeapObject;
+    const _strEncCache = new Map();
+    const _strEncCacheMax = 4096;
+    function _cachedEncode(str) {
+        let encoded = _strEncCache.get(str);
+        if (encoded) {
+            _strEncCache.delete(str);
+            _strEncCache.set(str, encoded);
+            return encoded;
+        }
+        encoded = textEncoder.encode(str);
+        if (_strEncCache.size >= _strEncCacheMax) {
+            _strEncCache.delete(_strEncCache.keys().next().value);
+        }
+        _strEncCache.set(str, encoded);
+        return encoded;
+    }
+    function _maxUTF8Len(str) { return str.length * 3; }
     let strStack = [];
     let i32Stack = [];
     let i64Stack = [];
@@ -72,6 +89,13 @@ export async function createInstantiator(options, swift) {
                 swift.memory.release(sourceId);
                 const bytes = new Uint8Array(memory.buffer, bytesPtr);
                 bytes.set(source);
+            }
+            bjs["swift_js_init_memory_from_string"] = function(sourceId, bytesPtr) {
+                const str = swift.memory.getObject(sourceId);
+                swift.memory.release(sourceId);
+                const target = new Uint8Array(memory.buffer, bytesPtr);
+                const result = textEncoder.encodeInto(str, target);
+                return result.written;
             }
             bjs["swift_js_make_js_string"] = function(ptr, len) {
                 return swift.memory.retain(decodeString(ptr, len));
@@ -261,7 +285,7 @@ export async function createInstantiator(options, swift) {
                 try {
                     const callback = swift.memory.getObject(callbackId);
                     let ret = callback(swift.memory.getObject(param0));
-                    tmpRetBytes = textEncoder.encode(ret);
+                    tmpRetBytes = _cachedEncode(ret);
                     return tmpRetBytes.length;
                 } catch (error) {
                     setException(error);
@@ -286,7 +310,7 @@ export async function createInstantiator(options, swift) {
                 try {
                     const callback = swift.memory.getObject(callbackId);
                     let ret = callback(param0IsSome ? swift.memory.getObject(param0ObjectId) : null);
-                    tmpRetBytes = textEncoder.encode(ret);
+                    tmpRetBytes = _cachedEncode(ret);
                     return tmpRetBytes.length;
                 } catch (error) {
                     setException(error);
@@ -351,7 +375,7 @@ export async function createInstantiator(options, swift) {
             TestModule["bjs_Renderable_render"] = function bjs_Renderable_render(self) {
                 try {
                     let ret = swift.memory.getObject(self).render();
-                    tmpRetBytes = textEncoder.encode(ret);
+                    tmpRetBytes = _cachedEncode(ret);
                     return tmpRetBytes.length;
                 } catch (error) {
                     setException(error);
@@ -428,7 +452,7 @@ export async function createInstantiator(options, swift) {
                 }
 
                 constructor(name) {
-                    const nameBytes = textEncoder.encode(name);
+                    const nameBytes = _cachedEncode(name);
                     const nameId = swift.memory.retain(nameBytes);
                     const ret = instance.exports.bjs_Widget_init(nameId, nameBytes.length);
                     return Widget.__construct(ret);
@@ -440,7 +464,7 @@ export async function createInstantiator(options, swift) {
                     return ret;
                 }
                 set name(value) {
-                    const valueBytes = textEncoder.encode(value);
+                    const valueBytes = _cachedEncode(value);
                     const valueId = swift.memory.retain(valueBytes);
                     instance.exports.bjs_Widget_name_set(this.pointer, valueId, valueBytes.length);
                 }
@@ -455,7 +479,7 @@ export async function createInstantiator(options, swift) {
                     return ret;
                 },
                 makeRenderableFactory: function bjs_makeRenderableFactory(defaultName) {
-                    const defaultNameBytes = textEncoder.encode(defaultName);
+                    const defaultNameBytes = _cachedEncode(defaultName);
                     const defaultNameId = swift.memory.retain(defaultNameBytes);
                     const ret = instance.exports.bjs_makeRenderableFactory(defaultNameId, defaultNameBytes.length);
                     return swift.memory.getObject(ret);

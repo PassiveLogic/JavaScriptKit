@@ -19,6 +19,23 @@ export async function createInstantiator(options, swift) {
     let tmpRetOptionalFloat;
     let tmpRetOptionalDouble;
     let tmpRetOptionalHeapObject;
+    const _strEncCache = new Map();
+    const _strEncCacheMax = 4096;
+    function _cachedEncode(str) {
+        let encoded = _strEncCache.get(str);
+        if (encoded) {
+            _strEncCache.delete(str);
+            _strEncCache.set(str, encoded);
+            return encoded;
+        }
+        encoded = textEncoder.encode(str);
+        if (_strEncCache.size >= _strEncCacheMax) {
+            _strEncCache.delete(_strEncCache.keys().next().value);
+        }
+        _strEncCache.set(str, encoded);
+        return encoded;
+    }
+    function _maxUTF8Len(str) { return str.length * 3; }
     let strStack = [];
     let i32Stack = [];
     let i64Stack = [];
@@ -48,6 +65,13 @@ export async function createInstantiator(options, swift) {
                 swift.memory.release(sourceId);
                 const bytes = new Uint8Array(memory.buffer, bytesPtr);
                 bytes.set(source);
+            }
+            bjs["swift_js_init_memory_from_string"] = function(sourceId, bytesPtr) {
+                const str = swift.memory.getObject(sourceId);
+                swift.memory.release(sourceId);
+                const target = new Uint8Array(memory.buffer, bytesPtr);
+                const result = textEncoder.encodeInto(str, target);
+                return result.written;
             }
             bjs["swift_js_make_js_string"] = function(ptr, len) {
                 return swift.memory.retain(decodeString(ptr, len));
@@ -574,7 +598,7 @@ export async function createInstantiator(options, swift) {
                     const isSome = name != null;
                     let result, result1;
                     if (isSome) {
-                        const nameBytes = textEncoder.encode(name);
+                        const nameBytes = _cachedEncode(name);
                         const nameId = swift.memory.retain(nameBytes);
                         result = nameId;
                         result1 = nameBytes.length;
@@ -595,7 +619,7 @@ export async function createInstantiator(options, swift) {
                     const isSome = name != null;
                     let result, result1;
                     if (isSome) {
-                        const nameBytes = textEncoder.encode(name);
+                        const nameBytes = _cachedEncode(name);
                         const nameId = swift.memory.retain(nameBytes);
                         result = nameId;
                         result1 = nameBytes.length;
@@ -615,7 +639,7 @@ export async function createInstantiator(options, swift) {
                     const isSome = value != null;
                     let result, result1;
                     if (isSome) {
-                        const valueBytes = textEncoder.encode(value);
+                        const valueBytes = _cachedEncode(value);
                         const valueId = swift.memory.retain(valueBytes);
                         result = valueId;
                         result1 = valueBytes.length;
@@ -645,7 +669,7 @@ export async function createInstantiator(options, swift) {
                     const isSome = value != null;
                     let result, result1;
                     if (isSome) {
-                        const valueBytes = textEncoder.encode(value);
+                        const valueBytes = _cachedEncode(value);
                         const valueId = swift.memory.retain(valueBytes);
                         result = valueId;
                         result1 = valueBytes.length;
@@ -760,7 +784,7 @@ export async function createInstantiator(options, swift) {
                     const isSome = name != null;
                     let result, result1;
                     if (isSome) {
-                        const nameBytes = textEncoder.encode(name);
+                        const nameBytes = _cachedEncode(name);
                         const nameId = swift.memory.retain(nameBytes);
                         result = nameId;
                         result1 = nameBytes.length;
@@ -847,7 +871,7 @@ export async function createInstantiator(options, swift) {
                     const isSome = name != null;
                     let result, result1;
                     if (isSome) {
-                        const nameBytes = textEncoder.encode(name);
+                        const nameBytes = _cachedEncode(name);
                         const nameId = swift.memory.retain(nameBytes);
                         result = nameId;
                         result1 = nameBytes.length;
@@ -864,7 +888,7 @@ export async function createInstantiator(options, swift) {
                     const isSome = name != null;
                     let result, result1;
                     if (isSome) {
-                        const nameBytes = textEncoder.encode(name);
+                        const nameBytes = _cachedEncode(name);
                         const nameId = swift.memory.retain(nameBytes);
                         result = nameId;
                         result1 = nameBytes.length;
@@ -881,7 +905,7 @@ export async function createInstantiator(options, swift) {
                     const isSome = name != null;
                     let result, result1;
                     if (isSome) {
-                        const nameBytes = textEncoder.encode(name);
+                        const nameBytes = _cachedEncode(name);
                         const nameId = swift.memory.retain(nameBytes);
                         result = nameId;
                         result1 = nameBytes.length;
@@ -898,7 +922,7 @@ export async function createInstantiator(options, swift) {
                     const isSome = name != null;
                     let result, result1;
                     if (isSome) {
-                        const nameBytes = textEncoder.encode(name);
+                        const nameBytes = _cachedEncode(name);
                         const nameId = swift.memory.retain(nameBytes);
                         result = nameId;
                         result1 = nameBytes.length;
@@ -929,7 +953,7 @@ export async function createInstantiator(options, swift) {
                     const isSome = name != null;
                     let result, result1;
                     if (isSome) {
-                        const nameBytes = textEncoder.encode(name);
+                        const nameBytes = _cachedEncode(name);
                         const nameId = swift.memory.retain(nameBytes);
                         result = nameId;
                         result1 = nameBytes.length;
@@ -946,7 +970,7 @@ export async function createInstantiator(options, swift) {
                     const isSome = firstName != null;
                     let result, result1;
                     if (isSome) {
-                        const firstNameBytes = textEncoder.encode(firstName);
+                        const firstNameBytes = _cachedEncode(firstName);
                         const firstNameId = swift.memory.retain(firstNameBytes);
                         result = firstNameId;
                         result1 = firstNameBytes.length;
@@ -957,7 +981,7 @@ export async function createInstantiator(options, swift) {
                     const isSome1 = lastName != null;
                     let result2, result3;
                     if (isSome1) {
-                        const lastNameBytes = textEncoder.encode(lastName);
+                        const lastNameBytes = _cachedEncode(lastName);
                         const lastNameId = swift.memory.retain(lastNameBytes);
                         result2 = lastNameId;
                         result3 = lastNameBytes.length;
