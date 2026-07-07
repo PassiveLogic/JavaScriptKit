@@ -161,7 +161,21 @@ public final class JSPromise: JSBridgedClass {
         let failureClosure = JSOneshotClosure {
             failure($0[0]).jsValue
         }
+        #if hasFeature(Embedded)
+        // Embedded (khasm port): the two-argument @dynamicMemberLookup call path specializes
+        // JSObject's generic subscript in a way that crashes the 6.5-dev frontend
+        // (Abort: getOrigParamIndex, ParameterPack.cpp:387); route through the [JSValue]
+        // call primitive instead — behavior-identical.
+        let thenFunction = jsObject.then.object!
+        return JSPromise(
+            unsafelyWrapping: thenFunction.invokeNonThrowingJSFunction(
+                arguments: [successClosure.jsValue, failureClosure.jsValue],
+                this: jsObject
+            ).jsValue.object!
+        )
+        #else
         return JSPromise(unsafelyWrapping: jsObject.then!(successClosure, failureClosure).object!)
+        #endif
     }
 
     #if compiler(>=5.5) && (!hasFeature(Embedded) || os(WASI))
@@ -178,7 +192,18 @@ public final class JSPromise: JSBridgedClass {
         let failureClosure = JSOneshotClosure.async { arguments throws(JSException) -> JSValue in
             try await failure(arguments[0]).jsValue
         }
+        #if hasFeature(Embedded)
+        // Embedded (khasm port): see the synchronous two-closure `then` above.
+        let thenFunction = jsObject.then.object!
+        return JSPromise(
+            unsafelyWrapping: thenFunction.invokeNonThrowingJSFunction(
+                arguments: [successClosure.jsValue, failureClosure.jsValue],
+                this: jsObject
+            ).jsValue.object!
+        )
+        #else
         return JSPromise(unsafelyWrapping: jsObject.then!(successClosure, failureClosure).object!)
+        #endif
     }
     #endif
 

@@ -29,11 +29,22 @@ public final class JSBigInt: JSObject {
     }
 
     public func clamped(bitSize: Int, signed: Bool) -> JSBigInt {
+        #if hasFeature(Embedded)
+        // Embedded (khasm port): the two-argument @dynamicMemberLookup call path crashes the
+        // 6.5-dev frontend (Abort: getOrigParamIndex, ParameterPack.cpp:387); route through
+        // the [JSValue] call primitive instead — behavior-identical.
+        let fn = signed ? constructor.asIntN.object! : constructor.asUintN.object!
+        return fn.invokeNonThrowingJSFunction(
+            arguments: [bitSize.jsValue, self.jsValue],
+            this: constructor.object!
+        ).jsValue.bigInt!
+        #else
         if signed {
             return constructor.asIntN(bitSize, self).bigInt!
         } else {
             return constructor.asUintN(bitSize, self).bigInt!
         }
+        #endif
     }
 }
 
