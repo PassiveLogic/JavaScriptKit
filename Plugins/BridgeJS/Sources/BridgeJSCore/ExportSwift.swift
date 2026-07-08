@@ -238,19 +238,32 @@ public class ExportSwift {
                 )
             }
 
-            liftedParameterExprs.append(liftingExpr)
+            // Embedded-port note: a lifted `[AnyP]` (or `[AnyP]?`) implicitly
+            // converting to a `[any P]` parameter is a covariant array conversion —
+            // dynamic casting under Embedded Swift. Erase element-wise instead.
+            var adjustedLiftingExpr = liftingExpr
+            if case .array(.swiftProtocol(let protocolName)) = param.type {
+                adjustedLiftingExpr = ExprSyntax(
+                    "\(adjustedLiftingExpr).map { $0 as any \(raw: protocolName) }"
+                )
+            } else if case .nullable(.array(.swiftProtocol(let protocolName)), _) = param.type {
+                adjustedLiftingExpr = ExprSyntax(
+                    "\(adjustedLiftingExpr).map { $0.map { $0 as any \(raw: protocolName) } }"
+                )
+            }
+
+            liftedParameterExprs.append(adjustedLiftingExpr)
             for (name, type) in zip(argumentsToLift, liftingInfo.parameters.map { $0.type }) {
                 abiParameterSignatures.append((name, type))
             }
         }
 
         private func protocolCastSuffix(for returnType: BridgeType) -> (prefix: String, suffix: String) {
-            switch returnType {
-            case .swiftProtocol:
-                return ("", " as! _BridgedSwiftProtocolExportable")
-            default:
-                return ("", "")
-            }
+            // Embedded-port note: no `as! _BridgedSwiftProtocolExportable` suffix —
+            // existential-to-existential casts are forbidden under Embedded Swift.
+            // Exported `@JS` protocols must refine `_BridgedSwiftProtocolExportable`
+            // instead, so `bridgeJSLowerAsProtocolReturn()` dispatches as a witness.
+            ("", "")
         }
 
         private func removeFirstLiftedParameter() -> (parameter: Parameter, expr: ExprSyntax) {
@@ -412,7 +425,7 @@ public class ExportSwift {
                 append(
                     """
                     if let ret {
-                        _swift_js_return_optional_object(1, (ret as! _BridgedSwiftProtocolExportable).bridgeJSLowerAsProtocolReturn())
+                        _swift_js_return_optional_object(1, ret.bridgeJSLowerAsProtocolReturn())
                     } else {
                         _swift_js_return_optional_object(0, 0)
                     }
@@ -924,7 +937,7 @@ struct StackCodegen {
             return ["\(raw: accessor).jsObject.bridgeJSStackPush()"]
         case .swiftProtocol:
             return [
-                "_swift_js_push_i32((\(raw: accessor) as! _BridgedSwiftProtocolExportable).bridgeJSLowerAsProtocolReturn())"
+                "_swift_js_push_i32(\(raw: accessor).bridgeJSLowerAsProtocolReturn())"
             ]
         case .void, .namespaceEnum:
             return []
@@ -958,7 +971,7 @@ struct StackCodegen {
         return [
             """
             for \(raw: elemVar) in \(raw: accessor) {
-                _swift_js_push_i32((\(raw: elemVar) as! _BridgedSwiftProtocolExportable).bridgeJSLowerAsProtocolReturn())
+                _swift_js_push_i32(\(raw: elemVar).bridgeJSLowerAsProtocolReturn())
             }
             """,
             "_swift_js_push_i32(Int32(\(raw: accessor).count))",
@@ -1040,7 +1053,7 @@ struct StackCodegen {
             """
             for \(raw: pairVar) in \(raw: accessor) {
                 \(raw: pairVar).key.bridgeJSStackPush()
-                _swift_js_push_i32((\(raw: pairVar).value as! _BridgedSwiftProtocolExportable).bridgeJSLowerAsProtocolReturn())
+                _swift_js_push_i32(\(raw: pairVar).value.bridgeJSLowerAsProtocolReturn())
             }
             """,
             "_swift_js_push_i32(Int32(\(raw: accessor).count))",

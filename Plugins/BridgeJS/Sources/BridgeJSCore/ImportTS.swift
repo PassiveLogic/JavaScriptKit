@@ -188,7 +188,7 @@ public struct ImportTS {
                 body.write("if let \(param.name) {")
                 body.indent {
                     body.write(
-                        "\(pattern) = (1, (\(param.name) as! _BridgedSwiftProtocolExportable).bridgeJSLowerAsProtocolReturn())"
+                        "\(pattern) = (1, \(param.name).bridgeJSLowerAsProtocolReturn())"
                     )
                 }
                 body.write("} else {")
@@ -200,7 +200,7 @@ public struct ImportTS {
                 let initializerExpr: ExprSyntax
                 if case .swiftProtocol = param.type, context == .exportSwift {
                     initializerExpr = ExprSyntax(
-                        "(\(raw: param.name) as! _BridgedSwiftProtocolExportable).bridgeJSLowerAsProtocolReturn()"
+                        "\(raw: param.name).bridgeJSLowerAsProtocolReturn()"
                     )
                 } else {
                     initializerExpr = ExprSyntax("\(raw: param.name).bridgeJSLowerParameter()")

@@ -182,13 +182,13 @@ public struct ClosureCodegen {
                 switch signature.returnType {
                 case .swiftProtocol:
                     printer.write(
-                        "return (result as! _BridgedSwiftProtocolExportable).bridgeJSLowerAsProtocolReturn()"
+                        "return result.bridgeJSLowerAsProtocolReturn()"
                     )
                 case .nullable(.swiftProtocol, _):
                     printer.write("if let result {")
                     printer.indent {
                         printer.write(
-                            "_swift_js_return_optional_object(1, (result as! _BridgedSwiftProtocolExportable).bridgeJSLowerAsProtocolReturn())"
+                            "_swift_js_return_optional_object(1, result.bridgeJSLowerAsProtocolReturn())"
                         )
                     }
                     printer.write("} else {")

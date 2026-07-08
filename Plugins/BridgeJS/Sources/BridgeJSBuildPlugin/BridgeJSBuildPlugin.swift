@@ -18,11 +18,35 @@ struct BridgeJSBuildPlugin: BuildToolPlugin {
         return target.directoryURL.appending(path: "bridge-js.config.json")
     }
 
+    /// Filename PREFIXES (matched against each Swift file's last path component,
+    /// colon-separated in the `BRIDGEJS_EXCLUDE_SOURCES` environment variable) to
+    /// hide from the BridgeJS scanner.
+    ///
+    /// BridgeJS parses sources with SwiftSyntax and does NOT evaluate `#if`
+    /// conditions, so `@JS` declarations inside inactive conditional-compilation
+    /// blocks (e.g. whole-file `#if canImport(...)` gates on a build flavor that
+    /// drops the imported product) would still get bridge glue generated for them,
+    /// producing "cannot find type" errors. Build flavors that compile such files
+    /// away can exclude them from scanning entirely with this variable.
+    private var excludedSourcePrefixes: [String] {
+        guard let raw = ProcessInfo.processInfo.environment["BRIDGEJS_EXCLUDE_SOURCES"], !raw.isEmpty else {
+            return []
+        }
+        return raw.split(separator: ":").map(String.init)
+    }
+
+    private func isExcluded(_ url: URL, by prefixes: [String]) -> Bool {
+        let fileName = url.lastPathComponent
+        return prefixes.contains(where: { fileName.hasPrefix($0) })
+    }
+
     private func createGenerateCommand(context: PluginContext, target: SwiftSourceModuleTarget) throws -> Command {
         let outputSwiftPath = context.pluginWorkDirectoryURL.appending(path: "BridgeJS.swift")
 
+        let excludedPrefixes = excludedSourcePrefixes
         let inputSwiftFiles = target.sourceFiles.filter {
             !$0.url.path.hasPrefix(context.pluginWorkDirectoryURL.path + "/")
+                && !isExcluded($0.url, by: excludedPrefixes)
         }
         .map(\.url)
 
@@ -37,7 +61,7 @@ struct BridgeJSBuildPlugin: BuildToolPlugin {
         // process @JS annotations in files produced by earlier plugins
         // without requiring any extra configuration.
         let pluginGeneratedSwiftFiles = target.pluginGeneratedSources.filter {
-            $0.pathExtension == "swift"
+            $0.pathExtension == "swift" && !isExcluded($0, by: excludedPrefixes)
         }
         inputFiles.append(contentsOf: pluginGeneratedSwiftFiles)
 
