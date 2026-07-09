@@ -30,7 +30,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "AsyncDirection",
+        "swiftCallName" : "TestModule.AsyncDirection",
         "tsFullPath" : "AsyncDirection"
       },
       {
@@ -57,14 +57,14 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "AsyncTheme",
+        "swiftCallName" : "TestModule.AsyncTheme",
         "tsFullPath" : "AsyncTheme"
       }
     ],
     "exposeToGlobal" : false,
     "functions" : [
       {
-        "abiName" : "bjs_asyncReturnVoid",
+        "abiName" : "bjs_TestModule_asyncReturnVoid",
         "effects" : {
           "isAsync" : true,
           "isStatic" : false,
@@ -81,7 +81,7 @@
         }
       },
       {
-        "abiName" : "bjs_asyncRoundTripInt",
+        "abiName" : "bjs_TestModule_asyncRoundTripInt",
         "effects" : {
           "isAsync" : true,
           "isStatic" : false,
@@ -112,7 +112,7 @@
         }
       },
       {
-        "abiName" : "bjs_asyncRoundTripString",
+        "abiName" : "bjs_TestModule_asyncRoundTripString",
         "effects" : {
           "isAsync" : true,
           "isStatic" : false,
@@ -137,7 +137,7 @@
         }
       },
       {
-        "abiName" : "bjs_asyncRoundTripBool",
+        "abiName" : "bjs_TestModule_asyncRoundTripBool",
         "effects" : {
           "isAsync" : true,
           "isStatic" : false,
@@ -162,7 +162,7 @@
         }
       },
       {
-        "abiName" : "bjs_asyncRoundTripFloat",
+        "abiName" : "bjs_TestModule_asyncRoundTripFloat",
         "effects" : {
           "isAsync" : true,
           "isStatic" : false,
@@ -187,7 +187,7 @@
         }
       },
       {
-        "abiName" : "bjs_asyncRoundTripDouble",
+        "abiName" : "bjs_TestModule_asyncRoundTripDouble",
         "effects" : {
           "isAsync" : true,
           "isStatic" : false,
@@ -212,7 +212,7 @@
         }
       },
       {
-        "abiName" : "bjs_asyncRoundTripJSObject",
+        "abiName" : "bjs_TestModule_asyncRoundTripJSObject",
         "effects" : {
           "isAsync" : true,
           "isStatic" : false,
@@ -237,7 +237,7 @@
         }
       },
       {
-        "abiName" : "bjs_asyncRoundTripStruct",
+        "abiName" : "bjs_TestModule_asyncRoundTripStruct",
         "effects" : {
           "isAsync" : true,
           "isStatic" : false,
@@ -250,19 +250,19 @@
             "name" : "v",
             "type" : {
               "swiftStruct" : {
-                "_0" : "AsyncPoint"
+                "_0" : "TestModule.AsyncPoint"
               }
             }
           }
         ],
         "returnType" : {
           "swiftStruct" : {
-            "_0" : "AsyncPoint"
+            "_0" : "TestModule.AsyncPoint"
           }
         }
       },
       {
-        "abiName" : "bjs_asyncRoundTripStructThrows",
+        "abiName" : "bjs_TestModule_asyncRoundTripStructThrows",
         "effects" : {
           "isAsync" : true,
           "isStatic" : false,
@@ -275,19 +275,19 @@
             "name" : "v",
             "type" : {
               "swiftStruct" : {
-                "_0" : "AsyncPoint"
+                "_0" : "TestModule.AsyncPoint"
               }
             }
           }
         ],
         "returnType" : {
           "swiftStruct" : {
-            "_0" : "AsyncPoint"
+            "_0" : "TestModule.AsyncPoint"
           }
         }
       },
       {
-        "abiName" : "bjs_asyncThrowsZeroArg",
+        "abiName" : "bjs_TestModule_asyncThrowsZeroArg",
         "effects" : {
           "isAsync" : true,
           "isStatic" : false,
@@ -304,7 +304,7 @@
         }
       },
       {
-        "abiName" : "bjs_asyncCombineStructs",
+        "abiName" : "bjs_TestModule_asyncCombineStructs",
         "effects" : {
           "isAsync" : true,
           "isStatic" : false,
@@ -317,7 +317,7 @@
             "name" : "a",
             "type" : {
               "swiftStruct" : {
-                "_0" : "AsyncPoint"
+                "_0" : "TestModule.AsyncPoint"
               }
             }
           },
@@ -326,19 +326,19 @@
             "name" : "b",
             "type" : {
               "swiftStruct" : {
-                "_0" : "AsyncPoint"
+                "_0" : "TestModule.AsyncPoint"
               }
             }
           }
         ],
         "returnType" : {
           "swiftStruct" : {
-            "_0" : "AsyncPoint"
+            "_0" : "TestModule.AsyncPoint"
           }
         }
       },
       {
-        "abiName" : "bjs_asyncRoundTripEnum",
+        "abiName" : "bjs_TestModule_asyncRoundTripEnum",
         "effects" : {
           "isAsync" : true,
           "isStatic" : false,
@@ -351,19 +351,19 @@
             "name" : "v",
             "type" : {
               "caseEnum" : {
-                "_0" : "AsyncDirection"
+                "_0" : "TestModule.AsyncDirection"
               }
             }
           }
         ],
         "returnType" : {
           "caseEnum" : {
-            "_0" : "AsyncDirection"
+            "_0" : "TestModule.AsyncDirection"
           }
         }
       },
       {
-        "abiName" : "bjs_asyncRoundTripRawEnum",
+        "abiName" : "bjs_TestModule_asyncRoundTripRawEnum",
         "effects" : {
           "isAsync" : true,
           "isStatic" : false,
@@ -376,7 +376,7 @@
             "name" : "v",
             "type" : {
               "rawValueEnum" : {
-                "_0" : "AsyncTheme",
+                "_0" : "TestModule.AsyncTheme",
                 "_1" : "String"
               }
             }
@@ -384,13 +384,13 @@
         ],
         "returnType" : {
           "rawValueEnum" : {
-            "_0" : "AsyncTheme",
+            "_0" : "TestModule.AsyncTheme",
             "_1" : "String"
           }
         }
       },
       {
-        "abiName" : "bjs_asyncRoundTripOptionalEnum",
+        "abiName" : "bjs_TestModule_asyncRoundTripOptionalEnum",
         "effects" : {
           "isAsync" : true,
           "isStatic" : false,
@@ -405,7 +405,7 @@
               "nullable" : {
                 "_0" : {
                   "caseEnum" : {
-                    "_0" : "AsyncDirection"
+                    "_0" : "TestModule.AsyncDirection"
                   }
                 },
                 "_1" : "null"
@@ -417,7 +417,7 @@
           "nullable" : {
             "_0" : {
               "caseEnum" : {
-                "_0" : "AsyncDirection"
+                "_0" : "TestModule.AsyncDirection"
               }
             },
             "_1" : "null"
@@ -425,7 +425,7 @@
         }
       },
       {
-        "abiName" : "bjs_asyncRoundTripOptionalRawEnum",
+        "abiName" : "bjs_TestModule_asyncRoundTripOptionalRawEnum",
         "effects" : {
           "isAsync" : true,
           "isStatic" : false,
@@ -440,7 +440,7 @@
               "nullable" : {
                 "_0" : {
                   "rawValueEnum" : {
-                    "_0" : "AsyncTheme",
+                    "_0" : "TestModule.AsyncTheme",
                     "_1" : "String"
                   }
                 },
@@ -453,7 +453,7 @@
           "nullable" : {
             "_0" : {
               "rawValueEnum" : {
-                "_0" : "AsyncTheme",
+                "_0" : "TestModule.AsyncTheme",
                 "_1" : "String"
               }
             },
@@ -462,7 +462,7 @@
         }
       },
       {
-        "abiName" : "bjs_asyncRoundTripOptionalStruct",
+        "abiName" : "bjs_TestModule_asyncRoundTripOptionalStruct",
         "effects" : {
           "isAsync" : true,
           "isStatic" : false,
@@ -477,7 +477,7 @@
               "nullable" : {
                 "_0" : {
                   "swiftStruct" : {
-                    "_0" : "AsyncPoint"
+                    "_0" : "TestModule.AsyncPoint"
                   }
                 },
                 "_1" : "null"
@@ -489,7 +489,7 @@
           "nullable" : {
             "_0" : {
               "swiftStruct" : {
-                "_0" : "AsyncPoint"
+                "_0" : "TestModule.AsyncPoint"
               }
             },
             "_1" : "null"
@@ -497,7 +497,7 @@
         }
       },
       {
-        "abiName" : "bjs_asyncRoundTripStructArray",
+        "abiName" : "bjs_TestModule_asyncRoundTripStructArray",
         "effects" : {
           "isAsync" : true,
           "isStatic" : false,
@@ -512,7 +512,7 @@
               "array" : {
                 "_0" : {
                   "swiftStruct" : {
-                    "_0" : "AsyncPoint"
+                    "_0" : "TestModule.AsyncPoint"
                   }
                 }
               }
@@ -523,14 +523,14 @@
           "array" : {
             "_0" : {
               "swiftStruct" : {
-                "_0" : "AsyncPoint"
+                "_0" : "TestModule.AsyncPoint"
               }
             }
           }
         }
       },
       {
-        "abiName" : "bjs_asyncRoundTripEnumArray",
+        "abiName" : "bjs_TestModule_asyncRoundTripEnumArray",
         "effects" : {
           "isAsync" : true,
           "isStatic" : false,
@@ -545,7 +545,7 @@
               "array" : {
                 "_0" : {
                   "caseEnum" : {
-                    "_0" : "AsyncDirection"
+                    "_0" : "TestModule.AsyncDirection"
                   }
                 }
               }
@@ -556,14 +556,14 @@
           "array" : {
             "_0" : {
               "caseEnum" : {
-                "_0" : "AsyncDirection"
+                "_0" : "TestModule.AsyncDirection"
               }
             }
           }
         }
       },
       {
-        "abiName" : "bjs_asyncRoundTripStructDictionary",
+        "abiName" : "bjs_TestModule_asyncRoundTripStructDictionary",
         "effects" : {
           "isAsync" : true,
           "isStatic" : false,
@@ -578,7 +578,7 @@
               "dictionary" : {
                 "_0" : {
                   "swiftStruct" : {
-                    "_0" : "AsyncPoint"
+                    "_0" : "TestModule.AsyncPoint"
                   }
                 }
               }
@@ -589,14 +589,14 @@
           "dictionary" : {
             "_0" : {
               "swiftStruct" : {
-                "_0" : "AsyncPoint"
+                "_0" : "TestModule.AsyncPoint"
               }
             }
           }
         }
       },
       {
-        "abiName" : "bjs_asyncRoundTripEnumDictionary",
+        "abiName" : "bjs_TestModule_asyncRoundTripEnumDictionary",
         "effects" : {
           "isAsync" : true,
           "isStatic" : false,
@@ -611,7 +611,7 @@
               "dictionary" : {
                 "_0" : {
                   "caseEnum" : {
-                    "_0" : "AsyncDirection"
+                    "_0" : "TestModule.AsyncDirection"
                   }
                 }
               }
@@ -622,7 +622,7 @@
           "dictionary" : {
             "_0" : {
               "caseEnum" : {
-                "_0" : "AsyncDirection"
+                "_0" : "TestModule.AsyncDirection"
               }
             }
           }
@@ -666,7 +666,7 @@
             }
           }
         ],
-        "swiftCallName" : "AsyncPoint"
+        "swiftCallName" : "TestModule.AsyncPoint"
       }
     ]
   },

@@ -31,7 +31,7 @@ export async function createInstantiator(options, swift) {
 
     let _exports = null;
     let bjs = null;
-    const __bjs_createFooContainerHelpers = () => ({
+    const __bjs_createTestModule_FooContainerHelpers = () => ({
         lower: (value) => {
             let id;
             if (value.foo != null) {
@@ -145,11 +145,11 @@ export async function createInstantiator(options, swift) {
                 const copy = memory.buffer.slice(ptr, ptr + byteLen);
                 taStack.push(Array.from(new Ctor(copy)));
             }
-            bjs["swift_js_struct_lower_FooContainer"] = function(objectId) {
-                structHelpers.FooContainer.lower(swift.memory.getObject(objectId));
+            bjs["swift_js_struct_lower_TestModule_FooContainer"] = function(objectId) {
+                structHelpers.TestModule_FooContainer.lower(swift.memory.getObject(objectId));
             }
-            bjs["swift_js_struct_lift_FooContainer"] = function() {
-                const value = structHelpers.FooContainer.lift();
+            bjs["swift_js_struct_lift_TestModule_FooContainer"] = function() {
+                const value = structHelpers.TestModule_FooContainer.lift();
                 return swift.memory.retain(value);
             }
             const __bjs_promiseSettlers = Symbol("JavaScriptKit.promiseSettlers");
@@ -272,12 +272,12 @@ export async function createInstantiator(options, swift) {
         /** @param {WebAssembly.Instance} instance */
         createExports: (instance) => {
             const js = swift.memory.heap;
-            const FooContainerHelpers = __bjs_createFooContainerHelpers();
-            structHelpers.FooContainer = FooContainerHelpers;
+            const TestModule_FooContainerHelpers = __bjs_createTestModule_FooContainerHelpers();
+            structHelpers.TestModule_FooContainer = TestModule_FooContainerHelpers;
 
             const exports = {
-                makeFoo: function bjs_makeFoo() {
-                    const ret = instance.exports.bjs_makeFoo();
+                makeFoo: function bjs_TestModule_makeFoo() {
+                    const ret = instance.exports.bjs_TestModule_makeFoo();
                     const ret1 = swift.memory.getObject(ret);
                     swift.memory.release(ret);
                     if (tmpRetException) {
@@ -288,13 +288,13 @@ export async function createInstantiator(options, swift) {
                     }
                     return ret1;
                 },
-                processFooArray: function bjs_processFooArray(foos) {
+                processFooArray: function bjs_TestModule_processFooArray(foos) {
                     for (const elem of foos) {
                         const objId = swift.memory.retain(elem);
                         i32Stack.push(objId);
                     }
                     i32Stack.push(foos.length);
-                    instance.exports.bjs_processFooArray();
+                    instance.exports.bjs_TestModule_processFooArray();
                     const arrayLen = i32Stack.pop();
                     let arrayResult;
                     if (arrayLen === -1) {
@@ -311,7 +311,7 @@ export async function createInstantiator(options, swift) {
                     }
                     return arrayResult;
                 },
-                processOptionalFooArray: function bjs_processOptionalFooArray(foos) {
+                processOptionalFooArray: function bjs_TestModule_processOptionalFooArray(foos) {
                     for (const elem of foos) {
                         const isSome = elem != null ? 1 : 0;
                         if (isSome) {
@@ -321,7 +321,7 @@ export async function createInstantiator(options, swift) {
                         i32Stack.push(isSome);
                     }
                     i32Stack.push(foos.length);
-                    instance.exports.bjs_processOptionalFooArray();
+                    instance.exports.bjs_TestModule_processOptionalFooArray();
                     const arrayLen = i32Stack.pop();
                     let arrayResult;
                     if (arrayLen === -1) {
@@ -345,10 +345,10 @@ export async function createInstantiator(options, swift) {
                     }
                     return arrayResult;
                 },
-                roundtripFooContainer: function bjs_roundtripFooContainer(container) {
-                    structHelpers.FooContainer.lower(container);
-                    instance.exports.bjs_roundtripFooContainer();
-                    const structValue = structHelpers.FooContainer.lift();
+                roundtripFooContainer: function bjs_TestModule_roundtripFooContainer(container) {
+                    structHelpers.TestModule_FooContainer.lower(container);
+                    instance.exports.bjs_TestModule_roundtripFooContainer();
+                    const structValue = structHelpers.TestModule_FooContainer.lift();
                     return structValue;
                 },
             };

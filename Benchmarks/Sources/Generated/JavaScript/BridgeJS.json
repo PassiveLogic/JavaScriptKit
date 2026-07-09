@@ -6,7 +6,7 @@
     "classes" : [
       {
         "constructor" : {
-          "abiName" : "bjs_EnumRoundtrip_init",
+          "abiName" : "bjs_Benchmarks_EnumRoundtrip_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -18,7 +18,7 @@
         },
         "methods" : [
           {
-            "abiName" : "bjs_EnumRoundtrip_take",
+            "abiName" : "bjs_Benchmarks_EnumRoundtrip_take",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -31,7 +31,7 @@
                 "name" : "value",
                 "type" : {
                   "associatedValueEnum" : {
-                    "_0" : "APIResult"
+                    "_0" : "Benchmarks.APIResult"
                   }
                 }
               }
@@ -43,7 +43,7 @@
             }
           },
           {
-            "abiName" : "bjs_EnumRoundtrip_makeSuccess",
+            "abiName" : "bjs_Benchmarks_EnumRoundtrip_makeSuccess",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -55,12 +55,12 @@
             ],
             "returnType" : {
               "associatedValueEnum" : {
-                "_0" : "APIResult"
+                "_0" : "Benchmarks.APIResult"
               }
             }
           },
           {
-            "abiName" : "bjs_EnumRoundtrip_makeFailure",
+            "abiName" : "bjs_Benchmarks_EnumRoundtrip_makeFailure",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -72,12 +72,12 @@
             ],
             "returnType" : {
               "associatedValueEnum" : {
-                "_0" : "APIResult"
+                "_0" : "Benchmarks.APIResult"
               }
             }
           },
           {
-            "abiName" : "bjs_EnumRoundtrip_makeFlag",
+            "abiName" : "bjs_Benchmarks_EnumRoundtrip_makeFlag",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -89,12 +89,12 @@
             ],
             "returnType" : {
               "associatedValueEnum" : {
-                "_0" : "APIResult"
+                "_0" : "Benchmarks.APIResult"
               }
             }
           },
           {
-            "abiName" : "bjs_EnumRoundtrip_makeRate",
+            "abiName" : "bjs_Benchmarks_EnumRoundtrip_makeRate",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -106,12 +106,12 @@
             ],
             "returnType" : {
               "associatedValueEnum" : {
-                "_0" : "APIResult"
+                "_0" : "Benchmarks.APIResult"
               }
             }
           },
           {
-            "abiName" : "bjs_EnumRoundtrip_makePrecise",
+            "abiName" : "bjs_Benchmarks_EnumRoundtrip_makePrecise",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -123,12 +123,12 @@
             ],
             "returnType" : {
               "associatedValueEnum" : {
-                "_0" : "APIResult"
+                "_0" : "Benchmarks.APIResult"
               }
             }
           },
           {
-            "abiName" : "bjs_EnumRoundtrip_makeInfo",
+            "abiName" : "bjs_Benchmarks_EnumRoundtrip_makeInfo",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -140,12 +140,12 @@
             ],
             "returnType" : {
               "associatedValueEnum" : {
-                "_0" : "APIResult"
+                "_0" : "Benchmarks.APIResult"
               }
             }
           },
           {
-            "abiName" : "bjs_EnumRoundtrip_roundtrip",
+            "abiName" : "bjs_Benchmarks_EnumRoundtrip_roundtrip",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -158,14 +158,14 @@
                 "name" : "result",
                 "type" : {
                   "associatedValueEnum" : {
-                    "_0" : "APIResult"
+                    "_0" : "Benchmarks.APIResult"
                   }
                 }
               }
             ],
             "returnType" : {
               "associatedValueEnum" : {
-                "_0" : "APIResult"
+                "_0" : "Benchmarks.APIResult"
               }
             }
           }
@@ -174,11 +174,11 @@
         "properties" : [
 
         ],
-        "swiftCallName" : "EnumRoundtrip"
+        "swiftCallName" : "Benchmarks.EnumRoundtrip"
       },
       {
         "constructor" : {
-          "abiName" : "bjs_ComplexResultRoundtrip_init",
+          "abiName" : "bjs_Benchmarks_ComplexResultRoundtrip_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -190,7 +190,7 @@
         },
         "methods" : [
           {
-            "abiName" : "bjs_ComplexResultRoundtrip_take",
+            "abiName" : "bjs_Benchmarks_ComplexResultRoundtrip_take",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -203,7 +203,7 @@
                 "name" : "value",
                 "type" : {
                   "associatedValueEnum" : {
-                    "_0" : "ComplexResult"
+                    "_0" : "Benchmarks.ComplexResult"
                   }
                 }
               }
@@ -215,7 +215,7 @@
             }
           },
           {
-            "abiName" : "bjs_ComplexResultRoundtrip_makeSuccess",
+            "abiName" : "bjs_Benchmarks_ComplexResultRoundtrip_makeSuccess",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -227,12 +227,12 @@
             ],
             "returnType" : {
               "associatedValueEnum" : {
-                "_0" : "ComplexResult"
+                "_0" : "Benchmarks.ComplexResult"
               }
             }
           },
           {
-            "abiName" : "bjs_ComplexResultRoundtrip_makeError",
+            "abiName" : "bjs_Benchmarks_ComplexResultRoundtrip_makeError",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -244,12 +244,12 @@
             ],
             "returnType" : {
               "associatedValueEnum" : {
-                "_0" : "ComplexResult"
+                "_0" : "Benchmarks.ComplexResult"
               }
             }
           },
           {
-            "abiName" : "bjs_ComplexResultRoundtrip_makeLocation",
+            "abiName" : "bjs_Benchmarks_ComplexResultRoundtrip_makeLocation",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -261,12 +261,12 @@
             ],
             "returnType" : {
               "associatedValueEnum" : {
-                "_0" : "ComplexResult"
+                "_0" : "Benchmarks.ComplexResult"
               }
             }
           },
           {
-            "abiName" : "bjs_ComplexResultRoundtrip_makeStatus",
+            "abiName" : "bjs_Benchmarks_ComplexResultRoundtrip_makeStatus",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -278,12 +278,12 @@
             ],
             "returnType" : {
               "associatedValueEnum" : {
-                "_0" : "ComplexResult"
+                "_0" : "Benchmarks.ComplexResult"
               }
             }
           },
           {
-            "abiName" : "bjs_ComplexResultRoundtrip_makeCoordinates",
+            "abiName" : "bjs_Benchmarks_ComplexResultRoundtrip_makeCoordinates",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -295,12 +295,12 @@
             ],
             "returnType" : {
               "associatedValueEnum" : {
-                "_0" : "ComplexResult"
+                "_0" : "Benchmarks.ComplexResult"
               }
             }
           },
           {
-            "abiName" : "bjs_ComplexResultRoundtrip_makeComprehensive",
+            "abiName" : "bjs_Benchmarks_ComplexResultRoundtrip_makeComprehensive",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -312,12 +312,12 @@
             ],
             "returnType" : {
               "associatedValueEnum" : {
-                "_0" : "ComplexResult"
+                "_0" : "Benchmarks.ComplexResult"
               }
             }
           },
           {
-            "abiName" : "bjs_ComplexResultRoundtrip_makeInfo",
+            "abiName" : "bjs_Benchmarks_ComplexResultRoundtrip_makeInfo",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -329,12 +329,12 @@
             ],
             "returnType" : {
               "associatedValueEnum" : {
-                "_0" : "ComplexResult"
+                "_0" : "Benchmarks.ComplexResult"
               }
             }
           },
           {
-            "abiName" : "bjs_ComplexResultRoundtrip_roundtrip",
+            "abiName" : "bjs_Benchmarks_ComplexResultRoundtrip_roundtrip",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -347,14 +347,14 @@
                 "name" : "result",
                 "type" : {
                   "associatedValueEnum" : {
-                    "_0" : "ComplexResult"
+                    "_0" : "Benchmarks.ComplexResult"
                   }
                 }
               }
             ],
             "returnType" : {
               "associatedValueEnum" : {
-                "_0" : "ComplexResult"
+                "_0" : "Benchmarks.ComplexResult"
               }
             }
           }
@@ -363,11 +363,11 @@
         "properties" : [
 
         ],
-        "swiftCallName" : "ComplexResultRoundtrip"
+        "swiftCallName" : "Benchmarks.ComplexResultRoundtrip"
       },
       {
         "constructor" : {
-          "abiName" : "bjs_StringRoundtrip_init",
+          "abiName" : "bjs_Benchmarks_StringRoundtrip_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -379,7 +379,7 @@
         },
         "methods" : [
           {
-            "abiName" : "bjs_StringRoundtrip_take",
+            "abiName" : "bjs_Benchmarks_StringRoundtrip_take",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -404,7 +404,7 @@
             }
           },
           {
-            "abiName" : "bjs_StringRoundtrip_make",
+            "abiName" : "bjs_Benchmarks_StringRoundtrip_make",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -425,11 +425,11 @@
         "properties" : [
 
         ],
-        "swiftCallName" : "StringRoundtrip"
+        "swiftCallName" : "Benchmarks.StringRoundtrip"
       },
       {
         "constructor" : {
-          "abiName" : "bjs_OptionalReturnRoundtrip_init",
+          "abiName" : "bjs_Benchmarks_OptionalReturnRoundtrip_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -441,7 +441,7 @@
         },
         "methods" : [
           {
-            "abiName" : "bjs_OptionalReturnRoundtrip_makeIntSome",
+            "abiName" : "bjs_Benchmarks_OptionalReturnRoundtrip_makeIntSome",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -466,7 +466,7 @@
             }
           },
           {
-            "abiName" : "bjs_OptionalReturnRoundtrip_makeIntNone",
+            "abiName" : "bjs_Benchmarks_OptionalReturnRoundtrip_makeIntNone",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -491,7 +491,7 @@
             }
           },
           {
-            "abiName" : "bjs_OptionalReturnRoundtrip_makeBoolSome",
+            "abiName" : "bjs_Benchmarks_OptionalReturnRoundtrip_makeBoolSome",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -513,7 +513,7 @@
             }
           },
           {
-            "abiName" : "bjs_OptionalReturnRoundtrip_makeBoolNone",
+            "abiName" : "bjs_Benchmarks_OptionalReturnRoundtrip_makeBoolNone",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -535,7 +535,7 @@
             }
           },
           {
-            "abiName" : "bjs_OptionalReturnRoundtrip_makeDoubleSome",
+            "abiName" : "bjs_Benchmarks_OptionalReturnRoundtrip_makeDoubleSome",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -557,7 +557,7 @@
             }
           },
           {
-            "abiName" : "bjs_OptionalReturnRoundtrip_makeDoubleNone",
+            "abiName" : "bjs_Benchmarks_OptionalReturnRoundtrip_makeDoubleNone",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -579,7 +579,7 @@
             }
           },
           {
-            "abiName" : "bjs_OptionalReturnRoundtrip_makeStringSome",
+            "abiName" : "bjs_Benchmarks_OptionalReturnRoundtrip_makeStringSome",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -601,7 +601,7 @@
             }
           },
           {
-            "abiName" : "bjs_OptionalReturnRoundtrip_makeStringNone",
+            "abiName" : "bjs_Benchmarks_OptionalReturnRoundtrip_makeStringNone",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -627,11 +627,11 @@
         "properties" : [
 
         ],
-        "swiftCallName" : "OptionalReturnRoundtrip"
+        "swiftCallName" : "Benchmarks.OptionalReturnRoundtrip"
       },
       {
         "constructor" : {
-          "abiName" : "bjs_StructRoundtrip_init",
+          "abiName" : "bjs_Benchmarks_StructRoundtrip_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -643,7 +643,7 @@
         },
         "methods" : [
           {
-            "abiName" : "bjs_StructRoundtrip_takeSimple",
+            "abiName" : "bjs_Benchmarks_StructRoundtrip_takeSimple",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -656,7 +656,7 @@
                 "name" : "value",
                 "type" : {
                   "swiftStruct" : {
-                    "_0" : "SimpleStruct"
+                    "_0" : "Benchmarks.SimpleStruct"
                   }
                 }
               }
@@ -668,7 +668,7 @@
             }
           },
           {
-            "abiName" : "bjs_StructRoundtrip_makeSimple",
+            "abiName" : "bjs_Benchmarks_StructRoundtrip_makeSimple",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -680,12 +680,12 @@
             ],
             "returnType" : {
               "swiftStruct" : {
-                "_0" : "SimpleStruct"
+                "_0" : "Benchmarks.SimpleStruct"
               }
             }
           },
           {
-            "abiName" : "bjs_StructRoundtrip_roundtripSimple",
+            "abiName" : "bjs_Benchmarks_StructRoundtrip_roundtripSimple",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -698,19 +698,19 @@
                 "name" : "value",
                 "type" : {
                   "swiftStruct" : {
-                    "_0" : "SimpleStruct"
+                    "_0" : "Benchmarks.SimpleStruct"
                   }
                 }
               }
             ],
             "returnType" : {
               "swiftStruct" : {
-                "_0" : "SimpleStruct"
+                "_0" : "Benchmarks.SimpleStruct"
               }
             }
           },
           {
-            "abiName" : "bjs_StructRoundtrip_takeAddress",
+            "abiName" : "bjs_Benchmarks_StructRoundtrip_takeAddress",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -723,7 +723,7 @@
                 "name" : "value",
                 "type" : {
                   "swiftStruct" : {
-                    "_0" : "Address"
+                    "_0" : "Benchmarks.Address"
                   }
                 }
               }
@@ -735,7 +735,7 @@
             }
           },
           {
-            "abiName" : "bjs_StructRoundtrip_makeAddress",
+            "abiName" : "bjs_Benchmarks_StructRoundtrip_makeAddress",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -747,12 +747,12 @@
             ],
             "returnType" : {
               "swiftStruct" : {
-                "_0" : "Address"
+                "_0" : "Benchmarks.Address"
               }
             }
           },
           {
-            "abiName" : "bjs_StructRoundtrip_roundtripAddress",
+            "abiName" : "bjs_Benchmarks_StructRoundtrip_roundtripAddress",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -765,19 +765,19 @@
                 "name" : "value",
                 "type" : {
                   "swiftStruct" : {
-                    "_0" : "Address"
+                    "_0" : "Benchmarks.Address"
                   }
                 }
               }
             ],
             "returnType" : {
               "swiftStruct" : {
-                "_0" : "Address"
+                "_0" : "Benchmarks.Address"
               }
             }
           },
           {
-            "abiName" : "bjs_StructRoundtrip_takePerson",
+            "abiName" : "bjs_Benchmarks_StructRoundtrip_takePerson",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -790,7 +790,7 @@
                 "name" : "value",
                 "type" : {
                   "swiftStruct" : {
-                    "_0" : "Person"
+                    "_0" : "Benchmarks.Person"
                   }
                 }
               }
@@ -802,7 +802,7 @@
             }
           },
           {
-            "abiName" : "bjs_StructRoundtrip_makePerson",
+            "abiName" : "bjs_Benchmarks_StructRoundtrip_makePerson",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -814,12 +814,12 @@
             ],
             "returnType" : {
               "swiftStruct" : {
-                "_0" : "Person"
+                "_0" : "Benchmarks.Person"
               }
             }
           },
           {
-            "abiName" : "bjs_StructRoundtrip_roundtripPerson",
+            "abiName" : "bjs_Benchmarks_StructRoundtrip_roundtripPerson",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -832,19 +832,19 @@
                 "name" : "value",
                 "type" : {
                   "swiftStruct" : {
-                    "_0" : "Person"
+                    "_0" : "Benchmarks.Person"
                   }
                 }
               }
             ],
             "returnType" : {
               "swiftStruct" : {
-                "_0" : "Person"
+                "_0" : "Benchmarks.Person"
               }
             }
           },
           {
-            "abiName" : "bjs_StructRoundtrip_takeComplex",
+            "abiName" : "bjs_Benchmarks_StructRoundtrip_takeComplex",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -857,7 +857,7 @@
                 "name" : "value",
                 "type" : {
                   "swiftStruct" : {
-                    "_0" : "ComplexStruct"
+                    "_0" : "Benchmarks.ComplexStruct"
                   }
                 }
               }
@@ -869,7 +869,7 @@
             }
           },
           {
-            "abiName" : "bjs_StructRoundtrip_makeComplex",
+            "abiName" : "bjs_Benchmarks_StructRoundtrip_makeComplex",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -881,12 +881,12 @@
             ],
             "returnType" : {
               "swiftStruct" : {
-                "_0" : "ComplexStruct"
+                "_0" : "Benchmarks.ComplexStruct"
               }
             }
           },
           {
-            "abiName" : "bjs_StructRoundtrip_roundtripComplex",
+            "abiName" : "bjs_Benchmarks_StructRoundtrip_roundtripComplex",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -899,14 +899,14 @@
                 "name" : "value",
                 "type" : {
                   "swiftStruct" : {
-                    "_0" : "ComplexStruct"
+                    "_0" : "Benchmarks.ComplexStruct"
                   }
                 }
               }
             ],
             "returnType" : {
               "swiftStruct" : {
-                "_0" : "ComplexStruct"
+                "_0" : "Benchmarks.ComplexStruct"
               }
             }
           }
@@ -915,11 +915,11 @@
         "properties" : [
 
         ],
-        "swiftCallName" : "StructRoundtrip"
+        "swiftCallName" : "Benchmarks.StructRoundtrip"
       },
       {
         "constructor" : {
-          "abiName" : "bjs_SimpleClass_init",
+          "abiName" : "bjs_Benchmarks_SimpleClass_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -1035,11 +1035,11 @@
             }
           }
         ],
-        "swiftCallName" : "SimpleClass"
+        "swiftCallName" : "Benchmarks.SimpleClass"
       },
       {
         "constructor" : {
-          "abiName" : "bjs_AddressClass_init",
+          "abiName" : "bjs_Benchmarks_AddressClass_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -1117,11 +1117,11 @@
             }
           }
         ],
-        "swiftCallName" : "AddressClass"
+        "swiftCallName" : "Benchmarks.AddressClass"
       },
       {
         "constructor" : {
-          "abiName" : "bjs_ClassRoundtrip_init",
+          "abiName" : "bjs_Benchmarks_ClassRoundtrip_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -1133,7 +1133,7 @@
         },
         "methods" : [
           {
-            "abiName" : "bjs_ClassRoundtrip_takeSimpleClass",
+            "abiName" : "bjs_Benchmarks_ClassRoundtrip_takeSimpleClass",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -1146,7 +1146,7 @@
                 "name" : "value",
                 "type" : {
                   "swiftHeapObject" : {
-                    "_0" : "SimpleClass"
+                    "_0" : "Benchmarks.SimpleClass"
                   }
                 }
               }
@@ -1158,7 +1158,7 @@
             }
           },
           {
-            "abiName" : "bjs_ClassRoundtrip_makeSimpleClass",
+            "abiName" : "bjs_Benchmarks_ClassRoundtrip_makeSimpleClass",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -1170,12 +1170,12 @@
             ],
             "returnType" : {
               "swiftHeapObject" : {
-                "_0" : "SimpleClass"
+                "_0" : "Benchmarks.SimpleClass"
               }
             }
           },
           {
-            "abiName" : "bjs_ClassRoundtrip_roundtripSimpleClass",
+            "abiName" : "bjs_Benchmarks_ClassRoundtrip_roundtripSimpleClass",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -1188,19 +1188,19 @@
                 "name" : "value",
                 "type" : {
                   "swiftHeapObject" : {
-                    "_0" : "SimpleClass"
+                    "_0" : "Benchmarks.SimpleClass"
                   }
                 }
               }
             ],
             "returnType" : {
               "swiftHeapObject" : {
-                "_0" : "SimpleClass"
+                "_0" : "Benchmarks.SimpleClass"
               }
             }
           },
           {
-            "abiName" : "bjs_ClassRoundtrip_takeAddressClass",
+            "abiName" : "bjs_Benchmarks_ClassRoundtrip_takeAddressClass",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -1213,7 +1213,7 @@
                 "name" : "value",
                 "type" : {
                   "swiftHeapObject" : {
-                    "_0" : "AddressClass"
+                    "_0" : "Benchmarks.AddressClass"
                   }
                 }
               }
@@ -1225,7 +1225,7 @@
             }
           },
           {
-            "abiName" : "bjs_ClassRoundtrip_makeAddressClass",
+            "abiName" : "bjs_Benchmarks_ClassRoundtrip_makeAddressClass",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -1237,12 +1237,12 @@
             ],
             "returnType" : {
               "swiftHeapObject" : {
-                "_0" : "AddressClass"
+                "_0" : "Benchmarks.AddressClass"
               }
             }
           },
           {
-            "abiName" : "bjs_ClassRoundtrip_roundtripAddressClass",
+            "abiName" : "bjs_Benchmarks_ClassRoundtrip_roundtripAddressClass",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -1255,14 +1255,14 @@
                 "name" : "value",
                 "type" : {
                   "swiftHeapObject" : {
-                    "_0" : "AddressClass"
+                    "_0" : "Benchmarks.AddressClass"
                   }
                 }
               }
             ],
             "returnType" : {
               "swiftHeapObject" : {
-                "_0" : "AddressClass"
+                "_0" : "Benchmarks.AddressClass"
               }
             }
           }
@@ -1271,11 +1271,11 @@
         "properties" : [
 
         ],
-        "swiftCallName" : "ClassRoundtrip"
+        "swiftCallName" : "Benchmarks.ClassRoundtrip"
       },
       {
         "constructor" : {
-          "abiName" : "bjs_ClassArrayRoundtrip_init",
+          "abiName" : "bjs_Benchmarks_ClassArrayRoundtrip_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -1287,7 +1287,7 @@
         },
         "methods" : [
           {
-            "abiName" : "bjs_ClassArrayRoundtrip_setupPool",
+            "abiName" : "bjs_Benchmarks_ClassArrayRoundtrip_setupPool",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -1315,7 +1315,7 @@
             }
           },
           {
-            "abiName" : "bjs_ClassArrayRoundtrip_getPool",
+            "abiName" : "bjs_Benchmarks_ClassArrayRoundtrip_getPool",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -1329,14 +1329,14 @@
               "array" : {
                 "_0" : {
                   "swiftHeapObject" : {
-                    "_0" : "SimpleClass"
+                    "_0" : "Benchmarks.SimpleClass"
                   }
                 }
               }
             }
           },
           {
-            "abiName" : "bjs_ClassArrayRoundtrip_makeClassArray",
+            "abiName" : "bjs_Benchmarks_ClassArrayRoundtrip_makeClassArray",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -1350,14 +1350,14 @@
               "array" : {
                 "_0" : {
                   "swiftHeapObject" : {
-                    "_0" : "SimpleClass"
+                    "_0" : "Benchmarks.SimpleClass"
                   }
                 }
               }
             }
           },
           {
-            "abiName" : "bjs_ClassArrayRoundtrip_takeClassArray",
+            "abiName" : "bjs_Benchmarks_ClassArrayRoundtrip_takeClassArray",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -1372,7 +1372,7 @@
                   "array" : {
                     "_0" : {
                       "swiftHeapObject" : {
-                        "_0" : "SimpleClass"
+                        "_0" : "Benchmarks.SimpleClass"
                       }
                     }
                   }
@@ -1386,7 +1386,7 @@
             }
           },
           {
-            "abiName" : "bjs_ClassArrayRoundtrip_roundtripClassArray",
+            "abiName" : "bjs_Benchmarks_ClassArrayRoundtrip_roundtripClassArray",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -1401,7 +1401,7 @@
                   "array" : {
                     "_0" : {
                       "swiftHeapObject" : {
-                        "_0" : "SimpleClass"
+                        "_0" : "Benchmarks.SimpleClass"
                       }
                     }
                   }
@@ -1412,7 +1412,7 @@
               "array" : {
                 "_0" : {
                   "swiftHeapObject" : {
-                    "_0" : "SimpleClass"
+                    "_0" : "Benchmarks.SimpleClass"
                   }
                 }
               }
@@ -1423,11 +1423,11 @@
         "properties" : [
 
         ],
-        "swiftCallName" : "ClassArrayRoundtrip"
+        "swiftCallName" : "Benchmarks.ClassArrayRoundtrip"
       },
       {
         "constructor" : {
-          "abiName" : "bjs_IdentityCacheBenchmark_init",
+          "abiName" : "bjs_Benchmarks_IdentityCacheBenchmark_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -1439,7 +1439,7 @@
         },
         "methods" : [
           {
-            "abiName" : "bjs_IdentityCacheBenchmark_setupPool",
+            "abiName" : "bjs_Benchmarks_IdentityCacheBenchmark_setupPool",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -1467,7 +1467,7 @@
             }
           },
           {
-            "abiName" : "bjs_IdentityCacheBenchmark_getPoolRepeated",
+            "abiName" : "bjs_Benchmarks_IdentityCacheBenchmark_getPoolRepeated",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -1481,7 +1481,7 @@
               "array" : {
                 "_0" : {
                   "swiftHeapObject" : {
-                    "_0" : "SimpleClass"
+                    "_0" : "Benchmarks.SimpleClass"
                   }
                 }
               }
@@ -1492,11 +1492,11 @@
         "properties" : [
 
         ],
-        "swiftCallName" : "IdentityCacheBenchmark"
+        "swiftCallName" : "Benchmarks.IdentityCacheBenchmark"
       },
       {
         "constructor" : {
-          "abiName" : "bjs_SimpleClassIdentity_init",
+          "abiName" : "bjs_Benchmarks_SimpleClassIdentity_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -1613,11 +1613,11 @@
             }
           }
         ],
-        "swiftCallName" : "SimpleClassIdentity"
+        "swiftCallName" : "Benchmarks.SimpleClassIdentity"
       },
       {
         "constructor" : {
-          "abiName" : "bjs_ClassRoundtripIdentity_init",
+          "abiName" : "bjs_Benchmarks_ClassRoundtripIdentity_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -1630,7 +1630,7 @@
         "identityMode" : true,
         "methods" : [
           {
-            "abiName" : "bjs_ClassRoundtripIdentity_roundtripSimpleClassIdentity",
+            "abiName" : "bjs_Benchmarks_ClassRoundtripIdentity_roundtripSimpleClassIdentity",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -1643,19 +1643,19 @@
                 "name" : "obj",
                 "type" : {
                   "swiftHeapObject" : {
-                    "_0" : "SimpleClassIdentity"
+                    "_0" : "Benchmarks.SimpleClassIdentity"
                   }
                 }
               }
             ],
             "returnType" : {
               "swiftHeapObject" : {
-                "_0" : "SimpleClassIdentity"
+                "_0" : "Benchmarks.SimpleClassIdentity"
               }
             }
           },
           {
-            "abiName" : "bjs_ClassRoundtripIdentity_makeSimpleClassIdentity",
+            "abiName" : "bjs_Benchmarks_ClassRoundtripIdentity_makeSimpleClassIdentity",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -1667,12 +1667,12 @@
             ],
             "returnType" : {
               "swiftHeapObject" : {
-                "_0" : "SimpleClassIdentity"
+                "_0" : "Benchmarks.SimpleClassIdentity"
               }
             }
           },
           {
-            "abiName" : "bjs_ClassRoundtripIdentity_takeSimpleClassIdentity",
+            "abiName" : "bjs_Benchmarks_ClassRoundtripIdentity_takeSimpleClassIdentity",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -1685,7 +1685,7 @@
                 "name" : "obj",
                 "type" : {
                   "swiftHeapObject" : {
-                    "_0" : "SimpleClassIdentity"
+                    "_0" : "Benchmarks.SimpleClassIdentity"
                   }
                 }
               }
@@ -1701,11 +1701,11 @@
         "properties" : [
 
         ],
-        "swiftCallName" : "ClassRoundtripIdentity"
+        "swiftCallName" : "Benchmarks.ClassRoundtripIdentity"
       },
       {
         "constructor" : {
-          "abiName" : "bjs_IdentityCacheBenchmarkIdentity_init",
+          "abiName" : "bjs_Benchmarks_IdentityCacheBenchmarkIdentity_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -1718,7 +1718,7 @@
         "identityMode" : true,
         "methods" : [
           {
-            "abiName" : "bjs_IdentityCacheBenchmarkIdentity_setupPool",
+            "abiName" : "bjs_Benchmarks_IdentityCacheBenchmarkIdentity_setupPool",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -1746,7 +1746,7 @@
             }
           },
           {
-            "abiName" : "bjs_IdentityCacheBenchmarkIdentity_getPoolRepeated",
+            "abiName" : "bjs_Benchmarks_IdentityCacheBenchmarkIdentity_getPoolRepeated",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -1760,7 +1760,7 @@
               "array" : {
                 "_0" : {
                   "swiftHeapObject" : {
-                    "_0" : "SimpleClassIdentity"
+                    "_0" : "Benchmarks.SimpleClassIdentity"
                   }
                 }
               }
@@ -1771,11 +1771,11 @@
         "properties" : [
 
         ],
-        "swiftCallName" : "IdentityCacheBenchmarkIdentity"
+        "swiftCallName" : "Benchmarks.IdentityCacheBenchmarkIdentity"
       },
       {
         "constructor" : {
-          "abiName" : "bjs_ArrayRoundtrip_init",
+          "abiName" : "bjs_Benchmarks_ArrayRoundtrip_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -1787,7 +1787,7 @@
         },
         "methods" : [
           {
-            "abiName" : "bjs_ArrayRoundtrip_takeIntArray",
+            "abiName" : "bjs_Benchmarks_ArrayRoundtrip_takeIntArray",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -1819,7 +1819,7 @@
             }
           },
           {
-            "abiName" : "bjs_ArrayRoundtrip_makeIntArray",
+            "abiName" : "bjs_Benchmarks_ArrayRoundtrip_makeIntArray",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -1843,7 +1843,7 @@
             }
           },
           {
-            "abiName" : "bjs_ArrayRoundtrip_roundtripIntArray",
+            "abiName" : "bjs_Benchmarks_ArrayRoundtrip_roundtripIntArray",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -1882,7 +1882,7 @@
             }
           },
           {
-            "abiName" : "bjs_ArrayRoundtrip_makeIntArrayLarge",
+            "abiName" : "bjs_Benchmarks_ArrayRoundtrip_makeIntArrayLarge",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -1906,7 +1906,7 @@
             }
           },
           {
-            "abiName" : "bjs_ArrayRoundtrip_takeDoubleArray",
+            "abiName" : "bjs_Benchmarks_ArrayRoundtrip_takeDoubleArray",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -1935,7 +1935,7 @@
             }
           },
           {
-            "abiName" : "bjs_ArrayRoundtrip_makeDoubleArray",
+            "abiName" : "bjs_Benchmarks_ArrayRoundtrip_makeDoubleArray",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -1956,7 +1956,7 @@
             }
           },
           {
-            "abiName" : "bjs_ArrayRoundtrip_roundtripDoubleArray",
+            "abiName" : "bjs_Benchmarks_ArrayRoundtrip_roundtripDoubleArray",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -1989,7 +1989,7 @@
             }
           },
           {
-            "abiName" : "bjs_ArrayRoundtrip_takeStringArray",
+            "abiName" : "bjs_Benchmarks_ArrayRoundtrip_takeStringArray",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -2018,7 +2018,7 @@
             }
           },
           {
-            "abiName" : "bjs_ArrayRoundtrip_makeStringArray",
+            "abiName" : "bjs_Benchmarks_ArrayRoundtrip_makeStringArray",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -2039,7 +2039,7 @@
             }
           },
           {
-            "abiName" : "bjs_ArrayRoundtrip_roundtripStringArray",
+            "abiName" : "bjs_Benchmarks_ArrayRoundtrip_roundtripStringArray",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -2072,7 +2072,7 @@
             }
           },
           {
-            "abiName" : "bjs_ArrayRoundtrip_takePointArray",
+            "abiName" : "bjs_Benchmarks_ArrayRoundtrip_takePointArray",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -2087,7 +2087,7 @@
                   "array" : {
                     "_0" : {
                       "swiftStruct" : {
-                        "_0" : "Point"
+                        "_0" : "Benchmarks.Point"
                       }
                     }
                   }
@@ -2101,7 +2101,7 @@
             }
           },
           {
-            "abiName" : "bjs_ArrayRoundtrip_makePointArray",
+            "abiName" : "bjs_Benchmarks_ArrayRoundtrip_makePointArray",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -2115,14 +2115,14 @@
               "array" : {
                 "_0" : {
                   "swiftStruct" : {
-                    "_0" : "Point"
+                    "_0" : "Benchmarks.Point"
                   }
                 }
               }
             }
           },
           {
-            "abiName" : "bjs_ArrayRoundtrip_roundtripPointArray",
+            "abiName" : "bjs_Benchmarks_ArrayRoundtrip_roundtripPointArray",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -2137,7 +2137,7 @@
                   "array" : {
                     "_0" : {
                       "swiftStruct" : {
-                        "_0" : "Point"
+                        "_0" : "Benchmarks.Point"
                       }
                     }
                   }
@@ -2148,14 +2148,14 @@
               "array" : {
                 "_0" : {
                   "swiftStruct" : {
-                    "_0" : "Point"
+                    "_0" : "Benchmarks.Point"
                   }
                 }
               }
             }
           },
           {
-            "abiName" : "bjs_ArrayRoundtrip_makePointArrayLarge",
+            "abiName" : "bjs_Benchmarks_ArrayRoundtrip_makePointArrayLarge",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -2169,14 +2169,14 @@
               "array" : {
                 "_0" : {
                   "swiftStruct" : {
-                    "_0" : "Point"
+                    "_0" : "Benchmarks.Point"
                   }
                 }
               }
             }
           },
           {
-            "abiName" : "bjs_ArrayRoundtrip_takeNestedIntArray",
+            "abiName" : "bjs_Benchmarks_ArrayRoundtrip_takeNestedIntArray",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -2212,7 +2212,7 @@
             }
           },
           {
-            "abiName" : "bjs_ArrayRoundtrip_makeNestedIntArray",
+            "abiName" : "bjs_Benchmarks_ArrayRoundtrip_makeNestedIntArray",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -2240,7 +2240,7 @@
             }
           },
           {
-            "abiName" : "bjs_ArrayRoundtrip_roundtripNestedIntArray",
+            "abiName" : "bjs_Benchmarks_ArrayRoundtrip_roundtripNestedIntArray",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -2287,7 +2287,7 @@
             }
           },
           {
-            "abiName" : "bjs_ArrayRoundtrip_takeNestedPointArray",
+            "abiName" : "bjs_Benchmarks_ArrayRoundtrip_takeNestedPointArray",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -2304,7 +2304,7 @@
                       "array" : {
                         "_0" : {
                           "swiftStruct" : {
-                            "_0" : "Point"
+                            "_0" : "Benchmarks.Point"
                           }
                         }
                       }
@@ -2320,7 +2320,7 @@
             }
           },
           {
-            "abiName" : "bjs_ArrayRoundtrip_makeNestedPointArray",
+            "abiName" : "bjs_Benchmarks_ArrayRoundtrip_makeNestedPointArray",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -2336,7 +2336,7 @@
                   "array" : {
                     "_0" : {
                       "swiftStruct" : {
-                        "_0" : "Point"
+                        "_0" : "Benchmarks.Point"
                       }
                     }
                   }
@@ -2345,7 +2345,7 @@
             }
           },
           {
-            "abiName" : "bjs_ArrayRoundtrip_roundtripNestedPointArray",
+            "abiName" : "bjs_Benchmarks_ArrayRoundtrip_roundtripNestedPointArray",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -2362,7 +2362,7 @@
                       "array" : {
                         "_0" : {
                           "swiftStruct" : {
-                            "_0" : "Point"
+                            "_0" : "Benchmarks.Point"
                           }
                         }
                       }
@@ -2377,7 +2377,7 @@
                   "array" : {
                     "_0" : {
                       "swiftStruct" : {
-                        "_0" : "Point"
+                        "_0" : "Benchmarks.Point"
                       }
                     }
                   }
@@ -2386,7 +2386,7 @@
             }
           },
           {
-            "abiName" : "bjs_ArrayRoundtrip_takeOptionalIntArray",
+            "abiName" : "bjs_Benchmarks_ArrayRoundtrip_takeOptionalIntArray",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -2423,7 +2423,7 @@
             }
           },
           {
-            "abiName" : "bjs_ArrayRoundtrip_makeOptionalIntArray",
+            "abiName" : "bjs_Benchmarks_ArrayRoundtrip_makeOptionalIntArray",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -2452,7 +2452,7 @@
             }
           },
           {
-            "abiName" : "bjs_ArrayRoundtrip_roundtripOptionalIntArray",
+            "abiName" : "bjs_Benchmarks_ArrayRoundtrip_roundtripOptionalIntArray",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -2501,7 +2501,7 @@
             }
           },
           {
-            "abiName" : "bjs_ArrayRoundtrip_takeOptionalPointArray",
+            "abiName" : "bjs_Benchmarks_ArrayRoundtrip_takeOptionalPointArray",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -2518,7 +2518,7 @@
                       "nullable" : {
                         "_0" : {
                           "swiftStruct" : {
-                            "_0" : "Point"
+                            "_0" : "Benchmarks.Point"
                           }
                         },
                         "_1" : "null"
@@ -2535,7 +2535,7 @@
             }
           },
           {
-            "abiName" : "bjs_ArrayRoundtrip_makeOptionalPointArray",
+            "abiName" : "bjs_Benchmarks_ArrayRoundtrip_makeOptionalPointArray",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -2551,7 +2551,7 @@
                   "nullable" : {
                     "_0" : {
                       "swiftStruct" : {
-                        "_0" : "Point"
+                        "_0" : "Benchmarks.Point"
                       }
                     },
                     "_1" : "null"
@@ -2561,7 +2561,7 @@
             }
           },
           {
-            "abiName" : "bjs_ArrayRoundtrip_roundtripOptionalPointArray",
+            "abiName" : "bjs_Benchmarks_ArrayRoundtrip_roundtripOptionalPointArray",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -2578,7 +2578,7 @@
                       "nullable" : {
                         "_0" : {
                           "swiftStruct" : {
-                            "_0" : "Point"
+                            "_0" : "Benchmarks.Point"
                           }
                         },
                         "_1" : "null"
@@ -2594,7 +2594,7 @@
                   "nullable" : {
                     "_0" : {
                       "swiftStruct" : {
-                        "_0" : "Point"
+                        "_0" : "Benchmarks.Point"
                       }
                     },
                     "_1" : "null"
@@ -2604,7 +2604,7 @@
             }
           },
           {
-            "abiName" : "bjs_ArrayRoundtrip_takeOptionalArray",
+            "abiName" : "bjs_Benchmarks_ArrayRoundtrip_takeOptionalArray",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -2641,7 +2641,7 @@
             }
           },
           {
-            "abiName" : "bjs_ArrayRoundtrip_makeOptionalArraySome",
+            "abiName" : "bjs_Benchmarks_ArrayRoundtrip_makeOptionalArraySome",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -2670,7 +2670,7 @@
             }
           },
           {
-            "abiName" : "bjs_ArrayRoundtrip_makeOptionalArrayNone",
+            "abiName" : "bjs_Benchmarks_ArrayRoundtrip_makeOptionalArrayNone",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -2699,7 +2699,7 @@
             }
           },
           {
-            "abiName" : "bjs_ArrayRoundtrip_roundtripOptionalArray",
+            "abiName" : "bjs_Benchmarks_ArrayRoundtrip_roundtripOptionalArray",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -2752,7 +2752,7 @@
         "properties" : [
 
         ],
-        "swiftCallName" : "ArrayRoundtrip"
+        "swiftCallName" : "Benchmarks.ArrayRoundtrip"
       }
     ],
     "enums" : [
@@ -2836,7 +2836,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "APIResult",
+        "swiftCallName" : "Benchmarks.APIResult",
         "tsFullPath" : "APIResult"
       },
       {
@@ -3045,14 +3045,14 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "ComplexResult",
+        "swiftCallName" : "Benchmarks.ComplexResult",
         "tsFullPath" : "ComplexResult"
       }
     ],
     "exposeToGlobal" : false,
     "functions" : [
       {
-        "abiName" : "bjs_run",
+        "abiName" : "bjs_Benchmarks_run",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -3133,7 +3133,7 @@
             }
           }
         ],
-        "swiftCallName" : "SimpleStruct"
+        "swiftCallName" : "Benchmarks.SimpleStruct"
       },
       {
         "methods" : [
@@ -3175,7 +3175,7 @@
             }
           }
         ],
-        "swiftCallName" : "Address"
+        "swiftCallName" : "Benchmarks.Address"
       },
       {
         "methods" : [
@@ -3212,7 +3212,7 @@
             "name" : "address",
             "type" : {
               "swiftStruct" : {
-                "_0" : "Address"
+                "_0" : "Benchmarks.Address"
               }
             }
           },
@@ -3232,7 +3232,7 @@
             }
           }
         ],
-        "swiftCallName" : "Person"
+        "swiftCallName" : "Benchmarks.Person"
       },
       {
         "methods" : [
@@ -3304,7 +3304,7 @@
             }
           }
         ],
-        "swiftCallName" : "ComplexStruct"
+        "swiftCallName" : "Benchmarks.ComplexStruct"
       },
       {
         "methods" : [
@@ -3333,7 +3333,7 @@
             }
           }
         ],
-        "swiftCallName" : "Point"
+        "swiftCallName" : "Benchmarks.Point"
       }
     ]
   },

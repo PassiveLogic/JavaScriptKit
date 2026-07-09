@@ -1,8 +1,8 @@
-extension FooContainer: _BridgedSwiftStruct {
-    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> FooContainer {
+extension TestModule.FooContainer: _BridgedSwiftStruct {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> TestModule.FooContainer {
         let optionalFoo = Optional<JSObject>.bridgeJSStackPop().map { Foo(unsafelyWrapping: $0) }
         let foo = Foo(unsafelyWrapping: JSObject.bridgeJSStackPop())
-        return FooContainer(foo: foo, optionalFoo: optionalFoo)
+        return TestModule.FooContainer(foo: foo, optionalFoo: optionalFoo)
     }
 
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSStackPush() {
@@ -11,44 +11,44 @@ extension FooContainer: _BridgedSwiftStruct {
     }
 
     init(unsafelyCopying jsObject: JSObject) {
-        _bjs_struct_lower_FooContainer(jsObject.bridgeJSLowerParameter())
+        _bjs_struct_lower_TestModule_FooContainer(jsObject.bridgeJSLowerParameter())
         self = Self.bridgeJSStackPop()
     }
 
     func toJSObject() -> JSObject {
         let __bjs_self = self
         __bjs_self.bridgeJSStackPush()
-        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_FooContainer()))
+        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_TestModule_FooContainer()))
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_FooContainer")
-fileprivate func _bjs_struct_lower_FooContainer_extern(_ objectId: Int32) -> Void
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_TestModule_FooContainer")
+fileprivate func _bjs_struct_lower_TestModule_FooContainer_extern(_ objectId: Int32) -> Void
 #else
-fileprivate func _bjs_struct_lower_FooContainer_extern(_ objectId: Int32) -> Void {
+fileprivate func _bjs_struct_lower_TestModule_FooContainer_extern(_ objectId: Int32) -> Void {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lower_FooContainer(_ objectId: Int32) -> Void {
-    return _bjs_struct_lower_FooContainer_extern(objectId)
+@inline(never) fileprivate func _bjs_struct_lower_TestModule_FooContainer(_ objectId: Int32) -> Void {
+    return _bjs_struct_lower_TestModule_FooContainer_extern(objectId)
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_FooContainer")
-fileprivate func _bjs_struct_lift_FooContainer_extern() -> Int32
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_TestModule_FooContainer")
+fileprivate func _bjs_struct_lift_TestModule_FooContainer_extern() -> Int32
 #else
-fileprivate func _bjs_struct_lift_FooContainer_extern() -> Int32 {
+fileprivate func _bjs_struct_lift_TestModule_FooContainer_extern() -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lift_FooContainer() -> Int32 {
-    return _bjs_struct_lift_FooContainer_extern()
+@inline(never) fileprivate func _bjs_struct_lift_TestModule_FooContainer() -> Int32 {
+    return _bjs_struct_lift_TestModule_FooContainer_extern()
 }
 
-@_expose(wasm, "bjs_makeFoo")
-@_cdecl("bjs_makeFoo")
-public func _bjs_makeFoo() -> Int32 {
+@_expose(wasm, "bjs_TestModule_makeFoo")
+@_cdecl("bjs_TestModule_makeFoo")
+public func _bjs_TestModule_makeFoo() -> Int32 {
     #if arch(wasm32)
     do {
         let ret = try makeFoo()
@@ -71,9 +71,9 @@ public func _bjs_makeFoo() -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_processFooArray")
-@_cdecl("bjs_processFooArray")
-public func _bjs_processFooArray() -> Void {
+@_expose(wasm, "bjs_TestModule_processFooArray")
+@_cdecl("bjs_TestModule_processFooArray")
+public func _bjs_TestModule_processFooArray() -> Void {
     #if arch(wasm32)
     let ret = processFooArray(_: [Foo].bridgeJSStackPop())
     ret.bridgeJSStackPush()
@@ -82,9 +82,9 @@ public func _bjs_processFooArray() -> Void {
     #endif
 }
 
-@_expose(wasm, "bjs_processOptionalFooArray")
-@_cdecl("bjs_processOptionalFooArray")
-public func _bjs_processOptionalFooArray() -> Void {
+@_expose(wasm, "bjs_TestModule_processOptionalFooArray")
+@_cdecl("bjs_TestModule_processOptionalFooArray")
+public func _bjs_TestModule_processOptionalFooArray() -> Void {
     #if arch(wasm32)
     let ret = processOptionalFooArray(_: [Optional<Foo>].bridgeJSStackPop())
     ret.bridgeJSStackPush()
@@ -93,11 +93,11 @@ public func _bjs_processOptionalFooArray() -> Void {
     #endif
 }
 
-@_expose(wasm, "bjs_roundtripFooContainer")
-@_cdecl("bjs_roundtripFooContainer")
-public func _bjs_roundtripFooContainer() -> Void {
+@_expose(wasm, "bjs_TestModule_roundtripFooContainer")
+@_cdecl("bjs_TestModule_roundtripFooContainer")
+public func _bjs_TestModule_roundtripFooContainer() -> Void {
     #if arch(wasm32)
-    let ret = roundtripFooContainer(_: FooContainer.bridgeJSLiftParameter())
+    let ret = roundtripFooContainer(_: TestModule.FooContainer.bridgeJSLiftParameter())
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")

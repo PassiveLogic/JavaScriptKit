@@ -9,226 +9,37 @@
 @_spi(BridgeJS) import JavaScriptKit
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests10HttpStatusO_Si")
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests10HttpStatusO_Si_extern(_ callback: Int32, _ param0: Int32) -> Int32
+@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests26BridgeJSRuntimeTests_ThemeO_SS")
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests26BridgeJSRuntimeTests_ThemeO_SS_extern(_ callback: Int32, _ param0Bytes: Int32, _ param0Length: Int32) -> Int32
 #else
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests10HttpStatusO_Si_extern(_ callback: Int32, _ param0: Int32) -> Int32 {
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests26BridgeJSRuntimeTests_ThemeO_SS_extern(_ callback: Int32, _ param0Bytes: Int32, _ param0Length: Int32) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests10HttpStatusO_Si(_ callback: Int32, _ param0: Int32) -> Int32 {
-    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests10HttpStatusO_Si_extern(callback, param0)
+@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests26BridgeJSRuntimeTests_ThemeO_SS(_ callback: Int32, _ param0Bytes: Int32, _ param0Length: Int32) -> Int32 {
+    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests26BridgeJSRuntimeTests_ThemeO_SS_extern(callback, param0Bytes, param0Length)
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests10HttpStatusO_Si")
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests10HttpStatusO_Si_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
+@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests26BridgeJSRuntimeTests_ThemeO_SS")
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests26BridgeJSRuntimeTests_ThemeO_SS_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
 #else
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests10HttpStatusO_Si_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests26BridgeJSRuntimeTests_ThemeO_SS_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests10HttpStatusO_Si(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
-    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests10HttpStatusO_Si_extern(boxPtr, file, line)
+@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests26BridgeJSRuntimeTests_ThemeO_SS(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests26BridgeJSRuntimeTests_ThemeO_SS_extern(boxPtr, file, line)
 }
 
-private enum _BJS_Closure_20BridgeJSRuntimeTests10HttpStatusO_Si {
-    static func bridgeJSLift(_ callbackId: Int32) -> (HttpStatus) -> Int {
-        let callback = JSObject.bridgeJSLiftParameter(callbackId)
-        return { [callback] param0 in
-            #if arch(wasm32)
-            let callbackValue = callback.bridgeJSLowerParameter()
-            let param0Value = param0.bridgeJSLowerParameter()
-            let ret = invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests10HttpStatusO_Si(callbackValue, param0Value)
-            return Int.bridgeJSLiftReturn(ret)
-            #else
-            fatalError("Only available on WebAssembly")
-            #endif
-        }
-    }
-}
-
-extension JSTypedClosure where Signature == (HttpStatus) -> Int {
-    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping (HttpStatus) -> Int) {
-        self.init(
-            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests10HttpStatusO_Si,
-            body: body,
-            fileID: fileID,
-            line: line
-        )
-    }
-}
-
-@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests10HttpStatusO_Si")
-@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests10HttpStatusO_Si")
-public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests10HttpStatusO_Si(_ boxPtr: UnsafeMutableRawPointer, _ param0: Int32) -> Int32 {
-    #if arch(wasm32)
-    let closure = Unmanaged<_BridgeJSTypedClosureBox<(HttpStatus) -> Int>>.fromOpaque(boxPtr).takeUnretainedValue().closure
-    let result = closure(HttpStatus.bridgeJSLiftParameter(param0))
-    return result.bridgeJSLowerReturn()
-    #else
-    fatalError("Only available on WebAssembly")
-    #endif
-}
-
-#if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests13DataProcessorP_13DataProcessorP")
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests13DataProcessorP_13DataProcessorP_extern(_ callback: Int32, _ param0: Int32) -> Int32
-#else
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests13DataProcessorP_13DataProcessorP_extern(_ callback: Int32, _ param0: Int32) -> Int32 {
-    fatalError("Only available on WebAssembly")
-}
-#endif
-@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests13DataProcessorP_13DataProcessorP(_ callback: Int32, _ param0: Int32) -> Int32 {
-    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests13DataProcessorP_13DataProcessorP_extern(callback, param0)
-}
-
-#if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests13DataProcessorP_13DataProcessorP")
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests13DataProcessorP_13DataProcessorP_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
-#else
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests13DataProcessorP_13DataProcessorP_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
-    fatalError("Only available on WebAssembly")
-}
-#endif
-@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests13DataProcessorP_13DataProcessorP(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
-    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests13DataProcessorP_13DataProcessorP_extern(boxPtr, file, line)
-}
-
-private enum _BJS_Closure_20BridgeJSRuntimeTests13DataProcessorP_13DataProcessorP {
-    static func bridgeJSLift(_ callbackId: Int32) -> (any DataProcessor) -> any DataProcessor {
-        let callback = JSObject.bridgeJSLiftParameter(callbackId)
-        return { [callback] param0 in
-            #if arch(wasm32)
-            let callbackValue = callback.bridgeJSLowerParameter()
-            let param0ObjectId = (param0 as! _BridgedSwiftProtocolExportable).bridgeJSLowerAsProtocolReturn()
-            let ret = invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests13DataProcessorP_13DataProcessorP(callbackValue, param0ObjectId)
-            return AnyDataProcessor.bridgeJSLiftReturn(ret)
-            #else
-            fatalError("Only available on WebAssembly")
-            #endif
-        }
-    }
-}
-
-extension JSTypedClosure where Signature == (any DataProcessor) -> any DataProcessor {
-    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping (any DataProcessor) -> any DataProcessor) {
-        self.init(
-            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests13DataProcessorP_13DataProcessorP,
-            body: body,
-            fileID: fileID,
-            line: line
-        )
-    }
-}
-
-@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests13DataProcessorP_13DataProcessorP")
-@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests13DataProcessorP_13DataProcessorP")
-public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests13DataProcessorP_13DataProcessorP(_ boxPtr: UnsafeMutableRawPointer, _ param0: Int32) -> Int32 {
-    #if arch(wasm32)
-    let closure = Unmanaged<_BridgeJSTypedClosureBox<(any DataProcessor) -> any DataProcessor>>.fromOpaque(boxPtr).takeUnretainedValue().closure
-    let result = closure(AnyDataProcessor.bridgeJSLiftParameter(param0))
-    return (result as! _BridgedSwiftProtocolExportable).bridgeJSLowerAsProtocolReturn()
-    #else
-    fatalError("Only available on WebAssembly")
-    #endif
-}
-
-#if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests13DataProcessorP_SS")
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests13DataProcessorP_SS_extern(_ callback: Int32, _ param0: Int32) -> Int32
-#else
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests13DataProcessorP_SS_extern(_ callback: Int32, _ param0: Int32) -> Int32 {
-    fatalError("Only available on WebAssembly")
-}
-#endif
-@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests13DataProcessorP_SS(_ callback: Int32, _ param0: Int32) -> Int32 {
-    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests13DataProcessorP_SS_extern(callback, param0)
-}
-
-#if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests13DataProcessorP_SS")
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests13DataProcessorP_SS_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
-#else
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests13DataProcessorP_SS_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
-    fatalError("Only available on WebAssembly")
-}
-#endif
-@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests13DataProcessorP_SS(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
-    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests13DataProcessorP_SS_extern(boxPtr, file, line)
-}
-
-private enum _BJS_Closure_20BridgeJSRuntimeTests13DataProcessorP_SS {
-    static func bridgeJSLift(_ callbackId: Int32) -> (any DataProcessor) -> String {
-        let callback = JSObject.bridgeJSLiftParameter(callbackId)
-        return { [callback] param0 in
-            #if arch(wasm32)
-            let callbackValue = callback.bridgeJSLowerParameter()
-            let param0ObjectId = (param0 as! _BridgedSwiftProtocolExportable).bridgeJSLowerAsProtocolReturn()
-            let ret = invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests13DataProcessorP_SS(callbackValue, param0ObjectId)
-            return String.bridgeJSLiftReturn(ret)
-            #else
-            fatalError("Only available on WebAssembly")
-            #endif
-        }
-    }
-}
-
-extension JSTypedClosure where Signature == (any DataProcessor) -> String {
-    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping (any DataProcessor) -> String) {
-        self.init(
-            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests13DataProcessorP_SS,
-            body: body,
-            fileID: fileID,
-            line: line
-        )
-    }
-}
-
-@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests13DataProcessorP_SS")
-@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests13DataProcessorP_SS")
-public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests13DataProcessorP_SS(_ boxPtr: UnsafeMutableRawPointer, _ param0: Int32) -> Void {
-    #if arch(wasm32)
-    let closure = Unmanaged<_BridgeJSTypedClosureBox<(any DataProcessor) -> String>>.fromOpaque(boxPtr).takeUnretainedValue().closure
-    let result = closure(AnyDataProcessor.bridgeJSLiftParameter(param0))
-    return result.bridgeJSLowerReturn()
-    #else
-    fatalError("Only available on WebAssembly")
-    #endif
-}
-
-#if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests5ThemeO_SS")
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests5ThemeO_SS_extern(_ callback: Int32, _ param0Bytes: Int32, _ param0Length: Int32) -> Int32
-#else
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests5ThemeO_SS_extern(_ callback: Int32, _ param0Bytes: Int32, _ param0Length: Int32) -> Int32 {
-    fatalError("Only available on WebAssembly")
-}
-#endif
-@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests5ThemeO_SS(_ callback: Int32, _ param0Bytes: Int32, _ param0Length: Int32) -> Int32 {
-    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests5ThemeO_SS_extern(callback, param0Bytes, param0Length)
-}
-
-#if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests5ThemeO_SS")
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests5ThemeO_SS_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
-#else
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests5ThemeO_SS_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
-    fatalError("Only available on WebAssembly")
-}
-#endif
-@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests5ThemeO_SS(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
-    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests5ThemeO_SS_extern(boxPtr, file, line)
-}
-
-private enum _BJS_Closure_20BridgeJSRuntimeTests5ThemeO_SS {
-    static func bridgeJSLift(_ callbackId: Int32) -> (Theme) -> String {
+private enum _BJS_Closure_20BridgeJSRuntimeTests26BridgeJSRuntimeTests_ThemeO_SS {
+    static func bridgeJSLift(_ callbackId: Int32) -> (BridgeJSRuntimeTests.Theme) -> String {
         let callback = JSObject.bridgeJSLiftParameter(callbackId)
         return { [callback] param0 in
             #if arch(wasm32)
             let callbackValue = callback.bridgeJSLowerParameter()
             let ret0 = param0.bridgeJSWithLoweredParameter { (param0Bytes, param0Length) in
-                let ret = invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests5ThemeO_SS(callbackValue, param0Bytes, param0Length)
+                let ret = invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests26BridgeJSRuntimeTests_ThemeO_SS(callbackValue, param0Bytes, param0Length)
                 return ret
             }
             let ret = ret0
@@ -240,10 +51,10 @@ private enum _BJS_Closure_20BridgeJSRuntimeTests5ThemeO_SS {
     }
 }
 
-extension JSTypedClosure where Signature == (Theme) -> String {
-    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping (Theme) -> String) {
+extension JSTypedClosure where Signature == (BridgeJSRuntimeTests.Theme) -> String {
+    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping (BridgeJSRuntimeTests.Theme) -> String) {
         self.init(
-            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests5ThemeO_SS,
+            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests26BridgeJSRuntimeTests_ThemeO_SS,
             body: body,
             fileID: fileID,
             line: line
@@ -251,12 +62,12 @@ extension JSTypedClosure where Signature == (Theme) -> String {
     }
 }
 
-@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests5ThemeO_SS")
-@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests5ThemeO_SS")
-public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests5ThemeO_SS(_ boxPtr: UnsafeMutableRawPointer, _ param0Bytes: Int32, _ param0Length: Int32) -> Void {
+@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests26BridgeJSRuntimeTests_ThemeO_SS")
+@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests26BridgeJSRuntimeTests_ThemeO_SS")
+public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests26BridgeJSRuntimeTests_ThemeO_SS(_ boxPtr: UnsafeMutableRawPointer, _ param0Bytes: Int32, _ param0Length: Int32) -> Void {
     #if arch(wasm32)
-    let closure = Unmanaged<_BridgeJSTypedClosureBox<(Theme) -> String>>.fromOpaque(boxPtr).takeUnretainedValue().closure
-    let result = closure(Theme.bridgeJSLiftParameter(param0Bytes, param0Length))
+    let closure = Unmanaged<_BridgeJSTypedClosureBox<(BridgeJSRuntimeTests.Theme) -> String>>.fromOpaque(boxPtr).takeUnretainedValue().closure
+    let result = closure(BridgeJSRuntimeTests.Theme.bridgeJSLiftParameter(param0Bytes, param0Length))
     return result.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
@@ -264,37 +75,37 @@ public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests5Th
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests5ThemeO_Sb")
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests5ThemeO_Sb_extern(_ callback: Int32, _ param0Bytes: Int32, _ param0Length: Int32) -> Int32
+@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests26BridgeJSRuntimeTests_ThemeO_Sb")
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests26BridgeJSRuntimeTests_ThemeO_Sb_extern(_ callback: Int32, _ param0Bytes: Int32, _ param0Length: Int32) -> Int32
 #else
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests5ThemeO_Sb_extern(_ callback: Int32, _ param0Bytes: Int32, _ param0Length: Int32) -> Int32 {
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests26BridgeJSRuntimeTests_ThemeO_Sb_extern(_ callback: Int32, _ param0Bytes: Int32, _ param0Length: Int32) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests5ThemeO_Sb(_ callback: Int32, _ param0Bytes: Int32, _ param0Length: Int32) -> Int32 {
-    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests5ThemeO_Sb_extern(callback, param0Bytes, param0Length)
+@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests26BridgeJSRuntimeTests_ThemeO_Sb(_ callback: Int32, _ param0Bytes: Int32, _ param0Length: Int32) -> Int32 {
+    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests26BridgeJSRuntimeTests_ThemeO_Sb_extern(callback, param0Bytes, param0Length)
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests5ThemeO_Sb")
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests5ThemeO_Sb_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
+@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests26BridgeJSRuntimeTests_ThemeO_Sb")
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests26BridgeJSRuntimeTests_ThemeO_Sb_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
 #else
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests5ThemeO_Sb_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests26BridgeJSRuntimeTests_ThemeO_Sb_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests5ThemeO_Sb(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
-    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests5ThemeO_Sb_extern(boxPtr, file, line)
+@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests26BridgeJSRuntimeTests_ThemeO_Sb(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests26BridgeJSRuntimeTests_ThemeO_Sb_extern(boxPtr, file, line)
 }
 
-private enum _BJS_Closure_20BridgeJSRuntimeTests5ThemeO_Sb {
-    static func bridgeJSLift(_ callbackId: Int32) -> (Theme) -> Bool {
+private enum _BJS_Closure_20BridgeJSRuntimeTests26BridgeJSRuntimeTests_ThemeO_Sb {
+    static func bridgeJSLift(_ callbackId: Int32) -> (BridgeJSRuntimeTests.Theme) -> Bool {
         let callback = JSObject.bridgeJSLiftParameter(callbackId)
         return { [callback] param0 in
             #if arch(wasm32)
             let callbackValue = callback.bridgeJSLowerParameter()
             let ret0 = param0.bridgeJSWithLoweredParameter { (param0Bytes, param0Length) in
-                let ret = invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests5ThemeO_Sb(callbackValue, param0Bytes, param0Length)
+                let ret = invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests26BridgeJSRuntimeTests_ThemeO_Sb(callbackValue, param0Bytes, param0Length)
                 return ret
             }
             let ret = ret0
@@ -306,10 +117,10 @@ private enum _BJS_Closure_20BridgeJSRuntimeTests5ThemeO_Sb {
     }
 }
 
-extension JSTypedClosure where Signature == (Theme) -> Bool {
-    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping (Theme) -> Bool) {
+extension JSTypedClosure where Signature == (BridgeJSRuntimeTests.Theme) -> Bool {
+    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping (BridgeJSRuntimeTests.Theme) -> Bool) {
         self.init(
-            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests5ThemeO_Sb,
+            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests26BridgeJSRuntimeTests_ThemeO_Sb,
             body: body,
             fileID: fileID,
             line: line
@@ -317,12 +128,12 @@ extension JSTypedClosure where Signature == (Theme) -> Bool {
     }
 }
 
-@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests5ThemeO_Sb")
-@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests5ThemeO_Sb")
-public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests5ThemeO_Sb(_ boxPtr: UnsafeMutableRawPointer, _ param0Bytes: Int32, _ param0Length: Int32) -> Int32 {
+@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests26BridgeJSRuntimeTests_ThemeO_Sb")
+@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests26BridgeJSRuntimeTests_ThemeO_Sb")
+public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests26BridgeJSRuntimeTests_ThemeO_Sb(_ boxPtr: UnsafeMutableRawPointer, _ param0Bytes: Int32, _ param0Length: Int32) -> Int32 {
     #if arch(wasm32)
-    let closure = Unmanaged<_BridgeJSTypedClosureBox<(Theme) -> Bool>>.fromOpaque(boxPtr).takeUnretainedValue().closure
-    let result = closure(Theme.bridgeJSLiftParameter(param0Bytes, param0Length))
+    let closure = Unmanaged<_BridgeJSTypedClosureBox<(BridgeJSRuntimeTests.Theme) -> Bool>>.fromOpaque(boxPtr).takeUnretainedValue().closure
+    let result = closure(BridgeJSRuntimeTests.Theme.bridgeJSLiftParameter(param0Bytes, param0Length))
     return result.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
@@ -330,37 +141,37 @@ public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests5Th
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests7GreeterC_SS")
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests7GreeterC_SS_extern(_ callback: Int32, _ param0: UnsafeMutableRawPointer) -> Int32
+@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests28BridgeJSRuntimeTests_GreeterC_SS")
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests28BridgeJSRuntimeTests_GreeterC_SS_extern(_ callback: Int32, _ param0: UnsafeMutableRawPointer) -> Int32
 #else
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests7GreeterC_SS_extern(_ callback: Int32, _ param0: UnsafeMutableRawPointer) -> Int32 {
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests28BridgeJSRuntimeTests_GreeterC_SS_extern(_ callback: Int32, _ param0: UnsafeMutableRawPointer) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests7GreeterC_SS(_ callback: Int32, _ param0: UnsafeMutableRawPointer) -> Int32 {
-    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests7GreeterC_SS_extern(callback, param0)
+@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests28BridgeJSRuntimeTests_GreeterC_SS(_ callback: Int32, _ param0: UnsafeMutableRawPointer) -> Int32 {
+    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests28BridgeJSRuntimeTests_GreeterC_SS_extern(callback, param0)
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests7GreeterC_SS")
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests7GreeterC_SS_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
+@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests28BridgeJSRuntimeTests_GreeterC_SS")
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests28BridgeJSRuntimeTests_GreeterC_SS_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
 #else
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests7GreeterC_SS_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests28BridgeJSRuntimeTests_GreeterC_SS_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests7GreeterC_SS(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
-    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests7GreeterC_SS_extern(boxPtr, file, line)
+@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests28BridgeJSRuntimeTests_GreeterC_SS(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests28BridgeJSRuntimeTests_GreeterC_SS_extern(boxPtr, file, line)
 }
 
-private enum _BJS_Closure_20BridgeJSRuntimeTests7GreeterC_SS {
-    static func bridgeJSLift(_ callbackId: Int32) -> (Greeter) -> String {
+private enum _BJS_Closure_20BridgeJSRuntimeTests28BridgeJSRuntimeTests_GreeterC_SS {
+    static func bridgeJSLift(_ callbackId: Int32) -> (BridgeJSRuntimeTests.Greeter) -> String {
         let callback = JSObject.bridgeJSLiftParameter(callbackId)
         return { [callback] param0 in
             #if arch(wasm32)
             let callbackValue = callback.bridgeJSLowerParameter()
             let param0Pointer = param0.bridgeJSLowerParameter()
-            let ret = invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests7GreeterC_SS(callbackValue, param0Pointer)
+            let ret = invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests28BridgeJSRuntimeTests_GreeterC_SS(callbackValue, param0Pointer)
             return String.bridgeJSLiftReturn(ret)
             #else
             fatalError("Only available on WebAssembly")
@@ -369,10 +180,10 @@ private enum _BJS_Closure_20BridgeJSRuntimeTests7GreeterC_SS {
     }
 }
 
-extension JSTypedClosure where Signature == (Greeter) -> String {
-    public init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping (Greeter) -> String) {
+extension JSTypedClosure where Signature == (BridgeJSRuntimeTests.Greeter) -> String {
+    public init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping (BridgeJSRuntimeTests.Greeter) -> String) {
         self.init(
-            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests7GreeterC_SS,
+            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests28BridgeJSRuntimeTests_GreeterC_SS,
             body: body,
             fileID: fileID,
             line: line
@@ -380,12 +191,390 @@ extension JSTypedClosure where Signature == (Greeter) -> String {
     }
 }
 
-@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests7GreeterC_SS")
-@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests7GreeterC_SS")
-public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests7GreeterC_SS(_ boxPtr: UnsafeMutableRawPointer, _ param0: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests28BridgeJSRuntimeTests_GreeterC_SS")
+@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests28BridgeJSRuntimeTests_GreeterC_SS")
+public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests28BridgeJSRuntimeTests_GreeterC_SS(_ boxPtr: UnsafeMutableRawPointer, _ param0: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let closure = Unmanaged<_BridgeJSTypedClosureBox<(Greeter) -> String>>.fromOpaque(boxPtr).takeUnretainedValue().closure
-    let result = closure(Greeter.bridgeJSLiftParameter(param0))
+    let closure = Unmanaged<_BridgeJSTypedClosureBox<(BridgeJSRuntimeTests.Greeter) -> String>>.fromOpaque(boxPtr).takeUnretainedValue().closure
+    let result = closure(BridgeJSRuntimeTests.Greeter.bridgeJSLiftParameter(param0))
+    return result.bridgeJSLowerReturn()
+    #else
+    fatalError("Only available on WebAssembly")
+    #endif
+}
+
+#if arch(wasm32)
+@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests30BridgeJSRuntimeTests_APIResultO_SS")
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests30BridgeJSRuntimeTests_APIResultO_SS_extern(_ callback: Int32, _ param0: Int32) -> Int32
+#else
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests30BridgeJSRuntimeTests_APIResultO_SS_extern(_ callback: Int32, _ param0: Int32) -> Int32 {
+    fatalError("Only available on WebAssembly")
+}
+#endif
+@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests30BridgeJSRuntimeTests_APIResultO_SS(_ callback: Int32, _ param0: Int32) -> Int32 {
+    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests30BridgeJSRuntimeTests_APIResultO_SS_extern(callback, param0)
+}
+
+#if arch(wasm32)
+@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests30BridgeJSRuntimeTests_APIResultO_SS")
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests30BridgeJSRuntimeTests_APIResultO_SS_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
+#else
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests30BridgeJSRuntimeTests_APIResultO_SS_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+    fatalError("Only available on WebAssembly")
+}
+#endif
+@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests30BridgeJSRuntimeTests_APIResultO_SS(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests30BridgeJSRuntimeTests_APIResultO_SS_extern(boxPtr, file, line)
+}
+
+private enum _BJS_Closure_20BridgeJSRuntimeTests30BridgeJSRuntimeTests_APIResultO_SS {
+    static func bridgeJSLift(_ callbackId: Int32) -> (BridgeJSRuntimeTests.APIResult) -> String {
+        let callback = JSObject.bridgeJSLiftParameter(callbackId)
+        return { [callback] param0 in
+            #if arch(wasm32)
+            let callbackValue = callback.bridgeJSLowerParameter()
+            let param0CaseId = param0.bridgeJSLowerParameter()
+            let ret = invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests30BridgeJSRuntimeTests_APIResultO_SS(callbackValue, param0CaseId)
+            return String.bridgeJSLiftReturn(ret)
+            #else
+            fatalError("Only available on WebAssembly")
+            #endif
+        }
+    }
+}
+
+extension JSTypedClosure where Signature == (BridgeJSRuntimeTests.APIResult) -> String {
+    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping (BridgeJSRuntimeTests.APIResult) -> String) {
+        self.init(
+            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests30BridgeJSRuntimeTests_APIResultO_SS,
+            body: body,
+            fileID: fileID,
+            line: line
+        )
+    }
+}
+
+@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests30BridgeJSRuntimeTests_APIResultO_SS")
+@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests30BridgeJSRuntimeTests_APIResultO_SS")
+public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests30BridgeJSRuntimeTests_APIResultO_SS(_ boxPtr: UnsafeMutableRawPointer, _ param0: Int32) -> Void {
+    #if arch(wasm32)
+    let closure = Unmanaged<_BridgeJSTypedClosureBox<(BridgeJSRuntimeTests.APIResult) -> String>>.fromOpaque(boxPtr).takeUnretainedValue().closure
+    let result = closure(BridgeJSRuntimeTests.APIResult.bridgeJSLiftParameter(param0))
+    return result.bridgeJSLowerReturn()
+    #else
+    fatalError("Only available on WebAssembly")
+    #endif
+}
+
+#if arch(wasm32)
+@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests30BridgeJSRuntimeTests_DirectionO_SS")
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests30BridgeJSRuntimeTests_DirectionO_SS_extern(_ callback: Int32, _ param0: Int32) -> Int32
+#else
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests30BridgeJSRuntimeTests_DirectionO_SS_extern(_ callback: Int32, _ param0: Int32) -> Int32 {
+    fatalError("Only available on WebAssembly")
+}
+#endif
+@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests30BridgeJSRuntimeTests_DirectionO_SS(_ callback: Int32, _ param0: Int32) -> Int32 {
+    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests30BridgeJSRuntimeTests_DirectionO_SS_extern(callback, param0)
+}
+
+#if arch(wasm32)
+@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests30BridgeJSRuntimeTests_DirectionO_SS")
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests30BridgeJSRuntimeTests_DirectionO_SS_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
+#else
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests30BridgeJSRuntimeTests_DirectionO_SS_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+    fatalError("Only available on WebAssembly")
+}
+#endif
+@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests30BridgeJSRuntimeTests_DirectionO_SS(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests30BridgeJSRuntimeTests_DirectionO_SS_extern(boxPtr, file, line)
+}
+
+private enum _BJS_Closure_20BridgeJSRuntimeTests30BridgeJSRuntimeTests_DirectionO_SS {
+    static func bridgeJSLift(_ callbackId: Int32) -> (BridgeJSRuntimeTests.Direction) -> String {
+        let callback = JSObject.bridgeJSLiftParameter(callbackId)
+        return { [callback] param0 in
+            #if arch(wasm32)
+            let callbackValue = callback.bridgeJSLowerParameter()
+            let param0Value = param0.bridgeJSLowerParameter()
+            let ret = invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests30BridgeJSRuntimeTests_DirectionO_SS(callbackValue, param0Value)
+            return String.bridgeJSLiftReturn(ret)
+            #else
+            fatalError("Only available on WebAssembly")
+            #endif
+        }
+    }
+}
+
+extension JSTypedClosure where Signature == (BridgeJSRuntimeTests.Direction) -> String {
+    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping (BridgeJSRuntimeTests.Direction) -> String) {
+        self.init(
+            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests30BridgeJSRuntimeTests_DirectionO_SS,
+            body: body,
+            fileID: fileID,
+            line: line
+        )
+    }
+}
+
+@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests30BridgeJSRuntimeTests_DirectionO_SS")
+@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests30BridgeJSRuntimeTests_DirectionO_SS")
+public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests30BridgeJSRuntimeTests_DirectionO_SS(_ boxPtr: UnsafeMutableRawPointer, _ param0: Int32) -> Void {
+    #if arch(wasm32)
+    let closure = Unmanaged<_BridgeJSTypedClosureBox<(BridgeJSRuntimeTests.Direction) -> String>>.fromOpaque(boxPtr).takeUnretainedValue().closure
+    let result = closure(BridgeJSRuntimeTests.Direction.bridgeJSLiftParameter(param0))
+    return result.bridgeJSLowerReturn()
+    #else
+    fatalError("Only available on WebAssembly")
+    #endif
+}
+
+#if arch(wasm32)
+@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests30BridgeJSRuntimeTests_DirectionO_Sb")
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests30BridgeJSRuntimeTests_DirectionO_Sb_extern(_ callback: Int32, _ param0: Int32) -> Int32
+#else
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests30BridgeJSRuntimeTests_DirectionO_Sb_extern(_ callback: Int32, _ param0: Int32) -> Int32 {
+    fatalError("Only available on WebAssembly")
+}
+#endif
+@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests30BridgeJSRuntimeTests_DirectionO_Sb(_ callback: Int32, _ param0: Int32) -> Int32 {
+    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests30BridgeJSRuntimeTests_DirectionO_Sb_extern(callback, param0)
+}
+
+#if arch(wasm32)
+@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests30BridgeJSRuntimeTests_DirectionO_Sb")
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests30BridgeJSRuntimeTests_DirectionO_Sb_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
+#else
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests30BridgeJSRuntimeTests_DirectionO_Sb_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+    fatalError("Only available on WebAssembly")
+}
+#endif
+@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests30BridgeJSRuntimeTests_DirectionO_Sb(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests30BridgeJSRuntimeTests_DirectionO_Sb_extern(boxPtr, file, line)
+}
+
+private enum _BJS_Closure_20BridgeJSRuntimeTests30BridgeJSRuntimeTests_DirectionO_Sb {
+    static func bridgeJSLift(_ callbackId: Int32) -> (BridgeJSRuntimeTests.Direction) -> Bool {
+        let callback = JSObject.bridgeJSLiftParameter(callbackId)
+        return { [callback] param0 in
+            #if arch(wasm32)
+            let callbackValue = callback.bridgeJSLowerParameter()
+            let param0Value = param0.bridgeJSLowerParameter()
+            let ret = invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests30BridgeJSRuntimeTests_DirectionO_Sb(callbackValue, param0Value)
+            return Bool.bridgeJSLiftReturn(ret)
+            #else
+            fatalError("Only available on WebAssembly")
+            #endif
+        }
+    }
+}
+
+extension JSTypedClosure where Signature == (BridgeJSRuntimeTests.Direction) -> Bool {
+    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping (BridgeJSRuntimeTests.Direction) -> Bool) {
+        self.init(
+            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests30BridgeJSRuntimeTests_DirectionO_Sb,
+            body: body,
+            fileID: fileID,
+            line: line
+        )
+    }
+}
+
+@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests30BridgeJSRuntimeTests_DirectionO_Sb")
+@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests30BridgeJSRuntimeTests_DirectionO_Sb")
+public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests30BridgeJSRuntimeTests_DirectionO_Sb(_ boxPtr: UnsafeMutableRawPointer, _ param0: Int32) -> Int32 {
+    #if arch(wasm32)
+    let closure = Unmanaged<_BridgeJSTypedClosureBox<(BridgeJSRuntimeTests.Direction) -> Bool>>.fromOpaque(boxPtr).takeUnretainedValue().closure
+    let result = closure(BridgeJSRuntimeTests.Direction.bridgeJSLiftParameter(param0))
+    return result.bridgeJSLowerReturn()
+    #else
+    fatalError("Only available on WebAssembly")
+    #endif
+}
+
+#if arch(wasm32)
+@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests31BridgeJSRuntimeTests_HttpStatusO_Si")
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests31BridgeJSRuntimeTests_HttpStatusO_Si_extern(_ callback: Int32, _ param0: Int32) -> Int32
+#else
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests31BridgeJSRuntimeTests_HttpStatusO_Si_extern(_ callback: Int32, _ param0: Int32) -> Int32 {
+    fatalError("Only available on WebAssembly")
+}
+#endif
+@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests31BridgeJSRuntimeTests_HttpStatusO_Si(_ callback: Int32, _ param0: Int32) -> Int32 {
+    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests31BridgeJSRuntimeTests_HttpStatusO_Si_extern(callback, param0)
+}
+
+#if arch(wasm32)
+@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests31BridgeJSRuntimeTests_HttpStatusO_Si")
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests31BridgeJSRuntimeTests_HttpStatusO_Si_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
+#else
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests31BridgeJSRuntimeTests_HttpStatusO_Si_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+    fatalError("Only available on WebAssembly")
+}
+#endif
+@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests31BridgeJSRuntimeTests_HttpStatusO_Si(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests31BridgeJSRuntimeTests_HttpStatusO_Si_extern(boxPtr, file, line)
+}
+
+private enum _BJS_Closure_20BridgeJSRuntimeTests31BridgeJSRuntimeTests_HttpStatusO_Si {
+    static func bridgeJSLift(_ callbackId: Int32) -> (BridgeJSRuntimeTests.HttpStatus) -> Int {
+        let callback = JSObject.bridgeJSLiftParameter(callbackId)
+        return { [callback] param0 in
+            #if arch(wasm32)
+            let callbackValue = callback.bridgeJSLowerParameter()
+            let param0Value = param0.bridgeJSLowerParameter()
+            let ret = invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests31BridgeJSRuntimeTests_HttpStatusO_Si(callbackValue, param0Value)
+            return Int.bridgeJSLiftReturn(ret)
+            #else
+            fatalError("Only available on WebAssembly")
+            #endif
+        }
+    }
+}
+
+extension JSTypedClosure where Signature == (BridgeJSRuntimeTests.HttpStatus) -> Int {
+    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping (BridgeJSRuntimeTests.HttpStatus) -> Int) {
+        self.init(
+            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests31BridgeJSRuntimeTests_HttpStatusO_Si,
+            body: body,
+            fileID: fileID,
+            line: line
+        )
+    }
+}
+
+@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests31BridgeJSRuntimeTests_HttpStatusO_Si")
+@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests31BridgeJSRuntimeTests_HttpStatusO_Si")
+public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests31BridgeJSRuntimeTests_HttpStatusO_Si(_ boxPtr: UnsafeMutableRawPointer, _ param0: Int32) -> Int32 {
+    #if arch(wasm32)
+    let closure = Unmanaged<_BridgeJSTypedClosureBox<(BridgeJSRuntimeTests.HttpStatus) -> Int>>.fromOpaque(boxPtr).takeUnretainedValue().closure
+    let result = closure(BridgeJSRuntimeTests.HttpStatus.bridgeJSLiftParameter(param0))
+    return result.bridgeJSLowerReturn()
+    #else
+    fatalError("Only available on WebAssembly")
+    #endif
+}
+
+#if arch(wasm32)
+@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests34BridgeJSRuntimeTests_DataProcessorP_34BridgeJSRuntimeTests_DataProcessorP")
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests34BridgeJSRuntimeTests_DataProcessorP_34BridgeJSRuntimeTests_DataProcessorP_extern(_ callback: Int32, _ param0: Int32) -> Int32
+#else
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests34BridgeJSRuntimeTests_DataProcessorP_34BridgeJSRuntimeTests_DataProcessorP_extern(_ callback: Int32, _ param0: Int32) -> Int32 {
+    fatalError("Only available on WebAssembly")
+}
+#endif
+@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests34BridgeJSRuntimeTests_DataProcessorP_34BridgeJSRuntimeTests_DataProcessorP(_ callback: Int32, _ param0: Int32) -> Int32 {
+    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests34BridgeJSRuntimeTests_DataProcessorP_34BridgeJSRuntimeTests_DataProcessorP_extern(callback, param0)
+}
+
+#if arch(wasm32)
+@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests34BridgeJSRuntimeTests_DataProcessorP_34BridgeJSRuntimeTests_DataProcessorP")
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests34BridgeJSRuntimeTests_DataProcessorP_34BridgeJSRuntimeTests_DataProcessorP_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
+#else
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests34BridgeJSRuntimeTests_DataProcessorP_34BridgeJSRuntimeTests_DataProcessorP_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+    fatalError("Only available on WebAssembly")
+}
+#endif
+@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests34BridgeJSRuntimeTests_DataProcessorP_34BridgeJSRuntimeTests_DataProcessorP(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests34BridgeJSRuntimeTests_DataProcessorP_34BridgeJSRuntimeTests_DataProcessorP_extern(boxPtr, file, line)
+}
+
+private enum _BJS_Closure_20BridgeJSRuntimeTests34BridgeJSRuntimeTests_DataProcessorP_34BridgeJSRuntimeTests_DataProcessorP {
+    static func bridgeJSLift(_ callbackId: Int32) -> (any BridgeJSRuntimeTests.DataProcessor) -> any BridgeJSRuntimeTests.DataProcessor {
+        let callback = JSObject.bridgeJSLiftParameter(callbackId)
+        return { [callback] param0 in
+            #if arch(wasm32)
+            let callbackValue = callback.bridgeJSLowerParameter()
+            let param0ObjectId = (param0 as! _BridgedSwiftProtocolExportable).bridgeJSLowerAsProtocolReturn()
+            let ret = invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests34BridgeJSRuntimeTests_DataProcessorP_34BridgeJSRuntimeTests_DataProcessorP(callbackValue, param0ObjectId)
+            return AnyDataProcessor.bridgeJSLiftReturn(ret)
+            #else
+            fatalError("Only available on WebAssembly")
+            #endif
+        }
+    }
+}
+
+extension JSTypedClosure where Signature == (any BridgeJSRuntimeTests.DataProcessor) -> any BridgeJSRuntimeTests.DataProcessor {
+    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping (any BridgeJSRuntimeTests.DataProcessor) -> any BridgeJSRuntimeTests.DataProcessor) {
+        self.init(
+            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests34BridgeJSRuntimeTests_DataProcessorP_34BridgeJSRuntimeTests_DataProcessorP,
+            body: body,
+            fileID: fileID,
+            line: line
+        )
+    }
+}
+
+@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests34BridgeJSRuntimeTests_DataProcessorP_34BridgeJSRuntimeTests_DataProcessorP")
+@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests34BridgeJSRuntimeTests_DataProcessorP_34BridgeJSRuntimeTests_DataProcessorP")
+public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests34BridgeJSRuntimeTests_DataProcessorP_34BridgeJSRuntimeTests_DataProcessorP(_ boxPtr: UnsafeMutableRawPointer, _ param0: Int32) -> Int32 {
+    #if arch(wasm32)
+    let closure = Unmanaged<_BridgeJSTypedClosureBox<(any BridgeJSRuntimeTests.DataProcessor) -> any BridgeJSRuntimeTests.DataProcessor>>.fromOpaque(boxPtr).takeUnretainedValue().closure
+    let result = closure(AnyDataProcessor.bridgeJSLiftParameter(param0))
+    return (result as! _BridgedSwiftProtocolExportable).bridgeJSLowerAsProtocolReturn()
+    #else
+    fatalError("Only available on WebAssembly")
+    #endif
+}
+
+#if arch(wasm32)
+@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests34BridgeJSRuntimeTests_DataProcessorP_SS")
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests34BridgeJSRuntimeTests_DataProcessorP_SS_extern(_ callback: Int32, _ param0: Int32) -> Int32
+#else
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests34BridgeJSRuntimeTests_DataProcessorP_SS_extern(_ callback: Int32, _ param0: Int32) -> Int32 {
+    fatalError("Only available on WebAssembly")
+}
+#endif
+@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests34BridgeJSRuntimeTests_DataProcessorP_SS(_ callback: Int32, _ param0: Int32) -> Int32 {
+    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests34BridgeJSRuntimeTests_DataProcessorP_SS_extern(callback, param0)
+}
+
+#if arch(wasm32)
+@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests34BridgeJSRuntimeTests_DataProcessorP_SS")
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests34BridgeJSRuntimeTests_DataProcessorP_SS_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
+#else
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests34BridgeJSRuntimeTests_DataProcessorP_SS_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+    fatalError("Only available on WebAssembly")
+}
+#endif
+@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests34BridgeJSRuntimeTests_DataProcessorP_SS(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests34BridgeJSRuntimeTests_DataProcessorP_SS_extern(boxPtr, file, line)
+}
+
+private enum _BJS_Closure_20BridgeJSRuntimeTests34BridgeJSRuntimeTests_DataProcessorP_SS {
+    static func bridgeJSLift(_ callbackId: Int32) -> (any BridgeJSRuntimeTests.DataProcessor) -> String {
+        let callback = JSObject.bridgeJSLiftParameter(callbackId)
+        return { [callback] param0 in
+            #if arch(wasm32)
+            let callbackValue = callback.bridgeJSLowerParameter()
+            let param0ObjectId = (param0 as! _BridgedSwiftProtocolExportable).bridgeJSLowerAsProtocolReturn()
+            let ret = invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests34BridgeJSRuntimeTests_DataProcessorP_SS(callbackValue, param0ObjectId)
+            return String.bridgeJSLiftReturn(ret)
+            #else
+            fatalError("Only available on WebAssembly")
+            #endif
+        }
+    }
+}
+
+extension JSTypedClosure where Signature == (any BridgeJSRuntimeTests.DataProcessor) -> String {
+    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping (any BridgeJSRuntimeTests.DataProcessor) -> String) {
+        self.init(
+            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests34BridgeJSRuntimeTests_DataProcessorP_SS,
+            body: body,
+            fileID: fileID,
+            line: line
+        )
+    }
+}
+
+@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests34BridgeJSRuntimeTests_DataProcessorP_SS")
+@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests34BridgeJSRuntimeTests_DataProcessorP_SS")
+public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests34BridgeJSRuntimeTests_DataProcessorP_SS(_ boxPtr: UnsafeMutableRawPointer, _ param0: Int32) -> Void {
+    #if arch(wasm32)
+    let closure = Unmanaged<_BridgeJSTypedClosureBox<(any BridgeJSRuntimeTests.DataProcessor) -> String>>.fromOpaque(boxPtr).takeUnretainedValue().closure
+    let result = closure(AnyDataProcessor.bridgeJSLiftParameter(param0))
     return result.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
@@ -456,226 +645,37 @@ public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests8JS
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests9APIResultO_SS")
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests9APIResultO_SS_extern(_ callback: Int32, _ param0: Int32) -> Int32
+@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsAl28BridgeJSRuntimeTests_Polygon_Si")
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsAl28BridgeJSRuntimeTests_Polygon_Si_extern(_ callback: Int32, _ param0: UnsafeMutableRawPointer) -> Int32
 #else
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests9APIResultO_SS_extern(_ callback: Int32, _ param0: Int32) -> Int32 {
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsAl28BridgeJSRuntimeTests_Polygon_Si_extern(_ callback: Int32, _ param0: UnsafeMutableRawPointer) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests9APIResultO_SS(_ callback: Int32, _ param0: Int32) -> Int32 {
-    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests9APIResultO_SS_extern(callback, param0)
+@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsAl28BridgeJSRuntimeTests_Polygon_Si(_ callback: Int32, _ param0: UnsafeMutableRawPointer) -> Int32 {
+    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsAl28BridgeJSRuntimeTests_Polygon_Si_extern(callback, param0)
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests9APIResultO_SS")
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests9APIResultO_SS_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
+@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsAl28BridgeJSRuntimeTests_Polygon_Si")
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsAl28BridgeJSRuntimeTests_Polygon_Si_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
 #else
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests9APIResultO_SS_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsAl28BridgeJSRuntimeTests_Polygon_Si_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests9APIResultO_SS(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
-    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests9APIResultO_SS_extern(boxPtr, file, line)
+@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsAl28BridgeJSRuntimeTests_Polygon_Si(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsAl28BridgeJSRuntimeTests_Polygon_Si_extern(boxPtr, file, line)
 }
 
-private enum _BJS_Closure_20BridgeJSRuntimeTests9APIResultO_SS {
-    static func bridgeJSLift(_ callbackId: Int32) -> (APIResult) -> String {
-        let callback = JSObject.bridgeJSLiftParameter(callbackId)
-        return { [callback] param0 in
-            #if arch(wasm32)
-            let callbackValue = callback.bridgeJSLowerParameter()
-            let param0CaseId = param0.bridgeJSLowerParameter()
-            let ret = invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests9APIResultO_SS(callbackValue, param0CaseId)
-            return String.bridgeJSLiftReturn(ret)
-            #else
-            fatalError("Only available on WebAssembly")
-            #endif
-        }
-    }
-}
-
-extension JSTypedClosure where Signature == (APIResult) -> String {
-    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping (APIResult) -> String) {
-        self.init(
-            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests9APIResultO_SS,
-            body: body,
-            fileID: fileID,
-            line: line
-        )
-    }
-}
-
-@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests9APIResultO_SS")
-@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests9APIResultO_SS")
-public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests9APIResultO_SS(_ boxPtr: UnsafeMutableRawPointer, _ param0: Int32) -> Void {
-    #if arch(wasm32)
-    let closure = Unmanaged<_BridgeJSTypedClosureBox<(APIResult) -> String>>.fromOpaque(boxPtr).takeUnretainedValue().closure
-    let result = closure(APIResult.bridgeJSLiftParameter(param0))
-    return result.bridgeJSLowerReturn()
-    #else
-    fatalError("Only available on WebAssembly")
-    #endif
-}
-
-#if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests9DirectionO_SS")
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests9DirectionO_SS_extern(_ callback: Int32, _ param0: Int32) -> Int32
-#else
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests9DirectionO_SS_extern(_ callback: Int32, _ param0: Int32) -> Int32 {
-    fatalError("Only available on WebAssembly")
-}
-#endif
-@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests9DirectionO_SS(_ callback: Int32, _ param0: Int32) -> Int32 {
-    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests9DirectionO_SS_extern(callback, param0)
-}
-
-#if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests9DirectionO_SS")
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests9DirectionO_SS_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
-#else
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests9DirectionO_SS_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
-    fatalError("Only available on WebAssembly")
-}
-#endif
-@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests9DirectionO_SS(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
-    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests9DirectionO_SS_extern(boxPtr, file, line)
-}
-
-private enum _BJS_Closure_20BridgeJSRuntimeTests9DirectionO_SS {
-    static func bridgeJSLift(_ callbackId: Int32) -> (Direction) -> String {
-        let callback = JSObject.bridgeJSLiftParameter(callbackId)
-        return { [callback] param0 in
-            #if arch(wasm32)
-            let callbackValue = callback.bridgeJSLowerParameter()
-            let param0Value = param0.bridgeJSLowerParameter()
-            let ret = invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests9DirectionO_SS(callbackValue, param0Value)
-            return String.bridgeJSLiftReturn(ret)
-            #else
-            fatalError("Only available on WebAssembly")
-            #endif
-        }
-    }
-}
-
-extension JSTypedClosure where Signature == (Direction) -> String {
-    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping (Direction) -> String) {
-        self.init(
-            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests9DirectionO_SS,
-            body: body,
-            fileID: fileID,
-            line: line
-        )
-    }
-}
-
-@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests9DirectionO_SS")
-@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests9DirectionO_SS")
-public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests9DirectionO_SS(_ boxPtr: UnsafeMutableRawPointer, _ param0: Int32) -> Void {
-    #if arch(wasm32)
-    let closure = Unmanaged<_BridgeJSTypedClosureBox<(Direction) -> String>>.fromOpaque(boxPtr).takeUnretainedValue().closure
-    let result = closure(Direction.bridgeJSLiftParameter(param0))
-    return result.bridgeJSLowerReturn()
-    #else
-    fatalError("Only available on WebAssembly")
-    #endif
-}
-
-#if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests9DirectionO_Sb")
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests9DirectionO_Sb_extern(_ callback: Int32, _ param0: Int32) -> Int32
-#else
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests9DirectionO_Sb_extern(_ callback: Int32, _ param0: Int32) -> Int32 {
-    fatalError("Only available on WebAssembly")
-}
-#endif
-@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests9DirectionO_Sb(_ callback: Int32, _ param0: Int32) -> Int32 {
-    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests9DirectionO_Sb_extern(callback, param0)
-}
-
-#if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests9DirectionO_Sb")
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests9DirectionO_Sb_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
-#else
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests9DirectionO_Sb_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
-    fatalError("Only available on WebAssembly")
-}
-#endif
-@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests9DirectionO_Sb(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
-    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests9DirectionO_Sb_extern(boxPtr, file, line)
-}
-
-private enum _BJS_Closure_20BridgeJSRuntimeTests9DirectionO_Sb {
-    static func bridgeJSLift(_ callbackId: Int32) -> (Direction) -> Bool {
-        let callback = JSObject.bridgeJSLiftParameter(callbackId)
-        return { [callback] param0 in
-            #if arch(wasm32)
-            let callbackValue = callback.bridgeJSLowerParameter()
-            let param0Value = param0.bridgeJSLowerParameter()
-            let ret = invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTests9DirectionO_Sb(callbackValue, param0Value)
-            return Bool.bridgeJSLiftReturn(ret)
-            #else
-            fatalError("Only available on WebAssembly")
-            #endif
-        }
-    }
-}
-
-extension JSTypedClosure where Signature == (Direction) -> Bool {
-    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping (Direction) -> Bool) {
-        self.init(
-            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests9DirectionO_Sb,
-            body: body,
-            fileID: fileID,
-            line: line
-        )
-    }
-}
-
-@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests9DirectionO_Sb")
-@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests9DirectionO_Sb")
-public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTests9DirectionO_Sb(_ boxPtr: UnsafeMutableRawPointer, _ param0: Int32) -> Int32 {
-    #if arch(wasm32)
-    let closure = Unmanaged<_BridgeJSTypedClosureBox<(Direction) -> Bool>>.fromOpaque(boxPtr).takeUnretainedValue().closure
-    let result = closure(Direction.bridgeJSLiftParameter(param0))
-    return result.bridgeJSLowerReturn()
-    #else
-    fatalError("Only available on WebAssembly")
-    #endif
-}
-
-#if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsAl7Polygon_Si")
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsAl7Polygon_Si_extern(_ callback: Int32, _ param0: UnsafeMutableRawPointer) -> Int32
-#else
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsAl7Polygon_Si_extern(_ callback: Int32, _ param0: UnsafeMutableRawPointer) -> Int32 {
-    fatalError("Only available on WebAssembly")
-}
-#endif
-@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsAl7Polygon_Si(_ callback: Int32, _ param0: UnsafeMutableRawPointer) -> Int32 {
-    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsAl7Polygon_Si_extern(callback, param0)
-}
-
-#if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsAl7Polygon_Si")
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsAl7Polygon_Si_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
-#else
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsAl7Polygon_Si_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
-    fatalError("Only available on WebAssembly")
-}
-#endif
-@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsAl7Polygon_Si(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
-    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsAl7Polygon_Si_extern(boxPtr, file, line)
-}
-
-private enum _BJS_Closure_20BridgeJSRuntimeTestsAl7Polygon_Si {
-    static func bridgeJSLift(_ callbackId: Int32) -> (Polygon) -> Int {
+private enum _BJS_Closure_20BridgeJSRuntimeTestsAl28BridgeJSRuntimeTests_Polygon_Si {
+    static func bridgeJSLift(_ callbackId: Int32) -> (BridgeJSRuntimeTests.Polygon) -> Int {
         let callback = JSObject.bridgeJSLiftParameter(callbackId)
         return { [callback] param0 in
             #if arch(wasm32)
             let callbackValue = callback.bridgeJSLowerParameter()
             let param0Pointer = param0.bridgeJSLowerParameter()
-            let ret = invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsAl7Polygon_Si(callbackValue, param0Pointer)
+            let ret = invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsAl28BridgeJSRuntimeTests_Polygon_Si(callbackValue, param0Pointer)
             return Int.bridgeJSLiftReturn(ret)
             #else
             fatalError("Only available on WebAssembly")
@@ -684,10 +684,10 @@ private enum _BJS_Closure_20BridgeJSRuntimeTestsAl7Polygon_Si {
     }
 }
 
-extension JSTypedClosure where Signature == (Polygon) -> Int {
-    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping (Polygon) -> Int) {
+extension JSTypedClosure where Signature == (BridgeJSRuntimeTests.Polygon) -> Int {
+    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping (BridgeJSRuntimeTests.Polygon) -> Int) {
         self.init(
-            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsAl7Polygon_Si,
+            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsAl28BridgeJSRuntimeTests_Polygon_Si,
             body: body,
             fileID: fileID,
             line: line
@@ -695,12 +695,12 @@ extension JSTypedClosure where Signature == (Polygon) -> Int {
     }
 }
 
-@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsAl7Polygon_Si")
-@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsAl7Polygon_Si")
-public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsAl7Polygon_Si(_ boxPtr: UnsafeMutableRawPointer, _ param0: UnsafeMutableRawPointer) -> Int32 {
+@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsAl28BridgeJSRuntimeTests_Polygon_Si")
+@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsAl28BridgeJSRuntimeTests_Polygon_Si")
+public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsAl28BridgeJSRuntimeTests_Polygon_Si(_ boxPtr: UnsafeMutableRawPointer, _ param0: UnsafeMutableRawPointer) -> Int32 {
     #if arch(wasm32)
-    let closure = Unmanaged<_BridgeJSTypedClosureBox<(Polygon) -> Int>>.fromOpaque(boxPtr).takeUnretainedValue().closure
-    let result = closure(Polygon.bridgeJSLiftParameter(param0))
+    let closure = Unmanaged<_BridgeJSTypedClosureBox<(BridgeJSRuntimeTests.Polygon) -> Int>>.fromOpaque(boxPtr).takeUnretainedValue().closure
+    let result = closure(BridgeJSRuntimeTests.Polygon.bridgeJSLiftParameter(param0))
     return result.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
@@ -874,41 +874,41 @@ public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsKSS
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSS_7GreeterC")
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSS_7GreeterC_extern(_ callback: Int32, _ param0Bytes: Int32, _ param0Length: Int32) -> UnsafeMutableRawPointer
+@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSS_28BridgeJSRuntimeTests_GreeterC")
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSS_28BridgeJSRuntimeTests_GreeterC_extern(_ callback: Int32, _ param0Bytes: Int32, _ param0Length: Int32) -> UnsafeMutableRawPointer
 #else
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSS_7GreeterC_extern(_ callback: Int32, _ param0Bytes: Int32, _ param0Length: Int32) -> UnsafeMutableRawPointer {
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSS_28BridgeJSRuntimeTests_GreeterC_extern(_ callback: Int32, _ param0Bytes: Int32, _ param0Length: Int32) -> UnsafeMutableRawPointer {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSS_7GreeterC(_ callback: Int32, _ param0Bytes: Int32, _ param0Length: Int32) -> UnsafeMutableRawPointer {
-    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSS_7GreeterC_extern(callback, param0Bytes, param0Length)
+@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSS_28BridgeJSRuntimeTests_GreeterC(_ callback: Int32, _ param0Bytes: Int32, _ param0Length: Int32) -> UnsafeMutableRawPointer {
+    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSS_28BridgeJSRuntimeTests_GreeterC_extern(callback, param0Bytes, param0Length)
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSS_7GreeterC")
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSS_7GreeterC_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
+@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSS_28BridgeJSRuntimeTests_GreeterC")
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSS_28BridgeJSRuntimeTests_GreeterC_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
 #else
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSS_7GreeterC_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSS_28BridgeJSRuntimeTests_GreeterC_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSS_7GreeterC(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
-    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSS_7GreeterC_extern(boxPtr, file, line)
+@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSS_28BridgeJSRuntimeTests_GreeterC(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSS_28BridgeJSRuntimeTests_GreeterC_extern(boxPtr, file, line)
 }
 
-private enum _BJS_Closure_20BridgeJSRuntimeTestsSS_7GreeterC {
-    static func bridgeJSLift(_ callbackId: Int32) -> (String) -> Greeter {
+private enum _BJS_Closure_20BridgeJSRuntimeTestsSS_28BridgeJSRuntimeTests_GreeterC {
+    static func bridgeJSLift(_ callbackId: Int32) -> (String) -> BridgeJSRuntimeTests.Greeter {
         let callback = JSObject.bridgeJSLiftParameter(callbackId)
         return { [callback] param0 in
             #if arch(wasm32)
             let callbackValue = callback.bridgeJSLowerParameter()
             let ret0 = param0.bridgeJSWithLoweredParameter { (param0Bytes, param0Length) in
-                let ret = invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSS_7GreeterC(callbackValue, param0Bytes, param0Length)
+                let ret = invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSS_28BridgeJSRuntimeTests_GreeterC(callbackValue, param0Bytes, param0Length)
                 return ret
             }
             let ret = ret0
-            return Greeter.bridgeJSLiftReturn(ret)
+            return BridgeJSRuntimeTests.Greeter.bridgeJSLiftReturn(ret)
             #else
             fatalError("Only available on WebAssembly")
             #endif
@@ -916,10 +916,10 @@ private enum _BJS_Closure_20BridgeJSRuntimeTestsSS_7GreeterC {
     }
 }
 
-extension JSTypedClosure where Signature == (String) -> Greeter {
-    public init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping (String) -> Greeter) {
+extension JSTypedClosure where Signature == (String) -> BridgeJSRuntimeTests.Greeter {
+    public init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping (String) -> BridgeJSRuntimeTests.Greeter) {
         self.init(
-            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSS_7GreeterC,
+            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSS_28BridgeJSRuntimeTests_GreeterC,
             body: body,
             fileID: fileID,
             line: line
@@ -927,11 +927,11 @@ extension JSTypedClosure where Signature == (String) -> Greeter {
     }
 }
 
-@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSS_7GreeterC")
-@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSS_7GreeterC")
-public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSS_7GreeterC(_ boxPtr: UnsafeMutableRawPointer, _ param0Bytes: Int32, _ param0Length: Int32) -> UnsafeMutableRawPointer {
+@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSS_28BridgeJSRuntimeTests_GreeterC")
+@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSS_28BridgeJSRuntimeTests_GreeterC")
+public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSS_28BridgeJSRuntimeTests_GreeterC(_ boxPtr: UnsafeMutableRawPointer, _ param0Bytes: Int32, _ param0Length: Int32) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let closure = Unmanaged<_BridgeJSTypedClosureBox<(String) -> Greeter>>.fromOpaque(boxPtr).takeUnretainedValue().closure
+    let closure = Unmanaged<_BridgeJSTypedClosureBox<(String) -> BridgeJSRuntimeTests.Greeter>>.fromOpaque(boxPtr).takeUnretainedValue().closure
     let result = closure(String.bridgeJSLiftParameter(param0Bytes, param0Length))
     return result.bridgeJSLowerReturn()
     #else
@@ -1006,38 +1006,38 @@ public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSS_
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_8Vector2DV")
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_8Vector2DV_extern(_ callback: Int32, _ param0: Float64) -> Void
+@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_29BridgeJSRuntimeTests_Vector2DV")
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_29BridgeJSRuntimeTests_Vector2DV_extern(_ callback: Int32, _ param0: Float64) -> Void
 #else
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_8Vector2DV_extern(_ callback: Int32, _ param0: Float64) -> Void {
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_29BridgeJSRuntimeTests_Vector2DV_extern(_ callback: Int32, _ param0: Float64) -> Void {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_8Vector2DV(_ callback: Int32, _ param0: Float64) -> Void {
-    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_8Vector2DV_extern(callback, param0)
+@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_29BridgeJSRuntimeTests_Vector2DV(_ callback: Int32, _ param0: Float64) -> Void {
+    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_29BridgeJSRuntimeTests_Vector2DV_extern(callback, param0)
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_8Vector2DV")
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_8Vector2DV_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
+@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_29BridgeJSRuntimeTests_Vector2DV")
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_29BridgeJSRuntimeTests_Vector2DV_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
 #else
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_8Vector2DV_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_29BridgeJSRuntimeTests_Vector2DV_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_8Vector2DV(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
-    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_8Vector2DV_extern(boxPtr, file, line)
+@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_29BridgeJSRuntimeTests_Vector2DV(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_29BridgeJSRuntimeTests_Vector2DV_extern(boxPtr, file, line)
 }
 
-private enum _BJS_Closure_20BridgeJSRuntimeTestsSd_8Vector2DV {
-    static func bridgeJSLift(_ callbackId: Int32) -> (Double) -> Vector2D {
+private enum _BJS_Closure_20BridgeJSRuntimeTestsSd_29BridgeJSRuntimeTests_Vector2DV {
+    static func bridgeJSLift(_ callbackId: Int32) -> (Double) -> BridgeJSRuntimeTests.Vector2D {
         let callback = JSObject.bridgeJSLiftParameter(callbackId)
         return { [callback] param0 in
             #if arch(wasm32)
             let callbackValue = callback.bridgeJSLowerParameter()
             let param0Value = param0.bridgeJSLowerParameter()
-            invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_8Vector2DV(callbackValue, param0Value)
-            return Vector2D.bridgeJSLiftReturn()
+            invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_29BridgeJSRuntimeTests_Vector2DV(callbackValue, param0Value)
+            return BridgeJSRuntimeTests.Vector2D.bridgeJSLiftReturn()
             #else
             fatalError("Only available on WebAssembly")
             #endif
@@ -1045,10 +1045,10 @@ private enum _BJS_Closure_20BridgeJSRuntimeTestsSd_8Vector2DV {
     }
 }
 
-extension JSTypedClosure where Signature == (Double) -> Vector2D {
-    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping (Double) -> Vector2D) {
+extension JSTypedClosure where Signature == (Double) -> BridgeJSRuntimeTests.Vector2D {
+    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping (Double) -> BridgeJSRuntimeTests.Vector2D) {
         self.init(
-            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_8Vector2DV,
+            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_29BridgeJSRuntimeTests_Vector2DV,
             body: body,
             fileID: fileID,
             line: line
@@ -1056,11 +1056,11 @@ extension JSTypedClosure where Signature == (Double) -> Vector2D {
     }
 }
 
-@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_8Vector2DV")
-@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_8Vector2DV")
-public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_8Vector2DV(_ boxPtr: UnsafeMutableRawPointer, _ param0: Float64) -> Void {
+@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_29BridgeJSRuntimeTests_Vector2DV")
+@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_29BridgeJSRuntimeTests_Vector2DV")
+public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_29BridgeJSRuntimeTests_Vector2DV(_ boxPtr: UnsafeMutableRawPointer, _ param0: Float64) -> Void {
     #if arch(wasm32)
-    let closure = Unmanaged<_BridgeJSTypedClosureBox<(Double) -> Vector2D>>.fromOpaque(boxPtr).takeUnretainedValue().closure
+    let closure = Unmanaged<_BridgeJSTypedClosureBox<(Double) -> BridgeJSRuntimeTests.Vector2D>>.fromOpaque(boxPtr).takeUnretainedValue().closure
     let result = closure(Double.bridgeJSLiftParameter(param0))
     return result.bridgeJSLowerReturn()
     #else
@@ -1132,38 +1132,38 @@ public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_Sq8Vector2DV")
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_Sq8Vector2DV_extern(_ callback: Int32, _ param0: Float64) -> Void
+@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_Sq29BridgeJSRuntimeTests_Vector2DV")
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_Sq29BridgeJSRuntimeTests_Vector2DV_extern(_ callback: Int32, _ param0: Float64) -> Void
 #else
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_Sq8Vector2DV_extern(_ callback: Int32, _ param0: Float64) -> Void {
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_Sq29BridgeJSRuntimeTests_Vector2DV_extern(_ callback: Int32, _ param0: Float64) -> Void {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_Sq8Vector2DV(_ callback: Int32, _ param0: Float64) -> Void {
-    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_Sq8Vector2DV_extern(callback, param0)
+@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_Sq29BridgeJSRuntimeTests_Vector2DV(_ callback: Int32, _ param0: Float64) -> Void {
+    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_Sq29BridgeJSRuntimeTests_Vector2DV_extern(callback, param0)
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_Sq8Vector2DV")
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_Sq8Vector2DV_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
+@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_Sq29BridgeJSRuntimeTests_Vector2DV")
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_Sq29BridgeJSRuntimeTests_Vector2DV_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
 #else
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_Sq8Vector2DV_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_Sq29BridgeJSRuntimeTests_Vector2DV_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_Sq8Vector2DV(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
-    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_Sq8Vector2DV_extern(boxPtr, file, line)
+@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_Sq29BridgeJSRuntimeTests_Vector2DV(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_Sq29BridgeJSRuntimeTests_Vector2DV_extern(boxPtr, file, line)
 }
 
-private enum _BJS_Closure_20BridgeJSRuntimeTestsSd_Sq8Vector2DV {
-    static func bridgeJSLift(_ callbackId: Int32) -> (Double) -> Optional<Vector2D> {
+private enum _BJS_Closure_20BridgeJSRuntimeTestsSd_Sq29BridgeJSRuntimeTests_Vector2DV {
+    static func bridgeJSLift(_ callbackId: Int32) -> (Double) -> Optional<BridgeJSRuntimeTests.Vector2D> {
         let callback = JSObject.bridgeJSLiftParameter(callbackId)
         return { [callback] param0 in
             #if arch(wasm32)
             let callbackValue = callback.bridgeJSLowerParameter()
             let param0Value = param0.bridgeJSLowerParameter()
-            invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_Sq8Vector2DV(callbackValue, param0Value)
-            return Optional<Vector2D>.bridgeJSLiftReturn()
+            invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_Sq29BridgeJSRuntimeTests_Vector2DV(callbackValue, param0Value)
+            return Optional<BridgeJSRuntimeTests.Vector2D>.bridgeJSLiftReturn()
             #else
             fatalError("Only available on WebAssembly")
             #endif
@@ -1171,10 +1171,10 @@ private enum _BJS_Closure_20BridgeJSRuntimeTestsSd_Sq8Vector2DV {
     }
 }
 
-extension JSTypedClosure where Signature == (Double) -> Optional<Vector2D> {
-    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping (Double) -> Optional<Vector2D>) {
+extension JSTypedClosure where Signature == (Double) -> Optional<BridgeJSRuntimeTests.Vector2D> {
+    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping (Double) -> Optional<BridgeJSRuntimeTests.Vector2D>) {
         self.init(
-            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_Sq8Vector2DV,
+            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_Sq29BridgeJSRuntimeTests_Vector2DV,
             body: body,
             fileID: fileID,
             line: line
@@ -1182,11 +1182,11 @@ extension JSTypedClosure where Signature == (Double) -> Optional<Vector2D> {
     }
 }
 
-@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_Sq8Vector2DV")
-@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_Sq8Vector2DV")
-public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_Sq8Vector2DV(_ boxPtr: UnsafeMutableRawPointer, _ param0: Float64) -> Void {
+@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_Sq29BridgeJSRuntimeTests_Vector2DV")
+@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_Sq29BridgeJSRuntimeTests_Vector2DV")
+public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSd_Sq29BridgeJSRuntimeTests_Vector2DV(_ boxPtr: UnsafeMutableRawPointer, _ param0: Float64) -> Void {
     #if arch(wasm32)
-    let closure = Unmanaged<_BridgeJSTypedClosureBox<(Double) -> Optional<Vector2D>>>.fromOpaque(boxPtr).takeUnretainedValue().closure
+    let closure = Unmanaged<_BridgeJSTypedClosureBox<(Double) -> Optional<BridgeJSRuntimeTests.Vector2D>>>.fromOpaque(boxPtr).takeUnretainedValue().closure
     let result = closure(Double.bridgeJSLiftParameter(param0))
     return result.bridgeJSLowerReturn()
     #else
@@ -1516,105 +1516,37 @@ public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSi_
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq13DataProcessorP_SS")
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq13DataProcessorP_SS_extern(_ callback: Int32, _ param0IsSome: Int32, _ param0ObjectId: Int32) -> Int32
+@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq26BridgeJSRuntimeTests_ThemeO_SS")
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq26BridgeJSRuntimeTests_ThemeO_SS_extern(_ callback: Int32, _ param0IsSome: Int32, _ param0Bytes: Int32, _ param0Length: Int32) -> Int32
 #else
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq13DataProcessorP_SS_extern(_ callback: Int32, _ param0IsSome: Int32, _ param0ObjectId: Int32) -> Int32 {
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq26BridgeJSRuntimeTests_ThemeO_SS_extern(_ callback: Int32, _ param0IsSome: Int32, _ param0Bytes: Int32, _ param0Length: Int32) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq13DataProcessorP_SS(_ callback: Int32, _ param0IsSome: Int32, _ param0ObjectId: Int32) -> Int32 {
-    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq13DataProcessorP_SS_extern(callback, param0IsSome, param0ObjectId)
+@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq26BridgeJSRuntimeTests_ThemeO_SS(_ callback: Int32, _ param0IsSome: Int32, _ param0Bytes: Int32, _ param0Length: Int32) -> Int32 {
+    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq26BridgeJSRuntimeTests_ThemeO_SS_extern(callback, param0IsSome, param0Bytes, param0Length)
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq13DataProcessorP_SS")
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq13DataProcessorP_SS_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
+@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq26BridgeJSRuntimeTests_ThemeO_SS")
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq26BridgeJSRuntimeTests_ThemeO_SS_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
 #else
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq13DataProcessorP_SS_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq26BridgeJSRuntimeTests_ThemeO_SS_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq13DataProcessorP_SS(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
-    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq13DataProcessorP_SS_extern(boxPtr, file, line)
+@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq26BridgeJSRuntimeTests_ThemeO_SS(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq26BridgeJSRuntimeTests_ThemeO_SS_extern(boxPtr, file, line)
 }
 
-private enum _BJS_Closure_20BridgeJSRuntimeTestsSq13DataProcessorP_SS {
-    static func bridgeJSLift(_ callbackId: Int32) -> (Optional<any DataProcessor>) -> String {
-        let callback = JSObject.bridgeJSLiftParameter(callbackId)
-        return { [callback] param0 in
-            #if arch(wasm32)
-            let callbackValue = callback.bridgeJSLowerParameter()
-            let (param0IsSome, param0ObjectId): (Int32, Int32)
-            if let param0 {
-                (param0IsSome, param0ObjectId) = (1, (param0 as! _BridgedSwiftProtocolExportable).bridgeJSLowerAsProtocolReturn())
-            } else {
-                (param0IsSome, param0ObjectId) = (0, 0)
-            }
-            let ret = invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq13DataProcessorP_SS(callbackValue, param0IsSome, param0ObjectId)
-            return String.bridgeJSLiftReturn(ret)
-            #else
-            fatalError("Only available on WebAssembly")
-            #endif
-        }
-    }
-}
-
-extension JSTypedClosure where Signature == (Optional<any DataProcessor>) -> String {
-    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping (Optional<any DataProcessor>) -> String) {
-        self.init(
-            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq13DataProcessorP_SS,
-            body: body,
-            fileID: fileID,
-            line: line
-        )
-    }
-}
-
-@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq13DataProcessorP_SS")
-@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq13DataProcessorP_SS")
-public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq13DataProcessorP_SS(_ boxPtr: UnsafeMutableRawPointer, _ param0IsSome: Int32, _ param0Value: Int32) -> Void {
-    #if arch(wasm32)
-    let closure = Unmanaged<_BridgeJSTypedClosureBox<(Optional<any DataProcessor>) -> String>>.fromOpaque(boxPtr).takeUnretainedValue().closure
-    let result = closure(Optional<AnyDataProcessor>.bridgeJSLiftParameter(param0IsSome, param0Value))
-    return result.bridgeJSLowerReturn()
-    #else
-    fatalError("Only available on WebAssembly")
-    #endif
-}
-
-#if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq5ThemeO_SS")
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq5ThemeO_SS_extern(_ callback: Int32, _ param0IsSome: Int32, _ param0Bytes: Int32, _ param0Length: Int32) -> Int32
-#else
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq5ThemeO_SS_extern(_ callback: Int32, _ param0IsSome: Int32, _ param0Bytes: Int32, _ param0Length: Int32) -> Int32 {
-    fatalError("Only available on WebAssembly")
-}
-#endif
-@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq5ThemeO_SS(_ callback: Int32, _ param0IsSome: Int32, _ param0Bytes: Int32, _ param0Length: Int32) -> Int32 {
-    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq5ThemeO_SS_extern(callback, param0IsSome, param0Bytes, param0Length)
-}
-
-#if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq5ThemeO_SS")
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq5ThemeO_SS_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
-#else
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq5ThemeO_SS_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
-    fatalError("Only available on WebAssembly")
-}
-#endif
-@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq5ThemeO_SS(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
-    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq5ThemeO_SS_extern(boxPtr, file, line)
-}
-
-private enum _BJS_Closure_20BridgeJSRuntimeTestsSq5ThemeO_SS {
-    static func bridgeJSLift(_ callbackId: Int32) -> (Optional<Theme>) -> String {
+private enum _BJS_Closure_20BridgeJSRuntimeTestsSq26BridgeJSRuntimeTests_ThemeO_SS {
+    static func bridgeJSLift(_ callbackId: Int32) -> (Optional<BridgeJSRuntimeTests.Theme>) -> String {
         let callback = JSObject.bridgeJSLiftParameter(callbackId)
         return { [callback] param0 in
             #if arch(wasm32)
             let callbackValue = callback.bridgeJSLowerParameter()
             let ret0 = param0.bridgeJSWithLoweredParameter { (param0IsSome, param0Bytes, param0Length) in
-                let ret = invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq5ThemeO_SS(callbackValue, param0IsSome, param0Bytes, param0Length)
+                let ret = invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq26BridgeJSRuntimeTests_ThemeO_SS(callbackValue, param0IsSome, param0Bytes, param0Length)
                 return ret
             }
             let ret = ret0
@@ -1626,10 +1558,10 @@ private enum _BJS_Closure_20BridgeJSRuntimeTestsSq5ThemeO_SS {
     }
 }
 
-extension JSTypedClosure where Signature == (Optional<Theme>) -> String {
-    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping (Optional<Theme>) -> String) {
+extension JSTypedClosure where Signature == (Optional<BridgeJSRuntimeTests.Theme>) -> String {
+    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping (Optional<BridgeJSRuntimeTests.Theme>) -> String) {
         self.init(
-            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq5ThemeO_SS,
+            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq26BridgeJSRuntimeTests_ThemeO_SS,
             body: body,
             fileID: fileID,
             line: line
@@ -1637,12 +1569,12 @@ extension JSTypedClosure where Signature == (Optional<Theme>) -> String {
     }
 }
 
-@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq5ThemeO_SS")
-@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq5ThemeO_SS")
-public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq5ThemeO_SS(_ boxPtr: UnsafeMutableRawPointer, _ param0IsSome: Int32, _ param0Bytes: Int32, _ param0Length: Int32) -> Void {
+@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq26BridgeJSRuntimeTests_ThemeO_SS")
+@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq26BridgeJSRuntimeTests_ThemeO_SS")
+public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq26BridgeJSRuntimeTests_ThemeO_SS(_ boxPtr: UnsafeMutableRawPointer, _ param0IsSome: Int32, _ param0Bytes: Int32, _ param0Length: Int32) -> Void {
     #if arch(wasm32)
-    let closure = Unmanaged<_BridgeJSTypedClosureBox<(Optional<Theme>) -> String>>.fromOpaque(boxPtr).takeUnretainedValue().closure
-    let result = closure(Optional<Theme>.bridgeJSLiftParameter(param0IsSome, param0Bytes, param0Length))
+    let closure = Unmanaged<_BridgeJSTypedClosureBox<(Optional<BridgeJSRuntimeTests.Theme>) -> String>>.fromOpaque(boxPtr).takeUnretainedValue().closure
+    let result = closure(Optional<BridgeJSRuntimeTests.Theme>.bridgeJSLiftParameter(param0IsSome, param0Bytes, param0Length))
     return result.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
@@ -1650,37 +1582,37 @@ public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq5
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq7GreeterC_SS")
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq7GreeterC_SS_extern(_ callback: Int32, _ param0IsSome: Int32, _ param0Pointer: UnsafeMutableRawPointer) -> Int32
+@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq28BridgeJSRuntimeTests_GreeterC_SS")
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq28BridgeJSRuntimeTests_GreeterC_SS_extern(_ callback: Int32, _ param0IsSome: Int32, _ param0Pointer: UnsafeMutableRawPointer) -> Int32
 #else
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq7GreeterC_SS_extern(_ callback: Int32, _ param0IsSome: Int32, _ param0Pointer: UnsafeMutableRawPointer) -> Int32 {
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq28BridgeJSRuntimeTests_GreeterC_SS_extern(_ callback: Int32, _ param0IsSome: Int32, _ param0Pointer: UnsafeMutableRawPointer) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq7GreeterC_SS(_ callback: Int32, _ param0IsSome: Int32, _ param0Pointer: UnsafeMutableRawPointer) -> Int32 {
-    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq7GreeterC_SS_extern(callback, param0IsSome, param0Pointer)
+@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq28BridgeJSRuntimeTests_GreeterC_SS(_ callback: Int32, _ param0IsSome: Int32, _ param0Pointer: UnsafeMutableRawPointer) -> Int32 {
+    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq28BridgeJSRuntimeTests_GreeterC_SS_extern(callback, param0IsSome, param0Pointer)
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq7GreeterC_SS")
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq7GreeterC_SS_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
+@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq28BridgeJSRuntimeTests_GreeterC_SS")
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq28BridgeJSRuntimeTests_GreeterC_SS_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
 #else
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq7GreeterC_SS_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq28BridgeJSRuntimeTests_GreeterC_SS_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq7GreeterC_SS(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
-    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq7GreeterC_SS_extern(boxPtr, file, line)
+@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq28BridgeJSRuntimeTests_GreeterC_SS(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq28BridgeJSRuntimeTests_GreeterC_SS_extern(boxPtr, file, line)
 }
 
-private enum _BJS_Closure_20BridgeJSRuntimeTestsSq7GreeterC_SS {
-    static func bridgeJSLift(_ callbackId: Int32) -> (Optional<Greeter>) -> String {
+private enum _BJS_Closure_20BridgeJSRuntimeTestsSq28BridgeJSRuntimeTests_GreeterC_SS {
+    static func bridgeJSLift(_ callbackId: Int32) -> (Optional<BridgeJSRuntimeTests.Greeter>) -> String {
         let callback = JSObject.bridgeJSLiftParameter(callbackId)
         return { [callback] param0 in
             #if arch(wasm32)
             let callbackValue = callback.bridgeJSLowerParameter()
             let (param0IsSome, param0Pointer) = param0.bridgeJSLowerParameter()
-            let ret = invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq7GreeterC_SS(callbackValue, param0IsSome, param0Pointer)
+            let ret = invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq28BridgeJSRuntimeTests_GreeterC_SS(callbackValue, param0IsSome, param0Pointer)
             return String.bridgeJSLiftReturn(ret)
             #else
             fatalError("Only available on WebAssembly")
@@ -1689,10 +1621,10 @@ private enum _BJS_Closure_20BridgeJSRuntimeTestsSq7GreeterC_SS {
     }
 }
 
-extension JSTypedClosure where Signature == (Optional<Greeter>) -> String {
-    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping (Optional<Greeter>) -> String) {
+extension JSTypedClosure where Signature == (Optional<BridgeJSRuntimeTests.Greeter>) -> String {
+    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping (Optional<BridgeJSRuntimeTests.Greeter>) -> String) {
         self.init(
-            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq7GreeterC_SS,
+            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq28BridgeJSRuntimeTests_GreeterC_SS,
             body: body,
             fileID: fileID,
             line: line
@@ -1700,12 +1632,12 @@ extension JSTypedClosure where Signature == (Optional<Greeter>) -> String {
     }
 }
 
-@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq7GreeterC_SS")
-@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq7GreeterC_SS")
-public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq7GreeterC_SS(_ boxPtr: UnsafeMutableRawPointer, _ param0IsSome: Int32, _ param0Value: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq28BridgeJSRuntimeTests_GreeterC_SS")
+@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq28BridgeJSRuntimeTests_GreeterC_SS")
+public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq28BridgeJSRuntimeTests_GreeterC_SS(_ boxPtr: UnsafeMutableRawPointer, _ param0IsSome: Int32, _ param0Value: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let closure = Unmanaged<_BridgeJSTypedClosureBox<(Optional<Greeter>) -> String>>.fromOpaque(boxPtr).takeUnretainedValue().closure
-    let result = closure(Optional<Greeter>.bridgeJSLiftParameter(param0IsSome, param0Value))
+    let closure = Unmanaged<_BridgeJSTypedClosureBox<(Optional<BridgeJSRuntimeTests.Greeter>) -> String>>.fromOpaque(boxPtr).takeUnretainedValue().closure
+    let result = closure(Optional<BridgeJSRuntimeTests.Greeter>.bridgeJSLiftParameter(param0IsSome, param0Value))
     return result.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
@@ -1713,38 +1645,38 @@ public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq7
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq7GreeterC_Sq7GreeterC")
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq7GreeterC_Sq7GreeterC_extern(_ callback: Int32, _ param0IsSome: Int32, _ param0Pointer: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer
+@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq28BridgeJSRuntimeTests_GreeterC_Sq28BridgeJSRuntimeTests_GreeterC")
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq28BridgeJSRuntimeTests_GreeterC_Sq28BridgeJSRuntimeTests_GreeterC_extern(_ callback: Int32, _ param0IsSome: Int32, _ param0Pointer: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer
 #else
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq7GreeterC_Sq7GreeterC_extern(_ callback: Int32, _ param0IsSome: Int32, _ param0Pointer: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq28BridgeJSRuntimeTests_GreeterC_Sq28BridgeJSRuntimeTests_GreeterC_extern(_ callback: Int32, _ param0IsSome: Int32, _ param0Pointer: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq7GreeterC_Sq7GreeterC(_ callback: Int32, _ param0IsSome: Int32, _ param0Pointer: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
-    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq7GreeterC_Sq7GreeterC_extern(callback, param0IsSome, param0Pointer)
+@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq28BridgeJSRuntimeTests_GreeterC_Sq28BridgeJSRuntimeTests_GreeterC(_ callback: Int32, _ param0IsSome: Int32, _ param0Pointer: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
+    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq28BridgeJSRuntimeTests_GreeterC_Sq28BridgeJSRuntimeTests_GreeterC_extern(callback, param0IsSome, param0Pointer)
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq7GreeterC_Sq7GreeterC")
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq7GreeterC_Sq7GreeterC_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
+@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq28BridgeJSRuntimeTests_GreeterC_Sq28BridgeJSRuntimeTests_GreeterC")
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq28BridgeJSRuntimeTests_GreeterC_Sq28BridgeJSRuntimeTests_GreeterC_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
 #else
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq7GreeterC_Sq7GreeterC_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq28BridgeJSRuntimeTests_GreeterC_Sq28BridgeJSRuntimeTests_GreeterC_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq7GreeterC_Sq7GreeterC(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
-    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq7GreeterC_Sq7GreeterC_extern(boxPtr, file, line)
+@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq28BridgeJSRuntimeTests_GreeterC_Sq28BridgeJSRuntimeTests_GreeterC(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq28BridgeJSRuntimeTests_GreeterC_Sq28BridgeJSRuntimeTests_GreeterC_extern(boxPtr, file, line)
 }
 
-private enum _BJS_Closure_20BridgeJSRuntimeTestsSq7GreeterC_Sq7GreeterC {
-    static func bridgeJSLift(_ callbackId: Int32) -> (Optional<Greeter>) -> Optional<Greeter> {
+private enum _BJS_Closure_20BridgeJSRuntimeTestsSq28BridgeJSRuntimeTests_GreeterC_Sq28BridgeJSRuntimeTests_GreeterC {
+    static func bridgeJSLift(_ callbackId: Int32) -> (Optional<BridgeJSRuntimeTests.Greeter>) -> Optional<BridgeJSRuntimeTests.Greeter> {
         let callback = JSObject.bridgeJSLiftParameter(callbackId)
         return { [callback] param0 in
             #if arch(wasm32)
             let callbackValue = callback.bridgeJSLowerParameter()
             let (param0IsSome, param0Pointer) = param0.bridgeJSLowerParameter()
-            let ret = invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq7GreeterC_Sq7GreeterC(callbackValue, param0IsSome, param0Pointer)
-            return Optional<Greeter>.bridgeJSLiftReturn(ret)
+            let ret = invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq28BridgeJSRuntimeTests_GreeterC_Sq28BridgeJSRuntimeTests_GreeterC(callbackValue, param0IsSome, param0Pointer)
+            return Optional<BridgeJSRuntimeTests.Greeter>.bridgeJSLiftReturn(ret)
             #else
             fatalError("Only available on WebAssembly")
             #endif
@@ -1752,10 +1684,10 @@ private enum _BJS_Closure_20BridgeJSRuntimeTestsSq7GreeterC_Sq7GreeterC {
     }
 }
 
-extension JSTypedClosure where Signature == (Optional<Greeter>) -> Optional<Greeter> {
-    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping (Optional<Greeter>) -> Optional<Greeter>) {
+extension JSTypedClosure where Signature == (Optional<BridgeJSRuntimeTests.Greeter>) -> Optional<BridgeJSRuntimeTests.Greeter> {
+    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping (Optional<BridgeJSRuntimeTests.Greeter>) -> Optional<BridgeJSRuntimeTests.Greeter>) {
         self.init(
-            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq7GreeterC_Sq7GreeterC,
+            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq28BridgeJSRuntimeTests_GreeterC_Sq28BridgeJSRuntimeTests_GreeterC,
             body: body,
             fileID: fileID,
             line: line
@@ -1763,12 +1695,12 @@ extension JSTypedClosure where Signature == (Optional<Greeter>) -> Optional<Gree
     }
 }
 
-@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq7GreeterC_Sq7GreeterC")
-@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq7GreeterC_Sq7GreeterC")
-public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq7GreeterC_Sq7GreeterC(_ boxPtr: UnsafeMutableRawPointer, _ param0IsSome: Int32, _ param0Value: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq28BridgeJSRuntimeTests_GreeterC_Sq28BridgeJSRuntimeTests_GreeterC")
+@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq28BridgeJSRuntimeTests_GreeterC_Sq28BridgeJSRuntimeTests_GreeterC")
+public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq28BridgeJSRuntimeTests_GreeterC_Sq28BridgeJSRuntimeTests_GreeterC(_ boxPtr: UnsafeMutableRawPointer, _ param0IsSome: Int32, _ param0Value: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let closure = Unmanaged<_BridgeJSTypedClosureBox<(Optional<Greeter>) -> Optional<Greeter>>>.fromOpaque(boxPtr).takeUnretainedValue().closure
-    let result = closure(Optional<Greeter>.bridgeJSLiftParameter(param0IsSome, param0Value))
+    let closure = Unmanaged<_BridgeJSTypedClosureBox<(Optional<BridgeJSRuntimeTests.Greeter>) -> Optional<BridgeJSRuntimeTests.Greeter>>>.fromOpaque(boxPtr).takeUnretainedValue().closure
+    let result = closure(Optional<BridgeJSRuntimeTests.Greeter>.bridgeJSLiftParameter(param0IsSome, param0Value))
     return result.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
@@ -1776,37 +1708,37 @@ public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq7
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq9APIResultO_SS")
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq9APIResultO_SS_extern(_ callback: Int32, _ param0IsSome: Int32, _ param0CaseId: Int32) -> Int32
+@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq30BridgeJSRuntimeTests_APIResultO_SS")
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq30BridgeJSRuntimeTests_APIResultO_SS_extern(_ callback: Int32, _ param0IsSome: Int32, _ param0CaseId: Int32) -> Int32
 #else
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq9APIResultO_SS_extern(_ callback: Int32, _ param0IsSome: Int32, _ param0CaseId: Int32) -> Int32 {
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq30BridgeJSRuntimeTests_APIResultO_SS_extern(_ callback: Int32, _ param0IsSome: Int32, _ param0CaseId: Int32) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq9APIResultO_SS(_ callback: Int32, _ param0IsSome: Int32, _ param0CaseId: Int32) -> Int32 {
-    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq9APIResultO_SS_extern(callback, param0IsSome, param0CaseId)
+@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq30BridgeJSRuntimeTests_APIResultO_SS(_ callback: Int32, _ param0IsSome: Int32, _ param0CaseId: Int32) -> Int32 {
+    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq30BridgeJSRuntimeTests_APIResultO_SS_extern(callback, param0IsSome, param0CaseId)
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq9APIResultO_SS")
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq9APIResultO_SS_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
+@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq30BridgeJSRuntimeTests_APIResultO_SS")
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq30BridgeJSRuntimeTests_APIResultO_SS_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
 #else
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq9APIResultO_SS_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq30BridgeJSRuntimeTests_APIResultO_SS_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq9APIResultO_SS(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
-    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq9APIResultO_SS_extern(boxPtr, file, line)
+@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq30BridgeJSRuntimeTests_APIResultO_SS(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq30BridgeJSRuntimeTests_APIResultO_SS_extern(boxPtr, file, line)
 }
 
-private enum _BJS_Closure_20BridgeJSRuntimeTestsSq9APIResultO_SS {
-    static func bridgeJSLift(_ callbackId: Int32) -> (Optional<APIResult>) -> String {
+private enum _BJS_Closure_20BridgeJSRuntimeTestsSq30BridgeJSRuntimeTests_APIResultO_SS {
+    static func bridgeJSLift(_ callbackId: Int32) -> (Optional<BridgeJSRuntimeTests.APIResult>) -> String {
         let callback = JSObject.bridgeJSLiftParameter(callbackId)
         return { [callback] param0 in
             #if arch(wasm32)
             let callbackValue = callback.bridgeJSLowerParameter()
             let (param0IsSome, param0CaseId) = param0.bridgeJSLowerParameter()
-            let ret = invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq9APIResultO_SS(callbackValue, param0IsSome, param0CaseId)
+            let ret = invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq30BridgeJSRuntimeTests_APIResultO_SS(callbackValue, param0IsSome, param0CaseId)
             return String.bridgeJSLiftReturn(ret)
             #else
             fatalError("Only available on WebAssembly")
@@ -1815,10 +1747,10 @@ private enum _BJS_Closure_20BridgeJSRuntimeTestsSq9APIResultO_SS {
     }
 }
 
-extension JSTypedClosure where Signature == (Optional<APIResult>) -> String {
-    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping (Optional<APIResult>) -> String) {
+extension JSTypedClosure where Signature == (Optional<BridgeJSRuntimeTests.APIResult>) -> String {
+    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping (Optional<BridgeJSRuntimeTests.APIResult>) -> String) {
         self.init(
-            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq9APIResultO_SS,
+            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq30BridgeJSRuntimeTests_APIResultO_SS,
             body: body,
             fileID: fileID,
             line: line
@@ -1826,12 +1758,12 @@ extension JSTypedClosure where Signature == (Optional<APIResult>) -> String {
     }
 }
 
-@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq9APIResultO_SS")
-@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq9APIResultO_SS")
-public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq9APIResultO_SS(_ boxPtr: UnsafeMutableRawPointer, _ param0IsSome: Int32, _ param0CaseId: Int32) -> Void {
+@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq30BridgeJSRuntimeTests_APIResultO_SS")
+@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq30BridgeJSRuntimeTests_APIResultO_SS")
+public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq30BridgeJSRuntimeTests_APIResultO_SS(_ boxPtr: UnsafeMutableRawPointer, _ param0IsSome: Int32, _ param0CaseId: Int32) -> Void {
     #if arch(wasm32)
-    let closure = Unmanaged<_BridgeJSTypedClosureBox<(Optional<APIResult>) -> String>>.fromOpaque(boxPtr).takeUnretainedValue().closure
-    let result = closure(Optional<APIResult>.bridgeJSLiftParameter(param0IsSome, param0CaseId))
+    let closure = Unmanaged<_BridgeJSTypedClosureBox<(Optional<BridgeJSRuntimeTests.APIResult>) -> String>>.fromOpaque(boxPtr).takeUnretainedValue().closure
+    let result = closure(Optional<BridgeJSRuntimeTests.APIResult>.bridgeJSLiftParameter(param0IsSome, param0CaseId))
     return result.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
@@ -1839,37 +1771,37 @@ public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq9
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq9DirectionO_SS")
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq9DirectionO_SS_extern(_ callback: Int32, _ param0IsSome: Int32, _ param0Value: Int32) -> Int32
+@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq30BridgeJSRuntimeTests_DirectionO_SS")
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq30BridgeJSRuntimeTests_DirectionO_SS_extern(_ callback: Int32, _ param0IsSome: Int32, _ param0Value: Int32) -> Int32
 #else
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq9DirectionO_SS_extern(_ callback: Int32, _ param0IsSome: Int32, _ param0Value: Int32) -> Int32 {
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq30BridgeJSRuntimeTests_DirectionO_SS_extern(_ callback: Int32, _ param0IsSome: Int32, _ param0Value: Int32) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq9DirectionO_SS(_ callback: Int32, _ param0IsSome: Int32, _ param0Value: Int32) -> Int32 {
-    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq9DirectionO_SS_extern(callback, param0IsSome, param0Value)
+@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq30BridgeJSRuntimeTests_DirectionO_SS(_ callback: Int32, _ param0IsSome: Int32, _ param0Value: Int32) -> Int32 {
+    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq30BridgeJSRuntimeTests_DirectionO_SS_extern(callback, param0IsSome, param0Value)
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq9DirectionO_SS")
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq9DirectionO_SS_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
+@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq30BridgeJSRuntimeTests_DirectionO_SS")
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq30BridgeJSRuntimeTests_DirectionO_SS_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
 #else
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq9DirectionO_SS_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq30BridgeJSRuntimeTests_DirectionO_SS_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq9DirectionO_SS(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
-    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq9DirectionO_SS_extern(boxPtr, file, line)
+@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq30BridgeJSRuntimeTests_DirectionO_SS(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq30BridgeJSRuntimeTests_DirectionO_SS_extern(boxPtr, file, line)
 }
 
-private enum _BJS_Closure_20BridgeJSRuntimeTestsSq9DirectionO_SS {
-    static func bridgeJSLift(_ callbackId: Int32) -> (Optional<Direction>) -> String {
+private enum _BJS_Closure_20BridgeJSRuntimeTestsSq30BridgeJSRuntimeTests_DirectionO_SS {
+    static func bridgeJSLift(_ callbackId: Int32) -> (Optional<BridgeJSRuntimeTests.Direction>) -> String {
         let callback = JSObject.bridgeJSLiftParameter(callbackId)
         return { [callback] param0 in
             #if arch(wasm32)
             let callbackValue = callback.bridgeJSLowerParameter()
             let (param0IsSome, param0Value) = param0.bridgeJSLowerParameter()
-            let ret = invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq9DirectionO_SS(callbackValue, param0IsSome, param0Value)
+            let ret = invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq30BridgeJSRuntimeTests_DirectionO_SS(callbackValue, param0IsSome, param0Value)
             return String.bridgeJSLiftReturn(ret)
             #else
             fatalError("Only available on WebAssembly")
@@ -1878,10 +1810,10 @@ private enum _BJS_Closure_20BridgeJSRuntimeTestsSq9DirectionO_SS {
     }
 }
 
-extension JSTypedClosure where Signature == (Optional<Direction>) -> String {
-    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping (Optional<Direction>) -> String) {
+extension JSTypedClosure where Signature == (Optional<BridgeJSRuntimeTests.Direction>) -> String {
+    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping (Optional<BridgeJSRuntimeTests.Direction>) -> String) {
         self.init(
-            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq9DirectionO_SS,
+            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq30BridgeJSRuntimeTests_DirectionO_SS,
             body: body,
             fileID: fileID,
             line: line
@@ -1889,12 +1821,80 @@ extension JSTypedClosure where Signature == (Optional<Direction>) -> String {
     }
 }
 
-@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq9DirectionO_SS")
-@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq9DirectionO_SS")
-public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq9DirectionO_SS(_ boxPtr: UnsafeMutableRawPointer, _ param0IsSome: Int32, _ param0Value: Int32) -> Void {
+@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq30BridgeJSRuntimeTests_DirectionO_SS")
+@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq30BridgeJSRuntimeTests_DirectionO_SS")
+public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq30BridgeJSRuntimeTests_DirectionO_SS(_ boxPtr: UnsafeMutableRawPointer, _ param0IsSome: Int32, _ param0Value: Int32) -> Void {
     #if arch(wasm32)
-    let closure = Unmanaged<_BridgeJSTypedClosureBox<(Optional<Direction>) -> String>>.fromOpaque(boxPtr).takeUnretainedValue().closure
-    let result = closure(Optional<Direction>.bridgeJSLiftParameter(param0IsSome, param0Value))
+    let closure = Unmanaged<_BridgeJSTypedClosureBox<(Optional<BridgeJSRuntimeTests.Direction>) -> String>>.fromOpaque(boxPtr).takeUnretainedValue().closure
+    let result = closure(Optional<BridgeJSRuntimeTests.Direction>.bridgeJSLiftParameter(param0IsSome, param0Value))
+    return result.bridgeJSLowerReturn()
+    #else
+    fatalError("Only available on WebAssembly")
+    #endif
+}
+
+#if arch(wasm32)
+@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq34BridgeJSRuntimeTests_DataProcessorP_SS")
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq34BridgeJSRuntimeTests_DataProcessorP_SS_extern(_ callback: Int32, _ param0IsSome: Int32, _ param0ObjectId: Int32) -> Int32
+#else
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq34BridgeJSRuntimeTests_DataProcessorP_SS_extern(_ callback: Int32, _ param0IsSome: Int32, _ param0ObjectId: Int32) -> Int32 {
+    fatalError("Only available on WebAssembly")
+}
+#endif
+@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq34BridgeJSRuntimeTests_DataProcessorP_SS(_ callback: Int32, _ param0IsSome: Int32, _ param0ObjectId: Int32) -> Int32 {
+    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq34BridgeJSRuntimeTests_DataProcessorP_SS_extern(callback, param0IsSome, param0ObjectId)
+}
+
+#if arch(wasm32)
+@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq34BridgeJSRuntimeTests_DataProcessorP_SS")
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq34BridgeJSRuntimeTests_DataProcessorP_SS_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
+#else
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq34BridgeJSRuntimeTests_DataProcessorP_SS_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+    fatalError("Only available on WebAssembly")
+}
+#endif
+@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq34BridgeJSRuntimeTests_DataProcessorP_SS(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq34BridgeJSRuntimeTests_DataProcessorP_SS_extern(boxPtr, file, line)
+}
+
+private enum _BJS_Closure_20BridgeJSRuntimeTestsSq34BridgeJSRuntimeTests_DataProcessorP_SS {
+    static func bridgeJSLift(_ callbackId: Int32) -> (Optional<any BridgeJSRuntimeTests.DataProcessor>) -> String {
+        let callback = JSObject.bridgeJSLiftParameter(callbackId)
+        return { [callback] param0 in
+            #if arch(wasm32)
+            let callbackValue = callback.bridgeJSLowerParameter()
+            let (param0IsSome, param0ObjectId): (Int32, Int32)
+            if let param0 {
+                (param0IsSome, param0ObjectId) = (1, (param0 as! _BridgedSwiftProtocolExportable).bridgeJSLowerAsProtocolReturn())
+            } else {
+                (param0IsSome, param0ObjectId) = (0, 0)
+            }
+            let ret = invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq34BridgeJSRuntimeTests_DataProcessorP_SS(callbackValue, param0IsSome, param0ObjectId)
+            return String.bridgeJSLiftReturn(ret)
+            #else
+            fatalError("Only available on WebAssembly")
+            #endif
+        }
+    }
+}
+
+extension JSTypedClosure where Signature == (Optional<any BridgeJSRuntimeTests.DataProcessor>) -> String {
+    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping (Optional<any BridgeJSRuntimeTests.DataProcessor>) -> String) {
+        self.init(
+            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq34BridgeJSRuntimeTests_DataProcessorP_SS,
+            body: body,
+            fileID: fileID,
+            line: line
+        )
+    }
+}
+
+@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq34BridgeJSRuntimeTests_DataProcessorP_SS")
+@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq34BridgeJSRuntimeTests_DataProcessorP_SS")
+public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsSq34BridgeJSRuntimeTests_DataProcessorP_SS(_ boxPtr: UnsafeMutableRawPointer, _ param0IsSome: Int32, _ param0Value: Int32) -> Void {
+    #if arch(wasm32)
+    let closure = Unmanaged<_BridgeJSTypedClosureBox<(Optional<any BridgeJSRuntimeTests.DataProcessor>) -> String>>.fromOpaque(boxPtr).takeUnretainedValue().closure
+    let result = closure(Optional<AnyDataProcessor>.bridgeJSLiftParameter(param0IsSome, param0Value))
     return result.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
@@ -2172,42 +2172,42 @@ public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaK
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaKSb_18AsyncPayloadResultO")
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaKSb_18AsyncPayloadResultO_extern(_ resolveRef: Int32, _ rejectRef: Int32, _ callback: Int32, _ param0: Int32) -> Void
+@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaKSb_39BridgeJSRuntimeTests_AsyncPayloadResultO")
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaKSb_39BridgeJSRuntimeTests_AsyncPayloadResultO_extern(_ resolveRef: Int32, _ rejectRef: Int32, _ callback: Int32, _ param0: Int32) -> Void
 #else
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaKSb_18AsyncPayloadResultO_extern(_ resolveRef: Int32, _ rejectRef: Int32, _ callback: Int32, _ param0: Int32) -> Void {
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaKSb_39BridgeJSRuntimeTests_AsyncPayloadResultO_extern(_ resolveRef: Int32, _ rejectRef: Int32, _ callback: Int32, _ param0: Int32) -> Void {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaKSb_18AsyncPayloadResultO(_ resolveRef: Int32, _ rejectRef: Int32, _ callback: Int32, _ param0: Int32) -> Void {
-    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaKSb_18AsyncPayloadResultO_extern(resolveRef, rejectRef, callback, param0)
+@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaKSb_39BridgeJSRuntimeTests_AsyncPayloadResultO(_ resolveRef: Int32, _ rejectRef: Int32, _ callback: Int32, _ param0: Int32) -> Void {
+    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaKSb_39BridgeJSRuntimeTests_AsyncPayloadResultO_extern(resolveRef, rejectRef, callback, param0)
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaKSb_18AsyncPayloadResultO")
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaKSb_18AsyncPayloadResultO_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
+@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaKSb_39BridgeJSRuntimeTests_AsyncPayloadResultO")
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaKSb_39BridgeJSRuntimeTests_AsyncPayloadResultO_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
 #else
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaKSb_18AsyncPayloadResultO_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaKSb_39BridgeJSRuntimeTests_AsyncPayloadResultO_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaKSb_18AsyncPayloadResultO(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
-    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaKSb_18AsyncPayloadResultO_extern(boxPtr, file, line)
+@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaKSb_39BridgeJSRuntimeTests_AsyncPayloadResultO(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaKSb_39BridgeJSRuntimeTests_AsyncPayloadResultO_extern(boxPtr, file, line)
 }
 
-private enum _BJS_Closure_20BridgeJSRuntimeTestsYaKSb_18AsyncPayloadResultO {
-    static func bridgeJSLift(_ callbackId: Int32) -> (Bool) async throws(JSException) -> AsyncPayloadResult {
+private enum _BJS_Closure_20BridgeJSRuntimeTestsYaKSb_39BridgeJSRuntimeTests_AsyncPayloadResultO {
+    static func bridgeJSLift(_ callbackId: Int32) -> (Bool) async throws(JSException) -> BridgeJSRuntimeTests.AsyncPayloadResult {
         let callback = JSObject.bridgeJSLiftParameter(callbackId)
-        return { [callback] (param0: Bool) async throws(JSException) -> AsyncPayloadResult in
+        return { [callback] (param0: Bool) async throws(JSException) -> BridgeJSRuntimeTests.AsyncPayloadResult in
             #if arch(wasm32)
             let resolved = try await _bjs_awaitPromise(makeResolveClosure: {
-                    JSTypedClosure<(sending AsyncPayloadResult) -> Void>($0)
+                    JSTypedClosure<(sending BridgeJSRuntimeTests.AsyncPayloadResult) -> Void>($0)
                 }, makeRejectClosure: {
                     JSTypedClosure<(sending JSValue) -> Void>($0)
                 }) { resolveRef, rejectRef in
                 let callbackValue = callback.bridgeJSLowerParameter()
                 let param0Value = param0.bridgeJSLowerParameter()
-                invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaKSb_18AsyncPayloadResultO(resolveRef, rejectRef, callbackValue, param0Value)
+                invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaKSb_39BridgeJSRuntimeTests_AsyncPayloadResultO(resolveRef, rejectRef, callbackValue, param0Value)
             }
             return resolved
             #else
@@ -2217,10 +2217,10 @@ private enum _BJS_Closure_20BridgeJSRuntimeTestsYaKSb_18AsyncPayloadResultO {
     }
 }
 
-extension JSTypedClosure where Signature == (Bool) async throws(JSException) -> AsyncPayloadResult {
-    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping (Bool) async throws(JSException) -> AsyncPayloadResult) {
+extension JSTypedClosure where Signature == (Bool) async throws(JSException) -> BridgeJSRuntimeTests.AsyncPayloadResult {
+    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping (Bool) async throws(JSException) -> BridgeJSRuntimeTests.AsyncPayloadResult) {
         self.init(
-            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaKSb_18AsyncPayloadResultO,
+            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaKSb_39BridgeJSRuntimeTests_AsyncPayloadResultO,
             body: body,
             fileID: fileID,
             line: line
@@ -2228,12 +2228,12 @@ extension JSTypedClosure where Signature == (Bool) async throws(JSException) -> 
     }
 }
 
-@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaKSb_18AsyncPayloadResultO")
-@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaKSb_18AsyncPayloadResultO")
-public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaKSb_18AsyncPayloadResultO(_ boxPtr: UnsafeMutableRawPointer, _ param0: Int32) -> Int32 {
+@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaKSb_39BridgeJSRuntimeTests_AsyncPayloadResultO")
+@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaKSb_39BridgeJSRuntimeTests_AsyncPayloadResultO")
+public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaKSb_39BridgeJSRuntimeTests_AsyncPayloadResultO(_ boxPtr: UnsafeMutableRawPointer, _ param0: Int32) -> Int32 {
     #if arch(wasm32)
-    let closure = Unmanaged<_BridgeJSTypedClosureBox<(Bool) async throws(JSException) -> AsyncPayloadResult>>.fromOpaque(boxPtr).takeUnretainedValue().closure
-    return _bjs_makePromise(resolve: Promise_resolve_18AsyncPayloadResultO, reject: Promise_reject) { () async throws(JSException) -> AsyncPayloadResult in
+    let closure = Unmanaged<_BridgeJSTypedClosureBox<(Bool) async throws(JSException) -> BridgeJSRuntimeTests.AsyncPayloadResult>>.fromOpaque(boxPtr).takeUnretainedValue().closure
+    return _bjs_makePromise(resolve: Promise_resolve_39BridgeJSRuntimeTests_AsyncPayloadResultO, reject: Promise_reject) { () async throws(JSException) -> BridgeJSRuntimeTests.AsyncPayloadResult in
         return try await closure(Bool.bridgeJSLiftParameter(param0))
     }
     #else
@@ -2313,42 +2313,42 @@ public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaS
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaSd_9DataPointV")
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaSd_9DataPointV_extern(_ resolveRef: Int32, _ rejectRef: Int32, _ callback: Int32, _ param0: Float64) -> Void
+@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaSd_30BridgeJSRuntimeTests_DataPointV")
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaSd_30BridgeJSRuntimeTests_DataPointV_extern(_ resolveRef: Int32, _ rejectRef: Int32, _ callback: Int32, _ param0: Float64) -> Void
 #else
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaSd_9DataPointV_extern(_ resolveRef: Int32, _ rejectRef: Int32, _ callback: Int32, _ param0: Float64) -> Void {
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaSd_30BridgeJSRuntimeTests_DataPointV_extern(_ resolveRef: Int32, _ rejectRef: Int32, _ callback: Int32, _ param0: Float64) -> Void {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaSd_9DataPointV(_ resolveRef: Int32, _ rejectRef: Int32, _ callback: Int32, _ param0: Float64) -> Void {
-    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaSd_9DataPointV_extern(resolveRef, rejectRef, callback, param0)
+@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaSd_30BridgeJSRuntimeTests_DataPointV(_ resolveRef: Int32, _ rejectRef: Int32, _ callback: Int32, _ param0: Float64) -> Void {
+    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaSd_30BridgeJSRuntimeTests_DataPointV_extern(resolveRef, rejectRef, callback, param0)
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaSd_9DataPointV")
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaSd_9DataPointV_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
+@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaSd_30BridgeJSRuntimeTests_DataPointV")
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaSd_30BridgeJSRuntimeTests_DataPointV_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
 #else
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaSd_9DataPointV_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaSd_30BridgeJSRuntimeTests_DataPointV_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaSd_9DataPointV(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
-    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaSd_9DataPointV_extern(boxPtr, file, line)
+@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaSd_30BridgeJSRuntimeTests_DataPointV(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaSd_30BridgeJSRuntimeTests_DataPointV_extern(boxPtr, file, line)
 }
 
-private enum _BJS_Closure_20BridgeJSRuntimeTestsYaSd_9DataPointV {
-    static func bridgeJSLift(_ callbackId: Int32) -> (Double) async -> DataPoint {
+private enum _BJS_Closure_20BridgeJSRuntimeTestsYaSd_30BridgeJSRuntimeTests_DataPointV {
+    static func bridgeJSLift(_ callbackId: Int32) -> (Double) async -> BridgeJSRuntimeTests.DataPoint {
         let callback = JSObject.bridgeJSLiftParameter(callbackId)
-        return { [callback] (param0: Double) async -> DataPoint in
+        return { [callback] (param0: Double) async -> BridgeJSRuntimeTests.DataPoint in
             #if arch(wasm32)
             let resolved = try! await _bjs_awaitPromise(makeResolveClosure: {
-                    JSTypedClosure<(sending DataPoint) -> Void>($0)
+                    JSTypedClosure<(sending BridgeJSRuntimeTests.DataPoint) -> Void>($0)
                 }, makeRejectClosure: {
                     JSTypedClosure<(sending JSValue) -> Void>($0)
                 }) { resolveRef, rejectRef in
                 let callbackValue = callback.bridgeJSLowerParameter()
                 let param0Value = param0.bridgeJSLowerParameter()
-                invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaSd_9DataPointV(resolveRef, rejectRef, callbackValue, param0Value)
+                invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaSd_30BridgeJSRuntimeTests_DataPointV(resolveRef, rejectRef, callbackValue, param0Value)
             }
             return resolved
             #else
@@ -2358,10 +2358,10 @@ private enum _BJS_Closure_20BridgeJSRuntimeTestsYaSd_9DataPointV {
     }
 }
 
-extension JSTypedClosure where Signature == (Double) async -> DataPoint {
-    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping (Double) async -> DataPoint) {
+extension JSTypedClosure where Signature == (Double) async -> BridgeJSRuntimeTests.DataPoint {
+    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping (Double) async -> BridgeJSRuntimeTests.DataPoint) {
         self.init(
-            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaSd_9DataPointV,
+            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaSd_30BridgeJSRuntimeTests_DataPointV,
             body: body,
             fileID: fileID,
             line: line
@@ -2369,76 +2369,14 @@ extension JSTypedClosure where Signature == (Double) async -> DataPoint {
     }
 }
 
-@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaSd_9DataPointV")
-@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaSd_9DataPointV")
-public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaSd_9DataPointV(_ boxPtr: UnsafeMutableRawPointer, _ param0: Float64) -> Int32 {
+@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaSd_30BridgeJSRuntimeTests_DataPointV")
+@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaSd_30BridgeJSRuntimeTests_DataPointV")
+public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsYaSd_30BridgeJSRuntimeTests_DataPointV(_ boxPtr: UnsafeMutableRawPointer, _ param0: Float64) -> Int32 {
     #if arch(wasm32)
-    let closure = Unmanaged<_BridgeJSTypedClosureBox<(Double) async -> DataPoint>>.fromOpaque(boxPtr).takeUnretainedValue().closure
-    return _bjs_makePromise(resolve: Promise_resolve_9DataPointV, reject: Promise_reject) {
+    let closure = Unmanaged<_BridgeJSTypedClosureBox<(Double) async -> BridgeJSRuntimeTests.DataPoint>>.fromOpaque(boxPtr).takeUnretainedValue().closure
+    return _bjs_makePromise(resolve: Promise_resolve_30BridgeJSRuntimeTests_DataPointV, reject: Promise_reject) {
         return await closure(Double.bridgeJSLiftParameter(param0))
     }
-    #else
-    fatalError("Only available on WebAssembly")
-    #endif
-}
-
-#if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss11FeatureFlagO_y")
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss11FeatureFlagO_y_extern(_ callback: Int32, _ param0Bytes: Int32, _ param0Length: Int32) -> Void
-#else
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss11FeatureFlagO_y_extern(_ callback: Int32, _ param0Bytes: Int32, _ param0Length: Int32) -> Void {
-    fatalError("Only available on WebAssembly")
-}
-#endif
-@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss11FeatureFlagO_y(_ callback: Int32, _ param0Bytes: Int32, _ param0Length: Int32) -> Void {
-    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss11FeatureFlagO_y_extern(callback, param0Bytes, param0Length)
-}
-
-#if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss11FeatureFlagO_y")
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss11FeatureFlagO_y_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
-#else
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss11FeatureFlagO_y_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
-    fatalError("Only available on WebAssembly")
-}
-#endif
-@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss11FeatureFlagO_y(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
-    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss11FeatureFlagO_y_extern(boxPtr, file, line)
-}
-
-private enum _BJS_Closure_20BridgeJSRuntimeTestss11FeatureFlagO_y {
-    static func bridgeJSLift(_ callbackId: Int32) -> (sending FeatureFlag) -> Void {
-        let callback = JSObject.bridgeJSLiftParameter(callbackId)
-        return { [callback] param0 in
-            #if arch(wasm32)
-            let callbackValue = callback.bridgeJSLowerParameter()
-            param0.bridgeJSWithLoweredParameter { (param0Bytes, param0Length) in
-                invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss11FeatureFlagO_y(callbackValue, param0Bytes, param0Length)
-            }
-            #else
-            fatalError("Only available on WebAssembly")
-            #endif
-        }
-    }
-}
-
-extension JSTypedClosure where Signature == (sending FeatureFlag) -> Void {
-    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping (sending FeatureFlag) -> Void) {
-        self.init(
-            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss11FeatureFlagO_y,
-            body: body,
-            fileID: fileID,
-            line: line
-        )
-    }
-}
-
-@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss11FeatureFlagO_y")
-@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss11FeatureFlagO_y")
-public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss11FeatureFlagO_y(_ boxPtr: UnsafeMutableRawPointer, _ param0Bytes: Int32, _ param0Length: Int32) -> Void {
-    #if arch(wasm32)
-    let closure = Unmanaged<_BridgeJSTypedClosureBox<(sending FeatureFlag) -> Void>>.fromOpaque(boxPtr).takeUnretainedValue().closure
-    closure(FeatureFlag.bridgeJSLiftParameter(param0Bytes, param0Length))
     #else
     fatalError("Only available on WebAssembly")
     #endif
@@ -2506,37 +2444,37 @@ public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss11
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss18AsyncPayloadResultO_y")
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss18AsyncPayloadResultO_y_extern(_ callback: Int32, _ param0: Int32) -> Void
+@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss30BridgeJSRuntimeTests_DataPointV_y")
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss30BridgeJSRuntimeTests_DataPointV_y_extern(_ callback: Int32) -> Void
 #else
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss18AsyncPayloadResultO_y_extern(_ callback: Int32, _ param0: Int32) -> Void {
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss30BridgeJSRuntimeTests_DataPointV_y_extern(_ callback: Int32) -> Void {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss18AsyncPayloadResultO_y(_ callback: Int32, _ param0: Int32) -> Void {
-    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss18AsyncPayloadResultO_y_extern(callback, param0)
+@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss30BridgeJSRuntimeTests_DataPointV_y(_ callback: Int32) -> Void {
+    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss30BridgeJSRuntimeTests_DataPointV_y_extern(callback)
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss18AsyncPayloadResultO_y")
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss18AsyncPayloadResultO_y_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
+@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss30BridgeJSRuntimeTests_DataPointV_y")
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss30BridgeJSRuntimeTests_DataPointV_y_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
 #else
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss18AsyncPayloadResultO_y_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss30BridgeJSRuntimeTests_DataPointV_y_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss18AsyncPayloadResultO_y(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
-    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss18AsyncPayloadResultO_y_extern(boxPtr, file, line)
+@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss30BridgeJSRuntimeTests_DataPointV_y(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss30BridgeJSRuntimeTests_DataPointV_y_extern(boxPtr, file, line)
 }
 
-private enum _BJS_Closure_20BridgeJSRuntimeTestss18AsyncPayloadResultO_y {
-    static func bridgeJSLift(_ callbackId: Int32) -> (sending AsyncPayloadResult) -> Void {
+private enum _BJS_Closure_20BridgeJSRuntimeTestss30BridgeJSRuntimeTests_DataPointV_y {
+    static func bridgeJSLift(_ callbackId: Int32) -> (sending BridgeJSRuntimeTests.DataPoint) -> Void {
         let callback = JSObject.bridgeJSLiftParameter(callbackId)
         return { [callback] param0 in
             #if arch(wasm32)
             let callbackValue = callback.bridgeJSLowerParameter()
-            let param0CaseId = param0.bridgeJSLowerParameter()
-            invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss18AsyncPayloadResultO_y(callbackValue, param0CaseId)
+            let _ = param0.bridgeJSLowerParameter()
+            invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss30BridgeJSRuntimeTests_DataPointV_y(callbackValue)
             #else
             fatalError("Only available on WebAssembly")
             #endif
@@ -2544,10 +2482,10 @@ private enum _BJS_Closure_20BridgeJSRuntimeTestss18AsyncPayloadResultO_y {
     }
 }
 
-extension JSTypedClosure where Signature == (sending AsyncPayloadResult) -> Void {
-    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping (sending AsyncPayloadResult) -> Void) {
+extension JSTypedClosure where Signature == (sending BridgeJSRuntimeTests.DataPoint) -> Void {
+    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping (sending BridgeJSRuntimeTests.DataPoint) -> Void) {
         self.init(
-            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss18AsyncPayloadResultO_y,
+            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss30BridgeJSRuntimeTests_DataPointV_y,
             body: body,
             fileID: fileID,
             line: line
@@ -2555,49 +2493,50 @@ extension JSTypedClosure where Signature == (sending AsyncPayloadResult) -> Void
     }
 }
 
-@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss18AsyncPayloadResultO_y")
-@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss18AsyncPayloadResultO_y")
-public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss18AsyncPayloadResultO_y(_ boxPtr: UnsafeMutableRawPointer, _ param0: Int32) -> Void {
+@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss30BridgeJSRuntimeTests_DataPointV_y")
+@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss30BridgeJSRuntimeTests_DataPointV_y")
+public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss30BridgeJSRuntimeTests_DataPointV_y(_ boxPtr: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let closure = Unmanaged<_BridgeJSTypedClosureBox<(sending AsyncPayloadResult) -> Void>>.fromOpaque(boxPtr).takeUnretainedValue().closure
-    closure(AsyncPayloadResult.bridgeJSLiftParameter(param0))
+    let closure = Unmanaged<_BridgeJSTypedClosureBox<(sending BridgeJSRuntimeTests.DataPoint) -> Void>>.fromOpaque(boxPtr).takeUnretainedValue().closure
+    closure(BridgeJSRuntimeTests.DataPoint.bridgeJSLiftParameter())
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss26AsyncImportedPayloadResultO_y")
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss26AsyncImportedPayloadResultO_y_extern(_ callback: Int32, _ param0: Int32) -> Void
+@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss32BridgeJSRuntimeTests_FeatureFlagO_y")
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss32BridgeJSRuntimeTests_FeatureFlagO_y_extern(_ callback: Int32, _ param0Bytes: Int32, _ param0Length: Int32) -> Void
 #else
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss26AsyncImportedPayloadResultO_y_extern(_ callback: Int32, _ param0: Int32) -> Void {
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss32BridgeJSRuntimeTests_FeatureFlagO_y_extern(_ callback: Int32, _ param0Bytes: Int32, _ param0Length: Int32) -> Void {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss26AsyncImportedPayloadResultO_y(_ callback: Int32, _ param0: Int32) -> Void {
-    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss26AsyncImportedPayloadResultO_y_extern(callback, param0)
+@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss32BridgeJSRuntimeTests_FeatureFlagO_y(_ callback: Int32, _ param0Bytes: Int32, _ param0Length: Int32) -> Void {
+    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss32BridgeJSRuntimeTests_FeatureFlagO_y_extern(callback, param0Bytes, param0Length)
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss26AsyncImportedPayloadResultO_y")
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss26AsyncImportedPayloadResultO_y_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
+@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss32BridgeJSRuntimeTests_FeatureFlagO_y")
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss32BridgeJSRuntimeTests_FeatureFlagO_y_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
 #else
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss26AsyncImportedPayloadResultO_y_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss32BridgeJSRuntimeTests_FeatureFlagO_y_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss26AsyncImportedPayloadResultO_y(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
-    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss26AsyncImportedPayloadResultO_y_extern(boxPtr, file, line)
+@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss32BridgeJSRuntimeTests_FeatureFlagO_y(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss32BridgeJSRuntimeTests_FeatureFlagO_y_extern(boxPtr, file, line)
 }
 
-private enum _BJS_Closure_20BridgeJSRuntimeTestss26AsyncImportedPayloadResultO_y {
-    static func bridgeJSLift(_ callbackId: Int32) -> (sending AsyncImportedPayloadResult) -> Void {
+private enum _BJS_Closure_20BridgeJSRuntimeTestss32BridgeJSRuntimeTests_FeatureFlagO_y {
+    static func bridgeJSLift(_ callbackId: Int32) -> (sending BridgeJSRuntimeTests.FeatureFlag) -> Void {
         let callback = JSObject.bridgeJSLiftParameter(callbackId)
         return { [callback] param0 in
             #if arch(wasm32)
             let callbackValue = callback.bridgeJSLowerParameter()
-            let param0CaseId = param0.bridgeJSLowerParameter()
-            invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss26AsyncImportedPayloadResultO_y(callbackValue, param0CaseId)
+            param0.bridgeJSWithLoweredParameter { (param0Bytes, param0Length) in
+                invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss32BridgeJSRuntimeTests_FeatureFlagO_y(callbackValue, param0Bytes, param0Length)
+            }
             #else
             fatalError("Only available on WebAssembly")
             #endif
@@ -2605,10 +2544,10 @@ private enum _BJS_Closure_20BridgeJSRuntimeTestss26AsyncImportedPayloadResultO_y
     }
 }
 
-extension JSTypedClosure where Signature == (sending AsyncImportedPayloadResult) -> Void {
-    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping (sending AsyncImportedPayloadResult) -> Void) {
+extension JSTypedClosure where Signature == (sending BridgeJSRuntimeTests.FeatureFlag) -> Void {
+    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping (sending BridgeJSRuntimeTests.FeatureFlag) -> Void) {
         self.init(
-            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss26AsyncImportedPayloadResultO_y,
+            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss32BridgeJSRuntimeTests_FeatureFlagO_y,
             body: body,
             fileID: fileID,
             line: line
@@ -2616,12 +2555,134 @@ extension JSTypedClosure where Signature == (sending AsyncImportedPayloadResult)
     }
 }
 
-@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss26AsyncImportedPayloadResultO_y")
-@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss26AsyncImportedPayloadResultO_y")
-public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss26AsyncImportedPayloadResultO_y(_ boxPtr: UnsafeMutableRawPointer, _ param0: Int32) -> Void {
+@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss32BridgeJSRuntimeTests_FeatureFlagO_y")
+@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss32BridgeJSRuntimeTests_FeatureFlagO_y")
+public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss32BridgeJSRuntimeTests_FeatureFlagO_y(_ boxPtr: UnsafeMutableRawPointer, _ param0Bytes: Int32, _ param0Length: Int32) -> Void {
     #if arch(wasm32)
-    let closure = Unmanaged<_BridgeJSTypedClosureBox<(sending AsyncImportedPayloadResult) -> Void>>.fromOpaque(boxPtr).takeUnretainedValue().closure
-    closure(AsyncImportedPayloadResult.bridgeJSLiftParameter(param0))
+    let closure = Unmanaged<_BridgeJSTypedClosureBox<(sending BridgeJSRuntimeTests.FeatureFlag) -> Void>>.fromOpaque(boxPtr).takeUnretainedValue().closure
+    closure(BridgeJSRuntimeTests.FeatureFlag.bridgeJSLiftParameter(param0Bytes, param0Length))
+    #else
+    fatalError("Only available on WebAssembly")
+    #endif
+}
+
+#if arch(wasm32)
+@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss39BridgeJSRuntimeTests_AsyncPayloadResultO_y")
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss39BridgeJSRuntimeTests_AsyncPayloadResultO_y_extern(_ callback: Int32, _ param0: Int32) -> Void
+#else
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss39BridgeJSRuntimeTests_AsyncPayloadResultO_y_extern(_ callback: Int32, _ param0: Int32) -> Void {
+    fatalError("Only available on WebAssembly")
+}
+#endif
+@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss39BridgeJSRuntimeTests_AsyncPayloadResultO_y(_ callback: Int32, _ param0: Int32) -> Void {
+    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss39BridgeJSRuntimeTests_AsyncPayloadResultO_y_extern(callback, param0)
+}
+
+#if arch(wasm32)
+@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss39BridgeJSRuntimeTests_AsyncPayloadResultO_y")
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss39BridgeJSRuntimeTests_AsyncPayloadResultO_y_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
+#else
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss39BridgeJSRuntimeTests_AsyncPayloadResultO_y_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+    fatalError("Only available on WebAssembly")
+}
+#endif
+@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss39BridgeJSRuntimeTests_AsyncPayloadResultO_y(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss39BridgeJSRuntimeTests_AsyncPayloadResultO_y_extern(boxPtr, file, line)
+}
+
+private enum _BJS_Closure_20BridgeJSRuntimeTestss39BridgeJSRuntimeTests_AsyncPayloadResultO_y {
+    static func bridgeJSLift(_ callbackId: Int32) -> (sending BridgeJSRuntimeTests.AsyncPayloadResult) -> Void {
+        let callback = JSObject.bridgeJSLiftParameter(callbackId)
+        return { [callback] param0 in
+            #if arch(wasm32)
+            let callbackValue = callback.bridgeJSLowerParameter()
+            let param0CaseId = param0.bridgeJSLowerParameter()
+            invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss39BridgeJSRuntimeTests_AsyncPayloadResultO_y(callbackValue, param0CaseId)
+            #else
+            fatalError("Only available on WebAssembly")
+            #endif
+        }
+    }
+}
+
+extension JSTypedClosure where Signature == (sending BridgeJSRuntimeTests.AsyncPayloadResult) -> Void {
+    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping (sending BridgeJSRuntimeTests.AsyncPayloadResult) -> Void) {
+        self.init(
+            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss39BridgeJSRuntimeTests_AsyncPayloadResultO_y,
+            body: body,
+            fileID: fileID,
+            line: line
+        )
+    }
+}
+
+@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss39BridgeJSRuntimeTests_AsyncPayloadResultO_y")
+@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss39BridgeJSRuntimeTests_AsyncPayloadResultO_y")
+public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss39BridgeJSRuntimeTests_AsyncPayloadResultO_y(_ boxPtr: UnsafeMutableRawPointer, _ param0: Int32) -> Void {
+    #if arch(wasm32)
+    let closure = Unmanaged<_BridgeJSTypedClosureBox<(sending BridgeJSRuntimeTests.AsyncPayloadResult) -> Void>>.fromOpaque(boxPtr).takeUnretainedValue().closure
+    closure(BridgeJSRuntimeTests.AsyncPayloadResult.bridgeJSLiftParameter(param0))
+    #else
+    fatalError("Only available on WebAssembly")
+    #endif
+}
+
+#if arch(wasm32)
+@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss47BridgeJSRuntimeTests_AsyncImportedPayloadResultO_y")
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss47BridgeJSRuntimeTests_AsyncImportedPayloadResultO_y_extern(_ callback: Int32, _ param0: Int32) -> Void
+#else
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss47BridgeJSRuntimeTests_AsyncImportedPayloadResultO_y_extern(_ callback: Int32, _ param0: Int32) -> Void {
+    fatalError("Only available on WebAssembly")
+}
+#endif
+@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss47BridgeJSRuntimeTests_AsyncImportedPayloadResultO_y(_ callback: Int32, _ param0: Int32) -> Void {
+    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss47BridgeJSRuntimeTests_AsyncImportedPayloadResultO_y_extern(callback, param0)
+}
+
+#if arch(wasm32)
+@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss47BridgeJSRuntimeTests_AsyncImportedPayloadResultO_y")
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss47BridgeJSRuntimeTests_AsyncImportedPayloadResultO_y_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
+#else
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss47BridgeJSRuntimeTests_AsyncImportedPayloadResultO_y_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+    fatalError("Only available on WebAssembly")
+}
+#endif
+@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss47BridgeJSRuntimeTests_AsyncImportedPayloadResultO_y(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss47BridgeJSRuntimeTests_AsyncImportedPayloadResultO_y_extern(boxPtr, file, line)
+}
+
+private enum _BJS_Closure_20BridgeJSRuntimeTestss47BridgeJSRuntimeTests_AsyncImportedPayloadResultO_y {
+    static func bridgeJSLift(_ callbackId: Int32) -> (sending BridgeJSRuntimeTests.AsyncImportedPayloadResult) -> Void {
+        let callback = JSObject.bridgeJSLiftParameter(callbackId)
+        return { [callback] param0 in
+            #if arch(wasm32)
+            let callbackValue = callback.bridgeJSLowerParameter()
+            let param0CaseId = param0.bridgeJSLowerParameter()
+            invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss47BridgeJSRuntimeTests_AsyncImportedPayloadResultO_y(callbackValue, param0CaseId)
+            #else
+            fatalError("Only available on WebAssembly")
+            #endif
+        }
+    }
+}
+
+extension JSTypedClosure where Signature == (sending BridgeJSRuntimeTests.AsyncImportedPayloadResult) -> Void {
+    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping (sending BridgeJSRuntimeTests.AsyncImportedPayloadResult) -> Void) {
+        self.init(
+            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss47BridgeJSRuntimeTests_AsyncImportedPayloadResultO_y,
+            body: body,
+            fileID: fileID,
+            line: line
+        )
+    }
+}
+
+@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss47BridgeJSRuntimeTests_AsyncImportedPayloadResultO_y")
+@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss47BridgeJSRuntimeTests_AsyncImportedPayloadResultO_y")
+public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss47BridgeJSRuntimeTests_AsyncImportedPayloadResultO_y(_ boxPtr: UnsafeMutableRawPointer, _ param0: Int32) -> Void {
+    #if arch(wasm32)
+    let closure = Unmanaged<_BridgeJSTypedClosureBox<(sending BridgeJSRuntimeTests.AsyncImportedPayloadResult) -> Void>>.fromOpaque(boxPtr).takeUnretainedValue().closure
+    closure(BridgeJSRuntimeTests.AsyncImportedPayloadResult.bridgeJSLiftParameter(param0))
     #else
     fatalError("Only available on WebAssembly")
     #endif
@@ -2683,67 +2744,6 @@ public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss7J
     #if arch(wasm32)
     let closure = Unmanaged<_BridgeJSTypedClosureBox<(sending JSValue) -> Void>>.fromOpaque(boxPtr).takeUnretainedValue().closure
     closure(JSValue.bridgeJSLiftParameter(param0Kind, param0Payload1, param0Payload2))
-    #else
-    fatalError("Only available on WebAssembly")
-    #endif
-}
-
-#if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss9DataPointV_y")
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss9DataPointV_y_extern(_ callback: Int32) -> Void
-#else
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss9DataPointV_y_extern(_ callback: Int32) -> Void {
-    fatalError("Only available on WebAssembly")
-}
-#endif
-@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss9DataPointV_y(_ callback: Int32) -> Void {
-    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss9DataPointV_y_extern(callback)
-}
-
-#if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss9DataPointV_y")
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss9DataPointV_y_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
-#else
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss9DataPointV_y_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
-    fatalError("Only available on WebAssembly")
-}
-#endif
-@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss9DataPointV_y(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
-    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss9DataPointV_y_extern(boxPtr, file, line)
-}
-
-private enum _BJS_Closure_20BridgeJSRuntimeTestss9DataPointV_y {
-    static func bridgeJSLift(_ callbackId: Int32) -> (sending DataPoint) -> Void {
-        let callback = JSObject.bridgeJSLiftParameter(callbackId)
-        return { [callback] param0 in
-            #if arch(wasm32)
-            let callbackValue = callback.bridgeJSLowerParameter()
-            let _ = param0.bridgeJSLowerParameter()
-            invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss9DataPointV_y(callbackValue)
-            #else
-            fatalError("Only available on WebAssembly")
-            #endif
-        }
-    }
-}
-
-extension JSTypedClosure where Signature == (sending DataPoint) -> Void {
-    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping (sending DataPoint) -> Void) {
-        self.init(
-            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss9DataPointV_y,
-            body: body,
-            fileID: fileID,
-            line: line
-        )
-    }
-}
-
-@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss9DataPointV_y")
-@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss9DataPointV_y")
-public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestss9DataPointV_y(_ boxPtr: UnsafeMutableRawPointer) -> Void {
-    #if arch(wasm32)
-    let closure = Unmanaged<_BridgeJSTypedClosureBox<(sending DataPoint) -> Void>>.fromOpaque(boxPtr).takeUnretainedValue().closure
-    closure(DataPoint.bridgeJSLiftParameter())
     #else
     fatalError("Only available on WebAssembly")
     #endif
@@ -3117,37 +3117,37 @@ public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestssSd
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestssSq26AsyncImportedPayloadResultO_y")
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestssSq26AsyncImportedPayloadResultO_y_extern(_ callback: Int32, _ param0IsSome: Int32, _ param0CaseId: Int32) -> Void
+@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestssSq47BridgeJSRuntimeTests_AsyncImportedPayloadResultO_y")
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestssSq47BridgeJSRuntimeTests_AsyncImportedPayloadResultO_y_extern(_ callback: Int32, _ param0IsSome: Int32, _ param0CaseId: Int32) -> Void
 #else
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestssSq26AsyncImportedPayloadResultO_y_extern(_ callback: Int32, _ param0IsSome: Int32, _ param0CaseId: Int32) -> Void {
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestssSq47BridgeJSRuntimeTests_AsyncImportedPayloadResultO_y_extern(_ callback: Int32, _ param0IsSome: Int32, _ param0CaseId: Int32) -> Void {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestssSq26AsyncImportedPayloadResultO_y(_ callback: Int32, _ param0IsSome: Int32, _ param0CaseId: Int32) -> Void {
-    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestssSq26AsyncImportedPayloadResultO_y_extern(callback, param0IsSome, param0CaseId)
+@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestssSq47BridgeJSRuntimeTests_AsyncImportedPayloadResultO_y(_ callback: Int32, _ param0IsSome: Int32, _ param0CaseId: Int32) -> Void {
+    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestssSq47BridgeJSRuntimeTests_AsyncImportedPayloadResultO_y_extern(callback, param0IsSome, param0CaseId)
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestssSq26AsyncImportedPayloadResultO_y")
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestssSq26AsyncImportedPayloadResultO_y_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
+@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestssSq47BridgeJSRuntimeTests_AsyncImportedPayloadResultO_y")
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestssSq47BridgeJSRuntimeTests_AsyncImportedPayloadResultO_y_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
 #else
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestssSq26AsyncImportedPayloadResultO_y_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestssSq47BridgeJSRuntimeTests_AsyncImportedPayloadResultO_y_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestssSq26AsyncImportedPayloadResultO_y(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
-    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestssSq26AsyncImportedPayloadResultO_y_extern(boxPtr, file, line)
+@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestssSq47BridgeJSRuntimeTests_AsyncImportedPayloadResultO_y(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestssSq47BridgeJSRuntimeTests_AsyncImportedPayloadResultO_y_extern(boxPtr, file, line)
 }
 
-private enum _BJS_Closure_20BridgeJSRuntimeTestssSq26AsyncImportedPayloadResultO_y {
-    static func bridgeJSLift(_ callbackId: Int32) -> (sending Optional<AsyncImportedPayloadResult>) -> Void {
+private enum _BJS_Closure_20BridgeJSRuntimeTestssSq47BridgeJSRuntimeTests_AsyncImportedPayloadResultO_y {
+    static func bridgeJSLift(_ callbackId: Int32) -> (sending Optional<BridgeJSRuntimeTests.AsyncImportedPayloadResult>) -> Void {
         let callback = JSObject.bridgeJSLiftParameter(callbackId)
         return { [callback] param0 in
             #if arch(wasm32)
             let callbackValue = callback.bridgeJSLowerParameter()
             let (param0IsSome, param0CaseId) = param0.bridgeJSLowerParameter()
-            invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestssSq26AsyncImportedPayloadResultO_y(callbackValue, param0IsSome, param0CaseId)
+            invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestssSq47BridgeJSRuntimeTests_AsyncImportedPayloadResultO_y(callbackValue, param0IsSome, param0CaseId)
             #else
             fatalError("Only available on WebAssembly")
             #endif
@@ -3155,10 +3155,10 @@ private enum _BJS_Closure_20BridgeJSRuntimeTestssSq26AsyncImportedPayloadResultO
     }
 }
 
-extension JSTypedClosure where Signature == (sending Optional<AsyncImportedPayloadResult>) -> Void {
-    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping (sending Optional<AsyncImportedPayloadResult>) -> Void) {
+extension JSTypedClosure where Signature == (sending Optional<BridgeJSRuntimeTests.AsyncImportedPayloadResult>) -> Void {
+    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping (sending Optional<BridgeJSRuntimeTests.AsyncImportedPayloadResult>) -> Void) {
         self.init(
-            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestssSq26AsyncImportedPayloadResultO_y,
+            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestssSq47BridgeJSRuntimeTests_AsyncImportedPayloadResultO_y,
             body: body,
             fileID: fileID,
             line: line
@@ -3166,12 +3166,12 @@ extension JSTypedClosure where Signature == (sending Optional<AsyncImportedPaylo
     }
 }
 
-@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestssSq26AsyncImportedPayloadResultO_y")
-@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestssSq26AsyncImportedPayloadResultO_y")
-public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestssSq26AsyncImportedPayloadResultO_y(_ boxPtr: UnsafeMutableRawPointer, _ param0IsSome: Int32, _ param0CaseId: Int32) -> Void {
+@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestssSq47BridgeJSRuntimeTests_AsyncImportedPayloadResultO_y")
+@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestssSq47BridgeJSRuntimeTests_AsyncImportedPayloadResultO_y")
+public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestssSq47BridgeJSRuntimeTests_AsyncImportedPayloadResultO_y(_ boxPtr: UnsafeMutableRawPointer, _ param0IsSome: Int32, _ param0CaseId: Int32) -> Void {
     #if arch(wasm32)
-    let closure = Unmanaged<_BridgeJSTypedClosureBox<(sending Optional<AsyncImportedPayloadResult>) -> Void>>.fromOpaque(boxPtr).takeUnretainedValue().closure
-    closure(Optional<AsyncImportedPayloadResult>.bridgeJSLiftParameter(param0IsSome, param0CaseId))
+    let closure = Unmanaged<_BridgeJSTypedClosureBox<(sending Optional<BridgeJSRuntimeTests.AsyncImportedPayloadResult>) -> Void>>.fromOpaque(boxPtr).takeUnretainedValue().closure
+    closure(Optional<BridgeJSRuntimeTests.AsyncImportedPayloadResult>.bridgeJSLiftParameter(param0IsSome, param0CaseId))
     #else
     fatalError("Only available on WebAssembly")
     #endif
@@ -3301,36 +3301,36 @@ public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestssSq
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_13DataProcessorP")
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_13DataProcessorP_extern(_ callback: Int32) -> Int32
+@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_34BridgeJSRuntimeTests_DataProcessorP")
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_34BridgeJSRuntimeTests_DataProcessorP_extern(_ callback: Int32) -> Int32
 #else
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_13DataProcessorP_extern(_ callback: Int32) -> Int32 {
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_34BridgeJSRuntimeTests_DataProcessorP_extern(_ callback: Int32) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_13DataProcessorP(_ callback: Int32) -> Int32 {
-    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_13DataProcessorP_extern(callback)
+@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_34BridgeJSRuntimeTests_DataProcessorP(_ callback: Int32) -> Int32 {
+    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_34BridgeJSRuntimeTests_DataProcessorP_extern(callback)
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_13DataProcessorP")
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_13DataProcessorP_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
+@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_34BridgeJSRuntimeTests_DataProcessorP")
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_34BridgeJSRuntimeTests_DataProcessorP_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
 #else
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_13DataProcessorP_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_34BridgeJSRuntimeTests_DataProcessorP_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_13DataProcessorP(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
-    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_13DataProcessorP_extern(boxPtr, file, line)
+@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_34BridgeJSRuntimeTests_DataProcessorP(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_34BridgeJSRuntimeTests_DataProcessorP_extern(boxPtr, file, line)
 }
 
-private enum _BJS_Closure_20BridgeJSRuntimeTestsy_13DataProcessorP {
-    static func bridgeJSLift(_ callbackId: Int32) -> () -> any DataProcessor {
+private enum _BJS_Closure_20BridgeJSRuntimeTestsy_34BridgeJSRuntimeTests_DataProcessorP {
+    static func bridgeJSLift(_ callbackId: Int32) -> () -> any BridgeJSRuntimeTests.DataProcessor {
         let callback = JSObject.bridgeJSLiftParameter(callbackId)
         return { [callback] in
             #if arch(wasm32)
             let callbackValue = callback.bridgeJSLowerParameter()
-            let ret = invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_13DataProcessorP(callbackValue)
+            let ret = invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_34BridgeJSRuntimeTests_DataProcessorP(callbackValue)
             return AnyDataProcessor.bridgeJSLiftReturn(ret)
             #else
             fatalError("Only available on WebAssembly")
@@ -3339,10 +3339,10 @@ private enum _BJS_Closure_20BridgeJSRuntimeTestsy_13DataProcessorP {
     }
 }
 
-extension JSTypedClosure where Signature == () -> any DataProcessor {
-    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping () -> any DataProcessor) {
+extension JSTypedClosure where Signature == () -> any BridgeJSRuntimeTests.DataProcessor {
+    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping () -> any BridgeJSRuntimeTests.DataProcessor) {
         self.init(
-            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_13DataProcessorP,
+            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_34BridgeJSRuntimeTests_DataProcessorP,
             body: body,
             fileID: fileID,
             line: line
@@ -3350,11 +3350,11 @@ extension JSTypedClosure where Signature == () -> any DataProcessor {
     }
 }
 
-@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_13DataProcessorP")
-@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_13DataProcessorP")
-public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_13DataProcessorP(_ boxPtr: UnsafeMutableRawPointer) -> Int32 {
+@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_34BridgeJSRuntimeTests_DataProcessorP")
+@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_34BridgeJSRuntimeTests_DataProcessorP")
+public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_34BridgeJSRuntimeTests_DataProcessorP(_ boxPtr: UnsafeMutableRawPointer) -> Int32 {
     #if arch(wasm32)
-    let closure = Unmanaged<_BridgeJSTypedClosureBox<() -> any DataProcessor>>.fromOpaque(boxPtr).takeUnretainedValue().closure
+    let closure = Unmanaged<_BridgeJSTypedClosureBox<() -> any BridgeJSRuntimeTests.DataProcessor>>.fromOpaque(boxPtr).takeUnretainedValue().closure
     let result = closure()
     return (result as! _BridgedSwiftProtocolExportable).bridgeJSLowerAsProtocolReturn()
     #else
@@ -3425,37 +3425,37 @@ public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_S
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_Sq7GreeterC")
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_Sq7GreeterC_extern(_ callback: Int32) -> UnsafeMutableRawPointer
+@_extern(wasm, module: "bjs", name: "invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_Sq28BridgeJSRuntimeTests_GreeterC")
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_Sq28BridgeJSRuntimeTests_GreeterC_extern(_ callback: Int32) -> UnsafeMutableRawPointer
 #else
-fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_Sq7GreeterC_extern(_ callback: Int32) -> UnsafeMutableRawPointer {
+fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_Sq28BridgeJSRuntimeTests_GreeterC_extern(_ callback: Int32) -> UnsafeMutableRawPointer {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_Sq7GreeterC(_ callback: Int32) -> UnsafeMutableRawPointer {
-    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_Sq7GreeterC_extern(callback)
+@inline(never) fileprivate func invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_Sq28BridgeJSRuntimeTests_GreeterC(_ callback: Int32) -> UnsafeMutableRawPointer {
+    return invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_Sq28BridgeJSRuntimeTests_GreeterC_extern(callback)
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_Sq7GreeterC")
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_Sq7GreeterC_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
+@_extern(wasm, module: "bjs", name: "make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_Sq28BridgeJSRuntimeTests_GreeterC")
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_Sq28BridgeJSRuntimeTests_GreeterC_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
 #else
-fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_Sq7GreeterC_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_Sq28BridgeJSRuntimeTests_GreeterC_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_Sq7GreeterC(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
-    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_Sq7GreeterC_extern(boxPtr, file, line)
+@inline(never) fileprivate func make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_Sq28BridgeJSRuntimeTests_GreeterC(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+    return make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_Sq28BridgeJSRuntimeTests_GreeterC_extern(boxPtr, file, line)
 }
 
-private enum _BJS_Closure_20BridgeJSRuntimeTestsy_Sq7GreeterC {
-    static func bridgeJSLift(_ callbackId: Int32) -> () -> Optional<Greeter> {
+private enum _BJS_Closure_20BridgeJSRuntimeTestsy_Sq28BridgeJSRuntimeTests_GreeterC {
+    static func bridgeJSLift(_ callbackId: Int32) -> () -> Optional<BridgeJSRuntimeTests.Greeter> {
         let callback = JSObject.bridgeJSLiftParameter(callbackId)
         return { [callback] in
             #if arch(wasm32)
             let callbackValue = callback.bridgeJSLowerParameter()
-            let ret = invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_Sq7GreeterC(callbackValue)
-            return Optional<Greeter>.bridgeJSLiftReturn(ret)
+            let ret = invoke_js_callback_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_Sq28BridgeJSRuntimeTests_GreeterC(callbackValue)
+            return Optional<BridgeJSRuntimeTests.Greeter>.bridgeJSLiftReturn(ret)
             #else
             fatalError("Only available on WebAssembly")
             #endif
@@ -3463,10 +3463,10 @@ private enum _BJS_Closure_20BridgeJSRuntimeTestsy_Sq7GreeterC {
     }
 }
 
-extension JSTypedClosure where Signature == () -> Optional<Greeter> {
-    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping () -> Optional<Greeter>) {
+extension JSTypedClosure where Signature == () -> Optional<BridgeJSRuntimeTests.Greeter> {
+    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping () -> Optional<BridgeJSRuntimeTests.Greeter>) {
         self.init(
-            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_Sq7GreeterC,
+            makeClosure: make_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_Sq28BridgeJSRuntimeTests_GreeterC,
             body: body,
             fileID: fileID,
             line: line
@@ -3474,11 +3474,11 @@ extension JSTypedClosure where Signature == () -> Optional<Greeter> {
     }
 }
 
-@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_Sq7GreeterC")
-@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_Sq7GreeterC")
-public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_Sq7GreeterC(_ boxPtr: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_Sq28BridgeJSRuntimeTests_GreeterC")
+@_cdecl("invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_Sq28BridgeJSRuntimeTests_GreeterC")
+public func _invoke_swift_closure_BridgeJSRuntimeTests_20BridgeJSRuntimeTestsy_Sq28BridgeJSRuntimeTests_GreeterC(_ boxPtr: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let closure = Unmanaged<_BridgeJSTypedClosureBox<() -> Optional<Greeter>>>.fromOpaque(boxPtr).takeUnretainedValue().closure
+    let closure = Unmanaged<_BridgeJSTypedClosureBox<() -> Optional<BridgeJSRuntimeTests.Greeter>>>.fromOpaque(boxPtr).takeUnretainedValue().closure
     let result = closure()
     return result.bridgeJSLowerReturn()
     #else
@@ -3627,42 +3627,42 @@ struct AnyDataProcessor: DataProcessor, _BridgedSwiftProtocolWrapper {
         return Bool.bridgeJSLiftReturn(ret)
     }
 
-    func processGreeter(_ greeter: Greeter) -> String {
+    func processGreeter(_ greeter: BridgeJSRuntimeTests.Greeter) -> String {
         let jsObjectValue = jsObject.bridgeJSLowerParameter()
         let greeterPointer = greeter.bridgeJSLowerParameter()
         let ret = _extern_processGreeter(jsObjectValue, greeterPointer)
         return String.bridgeJSLiftReturn(ret)
     }
 
-    func createGreeter() -> Greeter {
+    func createGreeter() -> BridgeJSRuntimeTests.Greeter {
         let jsObjectValue = jsObject.bridgeJSLowerParameter()
         let ret = _extern_createGreeter(jsObjectValue)
-        return Greeter.bridgeJSLiftReturn(ret)
+        return BridgeJSRuntimeTests.Greeter.bridgeJSLiftReturn(ret)
     }
 
-    func processOptionalGreeter(_ greeter: Optional<Greeter>) -> String {
+    func processOptionalGreeter(_ greeter: Optional<BridgeJSRuntimeTests.Greeter>) -> String {
         let jsObjectValue = jsObject.bridgeJSLowerParameter()
         let (greeterIsSome, greeterPointer) = greeter.bridgeJSLowerParameter()
         let ret = _extern_processOptionalGreeter(jsObjectValue, greeterIsSome, greeterPointer)
         return String.bridgeJSLiftReturn(ret)
     }
 
-    func createOptionalGreeter() -> Optional<Greeter> {
+    func createOptionalGreeter() -> Optional<BridgeJSRuntimeTests.Greeter> {
         let jsObjectValue = jsObject.bridgeJSLowerParameter()
         let ret = _extern_createOptionalGreeter(jsObjectValue)
-        return Optional<Greeter>.bridgeJSLiftReturn(ret)
+        return Optional<BridgeJSRuntimeTests.Greeter>.bridgeJSLiftReturn(ret)
     }
 
-    func handleAPIResult(_ result: Optional<APIResult>) -> Void {
+    func handleAPIResult(_ result: Optional<BridgeJSRuntimeTests.APIResult>) -> Void {
         let jsObjectValue = jsObject.bridgeJSLowerParameter()
         let (resultIsSome, resultCaseId) = result.bridgeJSLowerParameter()
         _extern_handleAPIResult(jsObjectValue, resultIsSome, resultCaseId)
     }
 
-    func getAPIResult() -> Optional<APIResult> {
+    func getAPIResult() -> Optional<BridgeJSRuntimeTests.APIResult> {
         let jsObjectValue = jsObject.bridgeJSLowerParameter()
         let ret = _extern_getAPIResult(jsObjectValue)
-        return Optional<APIResult>.bridgeJSLiftReturn(ret)
+        return Optional<BridgeJSRuntimeTests.APIResult>.bridgeJSLiftReturn(ret)
     }
 
     var count: Int {
@@ -3713,11 +3713,11 @@ struct AnyDataProcessor: DataProcessor, _BridgedSwiftProtocolWrapper {
         }
     }
 
-    var direction: Optional<Direction> {
+    var direction: Optional<BridgeJSRuntimeTests.Direction> {
         get {
             let jsObjectValue = jsObject.bridgeJSLowerParameter()
             let ret = bjs_DataProcessor_direction_get(jsObjectValue)
-            return Optional<Direction>.bridgeJSLiftReturn(ret)
+            return Optional<BridgeJSRuntimeTests.Direction>.bridgeJSLiftReturn(ret)
         }
         set {
             let jsObjectValue = jsObject.bridgeJSLowerParameter()
@@ -3726,11 +3726,11 @@ struct AnyDataProcessor: DataProcessor, _BridgedSwiftProtocolWrapper {
         }
     }
 
-    var optionalTheme: Optional<Theme> {
+    var optionalTheme: Optional<BridgeJSRuntimeTests.Theme> {
         get {
             let jsObjectValue = jsObject.bridgeJSLowerParameter()
             bjs_DataProcessor_optionalTheme_get(jsObjectValue)
-            return Optional<Theme>.bridgeJSLiftReturnFromSideChannel()
+            return Optional<BridgeJSRuntimeTests.Theme>.bridgeJSLiftReturnFromSideChannel()
         }
         set {
             let jsObjectValue = jsObject.bridgeJSLowerParameter()
@@ -3740,11 +3740,11 @@ struct AnyDataProcessor: DataProcessor, _BridgedSwiftProtocolWrapper {
         }
     }
 
-    var httpStatus: Optional<HttpStatus> {
+    var httpStatus: Optional<BridgeJSRuntimeTests.HttpStatus> {
         get {
             let jsObjectValue = jsObject.bridgeJSLowerParameter()
             bjs_DataProcessor_httpStatus_get(jsObjectValue)
-            return Optional<HttpStatus>.bridgeJSLiftReturnFromSideChannel()
+            return Optional<BridgeJSRuntimeTests.HttpStatus>.bridgeJSLiftReturnFromSideChannel()
         }
         set {
             let jsObjectValue = jsObject.bridgeJSLowerParameter()
@@ -3753,11 +3753,11 @@ struct AnyDataProcessor: DataProcessor, _BridgedSwiftProtocolWrapper {
         }
     }
 
-    var apiResult: Optional<APIResult> {
+    var apiResult: Optional<BridgeJSRuntimeTests.APIResult> {
         get {
             let jsObjectValue = jsObject.bridgeJSLowerParameter()
             let ret = bjs_DataProcessor_apiResult_get(jsObjectValue)
-            return Optional<APIResult>.bridgeJSLiftReturn(ret)
+            return Optional<BridgeJSRuntimeTests.APIResult>.bridgeJSLiftReturn(ret)
         }
         set {
             let jsObjectValue = jsObject.bridgeJSLowerParameter()
@@ -3766,11 +3766,11 @@ struct AnyDataProcessor: DataProcessor, _BridgedSwiftProtocolWrapper {
         }
     }
 
-    var helper: Greeter {
+    var helper: BridgeJSRuntimeTests.Greeter {
         get {
             let jsObjectValue = jsObject.bridgeJSLowerParameter()
             let ret = bjs_DataProcessor_helper_get(jsObjectValue)
-            return Greeter.bridgeJSLiftReturn(ret)
+            return BridgeJSRuntimeTests.Greeter.bridgeJSLiftReturn(ret)
         }
         set {
             let jsObjectValue = jsObject.bridgeJSLowerParameter()
@@ -3779,11 +3779,11 @@ struct AnyDataProcessor: DataProcessor, _BridgedSwiftProtocolWrapper {
         }
     }
 
-    var optionalHelper: Optional<Greeter> {
+    var optionalHelper: Optional<BridgeJSRuntimeTests.Greeter> {
         get {
             let jsObjectValue = jsObject.bridgeJSLowerParameter()
             let ret = bjs_DataProcessor_optionalHelper_get(jsObjectValue)
-            return Optional<Greeter>.bridgeJSLiftReturn(ret)
+            return Optional<BridgeJSRuntimeTests.Greeter>.bridgeJSLiftReturn(ret)
         }
         set {
             let jsObjectValue = jsObject.bridgeJSLowerParameter()
@@ -4157,15 +4157,15 @@ fileprivate func bjs_DataProcessor_optionalHelper_set_extern(_ jsObject: Int32, 
     return bjs_DataProcessor_optionalHelper_set_extern(jsObject, newValueIsSome, newValuePointer)
 }
 
-extension Severity: _BridgedSwiftCaseEnum {
+extension BridgeJSRuntimeTests.Severity: _BridgedSwiftCaseEnum {
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSLowerParameter() -> Int32 {
         return bridgeJSRawValue
     }
-    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftReturn(_ value: Int32) -> Severity {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftReturn(_ value: Int32) -> BridgeJSRuntimeTests.Severity {
         return bridgeJSLiftParameter(value)
     }
-    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftParameter(_ value: Int32) -> Severity {
-        return Severity(bridgeJSRawValue: value)!
+    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftParameter(_ value: Int32) -> BridgeJSRuntimeTests.Severity {
+        return BridgeJSRuntimeTests.Severity(bridgeJSRawValue: value)!
     }
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSLowerReturn() -> Int32 {
         return bridgeJSLowerParameter()
@@ -4196,15 +4196,15 @@ extension Severity: _BridgedSwiftCaseEnum {
     }
 }
 
-extension Shape: _BridgedSwiftAssociatedValueEnum {
-    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPopPayload(_ caseId: Int32) -> Shape {
+extension BridgeJSRuntimeTests.Shape: _BridgedSwiftAssociatedValueEnum {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPopPayload(_ caseId: Int32) -> BridgeJSRuntimeTests.Shape {
         switch caseId {
         case 0:
-            return .polygon(Polygon.bridgeJSStackPop())
+            return .polygon(BridgeJSRuntimeTests.Polygon.bridgeJSStackPop())
         case 1:
             return .empty
         default:
-            fatalError("Unknown Shape case ID: \(caseId)")
+            fatalError("Unknown BridgeJSRuntimeTests.Shape case ID: \(caseId)")
         }
     }
 
@@ -4219,15 +4219,15 @@ extension Shape: _BridgedSwiftAssociatedValueEnum {
     }
 }
 
-extension InnerTag: _BridgedSwiftAssociatedValueEnum {
-    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPopPayload(_ caseId: Int32) -> InnerTag {
+extension BridgeJSRuntimeTests.InnerTag: _BridgedSwiftAssociatedValueEnum {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPopPayload(_ caseId: Int32) -> BridgeJSRuntimeTests.InnerTag {
         switch caseId {
         case 0:
             return .payload(Int.bridgeJSStackPop())
         case 1:
             return .empty
         default:
-            fatalError("Unknown InnerTag case ID: \(caseId)")
+            fatalError("Unknown BridgeJSRuntimeTests.InnerTag case ID: \(caseId)")
         }
     }
 
@@ -4242,220 +4242,220 @@ extension InnerTag: _BridgedSwiftAssociatedValueEnum {
     }
 }
 
-@_expose(wasm, "bjs_ArraySupportExports_static_roundTripIntArray")
-@_cdecl("bjs_ArraySupportExports_static_roundTripIntArray")
-public func _bjs_ArraySupportExports_static_roundTripIntArray() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripIntArray")
+@_cdecl("bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripIntArray")
+public func _bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripIntArray() -> Void {
     #if arch(wasm32)
-    let ret = ArraySupportExports.roundTripIntArray(_: [Int].bridgeJSStackPop())
+    let ret = BridgeJSRuntimeTests.ArraySupportExports.roundTripIntArray(_: [Int].bridgeJSStackPop())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_ArraySupportExports_static_roundTripStringArray")
-@_cdecl("bjs_ArraySupportExports_static_roundTripStringArray")
-public func _bjs_ArraySupportExports_static_roundTripStringArray() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripStringArray")
+@_cdecl("bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripStringArray")
+public func _bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripStringArray() -> Void {
     #if arch(wasm32)
-    let ret = ArraySupportExports.roundTripStringArray(_: [String].bridgeJSStackPop())
+    let ret = BridgeJSRuntimeTests.ArraySupportExports.roundTripStringArray(_: [String].bridgeJSStackPop())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_ArraySupportExports_static_roundTripDoubleArray")
-@_cdecl("bjs_ArraySupportExports_static_roundTripDoubleArray")
-public func _bjs_ArraySupportExports_static_roundTripDoubleArray() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripDoubleArray")
+@_cdecl("bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripDoubleArray")
+public func _bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripDoubleArray() -> Void {
     #if arch(wasm32)
-    let ret = ArraySupportExports.roundTripDoubleArray(_: [Double].bridgeJSStackPop())
+    let ret = BridgeJSRuntimeTests.ArraySupportExports.roundTripDoubleArray(_: [Double].bridgeJSStackPop())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_ArraySupportExports_static_roundTripBoolArray")
-@_cdecl("bjs_ArraySupportExports_static_roundTripBoolArray")
-public func _bjs_ArraySupportExports_static_roundTripBoolArray() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripBoolArray")
+@_cdecl("bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripBoolArray")
+public func _bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripBoolArray() -> Void {
     #if arch(wasm32)
-    let ret = ArraySupportExports.roundTripBoolArray(_: [Bool].bridgeJSStackPop())
+    let ret = BridgeJSRuntimeTests.ArraySupportExports.roundTripBoolArray(_: [Bool].bridgeJSStackPop())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_ArraySupportExports_static_roundTripUnsafeRawPointerArray")
-@_cdecl("bjs_ArraySupportExports_static_roundTripUnsafeRawPointerArray")
-public func _bjs_ArraySupportExports_static_roundTripUnsafeRawPointerArray() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripUnsafeRawPointerArray")
+@_cdecl("bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripUnsafeRawPointerArray")
+public func _bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripUnsafeRawPointerArray() -> Void {
     #if arch(wasm32)
-    let ret = ArraySupportExports.roundTripUnsafeRawPointerArray(_: [UnsafeRawPointer].bridgeJSStackPop())
+    let ret = BridgeJSRuntimeTests.ArraySupportExports.roundTripUnsafeRawPointerArray(_: [UnsafeRawPointer].bridgeJSStackPop())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_ArraySupportExports_static_roundTripUnsafeMutableRawPointerArray")
-@_cdecl("bjs_ArraySupportExports_static_roundTripUnsafeMutableRawPointerArray")
-public func _bjs_ArraySupportExports_static_roundTripUnsafeMutableRawPointerArray() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripUnsafeMutableRawPointerArray")
+@_cdecl("bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripUnsafeMutableRawPointerArray")
+public func _bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripUnsafeMutableRawPointerArray() -> Void {
     #if arch(wasm32)
-    let ret = ArraySupportExports.roundTripUnsafeMutableRawPointerArray(_: [UnsafeMutableRawPointer].bridgeJSStackPop())
+    let ret = BridgeJSRuntimeTests.ArraySupportExports.roundTripUnsafeMutableRawPointerArray(_: [UnsafeMutableRawPointer].bridgeJSStackPop())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_ArraySupportExports_static_roundTripOpaquePointerArray")
-@_cdecl("bjs_ArraySupportExports_static_roundTripOpaquePointerArray")
-public func _bjs_ArraySupportExports_static_roundTripOpaquePointerArray() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripOpaquePointerArray")
+@_cdecl("bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripOpaquePointerArray")
+public func _bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripOpaquePointerArray() -> Void {
     #if arch(wasm32)
-    let ret = ArraySupportExports.roundTripOpaquePointerArray(_: [OpaquePointer].bridgeJSStackPop())
+    let ret = BridgeJSRuntimeTests.ArraySupportExports.roundTripOpaquePointerArray(_: [OpaquePointer].bridgeJSStackPop())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_ArraySupportExports_static_roundTripUnsafePointerArray")
-@_cdecl("bjs_ArraySupportExports_static_roundTripUnsafePointerArray")
-public func _bjs_ArraySupportExports_static_roundTripUnsafePointerArray() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripUnsafePointerArray")
+@_cdecl("bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripUnsafePointerArray")
+public func _bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripUnsafePointerArray() -> Void {
     #if arch(wasm32)
-    let ret = ArraySupportExports.roundTripUnsafePointerArray(_: [UnsafePointer<UInt8>].bridgeJSStackPop())
+    let ret = BridgeJSRuntimeTests.ArraySupportExports.roundTripUnsafePointerArray(_: [UnsafePointer<UInt8>].bridgeJSStackPop())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_ArraySupportExports_static_roundTripUnsafeMutablePointerArray")
-@_cdecl("bjs_ArraySupportExports_static_roundTripUnsafeMutablePointerArray")
-public func _bjs_ArraySupportExports_static_roundTripUnsafeMutablePointerArray() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripUnsafeMutablePointerArray")
+@_cdecl("bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripUnsafeMutablePointerArray")
+public func _bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripUnsafeMutablePointerArray() -> Void {
     #if arch(wasm32)
-    let ret = ArraySupportExports.roundTripUnsafeMutablePointerArray(_: [UnsafeMutablePointer<UInt8>].bridgeJSStackPop())
+    let ret = BridgeJSRuntimeTests.ArraySupportExports.roundTripUnsafeMutablePointerArray(_: [UnsafeMutablePointer<UInt8>].bridgeJSStackPop())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_ArraySupportExports_static_roundTripJSValueArray")
-@_cdecl("bjs_ArraySupportExports_static_roundTripJSValueArray")
-public func _bjs_ArraySupportExports_static_roundTripJSValueArray() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripJSValueArray")
+@_cdecl("bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripJSValueArray")
+public func _bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripJSValueArray() -> Void {
     #if arch(wasm32)
-    let ret = ArraySupportExports.roundTripJSValueArray(_: [JSValue].bridgeJSStackPop())
+    let ret = BridgeJSRuntimeTests.ArraySupportExports.roundTripJSValueArray(_: [JSValue].bridgeJSStackPop())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_ArraySupportExports_static_roundTripJSObjectArray")
-@_cdecl("bjs_ArraySupportExports_static_roundTripJSObjectArray")
-public func _bjs_ArraySupportExports_static_roundTripJSObjectArray() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripJSObjectArray")
+@_cdecl("bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripJSObjectArray")
+public func _bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripJSObjectArray() -> Void {
     #if arch(wasm32)
-    let ret = ArraySupportExports.roundTripJSObjectArray(_: [JSObject].bridgeJSStackPop())
+    let ret = BridgeJSRuntimeTests.ArraySupportExports.roundTripJSObjectArray(_: [JSObject].bridgeJSStackPop())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_ArraySupportExports_static_roundTripCaseEnumArray")
-@_cdecl("bjs_ArraySupportExports_static_roundTripCaseEnumArray")
-public func _bjs_ArraySupportExports_static_roundTripCaseEnumArray() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripCaseEnumArray")
+@_cdecl("bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripCaseEnumArray")
+public func _bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripCaseEnumArray() -> Void {
     #if arch(wasm32)
-    let ret = ArraySupportExports.roundTripCaseEnumArray(_: [Direction].bridgeJSStackPop())
+    let ret = BridgeJSRuntimeTests.ArraySupportExports.roundTripCaseEnumArray(_: [BridgeJSRuntimeTests.Direction].bridgeJSStackPop())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_ArraySupportExports_static_roundTripStringRawValueEnumArray")
-@_cdecl("bjs_ArraySupportExports_static_roundTripStringRawValueEnumArray")
-public func _bjs_ArraySupportExports_static_roundTripStringRawValueEnumArray() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripStringRawValueEnumArray")
+@_cdecl("bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripStringRawValueEnumArray")
+public func _bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripStringRawValueEnumArray() -> Void {
     #if arch(wasm32)
-    let ret = ArraySupportExports.roundTripStringRawValueEnumArray(_: [Theme].bridgeJSStackPop())
+    let ret = BridgeJSRuntimeTests.ArraySupportExports.roundTripStringRawValueEnumArray(_: [BridgeJSRuntimeTests.Theme].bridgeJSStackPop())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_ArraySupportExports_static_roundTripIntRawValueEnumArray")
-@_cdecl("bjs_ArraySupportExports_static_roundTripIntRawValueEnumArray")
-public func _bjs_ArraySupportExports_static_roundTripIntRawValueEnumArray() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripIntRawValueEnumArray")
+@_cdecl("bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripIntRawValueEnumArray")
+public func _bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripIntRawValueEnumArray() -> Void {
     #if arch(wasm32)
-    let ret = ArraySupportExports.roundTripIntRawValueEnumArray(_: [HttpStatus].bridgeJSStackPop())
+    let ret = BridgeJSRuntimeTests.ArraySupportExports.roundTripIntRawValueEnumArray(_: [BridgeJSRuntimeTests.HttpStatus].bridgeJSStackPop())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_ArraySupportExports_static_roundTripInt64RawValueEnumArray")
-@_cdecl("bjs_ArraySupportExports_static_roundTripInt64RawValueEnumArray")
-public func _bjs_ArraySupportExports_static_roundTripInt64RawValueEnumArray() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripInt64RawValueEnumArray")
+@_cdecl("bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripInt64RawValueEnumArray")
+public func _bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripInt64RawValueEnumArray() -> Void {
     #if arch(wasm32)
-    let ret = ArraySupportExports.roundTripInt64RawValueEnumArray(_: [FileSize].bridgeJSStackPop())
+    let ret = BridgeJSRuntimeTests.ArraySupportExports.roundTripInt64RawValueEnumArray(_: [BridgeJSRuntimeTests.FileSize].bridgeJSStackPop())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_ArraySupportExports_static_roundTripUInt64RawValueEnumArray")
-@_cdecl("bjs_ArraySupportExports_static_roundTripUInt64RawValueEnumArray")
-public func _bjs_ArraySupportExports_static_roundTripUInt64RawValueEnumArray() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripUInt64RawValueEnumArray")
+@_cdecl("bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripUInt64RawValueEnumArray")
+public func _bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripUInt64RawValueEnumArray() -> Void {
     #if arch(wasm32)
-    let ret = ArraySupportExports.roundTripUInt64RawValueEnumArray(_: [SessionId].bridgeJSStackPop())
+    let ret = BridgeJSRuntimeTests.ArraySupportExports.roundTripUInt64RawValueEnumArray(_: [BridgeJSRuntimeTests.SessionId].bridgeJSStackPop())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_ArraySupportExports_static_roundTripStructArray")
-@_cdecl("bjs_ArraySupportExports_static_roundTripStructArray")
-public func _bjs_ArraySupportExports_static_roundTripStructArray() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripStructArray")
+@_cdecl("bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripStructArray")
+public func _bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripStructArray() -> Void {
     #if arch(wasm32)
-    let ret = ArraySupportExports.roundTripStructArray(_: [DataPoint].bridgeJSStackPop())
+    let ret = BridgeJSRuntimeTests.ArraySupportExports.roundTripStructArray(_: [BridgeJSRuntimeTests.DataPoint].bridgeJSStackPop())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_ArraySupportExports_static_roundTripSwiftClassArray")
-@_cdecl("bjs_ArraySupportExports_static_roundTripSwiftClassArray")
-public func _bjs_ArraySupportExports_static_roundTripSwiftClassArray() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripSwiftClassArray")
+@_cdecl("bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripSwiftClassArray")
+public func _bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripSwiftClassArray() -> Void {
     #if arch(wasm32)
-    let ret = ArraySupportExports.roundTripSwiftClassArray(_: [Greeter].bridgeJSStackPop())
+    let ret = BridgeJSRuntimeTests.ArraySupportExports.roundTripSwiftClassArray(_: [BridgeJSRuntimeTests.Greeter].bridgeJSStackPop())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_ArraySupportExports_static_roundTripNamespacedSwiftClassArray")
-@_cdecl("bjs_ArraySupportExports_static_roundTripNamespacedSwiftClassArray")
-public func _bjs_ArraySupportExports_static_roundTripNamespacedSwiftClassArray() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripNamespacedSwiftClassArray")
+@_cdecl("bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripNamespacedSwiftClassArray")
+public func _bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripNamespacedSwiftClassArray() -> Void {
     #if arch(wasm32)
-    let ret = ArraySupportExports.roundTripNamespacedSwiftClassArray(_: [Utils.Converter].bridgeJSStackPop())
+    let ret = BridgeJSRuntimeTests.ArraySupportExports.roundTripNamespacedSwiftClassArray(_: [BridgeJSRuntimeTests.Utils.Converter].bridgeJSStackPop())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_ArraySupportExports_static_roundTripProtocolArray")
-@_cdecl("bjs_ArraySupportExports_static_roundTripProtocolArray")
-public func _bjs_ArraySupportExports_static_roundTripProtocolArray() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripProtocolArray")
+@_cdecl("bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripProtocolArray")
+public func _bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripProtocolArray() -> Void {
     #if arch(wasm32)
-    let ret = ArraySupportExports.roundTripProtocolArray(_: [AnyArrayElementProtocol].bridgeJSStackPop())
+    let ret = BridgeJSRuntimeTests.ArraySupportExports.roundTripProtocolArray(_: [AnyArrayElementProtocol].bridgeJSStackPop())
     for __bjs_elem_ret in ret {
         _swift_js_push_i32((__bjs_elem_ret as! _BridgedSwiftProtocolExportable).bridgeJSLowerAsProtocolReturn())
     }
@@ -4465,269 +4465,269 @@ public func _bjs_ArraySupportExports_static_roundTripProtocolArray() -> Void {
     #endif
 }
 
-@_expose(wasm, "bjs_ArraySupportExports_static_roundTripJSClassArray")
-@_cdecl("bjs_ArraySupportExports_static_roundTripJSClassArray")
-public func _bjs_ArraySupportExports_static_roundTripJSClassArray() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripJSClassArray")
+@_cdecl("bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripJSClassArray")
+public func _bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripJSClassArray() -> Void {
     #if arch(wasm32)
-    let ret = ArraySupportExports.roundTripJSClassArray(_: [ArrayElementObject].bridgeJSStackPop())
+    let ret = BridgeJSRuntimeTests.ArraySupportExports.roundTripJSClassArray(_: [ArrayElementObject].bridgeJSStackPop())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_ArraySupportExports_static_roundTripOptionalIntArray")
-@_cdecl("bjs_ArraySupportExports_static_roundTripOptionalIntArray")
-public func _bjs_ArraySupportExports_static_roundTripOptionalIntArray() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripOptionalIntArray")
+@_cdecl("bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripOptionalIntArray")
+public func _bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripOptionalIntArray() -> Void {
     #if arch(wasm32)
-    let ret = ArraySupportExports.roundTripOptionalIntArray(_: [Optional<Int>].bridgeJSStackPop())
+    let ret = BridgeJSRuntimeTests.ArraySupportExports.roundTripOptionalIntArray(_: [Optional<Int>].bridgeJSStackPop())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_ArraySupportExports_static_roundTripOptionalStringArray")
-@_cdecl("bjs_ArraySupportExports_static_roundTripOptionalStringArray")
-public func _bjs_ArraySupportExports_static_roundTripOptionalStringArray() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripOptionalStringArray")
+@_cdecl("bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripOptionalStringArray")
+public func _bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripOptionalStringArray() -> Void {
     #if arch(wasm32)
-    let ret = ArraySupportExports.roundTripOptionalStringArray(_: [Optional<String>].bridgeJSStackPop())
+    let ret = BridgeJSRuntimeTests.ArraySupportExports.roundTripOptionalStringArray(_: [Optional<String>].bridgeJSStackPop())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_ArraySupportExports_static_roundTripOptionalJSObjectArray")
-@_cdecl("bjs_ArraySupportExports_static_roundTripOptionalJSObjectArray")
-public func _bjs_ArraySupportExports_static_roundTripOptionalJSObjectArray() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripOptionalJSObjectArray")
+@_cdecl("bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripOptionalJSObjectArray")
+public func _bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripOptionalJSObjectArray() -> Void {
     #if arch(wasm32)
-    let ret = ArraySupportExports.roundTripOptionalJSObjectArray(_: [Optional<JSObject>].bridgeJSStackPop())
+    let ret = BridgeJSRuntimeTests.ArraySupportExports.roundTripOptionalJSObjectArray(_: [Optional<JSObject>].bridgeJSStackPop())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_ArraySupportExports_static_roundTripOptionalCaseEnumArray")
-@_cdecl("bjs_ArraySupportExports_static_roundTripOptionalCaseEnumArray")
-public func _bjs_ArraySupportExports_static_roundTripOptionalCaseEnumArray() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripOptionalCaseEnumArray")
+@_cdecl("bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripOptionalCaseEnumArray")
+public func _bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripOptionalCaseEnumArray() -> Void {
     #if arch(wasm32)
-    let ret = ArraySupportExports.roundTripOptionalCaseEnumArray(_: [Optional<Direction>].bridgeJSStackPop())
+    let ret = BridgeJSRuntimeTests.ArraySupportExports.roundTripOptionalCaseEnumArray(_: [Optional<BridgeJSRuntimeTests.Direction>].bridgeJSStackPop())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_ArraySupportExports_static_roundTripOptionalStringRawValueEnumArray")
-@_cdecl("bjs_ArraySupportExports_static_roundTripOptionalStringRawValueEnumArray")
-public func _bjs_ArraySupportExports_static_roundTripOptionalStringRawValueEnumArray() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripOptionalStringRawValueEnumArray")
+@_cdecl("bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripOptionalStringRawValueEnumArray")
+public func _bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripOptionalStringRawValueEnumArray() -> Void {
     #if arch(wasm32)
-    let ret = ArraySupportExports.roundTripOptionalStringRawValueEnumArray(_: [Optional<Theme>].bridgeJSStackPop())
+    let ret = BridgeJSRuntimeTests.ArraySupportExports.roundTripOptionalStringRawValueEnumArray(_: [Optional<BridgeJSRuntimeTests.Theme>].bridgeJSStackPop())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_ArraySupportExports_static_roundTripOptionalIntRawValueEnumArray")
-@_cdecl("bjs_ArraySupportExports_static_roundTripOptionalIntRawValueEnumArray")
-public func _bjs_ArraySupportExports_static_roundTripOptionalIntRawValueEnumArray() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripOptionalIntRawValueEnumArray")
+@_cdecl("bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripOptionalIntRawValueEnumArray")
+public func _bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripOptionalIntRawValueEnumArray() -> Void {
     #if arch(wasm32)
-    let ret = ArraySupportExports.roundTripOptionalIntRawValueEnumArray(_: [Optional<HttpStatus>].bridgeJSStackPop())
+    let ret = BridgeJSRuntimeTests.ArraySupportExports.roundTripOptionalIntRawValueEnumArray(_: [Optional<BridgeJSRuntimeTests.HttpStatus>].bridgeJSStackPop())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_ArraySupportExports_static_roundTripOptionalInt64RawValueEnumArray")
-@_cdecl("bjs_ArraySupportExports_static_roundTripOptionalInt64RawValueEnumArray")
-public func _bjs_ArraySupportExports_static_roundTripOptionalInt64RawValueEnumArray() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripOptionalInt64RawValueEnumArray")
+@_cdecl("bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripOptionalInt64RawValueEnumArray")
+public func _bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripOptionalInt64RawValueEnumArray() -> Void {
     #if arch(wasm32)
-    let ret = ArraySupportExports.roundTripOptionalInt64RawValueEnumArray(_: [Optional<FileSize>].bridgeJSStackPop())
+    let ret = BridgeJSRuntimeTests.ArraySupportExports.roundTripOptionalInt64RawValueEnumArray(_: [Optional<BridgeJSRuntimeTests.FileSize>].bridgeJSStackPop())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_ArraySupportExports_static_roundTripOptionalUInt64RawValueEnumArray")
-@_cdecl("bjs_ArraySupportExports_static_roundTripOptionalUInt64RawValueEnumArray")
-public func _bjs_ArraySupportExports_static_roundTripOptionalUInt64RawValueEnumArray() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripOptionalUInt64RawValueEnumArray")
+@_cdecl("bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripOptionalUInt64RawValueEnumArray")
+public func _bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripOptionalUInt64RawValueEnumArray() -> Void {
     #if arch(wasm32)
-    let ret = ArraySupportExports.roundTripOptionalUInt64RawValueEnumArray(_: [Optional<SessionId>].bridgeJSStackPop())
+    let ret = BridgeJSRuntimeTests.ArraySupportExports.roundTripOptionalUInt64RawValueEnumArray(_: [Optional<BridgeJSRuntimeTests.SessionId>].bridgeJSStackPop())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_ArraySupportExports_static_roundTripOptionalStructArray")
-@_cdecl("bjs_ArraySupportExports_static_roundTripOptionalStructArray")
-public func _bjs_ArraySupportExports_static_roundTripOptionalStructArray() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripOptionalStructArray")
+@_cdecl("bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripOptionalStructArray")
+public func _bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripOptionalStructArray() -> Void {
     #if arch(wasm32)
-    let ret = ArraySupportExports.roundTripOptionalStructArray(_: [Optional<DataPoint>].bridgeJSStackPop())
+    let ret = BridgeJSRuntimeTests.ArraySupportExports.roundTripOptionalStructArray(_: [Optional<BridgeJSRuntimeTests.DataPoint>].bridgeJSStackPop())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_ArraySupportExports_static_roundTripOptionalSwiftClassArray")
-@_cdecl("bjs_ArraySupportExports_static_roundTripOptionalSwiftClassArray")
-public func _bjs_ArraySupportExports_static_roundTripOptionalSwiftClassArray() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripOptionalSwiftClassArray")
+@_cdecl("bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripOptionalSwiftClassArray")
+public func _bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripOptionalSwiftClassArray() -> Void {
     #if arch(wasm32)
-    let ret = ArraySupportExports.roundTripOptionalSwiftClassArray(_: [Optional<Greeter>].bridgeJSStackPop())
+    let ret = BridgeJSRuntimeTests.ArraySupportExports.roundTripOptionalSwiftClassArray(_: [Optional<BridgeJSRuntimeTests.Greeter>].bridgeJSStackPop())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_ArraySupportExports_static_roundTripOptionalJSClassArray")
-@_cdecl("bjs_ArraySupportExports_static_roundTripOptionalJSClassArray")
-public func _bjs_ArraySupportExports_static_roundTripOptionalJSClassArray() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripOptionalJSClassArray")
+@_cdecl("bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripOptionalJSClassArray")
+public func _bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripOptionalJSClassArray() -> Void {
     #if arch(wasm32)
-    let ret = ArraySupportExports.roundTripOptionalJSClassArray(_: [Optional<ArrayElementObject>].bridgeJSStackPop())
+    let ret = BridgeJSRuntimeTests.ArraySupportExports.roundTripOptionalJSClassArray(_: [Optional<ArrayElementObject>].bridgeJSStackPop())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_ArraySupportExports_static_roundTripNestedIntArray")
-@_cdecl("bjs_ArraySupportExports_static_roundTripNestedIntArray")
-public func _bjs_ArraySupportExports_static_roundTripNestedIntArray() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripNestedIntArray")
+@_cdecl("bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripNestedIntArray")
+public func _bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripNestedIntArray() -> Void {
     #if arch(wasm32)
-    let ret = ArraySupportExports.roundTripNestedIntArray(_: [[Int]].bridgeJSStackPop())
+    let ret = BridgeJSRuntimeTests.ArraySupportExports.roundTripNestedIntArray(_: [[Int]].bridgeJSStackPop())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_ArraySupportExports_static_roundTripNestedStringArray")
-@_cdecl("bjs_ArraySupportExports_static_roundTripNestedStringArray")
-public func _bjs_ArraySupportExports_static_roundTripNestedStringArray() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripNestedStringArray")
+@_cdecl("bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripNestedStringArray")
+public func _bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripNestedStringArray() -> Void {
     #if arch(wasm32)
-    let ret = ArraySupportExports.roundTripNestedStringArray(_: [[String]].bridgeJSStackPop())
+    let ret = BridgeJSRuntimeTests.ArraySupportExports.roundTripNestedStringArray(_: [[String]].bridgeJSStackPop())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_ArraySupportExports_static_roundTripNestedDoubleArray")
-@_cdecl("bjs_ArraySupportExports_static_roundTripNestedDoubleArray")
-public func _bjs_ArraySupportExports_static_roundTripNestedDoubleArray() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripNestedDoubleArray")
+@_cdecl("bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripNestedDoubleArray")
+public func _bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripNestedDoubleArray() -> Void {
     #if arch(wasm32)
-    let ret = ArraySupportExports.roundTripNestedDoubleArray(_: [[Double]].bridgeJSStackPop())
+    let ret = BridgeJSRuntimeTests.ArraySupportExports.roundTripNestedDoubleArray(_: [[Double]].bridgeJSStackPop())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_ArraySupportExports_static_roundTripNestedBoolArray")
-@_cdecl("bjs_ArraySupportExports_static_roundTripNestedBoolArray")
-public func _bjs_ArraySupportExports_static_roundTripNestedBoolArray() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripNestedBoolArray")
+@_cdecl("bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripNestedBoolArray")
+public func _bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripNestedBoolArray() -> Void {
     #if arch(wasm32)
-    let ret = ArraySupportExports.roundTripNestedBoolArray(_: [[Bool]].bridgeJSStackPop())
+    let ret = BridgeJSRuntimeTests.ArraySupportExports.roundTripNestedBoolArray(_: [[Bool]].bridgeJSStackPop())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_ArraySupportExports_static_roundTripNestedStructArray")
-@_cdecl("bjs_ArraySupportExports_static_roundTripNestedStructArray")
-public func _bjs_ArraySupportExports_static_roundTripNestedStructArray() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripNestedStructArray")
+@_cdecl("bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripNestedStructArray")
+public func _bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripNestedStructArray() -> Void {
     #if arch(wasm32)
-    let ret = ArraySupportExports.roundTripNestedStructArray(_: [[DataPoint]].bridgeJSStackPop())
+    let ret = BridgeJSRuntimeTests.ArraySupportExports.roundTripNestedStructArray(_: [[BridgeJSRuntimeTests.DataPoint]].bridgeJSStackPop())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_ArraySupportExports_static_roundTripNestedCaseEnumArray")
-@_cdecl("bjs_ArraySupportExports_static_roundTripNestedCaseEnumArray")
-public func _bjs_ArraySupportExports_static_roundTripNestedCaseEnumArray() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripNestedCaseEnumArray")
+@_cdecl("bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripNestedCaseEnumArray")
+public func _bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripNestedCaseEnumArray() -> Void {
     #if arch(wasm32)
-    let ret = ArraySupportExports.roundTripNestedCaseEnumArray(_: [[Direction]].bridgeJSStackPop())
+    let ret = BridgeJSRuntimeTests.ArraySupportExports.roundTripNestedCaseEnumArray(_: [[BridgeJSRuntimeTests.Direction]].bridgeJSStackPop())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_ArraySupportExports_static_roundTripNestedSwiftClassArray")
-@_cdecl("bjs_ArraySupportExports_static_roundTripNestedSwiftClassArray")
-public func _bjs_ArraySupportExports_static_roundTripNestedSwiftClassArray() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripNestedSwiftClassArray")
+@_cdecl("bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripNestedSwiftClassArray")
+public func _bjs_BridgeJSRuntimeTests_ArraySupportExports_static_roundTripNestedSwiftClassArray() -> Void {
     #if arch(wasm32)
-    let ret = ArraySupportExports.roundTripNestedSwiftClassArray(_: [[Greeter]].bridgeJSStackPop())
+    let ret = BridgeJSRuntimeTests.ArraySupportExports.roundTripNestedSwiftClassArray(_: [[BridgeJSRuntimeTests.Greeter]].bridgeJSStackPop())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_ArraySupportExports_static_multiArrayFirst")
-@_cdecl("bjs_ArraySupportExports_static_multiArrayFirst")
-public func _bjs_ArraySupportExports_static_multiArrayFirst() -> Void {
-    #if arch(wasm32)
-    let _tmp_b = [String].bridgeJSStackPop()
-    let _tmp_a = [Int].bridgeJSStackPop()
-    let ret = ArraySupportExports.multiArrayFirst(_: _tmp_a, _: _tmp_b)
-    ret.bridgeJSStackPush()
-    #else
-    fatalError("Only available on WebAssembly")
-    #endif
-}
-
-@_expose(wasm, "bjs_ArraySupportExports_static_multiArraySecond")
-@_cdecl("bjs_ArraySupportExports_static_multiArraySecond")
-public func _bjs_ArraySupportExports_static_multiArraySecond() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ArraySupportExports_static_multiArrayFirst")
+@_cdecl("bjs_BridgeJSRuntimeTests_ArraySupportExports_static_multiArrayFirst")
+public func _bjs_BridgeJSRuntimeTests_ArraySupportExports_static_multiArrayFirst() -> Void {
     #if arch(wasm32)
     let _tmp_b = [String].bridgeJSStackPop()
     let _tmp_a = [Int].bridgeJSStackPop()
-    let ret = ArraySupportExports.multiArraySecond(_: _tmp_a, _: _tmp_b)
+    let ret = BridgeJSRuntimeTests.ArraySupportExports.multiArrayFirst(_: _tmp_a, _: _tmp_b)
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_ArraySupportExports_static_multiOptionalArrayFirst")
-@_cdecl("bjs_ArraySupportExports_static_multiOptionalArrayFirst")
-public func _bjs_ArraySupportExports_static_multiOptionalArrayFirst() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ArraySupportExports_static_multiArraySecond")
+@_cdecl("bjs_BridgeJSRuntimeTests_ArraySupportExports_static_multiArraySecond")
+public func _bjs_BridgeJSRuntimeTests_ArraySupportExports_static_multiArraySecond() -> Void {
+    #if arch(wasm32)
+    let _tmp_b = [String].bridgeJSStackPop()
+    let _tmp_a = [Int].bridgeJSStackPop()
+    let ret = BridgeJSRuntimeTests.ArraySupportExports.multiArraySecond(_: _tmp_a, _: _tmp_b)
+    ret.bridgeJSStackPush()
+    #else
+    fatalError("Only available on WebAssembly")
+    #endif
+}
+
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ArraySupportExports_static_multiOptionalArrayFirst")
+@_cdecl("bjs_BridgeJSRuntimeTests_ArraySupportExports_static_multiOptionalArrayFirst")
+public func _bjs_BridgeJSRuntimeTests_ArraySupportExports_static_multiOptionalArrayFirst() -> Void {
     #if arch(wasm32)
     let _tmp_b = Optional<[String]>.bridgeJSLiftParameter()
     let _tmp_a = Optional<[Int]>.bridgeJSLiftParameter()
-    let ret = ArraySupportExports.multiOptionalArrayFirst(_: _tmp_a, _: _tmp_b)
+    let ret = BridgeJSRuntimeTests.ArraySupportExports.multiOptionalArrayFirst(_: _tmp_a, _: _tmp_b)
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_ArraySupportExports_static_multiOptionalArraySecond")
-@_cdecl("bjs_ArraySupportExports_static_multiOptionalArraySecond")
-public func _bjs_ArraySupportExports_static_multiOptionalArraySecond() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ArraySupportExports_static_multiOptionalArraySecond")
+@_cdecl("bjs_BridgeJSRuntimeTests_ArraySupportExports_static_multiOptionalArraySecond")
+public func _bjs_BridgeJSRuntimeTests_ArraySupportExports_static_multiOptionalArraySecond() -> Void {
     #if arch(wasm32)
     let _tmp_b = Optional<[String]>.bridgeJSLiftParameter()
     let _tmp_a = Optional<[Int]>.bridgeJSLiftParameter()
-    let ret = ArraySupportExports.multiOptionalArraySecond(_: _tmp_a, _: _tmp_b)
+    let ret = BridgeJSRuntimeTests.ArraySupportExports.multiOptionalArraySecond(_: _tmp_a, _: _tmp_b)
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension AsyncImportedPayloadResult: _BridgedSwiftAssociatedValueEnum {
-    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPopPayload(_ caseId: Int32) -> AsyncImportedPayloadResult {
+extension BridgeJSRuntimeTests.AsyncImportedPayloadResult: _BridgedSwiftAssociatedValueEnum {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPopPayload(_ caseId: Int32) -> BridgeJSRuntimeTests.AsyncImportedPayloadResult {
         switch caseId {
         case 0:
             return .success(String.bridgeJSStackPop())
@@ -4736,7 +4736,7 @@ extension AsyncImportedPayloadResult: _BridgedSwiftAssociatedValueEnum {
         case 2:
             return .idle
         default:
-            fatalError("Unknown AsyncImportedPayloadResult case ID: \(caseId)")
+            fatalError("Unknown BridgeJSRuntimeTests.AsyncImportedPayloadResult case ID: \(caseId)")
         }
     }
 
@@ -4754,180 +4754,180 @@ extension AsyncImportedPayloadResult: _BridgedSwiftAssociatedValueEnum {
     }
 }
 
-@_expose(wasm, "bjs_DefaultArgumentExports_static_testStringDefault")
-@_cdecl("bjs_DefaultArgumentExports_static_testStringDefault")
-public func _bjs_DefaultArgumentExports_static_testStringDefault(_ messageBytes: Int32, _ messageLength: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DefaultArgumentExports_static_testStringDefault")
+@_cdecl("bjs_BridgeJSRuntimeTests_DefaultArgumentExports_static_testStringDefault")
+public func _bjs_BridgeJSRuntimeTests_DefaultArgumentExports_static_testStringDefault(_ messageBytes: Int32, _ messageLength: Int32) -> Void {
     #if arch(wasm32)
-    let ret = DefaultArgumentExports.testStringDefault(message: String.bridgeJSLiftParameter(messageBytes, messageLength))
+    let ret = BridgeJSRuntimeTests.DefaultArgumentExports.testStringDefault(message: String.bridgeJSLiftParameter(messageBytes, messageLength))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DefaultArgumentExports_static_testIntDefault")
-@_cdecl("bjs_DefaultArgumentExports_static_testIntDefault")
-public func _bjs_DefaultArgumentExports_static_testIntDefault(_ count: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DefaultArgumentExports_static_testIntDefault")
+@_cdecl("bjs_BridgeJSRuntimeTests_DefaultArgumentExports_static_testIntDefault")
+public func _bjs_BridgeJSRuntimeTests_DefaultArgumentExports_static_testIntDefault(_ count: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = DefaultArgumentExports.testIntDefault(count: Int.bridgeJSLiftParameter(count))
+    let ret = BridgeJSRuntimeTests.DefaultArgumentExports.testIntDefault(count: Int.bridgeJSLiftParameter(count))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DefaultArgumentExports_static_testBoolDefault")
-@_cdecl("bjs_DefaultArgumentExports_static_testBoolDefault")
-public func _bjs_DefaultArgumentExports_static_testBoolDefault(_ flag: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DefaultArgumentExports_static_testBoolDefault")
+@_cdecl("bjs_BridgeJSRuntimeTests_DefaultArgumentExports_static_testBoolDefault")
+public func _bjs_BridgeJSRuntimeTests_DefaultArgumentExports_static_testBoolDefault(_ flag: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = DefaultArgumentExports.testBoolDefault(flag: Bool.bridgeJSLiftParameter(flag))
+    let ret = BridgeJSRuntimeTests.DefaultArgumentExports.testBoolDefault(flag: Bool.bridgeJSLiftParameter(flag))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DefaultArgumentExports_static_testOptionalDefault")
-@_cdecl("bjs_DefaultArgumentExports_static_testOptionalDefault")
-public func _bjs_DefaultArgumentExports_static_testOptionalDefault(_ nameIsSome: Int32, _ nameBytes: Int32, _ nameLength: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DefaultArgumentExports_static_testOptionalDefault")
+@_cdecl("bjs_BridgeJSRuntimeTests_DefaultArgumentExports_static_testOptionalDefault")
+public func _bjs_BridgeJSRuntimeTests_DefaultArgumentExports_static_testOptionalDefault(_ nameIsSome: Int32, _ nameBytes: Int32, _ nameLength: Int32) -> Void {
     #if arch(wasm32)
-    let ret = DefaultArgumentExports.testOptionalDefault(name: Optional<String>.bridgeJSLiftParameter(nameIsSome, nameBytes, nameLength))
+    let ret = BridgeJSRuntimeTests.DefaultArgumentExports.testOptionalDefault(name: Optional<String>.bridgeJSLiftParameter(nameIsSome, nameBytes, nameLength))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DefaultArgumentExports_static_testMultipleDefaults")
-@_cdecl("bjs_DefaultArgumentExports_static_testMultipleDefaults")
-public func _bjs_DefaultArgumentExports_static_testMultipleDefaults(_ titleBytes: Int32, _ titleLength: Int32, _ count: Int32, _ enabled: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DefaultArgumentExports_static_testMultipleDefaults")
+@_cdecl("bjs_BridgeJSRuntimeTests_DefaultArgumentExports_static_testMultipleDefaults")
+public func _bjs_BridgeJSRuntimeTests_DefaultArgumentExports_static_testMultipleDefaults(_ titleBytes: Int32, _ titleLength: Int32, _ count: Int32, _ enabled: Int32) -> Void {
     #if arch(wasm32)
-    let ret = DefaultArgumentExports.testMultipleDefaults(title: String.bridgeJSLiftParameter(titleBytes, titleLength), count: Int.bridgeJSLiftParameter(count), enabled: Bool.bridgeJSLiftParameter(enabled))
+    let ret = BridgeJSRuntimeTests.DefaultArgumentExports.testMultipleDefaults(title: String.bridgeJSLiftParameter(titleBytes, titleLength), count: Int.bridgeJSLiftParameter(count), enabled: Bool.bridgeJSLiftParameter(enabled))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DefaultArgumentExports_static_testSimpleEnumDefault")
-@_cdecl("bjs_DefaultArgumentExports_static_testSimpleEnumDefault")
-public func _bjs_DefaultArgumentExports_static_testSimpleEnumDefault(_ status: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DefaultArgumentExports_static_testSimpleEnumDefault")
+@_cdecl("bjs_BridgeJSRuntimeTests_DefaultArgumentExports_static_testSimpleEnumDefault")
+public func _bjs_BridgeJSRuntimeTests_DefaultArgumentExports_static_testSimpleEnumDefault(_ status: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = DefaultArgumentExports.testSimpleEnumDefault(status: Status.bridgeJSLiftParameter(status))
+    let ret = BridgeJSRuntimeTests.DefaultArgumentExports.testSimpleEnumDefault(status: BridgeJSRuntimeTests.Status.bridgeJSLiftParameter(status))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DefaultArgumentExports_static_testDirectionDefault")
-@_cdecl("bjs_DefaultArgumentExports_static_testDirectionDefault")
-public func _bjs_DefaultArgumentExports_static_testDirectionDefault(_ direction: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DefaultArgumentExports_static_testDirectionDefault")
+@_cdecl("bjs_BridgeJSRuntimeTests_DefaultArgumentExports_static_testDirectionDefault")
+public func _bjs_BridgeJSRuntimeTests_DefaultArgumentExports_static_testDirectionDefault(_ direction: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = DefaultArgumentExports.testDirectionDefault(direction: Direction.bridgeJSLiftParameter(direction))
+    let ret = BridgeJSRuntimeTests.DefaultArgumentExports.testDirectionDefault(direction: BridgeJSRuntimeTests.Direction.bridgeJSLiftParameter(direction))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DefaultArgumentExports_static_testRawStringEnumDefault")
-@_cdecl("bjs_DefaultArgumentExports_static_testRawStringEnumDefault")
-public func _bjs_DefaultArgumentExports_static_testRawStringEnumDefault(_ themeBytes: Int32, _ themeLength: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DefaultArgumentExports_static_testRawStringEnumDefault")
+@_cdecl("bjs_BridgeJSRuntimeTests_DefaultArgumentExports_static_testRawStringEnumDefault")
+public func _bjs_BridgeJSRuntimeTests_DefaultArgumentExports_static_testRawStringEnumDefault(_ themeBytes: Int32, _ themeLength: Int32) -> Void {
     #if arch(wasm32)
-    let ret = DefaultArgumentExports.testRawStringEnumDefault(theme: Theme.bridgeJSLiftParameter(themeBytes, themeLength))
+    let ret = BridgeJSRuntimeTests.DefaultArgumentExports.testRawStringEnumDefault(theme: BridgeJSRuntimeTests.Theme.bridgeJSLiftParameter(themeBytes, themeLength))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DefaultArgumentExports_static_testComplexInit")
-@_cdecl("bjs_DefaultArgumentExports_static_testComplexInit")
-public func _bjs_DefaultArgumentExports_static_testComplexInit(_ greeter: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DefaultArgumentExports_static_testComplexInit")
+@_cdecl("bjs_BridgeJSRuntimeTests_DefaultArgumentExports_static_testComplexInit")
+public func _bjs_BridgeJSRuntimeTests_DefaultArgumentExports_static_testComplexInit(_ greeter: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = DefaultArgumentExports.testComplexInit(greeter: Greeter.bridgeJSLiftParameter(greeter))
+    let ret = BridgeJSRuntimeTests.DefaultArgumentExports.testComplexInit(greeter: BridgeJSRuntimeTests.Greeter.bridgeJSLiftParameter(greeter))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DefaultArgumentExports_static_testEmptyInit")
-@_cdecl("bjs_DefaultArgumentExports_static_testEmptyInit")
-public func _bjs_DefaultArgumentExports_static_testEmptyInit(_ object: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DefaultArgumentExports_static_testEmptyInit")
+@_cdecl("bjs_BridgeJSRuntimeTests_DefaultArgumentExports_static_testEmptyInit")
+public func _bjs_BridgeJSRuntimeTests_DefaultArgumentExports_static_testEmptyInit(_ object: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = DefaultArgumentExports.testEmptyInit(_: StaticPropertyHolder.bridgeJSLiftParameter(object))
+    let ret = BridgeJSRuntimeTests.DefaultArgumentExports.testEmptyInit(_: BridgeJSRuntimeTests.StaticPropertyHolder.bridgeJSLiftParameter(object))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DefaultArgumentExports_static_createConstructorDefaults")
-@_cdecl("bjs_DefaultArgumentExports_static_createConstructorDefaults")
-public func _bjs_DefaultArgumentExports_static_createConstructorDefaults(_ nameBytes: Int32, _ nameLength: Int32, _ count: Int32, _ enabled: Int32, _ status: Int32, _ tagIsSome: Int32, _ tagBytes: Int32, _ tagLength: Int32) -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DefaultArgumentExports_static_createConstructorDefaults")
+@_cdecl("bjs_BridgeJSRuntimeTests_DefaultArgumentExports_static_createConstructorDefaults")
+public func _bjs_BridgeJSRuntimeTests_DefaultArgumentExports_static_createConstructorDefaults(_ nameBytes: Int32, _ nameLength: Int32, _ count: Int32, _ enabled: Int32, _ status: Int32, _ tagIsSome: Int32, _ tagBytes: Int32, _ tagLength: Int32) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = DefaultArgumentExports.createConstructorDefaults(name: String.bridgeJSLiftParameter(nameBytes, nameLength), count: Int.bridgeJSLiftParameter(count), enabled: Bool.bridgeJSLiftParameter(enabled), status: Status.bridgeJSLiftParameter(status), tag: Optional<String>.bridgeJSLiftParameter(tagIsSome, tagBytes, tagLength))
+    let ret = BridgeJSRuntimeTests.DefaultArgumentExports.createConstructorDefaults(name: String.bridgeJSLiftParameter(nameBytes, nameLength), count: Int.bridgeJSLiftParameter(count), enabled: Bool.bridgeJSLiftParameter(enabled), status: BridgeJSRuntimeTests.Status.bridgeJSLiftParameter(status), tag: Optional<String>.bridgeJSLiftParameter(tagIsSome, tagBytes, tagLength))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DefaultArgumentExports_static_describeConstructorDefaults")
-@_cdecl("bjs_DefaultArgumentExports_static_describeConstructorDefaults")
-public func _bjs_DefaultArgumentExports_static_describeConstructorDefaults(_ value: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DefaultArgumentExports_static_describeConstructorDefaults")
+@_cdecl("bjs_BridgeJSRuntimeTests_DefaultArgumentExports_static_describeConstructorDefaults")
+public func _bjs_BridgeJSRuntimeTests_DefaultArgumentExports_static_describeConstructorDefaults(_ value: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = DefaultArgumentExports.describeConstructorDefaults(_: DefaultArgumentConstructorDefaults.bridgeJSLiftParameter(value))
+    let ret = BridgeJSRuntimeTests.DefaultArgumentExports.describeConstructorDefaults(_: BridgeJSRuntimeTests.DefaultArgumentConstructorDefaults.bridgeJSLiftParameter(value))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DefaultArgumentExports_static_arrayWithDefault")
-@_cdecl("bjs_DefaultArgumentExports_static_arrayWithDefault")
-public func _bjs_DefaultArgumentExports_static_arrayWithDefault() -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DefaultArgumentExports_static_arrayWithDefault")
+@_cdecl("bjs_BridgeJSRuntimeTests_DefaultArgumentExports_static_arrayWithDefault")
+public func _bjs_BridgeJSRuntimeTests_DefaultArgumentExports_static_arrayWithDefault() -> Int32 {
     #if arch(wasm32)
-    let ret = DefaultArgumentExports.arrayWithDefault(_: [Int].bridgeJSStackPop())
+    let ret = BridgeJSRuntimeTests.DefaultArgumentExports.arrayWithDefault(_: [Int].bridgeJSStackPop())
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DefaultArgumentExports_static_arrayWithOptionalDefault")
-@_cdecl("bjs_DefaultArgumentExports_static_arrayWithOptionalDefault")
-public func _bjs_DefaultArgumentExports_static_arrayWithOptionalDefault() -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DefaultArgumentExports_static_arrayWithOptionalDefault")
+@_cdecl("bjs_BridgeJSRuntimeTests_DefaultArgumentExports_static_arrayWithOptionalDefault")
+public func _bjs_BridgeJSRuntimeTests_DefaultArgumentExports_static_arrayWithOptionalDefault() -> Int32 {
     #if arch(wasm32)
-    let ret = DefaultArgumentExports.arrayWithOptionalDefault(_: Optional<[Int]>.bridgeJSLiftParameter())
+    let ret = BridgeJSRuntimeTests.DefaultArgumentExports.arrayWithOptionalDefault(_: Optional<[Int]>.bridgeJSLiftParameter())
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DefaultArgumentExports_static_arrayMixedDefaults")
-@_cdecl("bjs_DefaultArgumentExports_static_arrayMixedDefaults")
-public func _bjs_DefaultArgumentExports_static_arrayMixedDefaults(_ prefixBytes: Int32, _ prefixLength: Int32, _ suffixBytes: Int32, _ suffixLength: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DefaultArgumentExports_static_arrayMixedDefaults")
+@_cdecl("bjs_BridgeJSRuntimeTests_DefaultArgumentExports_static_arrayMixedDefaults")
+public func _bjs_BridgeJSRuntimeTests_DefaultArgumentExports_static_arrayMixedDefaults(_ prefixBytes: Int32, _ prefixLength: Int32, _ suffixBytes: Int32, _ suffixLength: Int32) -> Void {
     #if arch(wasm32)
-    let ret = DefaultArgumentExports.arrayMixedDefaults(prefix: String.bridgeJSLiftParameter(prefixBytes, prefixLength), values: [Int].bridgeJSStackPop(), suffix: String.bridgeJSLiftParameter(suffixBytes, suffixLength))
+    let ret = BridgeJSRuntimeTests.DefaultArgumentExports.arrayMixedDefaults(prefix: String.bridgeJSLiftParameter(prefixBytes, prefixLength), values: [Int].bridgeJSStackPop(), suffix: String.bridgeJSLiftParameter(suffixBytes, suffixLength))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension Direction: _BridgedSwiftCaseEnum {
+extension BridgeJSRuntimeTests.Direction: _BridgedSwiftCaseEnum {
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSLowerParameter() -> Int32 {
         return bridgeJSRawValue
     }
-    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftReturn(_ value: Int32) -> Direction {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftReturn(_ value: Int32) -> BridgeJSRuntimeTests.Direction {
         return bridgeJSLiftParameter(value)
     }
-    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftParameter(_ value: Int32) -> Direction {
-        return Direction(bridgeJSRawValue: value)!
+    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftParameter(_ value: Int32) -> BridgeJSRuntimeTests.Direction {
+        return BridgeJSRuntimeTests.Direction(bridgeJSRawValue: value)!
     }
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSLowerReturn() -> Int32 {
         return bridgeJSLowerParameter()
@@ -4962,15 +4962,15 @@ extension Direction: _BridgedSwiftCaseEnum {
     }
 }
 
-extension Status: _BridgedSwiftCaseEnum {
+extension BridgeJSRuntimeTests.Status: _BridgedSwiftCaseEnum {
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSLowerParameter() -> Int32 {
         return bridgeJSRawValue
     }
-    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftReturn(_ value: Int32) -> Status {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftReturn(_ value: Int32) -> BridgeJSRuntimeTests.Status {
         return bridgeJSLiftParameter(value)
     }
-    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftParameter(_ value: Int32) -> Status {
-        return Status(bridgeJSRawValue: value)!
+    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftParameter(_ value: Int32) -> BridgeJSRuntimeTests.Status {
+        return BridgeJSRuntimeTests.Status(bridgeJSRawValue: value)!
     }
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSLowerReturn() -> Int32 {
         return bridgeJSLowerParameter()
@@ -5001,33 +5001,33 @@ extension Status: _BridgedSwiftCaseEnum {
     }
 }
 
-extension Theme: _BridgedSwiftEnumNoPayload, _BridgedSwiftRawValueEnum {
+extension BridgeJSRuntimeTests.Theme: _BridgedSwiftEnumNoPayload, _BridgedSwiftRawValueEnum {
 }
 
-extension HttpStatus: _BridgedSwiftEnumNoPayload, _BridgedSwiftRawValueEnum {
+extension BridgeJSRuntimeTests.HttpStatus: _BridgedSwiftEnumNoPayload, _BridgedSwiftRawValueEnum {
 }
 
-extension FileSize: _BridgedSwiftEnumNoPayload, _BridgedSwiftRawValueEnum {
+extension BridgeJSRuntimeTests.FileSize: _BridgedSwiftEnumNoPayload, _BridgedSwiftRawValueEnum {
 }
 
-extension SessionId: _BridgedSwiftEnumNoPayload, _BridgedSwiftRawValueEnum {
+extension BridgeJSRuntimeTests.SessionId: _BridgedSwiftEnumNoPayload, _BridgedSwiftRawValueEnum {
 }
 
-extension Precision: _BridgedSwiftEnumNoPayload, _BridgedSwiftRawValueEnum {
+extension BridgeJSRuntimeTests.Precision: _BridgedSwiftEnumNoPayload, _BridgedSwiftRawValueEnum {
 }
 
-extension Ratio: _BridgedSwiftEnumNoPayload, _BridgedSwiftRawValueEnum {
+extension BridgeJSRuntimeTests.Ratio: _BridgedSwiftEnumNoPayload, _BridgedSwiftRawValueEnum {
 }
 
-extension TSDirection: _BridgedSwiftCaseEnum {
+extension BridgeJSRuntimeTests.TSDirection: _BridgedSwiftCaseEnum {
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSLowerParameter() -> Int32 {
         return bridgeJSRawValue
     }
-    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftReturn(_ value: Int32) -> TSDirection {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftReturn(_ value: Int32) -> BridgeJSRuntimeTests.TSDirection {
         return bridgeJSLiftParameter(value)
     }
-    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftParameter(_ value: Int32) -> TSDirection {
-        return TSDirection(bridgeJSRawValue: value)!
+    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftParameter(_ value: Int32) -> BridgeJSRuntimeTests.TSDirection {
+        return BridgeJSRuntimeTests.TSDirection(bridgeJSRawValue: value)!
     }
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSLowerReturn() -> Int32 {
         return bridgeJSLowerParameter()
@@ -5062,11 +5062,11 @@ extension TSDirection: _BridgedSwiftCaseEnum {
     }
 }
 
-extension TSTheme: _BridgedSwiftEnumNoPayload, _BridgedSwiftRawValueEnum {
+extension BridgeJSRuntimeTests.TSTheme: _BridgedSwiftEnumNoPayload, _BridgedSwiftRawValueEnum {
 }
 
-extension AsyncPayloadResult: _BridgedSwiftAssociatedValueEnum {
-    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPopPayload(_ caseId: Int32) -> AsyncPayloadResult {
+extension BridgeJSRuntimeTests.AsyncPayloadResult: _BridgedSwiftAssociatedValueEnum {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPopPayload(_ caseId: Int32) -> BridgeJSRuntimeTests.AsyncPayloadResult {
         switch caseId {
         case 0:
             return .success(String.bridgeJSStackPop())
@@ -5075,7 +5075,7 @@ extension AsyncPayloadResult: _BridgedSwiftAssociatedValueEnum {
         case 2:
             return .idle
         default:
-            fatalError("Unknown AsyncPayloadResult case ID: \(caseId)")
+            fatalError("Unknown BridgeJSRuntimeTests.AsyncPayloadResult case ID: \(caseId)")
         }
     }
 
@@ -5093,37 +5093,37 @@ extension AsyncPayloadResult: _BridgedSwiftAssociatedValueEnum {
     }
 }
 
-@_expose(wasm, "bjs_Utils_StringUtils_static_uppercase")
-@_cdecl("bjs_Utils_StringUtils_static_uppercase")
-public func _bjs_Utils_StringUtils_static_uppercase(_ textBytes: Int32, _ textLength: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_Utils_StringUtils_static_uppercase")
+@_cdecl("bjs_BridgeJSRuntimeTests_Utils_StringUtils_static_uppercase")
+public func _bjs_BridgeJSRuntimeTests_Utils_StringUtils_static_uppercase(_ textBytes: Int32, _ textLength: Int32) -> Void {
     #if arch(wasm32)
-    let ret = Utils.StringUtils.uppercase(_: String.bridgeJSLiftParameter(textBytes, textLength))
+    let ret = BridgeJSRuntimeTests.Utils.StringUtils.uppercase(_: String.bridgeJSLiftParameter(textBytes, textLength))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Utils_StringUtils_static_lowercase")
-@_cdecl("bjs_Utils_StringUtils_static_lowercase")
-public func _bjs_Utils_StringUtils_static_lowercase(_ textBytes: Int32, _ textLength: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_Utils_StringUtils_static_lowercase")
+@_cdecl("bjs_BridgeJSRuntimeTests_Utils_StringUtils_static_lowercase")
+public func _bjs_BridgeJSRuntimeTests_Utils_StringUtils_static_lowercase(_ textBytes: Int32, _ textLength: Int32) -> Void {
     #if arch(wasm32)
-    let ret = Utils.StringUtils.lowercase(_: String.bridgeJSLiftParameter(textBytes, textLength))
+    let ret = BridgeJSRuntimeTests.Utils.StringUtils.lowercase(_: String.bridgeJSLiftParameter(textBytes, textLength))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension Networking.API.Method: _BridgedSwiftCaseEnum {
+extension BridgeJSRuntimeTests.Networking.API.Method: _BridgedSwiftCaseEnum {
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSLowerParameter() -> Int32 {
         return bridgeJSRawValue
     }
-    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftReturn(_ value: Int32) -> Networking.API.Method {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftReturn(_ value: Int32) -> BridgeJSRuntimeTests.Networking.API.Method {
         return bridgeJSLiftParameter(value)
     }
-    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftParameter(_ value: Int32) -> Networking.API.Method {
-        return Networking.API.Method(bridgeJSRawValue: value)!
+    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftParameter(_ value: Int32) -> BridgeJSRuntimeTests.Networking.API.Method {
+        return BridgeJSRuntimeTests.Networking.API.Method(bridgeJSRawValue: value)!
     }
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSLowerReturn() -> Int32 {
         return bridgeJSLowerParameter()
@@ -5158,21 +5158,21 @@ extension Networking.API.Method: _BridgedSwiftCaseEnum {
     }
 }
 
-extension Configuration.LogLevel: _BridgedSwiftEnumNoPayload, _BridgedSwiftRawValueEnum {
+extension BridgeJSRuntimeTests.Configuration.LogLevel: _BridgedSwiftEnumNoPayload, _BridgedSwiftRawValueEnum {
 }
 
-extension Configuration.Port: _BridgedSwiftEnumNoPayload, _BridgedSwiftRawValueEnum {
+extension BridgeJSRuntimeTests.Configuration.Port: _BridgedSwiftEnumNoPayload, _BridgedSwiftRawValueEnum {
 }
 
-extension Internal.SupportedMethod: _BridgedSwiftCaseEnum {
+extension BridgeJSRuntimeTests.Internal.SupportedMethod: _BridgedSwiftCaseEnum {
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSLowerParameter() -> Int32 {
         return bridgeJSRawValue
     }
-    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftReturn(_ value: Int32) -> Internal.SupportedMethod {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftReturn(_ value: Int32) -> BridgeJSRuntimeTests.Internal.SupportedMethod {
         return bridgeJSLiftParameter(value)
     }
-    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftParameter(_ value: Int32) -> Internal.SupportedMethod {
-        return Internal.SupportedMethod(bridgeJSRawValue: value)!
+    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftParameter(_ value: Int32) -> BridgeJSRuntimeTests.Internal.SupportedMethod {
+        return BridgeJSRuntimeTests.Internal.SupportedMethod(bridgeJSRawValue: value)!
     }
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSLowerReturn() -> Int32 {
         return bridgeJSLowerParameter()
@@ -5199,8 +5199,8 @@ extension Internal.SupportedMethod: _BridgedSwiftCaseEnum {
     }
 }
 
-extension APIResult: _BridgedSwiftAssociatedValueEnum {
-    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPopPayload(_ caseId: Int32) -> APIResult {
+extension BridgeJSRuntimeTests.APIResult: _BridgedSwiftAssociatedValueEnum {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPopPayload(_ caseId: Int32) -> BridgeJSRuntimeTests.APIResult {
         switch caseId {
         case 0:
             return .success(String.bridgeJSStackPop())
@@ -5215,7 +5215,7 @@ extension APIResult: _BridgedSwiftAssociatedValueEnum {
         case 5:
             return .info
         default:
-            fatalError("Unknown APIResult case ID: \(caseId)")
+            fatalError("Unknown BridgeJSRuntimeTests.APIResult case ID: \(caseId)")
         }
     }
 
@@ -5242,8 +5242,8 @@ extension APIResult: _BridgedSwiftAssociatedValueEnum {
     }
 }
 
-extension ComplexResult: _BridgedSwiftAssociatedValueEnum {
-    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPopPayload(_ caseId: Int32) -> ComplexResult {
+extension BridgeJSRuntimeTests.ComplexResult: _BridgedSwiftAssociatedValueEnum {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPopPayload(_ caseId: Int32) -> BridgeJSRuntimeTests.ComplexResult {
         switch caseId {
         case 0:
             return .success(String.bridgeJSStackPop())
@@ -5260,7 +5260,7 @@ extension ComplexResult: _BridgedSwiftAssociatedValueEnum {
         case 6:
             return .info
         default:
-            fatalError("Unknown ComplexResult case ID: \(caseId)")
+            fatalError("Unknown BridgeJSRuntimeTests.ComplexResult case ID: \(caseId)")
         }
     }
 
@@ -5305,8 +5305,8 @@ extension ComplexResult: _BridgedSwiftAssociatedValueEnum {
     }
 }
 
-extension Utilities.Result: _BridgedSwiftAssociatedValueEnum {
-    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPopPayload(_ caseId: Int32) -> Utilities.Result {
+extension BridgeJSRuntimeTests.Utilities.Result: _BridgedSwiftAssociatedValueEnum {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPopPayload(_ caseId: Int32) -> BridgeJSRuntimeTests.Utilities.Result {
         switch caseId {
         case 0:
             return .success(String.bridgeJSStackPop())
@@ -5315,7 +5315,7 @@ extension Utilities.Result: _BridgedSwiftAssociatedValueEnum {
         case 2:
             return .status(Bool.bridgeJSStackPop(), Int.bridgeJSStackPop(), String.bridgeJSStackPop())
         default:
-            fatalError("Unknown Utilities.Result case ID: \(caseId)")
+            fatalError("Unknown BridgeJSRuntimeTests.Utilities.Result case ID: \(caseId)")
         }
     }
 
@@ -5337,15 +5337,15 @@ extension Utilities.Result: _BridgedSwiftAssociatedValueEnum {
     }
 }
 
-extension API.NetworkingResult: _BridgedSwiftAssociatedValueEnum {
-    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPopPayload(_ caseId: Int32) -> API.NetworkingResult {
+extension BridgeJSRuntimeTests.API.NetworkingResult: _BridgedSwiftAssociatedValueEnum {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPopPayload(_ caseId: Int32) -> BridgeJSRuntimeTests.API.NetworkingResult {
         switch caseId {
         case 0:
             return .success(String.bridgeJSStackPop())
         case 1:
             return .failure(String.bridgeJSStackPop(), Int.bridgeJSStackPop())
         default:
-            fatalError("Unknown API.NetworkingResult case ID: \(caseId)")
+            fatalError("Unknown BridgeJSRuntimeTests.API.NetworkingResult case ID: \(caseId)")
         }
     }
 
@@ -5362,17 +5362,17 @@ extension API.NetworkingResult: _BridgedSwiftAssociatedValueEnum {
     }
 }
 
-extension AllTypesResult: _BridgedSwiftAssociatedValueEnum {
-    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPopPayload(_ caseId: Int32) -> AllTypesResult {
+extension BridgeJSRuntimeTests.AllTypesResult: _BridgedSwiftAssociatedValueEnum {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPopPayload(_ caseId: Int32) -> BridgeJSRuntimeTests.AllTypesResult {
         switch caseId {
         case 0:
-            return .structPayload(Address.bridgeJSStackPop())
+            return .structPayload(BridgeJSRuntimeTests.Address.bridgeJSStackPop())
         case 1:
-            return .classPayload(Greeter.bridgeJSStackPop())
+            return .classPayload(BridgeJSRuntimeTests.Greeter.bridgeJSStackPop())
         case 2:
             return .jsObjectPayload(JSObject.bridgeJSStackPop())
         case 3:
-            return .nestedEnum(APIResult.bridgeJSStackPop())
+            return .nestedEnum(BridgeJSRuntimeTests.APIResult.bridgeJSStackPop())
         case 4:
             return .arrayPayload([Int].bridgeJSStackPop())
         case 5:
@@ -5380,7 +5380,7 @@ extension AllTypesResult: _BridgedSwiftAssociatedValueEnum {
         case 6:
             return .empty
         default:
-            fatalError("Unknown AllTypesResult case ID: \(caseId)")
+            fatalError("Unknown BridgeJSRuntimeTests.AllTypesResult case ID: \(caseId)")
         }
     }
 
@@ -5410,21 +5410,21 @@ extension AllTypesResult: _BridgedSwiftAssociatedValueEnum {
     }
 }
 
-extension TypedPayloadResult: _BridgedSwiftAssociatedValueEnum {
-    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPopPayload(_ caseId: Int32) -> TypedPayloadResult {
+extension BridgeJSRuntimeTests.TypedPayloadResult: _BridgedSwiftAssociatedValueEnum {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPopPayload(_ caseId: Int32) -> BridgeJSRuntimeTests.TypedPayloadResult {
         switch caseId {
         case 0:
-            return .precision(Precision.bridgeJSStackPop())
+            return .precision(BridgeJSRuntimeTests.Precision.bridgeJSStackPop())
         case 1:
-            return .direction(Direction.bridgeJSStackPop())
+            return .direction(BridgeJSRuntimeTests.Direction.bridgeJSStackPop())
         case 2:
-            return .optPrecision(Optional<Precision>.bridgeJSStackPop())
+            return .optPrecision(Optional<BridgeJSRuntimeTests.Precision>.bridgeJSStackPop())
         case 3:
-            return .optDirection(Optional<Direction>.bridgeJSStackPop())
+            return .optDirection(Optional<BridgeJSRuntimeTests.Direction>.bridgeJSStackPop())
         case 4:
             return .empty
         default:
-            fatalError("Unknown TypedPayloadResult case ID: \(caseId)")
+            fatalError("Unknown BridgeJSRuntimeTests.TypedPayloadResult case ID: \(caseId)")
         }
     }
 
@@ -5448,15 +5448,15 @@ extension TypedPayloadResult: _BridgedSwiftAssociatedValueEnum {
     }
 }
 
-extension StaticCalculator: _BridgedSwiftCaseEnum {
+extension BridgeJSRuntimeTests.StaticCalculator: _BridgedSwiftCaseEnum {
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSLowerParameter() -> Int32 {
         return bridgeJSRawValue
     }
-    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftReturn(_ value: Int32) -> StaticCalculator {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftReturn(_ value: Int32) -> BridgeJSRuntimeTests.StaticCalculator {
         return bridgeJSLiftParameter(value)
     }
-    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftParameter(_ value: Int32) -> StaticCalculator {
-        return StaticCalculator(bridgeJSRawValue: value)!
+    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftParameter(_ value: Int32) -> BridgeJSRuntimeTests.StaticCalculator {
+        return BridgeJSRuntimeTests.StaticCalculator(bridgeJSRawValue: value)!
     }
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSLowerReturn() -> Int32 {
         return bridgeJSLowerParameter()
@@ -5483,81 +5483,81 @@ extension StaticCalculator: _BridgedSwiftCaseEnum {
     }
 }
 
-@_expose(wasm, "bjs_StaticCalculator_static_roundtrip")
-@_cdecl("bjs_StaticCalculator_static_roundtrip")
-public func _bjs_StaticCalculator_static_roundtrip(_ value: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_StaticCalculator_static_roundtrip")
+@_cdecl("bjs_BridgeJSRuntimeTests_StaticCalculator_static_roundtrip")
+public func _bjs_BridgeJSRuntimeTests_StaticCalculator_static_roundtrip(_ value: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = StaticCalculator.roundtrip(_: Int.bridgeJSLiftParameter(value))
+    let ret = BridgeJSRuntimeTests.StaticCalculator.roundtrip(_: Int.bridgeJSLiftParameter(value))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_StaticCalculator_static_doubleValue")
-@_cdecl("bjs_StaticCalculator_static_doubleValue")
-public func _bjs_StaticCalculator_static_doubleValue(_ value: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_StaticCalculator_static_doubleValue")
+@_cdecl("bjs_BridgeJSRuntimeTests_StaticCalculator_static_doubleValue")
+public func _bjs_BridgeJSRuntimeTests_StaticCalculator_static_doubleValue(_ value: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = StaticCalculator.doubleValue(_: Int.bridgeJSLiftParameter(value))
+    let ret = BridgeJSRuntimeTests.StaticCalculator.doubleValue(_: Int.bridgeJSLiftParameter(value))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_StaticCalculator_static_version_get")
-@_cdecl("bjs_StaticCalculator_static_version_get")
-public func _bjs_StaticCalculator_static_version_get() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_StaticCalculator_static_version_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_StaticCalculator_static_version_get")
+public func _bjs_BridgeJSRuntimeTests_StaticCalculator_static_version_get() -> Void {
     #if arch(wasm32)
-    let ret = StaticCalculator.version
+    let ret = BridgeJSRuntimeTests.StaticCalculator.version
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_StaticUtils_Nested_static_roundtrip")
-@_cdecl("bjs_StaticUtils_Nested_static_roundtrip")
-public func _bjs_StaticUtils_Nested_static_roundtrip(_ valueBytes: Int32, _ valueLength: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_StaticUtils_Nested_static_roundtrip")
+@_cdecl("bjs_BridgeJSRuntimeTests_StaticUtils_Nested_static_roundtrip")
+public func _bjs_BridgeJSRuntimeTests_StaticUtils_Nested_static_roundtrip(_ valueBytes: Int32, _ valueLength: Int32) -> Void {
     #if arch(wasm32)
-    let ret = StaticUtils.Nested.roundtrip(_: String.bridgeJSLiftParameter(valueBytes, valueLength))
+    let ret = BridgeJSRuntimeTests.StaticUtils.Nested.roundtrip(_: String.bridgeJSLiftParameter(valueBytes, valueLength))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Services_Graph_GraphOperations_static_createGraph")
-@_cdecl("bjs_Services_Graph_GraphOperations_static_createGraph")
-public func _bjs_Services_Graph_GraphOperations_static_createGraph(_ rootId: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_GraphOperations_static_createGraph")
+@_cdecl("bjs_BridgeJSRuntimeTests_GraphOperations_static_createGraph")
+public func _bjs_BridgeJSRuntimeTests_GraphOperations_static_createGraph(_ rootId: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = GraphOperations.createGraph(rootId: Int.bridgeJSLiftParameter(rootId))
+    let ret = BridgeJSRuntimeTests.GraphOperations.createGraph(rootId: Int.bridgeJSLiftParameter(rootId))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Services_Graph_GraphOperations_static_nodeCount")
-@_cdecl("bjs_Services_Graph_GraphOperations_static_nodeCount")
-public func _bjs_Services_Graph_GraphOperations_static_nodeCount(_ graphId: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_GraphOperations_static_nodeCount")
+@_cdecl("bjs_BridgeJSRuntimeTests_GraphOperations_static_nodeCount")
+public func _bjs_BridgeJSRuntimeTests_GraphOperations_static_nodeCount(_ graphId: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = GraphOperations.nodeCount(graphId: Int.bridgeJSLiftParameter(graphId))
+    let ret = BridgeJSRuntimeTests.GraphOperations.nodeCount(graphId: Int.bridgeJSLiftParameter(graphId))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension StaticPropertyEnum: _BridgedSwiftCaseEnum {
+extension BridgeJSRuntimeTests.StaticPropertyEnum: _BridgedSwiftCaseEnum {
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSLowerParameter() -> Int32 {
         return bridgeJSRawValue
     }
-    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftReturn(_ value: Int32) -> StaticPropertyEnum {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftReturn(_ value: Int32) -> BridgeJSRuntimeTests.StaticPropertyEnum {
         return bridgeJSLiftParameter(value)
     }
-    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftParameter(_ value: Int32) -> StaticPropertyEnum {
-        return StaticPropertyEnum(bridgeJSRawValue: value)!
+    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftParameter(_ value: Int32) -> BridgeJSRuntimeTests.StaticPropertyEnum {
+        return BridgeJSRuntimeTests.StaticPropertyEnum(bridgeJSRawValue: value)!
     }
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSLowerReturn() -> Int32 {
         return bridgeJSLowerParameter()
@@ -5584,231 +5584,231 @@ extension StaticPropertyEnum: _BridgedSwiftCaseEnum {
     }
 }
 
-@_expose(wasm, "bjs_StaticPropertyEnum_static_enumProperty_get")
-@_cdecl("bjs_StaticPropertyEnum_static_enumProperty_get")
-public func _bjs_StaticPropertyEnum_static_enumProperty_get() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_StaticPropertyEnum_static_enumProperty_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_StaticPropertyEnum_static_enumProperty_get")
+public func _bjs_BridgeJSRuntimeTests_StaticPropertyEnum_static_enumProperty_get() -> Void {
     #if arch(wasm32)
-    let ret = StaticPropertyEnum.enumProperty
+    let ret = BridgeJSRuntimeTests.StaticPropertyEnum.enumProperty
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_StaticPropertyEnum_static_enumProperty_set")
-@_cdecl("bjs_StaticPropertyEnum_static_enumProperty_set")
-public func _bjs_StaticPropertyEnum_static_enumProperty_set(_ valueBytes: Int32, _ valueLength: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_StaticPropertyEnum_static_enumProperty_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_StaticPropertyEnum_static_enumProperty_set")
+public func _bjs_BridgeJSRuntimeTests_StaticPropertyEnum_static_enumProperty_set(_ valueBytes: Int32, _ valueLength: Int32) -> Void {
     #if arch(wasm32)
-    StaticPropertyEnum.enumProperty = String.bridgeJSLiftParameter(valueBytes, valueLength)
+    BridgeJSRuntimeTests.StaticPropertyEnum.enumProperty = String.bridgeJSLiftParameter(valueBytes, valueLength)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_StaticPropertyEnum_static_enumConstant_get")
-@_cdecl("bjs_StaticPropertyEnum_static_enumConstant_get")
-public func _bjs_StaticPropertyEnum_static_enumConstant_get() -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_StaticPropertyEnum_static_enumConstant_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_StaticPropertyEnum_static_enumConstant_get")
+public func _bjs_BridgeJSRuntimeTests_StaticPropertyEnum_static_enumConstant_get() -> Int32 {
     #if arch(wasm32)
-    let ret = StaticPropertyEnum.enumConstant
+    let ret = BridgeJSRuntimeTests.StaticPropertyEnum.enumConstant
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_StaticPropertyEnum_static_enumBool_get")
-@_cdecl("bjs_StaticPropertyEnum_static_enumBool_get")
-public func _bjs_StaticPropertyEnum_static_enumBool_get() -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_StaticPropertyEnum_static_enumBool_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_StaticPropertyEnum_static_enumBool_get")
+public func _bjs_BridgeJSRuntimeTests_StaticPropertyEnum_static_enumBool_get() -> Int32 {
     #if arch(wasm32)
-    let ret = StaticPropertyEnum.enumBool
+    let ret = BridgeJSRuntimeTests.StaticPropertyEnum.enumBool
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_StaticPropertyEnum_static_enumBool_set")
-@_cdecl("bjs_StaticPropertyEnum_static_enumBool_set")
-public func _bjs_StaticPropertyEnum_static_enumBool_set(_ value: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_StaticPropertyEnum_static_enumBool_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_StaticPropertyEnum_static_enumBool_set")
+public func _bjs_BridgeJSRuntimeTests_StaticPropertyEnum_static_enumBool_set(_ value: Int32) -> Void {
     #if arch(wasm32)
-    StaticPropertyEnum.enumBool = Bool.bridgeJSLiftParameter(value)
+    BridgeJSRuntimeTests.StaticPropertyEnum.enumBool = Bool.bridgeJSLiftParameter(value)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_StaticPropertyEnum_static_enumVariable_get")
-@_cdecl("bjs_StaticPropertyEnum_static_enumVariable_get")
-public func _bjs_StaticPropertyEnum_static_enumVariable_get() -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_StaticPropertyEnum_static_enumVariable_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_StaticPropertyEnum_static_enumVariable_get")
+public func _bjs_BridgeJSRuntimeTests_StaticPropertyEnum_static_enumVariable_get() -> Int32 {
     #if arch(wasm32)
-    let ret = StaticPropertyEnum.enumVariable
+    let ret = BridgeJSRuntimeTests.StaticPropertyEnum.enumVariable
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_StaticPropertyEnum_static_enumVariable_set")
-@_cdecl("bjs_StaticPropertyEnum_static_enumVariable_set")
-public func _bjs_StaticPropertyEnum_static_enumVariable_set(_ value: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_StaticPropertyEnum_static_enumVariable_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_StaticPropertyEnum_static_enumVariable_set")
+public func _bjs_BridgeJSRuntimeTests_StaticPropertyEnum_static_enumVariable_set(_ value: Int32) -> Void {
     #if arch(wasm32)
-    StaticPropertyEnum.enumVariable = Int.bridgeJSLiftParameter(value)
+    BridgeJSRuntimeTests.StaticPropertyEnum.enumVariable = Int.bridgeJSLiftParameter(value)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_StaticPropertyEnum_static_computedReadonly_get")
-@_cdecl("bjs_StaticPropertyEnum_static_computedReadonly_get")
-public func _bjs_StaticPropertyEnum_static_computedReadonly_get() -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_StaticPropertyEnum_static_computedReadonly_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_StaticPropertyEnum_static_computedReadonly_get")
+public func _bjs_BridgeJSRuntimeTests_StaticPropertyEnum_static_computedReadonly_get() -> Int32 {
     #if arch(wasm32)
-    let ret = StaticPropertyEnum.computedReadonly
+    let ret = BridgeJSRuntimeTests.StaticPropertyEnum.computedReadonly
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_StaticPropertyEnum_static_computedReadWrite_get")
-@_cdecl("bjs_StaticPropertyEnum_static_computedReadWrite_get")
-public func _bjs_StaticPropertyEnum_static_computedReadWrite_get() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_StaticPropertyEnum_static_computedReadWrite_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_StaticPropertyEnum_static_computedReadWrite_get")
+public func _bjs_BridgeJSRuntimeTests_StaticPropertyEnum_static_computedReadWrite_get() -> Void {
     #if arch(wasm32)
-    let ret = StaticPropertyEnum.computedReadWrite
+    let ret = BridgeJSRuntimeTests.StaticPropertyEnum.computedReadWrite
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_StaticPropertyEnum_static_computedReadWrite_set")
-@_cdecl("bjs_StaticPropertyEnum_static_computedReadWrite_set")
-public func _bjs_StaticPropertyEnum_static_computedReadWrite_set(_ valueBytes: Int32, _ valueLength: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_StaticPropertyEnum_static_computedReadWrite_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_StaticPropertyEnum_static_computedReadWrite_set")
+public func _bjs_BridgeJSRuntimeTests_StaticPropertyEnum_static_computedReadWrite_set(_ valueBytes: Int32, _ valueLength: Int32) -> Void {
     #if arch(wasm32)
-    StaticPropertyEnum.computedReadWrite = String.bridgeJSLiftParameter(valueBytes, valueLength)
+    BridgeJSRuntimeTests.StaticPropertyEnum.computedReadWrite = String.bridgeJSLiftParameter(valueBytes, valueLength)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_StaticPropertyNamespace_static_namespaceProperty_get")
-@_cdecl("bjs_StaticPropertyNamespace_static_namespaceProperty_get")
-public func _bjs_StaticPropertyNamespace_static_namespaceProperty_get() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_StaticPropertyNamespace_static_namespaceProperty_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_StaticPropertyNamespace_static_namespaceProperty_get")
+public func _bjs_BridgeJSRuntimeTests_StaticPropertyNamespace_static_namespaceProperty_get() -> Void {
     #if arch(wasm32)
-    let ret = StaticPropertyNamespace.namespaceProperty
+    let ret = BridgeJSRuntimeTests.StaticPropertyNamespace.namespaceProperty
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_StaticPropertyNamespace_static_namespaceProperty_set")
-@_cdecl("bjs_StaticPropertyNamespace_static_namespaceProperty_set")
-public func _bjs_StaticPropertyNamespace_static_namespaceProperty_set(_ valueBytes: Int32, _ valueLength: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_StaticPropertyNamespace_static_namespaceProperty_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_StaticPropertyNamespace_static_namespaceProperty_set")
+public func _bjs_BridgeJSRuntimeTests_StaticPropertyNamespace_static_namespaceProperty_set(_ valueBytes: Int32, _ valueLength: Int32) -> Void {
     #if arch(wasm32)
-    StaticPropertyNamespace.namespaceProperty = String.bridgeJSLiftParameter(valueBytes, valueLength)
+    BridgeJSRuntimeTests.StaticPropertyNamespace.namespaceProperty = String.bridgeJSLiftParameter(valueBytes, valueLength)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_StaticPropertyNamespace_static_namespaceConstant_get")
-@_cdecl("bjs_StaticPropertyNamespace_static_namespaceConstant_get")
-public func _bjs_StaticPropertyNamespace_static_namespaceConstant_get() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_StaticPropertyNamespace_static_namespaceConstant_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_StaticPropertyNamespace_static_namespaceConstant_get")
+public func _bjs_BridgeJSRuntimeTests_StaticPropertyNamespace_static_namespaceConstant_get() -> Void {
     #if arch(wasm32)
-    let ret = StaticPropertyNamespace.namespaceConstant
+    let ret = BridgeJSRuntimeTests.StaticPropertyNamespace.namespaceConstant
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_StaticPropertyNamespace_NestedProperties_static_nestedProperty_get")
-@_cdecl("bjs_StaticPropertyNamespace_NestedProperties_static_nestedProperty_get")
-public func _bjs_StaticPropertyNamespace_NestedProperties_static_nestedProperty_get() -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_StaticPropertyNamespace_NestedProperties_static_nestedProperty_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_StaticPropertyNamespace_NestedProperties_static_nestedProperty_get")
+public func _bjs_BridgeJSRuntimeTests_StaticPropertyNamespace_NestedProperties_static_nestedProperty_get() -> Int32 {
     #if arch(wasm32)
-    let ret = StaticPropertyNamespace.NestedProperties.nestedProperty
+    let ret = BridgeJSRuntimeTests.StaticPropertyNamespace.NestedProperties.nestedProperty
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_StaticPropertyNamespace_NestedProperties_static_nestedProperty_set")
-@_cdecl("bjs_StaticPropertyNamespace_NestedProperties_static_nestedProperty_set")
-public func _bjs_StaticPropertyNamespace_NestedProperties_static_nestedProperty_set(_ value: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_StaticPropertyNamespace_NestedProperties_static_nestedProperty_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_StaticPropertyNamespace_NestedProperties_static_nestedProperty_set")
+public func _bjs_BridgeJSRuntimeTests_StaticPropertyNamespace_NestedProperties_static_nestedProperty_set(_ value: Int32) -> Void {
     #if arch(wasm32)
-    StaticPropertyNamespace.NestedProperties.nestedProperty = Int.bridgeJSLiftParameter(value)
+    BridgeJSRuntimeTests.StaticPropertyNamespace.NestedProperties.nestedProperty = Int.bridgeJSLiftParameter(value)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_StaticPropertyNamespace_NestedProperties_static_nestedConstant_get")
-@_cdecl("bjs_StaticPropertyNamespace_NestedProperties_static_nestedConstant_get")
-public func _bjs_StaticPropertyNamespace_NestedProperties_static_nestedConstant_get() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_StaticPropertyNamespace_NestedProperties_static_nestedConstant_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_StaticPropertyNamespace_NestedProperties_static_nestedConstant_get")
+public func _bjs_BridgeJSRuntimeTests_StaticPropertyNamespace_NestedProperties_static_nestedConstant_get() -> Void {
     #if arch(wasm32)
-    let ret = StaticPropertyNamespace.NestedProperties.nestedConstant
+    let ret = BridgeJSRuntimeTests.StaticPropertyNamespace.NestedProperties.nestedConstant
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_StaticPropertyNamespace_NestedProperties_static_nestedDouble_get")
-@_cdecl("bjs_StaticPropertyNamespace_NestedProperties_static_nestedDouble_get")
-public func _bjs_StaticPropertyNamespace_NestedProperties_static_nestedDouble_get() -> Float64 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_StaticPropertyNamespace_NestedProperties_static_nestedDouble_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_StaticPropertyNamespace_NestedProperties_static_nestedDouble_get")
+public func _bjs_BridgeJSRuntimeTests_StaticPropertyNamespace_NestedProperties_static_nestedDouble_get() -> Float64 {
     #if arch(wasm32)
-    let ret = StaticPropertyNamespace.NestedProperties.nestedDouble
+    let ret = BridgeJSRuntimeTests.StaticPropertyNamespace.NestedProperties.nestedDouble
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_StaticPropertyNamespace_NestedProperties_static_nestedDouble_set")
-@_cdecl("bjs_StaticPropertyNamespace_NestedProperties_static_nestedDouble_set")
-public func _bjs_StaticPropertyNamespace_NestedProperties_static_nestedDouble_set(_ value: Float64) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_StaticPropertyNamespace_NestedProperties_static_nestedDouble_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_StaticPropertyNamespace_NestedProperties_static_nestedDouble_set")
+public func _bjs_BridgeJSRuntimeTests_StaticPropertyNamespace_NestedProperties_static_nestedDouble_set(_ value: Float64) -> Void {
     #if arch(wasm32)
-    StaticPropertyNamespace.NestedProperties.nestedDouble = Double.bridgeJSLiftParameter(value)
+    BridgeJSRuntimeTests.StaticPropertyNamespace.NestedProperties.nestedDouble = Double.bridgeJSLiftParameter(value)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_NestedStructGroupA_static_roundtripMetadata")
-@_cdecl("bjs_NestedStructGroupA_static_roundtripMetadata")
-public func _bjs_NestedStructGroupA_static_roundtripMetadata() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_NestedStructGroupA_static_roundtripMetadata")
+@_cdecl("bjs_BridgeJSRuntimeTests_NestedStructGroupA_static_roundtripMetadata")
+public func _bjs_BridgeJSRuntimeTests_NestedStructGroupA_static_roundtripMetadata() -> Void {
     #if arch(wasm32)
-    let ret = NestedStructGroupA.roundtripMetadata(_: NestedStructGroupA.Metadata.bridgeJSLiftParameter())
+    let ret = BridgeJSRuntimeTests.NestedStructGroupA.roundtripMetadata(_: BridgeJSRuntimeTests.NestedStructGroupA.Metadata.bridgeJSLiftParameter())
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_NestedStructGroupB_static_roundtripMetadata")
-@_cdecl("bjs_NestedStructGroupB_static_roundtripMetadata")
-public func _bjs_NestedStructGroupB_static_roundtripMetadata() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_NestedStructGroupB_static_roundtripMetadata")
+@_cdecl("bjs_BridgeJSRuntimeTests_NestedStructGroupB_static_roundtripMetadata")
+public func _bjs_BridgeJSRuntimeTests_NestedStructGroupB_static_roundtripMetadata() -> Void {
     #if arch(wasm32)
-    let ret = NestedStructGroupB.roundtripMetadata(_: NestedStructGroupB.Metadata.bridgeJSLiftParameter())
+    let ret = BridgeJSRuntimeTests.NestedStructGroupB.roundtripMetadata(_: BridgeJSRuntimeTests.NestedStructGroupB.Metadata.bridgeJSLiftParameter())
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension NestedTypeHost.Variant: _BridgedSwiftEnumNoPayload, _BridgedSwiftRawValueEnum {
+extension BridgeJSRuntimeTests.NestedTypeHost.Variant: _BridgedSwiftEnumNoPayload, _BridgedSwiftRawValueEnum {
 }
 
-extension LightColor: _BridgedSwiftCaseEnum {
+extension BridgeJSRuntimeTests.LightColor: _BridgedSwiftCaseEnum {
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSLowerParameter() -> Int32 {
         return bridgeJSRawValue
     }
-    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftReturn(_ value: Int32) -> LightColor {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftReturn(_ value: Int32) -> BridgeJSRuntimeTests.LightColor {
         return bridgeJSLiftParameter(value)
     }
-    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftParameter(_ value: Int32) -> LightColor {
-        return LightColor(bridgeJSRawValue: value)!
+    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftParameter(_ value: Int32) -> BridgeJSRuntimeTests.LightColor {
+        return BridgeJSRuntimeTests.LightColor(bridgeJSRawValue: value)!
     }
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSLowerReturn() -> Int32 {
         return bridgeJSLowerParameter()
@@ -5839,8 +5839,8 @@ extension LightColor: _BridgedSwiftCaseEnum {
     }
 }
 
-extension ImportedPayloadSignal: _BridgedSwiftAssociatedValueEnum {
-    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPopPayload(_ caseId: Int32) -> ImportedPayloadSignal {
+extension BridgeJSRuntimeTests.ImportedPayloadSignal: _BridgedSwiftAssociatedValueEnum {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPopPayload(_ caseId: Int32) -> BridgeJSRuntimeTests.ImportedPayloadSignal {
         switch caseId {
         case 0:
             return .start(String.bridgeJSStackPop())
@@ -5849,7 +5849,7 @@ extension ImportedPayloadSignal: _BridgedSwiftAssociatedValueEnum {
         case 2:
             return .idle
         default:
-            fatalError("Unknown ImportedPayloadSignal case ID: \(caseId)")
+            fatalError("Unknown BridgeJSRuntimeTests.ImportedPayloadSignal case ID: \(caseId)")
         }
     }
 
@@ -5867,491 +5867,491 @@ extension ImportedPayloadSignal: _BridgedSwiftAssociatedValueEnum {
     }
 }
 
-@_expose(wasm, "bjs_IntegerTypesSupportExports_static_roundTripInt")
-@_cdecl("bjs_IntegerTypesSupportExports_static_roundTripInt")
-public func _bjs_IntegerTypesSupportExports_static_roundTripInt(_ v: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_IntegerTypesSupportExports_static_roundTripInt")
+@_cdecl("bjs_BridgeJSRuntimeTests_IntegerTypesSupportExports_static_roundTripInt")
+public func _bjs_BridgeJSRuntimeTests_IntegerTypesSupportExports_static_roundTripInt(_ v: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = IntegerTypesSupportExports.roundTripInt(_: Int.bridgeJSLiftParameter(v))
+    let ret = BridgeJSRuntimeTests.IntegerTypesSupportExports.roundTripInt(_: Int.bridgeJSLiftParameter(v))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_IntegerTypesSupportExports_static_roundTripUInt")
-@_cdecl("bjs_IntegerTypesSupportExports_static_roundTripUInt")
-public func _bjs_IntegerTypesSupportExports_static_roundTripUInt(_ v: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_IntegerTypesSupportExports_static_roundTripUInt")
+@_cdecl("bjs_BridgeJSRuntimeTests_IntegerTypesSupportExports_static_roundTripUInt")
+public func _bjs_BridgeJSRuntimeTests_IntegerTypesSupportExports_static_roundTripUInt(_ v: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = IntegerTypesSupportExports.roundTripUInt(_: UInt.bridgeJSLiftParameter(v))
+    let ret = BridgeJSRuntimeTests.IntegerTypesSupportExports.roundTripUInt(_: UInt.bridgeJSLiftParameter(v))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_IntegerTypesSupportExports_static_roundTripInt8")
-@_cdecl("bjs_IntegerTypesSupportExports_static_roundTripInt8")
-public func _bjs_IntegerTypesSupportExports_static_roundTripInt8(_ v: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_IntegerTypesSupportExports_static_roundTripInt8")
+@_cdecl("bjs_BridgeJSRuntimeTests_IntegerTypesSupportExports_static_roundTripInt8")
+public func _bjs_BridgeJSRuntimeTests_IntegerTypesSupportExports_static_roundTripInt8(_ v: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = IntegerTypesSupportExports.roundTripInt8(_: Int8.bridgeJSLiftParameter(v))
+    let ret = BridgeJSRuntimeTests.IntegerTypesSupportExports.roundTripInt8(_: Int8.bridgeJSLiftParameter(v))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_IntegerTypesSupportExports_static_roundTripUInt8")
-@_cdecl("bjs_IntegerTypesSupportExports_static_roundTripUInt8")
-public func _bjs_IntegerTypesSupportExports_static_roundTripUInt8(_ v: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_IntegerTypesSupportExports_static_roundTripUInt8")
+@_cdecl("bjs_BridgeJSRuntimeTests_IntegerTypesSupportExports_static_roundTripUInt8")
+public func _bjs_BridgeJSRuntimeTests_IntegerTypesSupportExports_static_roundTripUInt8(_ v: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = IntegerTypesSupportExports.roundTripUInt8(_: UInt8.bridgeJSLiftParameter(v))
+    let ret = BridgeJSRuntimeTests.IntegerTypesSupportExports.roundTripUInt8(_: UInt8.bridgeJSLiftParameter(v))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_IntegerTypesSupportExports_static_roundTripInt16")
-@_cdecl("bjs_IntegerTypesSupportExports_static_roundTripInt16")
-public func _bjs_IntegerTypesSupportExports_static_roundTripInt16(_ v: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_IntegerTypesSupportExports_static_roundTripInt16")
+@_cdecl("bjs_BridgeJSRuntimeTests_IntegerTypesSupportExports_static_roundTripInt16")
+public func _bjs_BridgeJSRuntimeTests_IntegerTypesSupportExports_static_roundTripInt16(_ v: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = IntegerTypesSupportExports.roundTripInt16(_: Int16.bridgeJSLiftParameter(v))
+    let ret = BridgeJSRuntimeTests.IntegerTypesSupportExports.roundTripInt16(_: Int16.bridgeJSLiftParameter(v))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_IntegerTypesSupportExports_static_roundTripUInt16")
-@_cdecl("bjs_IntegerTypesSupportExports_static_roundTripUInt16")
-public func _bjs_IntegerTypesSupportExports_static_roundTripUInt16(_ v: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_IntegerTypesSupportExports_static_roundTripUInt16")
+@_cdecl("bjs_BridgeJSRuntimeTests_IntegerTypesSupportExports_static_roundTripUInt16")
+public func _bjs_BridgeJSRuntimeTests_IntegerTypesSupportExports_static_roundTripUInt16(_ v: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = IntegerTypesSupportExports.roundTripUInt16(_: UInt16.bridgeJSLiftParameter(v))
+    let ret = BridgeJSRuntimeTests.IntegerTypesSupportExports.roundTripUInt16(_: UInt16.bridgeJSLiftParameter(v))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_IntegerTypesSupportExports_static_roundTripInt32")
-@_cdecl("bjs_IntegerTypesSupportExports_static_roundTripInt32")
-public func _bjs_IntegerTypesSupportExports_static_roundTripInt32(_ v: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_IntegerTypesSupportExports_static_roundTripInt32")
+@_cdecl("bjs_BridgeJSRuntimeTests_IntegerTypesSupportExports_static_roundTripInt32")
+public func _bjs_BridgeJSRuntimeTests_IntegerTypesSupportExports_static_roundTripInt32(_ v: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = IntegerTypesSupportExports.roundTripInt32(_: Int32.bridgeJSLiftParameter(v))
+    let ret = BridgeJSRuntimeTests.IntegerTypesSupportExports.roundTripInt32(_: Int32.bridgeJSLiftParameter(v))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_IntegerTypesSupportExports_static_roundTripUInt32")
-@_cdecl("bjs_IntegerTypesSupportExports_static_roundTripUInt32")
-public func _bjs_IntegerTypesSupportExports_static_roundTripUInt32(_ v: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_IntegerTypesSupportExports_static_roundTripUInt32")
+@_cdecl("bjs_BridgeJSRuntimeTests_IntegerTypesSupportExports_static_roundTripUInt32")
+public func _bjs_BridgeJSRuntimeTests_IntegerTypesSupportExports_static_roundTripUInt32(_ v: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = IntegerTypesSupportExports.roundTripUInt32(_: UInt32.bridgeJSLiftParameter(v))
+    let ret = BridgeJSRuntimeTests.IntegerTypesSupportExports.roundTripUInt32(_: UInt32.bridgeJSLiftParameter(v))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_IntegerTypesSupportExports_static_roundTripInt64")
-@_cdecl("bjs_IntegerTypesSupportExports_static_roundTripInt64")
-public func _bjs_IntegerTypesSupportExports_static_roundTripInt64(_ v: Int64) -> Int64 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_IntegerTypesSupportExports_static_roundTripInt64")
+@_cdecl("bjs_BridgeJSRuntimeTests_IntegerTypesSupportExports_static_roundTripInt64")
+public func _bjs_BridgeJSRuntimeTests_IntegerTypesSupportExports_static_roundTripInt64(_ v: Int64) -> Int64 {
     #if arch(wasm32)
-    let ret = IntegerTypesSupportExports.roundTripInt64(_: Int64.bridgeJSLiftParameter(v))
+    let ret = BridgeJSRuntimeTests.IntegerTypesSupportExports.roundTripInt64(_: Int64.bridgeJSLiftParameter(v))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_IntegerTypesSupportExports_static_roundTripUInt64")
-@_cdecl("bjs_IntegerTypesSupportExports_static_roundTripUInt64")
-public func _bjs_IntegerTypesSupportExports_static_roundTripUInt64(_ v: Int64) -> Int64 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_IntegerTypesSupportExports_static_roundTripUInt64")
+@_cdecl("bjs_BridgeJSRuntimeTests_IntegerTypesSupportExports_static_roundTripUInt64")
+public func _bjs_BridgeJSRuntimeTests_IntegerTypesSupportExports_static_roundTripUInt64(_ v: Int64) -> Int64 {
     #if arch(wasm32)
-    let ret = IntegerTypesSupportExports.roundTripUInt64(_: UInt64.bridgeJSLiftParameter(v))
+    let ret = BridgeJSRuntimeTests.IntegerTypesSupportExports.roundTripUInt64(_: UInt64.bridgeJSLiftParameter(v))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_JSTypedArrayExports_static_roundTripUint8Array")
-@_cdecl("bjs_JSTypedArrayExports_static_roundTripUint8Array")
-public func _bjs_JSTypedArrayExports_static_roundTripUint8Array(_ v: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_JSTypedArrayExports_static_roundTripUint8Array")
+@_cdecl("bjs_BridgeJSRuntimeTests_JSTypedArrayExports_static_roundTripUint8Array")
+public func _bjs_BridgeJSRuntimeTests_JSTypedArrayExports_static_roundTripUint8Array(_ v: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = JSTypedArrayExports.roundTripUint8Array(_: JSUint8Array.bridgeJSLiftParameter(v))
+    let ret = BridgeJSRuntimeTests.JSTypedArrayExports.roundTripUint8Array(_: JSUint8Array.bridgeJSLiftParameter(v))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_JSTypedArrayExports_static_roundTripFloat32Array")
-@_cdecl("bjs_JSTypedArrayExports_static_roundTripFloat32Array")
-public func _bjs_JSTypedArrayExports_static_roundTripFloat32Array(_ v: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_JSTypedArrayExports_static_roundTripFloat32Array")
+@_cdecl("bjs_BridgeJSRuntimeTests_JSTypedArrayExports_static_roundTripFloat32Array")
+public func _bjs_BridgeJSRuntimeTests_JSTypedArrayExports_static_roundTripFloat32Array(_ v: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = JSTypedArrayExports.roundTripFloat32Array(_: JSFloat32Array.bridgeJSLiftParameter(v))
+    let ret = BridgeJSRuntimeTests.JSTypedArrayExports.roundTripFloat32Array(_: JSFloat32Array.bridgeJSLiftParameter(v))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_JSTypedArrayExports_static_roundTripFloat64Array")
-@_cdecl("bjs_JSTypedArrayExports_static_roundTripFloat64Array")
-public func _bjs_JSTypedArrayExports_static_roundTripFloat64Array(_ v: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_JSTypedArrayExports_static_roundTripFloat64Array")
+@_cdecl("bjs_BridgeJSRuntimeTests_JSTypedArrayExports_static_roundTripFloat64Array")
+public func _bjs_BridgeJSRuntimeTests_JSTypedArrayExports_static_roundTripFloat64Array(_ v: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = JSTypedArrayExports.roundTripFloat64Array(_: JSFloat64Array.bridgeJSLiftParameter(v))
+    let ret = BridgeJSRuntimeTests.JSTypedArrayExports.roundTripFloat64Array(_: JSFloat64Array.bridgeJSLiftParameter(v))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_JSTypedArrayExports_static_roundTripInt32Array")
-@_cdecl("bjs_JSTypedArrayExports_static_roundTripInt32Array")
-public func _bjs_JSTypedArrayExports_static_roundTripInt32Array(_ v: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_JSTypedArrayExports_static_roundTripInt32Array")
+@_cdecl("bjs_BridgeJSRuntimeTests_JSTypedArrayExports_static_roundTripInt32Array")
+public func _bjs_BridgeJSRuntimeTests_JSTypedArrayExports_static_roundTripInt32Array(_ v: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = JSTypedArrayExports.roundTripInt32Array(_: JSInt32Array.bridgeJSLiftParameter(v))
+    let ret = BridgeJSRuntimeTests.JSTypedArrayExports.roundTripInt32Array(_: JSInt32Array.bridgeJSLiftParameter(v))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_OptionalSupportExports_static_roundTripOptionalString")
-@_cdecl("bjs_OptionalSupportExports_static_roundTripOptionalString")
-public func _bjs_OptionalSupportExports_static_roundTripOptionalString(_ vIsSome: Int32, _ vBytes: Int32, _ vLength: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalString")
+@_cdecl("bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalString")
+public func _bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalString(_ vIsSome: Int32, _ vBytes: Int32, _ vLength: Int32) -> Void {
     #if arch(wasm32)
-    let ret = OptionalSupportExports.roundTripOptionalString(_: Optional<String>.bridgeJSLiftParameter(vIsSome, vBytes, vLength))
+    let ret = BridgeJSRuntimeTests.OptionalSupportExports.roundTripOptionalString(_: Optional<String>.bridgeJSLiftParameter(vIsSome, vBytes, vLength))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_OptionalSupportExports_static_roundTripOptionalInt")
-@_cdecl("bjs_OptionalSupportExports_static_roundTripOptionalInt")
-public func _bjs_OptionalSupportExports_static_roundTripOptionalInt(_ vIsSome: Int32, _ vValue: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalInt")
+@_cdecl("bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalInt")
+public func _bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalInt(_ vIsSome: Int32, _ vValue: Int32) -> Void {
     #if arch(wasm32)
-    let ret = OptionalSupportExports.roundTripOptionalInt(_: Optional<Int>.bridgeJSLiftParameter(vIsSome, vValue))
+    let ret = BridgeJSRuntimeTests.OptionalSupportExports.roundTripOptionalInt(_: Optional<Int>.bridgeJSLiftParameter(vIsSome, vValue))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_OptionalSupportExports_static_roundTripOptionalBool")
-@_cdecl("bjs_OptionalSupportExports_static_roundTripOptionalBool")
-public func _bjs_OptionalSupportExports_static_roundTripOptionalBool(_ vIsSome: Int32, _ vValue: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalBool")
+@_cdecl("bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalBool")
+public func _bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalBool(_ vIsSome: Int32, _ vValue: Int32) -> Void {
     #if arch(wasm32)
-    let ret = OptionalSupportExports.roundTripOptionalBool(_: Optional<Bool>.bridgeJSLiftParameter(vIsSome, vValue))
+    let ret = BridgeJSRuntimeTests.OptionalSupportExports.roundTripOptionalBool(_: Optional<Bool>.bridgeJSLiftParameter(vIsSome, vValue))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_OptionalSupportExports_static_roundTripOptionalFloat")
-@_cdecl("bjs_OptionalSupportExports_static_roundTripOptionalFloat")
-public func _bjs_OptionalSupportExports_static_roundTripOptionalFloat(_ vIsSome: Int32, _ vValue: Float32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalFloat")
+@_cdecl("bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalFloat")
+public func _bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalFloat(_ vIsSome: Int32, _ vValue: Float32) -> Void {
     #if arch(wasm32)
-    let ret = OptionalSupportExports.roundTripOptionalFloat(_: Optional<Float>.bridgeJSLiftParameter(vIsSome, vValue))
+    let ret = BridgeJSRuntimeTests.OptionalSupportExports.roundTripOptionalFloat(_: Optional<Float>.bridgeJSLiftParameter(vIsSome, vValue))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_OptionalSupportExports_static_roundTripOptionalDouble")
-@_cdecl("bjs_OptionalSupportExports_static_roundTripOptionalDouble")
-public func _bjs_OptionalSupportExports_static_roundTripOptionalDouble(_ vIsSome: Int32, _ vValue: Float64) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalDouble")
+@_cdecl("bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalDouble")
+public func _bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalDouble(_ vIsSome: Int32, _ vValue: Float64) -> Void {
     #if arch(wasm32)
-    let ret = OptionalSupportExports.roundTripOptionalDouble(_: Optional<Double>.bridgeJSLiftParameter(vIsSome, vValue))
+    let ret = BridgeJSRuntimeTests.OptionalSupportExports.roundTripOptionalDouble(_: Optional<Double>.bridgeJSLiftParameter(vIsSome, vValue))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_OptionalSupportExports_static_roundTripOptionalSyntax")
-@_cdecl("bjs_OptionalSupportExports_static_roundTripOptionalSyntax")
-public func _bjs_OptionalSupportExports_static_roundTripOptionalSyntax(_ vIsSome: Int32, _ vBytes: Int32, _ vLength: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalSyntax")
+@_cdecl("bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalSyntax")
+public func _bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalSyntax(_ vIsSome: Int32, _ vBytes: Int32, _ vLength: Int32) -> Void {
     #if arch(wasm32)
-    let ret = OptionalSupportExports.roundTripOptionalSyntax(_: Optional<String>.bridgeJSLiftParameter(vIsSome, vBytes, vLength))
+    let ret = BridgeJSRuntimeTests.OptionalSupportExports.roundTripOptionalSyntax(_: Optional<String>.bridgeJSLiftParameter(vIsSome, vBytes, vLength))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_OptionalSupportExports_static_roundTripOptionalCaseEnum")
-@_cdecl("bjs_OptionalSupportExports_static_roundTripOptionalCaseEnum")
-public func _bjs_OptionalSupportExports_static_roundTripOptionalCaseEnum(_ vIsSome: Int32, _ vValue: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalCaseEnum")
+@_cdecl("bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalCaseEnum")
+public func _bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalCaseEnum(_ vIsSome: Int32, _ vValue: Int32) -> Void {
     #if arch(wasm32)
-    let ret = OptionalSupportExports.roundTripOptionalCaseEnum(_: Optional<Status>.bridgeJSLiftParameter(vIsSome, vValue))
+    let ret = BridgeJSRuntimeTests.OptionalSupportExports.roundTripOptionalCaseEnum(_: Optional<BridgeJSRuntimeTests.Status>.bridgeJSLiftParameter(vIsSome, vValue))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_OptionalSupportExports_static_roundTripOptionalStringRawValueEnum")
-@_cdecl("bjs_OptionalSupportExports_static_roundTripOptionalStringRawValueEnum")
-public func _bjs_OptionalSupportExports_static_roundTripOptionalStringRawValueEnum(_ vIsSome: Int32, _ vBytes: Int32, _ vLength: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalStringRawValueEnum")
+@_cdecl("bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalStringRawValueEnum")
+public func _bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalStringRawValueEnum(_ vIsSome: Int32, _ vBytes: Int32, _ vLength: Int32) -> Void {
     #if arch(wasm32)
-    let ret = OptionalSupportExports.roundTripOptionalStringRawValueEnum(_: Optional<Theme>.bridgeJSLiftParameter(vIsSome, vBytes, vLength))
+    let ret = BridgeJSRuntimeTests.OptionalSupportExports.roundTripOptionalStringRawValueEnum(_: Optional<BridgeJSRuntimeTests.Theme>.bridgeJSLiftParameter(vIsSome, vBytes, vLength))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_OptionalSupportExports_static_roundTripOptionalIntRawValueEnum")
-@_cdecl("bjs_OptionalSupportExports_static_roundTripOptionalIntRawValueEnum")
-public func _bjs_OptionalSupportExports_static_roundTripOptionalIntRawValueEnum(_ vIsSome: Int32, _ vValue: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalIntRawValueEnum")
+@_cdecl("bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalIntRawValueEnum")
+public func _bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalIntRawValueEnum(_ vIsSome: Int32, _ vValue: Int32) -> Void {
     #if arch(wasm32)
-    let ret = OptionalSupportExports.roundTripOptionalIntRawValueEnum(_: Optional<HttpStatus>.bridgeJSLiftParameter(vIsSome, vValue))
+    let ret = BridgeJSRuntimeTests.OptionalSupportExports.roundTripOptionalIntRawValueEnum(_: Optional<BridgeJSRuntimeTests.HttpStatus>.bridgeJSLiftParameter(vIsSome, vValue))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_OptionalSupportExports_static_roundTripOptionalInt64RawValueEnum")
-@_cdecl("bjs_OptionalSupportExports_static_roundTripOptionalInt64RawValueEnum")
-public func _bjs_OptionalSupportExports_static_roundTripOptionalInt64RawValueEnum(_ vIsSome: Int32, _ vValue: Int64) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalInt64RawValueEnum")
+@_cdecl("bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalInt64RawValueEnum")
+public func _bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalInt64RawValueEnum(_ vIsSome: Int32, _ vValue: Int64) -> Void {
     #if arch(wasm32)
-    let ret = OptionalSupportExports.roundTripOptionalInt64RawValueEnum(_: Optional<FileSize>.bridgeJSLiftParameter(vIsSome, vValue))
+    let ret = BridgeJSRuntimeTests.OptionalSupportExports.roundTripOptionalInt64RawValueEnum(_: Optional<BridgeJSRuntimeTests.FileSize>.bridgeJSLiftParameter(vIsSome, vValue))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_OptionalSupportExports_static_roundTripOptionalUInt64RawValueEnum")
-@_cdecl("bjs_OptionalSupportExports_static_roundTripOptionalUInt64RawValueEnum")
-public func _bjs_OptionalSupportExports_static_roundTripOptionalUInt64RawValueEnum(_ vIsSome: Int32, _ vValue: Int64) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalUInt64RawValueEnum")
+@_cdecl("bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalUInt64RawValueEnum")
+public func _bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalUInt64RawValueEnum(_ vIsSome: Int32, _ vValue: Int64) -> Void {
     #if arch(wasm32)
-    let ret = OptionalSupportExports.roundTripOptionalUInt64RawValueEnum(_: Optional<SessionId>.bridgeJSLiftParameter(vIsSome, vValue))
+    let ret = BridgeJSRuntimeTests.OptionalSupportExports.roundTripOptionalUInt64RawValueEnum(_: Optional<BridgeJSRuntimeTests.SessionId>.bridgeJSLiftParameter(vIsSome, vValue))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_OptionalSupportExports_static_roundTripOptionalTSEnum")
-@_cdecl("bjs_OptionalSupportExports_static_roundTripOptionalTSEnum")
-public func _bjs_OptionalSupportExports_static_roundTripOptionalTSEnum(_ vIsSome: Int32, _ vValue: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalTSEnum")
+@_cdecl("bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalTSEnum")
+public func _bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalTSEnum(_ vIsSome: Int32, _ vValue: Int32) -> Void {
     #if arch(wasm32)
-    let ret = OptionalSupportExports.roundTripOptionalTSEnum(_: Optional<TSDirection>.bridgeJSLiftParameter(vIsSome, vValue))
+    let ret = BridgeJSRuntimeTests.OptionalSupportExports.roundTripOptionalTSEnum(_: Optional<BridgeJSRuntimeTests.TSDirection>.bridgeJSLiftParameter(vIsSome, vValue))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_OptionalSupportExports_static_roundTripOptionalTSStringEnum")
-@_cdecl("bjs_OptionalSupportExports_static_roundTripOptionalTSStringEnum")
-public func _bjs_OptionalSupportExports_static_roundTripOptionalTSStringEnum(_ vIsSome: Int32, _ vBytes: Int32, _ vLength: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalTSStringEnum")
+@_cdecl("bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalTSStringEnum")
+public func _bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalTSStringEnum(_ vIsSome: Int32, _ vBytes: Int32, _ vLength: Int32) -> Void {
     #if arch(wasm32)
-    let ret = OptionalSupportExports.roundTripOptionalTSStringEnum(_: Optional<TSTheme>.bridgeJSLiftParameter(vIsSome, vBytes, vLength))
+    let ret = BridgeJSRuntimeTests.OptionalSupportExports.roundTripOptionalTSStringEnum(_: Optional<BridgeJSRuntimeTests.TSTheme>.bridgeJSLiftParameter(vIsSome, vBytes, vLength))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_OptionalSupportExports_static_roundTripOptionalNamespacedEnum")
-@_cdecl("bjs_OptionalSupportExports_static_roundTripOptionalNamespacedEnum")
-public func _bjs_OptionalSupportExports_static_roundTripOptionalNamespacedEnum(_ vIsSome: Int32, _ vValue: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalNamespacedEnum")
+@_cdecl("bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalNamespacedEnum")
+public func _bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalNamespacedEnum(_ vIsSome: Int32, _ vValue: Int32) -> Void {
     #if arch(wasm32)
-    let ret = OptionalSupportExports.roundTripOptionalNamespacedEnum(_: Optional<Networking.API.Method>.bridgeJSLiftParameter(vIsSome, vValue))
+    let ret = BridgeJSRuntimeTests.OptionalSupportExports.roundTripOptionalNamespacedEnum(_: Optional<BridgeJSRuntimeTests.Networking.API.Method>.bridgeJSLiftParameter(vIsSome, vValue))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_OptionalSupportExports_static_roundTripOptionalSwiftClass")
-@_cdecl("bjs_OptionalSupportExports_static_roundTripOptionalSwiftClass")
-public func _bjs_OptionalSupportExports_static_roundTripOptionalSwiftClass(_ vIsSome: Int32, _ vValue: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalSwiftClass")
+@_cdecl("bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalSwiftClass")
+public func _bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalSwiftClass(_ vIsSome: Int32, _ vValue: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = OptionalSupportExports.roundTripOptionalSwiftClass(_: Optional<Greeter>.bridgeJSLiftParameter(vIsSome, vValue))
+    let ret = BridgeJSRuntimeTests.OptionalSupportExports.roundTripOptionalSwiftClass(_: Optional<BridgeJSRuntimeTests.Greeter>.bridgeJSLiftParameter(vIsSome, vValue))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_OptionalSupportExports_static_roundTripOptionalIntArray")
-@_cdecl("bjs_OptionalSupportExports_static_roundTripOptionalIntArray")
-public func _bjs_OptionalSupportExports_static_roundTripOptionalIntArray() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalIntArray")
+@_cdecl("bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalIntArray")
+public func _bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalIntArray() -> Void {
     #if arch(wasm32)
-    let ret = OptionalSupportExports.roundTripOptionalIntArray(_: Optional<[Int]>.bridgeJSLiftParameter())
+    let ret = BridgeJSRuntimeTests.OptionalSupportExports.roundTripOptionalIntArray(_: Optional<[Int]>.bridgeJSLiftParameter())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_OptionalSupportExports_static_roundTripOptionalStringArray")
-@_cdecl("bjs_OptionalSupportExports_static_roundTripOptionalStringArray")
-public func _bjs_OptionalSupportExports_static_roundTripOptionalStringArray() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalStringArray")
+@_cdecl("bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalStringArray")
+public func _bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalStringArray() -> Void {
     #if arch(wasm32)
-    let ret = OptionalSupportExports.roundTripOptionalStringArray(_: Optional<[String]>.bridgeJSLiftParameter())
+    let ret = BridgeJSRuntimeTests.OptionalSupportExports.roundTripOptionalStringArray(_: Optional<[String]>.bridgeJSLiftParameter())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_OptionalSupportExports_static_roundTripOptionalSwiftClassArray")
-@_cdecl("bjs_OptionalSupportExports_static_roundTripOptionalSwiftClassArray")
-public func _bjs_OptionalSupportExports_static_roundTripOptionalSwiftClassArray() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalSwiftClassArray")
+@_cdecl("bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalSwiftClassArray")
+public func _bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalSwiftClassArray() -> Void {
     #if arch(wasm32)
-    let ret = OptionalSupportExports.roundTripOptionalSwiftClassArray(_: Optional<[Greeter]>.bridgeJSLiftParameter())
+    let ret = BridgeJSRuntimeTests.OptionalSupportExports.roundTripOptionalSwiftClassArray(_: Optional<[BridgeJSRuntimeTests.Greeter]>.bridgeJSLiftParameter())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_OptionalSupportExports_static_roundTripOptionalAPIResult")
-@_cdecl("bjs_OptionalSupportExports_static_roundTripOptionalAPIResult")
-public func _bjs_OptionalSupportExports_static_roundTripOptionalAPIResult(_ vIsSome: Int32, _ vCaseId: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalAPIResult")
+@_cdecl("bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalAPIResult")
+public func _bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalAPIResult(_ vIsSome: Int32, _ vCaseId: Int32) -> Void {
     #if arch(wasm32)
-    let ret = OptionalSupportExports.roundTripOptionalAPIResult(_: Optional<APIResult>.bridgeJSLiftParameter(vIsSome, vCaseId))
+    let ret = BridgeJSRuntimeTests.OptionalSupportExports.roundTripOptionalAPIResult(_: Optional<BridgeJSRuntimeTests.APIResult>.bridgeJSLiftParameter(vIsSome, vCaseId))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_OptionalSupportExports_static_roundTripOptionalTypedPayloadResult")
-@_cdecl("bjs_OptionalSupportExports_static_roundTripOptionalTypedPayloadResult")
-public func _bjs_OptionalSupportExports_static_roundTripOptionalTypedPayloadResult(_ vIsSome: Int32, _ vCaseId: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalTypedPayloadResult")
+@_cdecl("bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalTypedPayloadResult")
+public func _bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalTypedPayloadResult(_ vIsSome: Int32, _ vCaseId: Int32) -> Void {
     #if arch(wasm32)
-    let ret = OptionalSupportExports.roundTripOptionalTypedPayloadResult(_: Optional<TypedPayloadResult>.bridgeJSLiftParameter(vIsSome, vCaseId))
+    let ret = BridgeJSRuntimeTests.OptionalSupportExports.roundTripOptionalTypedPayloadResult(_: Optional<BridgeJSRuntimeTests.TypedPayloadResult>.bridgeJSLiftParameter(vIsSome, vCaseId))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_OptionalSupportExports_static_roundTripOptionalComplexResult")
-@_cdecl("bjs_OptionalSupportExports_static_roundTripOptionalComplexResult")
-public func _bjs_OptionalSupportExports_static_roundTripOptionalComplexResult(_ vIsSome: Int32, _ vCaseId: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalComplexResult")
+@_cdecl("bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalComplexResult")
+public func _bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalComplexResult(_ vIsSome: Int32, _ vCaseId: Int32) -> Void {
     #if arch(wasm32)
-    let ret = OptionalSupportExports.roundTripOptionalComplexResult(_: Optional<ComplexResult>.bridgeJSLiftParameter(vIsSome, vCaseId))
+    let ret = BridgeJSRuntimeTests.OptionalSupportExports.roundTripOptionalComplexResult(_: Optional<BridgeJSRuntimeTests.ComplexResult>.bridgeJSLiftParameter(vIsSome, vCaseId))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_OptionalSupportExports_static_roundTripOptionalAllTypesResult")
-@_cdecl("bjs_OptionalSupportExports_static_roundTripOptionalAllTypesResult")
-public func _bjs_OptionalSupportExports_static_roundTripOptionalAllTypesResult(_ vIsSome: Int32, _ vCaseId: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalAllTypesResult")
+@_cdecl("bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalAllTypesResult")
+public func _bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalAllTypesResult(_ vIsSome: Int32, _ vCaseId: Int32) -> Void {
     #if arch(wasm32)
-    let ret = OptionalSupportExports.roundTripOptionalAllTypesResult(_: Optional<AllTypesResult>.bridgeJSLiftParameter(vIsSome, vCaseId))
+    let ret = BridgeJSRuntimeTests.OptionalSupportExports.roundTripOptionalAllTypesResult(_: Optional<BridgeJSRuntimeTests.AllTypesResult>.bridgeJSLiftParameter(vIsSome, vCaseId))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_OptionalSupportExports_static_roundTripOptionalPayloadResult")
-@_cdecl("bjs_OptionalSupportExports_static_roundTripOptionalPayloadResult")
-public func _bjs_OptionalSupportExports_static_roundTripOptionalPayloadResult(_ v: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalPayloadResult")
+@_cdecl("bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalPayloadResult")
+public func _bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalPayloadResult(_ v: Int32) -> Void {
     #if arch(wasm32)
-    let ret = OptionalSupportExports.roundTripOptionalPayloadResult(_: OptionalAllTypesResult.bridgeJSLiftParameter(v))
+    let ret = BridgeJSRuntimeTests.OptionalSupportExports.roundTripOptionalPayloadResult(_: BridgeJSRuntimeTests.OptionalAllTypesResult.bridgeJSLiftParameter(v))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_OptionalSupportExports_static_roundTripOptionalPayloadResultOpt")
-@_cdecl("bjs_OptionalSupportExports_static_roundTripOptionalPayloadResultOpt")
-public func _bjs_OptionalSupportExports_static_roundTripOptionalPayloadResultOpt(_ vIsSome: Int32, _ vCaseId: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalPayloadResultOpt")
+@_cdecl("bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalPayloadResultOpt")
+public func _bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalPayloadResultOpt(_ vIsSome: Int32, _ vCaseId: Int32) -> Void {
     #if arch(wasm32)
-    let ret = OptionalSupportExports.roundTripOptionalPayloadResultOpt(_: Optional<OptionalAllTypesResult>.bridgeJSLiftParameter(vIsSome, vCaseId))
+    let ret = BridgeJSRuntimeTests.OptionalSupportExports.roundTripOptionalPayloadResultOpt(_: Optional<BridgeJSRuntimeTests.OptionalAllTypesResult>.bridgeJSLiftParameter(vIsSome, vCaseId))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_OptionalSupportExports_static_roundTripOptionalAPIOptionalResult")
-@_cdecl("bjs_OptionalSupportExports_static_roundTripOptionalAPIOptionalResult")
-public func _bjs_OptionalSupportExports_static_roundTripOptionalAPIOptionalResult(_ vIsSome: Int32, _ vCaseId: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalAPIOptionalResult")
+@_cdecl("bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalAPIOptionalResult")
+public func _bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_roundTripOptionalAPIOptionalResult(_ vIsSome: Int32, _ vCaseId: Int32) -> Void {
     #if arch(wasm32)
-    let ret = OptionalSupportExports.roundTripOptionalAPIOptionalResult(_: Optional<APIOptionalResult>.bridgeJSLiftParameter(vIsSome, vCaseId))
+    let ret = BridgeJSRuntimeTests.OptionalSupportExports.roundTripOptionalAPIOptionalResult(_: Optional<BridgeJSRuntimeTests.APIOptionalResult>.bridgeJSLiftParameter(vIsSome, vCaseId))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_OptionalSupportExports_static_takeOptionalJSObject")
-@_cdecl("bjs_OptionalSupportExports_static_takeOptionalJSObject")
-public func _bjs_OptionalSupportExports_static_takeOptionalJSObject(_ valueIsSome: Int32, _ valueValue: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_takeOptionalJSObject")
+@_cdecl("bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_takeOptionalJSObject")
+public func _bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_takeOptionalJSObject(_ valueIsSome: Int32, _ valueValue: Int32) -> Void {
     #if arch(wasm32)
-    OptionalSupportExports.takeOptionalJSObject(_: Optional<JSObject>.bridgeJSLiftParameter(valueIsSome, valueValue))
+    BridgeJSRuntimeTests.OptionalSupportExports.takeOptionalJSObject(_: Optional<JSObject>.bridgeJSLiftParameter(valueIsSome, valueValue))
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_OptionalSupportExports_static_applyOptionalGreeter")
-@_cdecl("bjs_OptionalSupportExports_static_applyOptionalGreeter")
-public func _bjs_OptionalSupportExports_static_applyOptionalGreeter(_ valueIsSome: Int32, _ valueValue: UnsafeMutableRawPointer, _ transform: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_applyOptionalGreeter")
+@_cdecl("bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_applyOptionalGreeter")
+public func _bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_applyOptionalGreeter(_ valueIsSome: Int32, _ valueValue: UnsafeMutableRawPointer, _ transform: Int32) -> Void {
     #if arch(wasm32)
-    let ret = OptionalSupportExports.applyOptionalGreeter(_: Optional<Greeter>.bridgeJSLiftParameter(valueIsSome, valueValue), _: _BJS_Closure_20BridgeJSRuntimeTestsSq7GreeterC_Sq7GreeterC.bridgeJSLift(transform))
+    let ret = BridgeJSRuntimeTests.OptionalSupportExports.applyOptionalGreeter(_: Optional<BridgeJSRuntimeTests.Greeter>.bridgeJSLiftParameter(valueIsSome, valueValue), _: _BJS_Closure_20BridgeJSRuntimeTestsSq28BridgeJSRuntimeTests_GreeterC_Sq28BridgeJSRuntimeTests_GreeterC.bridgeJSLift(transform))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_OptionalSupportExports_static_makeOptionalHolder")
-@_cdecl("bjs_OptionalSupportExports_static_makeOptionalHolder")
-public func _bjs_OptionalSupportExports_static_makeOptionalHolder(_ nullableGreeterIsSome: Int32, _ nullableGreeterValue: UnsafeMutableRawPointer, _ undefinedNumberIsSome: Int32, _ undefinedNumberValue: Float64) -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_makeOptionalHolder")
+@_cdecl("bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_makeOptionalHolder")
+public func _bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_makeOptionalHolder(_ nullableGreeterIsSome: Int32, _ nullableGreeterValue: UnsafeMutableRawPointer, _ undefinedNumberIsSome: Int32, _ undefinedNumberValue: Float64) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = OptionalSupportExports.makeOptionalHolder(nullableGreeter: Optional<Greeter>.bridgeJSLiftParameter(nullableGreeterIsSome, nullableGreeterValue), undefinedNumber: JSUndefinedOr<Double>.bridgeJSLiftParameter(undefinedNumberIsSome, undefinedNumberValue))
+    let ret = BridgeJSRuntimeTests.OptionalSupportExports.makeOptionalHolder(nullableGreeter: Optional<BridgeJSRuntimeTests.Greeter>.bridgeJSLiftParameter(nullableGreeterIsSome, nullableGreeterValue), undefinedNumber: JSUndefinedOr<Double>.bridgeJSLiftParameter(undefinedNumberIsSome, undefinedNumberValue))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_OptionalSupportExports_static_compareAPIResults")
-@_cdecl("bjs_OptionalSupportExports_static_compareAPIResults")
-public func _bjs_OptionalSupportExports_static_compareAPIResults(_ r1IsSome: Int32, _ r1CaseId: Int32, _ r2IsSome: Int32, _ r2CaseId: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_compareAPIResults")
+@_cdecl("bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_compareAPIResults")
+public func _bjs_BridgeJSRuntimeTests_OptionalSupportExports_static_compareAPIResults(_ r1IsSome: Int32, _ r1CaseId: Int32, _ r2IsSome: Int32, _ r2CaseId: Int32) -> Void {
     #if arch(wasm32)
-    let _tmp_r2 = Optional<APIResult>.bridgeJSLiftParameter(r2IsSome, r2CaseId)
-    let _tmp_r1 = Optional<APIResult>.bridgeJSLiftParameter(r1IsSome, r1CaseId)
-    let ret = OptionalSupportExports.compareAPIResults(_: _tmp_r1, _: _tmp_r2)
+    let _tmp_r2 = Optional<BridgeJSRuntimeTests.APIResult>.bridgeJSLiftParameter(r2IsSome, r2CaseId)
+    let _tmp_r1 = Optional<BridgeJSRuntimeTests.APIResult>.bridgeJSLiftParameter(r1IsSome, r1CaseId)
+    let ret = BridgeJSRuntimeTests.OptionalSupportExports.compareAPIResults(_: _tmp_r1, _: _tmp_r2)
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension OptionalAllTypesResult: _BridgedSwiftAssociatedValueEnum {
-    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPopPayload(_ caseId: Int32) -> OptionalAllTypesResult {
+extension BridgeJSRuntimeTests.OptionalAllTypesResult: _BridgedSwiftAssociatedValueEnum {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPopPayload(_ caseId: Int32) -> BridgeJSRuntimeTests.OptionalAllTypesResult {
         switch caseId {
         case 0:
-            return .optStruct(Optional<Address>.bridgeJSStackPop())
+            return .optStruct(Optional<BridgeJSRuntimeTests.Address>.bridgeJSStackPop())
         case 1:
-            return .optClass(Optional<Greeter>.bridgeJSStackPop())
+            return .optClass(Optional<BridgeJSRuntimeTests.Greeter>.bridgeJSStackPop())
         case 2:
             return .optJSObject(Optional<JSObject>.bridgeJSStackPop())
         case 3:
-            return .optNestedEnum(Optional<APIResult>.bridgeJSStackPop())
+            return .optNestedEnum(Optional<BridgeJSRuntimeTests.APIResult>.bridgeJSStackPop())
         case 4:
             return .optArray(Optional<[Int]>.bridgeJSStackPop())
         case 5:
@@ -6359,7 +6359,7 @@ extension OptionalAllTypesResult: _BridgedSwiftAssociatedValueEnum {
         case 6:
             return .empty
         default:
-            fatalError("Unknown OptionalAllTypesResult case ID: \(caseId)")
+            fatalError("Unknown BridgeJSRuntimeTests.OptionalAllTypesResult case ID: \(caseId)")
         }
     }
 
@@ -6389,8 +6389,8 @@ extension OptionalAllTypesResult: _BridgedSwiftAssociatedValueEnum {
     }
 }
 
-extension APIOptionalResult: _BridgedSwiftAssociatedValueEnum {
-    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPopPayload(_ caseId: Int32) -> APIOptionalResult {
+extension BridgeJSRuntimeTests.APIOptionalResult: _BridgedSwiftAssociatedValueEnum {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPopPayload(_ caseId: Int32) -> BridgeJSRuntimeTests.APIOptionalResult {
         switch caseId {
         case 0:
             return .success(Optional<String>.bridgeJSStackPop())
@@ -6399,7 +6399,7 @@ extension APIOptionalResult: _BridgedSwiftAssociatedValueEnum {
         case 2:
             return .status(Optional<Bool>.bridgeJSStackPop(), Optional<Int>.bridgeJSStackPop(), Optional<String>.bridgeJSStackPop())
         default:
-            fatalError("Unknown APIOptionalResult case ID: \(caseId)")
+            fatalError("Unknown BridgeJSRuntimeTests.APIOptionalResult case ID: \(caseId)")
         }
     }
 
@@ -6421,11 +6421,11 @@ extension APIOptionalResult: _BridgedSwiftAssociatedValueEnum {
     }
 }
 
-extension JSCoordinate: _BridgedSwiftStruct {
-    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> JSCoordinate {
+extension BridgeJSRuntimeTests.JSCoordinate: _BridgedSwiftStruct {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> BridgeJSRuntimeTests.JSCoordinate {
         let longitude = Double.bridgeJSStackPop()
         let latitude = Double.bridgeJSStackPop()
-        return JSCoordinate(latitude: latitude, longitude: longitude)
+        return BridgeJSRuntimeTests.JSCoordinate(latitude: latitude, longitude: longitude)
     }
 
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSStackPush() {
@@ -6434,57 +6434,57 @@ extension JSCoordinate: _BridgedSwiftStruct {
     }
 
     init(unsafelyCopying jsObject: JSObject) {
-        _bjs_struct_lower_JSCoordinate(jsObject.bridgeJSLowerParameter())
+        _bjs_struct_lower_BridgeJSRuntimeTests_JSCoordinate(jsObject.bridgeJSLowerParameter())
         self = Self.bridgeJSStackPop()
     }
 
     func toJSObject() -> JSObject {
         let __bjs_self = self
         __bjs_self.bridgeJSStackPush()
-        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_JSCoordinate()))
+        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_BridgeJSRuntimeTests_JSCoordinate()))
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_JSCoordinate")
-fileprivate func _bjs_struct_lower_JSCoordinate_extern(_ objectId: Int32) -> Void
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_BridgeJSRuntimeTests_JSCoordinate")
+fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_JSCoordinate_extern(_ objectId: Int32) -> Void
 #else
-fileprivate func _bjs_struct_lower_JSCoordinate_extern(_ objectId: Int32) -> Void {
+fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_JSCoordinate_extern(_ objectId: Int32) -> Void {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lower_JSCoordinate(_ objectId: Int32) -> Void {
-    return _bjs_struct_lower_JSCoordinate_extern(objectId)
+@inline(never) fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_JSCoordinate(_ objectId: Int32) -> Void {
+    return _bjs_struct_lower_BridgeJSRuntimeTests_JSCoordinate_extern(objectId)
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_JSCoordinate")
-fileprivate func _bjs_struct_lift_JSCoordinate_extern() -> Int32
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_BridgeJSRuntimeTests_JSCoordinate")
+fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_JSCoordinate_extern() -> Int32
 #else
-fileprivate func _bjs_struct_lift_JSCoordinate_extern() -> Int32 {
+fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_JSCoordinate_extern() -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lift_JSCoordinate() -> Int32 {
-    return _bjs_struct_lift_JSCoordinate_extern()
+@inline(never) fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_JSCoordinate() -> Int32 {
+    return _bjs_struct_lift_BridgeJSRuntimeTests_JSCoordinate_extern()
 }
 
-@_expose(wasm, "bjs_JSCoordinate_init")
-@_cdecl("bjs_JSCoordinate_init")
-public func _bjs_JSCoordinate_init(_ latitude: Float64, _ longitude: Float64) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_JSCoordinate_init")
+@_cdecl("bjs_BridgeJSRuntimeTests_JSCoordinate_init")
+public func _bjs_BridgeJSRuntimeTests_JSCoordinate_init(_ latitude: Float64, _ longitude: Float64) -> Void {
     #if arch(wasm32)
-    let ret = JSCoordinate(latitude: Double.bridgeJSLiftParameter(latitude), longitude: Double.bridgeJSLiftParameter(longitude))
+    let ret = BridgeJSRuntimeTests.JSCoordinate(latitude: Double.bridgeJSLiftParameter(latitude), longitude: Double.bridgeJSLiftParameter(longitude))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension NestedStructGroupA.Metadata: _BridgedSwiftStruct {
-    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> NestedStructGroupA.Metadata {
+extension BridgeJSRuntimeTests.NestedStructGroupA.Metadata: _BridgedSwiftStruct {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> BridgeJSRuntimeTests.NestedStructGroupA.Metadata {
         let count = Int.bridgeJSStackPop()
         let label = String.bridgeJSStackPop()
-        return NestedStructGroupA.Metadata(label: label, count: count)
+        return BridgeJSRuntimeTests.NestedStructGroupA.Metadata(label: label, count: count)
     }
 
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSStackPush() {
@@ -6493,46 +6493,46 @@ extension NestedStructGroupA.Metadata: _BridgedSwiftStruct {
     }
 
     init(unsafelyCopying jsObject: JSObject) {
-        _bjs_struct_lower_NestedStructGroupA_Metadata(jsObject.bridgeJSLowerParameter())
+        _bjs_struct_lower_BridgeJSRuntimeTests_NestedStructGroupA_Metadata(jsObject.bridgeJSLowerParameter())
         self = Self.bridgeJSStackPop()
     }
 
     func toJSObject() -> JSObject {
         let __bjs_self = self
         __bjs_self.bridgeJSStackPush()
-        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_NestedStructGroupA_Metadata()))
+        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_BridgeJSRuntimeTests_NestedStructGroupA_Metadata()))
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_NestedStructGroupA_Metadata")
-fileprivate func _bjs_struct_lower_NestedStructGroupA_Metadata_extern(_ objectId: Int32) -> Void
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_BridgeJSRuntimeTests_NestedStructGroupA_Metadata")
+fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_NestedStructGroupA_Metadata_extern(_ objectId: Int32) -> Void
 #else
-fileprivate func _bjs_struct_lower_NestedStructGroupA_Metadata_extern(_ objectId: Int32) -> Void {
+fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_NestedStructGroupA_Metadata_extern(_ objectId: Int32) -> Void {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lower_NestedStructGroupA_Metadata(_ objectId: Int32) -> Void {
-    return _bjs_struct_lower_NestedStructGroupA_Metadata_extern(objectId)
+@inline(never) fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_NestedStructGroupA_Metadata(_ objectId: Int32) -> Void {
+    return _bjs_struct_lower_BridgeJSRuntimeTests_NestedStructGroupA_Metadata_extern(objectId)
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_NestedStructGroupA_Metadata")
-fileprivate func _bjs_struct_lift_NestedStructGroupA_Metadata_extern() -> Int32
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_BridgeJSRuntimeTests_NestedStructGroupA_Metadata")
+fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_NestedStructGroupA_Metadata_extern() -> Int32
 #else
-fileprivate func _bjs_struct_lift_NestedStructGroupA_Metadata_extern() -> Int32 {
+fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_NestedStructGroupA_Metadata_extern() -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lift_NestedStructGroupA_Metadata() -> Int32 {
-    return _bjs_struct_lift_NestedStructGroupA_Metadata_extern()
+@inline(never) fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_NestedStructGroupA_Metadata() -> Int32 {
+    return _bjs_struct_lift_BridgeJSRuntimeTests_NestedStructGroupA_Metadata_extern()
 }
 
-extension NestedStructGroupB.Metadata: _BridgedSwiftStruct {
-    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> NestedStructGroupB.Metadata {
+extension BridgeJSRuntimeTests.NestedStructGroupB.Metadata: _BridgedSwiftStruct {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> BridgeJSRuntimeTests.NestedStructGroupB.Metadata {
         let value = Double.bridgeJSStackPop()
         let tag = String.bridgeJSStackPop()
-        return NestedStructGroupB.Metadata(tag: tag, value: value)
+        return BridgeJSRuntimeTests.NestedStructGroupB.Metadata(tag: tag, value: value)
     }
 
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSStackPush() {
@@ -6541,45 +6541,45 @@ extension NestedStructGroupB.Metadata: _BridgedSwiftStruct {
     }
 
     init(unsafelyCopying jsObject: JSObject) {
-        _bjs_struct_lower_NestedStructGroupB_Metadata(jsObject.bridgeJSLowerParameter())
+        _bjs_struct_lower_BridgeJSRuntimeTests_NestedStructGroupB_Metadata(jsObject.bridgeJSLowerParameter())
         self = Self.bridgeJSStackPop()
     }
 
     func toJSObject() -> JSObject {
         let __bjs_self = self
         __bjs_self.bridgeJSStackPush()
-        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_NestedStructGroupB_Metadata()))
+        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_BridgeJSRuntimeTests_NestedStructGroupB_Metadata()))
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_NestedStructGroupB_Metadata")
-fileprivate func _bjs_struct_lower_NestedStructGroupB_Metadata_extern(_ objectId: Int32) -> Void
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_BridgeJSRuntimeTests_NestedStructGroupB_Metadata")
+fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_NestedStructGroupB_Metadata_extern(_ objectId: Int32) -> Void
 #else
-fileprivate func _bjs_struct_lower_NestedStructGroupB_Metadata_extern(_ objectId: Int32) -> Void {
+fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_NestedStructGroupB_Metadata_extern(_ objectId: Int32) -> Void {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lower_NestedStructGroupB_Metadata(_ objectId: Int32) -> Void {
-    return _bjs_struct_lower_NestedStructGroupB_Metadata_extern(objectId)
+@inline(never) fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_NestedStructGroupB_Metadata(_ objectId: Int32) -> Void {
+    return _bjs_struct_lower_BridgeJSRuntimeTests_NestedStructGroupB_Metadata_extern(objectId)
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_NestedStructGroupB_Metadata")
-fileprivate func _bjs_struct_lift_NestedStructGroupB_Metadata_extern() -> Int32
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_BridgeJSRuntimeTests_NestedStructGroupB_Metadata")
+fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_NestedStructGroupB_Metadata_extern() -> Int32
 #else
-fileprivate func _bjs_struct_lift_NestedStructGroupB_Metadata_extern() -> Int32 {
+fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_NestedStructGroupB_Metadata_extern() -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lift_NestedStructGroupB_Metadata() -> Int32 {
-    return _bjs_struct_lift_NestedStructGroupB_Metadata_extern()
+@inline(never) fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_NestedStructGroupB_Metadata() -> Int32 {
+    return _bjs_struct_lift_BridgeJSRuntimeTests_NestedStructGroupB_Metadata_extern()
 }
 
-extension NestedTypeHost.Label: _BridgedSwiftStruct {
-    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> NestedTypeHost.Label {
+extension BridgeJSRuntimeTests.NestedTypeHost.Label: _BridgedSwiftStruct {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> BridgeJSRuntimeTests.NestedTypeHost.Label {
         let text = String.bridgeJSStackPop()
-        return NestedTypeHost.Label(text: text)
+        return BridgeJSRuntimeTests.NestedTypeHost.Label(text: text)
     }
 
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSStackPush() {
@@ -6587,79 +6587,79 @@ extension NestedTypeHost.Label: _BridgedSwiftStruct {
     }
 
     init(unsafelyCopying jsObject: JSObject) {
-        _bjs_struct_lower_NestedTypeHost_Label(jsObject.bridgeJSLowerParameter())
+        _bjs_struct_lower_BridgeJSRuntimeTests_NestedTypeHost_Label(jsObject.bridgeJSLowerParameter())
         self = Self.bridgeJSStackPop()
     }
 
     func toJSObject() -> JSObject {
         let __bjs_self = self
         __bjs_self.bridgeJSStackPush()
-        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_NestedTypeHost_Label()))
+        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_BridgeJSRuntimeTests_NestedTypeHost_Label()))
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_NestedTypeHost_Label")
-fileprivate func _bjs_struct_lower_NestedTypeHost_Label_extern(_ objectId: Int32) -> Void
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_BridgeJSRuntimeTests_NestedTypeHost_Label")
+fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_NestedTypeHost_Label_extern(_ objectId: Int32) -> Void
 #else
-fileprivate func _bjs_struct_lower_NestedTypeHost_Label_extern(_ objectId: Int32) -> Void {
+fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_NestedTypeHost_Label_extern(_ objectId: Int32) -> Void {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lower_NestedTypeHost_Label(_ objectId: Int32) -> Void {
-    return _bjs_struct_lower_NestedTypeHost_Label_extern(objectId)
+@inline(never) fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_NestedTypeHost_Label(_ objectId: Int32) -> Void {
+    return _bjs_struct_lower_BridgeJSRuntimeTests_NestedTypeHost_Label_extern(objectId)
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_NestedTypeHost_Label")
-fileprivate func _bjs_struct_lift_NestedTypeHost_Label_extern() -> Int32
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_BridgeJSRuntimeTests_NestedTypeHost_Label")
+fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_NestedTypeHost_Label_extern() -> Int32
 #else
-fileprivate func _bjs_struct_lift_NestedTypeHost_Label_extern() -> Int32 {
+fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_NestedTypeHost_Label_extern() -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lift_NestedTypeHost_Label() -> Int32 {
-    return _bjs_struct_lift_NestedTypeHost_Label_extern()
+@inline(never) fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_NestedTypeHost_Label() -> Int32 {
+    return _bjs_struct_lift_BridgeJSRuntimeTests_NestedTypeHost_Label_extern()
 }
 
-@_expose(wasm, "bjs_NestedTypeHost_Label_init")
-@_cdecl("bjs_NestedTypeHost_Label_init")
-public func _bjs_NestedTypeHost_Label_init(_ textBytes: Int32, _ textLength: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_NestedTypeHost_Label_init")
+@_cdecl("bjs_BridgeJSRuntimeTests_NestedTypeHost_Label_init")
+public func _bjs_BridgeJSRuntimeTests_NestedTypeHost_Label_init(_ textBytes: Int32, _ textLength: Int32) -> Void {
     #if arch(wasm32)
-    let ret = NestedTypeHost.Label(text: String.bridgeJSLiftParameter(textBytes, textLength))
+    let ret = BridgeJSRuntimeTests.NestedTypeHost.Label(text: String.bridgeJSLiftParameter(textBytes, textLength))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_NestedTypeHost_Label_static_maxLength_get")
-@_cdecl("bjs_NestedTypeHost_Label_static_maxLength_get")
-public func _bjs_NestedTypeHost_Label_static_maxLength_get() -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_NestedTypeHost_Label_static_maxLength_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_NestedTypeHost_Label_static_maxLength_get")
+public func _bjs_BridgeJSRuntimeTests_NestedTypeHost_Label_static_maxLength_get() -> Int32 {
     #if arch(wasm32)
-    let ret = NestedTypeHost.Label.maxLength
+    let ret = BridgeJSRuntimeTests.NestedTypeHost.Label.maxLength
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_NestedTypeHost_Label_static_untitled")
-@_cdecl("bjs_NestedTypeHost_Label_static_untitled")
-public func _bjs_NestedTypeHost_Label_static_untitled() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_NestedTypeHost_Label_static_untitled")
+@_cdecl("bjs_BridgeJSRuntimeTests_NestedTypeHost_Label_static_untitled")
+public func _bjs_BridgeJSRuntimeTests_NestedTypeHost_Label_static_untitled() -> Void {
     #if arch(wasm32)
-    let ret = NestedTypeHost.Label.untitled()
+    let ret = BridgeJSRuntimeTests.NestedTypeHost.Label.untitled()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension Point: _BridgedSwiftStruct {
-    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> Point {
+extension BridgeJSRuntimeTests.Point: _BridgedSwiftStruct {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> BridgeJSRuntimeTests.Point {
         let y = Int.bridgeJSStackPop()
         let x = Int.bridgeJSStackPop()
-        return Point(x: x, y: y)
+        return BridgeJSRuntimeTests.Point(x: x, y: y)
     }
 
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSStackPush() {
@@ -6668,49 +6668,49 @@ extension Point: _BridgedSwiftStruct {
     }
 
     init(unsafelyCopying jsObject: JSObject) {
-        _bjs_struct_lower_Point(jsObject.bridgeJSLowerParameter())
+        _bjs_struct_lower_BridgeJSRuntimeTests_Point(jsObject.bridgeJSLowerParameter())
         self = Self.bridgeJSStackPop()
     }
 
     func toJSObject() -> JSObject {
         let __bjs_self = self
         __bjs_self.bridgeJSStackPush()
-        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_Point()))
+        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_BridgeJSRuntimeTests_Point()))
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_Point")
-fileprivate func _bjs_struct_lower_Point_extern(_ objectId: Int32) -> Void
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_BridgeJSRuntimeTests_Point")
+fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_Point_extern(_ objectId: Int32) -> Void
 #else
-fileprivate func _bjs_struct_lower_Point_extern(_ objectId: Int32) -> Void {
+fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_Point_extern(_ objectId: Int32) -> Void {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lower_Point(_ objectId: Int32) -> Void {
-    return _bjs_struct_lower_Point_extern(objectId)
+@inline(never) fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_Point(_ objectId: Int32) -> Void {
+    return _bjs_struct_lower_BridgeJSRuntimeTests_Point_extern(objectId)
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_Point")
-fileprivate func _bjs_struct_lift_Point_extern() -> Int32
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_BridgeJSRuntimeTests_Point")
+fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_Point_extern() -> Int32
 #else
-fileprivate func _bjs_struct_lift_Point_extern() -> Int32 {
+fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_Point_extern() -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lift_Point() -> Int32 {
-    return _bjs_struct_lift_Point_extern()
+@inline(never) fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_Point() -> Int32 {
+    return _bjs_struct_lift_BridgeJSRuntimeTests_Point_extern()
 }
 
-extension PointerFields: _BridgedSwiftStruct {
-    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> PointerFields {
+extension BridgeJSRuntimeTests.PointerFields: _BridgedSwiftStruct {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> BridgeJSRuntimeTests.PointerFields {
         let mutPtr = UnsafeMutablePointer<UInt8>.bridgeJSStackPop()
         let ptr = UnsafePointer<UInt8>.bridgeJSStackPop()
         let opaque = OpaquePointer.bridgeJSStackPop()
         let mutRaw = UnsafeMutableRawPointer.bridgeJSStackPop()
         let raw = UnsafeRawPointer.bridgeJSStackPop()
-        return PointerFields(raw: raw, mutRaw: mutRaw, opaque: opaque, ptr: ptr, mutPtr: mutPtr)
+        return BridgeJSRuntimeTests.PointerFields(raw: raw, mutRaw: mutRaw, opaque: opaque, ptr: ptr, mutPtr: mutPtr)
     }
 
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSStackPush() {
@@ -6722,60 +6722,60 @@ extension PointerFields: _BridgedSwiftStruct {
     }
 
     init(unsafelyCopying jsObject: JSObject) {
-        _bjs_struct_lower_PointerFields(jsObject.bridgeJSLowerParameter())
+        _bjs_struct_lower_BridgeJSRuntimeTests_PointerFields(jsObject.bridgeJSLowerParameter())
         self = Self.bridgeJSStackPop()
     }
 
     func toJSObject() -> JSObject {
         let __bjs_self = self
         __bjs_self.bridgeJSStackPush()
-        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_PointerFields()))
+        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_BridgeJSRuntimeTests_PointerFields()))
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_PointerFields")
-fileprivate func _bjs_struct_lower_PointerFields_extern(_ objectId: Int32) -> Void
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_BridgeJSRuntimeTests_PointerFields")
+fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_PointerFields_extern(_ objectId: Int32) -> Void
 #else
-fileprivate func _bjs_struct_lower_PointerFields_extern(_ objectId: Int32) -> Void {
+fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_PointerFields_extern(_ objectId: Int32) -> Void {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lower_PointerFields(_ objectId: Int32) -> Void {
-    return _bjs_struct_lower_PointerFields_extern(objectId)
+@inline(never) fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_PointerFields(_ objectId: Int32) -> Void {
+    return _bjs_struct_lower_BridgeJSRuntimeTests_PointerFields_extern(objectId)
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_PointerFields")
-fileprivate func _bjs_struct_lift_PointerFields_extern() -> Int32
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_BridgeJSRuntimeTests_PointerFields")
+fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_PointerFields_extern() -> Int32
 #else
-fileprivate func _bjs_struct_lift_PointerFields_extern() -> Int32 {
+fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_PointerFields_extern() -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lift_PointerFields() -> Int32 {
-    return _bjs_struct_lift_PointerFields_extern()
+@inline(never) fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_PointerFields() -> Int32 {
+    return _bjs_struct_lift_BridgeJSRuntimeTests_PointerFields_extern()
 }
 
-@_expose(wasm, "bjs_PointerFields_init")
-@_cdecl("bjs_PointerFields_init")
-public func _bjs_PointerFields_init(_ raw: UnsafeMutableRawPointer, _ mutRaw: UnsafeMutableRawPointer, _ opaque: UnsafeMutableRawPointer, _ ptr: UnsafeMutableRawPointer, _ mutPtr: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_PointerFields_init")
+@_cdecl("bjs_BridgeJSRuntimeTests_PointerFields_init")
+public func _bjs_BridgeJSRuntimeTests_PointerFields_init(_ raw: UnsafeMutableRawPointer, _ mutRaw: UnsafeMutableRawPointer, _ opaque: UnsafeMutableRawPointer, _ ptr: UnsafeMutableRawPointer, _ mutPtr: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = PointerFields(raw: UnsafeRawPointer.bridgeJSLiftParameter(raw), mutRaw: UnsafeMutableRawPointer.bridgeJSLiftParameter(mutRaw), opaque: OpaquePointer.bridgeJSLiftParameter(opaque), ptr: UnsafePointer<UInt8>.bridgeJSLiftParameter(ptr), mutPtr: UnsafeMutablePointer<UInt8>.bridgeJSLiftParameter(mutPtr))
+    let ret = BridgeJSRuntimeTests.PointerFields(raw: UnsafeRawPointer.bridgeJSLiftParameter(raw), mutRaw: UnsafeMutableRawPointer.bridgeJSLiftParameter(mutRaw), opaque: OpaquePointer.bridgeJSLiftParameter(opaque), ptr: UnsafePointer<UInt8>.bridgeJSLiftParameter(ptr), mutPtr: UnsafeMutablePointer<UInt8>.bridgeJSLiftParameter(mutPtr))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension DataPoint: _BridgedSwiftStruct {
-    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> DataPoint {
+extension BridgeJSRuntimeTests.DataPoint: _BridgedSwiftStruct {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> BridgeJSRuntimeTests.DataPoint {
         let optFlag = Optional<Bool>.bridgeJSStackPop()
         let optCount = Optional<Int>.bridgeJSStackPop()
         let label = String.bridgeJSStackPop()
         let y = Double.bridgeJSStackPop()
         let x = Double.bridgeJSStackPop()
-        return DataPoint(x: x, y: y, label: label, optCount: optCount, optFlag: optFlag)
+        return BridgeJSRuntimeTests.DataPoint(x: x, y: y, label: label, optCount: optCount, optFlag: optFlag)
     }
 
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSStackPush() {
@@ -6787,79 +6787,79 @@ extension DataPoint: _BridgedSwiftStruct {
     }
 
     init(unsafelyCopying jsObject: JSObject) {
-        _bjs_struct_lower_DataPoint(jsObject.bridgeJSLowerParameter())
+        _bjs_struct_lower_BridgeJSRuntimeTests_DataPoint(jsObject.bridgeJSLowerParameter())
         self = Self.bridgeJSStackPop()
     }
 
     func toJSObject() -> JSObject {
         let __bjs_self = self
         __bjs_self.bridgeJSStackPush()
-        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_DataPoint()))
+        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_BridgeJSRuntimeTests_DataPoint()))
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_DataPoint")
-fileprivate func _bjs_struct_lower_DataPoint_extern(_ objectId: Int32) -> Void
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_BridgeJSRuntimeTests_DataPoint")
+fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_DataPoint_extern(_ objectId: Int32) -> Void
 #else
-fileprivate func _bjs_struct_lower_DataPoint_extern(_ objectId: Int32) -> Void {
+fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_DataPoint_extern(_ objectId: Int32) -> Void {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lower_DataPoint(_ objectId: Int32) -> Void {
-    return _bjs_struct_lower_DataPoint_extern(objectId)
+@inline(never) fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_DataPoint(_ objectId: Int32) -> Void {
+    return _bjs_struct_lower_BridgeJSRuntimeTests_DataPoint_extern(objectId)
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_DataPoint")
-fileprivate func _bjs_struct_lift_DataPoint_extern() -> Int32
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_BridgeJSRuntimeTests_DataPoint")
+fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_DataPoint_extern() -> Int32
 #else
-fileprivate func _bjs_struct_lift_DataPoint_extern() -> Int32 {
+fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_DataPoint_extern() -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lift_DataPoint() -> Int32 {
-    return _bjs_struct_lift_DataPoint_extern()
+@inline(never) fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_DataPoint() -> Int32 {
+    return _bjs_struct_lift_BridgeJSRuntimeTests_DataPoint_extern()
 }
 
-@_expose(wasm, "bjs_DataPoint_init")
-@_cdecl("bjs_DataPoint_init")
-public func _bjs_DataPoint_init(_ x: Float64, _ y: Float64, _ labelBytes: Int32, _ labelLength: Int32, _ optCountIsSome: Int32, _ optCountValue: Int32, _ optFlagIsSome: Int32, _ optFlagValue: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DataPoint_init")
+@_cdecl("bjs_BridgeJSRuntimeTests_DataPoint_init")
+public func _bjs_BridgeJSRuntimeTests_DataPoint_init(_ x: Float64, _ y: Float64, _ labelBytes: Int32, _ labelLength: Int32, _ optCountIsSome: Int32, _ optCountValue: Int32, _ optFlagIsSome: Int32, _ optFlagValue: Int32) -> Void {
     #if arch(wasm32)
-    let ret = DataPoint(x: Double.bridgeJSLiftParameter(x), y: Double.bridgeJSLiftParameter(y), label: String.bridgeJSLiftParameter(labelBytes, labelLength), optCount: Optional<Int>.bridgeJSLiftParameter(optCountIsSome, optCountValue), optFlag: Optional<Bool>.bridgeJSLiftParameter(optFlagIsSome, optFlagValue))
+    let ret = BridgeJSRuntimeTests.DataPoint(x: Double.bridgeJSLiftParameter(x), y: Double.bridgeJSLiftParameter(y), label: String.bridgeJSLiftParameter(labelBytes, labelLength), optCount: Optional<Int>.bridgeJSLiftParameter(optCountIsSome, optCountValue), optFlag: Optional<Bool>.bridgeJSLiftParameter(optFlagIsSome, optFlagValue))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DataPoint_static_dimensions_get")
-@_cdecl("bjs_DataPoint_static_dimensions_get")
-public func _bjs_DataPoint_static_dimensions_get() -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DataPoint_static_dimensions_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_DataPoint_static_dimensions_get")
+public func _bjs_BridgeJSRuntimeTests_DataPoint_static_dimensions_get() -> Int32 {
     #if arch(wasm32)
-    let ret = DataPoint.dimensions
+    let ret = BridgeJSRuntimeTests.DataPoint.dimensions
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DataPoint_static_origin")
-@_cdecl("bjs_DataPoint_static_origin")
-public func _bjs_DataPoint_static_origin() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DataPoint_static_origin")
+@_cdecl("bjs_BridgeJSRuntimeTests_DataPoint_static_origin")
+public func _bjs_BridgeJSRuntimeTests_DataPoint_static_origin() -> Void {
     #if arch(wasm32)
-    let ret = DataPoint.origin()
+    let ret = BridgeJSRuntimeTests.DataPoint.origin()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension PublicPoint: _BridgedSwiftStruct {
-    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> PublicPoint {
+extension BridgeJSRuntimeTests.PublicPoint: _BridgedSwiftStruct {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> BridgeJSRuntimeTests.PublicPoint {
         let y = Int.bridgeJSStackPop()
         let x = Int.bridgeJSStackPop()
-        return PublicPoint(x: x, y: y)
+        return BridgeJSRuntimeTests.PublicPoint(x: x, y: y)
     }
 
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSStackPush() {
@@ -6868,58 +6868,58 @@ extension PublicPoint: _BridgedSwiftStruct {
     }
 
     public init(unsafelyCopying jsObject: JSObject) {
-        _bjs_struct_lower_PublicPoint(jsObject.bridgeJSLowerParameter())
+        _bjs_struct_lower_BridgeJSRuntimeTests_PublicPoint(jsObject.bridgeJSLowerParameter())
         self = Self.bridgeJSStackPop()
     }
 
     public func toJSObject() -> JSObject {
         let __bjs_self = self
         __bjs_self.bridgeJSStackPush()
-        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_PublicPoint()))
+        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_BridgeJSRuntimeTests_PublicPoint()))
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_PublicPoint")
-fileprivate func _bjs_struct_lower_PublicPoint_extern(_ objectId: Int32) -> Void
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_BridgeJSRuntimeTests_PublicPoint")
+fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_PublicPoint_extern(_ objectId: Int32) -> Void
 #else
-fileprivate func _bjs_struct_lower_PublicPoint_extern(_ objectId: Int32) -> Void {
+fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_PublicPoint_extern(_ objectId: Int32) -> Void {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lower_PublicPoint(_ objectId: Int32) -> Void {
-    return _bjs_struct_lower_PublicPoint_extern(objectId)
+@inline(never) fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_PublicPoint(_ objectId: Int32) -> Void {
+    return _bjs_struct_lower_BridgeJSRuntimeTests_PublicPoint_extern(objectId)
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_PublicPoint")
-fileprivate func _bjs_struct_lift_PublicPoint_extern() -> Int32
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_BridgeJSRuntimeTests_PublicPoint")
+fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_PublicPoint_extern() -> Int32
 #else
-fileprivate func _bjs_struct_lift_PublicPoint_extern() -> Int32 {
+fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_PublicPoint_extern() -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lift_PublicPoint() -> Int32 {
-    return _bjs_struct_lift_PublicPoint_extern()
+@inline(never) fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_PublicPoint() -> Int32 {
+    return _bjs_struct_lift_BridgeJSRuntimeTests_PublicPoint_extern()
 }
 
-@_expose(wasm, "bjs_PublicPoint_init")
-@_cdecl("bjs_PublicPoint_init")
-public func _bjs_PublicPoint_init(_ x: Int32, _ y: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_PublicPoint_init")
+@_cdecl("bjs_BridgeJSRuntimeTests_PublicPoint_init")
+public func _bjs_BridgeJSRuntimeTests_PublicPoint_init(_ x: Int32, _ y: Int32) -> Void {
     #if arch(wasm32)
-    let ret = PublicPoint(x: Int.bridgeJSLiftParameter(x), y: Int.bridgeJSLiftParameter(y))
+    let ret = BridgeJSRuntimeTests.PublicPoint(x: Int.bridgeJSLiftParameter(x), y: Int.bridgeJSLiftParameter(y))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension Address: _BridgedSwiftStruct {
-    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> Address {
+extension BridgeJSRuntimeTests.Address: _BridgedSwiftStruct {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> BridgeJSRuntimeTests.Address {
         let zipCode = Optional<Int>.bridgeJSStackPop()
         let city = String.bridgeJSStackPop()
         let street = String.bridgeJSStackPop()
-        return Address(street: street, city: city, zipCode: zipCode)
+        return BridgeJSRuntimeTests.Address(street: street, city: city, zipCode: zipCode)
     }
 
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSStackPush() {
@@ -6929,49 +6929,49 @@ extension Address: _BridgedSwiftStruct {
     }
 
     init(unsafelyCopying jsObject: JSObject) {
-        _bjs_struct_lower_Address(jsObject.bridgeJSLowerParameter())
+        _bjs_struct_lower_BridgeJSRuntimeTests_Address(jsObject.bridgeJSLowerParameter())
         self = Self.bridgeJSStackPop()
     }
 
     func toJSObject() -> JSObject {
         let __bjs_self = self
         __bjs_self.bridgeJSStackPush()
-        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_Address()))
+        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_BridgeJSRuntimeTests_Address()))
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_Address")
-fileprivate func _bjs_struct_lower_Address_extern(_ objectId: Int32) -> Void
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_BridgeJSRuntimeTests_Address")
+fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_Address_extern(_ objectId: Int32) -> Void
 #else
-fileprivate func _bjs_struct_lower_Address_extern(_ objectId: Int32) -> Void {
+fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_Address_extern(_ objectId: Int32) -> Void {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lower_Address(_ objectId: Int32) -> Void {
-    return _bjs_struct_lower_Address_extern(objectId)
+@inline(never) fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_Address(_ objectId: Int32) -> Void {
+    return _bjs_struct_lower_BridgeJSRuntimeTests_Address_extern(objectId)
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_Address")
-fileprivate func _bjs_struct_lift_Address_extern() -> Int32
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_BridgeJSRuntimeTests_Address")
+fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_Address_extern() -> Int32
 #else
-fileprivate func _bjs_struct_lift_Address_extern() -> Int32 {
+fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_Address_extern() -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lift_Address() -> Int32 {
-    return _bjs_struct_lift_Address_extern()
+@inline(never) fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_Address() -> Int32 {
+    return _bjs_struct_lift_BridgeJSRuntimeTests_Address_extern()
 }
 
-extension Contact: _BridgedSwiftStruct {
-    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> Contact {
-        let secondaryAddress = Optional<Address>.bridgeJSStackPop()
+extension BridgeJSRuntimeTests.Contact: _BridgedSwiftStruct {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> BridgeJSRuntimeTests.Contact {
+        let secondaryAddress = Optional<BridgeJSRuntimeTests.Address>.bridgeJSStackPop()
         let email = Optional<String>.bridgeJSStackPop()
-        let address = Address.bridgeJSStackPop()
+        let address = BridgeJSRuntimeTests.Address.bridgeJSStackPop()
         let age = Int.bridgeJSStackPop()
         let name = String.bridgeJSStackPop()
-        return Contact(name: name, age: age, address: address, email: email, secondaryAddress: secondaryAddress)
+        return BridgeJSRuntimeTests.Contact(name: name, age: age, address: address, email: email, secondaryAddress: secondaryAddress)
     }
 
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSStackPush() {
@@ -6983,48 +6983,48 @@ extension Contact: _BridgedSwiftStruct {
     }
 
     init(unsafelyCopying jsObject: JSObject) {
-        _bjs_struct_lower_Contact(jsObject.bridgeJSLowerParameter())
+        _bjs_struct_lower_BridgeJSRuntimeTests_Contact(jsObject.bridgeJSLowerParameter())
         self = Self.bridgeJSStackPop()
     }
 
     func toJSObject() -> JSObject {
         let __bjs_self = self
         __bjs_self.bridgeJSStackPush()
-        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_Contact()))
+        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_BridgeJSRuntimeTests_Contact()))
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_Contact")
-fileprivate func _bjs_struct_lower_Contact_extern(_ objectId: Int32) -> Void
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_BridgeJSRuntimeTests_Contact")
+fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_Contact_extern(_ objectId: Int32) -> Void
 #else
-fileprivate func _bjs_struct_lower_Contact_extern(_ objectId: Int32) -> Void {
+fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_Contact_extern(_ objectId: Int32) -> Void {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lower_Contact(_ objectId: Int32) -> Void {
-    return _bjs_struct_lower_Contact_extern(objectId)
+@inline(never) fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_Contact(_ objectId: Int32) -> Void {
+    return _bjs_struct_lower_BridgeJSRuntimeTests_Contact_extern(objectId)
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_Contact")
-fileprivate func _bjs_struct_lift_Contact_extern() -> Int32
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_BridgeJSRuntimeTests_Contact")
+fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_Contact_extern() -> Int32
 #else
-fileprivate func _bjs_struct_lift_Contact_extern() -> Int32 {
+fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_Contact_extern() -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lift_Contact() -> Int32 {
-    return _bjs_struct_lift_Contact_extern()
+@inline(never) fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_Contact() -> Int32 {
+    return _bjs_struct_lift_BridgeJSRuntimeTests_Contact_extern()
 }
 
-extension Config: _BridgedSwiftStruct {
-    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> Config {
-        let status = Status.bridgeJSStackPop()
-        let direction = Optional<Direction>.bridgeJSStackPop()
-        let theme = Optional<Theme>.bridgeJSStackPop()
+extension BridgeJSRuntimeTests.Config: _BridgedSwiftStruct {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> BridgeJSRuntimeTests.Config {
+        let status = BridgeJSRuntimeTests.Status.bridgeJSStackPop()
+        let direction = Optional<BridgeJSRuntimeTests.Direction>.bridgeJSStackPop()
+        let theme = Optional<BridgeJSRuntimeTests.Theme>.bridgeJSStackPop()
         let name = String.bridgeJSStackPop()
-        return Config(name: name, theme: theme, direction: direction, status: status)
+        return BridgeJSRuntimeTests.Config(name: name, theme: theme, direction: direction, status: status)
     }
 
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSStackPush() {
@@ -7035,46 +7035,46 @@ extension Config: _BridgedSwiftStruct {
     }
 
     init(unsafelyCopying jsObject: JSObject) {
-        _bjs_struct_lower_Config(jsObject.bridgeJSLowerParameter())
+        _bjs_struct_lower_BridgeJSRuntimeTests_Config(jsObject.bridgeJSLowerParameter())
         self = Self.bridgeJSStackPop()
     }
 
     func toJSObject() -> JSObject {
         let __bjs_self = self
         __bjs_self.bridgeJSStackPush()
-        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_Config()))
+        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_BridgeJSRuntimeTests_Config()))
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_Config")
-fileprivate func _bjs_struct_lower_Config_extern(_ objectId: Int32) -> Void
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_BridgeJSRuntimeTests_Config")
+fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_Config_extern(_ objectId: Int32) -> Void
 #else
-fileprivate func _bjs_struct_lower_Config_extern(_ objectId: Int32) -> Void {
+fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_Config_extern(_ objectId: Int32) -> Void {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lower_Config(_ objectId: Int32) -> Void {
-    return _bjs_struct_lower_Config_extern(objectId)
+@inline(never) fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_Config(_ objectId: Int32) -> Void {
+    return _bjs_struct_lower_BridgeJSRuntimeTests_Config_extern(objectId)
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_Config")
-fileprivate func _bjs_struct_lift_Config_extern() -> Int32
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_BridgeJSRuntimeTests_Config")
+fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_Config_extern() -> Int32
 #else
-fileprivate func _bjs_struct_lift_Config_extern() -> Int32 {
+fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_Config_extern() -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lift_Config() -> Int32 {
-    return _bjs_struct_lift_Config_extern()
+@inline(never) fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_Config() -> Int32 {
+    return _bjs_struct_lift_BridgeJSRuntimeTests_Config_extern()
 }
 
-extension SessionData: _BridgedSwiftStruct {
-    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> SessionData {
-        let owner = Optional<Greeter>.bridgeJSStackPop()
+extension BridgeJSRuntimeTests.SessionData: _BridgedSwiftStruct {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> BridgeJSRuntimeTests.SessionData {
+        let owner = Optional<BridgeJSRuntimeTests.Greeter>.bridgeJSStackPop()
         let id = Int.bridgeJSStackPop()
-        return SessionData(id: id, owner: owner)
+        return BridgeJSRuntimeTests.SessionData(id: id, owner: owner)
     }
 
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSStackPush() {
@@ -7083,48 +7083,48 @@ extension SessionData: _BridgedSwiftStruct {
     }
 
     init(unsafelyCopying jsObject: JSObject) {
-        _bjs_struct_lower_SessionData(jsObject.bridgeJSLowerParameter())
+        _bjs_struct_lower_BridgeJSRuntimeTests_SessionData(jsObject.bridgeJSLowerParameter())
         self = Self.bridgeJSStackPop()
     }
 
     func toJSObject() -> JSObject {
         let __bjs_self = self
         __bjs_self.bridgeJSStackPush()
-        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_SessionData()))
+        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_BridgeJSRuntimeTests_SessionData()))
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_SessionData")
-fileprivate func _bjs_struct_lower_SessionData_extern(_ objectId: Int32) -> Void
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_BridgeJSRuntimeTests_SessionData")
+fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_SessionData_extern(_ objectId: Int32) -> Void
 #else
-fileprivate func _bjs_struct_lower_SessionData_extern(_ objectId: Int32) -> Void {
+fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_SessionData_extern(_ objectId: Int32) -> Void {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lower_SessionData(_ objectId: Int32) -> Void {
-    return _bjs_struct_lower_SessionData_extern(objectId)
+@inline(never) fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_SessionData(_ objectId: Int32) -> Void {
+    return _bjs_struct_lower_BridgeJSRuntimeTests_SessionData_extern(objectId)
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_SessionData")
-fileprivate func _bjs_struct_lift_SessionData_extern() -> Int32
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_BridgeJSRuntimeTests_SessionData")
+fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_SessionData_extern() -> Int32
 #else
-fileprivate func _bjs_struct_lift_SessionData_extern() -> Int32 {
+fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_SessionData_extern() -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lift_SessionData() -> Int32 {
-    return _bjs_struct_lift_SessionData_extern()
+@inline(never) fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_SessionData() -> Int32 {
+    return _bjs_struct_lift_BridgeJSRuntimeTests_SessionData_extern()
 }
 
-extension ValidationReport: _BridgedSwiftStruct {
-    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> ValidationReport {
-        let outcome = Optional<APIResult>.bridgeJSStackPop()
-        let status = Optional<Status>.bridgeJSStackPop()
-        let result = APIResult.bridgeJSStackPop()
+extension BridgeJSRuntimeTests.ValidationReport: _BridgedSwiftStruct {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> BridgeJSRuntimeTests.ValidationReport {
+        let outcome = Optional<BridgeJSRuntimeTests.APIResult>.bridgeJSStackPop()
+        let status = Optional<BridgeJSRuntimeTests.Status>.bridgeJSStackPop()
+        let result = BridgeJSRuntimeTests.APIResult.bridgeJSStackPop()
         let id = Int.bridgeJSStackPop()
-        return ValidationReport(id: id, result: result, status: status, outcome: outcome)
+        return BridgeJSRuntimeTests.ValidationReport(id: id, result: result, status: status, outcome: outcome)
     }
 
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSStackPush() {
@@ -7135,54 +7135,54 @@ extension ValidationReport: _BridgedSwiftStruct {
     }
 
     init(unsafelyCopying jsObject: JSObject) {
-        _bjs_struct_lower_ValidationReport(jsObject.bridgeJSLowerParameter())
+        _bjs_struct_lower_BridgeJSRuntimeTests_ValidationReport(jsObject.bridgeJSLowerParameter())
         self = Self.bridgeJSStackPop()
     }
 
     func toJSObject() -> JSObject {
         let __bjs_self = self
         __bjs_self.bridgeJSStackPush()
-        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_ValidationReport()))
+        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_BridgeJSRuntimeTests_ValidationReport()))
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_ValidationReport")
-fileprivate func _bjs_struct_lower_ValidationReport_extern(_ objectId: Int32) -> Void
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_BridgeJSRuntimeTests_ValidationReport")
+fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_ValidationReport_extern(_ objectId: Int32) -> Void
 #else
-fileprivate func _bjs_struct_lower_ValidationReport_extern(_ objectId: Int32) -> Void {
+fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_ValidationReport_extern(_ objectId: Int32) -> Void {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lower_ValidationReport(_ objectId: Int32) -> Void {
-    return _bjs_struct_lower_ValidationReport_extern(objectId)
+@inline(never) fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_ValidationReport(_ objectId: Int32) -> Void {
+    return _bjs_struct_lower_BridgeJSRuntimeTests_ValidationReport_extern(objectId)
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_ValidationReport")
-fileprivate func _bjs_struct_lift_ValidationReport_extern() -> Int32
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_BridgeJSRuntimeTests_ValidationReport")
+fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_ValidationReport_extern() -> Int32
 #else
-fileprivate func _bjs_struct_lift_ValidationReport_extern() -> Int32 {
+fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_ValidationReport_extern() -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lift_ValidationReport() -> Int32 {
-    return _bjs_struct_lift_ValidationReport_extern()
+@inline(never) fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_ValidationReport() -> Int32 {
+    return _bjs_struct_lift_BridgeJSRuntimeTests_ValidationReport_extern()
 }
 
-extension AdvancedConfig: _BridgedSwiftStruct {
-    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> AdvancedConfig {
-        let overrideDefaults = Optional<ConfigStruct>.bridgeJSStackPop()
-        let defaults = ConfigStruct.bridgeJSStackPop()
-        let location = Optional<DataPoint>.bridgeJSStackPop()
+extension BridgeJSRuntimeTests.AdvancedConfig: _BridgedSwiftStruct {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> BridgeJSRuntimeTests.AdvancedConfig {
+        let overrideDefaults = Optional<BridgeJSRuntimeTests.ConfigStruct>.bridgeJSStackPop()
+        let defaults = BridgeJSRuntimeTests.ConfigStruct.bridgeJSStackPop()
+        let location = Optional<BridgeJSRuntimeTests.DataPoint>.bridgeJSStackPop()
         let metadata = Optional<JSObject>.bridgeJSStackPop()
-        let result = Optional<APIResult>.bridgeJSStackPop()
-        let status = Status.bridgeJSStackPop()
-        let theme = Theme.bridgeJSStackPop()
+        let result = Optional<BridgeJSRuntimeTests.APIResult>.bridgeJSStackPop()
+        let status = BridgeJSRuntimeTests.Status.bridgeJSStackPop()
+        let theme = BridgeJSRuntimeTests.Theme.bridgeJSStackPop()
         let enabled = Bool.bridgeJSStackPop()
         let title = String.bridgeJSStackPop()
         let id = Int.bridgeJSStackPop()
-        return AdvancedConfig(id: id, title: title, enabled: enabled, theme: theme, status: status, result: result, metadata: metadata, location: location, defaults: defaults, overrideDefaults: overrideDefaults)
+        return BridgeJSRuntimeTests.AdvancedConfig(id: id, title: title, enabled: enabled, theme: theme, status: status, result: result, metadata: metadata, location: location, defaults: defaults, overrideDefaults: overrideDefaults)
     }
 
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSStackPush() {
@@ -7199,48 +7199,48 @@ extension AdvancedConfig: _BridgedSwiftStruct {
     }
 
     init(unsafelyCopying jsObject: JSObject) {
-        _bjs_struct_lower_AdvancedConfig(jsObject.bridgeJSLowerParameter())
+        _bjs_struct_lower_BridgeJSRuntimeTests_AdvancedConfig(jsObject.bridgeJSLowerParameter())
         self = Self.bridgeJSStackPop()
     }
 
     func toJSObject() -> JSObject {
         let __bjs_self = self
         __bjs_self.bridgeJSStackPush()
-        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_AdvancedConfig()))
+        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_BridgeJSRuntimeTests_AdvancedConfig()))
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_AdvancedConfig")
-fileprivate func _bjs_struct_lower_AdvancedConfig_extern(_ objectId: Int32) -> Void
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_BridgeJSRuntimeTests_AdvancedConfig")
+fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_AdvancedConfig_extern(_ objectId: Int32) -> Void
 #else
-fileprivate func _bjs_struct_lower_AdvancedConfig_extern(_ objectId: Int32) -> Void {
+fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_AdvancedConfig_extern(_ objectId: Int32) -> Void {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lower_AdvancedConfig(_ objectId: Int32) -> Void {
-    return _bjs_struct_lower_AdvancedConfig_extern(objectId)
+@inline(never) fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_AdvancedConfig(_ objectId: Int32) -> Void {
+    return _bjs_struct_lower_BridgeJSRuntimeTests_AdvancedConfig_extern(objectId)
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_AdvancedConfig")
-fileprivate func _bjs_struct_lift_AdvancedConfig_extern() -> Int32
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_BridgeJSRuntimeTests_AdvancedConfig")
+fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_AdvancedConfig_extern() -> Int32
 #else
-fileprivate func _bjs_struct_lift_AdvancedConfig_extern() -> Int32 {
+fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_AdvancedConfig_extern() -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lift_AdvancedConfig() -> Int32 {
-    return _bjs_struct_lift_AdvancedConfig_extern()
+@inline(never) fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_AdvancedConfig() -> Int32 {
+    return _bjs_struct_lift_BridgeJSRuntimeTests_AdvancedConfig_extern()
 }
 
-extension MeasurementConfig: _BridgedSwiftStruct {
-    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> MeasurementConfig {
-        let optionalRatio = Optional<Ratio>.bridgeJSStackPop()
-        let optionalPrecision = Optional<Precision>.bridgeJSStackPop()
-        let ratio = Ratio.bridgeJSStackPop()
-        let precision = Precision.bridgeJSStackPop()
-        return MeasurementConfig(precision: precision, ratio: ratio, optionalPrecision: optionalPrecision, optionalRatio: optionalRatio)
+extension BridgeJSRuntimeTests.MeasurementConfig: _BridgedSwiftStruct {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> BridgeJSRuntimeTests.MeasurementConfig {
+        let optionalRatio = Optional<BridgeJSRuntimeTests.Ratio>.bridgeJSStackPop()
+        let optionalPrecision = Optional<BridgeJSRuntimeTests.Precision>.bridgeJSStackPop()
+        let ratio = BridgeJSRuntimeTests.Ratio.bridgeJSStackPop()
+        let precision = BridgeJSRuntimeTests.Precision.bridgeJSStackPop()
+        return BridgeJSRuntimeTests.MeasurementConfig(precision: precision, ratio: ratio, optionalPrecision: optionalPrecision, optionalRatio: optionalRatio)
     }
 
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSStackPush() {
@@ -7251,45 +7251,45 @@ extension MeasurementConfig: _BridgedSwiftStruct {
     }
 
     init(unsafelyCopying jsObject: JSObject) {
-        _bjs_struct_lower_MeasurementConfig(jsObject.bridgeJSLowerParameter())
+        _bjs_struct_lower_BridgeJSRuntimeTests_MeasurementConfig(jsObject.bridgeJSLowerParameter())
         self = Self.bridgeJSStackPop()
     }
 
     func toJSObject() -> JSObject {
         let __bjs_self = self
         __bjs_self.bridgeJSStackPush()
-        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_MeasurementConfig()))
+        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_BridgeJSRuntimeTests_MeasurementConfig()))
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_MeasurementConfig")
-fileprivate func _bjs_struct_lower_MeasurementConfig_extern(_ objectId: Int32) -> Void
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_BridgeJSRuntimeTests_MeasurementConfig")
+fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_MeasurementConfig_extern(_ objectId: Int32) -> Void
 #else
-fileprivate func _bjs_struct_lower_MeasurementConfig_extern(_ objectId: Int32) -> Void {
+fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_MeasurementConfig_extern(_ objectId: Int32) -> Void {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lower_MeasurementConfig(_ objectId: Int32) -> Void {
-    return _bjs_struct_lower_MeasurementConfig_extern(objectId)
+@inline(never) fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_MeasurementConfig(_ objectId: Int32) -> Void {
+    return _bjs_struct_lower_BridgeJSRuntimeTests_MeasurementConfig_extern(objectId)
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_MeasurementConfig")
-fileprivate func _bjs_struct_lift_MeasurementConfig_extern() -> Int32
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_BridgeJSRuntimeTests_MeasurementConfig")
+fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_MeasurementConfig_extern() -> Int32
 #else
-fileprivate func _bjs_struct_lift_MeasurementConfig_extern() -> Int32 {
+fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_MeasurementConfig_extern() -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lift_MeasurementConfig() -> Int32 {
-    return _bjs_struct_lift_MeasurementConfig_extern()
+@inline(never) fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_MeasurementConfig() -> Int32 {
+    return _bjs_struct_lift_BridgeJSRuntimeTests_MeasurementConfig_extern()
 }
 
-extension MathOperations: _BridgedSwiftStruct {
-    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> MathOperations {
+extension BridgeJSRuntimeTests.MathOperations: _BridgedSwiftStruct {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> BridgeJSRuntimeTests.MathOperations {
         let baseValue = Double.bridgeJSStackPop()
-        return MathOperations(baseValue: baseValue)
+        return BridgeJSRuntimeTests.MathOperations(baseValue: baseValue)
     }
 
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSStackPush() {
@@ -7297,90 +7297,90 @@ extension MathOperations: _BridgedSwiftStruct {
     }
 
     init(unsafelyCopying jsObject: JSObject) {
-        _bjs_struct_lower_MathOperations(jsObject.bridgeJSLowerParameter())
+        _bjs_struct_lower_BridgeJSRuntimeTests_MathOperations(jsObject.bridgeJSLowerParameter())
         self = Self.bridgeJSStackPop()
     }
 
     func toJSObject() -> JSObject {
         let __bjs_self = self
         __bjs_self.bridgeJSStackPush()
-        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_MathOperations()))
+        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_BridgeJSRuntimeTests_MathOperations()))
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_MathOperations")
-fileprivate func _bjs_struct_lower_MathOperations_extern(_ objectId: Int32) -> Void
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_BridgeJSRuntimeTests_MathOperations")
+fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_MathOperations_extern(_ objectId: Int32) -> Void
 #else
-fileprivate func _bjs_struct_lower_MathOperations_extern(_ objectId: Int32) -> Void {
+fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_MathOperations_extern(_ objectId: Int32) -> Void {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lower_MathOperations(_ objectId: Int32) -> Void {
-    return _bjs_struct_lower_MathOperations_extern(objectId)
+@inline(never) fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_MathOperations(_ objectId: Int32) -> Void {
+    return _bjs_struct_lower_BridgeJSRuntimeTests_MathOperations_extern(objectId)
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_MathOperations")
-fileprivate func _bjs_struct_lift_MathOperations_extern() -> Int32
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_BridgeJSRuntimeTests_MathOperations")
+fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_MathOperations_extern() -> Int32
 #else
-fileprivate func _bjs_struct_lift_MathOperations_extern() -> Int32 {
+fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_MathOperations_extern() -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lift_MathOperations() -> Int32 {
-    return _bjs_struct_lift_MathOperations_extern()
+@inline(never) fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_MathOperations() -> Int32 {
+    return _bjs_struct_lift_BridgeJSRuntimeTests_MathOperations_extern()
 }
 
-@_expose(wasm, "bjs_MathOperations_init")
-@_cdecl("bjs_MathOperations_init")
-public func _bjs_MathOperations_init(_ baseValue: Float64) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_MathOperations_init")
+@_cdecl("bjs_BridgeJSRuntimeTests_MathOperations_init")
+public func _bjs_BridgeJSRuntimeTests_MathOperations_init(_ baseValue: Float64) -> Void {
     #if arch(wasm32)
-    let ret = MathOperations(baseValue: Double.bridgeJSLiftParameter(baseValue))
+    let ret = BridgeJSRuntimeTests.MathOperations(baseValue: Double.bridgeJSLiftParameter(baseValue))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_MathOperations_add")
-@_cdecl("bjs_MathOperations_add")
-public func _bjs_MathOperations_add(_ a: Float64, _ b: Float64) -> Float64 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_MathOperations_add")
+@_cdecl("bjs_BridgeJSRuntimeTests_MathOperations_add")
+public func _bjs_BridgeJSRuntimeTests_MathOperations_add(_ a: Float64, _ b: Float64) -> Float64 {
     #if arch(wasm32)
-    let ret = MathOperations.bridgeJSLiftParameter().add(a: Double.bridgeJSLiftParameter(a), b: Double.bridgeJSLiftParameter(b))
+    let ret = BridgeJSRuntimeTests.MathOperations.bridgeJSLiftParameter().add(a: Double.bridgeJSLiftParameter(a), b: Double.bridgeJSLiftParameter(b))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_MathOperations_multiply")
-@_cdecl("bjs_MathOperations_multiply")
-public func _bjs_MathOperations_multiply(_ a: Float64, _ b: Float64) -> Float64 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_MathOperations_multiply")
+@_cdecl("bjs_BridgeJSRuntimeTests_MathOperations_multiply")
+public func _bjs_BridgeJSRuntimeTests_MathOperations_multiply(_ a: Float64, _ b: Float64) -> Float64 {
     #if arch(wasm32)
-    let ret = MathOperations.bridgeJSLiftParameter().multiply(a: Double.bridgeJSLiftParameter(a), b: Double.bridgeJSLiftParameter(b))
+    let ret = BridgeJSRuntimeTests.MathOperations.bridgeJSLiftParameter().multiply(a: Double.bridgeJSLiftParameter(a), b: Double.bridgeJSLiftParameter(b))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_MathOperations_static_subtract")
-@_cdecl("bjs_MathOperations_static_subtract")
-public func _bjs_MathOperations_static_subtract(_ a: Float64, _ b: Float64) -> Float64 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_MathOperations_static_subtract")
+@_cdecl("bjs_BridgeJSRuntimeTests_MathOperations_static_subtract")
+public func _bjs_BridgeJSRuntimeTests_MathOperations_static_subtract(_ a: Float64, _ b: Float64) -> Float64 {
     #if arch(wasm32)
-    let ret = MathOperations.subtract(a: Double.bridgeJSLiftParameter(a), b: Double.bridgeJSLiftParameter(b))
+    let ret = BridgeJSRuntimeTests.MathOperations.subtract(a: Double.bridgeJSLiftParameter(a), b: Double.bridgeJSLiftParameter(b))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension CopyableCart: _BridgedSwiftStruct {
-    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> CopyableCart {
+extension BridgeJSRuntimeTests.CopyableCart: _BridgedSwiftStruct {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> BridgeJSRuntimeTests.CopyableCart {
         let note = Optional<String>.bridgeJSStackPop()
         let x = Int.bridgeJSStackPop()
-        return CopyableCart(x: x, note: note)
+        return BridgeJSRuntimeTests.CopyableCart(x: x, note: note)
     }
 
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSStackPush() {
@@ -7389,57 +7389,57 @@ extension CopyableCart: _BridgedSwiftStruct {
     }
 
     init(unsafelyCopying jsObject: JSObject) {
-        _bjs_struct_lower_CopyableCart(jsObject.bridgeJSLowerParameter())
+        _bjs_struct_lower_BridgeJSRuntimeTests_CopyableCart(jsObject.bridgeJSLowerParameter())
         self = Self.bridgeJSStackPop()
     }
 
     func toJSObject() -> JSObject {
         let __bjs_self = self
         __bjs_self.bridgeJSStackPush()
-        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_CopyableCart()))
+        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_BridgeJSRuntimeTests_CopyableCart()))
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_CopyableCart")
-fileprivate func _bjs_struct_lower_CopyableCart_extern(_ objectId: Int32) -> Void
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_BridgeJSRuntimeTests_CopyableCart")
+fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_CopyableCart_extern(_ objectId: Int32) -> Void
 #else
-fileprivate func _bjs_struct_lower_CopyableCart_extern(_ objectId: Int32) -> Void {
+fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_CopyableCart_extern(_ objectId: Int32) -> Void {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lower_CopyableCart(_ objectId: Int32) -> Void {
-    return _bjs_struct_lower_CopyableCart_extern(objectId)
+@inline(never) fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_CopyableCart(_ objectId: Int32) -> Void {
+    return _bjs_struct_lower_BridgeJSRuntimeTests_CopyableCart_extern(objectId)
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_CopyableCart")
-fileprivate func _bjs_struct_lift_CopyableCart_extern() -> Int32
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_BridgeJSRuntimeTests_CopyableCart")
+fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_CopyableCart_extern() -> Int32
 #else
-fileprivate func _bjs_struct_lift_CopyableCart_extern() -> Int32 {
+fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_CopyableCart_extern() -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lift_CopyableCart() -> Int32 {
-    return _bjs_struct_lift_CopyableCart_extern()
+@inline(never) fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_CopyableCart() -> Int32 {
+    return _bjs_struct_lift_BridgeJSRuntimeTests_CopyableCart_extern()
 }
 
-@_expose(wasm, "bjs_CopyableCart_static_fromJSObject")
-@_cdecl("bjs_CopyableCart_static_fromJSObject")
-public func _bjs_CopyableCart_static_fromJSObject(_ object: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_CopyableCart_static_fromJSObject")
+@_cdecl("bjs_BridgeJSRuntimeTests_CopyableCart_static_fromJSObject")
+public func _bjs_BridgeJSRuntimeTests_CopyableCart_static_fromJSObject(_ object: Int32) -> Void {
     #if arch(wasm32)
-    let ret = CopyableCart.fromJSObject(_: JSObject.bridgeJSLiftParameter(object))
+    let ret = BridgeJSRuntimeTests.CopyableCart.fromJSObject(_: JSObject.bridgeJSLiftParameter(object))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension CopyableCartItem: _BridgedSwiftStruct {
-    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> CopyableCartItem {
+extension BridgeJSRuntimeTests.CopyableCartItem: _BridgedSwiftStruct {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> BridgeJSRuntimeTests.CopyableCartItem {
         let quantity = Int.bridgeJSStackPop()
         let sku = String.bridgeJSStackPop()
-        return CopyableCartItem(sku: sku, quantity: quantity)
+        return BridgeJSRuntimeTests.CopyableCartItem(sku: sku, quantity: quantity)
     }
 
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSStackPush() {
@@ -7448,47 +7448,47 @@ extension CopyableCartItem: _BridgedSwiftStruct {
     }
 
     init(unsafelyCopying jsObject: JSObject) {
-        _bjs_struct_lower_CopyableCartItem(jsObject.bridgeJSLowerParameter())
+        _bjs_struct_lower_BridgeJSRuntimeTests_CopyableCartItem(jsObject.bridgeJSLowerParameter())
         self = Self.bridgeJSStackPop()
     }
 
     func toJSObject() -> JSObject {
         let __bjs_self = self
         __bjs_self.bridgeJSStackPush()
-        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_CopyableCartItem()))
+        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_BridgeJSRuntimeTests_CopyableCartItem()))
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_CopyableCartItem")
-fileprivate func _bjs_struct_lower_CopyableCartItem_extern(_ objectId: Int32) -> Void
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_BridgeJSRuntimeTests_CopyableCartItem")
+fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_CopyableCartItem_extern(_ objectId: Int32) -> Void
 #else
-fileprivate func _bjs_struct_lower_CopyableCartItem_extern(_ objectId: Int32) -> Void {
+fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_CopyableCartItem_extern(_ objectId: Int32) -> Void {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lower_CopyableCartItem(_ objectId: Int32) -> Void {
-    return _bjs_struct_lower_CopyableCartItem_extern(objectId)
+@inline(never) fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_CopyableCartItem(_ objectId: Int32) -> Void {
+    return _bjs_struct_lower_BridgeJSRuntimeTests_CopyableCartItem_extern(objectId)
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_CopyableCartItem")
-fileprivate func _bjs_struct_lift_CopyableCartItem_extern() -> Int32
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_BridgeJSRuntimeTests_CopyableCartItem")
+fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_CopyableCartItem_extern() -> Int32
 #else
-fileprivate func _bjs_struct_lift_CopyableCartItem_extern() -> Int32 {
+fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_CopyableCartItem_extern() -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lift_CopyableCartItem() -> Int32 {
-    return _bjs_struct_lift_CopyableCartItem_extern()
+@inline(never) fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_CopyableCartItem() -> Int32 {
+    return _bjs_struct_lift_BridgeJSRuntimeTests_CopyableCartItem_extern()
 }
 
-extension CopyableNestedCart: _BridgedSwiftStruct {
-    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> CopyableNestedCart {
-        let shippingAddress = Optional<Address>.bridgeJSStackPop()
-        let item = CopyableCartItem.bridgeJSStackPop()
+extension BridgeJSRuntimeTests.CopyableNestedCart: _BridgedSwiftStruct {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> BridgeJSRuntimeTests.CopyableNestedCart {
+        let shippingAddress = Optional<BridgeJSRuntimeTests.Address>.bridgeJSStackPop()
+        let item = BridgeJSRuntimeTests.CopyableCartItem.bridgeJSStackPop()
         let id = Int.bridgeJSStackPop()
-        return CopyableNestedCart(id: id, item: item, shippingAddress: shippingAddress)
+        return BridgeJSRuntimeTests.CopyableNestedCart(id: id, item: item, shippingAddress: shippingAddress)
     }
 
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSStackPush() {
@@ -7498,57 +7498,57 @@ extension CopyableNestedCart: _BridgedSwiftStruct {
     }
 
     init(unsafelyCopying jsObject: JSObject) {
-        _bjs_struct_lower_CopyableNestedCart(jsObject.bridgeJSLowerParameter())
+        _bjs_struct_lower_BridgeJSRuntimeTests_CopyableNestedCart(jsObject.bridgeJSLowerParameter())
         self = Self.bridgeJSStackPop()
     }
 
     func toJSObject() -> JSObject {
         let __bjs_self = self
         __bjs_self.bridgeJSStackPush()
-        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_CopyableNestedCart()))
+        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_BridgeJSRuntimeTests_CopyableNestedCart()))
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_CopyableNestedCart")
-fileprivate func _bjs_struct_lower_CopyableNestedCart_extern(_ objectId: Int32) -> Void
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_BridgeJSRuntimeTests_CopyableNestedCart")
+fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_CopyableNestedCart_extern(_ objectId: Int32) -> Void
 #else
-fileprivate func _bjs_struct_lower_CopyableNestedCart_extern(_ objectId: Int32) -> Void {
+fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_CopyableNestedCart_extern(_ objectId: Int32) -> Void {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lower_CopyableNestedCart(_ objectId: Int32) -> Void {
-    return _bjs_struct_lower_CopyableNestedCart_extern(objectId)
+@inline(never) fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_CopyableNestedCart(_ objectId: Int32) -> Void {
+    return _bjs_struct_lower_BridgeJSRuntimeTests_CopyableNestedCart_extern(objectId)
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_CopyableNestedCart")
-fileprivate func _bjs_struct_lift_CopyableNestedCart_extern() -> Int32
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_BridgeJSRuntimeTests_CopyableNestedCart")
+fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_CopyableNestedCart_extern() -> Int32
 #else
-fileprivate func _bjs_struct_lift_CopyableNestedCart_extern() -> Int32 {
+fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_CopyableNestedCart_extern() -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lift_CopyableNestedCart() -> Int32 {
-    return _bjs_struct_lift_CopyableNestedCart_extern()
+@inline(never) fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_CopyableNestedCart() -> Int32 {
+    return _bjs_struct_lift_BridgeJSRuntimeTests_CopyableNestedCart_extern()
 }
 
-@_expose(wasm, "bjs_CopyableNestedCart_static_fromJSObject")
-@_cdecl("bjs_CopyableNestedCart_static_fromJSObject")
-public func _bjs_CopyableNestedCart_static_fromJSObject(_ object: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_CopyableNestedCart_static_fromJSObject")
+@_cdecl("bjs_BridgeJSRuntimeTests_CopyableNestedCart_static_fromJSObject")
+public func _bjs_BridgeJSRuntimeTests_CopyableNestedCart_static_fromJSObject(_ object: Int32) -> Void {
     #if arch(wasm32)
-    let ret = CopyableNestedCart.fromJSObject(_: JSObject.bridgeJSLiftParameter(object))
+    let ret = BridgeJSRuntimeTests.CopyableNestedCart.fromJSObject(_: JSObject.bridgeJSLiftParameter(object))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension ConfigStruct: _BridgedSwiftStruct {
-    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> ConfigStruct {
+extension BridgeJSRuntimeTests.ConfigStruct: _BridgedSwiftStruct {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> BridgeJSRuntimeTests.ConfigStruct {
         let value = Int.bridgeJSStackPop()
         let name = String.bridgeJSStackPop()
-        return ConfigStruct(name: name, value: value)
+        return BridgeJSRuntimeTests.ConfigStruct(name: name, value: value)
     }
 
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSStackPush() {
@@ -7557,110 +7557,110 @@ extension ConfigStruct: _BridgedSwiftStruct {
     }
 
     init(unsafelyCopying jsObject: JSObject) {
-        _bjs_struct_lower_ConfigStruct(jsObject.bridgeJSLowerParameter())
+        _bjs_struct_lower_BridgeJSRuntimeTests_ConfigStruct(jsObject.bridgeJSLowerParameter())
         self = Self.bridgeJSStackPop()
     }
 
     func toJSObject() -> JSObject {
         let __bjs_self = self
         __bjs_self.bridgeJSStackPush()
-        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_ConfigStruct()))
+        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_BridgeJSRuntimeTests_ConfigStruct()))
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_ConfigStruct")
-fileprivate func _bjs_struct_lower_ConfigStruct_extern(_ objectId: Int32) -> Void
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_BridgeJSRuntimeTests_ConfigStruct")
+fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_ConfigStruct_extern(_ objectId: Int32) -> Void
 #else
-fileprivate func _bjs_struct_lower_ConfigStruct_extern(_ objectId: Int32) -> Void {
+fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_ConfigStruct_extern(_ objectId: Int32) -> Void {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lower_ConfigStruct(_ objectId: Int32) -> Void {
-    return _bjs_struct_lower_ConfigStruct_extern(objectId)
+@inline(never) fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_ConfigStruct(_ objectId: Int32) -> Void {
+    return _bjs_struct_lower_BridgeJSRuntimeTests_ConfigStruct_extern(objectId)
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_ConfigStruct")
-fileprivate func _bjs_struct_lift_ConfigStruct_extern() -> Int32
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_BridgeJSRuntimeTests_ConfigStruct")
+fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_ConfigStruct_extern() -> Int32
 #else
-fileprivate func _bjs_struct_lift_ConfigStruct_extern() -> Int32 {
+fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_ConfigStruct_extern() -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lift_ConfigStruct() -> Int32 {
-    return _bjs_struct_lift_ConfigStruct_extern()
+@inline(never) fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_ConfigStruct() -> Int32 {
+    return _bjs_struct_lift_BridgeJSRuntimeTests_ConfigStruct_extern()
 }
 
-@_expose(wasm, "bjs_ConfigStruct_static_defaultConfig_get")
-@_cdecl("bjs_ConfigStruct_static_defaultConfig_get")
-public func _bjs_ConfigStruct_static_defaultConfig_get() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ConfigStruct_static_defaultConfig_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_ConfigStruct_static_defaultConfig_get")
+public func _bjs_BridgeJSRuntimeTests_ConfigStruct_static_defaultConfig_get() -> Void {
     #if arch(wasm32)
-    let ret = ConfigStruct.defaultConfig
+    let ret = BridgeJSRuntimeTests.ConfigStruct.defaultConfig
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_ConfigStruct_static_defaultConfig_set")
-@_cdecl("bjs_ConfigStruct_static_defaultConfig_set")
-public func _bjs_ConfigStruct_static_defaultConfig_set(_ valueBytes: Int32, _ valueLength: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ConfigStruct_static_defaultConfig_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_ConfigStruct_static_defaultConfig_set")
+public func _bjs_BridgeJSRuntimeTests_ConfigStruct_static_defaultConfig_set(_ valueBytes: Int32, _ valueLength: Int32) -> Void {
     #if arch(wasm32)
-    ConfigStruct.defaultConfig = String.bridgeJSLiftParameter(valueBytes, valueLength)
+    BridgeJSRuntimeTests.ConfigStruct.defaultConfig = String.bridgeJSLiftParameter(valueBytes, valueLength)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_ConfigStruct_static_maxRetries_get")
-@_cdecl("bjs_ConfigStruct_static_maxRetries_get")
-public func _bjs_ConfigStruct_static_maxRetries_get() -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ConfigStruct_static_maxRetries_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_ConfigStruct_static_maxRetries_get")
+public func _bjs_BridgeJSRuntimeTests_ConfigStruct_static_maxRetries_get() -> Int32 {
     #if arch(wasm32)
-    let ret = ConfigStruct.maxRetries
+    let ret = BridgeJSRuntimeTests.ConfigStruct.maxRetries
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_ConfigStruct_static_timeout_get")
-@_cdecl("bjs_ConfigStruct_static_timeout_get")
-public func _bjs_ConfigStruct_static_timeout_get() -> Float64 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ConfigStruct_static_timeout_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_ConfigStruct_static_timeout_get")
+public func _bjs_BridgeJSRuntimeTests_ConfigStruct_static_timeout_get() -> Float64 {
     #if arch(wasm32)
-    let ret = ConfigStruct.timeout
+    let ret = BridgeJSRuntimeTests.ConfigStruct.timeout
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_ConfigStruct_static_timeout_set")
-@_cdecl("bjs_ConfigStruct_static_timeout_set")
-public func _bjs_ConfigStruct_static_timeout_set(_ value: Float64) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ConfigStruct_static_timeout_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_ConfigStruct_static_timeout_set")
+public func _bjs_BridgeJSRuntimeTests_ConfigStruct_static_timeout_set(_ value: Float64) -> Void {
     #if arch(wasm32)
-    ConfigStruct.timeout = Double.bridgeJSLiftParameter(value)
+    BridgeJSRuntimeTests.ConfigStruct.timeout = Double.bridgeJSLiftParameter(value)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_ConfigStruct_static_computedSetting_get")
-@_cdecl("bjs_ConfigStruct_static_computedSetting_get")
-public func _bjs_ConfigStruct_static_computedSetting_get() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ConfigStruct_static_computedSetting_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_ConfigStruct_static_computedSetting_get")
+public func _bjs_BridgeJSRuntimeTests_ConfigStruct_static_computedSetting_get() -> Void {
     #if arch(wasm32)
-    let ret = ConfigStruct.computedSetting
+    let ret = BridgeJSRuntimeTests.ConfigStruct.computedSetting
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension Vector2D: _BridgedSwiftStruct {
-    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> Vector2D {
+extension BridgeJSRuntimeTests.Vector2D: _BridgedSwiftStruct {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> BridgeJSRuntimeTests.Vector2D {
         let dy = Double.bridgeJSStackPop()
         let dx = Double.bridgeJSStackPop()
-        return Vector2D(dx: dx, dy: dy)
+        return BridgeJSRuntimeTests.Vector2D(dx: dx, dy: dy)
     }
 
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSStackPush() {
@@ -7669,79 +7669,79 @@ extension Vector2D: _BridgedSwiftStruct {
     }
 
     init(unsafelyCopying jsObject: JSObject) {
-        _bjs_struct_lower_Vector2D(jsObject.bridgeJSLowerParameter())
+        _bjs_struct_lower_BridgeJSRuntimeTests_Vector2D(jsObject.bridgeJSLowerParameter())
         self = Self.bridgeJSStackPop()
     }
 
     func toJSObject() -> JSObject {
         let __bjs_self = self
         __bjs_self.bridgeJSStackPush()
-        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_Vector2D()))
+        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_BridgeJSRuntimeTests_Vector2D()))
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_Vector2D")
-fileprivate func _bjs_struct_lower_Vector2D_extern(_ objectId: Int32) -> Void
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_BridgeJSRuntimeTests_Vector2D")
+fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_Vector2D_extern(_ objectId: Int32) -> Void
 #else
-fileprivate func _bjs_struct_lower_Vector2D_extern(_ objectId: Int32) -> Void {
+fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_Vector2D_extern(_ objectId: Int32) -> Void {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lower_Vector2D(_ objectId: Int32) -> Void {
-    return _bjs_struct_lower_Vector2D_extern(objectId)
+@inline(never) fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_Vector2D(_ objectId: Int32) -> Void {
+    return _bjs_struct_lower_BridgeJSRuntimeTests_Vector2D_extern(objectId)
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_Vector2D")
-fileprivate func _bjs_struct_lift_Vector2D_extern() -> Int32
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_BridgeJSRuntimeTests_Vector2D")
+fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_Vector2D_extern() -> Int32
 #else
-fileprivate func _bjs_struct_lift_Vector2D_extern() -> Int32 {
+fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_Vector2D_extern() -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lift_Vector2D() -> Int32 {
-    return _bjs_struct_lift_Vector2D_extern()
+@inline(never) fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_Vector2D() -> Int32 {
+    return _bjs_struct_lift_BridgeJSRuntimeTests_Vector2D_extern()
 }
 
-@_expose(wasm, "bjs_Vector2D_init")
-@_cdecl("bjs_Vector2D_init")
-public func _bjs_Vector2D_init(_ dx: Float64, _ dy: Float64) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_Vector2D_init")
+@_cdecl("bjs_BridgeJSRuntimeTests_Vector2D_init")
+public func _bjs_BridgeJSRuntimeTests_Vector2D_init(_ dx: Float64, _ dy: Float64) -> Void {
     #if arch(wasm32)
-    let ret = Vector2D(dx: Double.bridgeJSLiftParameter(dx), dy: Double.bridgeJSLiftParameter(dy))
+    let ret = BridgeJSRuntimeTests.Vector2D(dx: Double.bridgeJSLiftParameter(dx), dy: Double.bridgeJSLiftParameter(dy))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Vector2D_magnitude")
-@_cdecl("bjs_Vector2D_magnitude")
-public func _bjs_Vector2D_magnitude() -> Float64 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_Vector2D_magnitude")
+@_cdecl("bjs_BridgeJSRuntimeTests_Vector2D_magnitude")
+public func _bjs_BridgeJSRuntimeTests_Vector2D_magnitude() -> Float64 {
     #if arch(wasm32)
-    let ret = Vector2D.bridgeJSLiftParameter().magnitude()
+    let ret = BridgeJSRuntimeTests.Vector2D.bridgeJSLiftParameter().magnitude()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Vector2D_scaled")
-@_cdecl("bjs_Vector2D_scaled")
-public func _bjs_Vector2D_scaled(_ factor: Float64) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_Vector2D_scaled")
+@_cdecl("bjs_BridgeJSRuntimeTests_Vector2D_scaled")
+public func _bjs_BridgeJSRuntimeTests_Vector2D_scaled(_ factor: Float64) -> Void {
     #if arch(wasm32)
-    let ret = Vector2D.bridgeJSLiftParameter().scaled(by: Double.bridgeJSLiftParameter(factor))
+    let ret = BridgeJSRuntimeTests.Vector2D.bridgeJSLiftParameter().scaled(by: Double.bridgeJSLiftParameter(factor))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension JSObjectContainer: _BridgedSwiftStruct {
-    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> JSObjectContainer {
+extension BridgeJSRuntimeTests.JSObjectContainer: _BridgedSwiftStruct {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> BridgeJSRuntimeTests.JSObjectContainer {
         let optionalObject = Optional<JSObject>.bridgeJSStackPop()
         let object = JSObject.bridgeJSStackPop()
-        return JSObjectContainer(object: object, optionalObject: optionalObject)
+        return BridgeJSRuntimeTests.JSObjectContainer(object: object, optionalObject: optionalObject)
     }
 
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSStackPush() {
@@ -7750,46 +7750,46 @@ extension JSObjectContainer: _BridgedSwiftStruct {
     }
 
     init(unsafelyCopying jsObject: JSObject) {
-        _bjs_struct_lower_JSObjectContainer(jsObject.bridgeJSLowerParameter())
+        _bjs_struct_lower_BridgeJSRuntimeTests_JSObjectContainer(jsObject.bridgeJSLowerParameter())
         self = Self.bridgeJSStackPop()
     }
 
     func toJSObject() -> JSObject {
         let __bjs_self = self
         __bjs_self.bridgeJSStackPush()
-        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_JSObjectContainer()))
+        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_BridgeJSRuntimeTests_JSObjectContainer()))
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_JSObjectContainer")
-fileprivate func _bjs_struct_lower_JSObjectContainer_extern(_ objectId: Int32) -> Void
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_BridgeJSRuntimeTests_JSObjectContainer")
+fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_JSObjectContainer_extern(_ objectId: Int32) -> Void
 #else
-fileprivate func _bjs_struct_lower_JSObjectContainer_extern(_ objectId: Int32) -> Void {
+fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_JSObjectContainer_extern(_ objectId: Int32) -> Void {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lower_JSObjectContainer(_ objectId: Int32) -> Void {
-    return _bjs_struct_lower_JSObjectContainer_extern(objectId)
+@inline(never) fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_JSObjectContainer(_ objectId: Int32) -> Void {
+    return _bjs_struct_lower_BridgeJSRuntimeTests_JSObjectContainer_extern(objectId)
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_JSObjectContainer")
-fileprivate func _bjs_struct_lift_JSObjectContainer_extern() -> Int32
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_BridgeJSRuntimeTests_JSObjectContainer")
+fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_JSObjectContainer_extern() -> Int32
 #else
-fileprivate func _bjs_struct_lift_JSObjectContainer_extern() -> Int32 {
+fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_JSObjectContainer_extern() -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lift_JSObjectContainer() -> Int32 {
-    return _bjs_struct_lift_JSObjectContainer_extern()
+@inline(never) fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_JSObjectContainer() -> Int32 {
+    return _bjs_struct_lift_BridgeJSRuntimeTests_JSObjectContainer_extern()
 }
 
-extension FooContainer: _BridgedSwiftStruct {
-    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> FooContainer {
+extension BridgeJSRuntimeTests.FooContainer: _BridgedSwiftStruct {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> BridgeJSRuntimeTests.FooContainer {
         let optionalFoo = Optional<JSObject>.bridgeJSStackPop().map { Foo(unsafelyWrapping: $0) }
         let foo = Foo(unsafelyWrapping: JSObject.bridgeJSStackPop())
-        return FooContainer(foo: foo, optionalFoo: optionalFoo)
+        return BridgeJSRuntimeTests.FooContainer(foo: foo, optionalFoo: optionalFoo)
     }
 
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSStackPush() {
@@ -7798,46 +7798,46 @@ extension FooContainer: _BridgedSwiftStruct {
     }
 
     init(unsafelyCopying jsObject: JSObject) {
-        _bjs_struct_lower_FooContainer(jsObject.bridgeJSLowerParameter())
+        _bjs_struct_lower_BridgeJSRuntimeTests_FooContainer(jsObject.bridgeJSLowerParameter())
         self = Self.bridgeJSStackPop()
     }
 
     func toJSObject() -> JSObject {
         let __bjs_self = self
         __bjs_self.bridgeJSStackPush()
-        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_FooContainer()))
+        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_BridgeJSRuntimeTests_FooContainer()))
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_FooContainer")
-fileprivate func _bjs_struct_lower_FooContainer_extern(_ objectId: Int32) -> Void
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_BridgeJSRuntimeTests_FooContainer")
+fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_FooContainer_extern(_ objectId: Int32) -> Void
 #else
-fileprivate func _bjs_struct_lower_FooContainer_extern(_ objectId: Int32) -> Void {
+fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_FooContainer_extern(_ objectId: Int32) -> Void {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lower_FooContainer(_ objectId: Int32) -> Void {
-    return _bjs_struct_lower_FooContainer_extern(objectId)
+@inline(never) fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_FooContainer(_ objectId: Int32) -> Void {
+    return _bjs_struct_lower_BridgeJSRuntimeTests_FooContainer_extern(objectId)
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_FooContainer")
-fileprivate func _bjs_struct_lift_FooContainer_extern() -> Int32
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_BridgeJSRuntimeTests_FooContainer")
+fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_FooContainer_extern() -> Int32
 #else
-fileprivate func _bjs_struct_lift_FooContainer_extern() -> Int32 {
+fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_FooContainer_extern() -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lift_FooContainer() -> Int32 {
-    return _bjs_struct_lift_FooContainer_extern()
+@inline(never) fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_FooContainer() -> Int32 {
+    return _bjs_struct_lift_BridgeJSRuntimeTests_FooContainer_extern()
 }
 
-extension ArrayMembers: _BridgedSwiftStruct {
-    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> ArrayMembers {
+extension BridgeJSRuntimeTests.ArrayMembers: _BridgedSwiftStruct {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> BridgeJSRuntimeTests.ArrayMembers {
         let optStrings = Optional<[String]>.bridgeJSStackPop()
         let ints = [Int].bridgeJSStackPop()
-        return ArrayMembers(ints: ints, optStrings: optStrings)
+        return BridgeJSRuntimeTests.ArrayMembers(ints: ints, optStrings: optStrings)
     }
 
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSStackPush() {
@@ -7846,66 +7846,66 @@ extension ArrayMembers: _BridgedSwiftStruct {
     }
 
     init(unsafelyCopying jsObject: JSObject) {
-        _bjs_struct_lower_ArrayMembers(jsObject.bridgeJSLowerParameter())
+        _bjs_struct_lower_BridgeJSRuntimeTests_ArrayMembers(jsObject.bridgeJSLowerParameter())
         self = Self.bridgeJSStackPop()
     }
 
     func toJSObject() -> JSObject {
         let __bjs_self = self
         __bjs_self.bridgeJSStackPush()
-        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_ArrayMembers()))
+        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_BridgeJSRuntimeTests_ArrayMembers()))
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_ArrayMembers")
-fileprivate func _bjs_struct_lower_ArrayMembers_extern(_ objectId: Int32) -> Void
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_BridgeJSRuntimeTests_ArrayMembers")
+fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_ArrayMembers_extern(_ objectId: Int32) -> Void
 #else
-fileprivate func _bjs_struct_lower_ArrayMembers_extern(_ objectId: Int32) -> Void {
+fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_ArrayMembers_extern(_ objectId: Int32) -> Void {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lower_ArrayMembers(_ objectId: Int32) -> Void {
-    return _bjs_struct_lower_ArrayMembers_extern(objectId)
+@inline(never) fileprivate func _bjs_struct_lower_BridgeJSRuntimeTests_ArrayMembers(_ objectId: Int32) -> Void {
+    return _bjs_struct_lower_BridgeJSRuntimeTests_ArrayMembers_extern(objectId)
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_ArrayMembers")
-fileprivate func _bjs_struct_lift_ArrayMembers_extern() -> Int32
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_BridgeJSRuntimeTests_ArrayMembers")
+fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_ArrayMembers_extern() -> Int32
 #else
-fileprivate func _bjs_struct_lift_ArrayMembers_extern() -> Int32 {
+fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_ArrayMembers_extern() -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lift_ArrayMembers() -> Int32 {
-    return _bjs_struct_lift_ArrayMembers_extern()
+@inline(never) fileprivate func _bjs_struct_lift_BridgeJSRuntimeTests_ArrayMembers() -> Int32 {
+    return _bjs_struct_lift_BridgeJSRuntimeTests_ArrayMembers_extern()
 }
 
-@_expose(wasm, "bjs_ArrayMembers_sumValues")
-@_cdecl("bjs_ArrayMembers_sumValues")
-public func _bjs_ArrayMembers_sumValues() -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ArrayMembers_sumValues")
+@_cdecl("bjs_BridgeJSRuntimeTests_ArrayMembers_sumValues")
+public func _bjs_BridgeJSRuntimeTests_ArrayMembers_sumValues() -> Int32 {
     #if arch(wasm32)
-    let ret = ArrayMembers.bridgeJSLiftParameter().sumValues(_: [Int].bridgeJSStackPop())
+    let ret = BridgeJSRuntimeTests.ArrayMembers.bridgeJSLiftParameter().sumValues(_: [Int].bridgeJSStackPop())
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_ArrayMembers_firstString")
-@_cdecl("bjs_ArrayMembers_firstString")
-public func _bjs_ArrayMembers_firstString() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ArrayMembers_firstString")
+@_cdecl("bjs_BridgeJSRuntimeTests_ArrayMembers_firstString")
+public func _bjs_BridgeJSRuntimeTests_ArrayMembers_firstString() -> Void {
     #if arch(wasm32)
-    let ret = ArrayMembers.bridgeJSLiftParameter().firstString(_: [String].bridgeJSStackPop())
+    let ret = BridgeJSRuntimeTests.ArrayMembers.bridgeJSLiftParameter().firstString(_: [String].bridgeJSStackPop())
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_makeTag")
-@_cdecl("bjs_makeTag")
-public func _bjs_makeTag(_ nameBytes: Int32, _ nameLength: Int32) -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_makeTag")
+@_cdecl("bjs_BridgeJSRuntimeTests_makeTag")
+public func _bjs_BridgeJSRuntimeTests_makeTag(_ nameBytes: Int32, _ nameLength: Int32) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
     let ret = makeTag(_: String.bridgeJSLiftParameter(nameBytes, nameLength))
     return ret.bridgeJSLowerReturn()
@@ -7914,78 +7914,78 @@ public func _bjs_makeTag(_ nameBytes: Int32, _ nameLength: Int32) -> UnsafeMutab
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripPolygon")
-@_cdecl("bjs_roundTripPolygon")
-public func _bjs_roundTripPolygon(_ polygon: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_roundTripPolygon")
+@_cdecl("bjs_BridgeJSRuntimeTests_roundTripPolygon")
+public func _bjs_BridgeJSRuntimeTests_roundTripPolygon(_ polygon: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = roundTripPolygon(_: Polygon.bridgeJSLiftParameter(polygon))
+    let ret = roundTripPolygon(_: BridgeJSRuntimeTests.Polygon.bridgeJSLiftParameter(polygon))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_appendVertex")
-@_cdecl("bjs_appendVertex")
-public func _bjs_appendVertex(_ polygon: UnsafeMutableRawPointer, _ value: Float64) -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_appendVertex")
+@_cdecl("bjs_BridgeJSRuntimeTests_appendVertex")
+public func _bjs_BridgeJSRuntimeTests_appendVertex(_ polygon: UnsafeMutableRawPointer, _ value: Float64) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = appendVertex(_: Polygon.bridgeJSLiftParameter(polygon), _: Double.bridgeJSLiftParameter(value))
+    let ret = appendVertex(_: BridgeJSRuntimeTests.Polygon.bridgeJSLiftParameter(polygon), _: Double.bridgeJSLiftParameter(value))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_optionalRoundTripPolygon")
-@_cdecl("bjs_optionalRoundTripPolygon")
-public func _bjs_optionalRoundTripPolygon(_ polygonIsSome: Int32, _ polygonValue: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_optionalRoundTripPolygon")
+@_cdecl("bjs_BridgeJSRuntimeTests_optionalRoundTripPolygon")
+public func _bjs_BridgeJSRuntimeTests_optionalRoundTripPolygon(_ polygonIsSome: Int32, _ polygonValue: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = optionalRoundTripPolygon(_: Optional<Polygon>.bridgeJSLiftParameter(polygonIsSome, polygonValue))
+    let ret = optionalRoundTripPolygon(_: Optional<BridgeJSRuntimeTests.Polygon>.bridgeJSLiftParameter(polygonIsSome, polygonValue))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_polygonVertexCount")
-@_cdecl("bjs_polygonVertexCount")
-public func _bjs_polygonVertexCount(_ polygon: UnsafeMutableRawPointer) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_polygonVertexCount")
+@_cdecl("bjs_BridgeJSRuntimeTests_polygonVertexCount")
+public func _bjs_BridgeJSRuntimeTests_polygonVertexCount(_ polygon: UnsafeMutableRawPointer) -> Int32 {
     #if arch(wasm32)
-    let ret = polygonVertexCount(_: Polygon.bridgeJSLiftParameter(polygon))
+    let ret = polygonVertexCount(_: BridgeJSRuntimeTests.Polygon.bridgeJSLiftParameter(polygon))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripPolygonArray")
-@_cdecl("bjs_roundTripPolygonArray")
-public func _bjs_roundTripPolygonArray() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_roundTripPolygonArray")
+@_cdecl("bjs_BridgeJSRuntimeTests_roundTripPolygonArray")
+public func _bjs_BridgeJSRuntimeTests_roundTripPolygonArray() -> Void {
     #if arch(wasm32)
-    let ret = roundTripPolygonArray(_: [Polygon].bridgeJSStackPop())
+    let ret = roundTripPolygonArray(_: [BridgeJSRuntimeTests.Polygon].bridgeJSStackPop())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_concatPolygons")
-@_cdecl("bjs_concatPolygons")
-public func _bjs_concatPolygons() -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_concatPolygons")
+@_cdecl("bjs_BridgeJSRuntimeTests_concatPolygons")
+public func _bjs_BridgeJSRuntimeTests_concatPolygons() -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = concatPolygons(_: [Polygon].bridgeJSStackPop())
+    let ret = concatPolygons(_: [BridgeJSRuntimeTests.Polygon].bridgeJSStackPop())
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_validatePolygon")
-@_cdecl("bjs_validatePolygon")
-public func _bjs_validatePolygon(_ polygon: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_validatePolygon")
+@_cdecl("bjs_BridgeJSRuntimeTests_validatePolygon")
+public func _bjs_BridgeJSRuntimeTests_validatePolygon(_ polygon: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
     do {
-        let ret = try validatePolygon(_: Polygon.bridgeJSLiftParameter(polygon))
+        let ret = try validatePolygon(_: BridgeJSRuntimeTests.Polygon.bridgeJSLiftParameter(polygon))
         return ret.bridgeJSLowerReturn()
     } catch let error {
         if let error = error.thrownValue.object {
@@ -8005,20 +8005,20 @@ public func _bjs_validatePolygon(_ polygon: UnsafeMutableRawPointer) -> UnsafeMu
     #endif
 }
 
-@_expose(wasm, "bjs_splitPolygon")
-@_cdecl("bjs_splitPolygon")
-public func _bjs_splitPolygon(_ polygon: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_splitPolygon")
+@_cdecl("bjs_BridgeJSRuntimeTests_splitPolygon")
+public func _bjs_BridgeJSRuntimeTests_splitPolygon(_ polygon: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = splitPolygon(_: Polygon.bridgeJSLiftParameter(polygon))
+    let ret = splitPolygon(_: BridgeJSRuntimeTests.Polygon.bridgeJSLiftParameter(polygon))
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_makePolygonInspector")
-@_cdecl("bjs_makePolygonInspector")
-public func _bjs_makePolygonInspector() -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_makePolygonInspector")
+@_cdecl("bjs_BridgeJSRuntimeTests_makePolygonInspector")
+public func _bjs_BridgeJSRuntimeTests_makePolygonInspector() -> Int32 {
     #if arch(wasm32)
     let ret = makePolygonInspector()
     return JSTypedClosure(ret).bridgeJSLowerReturn()
@@ -8027,20 +8027,20 @@ public func _bjs_makePolygonInspector() -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripOptionalPolygonArray")
-@_cdecl("bjs_roundTripOptionalPolygonArray")
-public func _bjs_roundTripOptionalPolygonArray() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_roundTripOptionalPolygonArray")
+@_cdecl("bjs_BridgeJSRuntimeTests_roundTripOptionalPolygonArray")
+public func _bjs_BridgeJSRuntimeTests_roundTripOptionalPolygonArray() -> Void {
     #if arch(wasm32)
-    let ret = roundTripOptionalPolygonArray(_: [Optional<Polygon>].bridgeJSStackPop())
+    let ret = roundTripOptionalPolygonArray(_: [Optional<BridgeJSRuntimeTests.Polygon>].bridgeJSStackPop())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_makeTagHolder")
-@_cdecl("bjs_makeTagHolder")
-public func _bjs_makeTagHolder(_ nameBytes: Int32, _ nameLength: Int32, _ version: Int32) -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_makeTagHolder")
+@_cdecl("bjs_BridgeJSRuntimeTests_makeTagHolder")
+public func _bjs_BridgeJSRuntimeTests_makeTagHolder(_ nameBytes: Int32, _ nameLength: Int32, _ version: Int32) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
     let ret = makeTagHolder(_: String.bridgeJSLiftParameter(nameBytes, nameLength), _: Int.bridgeJSLiftParameter(version))
     return ret.bridgeJSLowerReturn()
@@ -8049,75 +8049,75 @@ public func _bjs_makeTagHolder(_ nameBytes: Int32, _ nameLength: Int32, _ versio
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripCoordinate")
-@_cdecl("bjs_roundTripCoordinate")
-public func _bjs_roundTripCoordinate() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_roundTripCoordinate")
+@_cdecl("bjs_BridgeJSRuntimeTests_roundTripCoordinate")
+public func _bjs_BridgeJSRuntimeTests_roundTripCoordinate() -> Void {
     #if arch(wasm32)
-    let ret = roundTripCoordinate(_: Coordinate.bridgeJSLiftParameter())
+    let ret = roundTripCoordinate(_: BridgeJSRuntimeTests.Coordinate.bridgeJSLiftParameter())
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripPriority")
-@_cdecl("bjs_roundTripPriority")
-public func _bjs_roundTripPriority(_ priority: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_roundTripPriority")
+@_cdecl("bjs_BridgeJSRuntimeTests_roundTripPriority")
+public func _bjs_BridgeJSRuntimeTests_roundTripPriority(_ priority: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = roundTripPriority(_: Priority.bridgeJSLiftParameter(priority))
+    let ret = roundTripPriority(_: BridgeJSRuntimeTests.Priority.bridgeJSLiftParameter(priority))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripAlert")
-@_cdecl("bjs_roundTripAlert")
-public func _bjs_roundTripAlert(_ alert: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_roundTripAlert")
+@_cdecl("bjs_BridgeJSRuntimeTests_roundTripAlert")
+public func _bjs_BridgeJSRuntimeTests_roundTripAlert(_ alert: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = roundTripAlert(_: Alert.bridgeJSLiftParameter(alert))
+    let ret = roundTripAlert(_: BridgeJSRuntimeTests.Alert.bridgeJSLiftParameter(alert))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_makeAlert")
-@_cdecl("bjs_makeAlert")
-public func _bjs_makeAlert(_ level: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_makeAlert")
+@_cdecl("bjs_BridgeJSRuntimeTests_makeAlert")
+public func _bjs_BridgeJSRuntimeTests_makeAlert(_ level: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = makeAlert(_: Severity.bridgeJSLiftParameter(level))
+    let ret = makeAlert(_: BridgeJSRuntimeTests.Severity.bridgeJSLiftParameter(level))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripShape")
-@_cdecl("bjs_roundTripShape")
-public func _bjs_roundTripShape(_ s: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_roundTripShape")
+@_cdecl("bjs_BridgeJSRuntimeTests_roundTripShape")
+public func _bjs_BridgeJSRuntimeTests_roundTripShape(_ s: Int32) -> Void {
     #if arch(wasm32)
-    let ret = roundTripShape(_: Shape.bridgeJSLiftParameter(s))
+    let ret = roundTripShape(_: BridgeJSRuntimeTests.Shape.bridgeJSLiftParameter(s))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_makeShapePolygon")
-@_cdecl("bjs_makeShapePolygon")
-public func _bjs_makeShapePolygon(_ polygon: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_makeShapePolygon")
+@_cdecl("bjs_BridgeJSRuntimeTests_makeShapePolygon")
+public func _bjs_BridgeJSRuntimeTests_makeShapePolygon(_ polygon: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = makeShapePolygon(_: Polygon.bridgeJSLiftParameter(polygon))
+    let ret = makeShapePolygon(_: BridgeJSRuntimeTests.Polygon.bridgeJSLiftParameter(polygon))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_makeShapeEmpty")
-@_cdecl("bjs_makeShapeEmpty")
-public func _bjs_makeShapeEmpty() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_makeShapeEmpty")
+@_cdecl("bjs_BridgeJSRuntimeTests_makeShapeEmpty")
+public func _bjs_BridgeJSRuntimeTests_makeShapeEmpty() -> Void {
     #if arch(wasm32)
     let ret = makeShapeEmpty()
     return ret.bridgeJSLowerReturn()
@@ -8126,64 +8126,64 @@ public func _bjs_makeShapeEmpty() -> Void {
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripUserId")
-@_cdecl("bjs_roundTripUserId")
-public func _bjs_roundTripUserId(_ id: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_roundTripUserId")
+@_cdecl("bjs_BridgeJSRuntimeTests_roundTripUserId")
+public func _bjs_BridgeJSRuntimeTests_roundTripUserId(_ id: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = roundTripUserId(_: UserId.bridgeJSLiftParameter(id))
+    let ret = roundTripUserId(_: BridgeJSRuntimeTests.UserId.bridgeJSLiftParameter(id))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripOptionalUserId")
-@_cdecl("bjs_roundTripOptionalUserId")
-public func _bjs_roundTripOptionalUserId(_ idIsSome: Int32, _ idValue: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_roundTripOptionalUserId")
+@_cdecl("bjs_BridgeJSRuntimeTests_roundTripOptionalUserId")
+public func _bjs_BridgeJSRuntimeTests_roundTripOptionalUserId(_ idIsSome: Int32, _ idValue: Int32) -> Void {
     #if arch(wasm32)
-    let ret = roundTripOptionalUserId(_: Optional<UserId>.bridgeJSLiftParameter(idIsSome, idValue))
+    let ret = roundTripOptionalUserId(_: Optional<BridgeJSRuntimeTests.UserId>.bridgeJSLiftParameter(idIsSome, idValue))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripUserIdArray")
-@_cdecl("bjs_roundTripUserIdArray")
-public func _bjs_roundTripUserIdArray() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_roundTripUserIdArray")
+@_cdecl("bjs_BridgeJSRuntimeTests_roundTripUserIdArray")
+public func _bjs_BridgeJSRuntimeTests_roundTripUserIdArray() -> Void {
     #if arch(wasm32)
-    let ret = roundTripUserIdArray(_: [UserId].bridgeJSStackPop())
+    let ret = roundTripUserIdArray(_: [BridgeJSRuntimeTests.UserId].bridgeJSStackPop())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripBoxed")
-@_cdecl("bjs_roundTripBoxed")
-public func _bjs_roundTripBoxed(_ boxedKind: Int32, _ boxedPayload1: Int32, _ boxedPayload2: Float64) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_roundTripBoxed")
+@_cdecl("bjs_BridgeJSRuntimeTests_roundTripBoxed")
+public func _bjs_BridgeJSRuntimeTests_roundTripBoxed(_ boxedKind: Int32, _ boxedPayload1: Int32, _ boxedPayload2: Float64) -> Void {
     #if arch(wasm32)
-    let ret = roundTripBoxed(_: Boxed.bridgeJSLiftParameter(boxedKind, boxedPayload1, boxedPayload2))
+    let ret = roundTripBoxed(_: BridgeJSRuntimeTests.Boxed.bridgeJSLiftParameter(boxedKind, boxedPayload1, boxedPayload2))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripOptionalBoxed")
-@_cdecl("bjs_roundTripOptionalBoxed")
-public func _bjs_roundTripOptionalBoxed(_ boxedIsSome: Int32, _ boxedKind: Int32, _ boxedPayload1: Int32, _ boxedPayload2: Float64) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_roundTripOptionalBoxed")
+@_cdecl("bjs_BridgeJSRuntimeTests_roundTripOptionalBoxed")
+public func _bjs_BridgeJSRuntimeTests_roundTripOptionalBoxed(_ boxedIsSome: Int32, _ boxedKind: Int32, _ boxedPayload1: Int32, _ boxedPayload2: Float64) -> Void {
     #if arch(wasm32)
-    let ret = roundTripOptionalBoxed(_: Optional<Boxed>.bridgeJSLiftParameter(boxedIsSome, boxedKind, boxedPayload1, boxedPayload2))
+    let ret = roundTripOptionalBoxed(_: Optional<BridgeJSRuntimeTests.Boxed>.bridgeJSLiftParameter(boxedIsSome, boxedKind, boxedPayload1, boxedPayload2))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_awaitAsyncCallback")
-@_cdecl("bjs_awaitAsyncCallback")
-public func _bjs_awaitAsyncCallback(_ fetch: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_awaitAsyncCallback")
+@_cdecl("bjs_BridgeJSRuntimeTests_awaitAsyncCallback")
+public func _bjs_BridgeJSRuntimeTests_awaitAsyncCallback(_ fetch: Int32) -> Int32 {
     #if arch(wasm32)
     return _bjs_makePromise(resolve: Promise_resolve_SS, reject: Promise_reject) { () async throws(JSException) -> String in
         return try await awaitAsyncCallback(_: _BJS_Closure_20BridgeJSRuntimeTestsYaKSS_SS.bridgeJSLift(fetch))
@@ -8193,9 +8193,9 @@ public func _bjs_awaitAsyncCallback(_ fetch: Int32) -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_makeAsyncParser")
-@_cdecl("bjs_makeAsyncParser")
-public func _bjs_makeAsyncParser() -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_makeAsyncParser")
+@_cdecl("bjs_BridgeJSRuntimeTests_makeAsyncParser")
+public func _bjs_BridgeJSRuntimeTests_makeAsyncParser() -> Int32 {
     #if arch(wasm32)
     let ret = makeAsyncParser()
     return ret.bridgeJSLowerReturn()
@@ -8204,9 +8204,9 @@ public func _bjs_makeAsyncParser() -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_makeAsyncEcho")
-@_cdecl("bjs_makeAsyncEcho")
-public func _bjs_makeAsyncEcho() -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_makeAsyncEcho")
+@_cdecl("bjs_BridgeJSRuntimeTests_makeAsyncEcho")
+public func _bjs_BridgeJSRuntimeTests_makeAsyncEcho() -> Int32 {
     #if arch(wasm32)
     let ret = makeAsyncEcho()
     return ret.bridgeJSLowerReturn()
@@ -8215,9 +8215,9 @@ public func _bjs_makeAsyncEcho() -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_makeAsyncRecorder")
-@_cdecl("bjs_makeAsyncRecorder")
-public func _bjs_makeAsyncRecorder() -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_makeAsyncRecorder")
+@_cdecl("bjs_BridgeJSRuntimeTests_makeAsyncRecorder")
+public func _bjs_BridgeJSRuntimeTests_makeAsyncRecorder() -> Int32 {
     #if arch(wasm32)
     let ret = makeAsyncRecorder()
     return ret.bridgeJSLowerReturn()
@@ -8226,9 +8226,9 @@ public func _bjs_makeAsyncRecorder() -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_lastRecordedValue")
-@_cdecl("bjs_lastRecordedValue")
-public func _bjs_lastRecordedValue() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_lastRecordedValue")
+@_cdecl("bjs_BridgeJSRuntimeTests_lastRecordedValue")
+public func _bjs_BridgeJSRuntimeTests_lastRecordedValue() -> Void {
     #if arch(wasm32)
     let ret = lastRecordedValue()
     return ret.bridgeJSLowerReturn()
@@ -8237,9 +8237,9 @@ public func _bjs_lastRecordedValue() -> Void {
     #endif
 }
 
-@_expose(wasm, "bjs_makeAsyncPayloadLoader")
-@_cdecl("bjs_makeAsyncPayloadLoader")
-public func _bjs_makeAsyncPayloadLoader() -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_makeAsyncPayloadLoader")
+@_cdecl("bjs_BridgeJSRuntimeTests_makeAsyncPayloadLoader")
+public func _bjs_BridgeJSRuntimeTests_makeAsyncPayloadLoader() -> Int32 {
     #if arch(wasm32)
     let ret = makeAsyncPayloadLoader()
     return ret.bridgeJSLowerReturn()
@@ -8248,21 +8248,21 @@ public func _bjs_makeAsyncPayloadLoader() -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_awaitPayloadCallback")
-@_cdecl("bjs_awaitPayloadCallback")
-public func _bjs_awaitPayloadCallback(_ load: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_awaitPayloadCallback")
+@_cdecl("bjs_BridgeJSRuntimeTests_awaitPayloadCallback")
+public func _bjs_BridgeJSRuntimeTests_awaitPayloadCallback(_ load: Int32) -> Int32 {
     #if arch(wasm32)
     return _bjs_makePromise(resolve: Promise_resolve_SS, reject: Promise_reject) { () async throws(JSException) -> String in
-        return try await awaitPayloadCallback(_: _BJS_Closure_20BridgeJSRuntimeTestsYaKSb_18AsyncPayloadResultO.bridgeJSLift(load))
+        return try await awaitPayloadCallback(_: _BJS_Closure_20BridgeJSRuntimeTestsYaKSb_39BridgeJSRuntimeTests_AsyncPayloadResultO.bridgeJSLift(load))
     }
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_makeAsyncPointMaker")
-@_cdecl("bjs_makeAsyncPointMaker")
-public func _bjs_makeAsyncPointMaker() -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_makeAsyncPointMaker")
+@_cdecl("bjs_BridgeJSRuntimeTests_makeAsyncPointMaker")
+public func _bjs_BridgeJSRuntimeTests_makeAsyncPointMaker() -> Int32 {
     #if arch(wasm32)
     let ret = makeAsyncPointMaker()
     return ret.bridgeJSLowerReturn()
@@ -8271,9 +8271,9 @@ public func _bjs_makeAsyncPointMaker() -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_makeThrowingParser")
-@_cdecl("bjs_makeThrowingParser")
-public func _bjs_makeThrowingParser() -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_makeThrowingParser")
+@_cdecl("bjs_BridgeJSRuntimeTests_makeThrowingParser")
+public func _bjs_BridgeJSRuntimeTests_makeThrowingParser() -> Int32 {
     #if arch(wasm32)
     let ret = makeThrowingParser()
     return ret.bridgeJSLowerReturn()
@@ -8282,9 +8282,9 @@ public func _bjs_makeThrowingParser() -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_runValidator")
-@_cdecl("bjs_runValidator")
-public func _bjs_runValidator(_ validate: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_runValidator")
+@_cdecl("bjs_BridgeJSRuntimeTests_runValidator")
+public func _bjs_BridgeJSRuntimeTests_runValidator(_ validate: Int32) -> Int32 {
     #if arch(wasm32)
     do {
         let ret = try runValidator(_: _BJS_Closure_20BridgeJSRuntimeTestsKSS_Sb.bridgeJSLift(validate))
@@ -8307,9 +8307,9 @@ public func _bjs_runValidator(_ validate: Int32) -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripVoid")
-@_cdecl("bjs_roundTripVoid")
-public func _bjs_roundTripVoid() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_roundTripVoid")
+@_cdecl("bjs_BridgeJSRuntimeTests_roundTripVoid")
+public func _bjs_BridgeJSRuntimeTests_roundTripVoid() -> Void {
     #if arch(wasm32)
     roundTripVoid()
     #else
@@ -8317,9 +8317,9 @@ public func _bjs_roundTripVoid() -> Void {
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripFloat")
-@_cdecl("bjs_roundTripFloat")
-public func _bjs_roundTripFloat(_ v: Float32) -> Float32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_roundTripFloat")
+@_cdecl("bjs_BridgeJSRuntimeTests_roundTripFloat")
+public func _bjs_BridgeJSRuntimeTests_roundTripFloat(_ v: Float32) -> Float32 {
     #if arch(wasm32)
     let ret = roundTripFloat(v: Float.bridgeJSLiftParameter(v))
     return ret.bridgeJSLowerReturn()
@@ -8328,9 +8328,9 @@ public func _bjs_roundTripFloat(_ v: Float32) -> Float32 {
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripDouble")
-@_cdecl("bjs_roundTripDouble")
-public func _bjs_roundTripDouble(_ v: Float64) -> Float64 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_roundTripDouble")
+@_cdecl("bjs_BridgeJSRuntimeTests_roundTripDouble")
+public func _bjs_BridgeJSRuntimeTests_roundTripDouble(_ v: Float64) -> Float64 {
     #if arch(wasm32)
     let ret = roundTripDouble(v: Double.bridgeJSLiftParameter(v))
     return ret.bridgeJSLowerReturn()
@@ -8339,9 +8339,9 @@ public func _bjs_roundTripDouble(_ v: Float64) -> Float64 {
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripBool")
-@_cdecl("bjs_roundTripBool")
-public func _bjs_roundTripBool(_ v: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_roundTripBool")
+@_cdecl("bjs_BridgeJSRuntimeTests_roundTripBool")
+public func _bjs_BridgeJSRuntimeTests_roundTripBool(_ v: Int32) -> Int32 {
     #if arch(wasm32)
     let ret = roundTripBool(v: Bool.bridgeJSLiftParameter(v))
     return ret.bridgeJSLowerReturn()
@@ -8350,9 +8350,9 @@ public func _bjs_roundTripBool(_ v: Int32) -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripString")
-@_cdecl("bjs_roundTripString")
-public func _bjs_roundTripString(_ vBytes: Int32, _ vLength: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_roundTripString")
+@_cdecl("bjs_BridgeJSRuntimeTests_roundTripString")
+public func _bjs_BridgeJSRuntimeTests_roundTripString(_ vBytes: Int32, _ vLength: Int32) -> Void {
     #if arch(wasm32)
     let ret = roundTripString(v: String.bridgeJSLiftParameter(vBytes, vLength))
     return ret.bridgeJSLowerReturn()
@@ -8361,20 +8361,20 @@ public func _bjs_roundTripString(_ vBytes: Int32, _ vLength: Int32) -> Void {
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripSwiftHeapObject")
-@_cdecl("bjs_roundTripSwiftHeapObject")
-public func _bjs_roundTripSwiftHeapObject(_ v: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_roundTripSwiftHeapObject")
+@_cdecl("bjs_BridgeJSRuntimeTests_roundTripSwiftHeapObject")
+public func _bjs_BridgeJSRuntimeTests_roundTripSwiftHeapObject(_ v: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = roundTripSwiftHeapObject(v: Greeter.bridgeJSLiftParameter(v))
+    let ret = roundTripSwiftHeapObject(v: BridgeJSRuntimeTests.Greeter.bridgeJSLiftParameter(v))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripUnsafeRawPointer")
-@_cdecl("bjs_roundTripUnsafeRawPointer")
-public func _bjs_roundTripUnsafeRawPointer(_ v: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_roundTripUnsafeRawPointer")
+@_cdecl("bjs_BridgeJSRuntimeTests_roundTripUnsafeRawPointer")
+public func _bjs_BridgeJSRuntimeTests_roundTripUnsafeRawPointer(_ v: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
     let ret = roundTripUnsafeRawPointer(v: UnsafeRawPointer.bridgeJSLiftParameter(v))
     return ret.bridgeJSLowerReturn()
@@ -8383,9 +8383,9 @@ public func _bjs_roundTripUnsafeRawPointer(_ v: UnsafeMutableRawPointer) -> Unsa
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripUnsafeMutableRawPointer")
-@_cdecl("bjs_roundTripUnsafeMutableRawPointer")
-public func _bjs_roundTripUnsafeMutableRawPointer(_ v: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_roundTripUnsafeMutableRawPointer")
+@_cdecl("bjs_BridgeJSRuntimeTests_roundTripUnsafeMutableRawPointer")
+public func _bjs_BridgeJSRuntimeTests_roundTripUnsafeMutableRawPointer(_ v: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
     let ret = roundTripUnsafeMutableRawPointer(v: UnsafeMutableRawPointer.bridgeJSLiftParameter(v))
     return ret.bridgeJSLowerReturn()
@@ -8394,9 +8394,9 @@ public func _bjs_roundTripUnsafeMutableRawPointer(_ v: UnsafeMutableRawPointer) 
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripOpaquePointer")
-@_cdecl("bjs_roundTripOpaquePointer")
-public func _bjs_roundTripOpaquePointer(_ v: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_roundTripOpaquePointer")
+@_cdecl("bjs_BridgeJSRuntimeTests_roundTripOpaquePointer")
+public func _bjs_BridgeJSRuntimeTests_roundTripOpaquePointer(_ v: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
     let ret = roundTripOpaquePointer(v: OpaquePointer.bridgeJSLiftParameter(v))
     return ret.bridgeJSLowerReturn()
@@ -8405,9 +8405,9 @@ public func _bjs_roundTripOpaquePointer(_ v: UnsafeMutableRawPointer) -> UnsafeM
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripUnsafePointer")
-@_cdecl("bjs_roundTripUnsafePointer")
-public func _bjs_roundTripUnsafePointer(_ v: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_roundTripUnsafePointer")
+@_cdecl("bjs_BridgeJSRuntimeTests_roundTripUnsafePointer")
+public func _bjs_BridgeJSRuntimeTests_roundTripUnsafePointer(_ v: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
     let ret = roundTripUnsafePointer(v: UnsafePointer<UInt8>.bridgeJSLiftParameter(v))
     return ret.bridgeJSLowerReturn()
@@ -8416,9 +8416,9 @@ public func _bjs_roundTripUnsafePointer(_ v: UnsafeMutableRawPointer) -> UnsafeM
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripUnsafeMutablePointer")
-@_cdecl("bjs_roundTripUnsafeMutablePointer")
-public func _bjs_roundTripUnsafeMutablePointer(_ v: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_roundTripUnsafeMutablePointer")
+@_cdecl("bjs_BridgeJSRuntimeTests_roundTripUnsafeMutablePointer")
+public func _bjs_BridgeJSRuntimeTests_roundTripUnsafeMutablePointer(_ v: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
     let ret = roundTripUnsafeMutablePointer(v: UnsafeMutablePointer<UInt8>.bridgeJSLiftParameter(v))
     return ret.bridgeJSLowerReturn()
@@ -8427,9 +8427,9 @@ public func _bjs_roundTripUnsafeMutablePointer(_ v: UnsafeMutableRawPointer) -> 
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripJSObject")
-@_cdecl("bjs_roundTripJSObject")
-public func _bjs_roundTripJSObject(_ v: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_roundTripJSObject")
+@_cdecl("bjs_BridgeJSRuntimeTests_roundTripJSObject")
+public func _bjs_BridgeJSRuntimeTests_roundTripJSObject(_ v: Int32) -> Int32 {
     #if arch(wasm32)
     let ret = roundTripJSObject(v: JSObject.bridgeJSLiftParameter(v))
     return ret.bridgeJSLowerReturn()
@@ -8438,9 +8438,9 @@ public func _bjs_roundTripJSObject(_ v: Int32) -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripDictionaryExport")
-@_cdecl("bjs_roundTripDictionaryExport")
-public func _bjs_roundTripDictionaryExport() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_roundTripDictionaryExport")
+@_cdecl("bjs_BridgeJSRuntimeTests_roundTripDictionaryExport")
+public func _bjs_BridgeJSRuntimeTests_roundTripDictionaryExport() -> Void {
     #if arch(wasm32)
     let ret = roundTripDictionaryExport(v: [String: Int].bridgeJSLiftParameter())
     return ret.bridgeJSLowerReturn()
@@ -8449,9 +8449,9 @@ public func _bjs_roundTripDictionaryExport() -> Void {
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripOptionalDictionaryExport")
-@_cdecl("bjs_roundTripOptionalDictionaryExport")
-public func _bjs_roundTripOptionalDictionaryExport() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_roundTripOptionalDictionaryExport")
+@_cdecl("bjs_BridgeJSRuntimeTests_roundTripOptionalDictionaryExport")
+public func _bjs_BridgeJSRuntimeTests_roundTripOptionalDictionaryExport() -> Void {
     #if arch(wasm32)
     let ret = roundTripOptionalDictionaryExport(v: Optional<[String: String]>.bridgeJSLiftParameter())
     return ret.bridgeJSLowerReturn()
@@ -8460,9 +8460,9 @@ public func _bjs_roundTripOptionalDictionaryExport() -> Void {
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripJSValue")
-@_cdecl("bjs_roundTripJSValue")
-public func _bjs_roundTripJSValue(_ vKind: Int32, _ vPayload1: Int32, _ vPayload2: Float64) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_roundTripJSValue")
+@_cdecl("bjs_BridgeJSRuntimeTests_roundTripJSValue")
+public func _bjs_BridgeJSRuntimeTests_roundTripJSValue(_ vKind: Int32, _ vPayload1: Int32, _ vPayload2: Float64) -> Void {
     #if arch(wasm32)
     let ret = roundTripJSValue(v: JSValue.bridgeJSLiftParameter(vKind, vPayload1, vPayload2))
     return ret.bridgeJSLowerReturn()
@@ -8471,9 +8471,9 @@ public func _bjs_roundTripJSValue(_ vKind: Int32, _ vPayload1: Int32, _ vPayload
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripOptionalJSValue")
-@_cdecl("bjs_roundTripOptionalJSValue")
-public func _bjs_roundTripOptionalJSValue(_ vIsSome: Int32, _ vKind: Int32, _ vPayload1: Int32, _ vPayload2: Float64) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_roundTripOptionalJSValue")
+@_cdecl("bjs_BridgeJSRuntimeTests_roundTripOptionalJSValue")
+public func _bjs_BridgeJSRuntimeTests_roundTripOptionalJSValue(_ vIsSome: Int32, _ vKind: Int32, _ vPayload1: Int32, _ vPayload2: Float64) -> Void {
     #if arch(wasm32)
     let ret = roundTripOptionalJSValue(v: Optional<JSValue>.bridgeJSLiftParameter(vIsSome, vKind, vPayload1, vPayload2))
     return ret.bridgeJSLowerReturn()
@@ -8482,9 +8482,9 @@ public func _bjs_roundTripOptionalJSValue(_ vIsSome: Int32, _ vKind: Int32, _ vP
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripOptionalJSValueArray")
-@_cdecl("bjs_roundTripOptionalJSValueArray")
-public func _bjs_roundTripOptionalJSValueArray() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_roundTripOptionalJSValueArray")
+@_cdecl("bjs_BridgeJSRuntimeTests_roundTripOptionalJSValueArray")
+public func _bjs_BridgeJSRuntimeTests_roundTripOptionalJSValueArray() -> Void {
     #if arch(wasm32)
     let ret = roundTripOptionalJSValueArray(v: Optional<[JSValue]>.bridgeJSLiftParameter())
     ret.bridgeJSStackPush()
@@ -8493,9 +8493,9 @@ public func _bjs_roundTripOptionalJSValueArray() -> Void {
     #endif
 }
 
-@_expose(wasm, "bjs_makeImportedFoo")
-@_cdecl("bjs_makeImportedFoo")
-public func _bjs_makeImportedFoo(_ valueBytes: Int32, _ valueLength: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_makeImportedFoo")
+@_cdecl("bjs_BridgeJSRuntimeTests_makeImportedFoo")
+public func _bjs_BridgeJSRuntimeTests_makeImportedFoo(_ valueBytes: Int32, _ valueLength: Int32) -> Int32 {
     #if arch(wasm32)
     do {
         let ret = try makeImportedFoo(value: String.bridgeJSLiftParameter(valueBytes, valueLength))
@@ -8518,9 +8518,9 @@ public func _bjs_makeImportedFoo(_ valueBytes: Int32, _ valueLength: Int32) -> I
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripOptionalImportedClass")
-@_cdecl("bjs_roundTripOptionalImportedClass")
-public func _bjs_roundTripOptionalImportedClass(_ vIsSome: Int32, _ vValue: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_roundTripOptionalImportedClass")
+@_cdecl("bjs_BridgeJSRuntimeTests_roundTripOptionalImportedClass")
+public func _bjs_BridgeJSRuntimeTests_roundTripOptionalImportedClass(_ vIsSome: Int32, _ vValue: Int32) -> Void {
     #if arch(wasm32)
     let ret = roundTripOptionalImportedClass(v: Optional<Foo>.bridgeJSLiftParameter(vIsSome, vValue))
     return ret.bridgeJSLowerReturn()
@@ -8529,9 +8529,9 @@ public func _bjs_roundTripOptionalImportedClass(_ vIsSome: Int32, _ vValue: Int3
     #endif
 }
 
-@_expose(wasm, "bjs_throwsSwiftError")
-@_cdecl("bjs_throwsSwiftError")
-public func _bjs_throwsSwiftError(_ shouldThrow: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_throwsSwiftError")
+@_cdecl("bjs_BridgeJSRuntimeTests_throwsSwiftError")
+public func _bjs_BridgeJSRuntimeTests_throwsSwiftError(_ shouldThrow: Int32) -> Void {
     #if arch(wasm32)
     do {
         try throwsSwiftError(shouldThrow: Bool.bridgeJSLiftParameter(shouldThrow))
@@ -8553,9 +8553,9 @@ public func _bjs_throwsSwiftError(_ shouldThrow: Int32) -> Void {
     #endif
 }
 
-@_expose(wasm, "bjs_throwsWithIntResult")
-@_cdecl("bjs_throwsWithIntResult")
-public func _bjs_throwsWithIntResult() -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_throwsWithIntResult")
+@_cdecl("bjs_BridgeJSRuntimeTests_throwsWithIntResult")
+public func _bjs_BridgeJSRuntimeTests_throwsWithIntResult() -> Int32 {
     #if arch(wasm32)
     do {
         let ret = try throwsWithIntResult()
@@ -8578,9 +8578,9 @@ public func _bjs_throwsWithIntResult() -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_throwsWithStringResult")
-@_cdecl("bjs_throwsWithStringResult")
-public func _bjs_throwsWithStringResult() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_throwsWithStringResult")
+@_cdecl("bjs_BridgeJSRuntimeTests_throwsWithStringResult")
+public func _bjs_BridgeJSRuntimeTests_throwsWithStringResult() -> Void {
     #if arch(wasm32)
     do {
         let ret = try throwsWithStringResult()
@@ -8603,9 +8603,9 @@ public func _bjs_throwsWithStringResult() -> Void {
     #endif
 }
 
-@_expose(wasm, "bjs_throwsWithBoolResult")
-@_cdecl("bjs_throwsWithBoolResult")
-public func _bjs_throwsWithBoolResult() -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_throwsWithBoolResult")
+@_cdecl("bjs_BridgeJSRuntimeTests_throwsWithBoolResult")
+public func _bjs_BridgeJSRuntimeTests_throwsWithBoolResult() -> Int32 {
     #if arch(wasm32)
     do {
         let ret = try throwsWithBoolResult()
@@ -8628,9 +8628,9 @@ public func _bjs_throwsWithBoolResult() -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_throwsWithFloatResult")
-@_cdecl("bjs_throwsWithFloatResult")
-public func _bjs_throwsWithFloatResult() -> Float32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_throwsWithFloatResult")
+@_cdecl("bjs_BridgeJSRuntimeTests_throwsWithFloatResult")
+public func _bjs_BridgeJSRuntimeTests_throwsWithFloatResult() -> Float32 {
     #if arch(wasm32)
     do {
         let ret = try throwsWithFloatResult()
@@ -8653,9 +8653,9 @@ public func _bjs_throwsWithFloatResult() -> Float32 {
     #endif
 }
 
-@_expose(wasm, "bjs_throwsWithDoubleResult")
-@_cdecl("bjs_throwsWithDoubleResult")
-public func _bjs_throwsWithDoubleResult() -> Float64 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_throwsWithDoubleResult")
+@_cdecl("bjs_BridgeJSRuntimeTests_throwsWithDoubleResult")
+public func _bjs_BridgeJSRuntimeTests_throwsWithDoubleResult() -> Float64 {
     #if arch(wasm32)
     do {
         let ret = try throwsWithDoubleResult()
@@ -8678,9 +8678,9 @@ public func _bjs_throwsWithDoubleResult() -> Float64 {
     #endif
 }
 
-@_expose(wasm, "bjs_throwsWithSwiftHeapObjectResult")
-@_cdecl("bjs_throwsWithSwiftHeapObjectResult")
-public func _bjs_throwsWithSwiftHeapObjectResult() -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_throwsWithSwiftHeapObjectResult")
+@_cdecl("bjs_BridgeJSRuntimeTests_throwsWithSwiftHeapObjectResult")
+public func _bjs_BridgeJSRuntimeTests_throwsWithSwiftHeapObjectResult() -> UnsafeMutableRawPointer {
     #if arch(wasm32)
     do {
         let ret = try throwsWithSwiftHeapObjectResult()
@@ -8703,9 +8703,9 @@ public func _bjs_throwsWithSwiftHeapObjectResult() -> UnsafeMutableRawPointer {
     #endif
 }
 
-@_expose(wasm, "bjs_throwsWithJSObjectResult")
-@_cdecl("bjs_throwsWithJSObjectResult")
-public func _bjs_throwsWithJSObjectResult() -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_throwsWithJSObjectResult")
+@_cdecl("bjs_BridgeJSRuntimeTests_throwsWithJSObjectResult")
+public func _bjs_BridgeJSRuntimeTests_throwsWithJSObjectResult() -> Int32 {
     #if arch(wasm32)
     do {
         let ret = try throwsWithJSObjectResult()
@@ -8728,9 +8728,9 @@ public func _bjs_throwsWithJSObjectResult() -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_zeroArgAsyncThrows")
-@_cdecl("bjs_zeroArgAsyncThrows")
-public func _bjs_zeroArgAsyncThrows() -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_zeroArgAsyncThrows")
+@_cdecl("bjs_BridgeJSRuntimeTests_zeroArgAsyncThrows")
+public func _bjs_BridgeJSRuntimeTests_zeroArgAsyncThrows() -> Int32 {
     #if arch(wasm32)
     let __bjs_capture = 0
     return _bjs_makePromise(resolve: Promise_resolve_SS, reject: Promise_reject) { [__bjs_capture] () async throws(JSException) -> String in
@@ -8742,9 +8742,9 @@ public func _bjs_zeroArgAsyncThrows() -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_asyncRoundTripVoid")
-@_cdecl("bjs_asyncRoundTripVoid")
-public func _bjs_asyncRoundTripVoid() -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_asyncRoundTripVoid")
+@_cdecl("bjs_BridgeJSRuntimeTests_asyncRoundTripVoid")
+public func _bjs_BridgeJSRuntimeTests_asyncRoundTripVoid() -> Int32 {
     #if arch(wasm32)
     return _bjs_makePromise(resolve: Promise_resolve_y, reject: Promise_reject) {
         await asyncRoundTripVoid()
@@ -8754,9 +8754,9 @@ public func _bjs_asyncRoundTripVoid() -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_asyncRoundTripInt")
-@_cdecl("bjs_asyncRoundTripInt")
-public func _bjs_asyncRoundTripInt(_ v: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_asyncRoundTripInt")
+@_cdecl("bjs_BridgeJSRuntimeTests_asyncRoundTripInt")
+public func _bjs_BridgeJSRuntimeTests_asyncRoundTripInt(_ v: Int32) -> Int32 {
     #if arch(wasm32)
     return _bjs_makePromise(resolve: Promise_resolve_Si, reject: Promise_reject) {
         return await asyncRoundTripInt(v: Int.bridgeJSLiftParameter(v))
@@ -8766,9 +8766,9 @@ public func _bjs_asyncRoundTripInt(_ v: Int32) -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_asyncRoundTripFloat")
-@_cdecl("bjs_asyncRoundTripFloat")
-public func _bjs_asyncRoundTripFloat(_ v: Float32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_asyncRoundTripFloat")
+@_cdecl("bjs_BridgeJSRuntimeTests_asyncRoundTripFloat")
+public func _bjs_BridgeJSRuntimeTests_asyncRoundTripFloat(_ v: Float32) -> Int32 {
     #if arch(wasm32)
     return _bjs_makePromise(resolve: Promise_resolve_Sf, reject: Promise_reject) {
         return await asyncRoundTripFloat(v: Float.bridgeJSLiftParameter(v))
@@ -8778,9 +8778,9 @@ public func _bjs_asyncRoundTripFloat(_ v: Float32) -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_asyncRoundTripDouble")
-@_cdecl("bjs_asyncRoundTripDouble")
-public func _bjs_asyncRoundTripDouble(_ v: Float64) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_asyncRoundTripDouble")
+@_cdecl("bjs_BridgeJSRuntimeTests_asyncRoundTripDouble")
+public func _bjs_BridgeJSRuntimeTests_asyncRoundTripDouble(_ v: Float64) -> Int32 {
     #if arch(wasm32)
     return _bjs_makePromise(resolve: Promise_resolve_Sd, reject: Promise_reject) {
         return await asyncRoundTripDouble(v: Double.bridgeJSLiftParameter(v))
@@ -8790,9 +8790,9 @@ public func _bjs_asyncRoundTripDouble(_ v: Float64) -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_asyncRoundTripBool")
-@_cdecl("bjs_asyncRoundTripBool")
-public func _bjs_asyncRoundTripBool(_ v: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_asyncRoundTripBool")
+@_cdecl("bjs_BridgeJSRuntimeTests_asyncRoundTripBool")
+public func _bjs_BridgeJSRuntimeTests_asyncRoundTripBool(_ v: Int32) -> Int32 {
     #if arch(wasm32)
     return _bjs_makePromise(resolve: Promise_resolve_Sb, reject: Promise_reject) {
         return await asyncRoundTripBool(v: Bool.bridgeJSLiftParameter(v))
@@ -8802,9 +8802,9 @@ public func _bjs_asyncRoundTripBool(_ v: Int32) -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_asyncRoundTripString")
-@_cdecl("bjs_asyncRoundTripString")
-public func _bjs_asyncRoundTripString(_ vBytes: Int32, _ vLength: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_asyncRoundTripString")
+@_cdecl("bjs_BridgeJSRuntimeTests_asyncRoundTripString")
+public func _bjs_BridgeJSRuntimeTests_asyncRoundTripString(_ vBytes: Int32, _ vLength: Int32) -> Int32 {
     #if arch(wasm32)
     return _bjs_makePromise(resolve: Promise_resolve_SS, reject: Promise_reject) {
         return await asyncRoundTripString(v: String.bridgeJSLiftParameter(vBytes, vLength))
@@ -8814,21 +8814,21 @@ public func _bjs_asyncRoundTripString(_ vBytes: Int32, _ vLength: Int32) -> Int3
     #endif
 }
 
-@_expose(wasm, "bjs_asyncRoundTripSwiftHeapObject")
-@_cdecl("bjs_asyncRoundTripSwiftHeapObject")
-public func _bjs_asyncRoundTripSwiftHeapObject(_ v: UnsafeMutableRawPointer) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_asyncRoundTripSwiftHeapObject")
+@_cdecl("bjs_BridgeJSRuntimeTests_asyncRoundTripSwiftHeapObject")
+public func _bjs_BridgeJSRuntimeTests_asyncRoundTripSwiftHeapObject(_ v: UnsafeMutableRawPointer) -> Int32 {
     #if arch(wasm32)
-    return _bjs_makePromise(resolve: Promise_resolve_7GreeterC, reject: Promise_reject) {
-        return await asyncRoundTripSwiftHeapObject(v: Greeter.bridgeJSLiftParameter(v))
+    return _bjs_makePromise(resolve: Promise_resolve_28BridgeJSRuntimeTests_GreeterC, reject: Promise_reject) {
+        return await asyncRoundTripSwiftHeapObject(v: BridgeJSRuntimeTests.Greeter.bridgeJSLiftParameter(v))
     }
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_asyncRoundTripJSObject")
-@_cdecl("bjs_asyncRoundTripJSObject")
-public func _bjs_asyncRoundTripJSObject(_ v: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_asyncRoundTripJSObject")
+@_cdecl("bjs_BridgeJSRuntimeTests_asyncRoundTripJSObject")
+public func _bjs_BridgeJSRuntimeTests_asyncRoundTripJSObject(_ v: Int32) -> Int32 {
     #if arch(wasm32)
     return _bjs_makePromise(resolve: Promise_resolve_8JSObjectC, reject: Promise_reject) {
         return await asyncRoundTripJSObject(v: JSObject.bridgeJSLiftParameter(v))
@@ -8838,19 +8838,19 @@ public func _bjs_asyncRoundTripJSObject(_ v: Int32) -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_takeGreeter")
-@_cdecl("bjs_takeGreeter")
-public func _bjs_takeGreeter(_ g: UnsafeMutableRawPointer, _ nameBytes: Int32, _ nameLength: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_takeGreeter")
+@_cdecl("bjs_BridgeJSRuntimeTests_takeGreeter")
+public func _bjs_BridgeJSRuntimeTests_takeGreeter(_ g: UnsafeMutableRawPointer, _ nameBytes: Int32, _ nameLength: Int32) -> Void {
     #if arch(wasm32)
-    takeGreeter(g: Greeter.bridgeJSLiftParameter(g), name: String.bridgeJSLiftParameter(nameBytes, nameLength))
+    takeGreeter(g: BridgeJSRuntimeTests.Greeter.bridgeJSLiftParameter(g), name: String.bridgeJSLiftParameter(nameBytes, nameLength))
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_createCalculator")
-@_cdecl("bjs_createCalculator")
-public func _bjs_createCalculator() -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_createCalculator")
+@_cdecl("bjs_BridgeJSRuntimeTests_createCalculator")
+public func _bjs_BridgeJSRuntimeTests_createCalculator() -> UnsafeMutableRawPointer {
     #if arch(wasm32)
     let ret = createCalculator()
     return ret.bridgeJSLowerReturn()
@@ -8859,20 +8859,20 @@ public func _bjs_createCalculator() -> UnsafeMutableRawPointer {
     #endif
 }
 
-@_expose(wasm, "bjs_useCalculator")
-@_cdecl("bjs_useCalculator")
-public func _bjs_useCalculator(_ calc: UnsafeMutableRawPointer, _ x: Int32, _ y: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_useCalculator")
+@_cdecl("bjs_BridgeJSRuntimeTests_useCalculator")
+public func _bjs_BridgeJSRuntimeTests_useCalculator(_ calc: UnsafeMutableRawPointer, _ x: Int32, _ y: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = useCalculator(calc: Calculator.bridgeJSLiftParameter(calc), x: Int.bridgeJSLiftParameter(x), y: Int.bridgeJSLiftParameter(y))
+    let ret = useCalculator(calc: BridgeJSRuntimeTests.Calculator.bridgeJSLiftParameter(calc), x: Int.bridgeJSLiftParameter(x), y: Int.bridgeJSLiftParameter(y))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_testGreeterToJSValue")
-@_cdecl("bjs_testGreeterToJSValue")
-public func _bjs_testGreeterToJSValue() -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_testGreeterToJSValue")
+@_cdecl("bjs_BridgeJSRuntimeTests_testGreeterToJSValue")
+public func _bjs_BridgeJSRuntimeTests_testGreeterToJSValue() -> Int32 {
     #if arch(wasm32)
     let ret = testGreeterToJSValue()
     return ret.bridgeJSLowerReturn()
@@ -8881,9 +8881,9 @@ public func _bjs_testGreeterToJSValue() -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_testCalculatorToJSValue")
-@_cdecl("bjs_testCalculatorToJSValue")
-public func _bjs_testCalculatorToJSValue() -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_testCalculatorToJSValue")
+@_cdecl("bjs_BridgeJSRuntimeTests_testCalculatorToJSValue")
+public func _bjs_BridgeJSRuntimeTests_testCalculatorToJSValue() -> Int32 {
     #if arch(wasm32)
     let ret = testCalculatorToJSValue()
     return ret.bridgeJSLowerReturn()
@@ -8892,31 +8892,31 @@ public func _bjs_testCalculatorToJSValue() -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_testSwiftClassAsJSValue")
-@_cdecl("bjs_testSwiftClassAsJSValue")
-public func _bjs_testSwiftClassAsJSValue(_ greeter: UnsafeMutableRawPointer) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_testSwiftClassAsJSValue")
+@_cdecl("bjs_BridgeJSRuntimeTests_testSwiftClassAsJSValue")
+public func _bjs_BridgeJSRuntimeTests_testSwiftClassAsJSValue(_ greeter: UnsafeMutableRawPointer) -> Int32 {
     #if arch(wasm32)
-    let ret = testSwiftClassAsJSValue(greeter: Greeter.bridgeJSLiftParameter(greeter))
+    let ret = testSwiftClassAsJSValue(greeter: BridgeJSRuntimeTests.Greeter.bridgeJSLiftParameter(greeter))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_setDirection")
-@_cdecl("bjs_setDirection")
-public func _bjs_setDirection(_ direction: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_setDirection")
+@_cdecl("bjs_BridgeJSRuntimeTests_setDirection")
+public func _bjs_BridgeJSRuntimeTests_setDirection(_ direction: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = setDirection(_: Direction.bridgeJSLiftParameter(direction))
+    let ret = setDirection(_: BridgeJSRuntimeTests.Direction.bridgeJSLiftParameter(direction))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_getDirection")
-@_cdecl("bjs_getDirection")
-public func _bjs_getDirection() -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_getDirection")
+@_cdecl("bjs_BridgeJSRuntimeTests_getDirection")
+public func _bjs_BridgeJSRuntimeTests_getDirection() -> Int32 {
     #if arch(wasm32)
     let ret = getDirection()
     return ret.bridgeJSLowerReturn()
@@ -8925,31 +8925,31 @@ public func _bjs_getDirection() -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_processDirection")
-@_cdecl("bjs_processDirection")
-public func _bjs_processDirection(_ input: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_processDirection")
+@_cdecl("bjs_BridgeJSRuntimeTests_processDirection")
+public func _bjs_BridgeJSRuntimeTests_processDirection(_ input: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = processDirection(_: Direction.bridgeJSLiftParameter(input))
+    let ret = processDirection(_: BridgeJSRuntimeTests.Direction.bridgeJSLiftParameter(input))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_setTheme")
-@_cdecl("bjs_setTheme")
-public func _bjs_setTheme(_ themeBytes: Int32, _ themeLength: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_setTheme")
+@_cdecl("bjs_BridgeJSRuntimeTests_setTheme")
+public func _bjs_BridgeJSRuntimeTests_setTheme(_ themeBytes: Int32, _ themeLength: Int32) -> Void {
     #if arch(wasm32)
-    let ret = setTheme(_: Theme.bridgeJSLiftParameter(themeBytes, themeLength))
+    let ret = setTheme(_: BridgeJSRuntimeTests.Theme.bridgeJSLiftParameter(themeBytes, themeLength))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_getTheme")
-@_cdecl("bjs_getTheme")
-public func _bjs_getTheme() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_getTheme")
+@_cdecl("bjs_BridgeJSRuntimeTests_getTheme")
+public func _bjs_BridgeJSRuntimeTests_getTheme() -> Void {
     #if arch(wasm32)
     let ret = getTheme()
     return ret.bridgeJSLowerReturn()
@@ -8958,60 +8958,60 @@ public func _bjs_getTheme() -> Void {
     #endif
 }
 
-@_expose(wasm, "bjs_asyncRoundTripTheme")
-@_cdecl("bjs_asyncRoundTripTheme")
-public func _bjs_asyncRoundTripTheme(_ vBytes: Int32, _ vLength: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_asyncRoundTripTheme")
+@_cdecl("bjs_BridgeJSRuntimeTests_asyncRoundTripTheme")
+public func _bjs_BridgeJSRuntimeTests_asyncRoundTripTheme(_ vBytes: Int32, _ vLength: Int32) -> Int32 {
     #if arch(wasm32)
-    return _bjs_makePromise(resolve: Promise_resolve_5ThemeO, reject: Promise_reject) {
-        return await asyncRoundTripTheme(_: Theme.bridgeJSLiftParameter(vBytes, vLength))
+    return _bjs_makePromise(resolve: Promise_resolve_26BridgeJSRuntimeTests_ThemeO, reject: Promise_reject) {
+        return await asyncRoundTripTheme(_: BridgeJSRuntimeTests.Theme.bridgeJSLiftParameter(vBytes, vLength))
     }
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_asyncRoundTripDirection")
-@_cdecl("bjs_asyncRoundTripDirection")
-public func _bjs_asyncRoundTripDirection(_ v: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_asyncRoundTripDirection")
+@_cdecl("bjs_BridgeJSRuntimeTests_asyncRoundTripDirection")
+public func _bjs_BridgeJSRuntimeTests_asyncRoundTripDirection(_ v: Int32) -> Int32 {
     #if arch(wasm32)
-    return _bjs_makePromise(resolve: Promise_resolve_9DirectionO, reject: Promise_reject) {
-        return await asyncRoundTripDirection(_: Direction.bridgeJSLiftParameter(v))
+    return _bjs_makePromise(resolve: Promise_resolve_30BridgeJSRuntimeTests_DirectionO, reject: Promise_reject) {
+        return await asyncRoundTripDirection(_: BridgeJSRuntimeTests.Direction.bridgeJSLiftParameter(v))
     }
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_asyncRoundTripOptionalTheme")
-@_cdecl("bjs_asyncRoundTripOptionalTheme")
-public func _bjs_asyncRoundTripOptionalTheme(_ vIsSome: Int32, _ vBytes: Int32, _ vLength: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_asyncRoundTripOptionalTheme")
+@_cdecl("bjs_BridgeJSRuntimeTests_asyncRoundTripOptionalTheme")
+public func _bjs_BridgeJSRuntimeTests_asyncRoundTripOptionalTheme(_ vIsSome: Int32, _ vBytes: Int32, _ vLength: Int32) -> Int32 {
     #if arch(wasm32)
-    return _bjs_makePromise(resolve: Promise_resolve_Sq5ThemeO, reject: Promise_reject) {
-        return await asyncRoundTripOptionalTheme(_: Optional<Theme>.bridgeJSLiftParameter(vIsSome, vBytes, vLength))
+    return _bjs_makePromise(resolve: Promise_resolve_Sq26BridgeJSRuntimeTests_ThemeO, reject: Promise_reject) {
+        return await asyncRoundTripOptionalTheme(_: Optional<BridgeJSRuntimeTests.Theme>.bridgeJSLiftParameter(vIsSome, vBytes, vLength))
     }
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_asyncRoundTripOptionalDirection")
-@_cdecl("bjs_asyncRoundTripOptionalDirection")
-public func _bjs_asyncRoundTripOptionalDirection(_ vIsSome: Int32, _ vValue: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_asyncRoundTripOptionalDirection")
+@_cdecl("bjs_BridgeJSRuntimeTests_asyncRoundTripOptionalDirection")
+public func _bjs_BridgeJSRuntimeTests_asyncRoundTripOptionalDirection(_ vIsSome: Int32, _ vValue: Int32) -> Int32 {
     #if arch(wasm32)
-    return _bjs_makePromise(resolve: Promise_resolve_Sq9DirectionO, reject: Promise_reject) {
-        return await asyncRoundTripOptionalDirection(_: Optional<Direction>.bridgeJSLiftParameter(vIsSome, vValue))
+    return _bjs_makePromise(resolve: Promise_resolve_Sq30BridgeJSRuntimeTests_DirectionO, reject: Promise_reject) {
+        return await asyncRoundTripOptionalDirection(_: Optional<BridgeJSRuntimeTests.Direction>.bridgeJSLiftParameter(vIsSome, vValue))
     }
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_asyncRoundTripDirectionArray")
-@_cdecl("bjs_asyncRoundTripDirectionArray")
-public func _bjs_asyncRoundTripDirectionArray() -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_asyncRoundTripDirectionArray")
+@_cdecl("bjs_BridgeJSRuntimeTests_asyncRoundTripDirectionArray")
+public func _bjs_BridgeJSRuntimeTests_asyncRoundTripDirectionArray() -> Int32 {
     #if arch(wasm32)
-    let _tmp_v = [Direction].bridgeJSStackPop()
-    return _bjs_makePromise(resolve: Promise_resolve_Sa9DirectionO, reject: Promise_reject) {
+    let _tmp_v = [BridgeJSRuntimeTests.Direction].bridgeJSStackPop()
+    return _bjs_makePromise(resolve: Promise_resolve_Sa30BridgeJSRuntimeTests_DirectionO, reject: Promise_reject) {
         return await asyncRoundTripDirectionArray(_: _tmp_v)
     }
     #else
@@ -9019,12 +9019,12 @@ public func _bjs_asyncRoundTripDirectionArray() -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_asyncRoundTripDirectionDict")
-@_cdecl("bjs_asyncRoundTripDirectionDict")
-public func _bjs_asyncRoundTripDirectionDict() -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_asyncRoundTripDirectionDict")
+@_cdecl("bjs_BridgeJSRuntimeTests_asyncRoundTripDirectionDict")
+public func _bjs_BridgeJSRuntimeTests_asyncRoundTripDirectionDict() -> Int32 {
     #if arch(wasm32)
-    let _tmp_v = [String: Direction].bridgeJSLiftParameter()
-    return _bjs_makePromise(resolve: Promise_resolve_SD9DirectionO, reject: Promise_reject) {
+    let _tmp_v = [String: BridgeJSRuntimeTests.Direction].bridgeJSLiftParameter()
+    return _bjs_makePromise(resolve: Promise_resolve_SD30BridgeJSRuntimeTests_DirectionO, reject: Promise_reject) {
         return await asyncRoundTripDirectionDict(_: _tmp_v)
     }
     #else
@@ -9032,12 +9032,12 @@ public func _bjs_asyncRoundTripDirectionDict() -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_asyncRoundTripThemeArray")
-@_cdecl("bjs_asyncRoundTripThemeArray")
-public func _bjs_asyncRoundTripThemeArray() -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_asyncRoundTripThemeArray")
+@_cdecl("bjs_BridgeJSRuntimeTests_asyncRoundTripThemeArray")
+public func _bjs_BridgeJSRuntimeTests_asyncRoundTripThemeArray() -> Int32 {
     #if arch(wasm32)
-    let _tmp_v = [Theme].bridgeJSStackPop()
-    return _bjs_makePromise(resolve: Promise_resolve_Sa5ThemeO, reject: Promise_reject) {
+    let _tmp_v = [BridgeJSRuntimeTests.Theme].bridgeJSStackPop()
+    return _bjs_makePromise(resolve: Promise_resolve_Sa26BridgeJSRuntimeTests_ThemeO, reject: Promise_reject) {
         return await asyncRoundTripThemeArray(_: _tmp_v)
     }
     #else
@@ -9045,12 +9045,12 @@ public func _bjs_asyncRoundTripThemeArray() -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_asyncRoundTripThemeDict")
-@_cdecl("bjs_asyncRoundTripThemeDict")
-public func _bjs_asyncRoundTripThemeDict() -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_asyncRoundTripThemeDict")
+@_cdecl("bjs_BridgeJSRuntimeTests_asyncRoundTripThemeDict")
+public func _bjs_BridgeJSRuntimeTests_asyncRoundTripThemeDict() -> Int32 {
     #if arch(wasm32)
-    let _tmp_v = [String: Theme].bridgeJSLiftParameter()
-    return _bjs_makePromise(resolve: Promise_resolve_SD5ThemeO, reject: Promise_reject) {
+    let _tmp_v = [String: BridgeJSRuntimeTests.Theme].bridgeJSLiftParameter()
+    return _bjs_makePromise(resolve: Promise_resolve_SD26BridgeJSRuntimeTests_ThemeO, reject: Promise_reject) {
         return await asyncRoundTripThemeDict(_: _tmp_v)
     }
     #else
@@ -9058,36 +9058,36 @@ public func _bjs_asyncRoundTripThemeDict() -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_asyncRoundTripFileSize")
-@_cdecl("bjs_asyncRoundTripFileSize")
-public func _bjs_asyncRoundTripFileSize(_ v: Int64) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_asyncRoundTripFileSize")
+@_cdecl("bjs_BridgeJSRuntimeTests_asyncRoundTripFileSize")
+public func _bjs_BridgeJSRuntimeTests_asyncRoundTripFileSize(_ v: Int64) -> Int32 {
     #if arch(wasm32)
-    return _bjs_makePromise(resolve: Promise_resolve_8FileSizeO, reject: Promise_reject) {
-        return await asyncRoundTripFileSize(_: FileSize.bridgeJSLiftParameter(v))
+    return _bjs_makePromise(resolve: Promise_resolve_29BridgeJSRuntimeTests_FileSizeO, reject: Promise_reject) {
+        return await asyncRoundTripFileSize(_: BridgeJSRuntimeTests.FileSize.bridgeJSLiftParameter(v))
     }
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_asyncRoundTripOptionalFileSize")
-@_cdecl("bjs_asyncRoundTripOptionalFileSize")
-public func _bjs_asyncRoundTripOptionalFileSize(_ vIsSome: Int32, _ vValue: Int64) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_asyncRoundTripOptionalFileSize")
+@_cdecl("bjs_BridgeJSRuntimeTests_asyncRoundTripOptionalFileSize")
+public func _bjs_BridgeJSRuntimeTests_asyncRoundTripOptionalFileSize(_ vIsSome: Int32, _ vValue: Int64) -> Int32 {
     #if arch(wasm32)
-    return _bjs_makePromise(resolve: Promise_resolve_Sq8FileSizeO, reject: Promise_reject) {
-        return await asyncRoundTripOptionalFileSize(_: Optional<FileSize>.bridgeJSLiftParameter(vIsSome, vValue))
+    return _bjs_makePromise(resolve: Promise_resolve_Sq29BridgeJSRuntimeTests_FileSizeO, reject: Promise_reject) {
+        return await asyncRoundTripOptionalFileSize(_: Optional<BridgeJSRuntimeTests.FileSize>.bridgeJSLiftParameter(vIsSome, vValue))
     }
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_asyncRoundTripAssociatedValueEnum")
-@_cdecl("bjs_asyncRoundTripAssociatedValueEnum")
-public func _bjs_asyncRoundTripAssociatedValueEnum(_ v: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_asyncRoundTripAssociatedValueEnum")
+@_cdecl("bjs_BridgeJSRuntimeTests_asyncRoundTripAssociatedValueEnum")
+public func _bjs_BridgeJSRuntimeTests_asyncRoundTripAssociatedValueEnum(_ v: Int32) -> Int32 {
     #if arch(wasm32)
-    let _tmp_v = AsyncPayloadResult.bridgeJSLiftParameter(v)
-    return _bjs_makePromise(resolve: Promise_resolve_18AsyncPayloadResultO, reject: Promise_reject) {
+    let _tmp_v = BridgeJSRuntimeTests.AsyncPayloadResult.bridgeJSLiftParameter(v)
+    return _bjs_makePromise(resolve: Promise_resolve_39BridgeJSRuntimeTests_AsyncPayloadResultO, reject: Promise_reject) {
         return await asyncRoundTripAssociatedValueEnum(_: _tmp_v)
     }
     #else
@@ -9095,12 +9095,12 @@ public func _bjs_asyncRoundTripAssociatedValueEnum(_ v: Int32) -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_asyncRoundTripOptionalAssociatedValueEnum")
-@_cdecl("bjs_asyncRoundTripOptionalAssociatedValueEnum")
-public func _bjs_asyncRoundTripOptionalAssociatedValueEnum(_ vIsSome: Int32, _ vCaseId: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_asyncRoundTripOptionalAssociatedValueEnum")
+@_cdecl("bjs_BridgeJSRuntimeTests_asyncRoundTripOptionalAssociatedValueEnum")
+public func _bjs_BridgeJSRuntimeTests_asyncRoundTripOptionalAssociatedValueEnum(_ vIsSome: Int32, _ vCaseId: Int32) -> Int32 {
     #if arch(wasm32)
-    let _tmp_v = Optional<AsyncPayloadResult>.bridgeJSLiftParameter(vIsSome, vCaseId)
-    return _bjs_makePromise(resolve: Promise_resolve_Sq18AsyncPayloadResultO, reject: Promise_reject) {
+    let _tmp_v = Optional<BridgeJSRuntimeTests.AsyncPayloadResult>.bridgeJSLiftParameter(vIsSome, vCaseId)
+    return _bjs_makePromise(resolve: Promise_resolve_Sq39BridgeJSRuntimeTests_AsyncPayloadResultO, reject: Promise_reject) {
         return await asyncRoundTripOptionalAssociatedValueEnum(_: _tmp_v)
     }
     #else
@@ -9108,20 +9108,20 @@ public func _bjs_asyncRoundTripOptionalAssociatedValueEnum(_ vIsSome: Int32, _ v
     #endif
 }
 
-@_expose(wasm, "bjs_setHttpStatus")
-@_cdecl("bjs_setHttpStatus")
-public func _bjs_setHttpStatus(_ status: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_setHttpStatus")
+@_cdecl("bjs_BridgeJSRuntimeTests_setHttpStatus")
+public func _bjs_BridgeJSRuntimeTests_setHttpStatus(_ status: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = setHttpStatus(_: HttpStatus.bridgeJSLiftParameter(status))
+    let ret = setHttpStatus(_: BridgeJSRuntimeTests.HttpStatus.bridgeJSLiftParameter(status))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_getHttpStatus")
-@_cdecl("bjs_getHttpStatus")
-public func _bjs_getHttpStatus() -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_getHttpStatus")
+@_cdecl("bjs_BridgeJSRuntimeTests_getHttpStatus")
+public func _bjs_BridgeJSRuntimeTests_getHttpStatus() -> Int32 {
     #if arch(wasm32)
     let ret = getHttpStatus()
     return ret.bridgeJSLowerReturn()
@@ -9130,20 +9130,20 @@ public func _bjs_getHttpStatus() -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_setFileSize")
-@_cdecl("bjs_setFileSize")
-public func _bjs_setFileSize(_ size: Int64) -> Int64 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_setFileSize")
+@_cdecl("bjs_BridgeJSRuntimeTests_setFileSize")
+public func _bjs_BridgeJSRuntimeTests_setFileSize(_ size: Int64) -> Int64 {
     #if arch(wasm32)
-    let ret = setFileSize(_: FileSize.bridgeJSLiftParameter(size))
+    let ret = setFileSize(_: BridgeJSRuntimeTests.FileSize.bridgeJSLiftParameter(size))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_getFileSize")
-@_cdecl("bjs_getFileSize")
-public func _bjs_getFileSize() -> Int64 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_getFileSize")
+@_cdecl("bjs_BridgeJSRuntimeTests_getFileSize")
+public func _bjs_BridgeJSRuntimeTests_getFileSize() -> Int64 {
     #if arch(wasm32)
     let ret = getFileSize()
     return ret.bridgeJSLowerReturn()
@@ -9152,20 +9152,20 @@ public func _bjs_getFileSize() -> Int64 {
     #endif
 }
 
-@_expose(wasm, "bjs_setSessionId")
-@_cdecl("bjs_setSessionId")
-public func _bjs_setSessionId(_ session: Int64) -> Int64 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_setSessionId")
+@_cdecl("bjs_BridgeJSRuntimeTests_setSessionId")
+public func _bjs_BridgeJSRuntimeTests_setSessionId(_ session: Int64) -> Int64 {
     #if arch(wasm32)
-    let ret = setSessionId(_: SessionId.bridgeJSLiftParameter(session))
+    let ret = setSessionId(_: BridgeJSRuntimeTests.SessionId.bridgeJSLiftParameter(session))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_getSessionId")
-@_cdecl("bjs_getSessionId")
-public func _bjs_getSessionId() -> Int64 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_getSessionId")
+@_cdecl("bjs_BridgeJSRuntimeTests_getSessionId")
+public func _bjs_BridgeJSRuntimeTests_getSessionId() -> Int64 {
     #if arch(wasm32)
     let ret = getSessionId()
     return ret.bridgeJSLowerReturn()
@@ -9174,31 +9174,31 @@ public func _bjs_getSessionId() -> Int64 {
     #endif
 }
 
-@_expose(wasm, "bjs_processTheme")
-@_cdecl("bjs_processTheme")
-public func _bjs_processTheme(_ themeBytes: Int32, _ themeLength: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_processTheme")
+@_cdecl("bjs_BridgeJSRuntimeTests_processTheme")
+public func _bjs_BridgeJSRuntimeTests_processTheme(_ themeBytes: Int32, _ themeLength: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = processTheme(_: Theme.bridgeJSLiftParameter(themeBytes, themeLength))
+    let ret = processTheme(_: BridgeJSRuntimeTests.Theme.bridgeJSLiftParameter(themeBytes, themeLength))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_setTSDirection")
-@_cdecl("bjs_setTSDirection")
-public func _bjs_setTSDirection(_ direction: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_setTSDirection")
+@_cdecl("bjs_BridgeJSRuntimeTests_setTSDirection")
+public func _bjs_BridgeJSRuntimeTests_setTSDirection(_ direction: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = setTSDirection(_: TSDirection.bridgeJSLiftParameter(direction))
+    let ret = setTSDirection(_: BridgeJSRuntimeTests.TSDirection.bridgeJSLiftParameter(direction))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_getTSDirection")
-@_cdecl("bjs_getTSDirection")
-public func _bjs_getTSDirection() -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_getTSDirection")
+@_cdecl("bjs_BridgeJSRuntimeTests_getTSDirection")
+public func _bjs_BridgeJSRuntimeTests_getTSDirection() -> Int32 {
     #if arch(wasm32)
     let ret = getTSDirection()
     return ret.bridgeJSLowerReturn()
@@ -9207,20 +9207,20 @@ public func _bjs_getTSDirection() -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_setTSTheme")
-@_cdecl("bjs_setTSTheme")
-public func _bjs_setTSTheme(_ themeBytes: Int32, _ themeLength: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_setTSTheme")
+@_cdecl("bjs_BridgeJSRuntimeTests_setTSTheme")
+public func _bjs_BridgeJSRuntimeTests_setTSTheme(_ themeBytes: Int32, _ themeLength: Int32) -> Void {
     #if arch(wasm32)
-    let ret = setTSTheme(_: TSTheme.bridgeJSLiftParameter(themeBytes, themeLength))
+    let ret = setTSTheme(_: BridgeJSRuntimeTests.TSTheme.bridgeJSLiftParameter(themeBytes, themeLength))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_getTSTheme")
-@_cdecl("bjs_getTSTheme")
-public func _bjs_getTSTheme() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_getTSTheme")
+@_cdecl("bjs_BridgeJSRuntimeTests_getTSTheme")
+public func _bjs_BridgeJSRuntimeTests_getTSTheme() -> Void {
     #if arch(wasm32)
     let ret = getTSTheme()
     return ret.bridgeJSLowerReturn()
@@ -9229,9 +9229,9 @@ public func _bjs_getTSTheme() -> Void {
     #endif
 }
 
-@_expose(wasm, "bjs_createConverter")
-@_cdecl("bjs_createConverter")
-public func _bjs_createConverter() -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_createConverter")
+@_cdecl("bjs_BridgeJSRuntimeTests_createConverter")
+public func _bjs_BridgeJSRuntimeTests_createConverter() -> UnsafeMutableRawPointer {
     #if arch(wasm32)
     let ret = createConverter()
     return ret.bridgeJSLowerReturn()
@@ -9240,31 +9240,31 @@ public func _bjs_createConverter() -> UnsafeMutableRawPointer {
     #endif
 }
 
-@_expose(wasm, "bjs_useConverter")
-@_cdecl("bjs_useConverter")
-public func _bjs_useConverter(_ converter: UnsafeMutableRawPointer, _ value: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_useConverter")
+@_cdecl("bjs_BridgeJSRuntimeTests_useConverter")
+public func _bjs_BridgeJSRuntimeTests_useConverter(_ converter: UnsafeMutableRawPointer, _ value: Int32) -> Void {
     #if arch(wasm32)
-    let ret = useConverter(converter: Utils.Converter.bridgeJSLiftParameter(converter), value: Int.bridgeJSLiftParameter(value))
+    let ret = useConverter(converter: BridgeJSRuntimeTests.Utils.Converter.bridgeJSLiftParameter(converter), value: Int.bridgeJSLiftParameter(value))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripConverterArray")
-@_cdecl("bjs_roundTripConverterArray")
-public func _bjs_roundTripConverterArray() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_roundTripConverterArray")
+@_cdecl("bjs_BridgeJSRuntimeTests_roundTripConverterArray")
+public func _bjs_BridgeJSRuntimeTests_roundTripConverterArray() -> Void {
     #if arch(wasm32)
-    let ret = roundTripConverterArray(_: [Utils.Converter].bridgeJSStackPop())
+    let ret = roundTripConverterArray(_: [BridgeJSRuntimeTests.Utils.Converter].bridgeJSStackPop())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_createHTTPServer")
-@_cdecl("bjs_createHTTPServer")
-public func _bjs_createHTTPServer() -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_createHTTPServer")
+@_cdecl("bjs_BridgeJSRuntimeTests_createHTTPServer")
+public func _bjs_BridgeJSRuntimeTests_createHTTPServer() -> UnsafeMutableRawPointer {
     #if arch(wasm32)
     let ret = createHTTPServer()
     return ret.bridgeJSLowerReturn()
@@ -9273,9 +9273,9 @@ public func _bjs_createHTTPServer() -> UnsafeMutableRawPointer {
     #endif
 }
 
-@_expose(wasm, "bjs_createUUID")
-@_cdecl("bjs_createUUID")
-public func _bjs_createUUID(_ valueBytes: Int32, _ valueLength: Int32) -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_createUUID")
+@_cdecl("bjs_BridgeJSRuntimeTests_createUUID")
+public func _bjs_BridgeJSRuntimeTests_createUUID(_ valueBytes: Int32, _ valueLength: Int32) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
     let ret = createUUID(value: String.bridgeJSLiftParameter(valueBytes, valueLength))
     return ret.bridgeJSLowerReturn()
@@ -9284,86 +9284,86 @@ public func _bjs_createUUID(_ valueBytes: Int32, _ valueLength: Int32) -> Unsafe
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripUUID")
-@_cdecl("bjs_roundTripUUID")
-public func _bjs_roundTripUUID(_ uuid: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_roundTripUUID")
+@_cdecl("bjs_BridgeJSRuntimeTests_roundTripUUID")
+public func _bjs_BridgeJSRuntimeTests_roundTripUUID(_ uuid: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = roundTripUUID(_: UUID.bridgeJSLiftParameter(uuid))
+    let ret = roundTripUUID(_: BridgeJSRuntimeTests.UUID.bridgeJSLiftParameter(uuid))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_roundtripNetworkingAPIMethod")
-@_cdecl("bjs_roundtripNetworkingAPIMethod")
-public func _bjs_roundtripNetworkingAPIMethod(_ method: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_roundtripNetworkingAPIMethod")
+@_cdecl("bjs_BridgeJSRuntimeTests_roundtripNetworkingAPIMethod")
+public func _bjs_BridgeJSRuntimeTests_roundtripNetworkingAPIMethod(_ method: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = roundtripNetworkingAPIMethod(_: Networking.API.Method.bridgeJSLiftParameter(method))
+    let ret = roundtripNetworkingAPIMethod(_: BridgeJSRuntimeTests.Networking.API.Method.bridgeJSLiftParameter(method))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_roundtripConfigurationLogLevel")
-@_cdecl("bjs_roundtripConfigurationLogLevel")
-public func _bjs_roundtripConfigurationLogLevel(_ levelBytes: Int32, _ levelLength: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_roundtripConfigurationLogLevel")
+@_cdecl("bjs_BridgeJSRuntimeTests_roundtripConfigurationLogLevel")
+public func _bjs_BridgeJSRuntimeTests_roundtripConfigurationLogLevel(_ levelBytes: Int32, _ levelLength: Int32) -> Void {
     #if arch(wasm32)
-    let ret = roundtripConfigurationLogLevel(_: Configuration.LogLevel.bridgeJSLiftParameter(levelBytes, levelLength))
+    let ret = roundtripConfigurationLogLevel(_: BridgeJSRuntimeTests.Configuration.LogLevel.bridgeJSLiftParameter(levelBytes, levelLength))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_roundtripConfigurationPort")
-@_cdecl("bjs_roundtripConfigurationPort")
-public func _bjs_roundtripConfigurationPort(_ port: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_roundtripConfigurationPort")
+@_cdecl("bjs_BridgeJSRuntimeTests_roundtripConfigurationPort")
+public func _bjs_BridgeJSRuntimeTests_roundtripConfigurationPort(_ port: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = roundtripConfigurationPort(_: Configuration.Port.bridgeJSLiftParameter(port))
+    let ret = roundtripConfigurationPort(_: BridgeJSRuntimeTests.Configuration.Port.bridgeJSLiftParameter(port))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_processConfigurationLogLevel")
-@_cdecl("bjs_processConfigurationLogLevel")
-public func _bjs_processConfigurationLogLevel(_ levelBytes: Int32, _ levelLength: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_processConfigurationLogLevel")
+@_cdecl("bjs_BridgeJSRuntimeTests_processConfigurationLogLevel")
+public func _bjs_BridgeJSRuntimeTests_processConfigurationLogLevel(_ levelBytes: Int32, _ levelLength: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = processConfigurationLogLevel(_: Configuration.LogLevel.bridgeJSLiftParameter(levelBytes, levelLength))
+    let ret = processConfigurationLogLevel(_: BridgeJSRuntimeTests.Configuration.LogLevel.bridgeJSLiftParameter(levelBytes, levelLength))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_roundtripInternalSupportedMethod")
-@_cdecl("bjs_roundtripInternalSupportedMethod")
-public func _bjs_roundtripInternalSupportedMethod(_ method: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_roundtripInternalSupportedMethod")
+@_cdecl("bjs_BridgeJSRuntimeTests_roundtripInternalSupportedMethod")
+public func _bjs_BridgeJSRuntimeTests_roundtripInternalSupportedMethod(_ method: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = roundtripInternalSupportedMethod(_: Internal.SupportedMethod.bridgeJSLiftParameter(method))
+    let ret = roundtripInternalSupportedMethod(_: BridgeJSRuntimeTests.Internal.SupportedMethod.bridgeJSLiftParameter(method))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_roundtripAPIResult")
-@_cdecl("bjs_roundtripAPIResult")
-public func _bjs_roundtripAPIResult(_ result: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_roundtripAPIResult")
+@_cdecl("bjs_BridgeJSRuntimeTests_roundtripAPIResult")
+public func _bjs_BridgeJSRuntimeTests_roundtripAPIResult(_ result: Int32) -> Void {
     #if arch(wasm32)
-    let ret = roundtripAPIResult(result: APIResult.bridgeJSLiftParameter(result))
+    let ret = roundtripAPIResult(result: BridgeJSRuntimeTests.APIResult.bridgeJSLiftParameter(result))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_makeAPIResultSuccess")
-@_cdecl("bjs_makeAPIResultSuccess")
-public func _bjs_makeAPIResultSuccess(_ valueBytes: Int32, _ valueLength: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_makeAPIResultSuccess")
+@_cdecl("bjs_BridgeJSRuntimeTests_makeAPIResultSuccess")
+public func _bjs_BridgeJSRuntimeTests_makeAPIResultSuccess(_ valueBytes: Int32, _ valueLength: Int32) -> Void {
     #if arch(wasm32)
     let ret = makeAPIResultSuccess(_: String.bridgeJSLiftParameter(valueBytes, valueLength))
     return ret.bridgeJSLowerReturn()
@@ -9372,9 +9372,9 @@ public func _bjs_makeAPIResultSuccess(_ valueBytes: Int32, _ valueLength: Int32)
     #endif
 }
 
-@_expose(wasm, "bjs_makeAPIResultFailure")
-@_cdecl("bjs_makeAPIResultFailure")
-public func _bjs_makeAPIResultFailure(_ value: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_makeAPIResultFailure")
+@_cdecl("bjs_BridgeJSRuntimeTests_makeAPIResultFailure")
+public func _bjs_BridgeJSRuntimeTests_makeAPIResultFailure(_ value: Int32) -> Void {
     #if arch(wasm32)
     let ret = makeAPIResultFailure(_: Int.bridgeJSLiftParameter(value))
     return ret.bridgeJSLowerReturn()
@@ -9383,9 +9383,9 @@ public func _bjs_makeAPIResultFailure(_ value: Int32) -> Void {
     #endif
 }
 
-@_expose(wasm, "bjs_makeAPIResultInfo")
-@_cdecl("bjs_makeAPIResultInfo")
-public func _bjs_makeAPIResultInfo() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_makeAPIResultInfo")
+@_cdecl("bjs_BridgeJSRuntimeTests_makeAPIResultInfo")
+public func _bjs_BridgeJSRuntimeTests_makeAPIResultInfo() -> Void {
     #if arch(wasm32)
     let ret = makeAPIResultInfo()
     return ret.bridgeJSLowerReturn()
@@ -9394,9 +9394,9 @@ public func _bjs_makeAPIResultInfo() -> Void {
     #endif
 }
 
-@_expose(wasm, "bjs_makeAPIResultFlag")
-@_cdecl("bjs_makeAPIResultFlag")
-public func _bjs_makeAPIResultFlag(_ value: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_makeAPIResultFlag")
+@_cdecl("bjs_BridgeJSRuntimeTests_makeAPIResultFlag")
+public func _bjs_BridgeJSRuntimeTests_makeAPIResultFlag(_ value: Int32) -> Void {
     #if arch(wasm32)
     let ret = makeAPIResultFlag(_: Bool.bridgeJSLiftParameter(value))
     return ret.bridgeJSLowerReturn()
@@ -9405,9 +9405,9 @@ public func _bjs_makeAPIResultFlag(_ value: Int32) -> Void {
     #endif
 }
 
-@_expose(wasm, "bjs_makeAPIResultRate")
-@_cdecl("bjs_makeAPIResultRate")
-public func _bjs_makeAPIResultRate(_ value: Float32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_makeAPIResultRate")
+@_cdecl("bjs_BridgeJSRuntimeTests_makeAPIResultRate")
+public func _bjs_BridgeJSRuntimeTests_makeAPIResultRate(_ value: Float32) -> Void {
     #if arch(wasm32)
     let ret = makeAPIResultRate(_: Float.bridgeJSLiftParameter(value))
     return ret.bridgeJSLowerReturn()
@@ -9416,9 +9416,9 @@ public func _bjs_makeAPIResultRate(_ value: Float32) -> Void {
     #endif
 }
 
-@_expose(wasm, "bjs_makeAPIResultPrecise")
-@_cdecl("bjs_makeAPIResultPrecise")
-public func _bjs_makeAPIResultPrecise(_ value: Float64) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_makeAPIResultPrecise")
+@_cdecl("bjs_BridgeJSRuntimeTests_makeAPIResultPrecise")
+public func _bjs_BridgeJSRuntimeTests_makeAPIResultPrecise(_ value: Float64) -> Void {
     #if arch(wasm32)
     let ret = makeAPIResultPrecise(_: Double.bridgeJSLiftParameter(value))
     return ret.bridgeJSLowerReturn()
@@ -9427,20 +9427,20 @@ public func _bjs_makeAPIResultPrecise(_ value: Float64) -> Void {
     #endif
 }
 
-@_expose(wasm, "bjs_roundtripComplexResult")
-@_cdecl("bjs_roundtripComplexResult")
-public func _bjs_roundtripComplexResult(_ result: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_roundtripComplexResult")
+@_cdecl("bjs_BridgeJSRuntimeTests_roundtripComplexResult")
+public func _bjs_BridgeJSRuntimeTests_roundtripComplexResult(_ result: Int32) -> Void {
     #if arch(wasm32)
-    let ret = roundtripComplexResult(_: ComplexResult.bridgeJSLiftParameter(result))
+    let ret = roundtripComplexResult(_: BridgeJSRuntimeTests.ComplexResult.bridgeJSLiftParameter(result))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_makeComplexResultSuccess")
-@_cdecl("bjs_makeComplexResultSuccess")
-public func _bjs_makeComplexResultSuccess(_ valueBytes: Int32, _ valueLength: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_makeComplexResultSuccess")
+@_cdecl("bjs_BridgeJSRuntimeTests_makeComplexResultSuccess")
+public func _bjs_BridgeJSRuntimeTests_makeComplexResultSuccess(_ valueBytes: Int32, _ valueLength: Int32) -> Void {
     #if arch(wasm32)
     let ret = makeComplexResultSuccess(_: String.bridgeJSLiftParameter(valueBytes, valueLength))
     return ret.bridgeJSLowerReturn()
@@ -9449,9 +9449,9 @@ public func _bjs_makeComplexResultSuccess(_ valueBytes: Int32, _ valueLength: In
     #endif
 }
 
-@_expose(wasm, "bjs_makeComplexResultError")
-@_cdecl("bjs_makeComplexResultError")
-public func _bjs_makeComplexResultError(_ messageBytes: Int32, _ messageLength: Int32, _ code: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_makeComplexResultError")
+@_cdecl("bjs_BridgeJSRuntimeTests_makeComplexResultError")
+public func _bjs_BridgeJSRuntimeTests_makeComplexResultError(_ messageBytes: Int32, _ messageLength: Int32, _ code: Int32) -> Void {
     #if arch(wasm32)
     let ret = makeComplexResultError(_: String.bridgeJSLiftParameter(messageBytes, messageLength), _: Int.bridgeJSLiftParameter(code))
     return ret.bridgeJSLowerReturn()
@@ -9460,9 +9460,9 @@ public func _bjs_makeComplexResultError(_ messageBytes: Int32, _ messageLength: 
     #endif
 }
 
-@_expose(wasm, "bjs_makeComplexResultLocation")
-@_cdecl("bjs_makeComplexResultLocation")
-public func _bjs_makeComplexResultLocation(_ lat: Float64, _ lng: Float64, _ nameBytes: Int32, _ nameLength: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_makeComplexResultLocation")
+@_cdecl("bjs_BridgeJSRuntimeTests_makeComplexResultLocation")
+public func _bjs_BridgeJSRuntimeTests_makeComplexResultLocation(_ lat: Float64, _ lng: Float64, _ nameBytes: Int32, _ nameLength: Int32) -> Void {
     #if arch(wasm32)
     let ret = makeComplexResultLocation(_: Double.bridgeJSLiftParameter(lat), _: Double.bridgeJSLiftParameter(lng), _: String.bridgeJSLiftParameter(nameBytes, nameLength))
     return ret.bridgeJSLowerReturn()
@@ -9471,9 +9471,9 @@ public func _bjs_makeComplexResultLocation(_ lat: Float64, _ lng: Float64, _ nam
     #endif
 }
 
-@_expose(wasm, "bjs_makeComplexResultStatus")
-@_cdecl("bjs_makeComplexResultStatus")
-public func _bjs_makeComplexResultStatus(_ active: Int32, _ code: Int32, _ messageBytes: Int32, _ messageLength: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_makeComplexResultStatus")
+@_cdecl("bjs_BridgeJSRuntimeTests_makeComplexResultStatus")
+public func _bjs_BridgeJSRuntimeTests_makeComplexResultStatus(_ active: Int32, _ code: Int32, _ messageBytes: Int32, _ messageLength: Int32) -> Void {
     #if arch(wasm32)
     let ret = makeComplexResultStatus(_: Bool.bridgeJSLiftParameter(active), _: Int.bridgeJSLiftParameter(code), _: String.bridgeJSLiftParameter(messageBytes, messageLength))
     return ret.bridgeJSLowerReturn()
@@ -9482,9 +9482,9 @@ public func _bjs_makeComplexResultStatus(_ active: Int32, _ code: Int32, _ messa
     #endif
 }
 
-@_expose(wasm, "bjs_makeComplexResultCoordinates")
-@_cdecl("bjs_makeComplexResultCoordinates")
-public func _bjs_makeComplexResultCoordinates(_ x: Float64, _ y: Float64, _ z: Float64) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_makeComplexResultCoordinates")
+@_cdecl("bjs_BridgeJSRuntimeTests_makeComplexResultCoordinates")
+public func _bjs_BridgeJSRuntimeTests_makeComplexResultCoordinates(_ x: Float64, _ y: Float64, _ z: Float64) -> Void {
     #if arch(wasm32)
     let ret = makeComplexResultCoordinates(_: Double.bridgeJSLiftParameter(x), _: Double.bridgeJSLiftParameter(y), _: Double.bridgeJSLiftParameter(z))
     return ret.bridgeJSLowerReturn()
@@ -9493,9 +9493,9 @@ public func _bjs_makeComplexResultCoordinates(_ x: Float64, _ y: Float64, _ z: F
     #endif
 }
 
-@_expose(wasm, "bjs_makeComplexResultComprehensive")
-@_cdecl("bjs_makeComplexResultComprehensive")
-public func _bjs_makeComplexResultComprehensive(_ flag1: Int32, _ flag2: Int32, _ count1: Int32, _ count2: Int32, _ value1: Float64, _ value2: Float64, _ text1Bytes: Int32, _ text1Length: Int32, _ text2Bytes: Int32, _ text2Length: Int32, _ text3Bytes: Int32, _ text3Length: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_makeComplexResultComprehensive")
+@_cdecl("bjs_BridgeJSRuntimeTests_makeComplexResultComprehensive")
+public func _bjs_BridgeJSRuntimeTests_makeComplexResultComprehensive(_ flag1: Int32, _ flag2: Int32, _ count1: Int32, _ count2: Int32, _ value1: Float64, _ value2: Float64, _ text1Bytes: Int32, _ text1Length: Int32, _ text2Bytes: Int32, _ text2Length: Int32, _ text3Bytes: Int32, _ text3Length: Int32) -> Void {
     #if arch(wasm32)
     let ret = makeComplexResultComprehensive(_: Bool.bridgeJSLiftParameter(flag1), _: Bool.bridgeJSLiftParameter(flag2), _: Int.bridgeJSLiftParameter(count1), _: Int.bridgeJSLiftParameter(count2), _: Double.bridgeJSLiftParameter(value1), _: Double.bridgeJSLiftParameter(value2), _: String.bridgeJSLiftParameter(text1Bytes, text1Length), _: String.bridgeJSLiftParameter(text2Bytes, text2Length), _: String.bridgeJSLiftParameter(text3Bytes, text3Length))
     return ret.bridgeJSLowerReturn()
@@ -9504,9 +9504,9 @@ public func _bjs_makeComplexResultComprehensive(_ flag1: Int32, _ flag2: Int32, 
     #endif
 }
 
-@_expose(wasm, "bjs_makeComplexResultInfo")
-@_cdecl("bjs_makeComplexResultInfo")
-public func _bjs_makeComplexResultInfo() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_makeComplexResultInfo")
+@_cdecl("bjs_BridgeJSRuntimeTests_makeComplexResultInfo")
+public func _bjs_BridgeJSRuntimeTests_makeComplexResultInfo() -> Void {
     #if arch(wasm32)
     let ret = makeComplexResultInfo()
     return ret.bridgeJSLowerReturn()
@@ -9515,9 +9515,9 @@ public func _bjs_makeComplexResultInfo() -> Void {
     #endif
 }
 
-@_expose(wasm, "bjs_makeUtilitiesResultSuccess")
-@_cdecl("bjs_makeUtilitiesResultSuccess")
-public func _bjs_makeUtilitiesResultSuccess(_ messageBytes: Int32, _ messageLength: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_makeUtilitiesResultSuccess")
+@_cdecl("bjs_BridgeJSRuntimeTests_makeUtilitiesResultSuccess")
+public func _bjs_BridgeJSRuntimeTests_makeUtilitiesResultSuccess(_ messageBytes: Int32, _ messageLength: Int32) -> Void {
     #if arch(wasm32)
     let ret = makeUtilitiesResultSuccess(_: String.bridgeJSLiftParameter(messageBytes, messageLength))
     return ret.bridgeJSLowerReturn()
@@ -9526,9 +9526,9 @@ public func _bjs_makeUtilitiesResultSuccess(_ messageBytes: Int32, _ messageLeng
     #endif
 }
 
-@_expose(wasm, "bjs_makeUtilitiesResultFailure")
-@_cdecl("bjs_makeUtilitiesResultFailure")
-public func _bjs_makeUtilitiesResultFailure(_ errorBytes: Int32, _ errorLength: Int32, _ code: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_makeUtilitiesResultFailure")
+@_cdecl("bjs_BridgeJSRuntimeTests_makeUtilitiesResultFailure")
+public func _bjs_BridgeJSRuntimeTests_makeUtilitiesResultFailure(_ errorBytes: Int32, _ errorLength: Int32, _ code: Int32) -> Void {
     #if arch(wasm32)
     let ret = makeUtilitiesResultFailure(_: String.bridgeJSLiftParameter(errorBytes, errorLength), _: Int.bridgeJSLiftParameter(code))
     return ret.bridgeJSLowerReturn()
@@ -9537,9 +9537,9 @@ public func _bjs_makeUtilitiesResultFailure(_ errorBytes: Int32, _ errorLength: 
     #endif
 }
 
-@_expose(wasm, "bjs_makeUtilitiesResultStatus")
-@_cdecl("bjs_makeUtilitiesResultStatus")
-public func _bjs_makeUtilitiesResultStatus(_ active: Int32, _ code: Int32, _ messageBytes: Int32, _ messageLength: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_makeUtilitiesResultStatus")
+@_cdecl("bjs_BridgeJSRuntimeTests_makeUtilitiesResultStatus")
+public func _bjs_BridgeJSRuntimeTests_makeUtilitiesResultStatus(_ active: Int32, _ code: Int32, _ messageBytes: Int32, _ messageLength: Int32) -> Void {
     #if arch(wasm32)
     let ret = makeUtilitiesResultStatus(_: Bool.bridgeJSLiftParameter(active), _: Int.bridgeJSLiftParameter(code), _: String.bridgeJSLiftParameter(messageBytes, messageLength))
     return ret.bridgeJSLowerReturn()
@@ -9548,9 +9548,9 @@ public func _bjs_makeUtilitiesResultStatus(_ active: Int32, _ code: Int32, _ mes
     #endif
 }
 
-@_expose(wasm, "bjs_makeAPINetworkingResultSuccess")
-@_cdecl("bjs_makeAPINetworkingResultSuccess")
-public func _bjs_makeAPINetworkingResultSuccess(_ messageBytes: Int32, _ messageLength: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_makeAPINetworkingResultSuccess")
+@_cdecl("bjs_BridgeJSRuntimeTests_makeAPINetworkingResultSuccess")
+public func _bjs_BridgeJSRuntimeTests_makeAPINetworkingResultSuccess(_ messageBytes: Int32, _ messageLength: Int32) -> Void {
     #if arch(wasm32)
     let ret = makeAPINetworkingResultSuccess(_: String.bridgeJSLiftParameter(messageBytes, messageLength))
     return ret.bridgeJSLowerReturn()
@@ -9559,9 +9559,9 @@ public func _bjs_makeAPINetworkingResultSuccess(_ messageBytes: Int32, _ message
     #endif
 }
 
-@_expose(wasm, "bjs_makeAPINetworkingResultFailure")
-@_cdecl("bjs_makeAPINetworkingResultFailure")
-public func _bjs_makeAPINetworkingResultFailure(_ errorBytes: Int32, _ errorLength: Int32, _ code: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_makeAPINetworkingResultFailure")
+@_cdecl("bjs_BridgeJSRuntimeTests_makeAPINetworkingResultFailure")
+public func _bjs_BridgeJSRuntimeTests_makeAPINetworkingResultFailure(_ errorBytes: Int32, _ errorLength: Int32, _ code: Int32) -> Void {
     #if arch(wasm32)
     let ret = makeAPINetworkingResultFailure(_: String.bridgeJSLiftParameter(errorBytes, errorLength), _: Int.bridgeJSLiftParameter(code))
     return ret.bridgeJSLowerReturn()
@@ -9570,53 +9570,53 @@ public func _bjs_makeAPINetworkingResultFailure(_ errorBytes: Int32, _ errorLeng
     #endif
 }
 
-@_expose(wasm, "bjs_roundtripUtilitiesResult")
-@_cdecl("bjs_roundtripUtilitiesResult")
-public func _bjs_roundtripUtilitiesResult(_ result: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_roundtripUtilitiesResult")
+@_cdecl("bjs_BridgeJSRuntimeTests_roundtripUtilitiesResult")
+public func _bjs_BridgeJSRuntimeTests_roundtripUtilitiesResult(_ result: Int32) -> Void {
     #if arch(wasm32)
-    let ret = roundtripUtilitiesResult(_: Utilities.Result.bridgeJSLiftParameter(result))
+    let ret = roundtripUtilitiesResult(_: BridgeJSRuntimeTests.Utilities.Result.bridgeJSLiftParameter(result))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_roundtripAPINetworkingResult")
-@_cdecl("bjs_roundtripAPINetworkingResult")
-public func _bjs_roundtripAPINetworkingResult(_ result: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_roundtripAPINetworkingResult")
+@_cdecl("bjs_BridgeJSRuntimeTests_roundtripAPINetworkingResult")
+public func _bjs_BridgeJSRuntimeTests_roundtripAPINetworkingResult(_ result: Int32) -> Void {
     #if arch(wasm32)
-    let ret = roundtripAPINetworkingResult(_: API.NetworkingResult.bridgeJSLiftParameter(result))
+    let ret = roundtripAPINetworkingResult(_: BridgeJSRuntimeTests.API.NetworkingResult.bridgeJSLiftParameter(result))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripAllTypesResult")
-@_cdecl("bjs_roundTripAllTypesResult")
-public func _bjs_roundTripAllTypesResult(_ result: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_roundTripAllTypesResult")
+@_cdecl("bjs_BridgeJSRuntimeTests_roundTripAllTypesResult")
+public func _bjs_BridgeJSRuntimeTests_roundTripAllTypesResult(_ result: Int32) -> Void {
     #if arch(wasm32)
-    let ret = roundTripAllTypesResult(_: AllTypesResult.bridgeJSLiftParameter(result))
+    let ret = roundTripAllTypesResult(_: BridgeJSRuntimeTests.AllTypesResult.bridgeJSLiftParameter(result))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripTypedPayloadResult")
-@_cdecl("bjs_roundTripTypedPayloadResult")
-public func _bjs_roundTripTypedPayloadResult(_ result: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_roundTripTypedPayloadResult")
+@_cdecl("bjs_BridgeJSRuntimeTests_roundTripTypedPayloadResult")
+public func _bjs_BridgeJSRuntimeTests_roundTripTypedPayloadResult(_ result: Int32) -> Void {
     #if arch(wasm32)
-    let ret = roundTripTypedPayloadResult(_: TypedPayloadResult.bridgeJSLiftParameter(result))
+    let ret = roundTripTypedPayloadResult(_: BridgeJSRuntimeTests.TypedPayloadResult.bridgeJSLiftParameter(result))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_createPropertyHolder")
-@_cdecl("bjs_createPropertyHolder")
-public func _bjs_createPropertyHolder(_ intValue: Int32, _ floatValue: Float32, _ doubleValue: Float64, _ boolValue: Int32, _ stringValueBytes: Int32, _ stringValueLength: Int32, _ jsObject: Int32) -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_createPropertyHolder")
+@_cdecl("bjs_BridgeJSRuntimeTests_createPropertyHolder")
+public func _bjs_BridgeJSRuntimeTests_createPropertyHolder(_ intValue: Int32, _ floatValue: Float32, _ doubleValue: Float64, _ boolValue: Int32, _ stringValueBytes: Int32, _ stringValueLength: Int32, _ jsObject: Int32) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
     let ret = createPropertyHolder(intValue: Int.bridgeJSLiftParameter(intValue), floatValue: Float.bridgeJSLiftParameter(floatValue), doubleValue: Double.bridgeJSLiftParameter(doubleValue), boolValue: Bool.bridgeJSLiftParameter(boolValue), stringValue: String.bridgeJSLiftParameter(stringValueBytes, stringValueLength), jsObject: JSObject.bridgeJSLiftParameter(jsObject))
     return ret.bridgeJSLowerReturn()
@@ -9625,20 +9625,20 @@ public func _bjs_createPropertyHolder(_ intValue: Int32, _ floatValue: Float32, 
     #endif
 }
 
-@_expose(wasm, "bjs_testPropertyHolder")
-@_cdecl("bjs_testPropertyHolder")
-public func _bjs_testPropertyHolder(_ holder: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_testPropertyHolder")
+@_cdecl("bjs_BridgeJSRuntimeTests_testPropertyHolder")
+public func _bjs_BridgeJSRuntimeTests_testPropertyHolder(_ holder: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = testPropertyHolder(holder: PropertyHolder.bridgeJSLiftParameter(holder))
+    let ret = testPropertyHolder(holder: BridgeJSRuntimeTests.PropertyHolder.bridgeJSLiftParameter(holder))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_resetObserverCounts")
-@_cdecl("bjs_resetObserverCounts")
-public func _bjs_resetObserverCounts() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_resetObserverCounts")
+@_cdecl("bjs_BridgeJSRuntimeTests_resetObserverCounts")
+public func _bjs_BridgeJSRuntimeTests_resetObserverCounts() -> Void {
     #if arch(wasm32)
     resetObserverCounts()
     #else
@@ -9646,9 +9646,9 @@ public func _bjs_resetObserverCounts() -> Void {
     #endif
 }
 
-@_expose(wasm, "bjs_getObserverStats")
-@_cdecl("bjs_getObserverStats")
-public func _bjs_getObserverStats() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_getObserverStats")
+@_cdecl("bjs_BridgeJSRuntimeTests_getObserverStats")
+public func _bjs_BridgeJSRuntimeTests_getObserverStats() -> Void {
     #if arch(wasm32)
     let ret = getObserverStats()
     return ret.bridgeJSLowerReturn()
@@ -9657,9 +9657,9 @@ public func _bjs_getObserverStats() -> Void {
     #endif
 }
 
-@_expose(wasm, "bjs_formatName")
-@_cdecl("bjs_formatName")
-public func _bjs_formatName(_ nameBytes: Int32, _ nameLength: Int32, _ transform: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_formatName")
+@_cdecl("bjs_BridgeJSRuntimeTests_formatName")
+public func _bjs_BridgeJSRuntimeTests_formatName(_ nameBytes: Int32, _ nameLength: Int32, _ transform: Int32) -> Void {
     #if arch(wasm32)
     let ret = formatName(_: String.bridgeJSLiftParameter(nameBytes, nameLength), transform: _BJS_Closure_20BridgeJSRuntimeTestsSS_SS.bridgeJSLift(transform))
     return ret.bridgeJSLowerReturn()
@@ -9668,9 +9668,9 @@ public func _bjs_formatName(_ nameBytes: Int32, _ nameLength: Int32, _ transform
     #endif
 }
 
-@_expose(wasm, "bjs_makeFormatter")
-@_cdecl("bjs_makeFormatter")
-public func _bjs_makeFormatter(_ prefixBytes: Int32, _ prefixLength: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_makeFormatter")
+@_cdecl("bjs_BridgeJSRuntimeTests_makeFormatter")
+public func _bjs_BridgeJSRuntimeTests_makeFormatter(_ prefixBytes: Int32, _ prefixLength: Int32) -> Int32 {
     #if arch(wasm32)
     let ret = makeFormatter(prefix: String.bridgeJSLiftParameter(prefixBytes, prefixLength))
     return JSTypedClosure(ret).bridgeJSLowerReturn()
@@ -9679,9 +9679,9 @@ public func _bjs_makeFormatter(_ prefixBytes: Int32, _ prefixLength: Int32) -> I
     #endif
 }
 
-@_expose(wasm, "bjs_makeAdder")
-@_cdecl("bjs_makeAdder")
-public func _bjs_makeAdder(_ base: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_makeAdder")
+@_cdecl("bjs_BridgeJSRuntimeTests_makeAdder")
+public func _bjs_BridgeJSRuntimeTests_makeAdder(_ base: Int32) -> Int32 {
     #if arch(wasm32)
     let ret = makeAdder(base: Int.bridgeJSLiftParameter(base))
     return JSTypedClosure(ret).bridgeJSLowerReturn()
@@ -9690,78 +9690,78 @@ public func _bjs_makeAdder(_ base: Int32) -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripPointerFields")
-@_cdecl("bjs_roundTripPointerFields")
-public func _bjs_roundTripPointerFields() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_roundTripPointerFields")
+@_cdecl("bjs_BridgeJSRuntimeTests_roundTripPointerFields")
+public func _bjs_BridgeJSRuntimeTests_roundTripPointerFields() -> Void {
     #if arch(wasm32)
-    let ret = roundTripPointerFields(_: PointerFields.bridgeJSLiftParameter())
+    let ret = roundTripPointerFields(_: BridgeJSRuntimeTests.PointerFields.bridgeJSLiftParameter())
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_testStructDefault")
-@_cdecl("bjs_testStructDefault")
-public func _bjs_testStructDefault() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_testStructDefault")
+@_cdecl("bjs_BridgeJSRuntimeTests_testStructDefault")
+public func _bjs_BridgeJSRuntimeTests_testStructDefault() -> Void {
     #if arch(wasm32)
-    let ret = testStructDefault(point: DataPoint.bridgeJSLiftParameter())
+    let ret = testStructDefault(point: BridgeJSRuntimeTests.DataPoint.bridgeJSLiftParameter())
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_cartToJSObject")
-@_cdecl("bjs_cartToJSObject")
-public func _bjs_cartToJSObject() -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_cartToJSObject")
+@_cdecl("bjs_BridgeJSRuntimeTests_cartToJSObject")
+public func _bjs_BridgeJSRuntimeTests_cartToJSObject() -> Int32 {
     #if arch(wasm32)
-    let ret = cartToJSObject(_: CopyableCart.bridgeJSLiftParameter())
+    let ret = cartToJSObject(_: BridgeJSRuntimeTests.CopyableCart.bridgeJSLiftParameter())
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_nestedCartToJSObject")
-@_cdecl("bjs_nestedCartToJSObject")
-public func _bjs_nestedCartToJSObject() -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_nestedCartToJSObject")
+@_cdecl("bjs_BridgeJSRuntimeTests_nestedCartToJSObject")
+public func _bjs_BridgeJSRuntimeTests_nestedCartToJSObject() -> Int32 {
     #if arch(wasm32)
-    let ret = nestedCartToJSObject(_: CopyableNestedCart.bridgeJSLiftParameter())
+    let ret = nestedCartToJSObject(_: BridgeJSRuntimeTests.CopyableNestedCart.bridgeJSLiftParameter())
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripDataPoint")
-@_cdecl("bjs_roundTripDataPoint")
-public func _bjs_roundTripDataPoint() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_roundTripDataPoint")
+@_cdecl("bjs_BridgeJSRuntimeTests_roundTripDataPoint")
+public func _bjs_BridgeJSRuntimeTests_roundTripDataPoint() -> Void {
     #if arch(wasm32)
-    let ret = roundTripDataPoint(_: DataPoint.bridgeJSLiftParameter())
+    let ret = roundTripDataPoint(_: BridgeJSRuntimeTests.DataPoint.bridgeJSLiftParameter())
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripPublicPoint")
-@_cdecl("bjs_roundTripPublicPoint")
-public func _bjs_roundTripPublicPoint() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_roundTripPublicPoint")
+@_cdecl("bjs_BridgeJSRuntimeTests_roundTripPublicPoint")
+public func _bjs_BridgeJSRuntimeTests_roundTripPublicPoint() -> Void {
     #if arch(wasm32)
-    let ret = roundTripPublicPoint(_: PublicPoint.bridgeJSLiftParameter())
+    let ret = roundTripPublicPoint(_: BridgeJSRuntimeTests.PublicPoint.bridgeJSLiftParameter())
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_asyncRoundTripPublicPoint")
-@_cdecl("bjs_asyncRoundTripPublicPoint")
-public func _bjs_asyncRoundTripPublicPoint() -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_asyncRoundTripPublicPoint")
+@_cdecl("bjs_BridgeJSRuntimeTests_asyncRoundTripPublicPoint")
+public func _bjs_BridgeJSRuntimeTests_asyncRoundTripPublicPoint() -> Int32 {
     #if arch(wasm32)
-    let _tmp_point = PublicPoint.bridgeJSLiftParameter()
-    return _bjs_makePromise(resolve: Promise_resolve_11PublicPointV, reject: Promise_reject) {
+    let _tmp_point = BridgeJSRuntimeTests.PublicPoint.bridgeJSLiftParameter()
+    return _bjs_makePromise(resolve: Promise_resolve_32BridgeJSRuntimeTests_PublicPointV, reject: Promise_reject) {
         return await asyncRoundTripPublicPoint(_: _tmp_point)
     }
     #else
@@ -9769,12 +9769,12 @@ public func _bjs_asyncRoundTripPublicPoint() -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_asyncRoundTripPublicPointThrows")
-@_cdecl("bjs_asyncRoundTripPublicPointThrows")
-public func _bjs_asyncRoundTripPublicPointThrows() -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_asyncRoundTripPublicPointThrows")
+@_cdecl("bjs_BridgeJSRuntimeTests_asyncRoundTripPublicPointThrows")
+public func _bjs_BridgeJSRuntimeTests_asyncRoundTripPublicPointThrows() -> Int32 {
     #if arch(wasm32)
-    let _tmp_point = PublicPoint.bridgeJSLiftParameter()
-    return _bjs_makePromise(resolve: Promise_resolve_11PublicPointV, reject: Promise_reject) { () async throws(JSException) -> PublicPoint in
+    let _tmp_point = BridgeJSRuntimeTests.PublicPoint.bridgeJSLiftParameter()
+    return _bjs_makePromise(resolve: Promise_resolve_32BridgeJSRuntimeTests_PublicPointV, reject: Promise_reject) { () async throws(JSException) -> BridgeJSRuntimeTests.PublicPoint in
         return try await asyncRoundTripPublicPointThrows(_: _tmp_point)
     }
     #else
@@ -9782,11 +9782,11 @@ public func _bjs_asyncRoundTripPublicPointThrows() -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_asyncStructOrThrow")
-@_cdecl("bjs_asyncStructOrThrow")
-public func _bjs_asyncStructOrThrow(_ shouldThrow: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_asyncStructOrThrow")
+@_cdecl("bjs_BridgeJSRuntimeTests_asyncStructOrThrow")
+public func _bjs_BridgeJSRuntimeTests_asyncStructOrThrow(_ shouldThrow: Int32) -> Int32 {
     #if arch(wasm32)
-    return _bjs_makePromise(resolve: Promise_resolve_11PublicPointV, reject: Promise_reject) { () async throws(JSException) -> PublicPoint in
+    return _bjs_makePromise(resolve: Promise_resolve_32BridgeJSRuntimeTests_PublicPointV, reject: Promise_reject) { () async throws(JSException) -> BridgeJSRuntimeTests.PublicPoint in
         return try await asyncStructOrThrow(_: Bool.bridgeJSLiftParameter(shouldThrow))
     }
     #else
@@ -9794,13 +9794,13 @@ public func _bjs_asyncStructOrThrow(_ shouldThrow: Int32) -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_asyncCombinePublicPoints")
-@_cdecl("bjs_asyncCombinePublicPoints")
-public func _bjs_asyncCombinePublicPoints() -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_asyncCombinePublicPoints")
+@_cdecl("bjs_BridgeJSRuntimeTests_asyncCombinePublicPoints")
+public func _bjs_BridgeJSRuntimeTests_asyncCombinePublicPoints() -> Int32 {
     #if arch(wasm32)
-    let _tmp_b = PublicPoint.bridgeJSLiftParameter()
-    let _tmp_a = PublicPoint.bridgeJSLiftParameter()
-    return _bjs_makePromise(resolve: Promise_resolve_11PublicPointV, reject: Promise_reject) {
+    let _tmp_b = BridgeJSRuntimeTests.PublicPoint.bridgeJSLiftParameter()
+    let _tmp_a = BridgeJSRuntimeTests.PublicPoint.bridgeJSLiftParameter()
+    return _bjs_makePromise(resolve: Promise_resolve_32BridgeJSRuntimeTests_PublicPointV, reject: Promise_reject) {
         return await asyncCombinePublicPoints(_: _tmp_a, _: _tmp_b)
     }
     #else
@@ -9808,12 +9808,12 @@ public func _bjs_asyncCombinePublicPoints() -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_asyncRoundTripContact")
-@_cdecl("bjs_asyncRoundTripContact")
-public func _bjs_asyncRoundTripContact() -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_asyncRoundTripContact")
+@_cdecl("bjs_BridgeJSRuntimeTests_asyncRoundTripContact")
+public func _bjs_BridgeJSRuntimeTests_asyncRoundTripContact() -> Int32 {
     #if arch(wasm32)
-    let _tmp_contact = Contact.bridgeJSLiftParameter()
-    return _bjs_makePromise(resolve: Promise_resolve_7ContactV, reject: Promise_reject) {
+    let _tmp_contact = BridgeJSRuntimeTests.Contact.bridgeJSLiftParameter()
+    return _bjs_makePromise(resolve: Promise_resolve_28BridgeJSRuntimeTests_ContactV, reject: Promise_reject) {
         return await asyncRoundTripContact(_: _tmp_contact)
     }
     #else
@@ -9821,12 +9821,12 @@ public func _bjs_asyncRoundTripContact() -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_asyncRoundTripPublicPointArray")
-@_cdecl("bjs_asyncRoundTripPublicPointArray")
-public func _bjs_asyncRoundTripPublicPointArray() -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_asyncRoundTripPublicPointArray")
+@_cdecl("bjs_BridgeJSRuntimeTests_asyncRoundTripPublicPointArray")
+public func _bjs_BridgeJSRuntimeTests_asyncRoundTripPublicPointArray() -> Int32 {
     #if arch(wasm32)
-    let _tmp_points = [PublicPoint].bridgeJSStackPop()
-    return _bjs_makePromise(resolve: Promise_resolve_Sa11PublicPointV, reject: Promise_reject) {
+    let _tmp_points = [BridgeJSRuntimeTests.PublicPoint].bridgeJSStackPop()
+    return _bjs_makePromise(resolve: Promise_resolve_Sa32BridgeJSRuntimeTests_PublicPointV, reject: Promise_reject) {
         return await asyncRoundTripPublicPointArray(_: _tmp_points)
     }
     #else
@@ -9834,12 +9834,12 @@ public func _bjs_asyncRoundTripPublicPointArray() -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_asyncRoundTripOptionalPublicPoint")
-@_cdecl("bjs_asyncRoundTripOptionalPublicPoint")
-public func _bjs_asyncRoundTripOptionalPublicPoint() -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_asyncRoundTripOptionalPublicPoint")
+@_cdecl("bjs_BridgeJSRuntimeTests_asyncRoundTripOptionalPublicPoint")
+public func _bjs_BridgeJSRuntimeTests_asyncRoundTripOptionalPublicPoint() -> Int32 {
     #if arch(wasm32)
-    let _tmp_point = Optional<PublicPoint>.bridgeJSLiftParameter()
-    return _bjs_makePromise(resolve: Promise_resolve_Sq11PublicPointV, reject: Promise_reject) {
+    let _tmp_point = Optional<BridgeJSRuntimeTests.PublicPoint>.bridgeJSLiftParameter()
+    return _bjs_makePromise(resolve: Promise_resolve_Sq32BridgeJSRuntimeTests_PublicPointV, reject: Promise_reject) {
         return await asyncRoundTripOptionalPublicPoint(_: _tmp_point)
     }
     #else
@@ -9847,12 +9847,12 @@ public func _bjs_asyncRoundTripOptionalPublicPoint() -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_asyncRoundTripPublicPointDict")
-@_cdecl("bjs_asyncRoundTripPublicPointDict")
-public func _bjs_asyncRoundTripPublicPointDict() -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_asyncRoundTripPublicPointDict")
+@_cdecl("bjs_BridgeJSRuntimeTests_asyncRoundTripPublicPointDict")
+public func _bjs_BridgeJSRuntimeTests_asyncRoundTripPublicPointDict() -> Int32 {
     #if arch(wasm32)
-    let _tmp_points = [String: PublicPoint].bridgeJSLiftParameter()
-    return _bjs_makePromise(resolve: Promise_resolve_SD11PublicPointV, reject: Promise_reject) {
+    let _tmp_points = [String: BridgeJSRuntimeTests.PublicPoint].bridgeJSLiftParameter()
+    return _bjs_makePromise(resolve: Promise_resolve_SD32BridgeJSRuntimeTests_PublicPointV, reject: Promise_reject) {
         return await asyncRoundTripPublicPointDict(_: _tmp_points)
     }
     #else
@@ -9860,78 +9860,78 @@ public func _bjs_asyncRoundTripPublicPointDict() -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripContact")
-@_cdecl("bjs_roundTripContact")
-public func _bjs_roundTripContact() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_roundTripContact")
+@_cdecl("bjs_BridgeJSRuntimeTests_roundTripContact")
+public func _bjs_BridgeJSRuntimeTests_roundTripContact() -> Void {
     #if arch(wasm32)
-    let ret = roundTripContact(_: Contact.bridgeJSLiftParameter())
+    let ret = roundTripContact(_: BridgeJSRuntimeTests.Contact.bridgeJSLiftParameter())
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripConfig")
-@_cdecl("bjs_roundTripConfig")
-public func _bjs_roundTripConfig() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_roundTripConfig")
+@_cdecl("bjs_BridgeJSRuntimeTests_roundTripConfig")
+public func _bjs_BridgeJSRuntimeTests_roundTripConfig() -> Void {
     #if arch(wasm32)
-    let ret = roundTripConfig(_: Config.bridgeJSLiftParameter())
+    let ret = roundTripConfig(_: BridgeJSRuntimeTests.Config.bridgeJSLiftParameter())
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripSessionData")
-@_cdecl("bjs_roundTripSessionData")
-public func _bjs_roundTripSessionData() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_roundTripSessionData")
+@_cdecl("bjs_BridgeJSRuntimeTests_roundTripSessionData")
+public func _bjs_BridgeJSRuntimeTests_roundTripSessionData() -> Void {
     #if arch(wasm32)
-    let ret = roundTripSessionData(_: SessionData.bridgeJSLiftParameter())
+    let ret = roundTripSessionData(_: BridgeJSRuntimeTests.SessionData.bridgeJSLiftParameter())
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripValidationReport")
-@_cdecl("bjs_roundTripValidationReport")
-public func _bjs_roundTripValidationReport() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_roundTripValidationReport")
+@_cdecl("bjs_BridgeJSRuntimeTests_roundTripValidationReport")
+public func _bjs_BridgeJSRuntimeTests_roundTripValidationReport() -> Void {
     #if arch(wasm32)
-    let ret = roundTripValidationReport(_: ValidationReport.bridgeJSLiftParameter())
+    let ret = roundTripValidationReport(_: BridgeJSRuntimeTests.ValidationReport.bridgeJSLiftParameter())
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripAdvancedConfig")
-@_cdecl("bjs_roundTripAdvancedConfig")
-public func _bjs_roundTripAdvancedConfig() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_roundTripAdvancedConfig")
+@_cdecl("bjs_BridgeJSRuntimeTests_roundTripAdvancedConfig")
+public func _bjs_BridgeJSRuntimeTests_roundTripAdvancedConfig() -> Void {
     #if arch(wasm32)
-    let ret = roundTripAdvancedConfig(_: AdvancedConfig.bridgeJSLiftParameter())
+    let ret = roundTripAdvancedConfig(_: BridgeJSRuntimeTests.AdvancedConfig.bridgeJSLiftParameter())
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripMeasurementConfig")
-@_cdecl("bjs_roundTripMeasurementConfig")
-public func _bjs_roundTripMeasurementConfig() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_roundTripMeasurementConfig")
+@_cdecl("bjs_BridgeJSRuntimeTests_roundTripMeasurementConfig")
+public func _bjs_BridgeJSRuntimeTests_roundTripMeasurementConfig() -> Void {
     #if arch(wasm32)
-    let ret = roundTripMeasurementConfig(_: MeasurementConfig.bridgeJSLiftParameter())
+    let ret = roundTripMeasurementConfig(_: BridgeJSRuntimeTests.MeasurementConfig.bridgeJSLiftParameter())
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_updateValidationReport")
-@_cdecl("bjs_updateValidationReport")
-public func _bjs_updateValidationReport(_ newResultIsSome: Int32, _ newResultCaseId: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_updateValidationReport")
+@_cdecl("bjs_BridgeJSRuntimeTests_updateValidationReport")
+public func _bjs_BridgeJSRuntimeTests_updateValidationReport(_ newResultIsSome: Int32, _ newResultCaseId: Int32) -> Void {
     #if arch(wasm32)
-    let _tmp_report = ValidationReport.bridgeJSLiftParameter()
-    let _tmp_newResult = Optional<APIResult>.bridgeJSLiftParameter(newResultIsSome, newResultCaseId)
+    let _tmp_report = BridgeJSRuntimeTests.ValidationReport.bridgeJSLiftParameter()
+    let _tmp_newResult = Optional<BridgeJSRuntimeTests.APIResult>.bridgeJSLiftParameter(newResultIsSome, newResultCaseId)
     let ret = updateValidationReport(_: _tmp_newResult, _: _tmp_report)
     return ret.bridgeJSLowerReturn()
     #else
@@ -9939,56 +9939,56 @@ public func _bjs_updateValidationReport(_ newResultIsSome: Int32, _ newResultCas
     #endif
 }
 
-@_expose(wasm, "bjs_testContainerWithStruct")
-@_cdecl("bjs_testContainerWithStruct")
-public func _bjs_testContainerWithStruct() -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_testContainerWithStruct")
+@_cdecl("bjs_BridgeJSRuntimeTests_testContainerWithStruct")
+public func _bjs_BridgeJSRuntimeTests_testContainerWithStruct() -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = testContainerWithStruct(_: DataPoint.bridgeJSLiftParameter())
+    let ret = testContainerWithStruct(_: BridgeJSRuntimeTests.DataPoint.bridgeJSLiftParameter())
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripJSObjectContainer")
-@_cdecl("bjs_roundTripJSObjectContainer")
-public func _bjs_roundTripJSObjectContainer() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_roundTripJSObjectContainer")
+@_cdecl("bjs_BridgeJSRuntimeTests_roundTripJSObjectContainer")
+public func _bjs_BridgeJSRuntimeTests_roundTripJSObjectContainer() -> Void {
     #if arch(wasm32)
-    let ret = roundTripJSObjectContainer(_: JSObjectContainer.bridgeJSLiftParameter())
+    let ret = roundTripJSObjectContainer(_: BridgeJSRuntimeTests.JSObjectContainer.bridgeJSLiftParameter())
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripFooContainer")
-@_cdecl("bjs_roundTripFooContainer")
-public func _bjs_roundTripFooContainer() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_roundTripFooContainer")
+@_cdecl("bjs_BridgeJSRuntimeTests_roundTripFooContainer")
+public func _bjs_BridgeJSRuntimeTests_roundTripFooContainer() -> Void {
     #if arch(wasm32)
-    let ret = roundTripFooContainer(_: FooContainer.bridgeJSLiftParameter())
+    let ret = roundTripFooContainer(_: BridgeJSRuntimeTests.FooContainer.bridgeJSLiftParameter())
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripArrayMembers")
-@_cdecl("bjs_roundTripArrayMembers")
-public func _bjs_roundTripArrayMembers() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_roundTripArrayMembers")
+@_cdecl("bjs_BridgeJSRuntimeTests_roundTripArrayMembers")
+public func _bjs_BridgeJSRuntimeTests_roundTripArrayMembers() -> Void {
     #if arch(wasm32)
-    let ret = roundTripArrayMembers(_: ArrayMembers.bridgeJSLiftParameter())
+    let ret = roundTripArrayMembers(_: BridgeJSRuntimeTests.ArrayMembers.bridgeJSLiftParameter())
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_arrayMembersSum")
-@_cdecl("bjs_arrayMembersSum")
-public func _bjs_arrayMembersSum() -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_arrayMembersSum")
+@_cdecl("bjs_BridgeJSRuntimeTests_arrayMembersSum")
+public func _bjs_BridgeJSRuntimeTests_arrayMembersSum() -> Int32 {
     #if arch(wasm32)
     let _tmp_values = [Int].bridgeJSStackPop()
-    let _tmp_value = ArrayMembers.bridgeJSLiftParameter()
+    let _tmp_value = BridgeJSRuntimeTests.ArrayMembers.bridgeJSLiftParameter()
     let ret = arrayMembersSum(_: _tmp_value, _: _tmp_values)
     return ret.bridgeJSLowerReturn()
     #else
@@ -9996,12 +9996,12 @@ public func _bjs_arrayMembersSum() -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_arrayMembersFirst")
-@_cdecl("bjs_arrayMembersFirst")
-public func _bjs_arrayMembersFirst() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_arrayMembersFirst")
+@_cdecl("bjs_BridgeJSRuntimeTests_arrayMembersFirst")
+public func _bjs_BridgeJSRuntimeTests_arrayMembersFirst() -> Void {
     #if arch(wasm32)
     let _tmp_values = [String].bridgeJSStackPop()
-    let _tmp_value = ArrayMembers.bridgeJSLiftParameter()
+    let _tmp_value = BridgeJSRuntimeTests.ArrayMembers.bridgeJSLiftParameter()
     let ret = arrayMembersFirst(_: _tmp_value, _: _tmp_values)
     return ret.bridgeJSLowerReturn()
     #else
@@ -10009,2121 +10009,2121 @@ public func _bjs_arrayMembersFirst() -> Void {
     #endif
 }
 
-@_expose(wasm, "bjs_PolygonReference_init")
-@_cdecl("bjs_PolygonReference_init")
-public func _bjs_PolygonReference_init(_ labelBytes: Int32, _ labelLength: Int32) -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_PolygonReference_init")
+@_cdecl("bjs_BridgeJSRuntimeTests_PolygonReference_init")
+public func _bjs_BridgeJSRuntimeTests_PolygonReference_init(_ labelBytes: Int32, _ labelLength: Int32) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = PolygonReference(verticesData: [Double].bridgeJSStackPop(), label: String.bridgeJSLiftParameter(labelBytes, labelLength))
+    let ret = BridgeJSRuntimeTests.PolygonReference(verticesData: [Double].bridgeJSStackPop(), label: String.bridgeJSLiftParameter(labelBytes, labelLength))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PolygonReference_vertexCount")
-@_cdecl("bjs_PolygonReference_vertexCount")
-public func _bjs_PolygonReference_vertexCount(_ _self: UnsafeMutableRawPointer) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_PolygonReference_vertexCount")
+@_cdecl("bjs_BridgeJSRuntimeTests_PolygonReference_vertexCount")
+public func _bjs_BridgeJSRuntimeTests_PolygonReference_vertexCount(_ _self: UnsafeMutableRawPointer) -> Int32 {
     #if arch(wasm32)
-    let ret = PolygonReference.bridgeJSLiftParameter(_self).vertexCount()
+    let ret = BridgeJSRuntimeTests.PolygonReference.bridgeJSLiftParameter(_self).vertexCount()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PolygonReference_summary")
-@_cdecl("bjs_PolygonReference_summary")
-public func _bjs_PolygonReference_summary(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_PolygonReference_summary")
+@_cdecl("bjs_BridgeJSRuntimeTests_PolygonReference_summary")
+public func _bjs_BridgeJSRuntimeTests_PolygonReference_summary(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = PolygonReference.bridgeJSLiftParameter(_self).summary()
+    let ret = BridgeJSRuntimeTests.PolygonReference.bridgeJSLiftParameter(_self).summary()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PolygonReference_snapshot")
-@_cdecl("bjs_PolygonReference_snapshot")
-public func _bjs_PolygonReference_snapshot(_ _self: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_PolygonReference_snapshot")
+@_cdecl("bjs_BridgeJSRuntimeTests_PolygonReference_snapshot")
+public func _bjs_BridgeJSRuntimeTests_PolygonReference_snapshot(_ _self: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = PolygonReference.bridgeJSLiftParameter(_self).snapshot()
+    let ret = BridgeJSRuntimeTests.PolygonReference.bridgeJSLiftParameter(_self).snapshot()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PolygonReference_merge")
-@_cdecl("bjs_PolygonReference_merge")
-public func _bjs_PolygonReference_merge(_ _self: UnsafeMutableRawPointer, _ other: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_PolygonReference_merge")
+@_cdecl("bjs_BridgeJSRuntimeTests_PolygonReference_merge")
+public func _bjs_BridgeJSRuntimeTests_PolygonReference_merge(_ _self: UnsafeMutableRawPointer, _ other: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = PolygonReference.bridgeJSLiftParameter(_self).merge(_: Polygon.bridgeJSLiftParameter(other))
+    let ret = BridgeJSRuntimeTests.PolygonReference.bridgeJSLiftParameter(_self).merge(_: BridgeJSRuntimeTests.Polygon.bridgeJSLiftParameter(other))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PolygonReference_static_origin")
-@_cdecl("bjs_PolygonReference_static_origin")
-public func _bjs_PolygonReference_static_origin(_ labelBytes: Int32, _ labelLength: Int32) -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_PolygonReference_static_origin")
+@_cdecl("bjs_BridgeJSRuntimeTests_PolygonReference_static_origin")
+public func _bjs_BridgeJSRuntimeTests_PolygonReference_static_origin(_ labelBytes: Int32, _ labelLength: Int32) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = PolygonReference.origin(label: String.bridgeJSLiftParameter(labelBytes, labelLength))
+    let ret = BridgeJSRuntimeTests.PolygonReference.origin(label: String.bridgeJSLiftParameter(labelBytes, labelLength))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PolygonReference_deinit")
-@_cdecl("bjs_PolygonReference_deinit")
-public func _bjs_PolygonReference_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_PolygonReference_deinit")
+@_cdecl("bjs_BridgeJSRuntimeTests_PolygonReference_deinit")
+public func _bjs_BridgeJSRuntimeTests_PolygonReference_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    Unmanaged<PolygonReference>.fromOpaque(pointer).release()
+    Unmanaged<BridgeJSRuntimeTests.PolygonReference>.fromOpaque(pointer).release()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension PolygonReference: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
+extension BridgeJSRuntimeTests.PolygonReference: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
     var jsValue: JSValue {
-        return .object(JSObject(id: UInt32(bitPattern: _bjs_PolygonReference_wrap(Unmanaged.passRetained(self).toOpaque()))))
+        return .object(JSObject(id: UInt32(bitPattern: _bjs_BridgeJSRuntimeTests_PolygonReference_wrap(Unmanaged.passRetained(self).toOpaque()))))
     }
     consuming func bridgeJSLowerAsProtocolReturn() -> Int32 {
-        _bjs_PolygonReference_wrap(Unmanaged.passRetained(self).toOpaque())
+        _bjs_BridgeJSRuntimeTests_PolygonReference_wrap(Unmanaged.passRetained(self).toOpaque())
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_PolygonReference_wrap")
-fileprivate func _bjs_PolygonReference_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
+@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_BridgeJSRuntimeTests_PolygonReference_wrap")
+fileprivate func _bjs_BridgeJSRuntimeTests_PolygonReference_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
 #else
-fileprivate func _bjs_PolygonReference_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+fileprivate func _bjs_BridgeJSRuntimeTests_PolygonReference_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_PolygonReference_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
-    return _bjs_PolygonReference_wrap_extern(pointer)
+@inline(never) fileprivate func _bjs_BridgeJSRuntimeTests_PolygonReference_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+    return _bjs_BridgeJSRuntimeTests_PolygonReference_wrap_extern(pointer)
 }
 
-@_expose(wasm, "bjs_TagReference_describe")
-@_cdecl("bjs_TagReference_describe")
-public func _bjs_TagReference_describe(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_TagReference_describe")
+@_cdecl("bjs_BridgeJSRuntimeTests_TagReference_describe")
+public func _bjs_BridgeJSRuntimeTests_TagReference_describe(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = TagReference.bridgeJSLiftParameter(_self).describe()
+    let ret = BridgeJSRuntimeTests.TagReference.bridgeJSLiftParameter(_self).describe()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_TagReference_deinit")
-@_cdecl("bjs_TagReference_deinit")
-public func _bjs_TagReference_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_TagReference_deinit")
+@_cdecl("bjs_BridgeJSRuntimeTests_TagReference_deinit")
+public func _bjs_BridgeJSRuntimeTests_TagReference_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    Unmanaged<TagReference>.fromOpaque(pointer).release()
+    Unmanaged<BridgeJSRuntimeTests.TagReference>.fromOpaque(pointer).release()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension TagReference: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
+extension BridgeJSRuntimeTests.TagReference: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
     var jsValue: JSValue {
-        return .object(JSObject(id: UInt32(bitPattern: _bjs_TagReference_wrap(Unmanaged.passRetained(self).toOpaque()))))
+        return .object(JSObject(id: UInt32(bitPattern: _bjs_BridgeJSRuntimeTests_TagReference_wrap(Unmanaged.passRetained(self).toOpaque()))))
     }
     consuming func bridgeJSLowerAsProtocolReturn() -> Int32 {
-        _bjs_TagReference_wrap(Unmanaged.passRetained(self).toOpaque())
+        _bjs_BridgeJSRuntimeTests_TagReference_wrap(Unmanaged.passRetained(self).toOpaque())
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_TagReference_wrap")
-fileprivate func _bjs_TagReference_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
+@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_BridgeJSRuntimeTests_TagReference_wrap")
+fileprivate func _bjs_BridgeJSRuntimeTests_TagReference_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
 #else
-fileprivate func _bjs_TagReference_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+fileprivate func _bjs_BridgeJSRuntimeTests_TagReference_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_TagReference_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
-    return _bjs_TagReference_wrap_extern(pointer)
+@inline(never) fileprivate func _bjs_BridgeJSRuntimeTests_TagReference_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+    return _bjs_BridgeJSRuntimeTests_TagReference_wrap_extern(pointer)
 }
 
-@_expose(wasm, "bjs_TagHolderReference_init")
-@_cdecl("bjs_TagHolderReference_init")
-public func _bjs_TagHolderReference_init(_ tag: UnsafeMutableRawPointer, _ version: Int32) -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_TagHolderReference_init")
+@_cdecl("bjs_BridgeJSRuntimeTests_TagHolderReference_init")
+public func _bjs_BridgeJSRuntimeTests_TagHolderReference_init(_ tag: UnsafeMutableRawPointer, _ version: Int32) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = TagHolderReference(tag: Tag.bridgeJSLiftParameter(tag), version: Int.bridgeJSLiftParameter(version))
+    let ret = BridgeJSRuntimeTests.TagHolderReference(tag: BridgeJSRuntimeTests.Tag.bridgeJSLiftParameter(tag), version: Int.bridgeJSLiftParameter(version))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_TagHolderReference_describe")
-@_cdecl("bjs_TagHolderReference_describe")
-public func _bjs_TagHolderReference_describe(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_TagHolderReference_describe")
+@_cdecl("bjs_BridgeJSRuntimeTests_TagHolderReference_describe")
+public func _bjs_BridgeJSRuntimeTests_TagHolderReference_describe(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = TagHolderReference.bridgeJSLiftParameter(_self).describe()
+    let ret = BridgeJSRuntimeTests.TagHolderReference.bridgeJSLiftParameter(_self).describe()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_TagHolderReference_tag_get")
-@_cdecl("bjs_TagHolderReference_tag_get")
-public func _bjs_TagHolderReference_tag_get(_ _self: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_TagHolderReference_tag_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_TagHolderReference_tag_get")
+public func _bjs_BridgeJSRuntimeTests_TagHolderReference_tag_get(_ _self: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = TagHolderReference.bridgeJSLiftParameter(_self).tag
+    let ret = BridgeJSRuntimeTests.TagHolderReference.bridgeJSLiftParameter(_self).tag
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_TagHolderReference_tag_set")
-@_cdecl("bjs_TagHolderReference_tag_set")
-public func _bjs_TagHolderReference_tag_set(_ _self: UnsafeMutableRawPointer, _ value: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_TagHolderReference_tag_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_TagHolderReference_tag_set")
+public func _bjs_BridgeJSRuntimeTests_TagHolderReference_tag_set(_ _self: UnsafeMutableRawPointer, _ value: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    TagHolderReference.bridgeJSLiftParameter(_self).tag = Tag.bridgeJSLiftParameter(value)
+    BridgeJSRuntimeTests.TagHolderReference.bridgeJSLiftParameter(_self).tag = BridgeJSRuntimeTests.Tag.bridgeJSLiftParameter(value)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_TagHolderReference_version_get")
-@_cdecl("bjs_TagHolderReference_version_get")
-public func _bjs_TagHolderReference_version_get(_ _self: UnsafeMutableRawPointer) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_TagHolderReference_version_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_TagHolderReference_version_get")
+public func _bjs_BridgeJSRuntimeTests_TagHolderReference_version_get(_ _self: UnsafeMutableRawPointer) -> Int32 {
     #if arch(wasm32)
-    let ret = TagHolderReference.bridgeJSLiftParameter(_self).version
+    let ret = BridgeJSRuntimeTests.TagHolderReference.bridgeJSLiftParameter(_self).version
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_TagHolderReference_version_set")
-@_cdecl("bjs_TagHolderReference_version_set")
-public func _bjs_TagHolderReference_version_set(_ _self: UnsafeMutableRawPointer, _ value: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_TagHolderReference_version_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_TagHolderReference_version_set")
+public func _bjs_BridgeJSRuntimeTests_TagHolderReference_version_set(_ _self: UnsafeMutableRawPointer, _ value: Int32) -> Void {
     #if arch(wasm32)
-    TagHolderReference.bridgeJSLiftParameter(_self).version = Int.bridgeJSLiftParameter(value)
+    BridgeJSRuntimeTests.TagHolderReference.bridgeJSLiftParameter(_self).version = Int.bridgeJSLiftParameter(value)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_TagHolderReference_deinit")
-@_cdecl("bjs_TagHolderReference_deinit")
-public func _bjs_TagHolderReference_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_TagHolderReference_deinit")
+@_cdecl("bjs_BridgeJSRuntimeTests_TagHolderReference_deinit")
+public func _bjs_BridgeJSRuntimeTests_TagHolderReference_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    Unmanaged<TagHolderReference>.fromOpaque(pointer).release()
+    Unmanaged<BridgeJSRuntimeTests.TagHolderReference>.fromOpaque(pointer).release()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension TagHolderReference: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
+extension BridgeJSRuntimeTests.TagHolderReference: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
     var jsValue: JSValue {
-        return .object(JSObject(id: UInt32(bitPattern: _bjs_TagHolderReference_wrap(Unmanaged.passRetained(self).toOpaque()))))
+        return .object(JSObject(id: UInt32(bitPattern: _bjs_BridgeJSRuntimeTests_TagHolderReference_wrap(Unmanaged.passRetained(self).toOpaque()))))
     }
     consuming func bridgeJSLowerAsProtocolReturn() -> Int32 {
-        _bjs_TagHolderReference_wrap(Unmanaged.passRetained(self).toOpaque())
+        _bjs_BridgeJSRuntimeTests_TagHolderReference_wrap(Unmanaged.passRetained(self).toOpaque())
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_TagHolderReference_wrap")
-fileprivate func _bjs_TagHolderReference_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
+@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_BridgeJSRuntimeTests_TagHolderReference_wrap")
+fileprivate func _bjs_BridgeJSRuntimeTests_TagHolderReference_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
 #else
-fileprivate func _bjs_TagHolderReference_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+fileprivate func _bjs_BridgeJSRuntimeTests_TagHolderReference_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_TagHolderReference_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
-    return _bjs_TagHolderReference_wrap_extern(pointer)
+@inline(never) fileprivate func _bjs_BridgeJSRuntimeTests_TagHolderReference_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+    return _bjs_BridgeJSRuntimeTests_TagHolderReference_wrap_extern(pointer)
 }
 
-@_expose(wasm, "bjs_PriorityReference_describe")
-@_cdecl("bjs_PriorityReference_describe")
-public func _bjs_PriorityReference_describe(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_PriorityReference_describe")
+@_cdecl("bjs_BridgeJSRuntimeTests_PriorityReference_describe")
+public func _bjs_BridgeJSRuntimeTests_PriorityReference_describe(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = PriorityReference.bridgeJSLiftParameter(_self).describe()
+    let ret = BridgeJSRuntimeTests.PriorityReference.bridgeJSLiftParameter(_self).describe()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PriorityReference_weight")
-@_cdecl("bjs_PriorityReference_weight")
-public func _bjs_PriorityReference_weight(_ _self: UnsafeMutableRawPointer) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_PriorityReference_weight")
+@_cdecl("bjs_BridgeJSRuntimeTests_PriorityReference_weight")
+public func _bjs_BridgeJSRuntimeTests_PriorityReference_weight(_ _self: UnsafeMutableRawPointer) -> Int32 {
     #if arch(wasm32)
-    let ret = PriorityReference.bridgeJSLiftParameter(_self).weight()
+    let ret = BridgeJSRuntimeTests.PriorityReference.bridgeJSLiftParameter(_self).weight()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PriorityReference_static_low")
-@_cdecl("bjs_PriorityReference_static_low")
-public func _bjs_PriorityReference_static_low() -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_PriorityReference_static_low")
+@_cdecl("bjs_BridgeJSRuntimeTests_PriorityReference_static_low")
+public func _bjs_BridgeJSRuntimeTests_PriorityReference_static_low() -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = PriorityReference.low()
+    let ret = BridgeJSRuntimeTests.PriorityReference.low()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PriorityReference_static_medium")
-@_cdecl("bjs_PriorityReference_static_medium")
-public func _bjs_PriorityReference_static_medium() -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_PriorityReference_static_medium")
+@_cdecl("bjs_BridgeJSRuntimeTests_PriorityReference_static_medium")
+public func _bjs_BridgeJSRuntimeTests_PriorityReference_static_medium() -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = PriorityReference.medium()
+    let ret = BridgeJSRuntimeTests.PriorityReference.medium()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PriorityReference_static_high")
-@_cdecl("bjs_PriorityReference_static_high")
-public func _bjs_PriorityReference_static_high() -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_PriorityReference_static_high")
+@_cdecl("bjs_BridgeJSRuntimeTests_PriorityReference_static_high")
+public func _bjs_BridgeJSRuntimeTests_PriorityReference_static_high() -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = PriorityReference.high()
+    let ret = BridgeJSRuntimeTests.PriorityReference.high()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PriorityReference_deinit")
-@_cdecl("bjs_PriorityReference_deinit")
-public func _bjs_PriorityReference_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_PriorityReference_deinit")
+@_cdecl("bjs_BridgeJSRuntimeTests_PriorityReference_deinit")
+public func _bjs_BridgeJSRuntimeTests_PriorityReference_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    Unmanaged<PriorityReference>.fromOpaque(pointer).release()
+    Unmanaged<BridgeJSRuntimeTests.PriorityReference>.fromOpaque(pointer).release()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension PriorityReference: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
+extension BridgeJSRuntimeTests.PriorityReference: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
     var jsValue: JSValue {
-        return .object(JSObject(id: UInt32(bitPattern: _bjs_PriorityReference_wrap(Unmanaged.passRetained(self).toOpaque()))))
+        return .object(JSObject(id: UInt32(bitPattern: _bjs_BridgeJSRuntimeTests_PriorityReference_wrap(Unmanaged.passRetained(self).toOpaque()))))
     }
     consuming func bridgeJSLowerAsProtocolReturn() -> Int32 {
-        _bjs_PriorityReference_wrap(Unmanaged.passRetained(self).toOpaque())
+        _bjs_BridgeJSRuntimeTests_PriorityReference_wrap(Unmanaged.passRetained(self).toOpaque())
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_PriorityReference_wrap")
-fileprivate func _bjs_PriorityReference_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
+@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_BridgeJSRuntimeTests_PriorityReference_wrap")
+fileprivate func _bjs_BridgeJSRuntimeTests_PriorityReference_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
 #else
-fileprivate func _bjs_PriorityReference_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+fileprivate func _bjs_BridgeJSRuntimeTests_PriorityReference_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_PriorityReference_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
-    return _bjs_PriorityReference_wrap_extern(pointer)
+@inline(never) fileprivate func _bjs_BridgeJSRuntimeTests_PriorityReference_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+    return _bjs_BridgeJSRuntimeTests_PriorityReference_wrap_extern(pointer)
 }
 
-@_expose(wasm, "bjs_ClosureSupportExports_static_makeIntToInt")
-@_cdecl("bjs_ClosureSupportExports_static_makeIntToInt")
-public func _bjs_ClosureSupportExports_static_makeIntToInt(_ base: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ClosureSupportExports_static_makeIntToInt")
+@_cdecl("bjs_BridgeJSRuntimeTests_ClosureSupportExports_static_makeIntToInt")
+public func _bjs_BridgeJSRuntimeTests_ClosureSupportExports_static_makeIntToInt(_ base: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = ClosureSupportExports.makeIntToInt(_: Int.bridgeJSLiftParameter(base))
+    let ret = BridgeJSRuntimeTests.ClosureSupportExports.makeIntToInt(_: Int.bridgeJSLiftParameter(base))
     return JSTypedClosure(ret).bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_ClosureSupportExports_static_makeDoubleToDouble")
-@_cdecl("bjs_ClosureSupportExports_static_makeDoubleToDouble")
-public func _bjs_ClosureSupportExports_static_makeDoubleToDouble(_ base: Float64) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ClosureSupportExports_static_makeDoubleToDouble")
+@_cdecl("bjs_BridgeJSRuntimeTests_ClosureSupportExports_static_makeDoubleToDouble")
+public func _bjs_BridgeJSRuntimeTests_ClosureSupportExports_static_makeDoubleToDouble(_ base: Float64) -> Int32 {
     #if arch(wasm32)
-    let ret = ClosureSupportExports.makeDoubleToDouble(_: Double.bridgeJSLiftParameter(base))
+    let ret = BridgeJSRuntimeTests.ClosureSupportExports.makeDoubleToDouble(_: Double.bridgeJSLiftParameter(base))
     return JSTypedClosure(ret).bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_ClosureSupportExports_static_makeStringToString")
-@_cdecl("bjs_ClosureSupportExports_static_makeStringToString")
-public func _bjs_ClosureSupportExports_static_makeStringToString(_ prefixBytes: Int32, _ prefixLength: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ClosureSupportExports_static_makeStringToString")
+@_cdecl("bjs_BridgeJSRuntimeTests_ClosureSupportExports_static_makeStringToString")
+public func _bjs_BridgeJSRuntimeTests_ClosureSupportExports_static_makeStringToString(_ prefixBytes: Int32, _ prefixLength: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = ClosureSupportExports.makeStringToString(_: String.bridgeJSLiftParameter(prefixBytes, prefixLength))
+    let ret = BridgeJSRuntimeTests.ClosureSupportExports.makeStringToString(_: String.bridgeJSLiftParameter(prefixBytes, prefixLength))
     return JSTypedClosure(ret).bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_ClosureSupportExports_static_makeJSIntToInt")
-@_cdecl("bjs_ClosureSupportExports_static_makeJSIntToInt")
-public func _bjs_ClosureSupportExports_static_makeJSIntToInt(_ base: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ClosureSupportExports_static_makeJSIntToInt")
+@_cdecl("bjs_BridgeJSRuntimeTests_ClosureSupportExports_static_makeJSIntToInt")
+public func _bjs_BridgeJSRuntimeTests_ClosureSupportExports_static_makeJSIntToInt(_ base: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = ClosureSupportExports.makeJSIntToInt(_: Int.bridgeJSLiftParameter(base))
+    let ret = BridgeJSRuntimeTests.ClosureSupportExports.makeJSIntToInt(_: Int.bridgeJSLiftParameter(base))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_ClosureSupportExports_static_makeJSDoubleToDouble")
-@_cdecl("bjs_ClosureSupportExports_static_makeJSDoubleToDouble")
-public func _bjs_ClosureSupportExports_static_makeJSDoubleToDouble(_ base: Float64) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ClosureSupportExports_static_makeJSDoubleToDouble")
+@_cdecl("bjs_BridgeJSRuntimeTests_ClosureSupportExports_static_makeJSDoubleToDouble")
+public func _bjs_BridgeJSRuntimeTests_ClosureSupportExports_static_makeJSDoubleToDouble(_ base: Float64) -> Int32 {
     #if arch(wasm32)
-    let ret = ClosureSupportExports.makeJSDoubleToDouble(_: Double.bridgeJSLiftParameter(base))
+    let ret = BridgeJSRuntimeTests.ClosureSupportExports.makeJSDoubleToDouble(_: Double.bridgeJSLiftParameter(base))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_ClosureSupportExports_static_makeJSStringToString")
-@_cdecl("bjs_ClosureSupportExports_static_makeJSStringToString")
-public func _bjs_ClosureSupportExports_static_makeJSStringToString(_ prefixBytes: Int32, _ prefixLength: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ClosureSupportExports_static_makeJSStringToString")
+@_cdecl("bjs_BridgeJSRuntimeTests_ClosureSupportExports_static_makeJSStringToString")
+public func _bjs_BridgeJSRuntimeTests_ClosureSupportExports_static_makeJSStringToString(_ prefixBytes: Int32, _ prefixLength: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = ClosureSupportExports.makeJSStringToString(_: String.bridgeJSLiftParameter(prefixBytes, prefixLength))
+    let ret = BridgeJSRuntimeTests.ClosureSupportExports.makeJSStringToString(_: String.bridgeJSLiftParameter(prefixBytes, prefixLength))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_ClosureSupportExports_deinit")
-@_cdecl("bjs_ClosureSupportExports_deinit")
-public func _bjs_ClosureSupportExports_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ClosureSupportExports_deinit")
+@_cdecl("bjs_BridgeJSRuntimeTests_ClosureSupportExports_deinit")
+public func _bjs_BridgeJSRuntimeTests_ClosureSupportExports_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    Unmanaged<ClosureSupportExports>.fromOpaque(pointer).release()
+    Unmanaged<BridgeJSRuntimeTests.ClosureSupportExports>.fromOpaque(pointer).release()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension ClosureSupportExports: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
+extension BridgeJSRuntimeTests.ClosureSupportExports: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
     var jsValue: JSValue {
-        return .object(JSObject(id: UInt32(bitPattern: _bjs_ClosureSupportExports_wrap(Unmanaged.passRetained(self).toOpaque()))))
+        return .object(JSObject(id: UInt32(bitPattern: _bjs_BridgeJSRuntimeTests_ClosureSupportExports_wrap(Unmanaged.passRetained(self).toOpaque()))))
     }
     consuming func bridgeJSLowerAsProtocolReturn() -> Int32 {
-        _bjs_ClosureSupportExports_wrap(Unmanaged.passRetained(self).toOpaque())
+        _bjs_BridgeJSRuntimeTests_ClosureSupportExports_wrap(Unmanaged.passRetained(self).toOpaque())
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_ClosureSupportExports_wrap")
-fileprivate func _bjs_ClosureSupportExports_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
+@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_BridgeJSRuntimeTests_ClosureSupportExports_wrap")
+fileprivate func _bjs_BridgeJSRuntimeTests_ClosureSupportExports_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
 #else
-fileprivate func _bjs_ClosureSupportExports_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+fileprivate func _bjs_BridgeJSRuntimeTests_ClosureSupportExports_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_ClosureSupportExports_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
-    return _bjs_ClosureSupportExports_wrap_extern(pointer)
+@inline(never) fileprivate func _bjs_BridgeJSRuntimeTests_ClosureSupportExports_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+    return _bjs_BridgeJSRuntimeTests_ClosureSupportExports_wrap_extern(pointer)
 }
 
-@_expose(wasm, "bjs_DefaultArgumentConstructorDefaults_init")
-@_cdecl("bjs_DefaultArgumentConstructorDefaults_init")
-public func _bjs_DefaultArgumentConstructorDefaults_init(_ nameBytes: Int32, _ nameLength: Int32, _ count: Int32, _ enabled: Int32, _ status: Int32, _ tagIsSome: Int32, _ tagBytes: Int32, _ tagLength: Int32) -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DefaultArgumentConstructorDefaults_init")
+@_cdecl("bjs_BridgeJSRuntimeTests_DefaultArgumentConstructorDefaults_init")
+public func _bjs_BridgeJSRuntimeTests_DefaultArgumentConstructorDefaults_init(_ nameBytes: Int32, _ nameLength: Int32, _ count: Int32, _ enabled: Int32, _ status: Int32, _ tagIsSome: Int32, _ tagBytes: Int32, _ tagLength: Int32) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = DefaultArgumentConstructorDefaults(name: String.bridgeJSLiftParameter(nameBytes, nameLength), count: Int.bridgeJSLiftParameter(count), enabled: Bool.bridgeJSLiftParameter(enabled), status: Status.bridgeJSLiftParameter(status), tag: Optional<String>.bridgeJSLiftParameter(tagIsSome, tagBytes, tagLength))
+    let ret = BridgeJSRuntimeTests.DefaultArgumentConstructorDefaults(name: String.bridgeJSLiftParameter(nameBytes, nameLength), count: Int.bridgeJSLiftParameter(count), enabled: Bool.bridgeJSLiftParameter(enabled), status: BridgeJSRuntimeTests.Status.bridgeJSLiftParameter(status), tag: Optional<String>.bridgeJSLiftParameter(tagIsSome, tagBytes, tagLength))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DefaultArgumentConstructorDefaults_describe")
-@_cdecl("bjs_DefaultArgumentConstructorDefaults_describe")
-public func _bjs_DefaultArgumentConstructorDefaults_describe(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DefaultArgumentConstructorDefaults_describe")
+@_cdecl("bjs_BridgeJSRuntimeTests_DefaultArgumentConstructorDefaults_describe")
+public func _bjs_BridgeJSRuntimeTests_DefaultArgumentConstructorDefaults_describe(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = DefaultArgumentConstructorDefaults.bridgeJSLiftParameter(_self).describe()
+    let ret = BridgeJSRuntimeTests.DefaultArgumentConstructorDefaults.bridgeJSLiftParameter(_self).describe()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DefaultArgumentConstructorDefaults_name_get")
-@_cdecl("bjs_DefaultArgumentConstructorDefaults_name_get")
-public func _bjs_DefaultArgumentConstructorDefaults_name_get(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DefaultArgumentConstructorDefaults_name_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_DefaultArgumentConstructorDefaults_name_get")
+public func _bjs_BridgeJSRuntimeTests_DefaultArgumentConstructorDefaults_name_get(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = DefaultArgumentConstructorDefaults.bridgeJSLiftParameter(_self).name
+    let ret = BridgeJSRuntimeTests.DefaultArgumentConstructorDefaults.bridgeJSLiftParameter(_self).name
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DefaultArgumentConstructorDefaults_name_set")
-@_cdecl("bjs_DefaultArgumentConstructorDefaults_name_set")
-public func _bjs_DefaultArgumentConstructorDefaults_name_set(_ _self: UnsafeMutableRawPointer, _ valueBytes: Int32, _ valueLength: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DefaultArgumentConstructorDefaults_name_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_DefaultArgumentConstructorDefaults_name_set")
+public func _bjs_BridgeJSRuntimeTests_DefaultArgumentConstructorDefaults_name_set(_ _self: UnsafeMutableRawPointer, _ valueBytes: Int32, _ valueLength: Int32) -> Void {
     #if arch(wasm32)
-    DefaultArgumentConstructorDefaults.bridgeJSLiftParameter(_self).name = String.bridgeJSLiftParameter(valueBytes, valueLength)
+    BridgeJSRuntimeTests.DefaultArgumentConstructorDefaults.bridgeJSLiftParameter(_self).name = String.bridgeJSLiftParameter(valueBytes, valueLength)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DefaultArgumentConstructorDefaults_count_get")
-@_cdecl("bjs_DefaultArgumentConstructorDefaults_count_get")
-public func _bjs_DefaultArgumentConstructorDefaults_count_get(_ _self: UnsafeMutableRawPointer) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DefaultArgumentConstructorDefaults_count_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_DefaultArgumentConstructorDefaults_count_get")
+public func _bjs_BridgeJSRuntimeTests_DefaultArgumentConstructorDefaults_count_get(_ _self: UnsafeMutableRawPointer) -> Int32 {
     #if arch(wasm32)
-    let ret = DefaultArgumentConstructorDefaults.bridgeJSLiftParameter(_self).count
+    let ret = BridgeJSRuntimeTests.DefaultArgumentConstructorDefaults.bridgeJSLiftParameter(_self).count
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DefaultArgumentConstructorDefaults_count_set")
-@_cdecl("bjs_DefaultArgumentConstructorDefaults_count_set")
-public func _bjs_DefaultArgumentConstructorDefaults_count_set(_ _self: UnsafeMutableRawPointer, _ value: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DefaultArgumentConstructorDefaults_count_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_DefaultArgumentConstructorDefaults_count_set")
+public func _bjs_BridgeJSRuntimeTests_DefaultArgumentConstructorDefaults_count_set(_ _self: UnsafeMutableRawPointer, _ value: Int32) -> Void {
     #if arch(wasm32)
-    DefaultArgumentConstructorDefaults.bridgeJSLiftParameter(_self).count = Int.bridgeJSLiftParameter(value)
+    BridgeJSRuntimeTests.DefaultArgumentConstructorDefaults.bridgeJSLiftParameter(_self).count = Int.bridgeJSLiftParameter(value)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DefaultArgumentConstructorDefaults_enabled_get")
-@_cdecl("bjs_DefaultArgumentConstructorDefaults_enabled_get")
-public func _bjs_DefaultArgumentConstructorDefaults_enabled_get(_ _self: UnsafeMutableRawPointer) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DefaultArgumentConstructorDefaults_enabled_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_DefaultArgumentConstructorDefaults_enabled_get")
+public func _bjs_BridgeJSRuntimeTests_DefaultArgumentConstructorDefaults_enabled_get(_ _self: UnsafeMutableRawPointer) -> Int32 {
     #if arch(wasm32)
-    let ret = DefaultArgumentConstructorDefaults.bridgeJSLiftParameter(_self).enabled
+    let ret = BridgeJSRuntimeTests.DefaultArgumentConstructorDefaults.bridgeJSLiftParameter(_self).enabled
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DefaultArgumentConstructorDefaults_enabled_set")
-@_cdecl("bjs_DefaultArgumentConstructorDefaults_enabled_set")
-public func _bjs_DefaultArgumentConstructorDefaults_enabled_set(_ _self: UnsafeMutableRawPointer, _ value: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DefaultArgumentConstructorDefaults_enabled_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_DefaultArgumentConstructorDefaults_enabled_set")
+public func _bjs_BridgeJSRuntimeTests_DefaultArgumentConstructorDefaults_enabled_set(_ _self: UnsafeMutableRawPointer, _ value: Int32) -> Void {
     #if arch(wasm32)
-    DefaultArgumentConstructorDefaults.bridgeJSLiftParameter(_self).enabled = Bool.bridgeJSLiftParameter(value)
+    BridgeJSRuntimeTests.DefaultArgumentConstructorDefaults.bridgeJSLiftParameter(_self).enabled = Bool.bridgeJSLiftParameter(value)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DefaultArgumentConstructorDefaults_status_get")
-@_cdecl("bjs_DefaultArgumentConstructorDefaults_status_get")
-public func _bjs_DefaultArgumentConstructorDefaults_status_get(_ _self: UnsafeMutableRawPointer) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DefaultArgumentConstructorDefaults_status_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_DefaultArgumentConstructorDefaults_status_get")
+public func _bjs_BridgeJSRuntimeTests_DefaultArgumentConstructorDefaults_status_get(_ _self: UnsafeMutableRawPointer) -> Int32 {
     #if arch(wasm32)
-    let ret = DefaultArgumentConstructorDefaults.bridgeJSLiftParameter(_self).status
+    let ret = BridgeJSRuntimeTests.DefaultArgumentConstructorDefaults.bridgeJSLiftParameter(_self).status
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DefaultArgumentConstructorDefaults_status_set")
-@_cdecl("bjs_DefaultArgumentConstructorDefaults_status_set")
-public func _bjs_DefaultArgumentConstructorDefaults_status_set(_ _self: UnsafeMutableRawPointer, _ value: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DefaultArgumentConstructorDefaults_status_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_DefaultArgumentConstructorDefaults_status_set")
+public func _bjs_BridgeJSRuntimeTests_DefaultArgumentConstructorDefaults_status_set(_ _self: UnsafeMutableRawPointer, _ value: Int32) -> Void {
     #if arch(wasm32)
-    DefaultArgumentConstructorDefaults.bridgeJSLiftParameter(_self).status = Status.bridgeJSLiftParameter(value)
+    BridgeJSRuntimeTests.DefaultArgumentConstructorDefaults.bridgeJSLiftParameter(_self).status = BridgeJSRuntimeTests.Status.bridgeJSLiftParameter(value)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DefaultArgumentConstructorDefaults_tag_get")
-@_cdecl("bjs_DefaultArgumentConstructorDefaults_tag_get")
-public func _bjs_DefaultArgumentConstructorDefaults_tag_get(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DefaultArgumentConstructorDefaults_tag_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_DefaultArgumentConstructorDefaults_tag_get")
+public func _bjs_BridgeJSRuntimeTests_DefaultArgumentConstructorDefaults_tag_get(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = DefaultArgumentConstructorDefaults.bridgeJSLiftParameter(_self).tag
+    let ret = BridgeJSRuntimeTests.DefaultArgumentConstructorDefaults.bridgeJSLiftParameter(_self).tag
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DefaultArgumentConstructorDefaults_tag_set")
-@_cdecl("bjs_DefaultArgumentConstructorDefaults_tag_set")
-public func _bjs_DefaultArgumentConstructorDefaults_tag_set(_ _self: UnsafeMutableRawPointer, _ valueIsSome: Int32, _ valueBytes: Int32, _ valueLength: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DefaultArgumentConstructorDefaults_tag_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_DefaultArgumentConstructorDefaults_tag_set")
+public func _bjs_BridgeJSRuntimeTests_DefaultArgumentConstructorDefaults_tag_set(_ _self: UnsafeMutableRawPointer, _ valueIsSome: Int32, _ valueBytes: Int32, _ valueLength: Int32) -> Void {
     #if arch(wasm32)
-    DefaultArgumentConstructorDefaults.bridgeJSLiftParameter(_self).tag = Optional<String>.bridgeJSLiftParameter(valueIsSome, valueBytes, valueLength)
+    BridgeJSRuntimeTests.DefaultArgumentConstructorDefaults.bridgeJSLiftParameter(_self).tag = Optional<String>.bridgeJSLiftParameter(valueIsSome, valueBytes, valueLength)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DefaultArgumentConstructorDefaults_deinit")
-@_cdecl("bjs_DefaultArgumentConstructorDefaults_deinit")
-public func _bjs_DefaultArgumentConstructorDefaults_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DefaultArgumentConstructorDefaults_deinit")
+@_cdecl("bjs_BridgeJSRuntimeTests_DefaultArgumentConstructorDefaults_deinit")
+public func _bjs_BridgeJSRuntimeTests_DefaultArgumentConstructorDefaults_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    Unmanaged<DefaultArgumentConstructorDefaults>.fromOpaque(pointer).release()
+    Unmanaged<BridgeJSRuntimeTests.DefaultArgumentConstructorDefaults>.fromOpaque(pointer).release()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension DefaultArgumentConstructorDefaults: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
+extension BridgeJSRuntimeTests.DefaultArgumentConstructorDefaults: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
     var jsValue: JSValue {
-        return .object(JSObject(id: UInt32(bitPattern: _bjs_DefaultArgumentConstructorDefaults_wrap(Unmanaged.passRetained(self).toOpaque()))))
+        return .object(JSObject(id: UInt32(bitPattern: _bjs_BridgeJSRuntimeTests_DefaultArgumentConstructorDefaults_wrap(Unmanaged.passRetained(self).toOpaque()))))
     }
     consuming func bridgeJSLowerAsProtocolReturn() -> Int32 {
-        _bjs_DefaultArgumentConstructorDefaults_wrap(Unmanaged.passRetained(self).toOpaque())
+        _bjs_BridgeJSRuntimeTests_DefaultArgumentConstructorDefaults_wrap(Unmanaged.passRetained(self).toOpaque())
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_DefaultArgumentConstructorDefaults_wrap")
-fileprivate func _bjs_DefaultArgumentConstructorDefaults_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
+@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_BridgeJSRuntimeTests_DefaultArgumentConstructorDefaults_wrap")
+fileprivate func _bjs_BridgeJSRuntimeTests_DefaultArgumentConstructorDefaults_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
 #else
-fileprivate func _bjs_DefaultArgumentConstructorDefaults_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+fileprivate func _bjs_BridgeJSRuntimeTests_DefaultArgumentConstructorDefaults_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_DefaultArgumentConstructorDefaults_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
-    return _bjs_DefaultArgumentConstructorDefaults_wrap_extern(pointer)
+@inline(never) fileprivate func _bjs_BridgeJSRuntimeTests_DefaultArgumentConstructorDefaults_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+    return _bjs_BridgeJSRuntimeTests_DefaultArgumentConstructorDefaults_wrap_extern(pointer)
 }
 
-@_expose(wasm, "bjs_Greeter_init")
-@_cdecl("bjs_Greeter_init")
-public func _bjs_Greeter_init(_ nameBytes: Int32, _ nameLength: Int32) -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_Greeter_init")
+@_cdecl("bjs_BridgeJSRuntimeTests_Greeter_init")
+public func _bjs_BridgeJSRuntimeTests_Greeter_init(_ nameBytes: Int32, _ nameLength: Int32) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = Greeter(name: String.bridgeJSLiftParameter(nameBytes, nameLength))
+    let ret = BridgeJSRuntimeTests.Greeter(name: String.bridgeJSLiftParameter(nameBytes, nameLength))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Greeter_greet")
-@_cdecl("bjs_Greeter_greet")
-public func _bjs_Greeter_greet(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_Greeter_greet")
+@_cdecl("bjs_BridgeJSRuntimeTests_Greeter_greet")
+public func _bjs_BridgeJSRuntimeTests_Greeter_greet(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = Greeter.bridgeJSLiftParameter(_self).greet()
+    let ret = BridgeJSRuntimeTests.Greeter.bridgeJSLiftParameter(_self).greet()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Greeter_changeName")
-@_cdecl("bjs_Greeter_changeName")
-public func _bjs_Greeter_changeName(_ _self: UnsafeMutableRawPointer, _ nameBytes: Int32, _ nameLength: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_Greeter_changeName")
+@_cdecl("bjs_BridgeJSRuntimeTests_Greeter_changeName")
+public func _bjs_BridgeJSRuntimeTests_Greeter_changeName(_ _self: UnsafeMutableRawPointer, _ nameBytes: Int32, _ nameLength: Int32) -> Void {
     #if arch(wasm32)
-    Greeter.bridgeJSLiftParameter(_self).changeName(name: String.bridgeJSLiftParameter(nameBytes, nameLength))
+    BridgeJSRuntimeTests.Greeter.bridgeJSLiftParameter(_self).changeName(name: String.bridgeJSLiftParameter(nameBytes, nameLength))
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Greeter_greetWith")
-@_cdecl("bjs_Greeter_greetWith")
-public func _bjs_Greeter_greetWith(_ _self: UnsafeMutableRawPointer, _ greeter: UnsafeMutableRawPointer, _ customGreeting: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_Greeter_greetWith")
+@_cdecl("bjs_BridgeJSRuntimeTests_Greeter_greetWith")
+public func _bjs_BridgeJSRuntimeTests_Greeter_greetWith(_ _self: UnsafeMutableRawPointer, _ greeter: UnsafeMutableRawPointer, _ customGreeting: Int32) -> Void {
     #if arch(wasm32)
-    let ret = Greeter.bridgeJSLiftParameter(_self).greetWith(greeter: Greeter.bridgeJSLiftParameter(greeter), customGreeting: _BJS_Closure_20BridgeJSRuntimeTests7GreeterC_SS.bridgeJSLift(customGreeting))
+    let ret = BridgeJSRuntimeTests.Greeter.bridgeJSLiftParameter(_self).greetWith(greeter: BridgeJSRuntimeTests.Greeter.bridgeJSLiftParameter(greeter), customGreeting: _BJS_Closure_20BridgeJSRuntimeTests28BridgeJSRuntimeTests_GreeterC_SS.bridgeJSLift(customGreeting))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Greeter_makeFormatter")
-@_cdecl("bjs_Greeter_makeFormatter")
-public func _bjs_Greeter_makeFormatter(_ _self: UnsafeMutableRawPointer, _ suffixBytes: Int32, _ suffixLength: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_Greeter_makeFormatter")
+@_cdecl("bjs_BridgeJSRuntimeTests_Greeter_makeFormatter")
+public func _bjs_BridgeJSRuntimeTests_Greeter_makeFormatter(_ _self: UnsafeMutableRawPointer, _ suffixBytes: Int32, _ suffixLength: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = Greeter.bridgeJSLiftParameter(_self).makeFormatter(suffix: String.bridgeJSLiftParameter(suffixBytes, suffixLength))
+    let ret = BridgeJSRuntimeTests.Greeter.bridgeJSLiftParameter(_self).makeFormatter(suffix: String.bridgeJSLiftParameter(suffixBytes, suffixLength))
     return JSTypedClosure(ret).bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Greeter_static_makeCreator")
-@_cdecl("bjs_Greeter_static_makeCreator")
-public func _bjs_Greeter_static_makeCreator(_ defaultNameBytes: Int32, _ defaultNameLength: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_Greeter_static_makeCreator")
+@_cdecl("bjs_BridgeJSRuntimeTests_Greeter_static_makeCreator")
+public func _bjs_BridgeJSRuntimeTests_Greeter_static_makeCreator(_ defaultNameBytes: Int32, _ defaultNameLength: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = Greeter.makeCreator(defaultName: String.bridgeJSLiftParameter(defaultNameBytes, defaultNameLength))
+    let ret = BridgeJSRuntimeTests.Greeter.makeCreator(defaultName: String.bridgeJSLiftParameter(defaultNameBytes, defaultNameLength))
     return JSTypedClosure(ret).bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Greeter_makeCustomGreeter")
-@_cdecl("bjs_Greeter_makeCustomGreeter")
-public func _bjs_Greeter_makeCustomGreeter(_ _self: UnsafeMutableRawPointer) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_Greeter_makeCustomGreeter")
+@_cdecl("bjs_BridgeJSRuntimeTests_Greeter_makeCustomGreeter")
+public func _bjs_BridgeJSRuntimeTests_Greeter_makeCustomGreeter(_ _self: UnsafeMutableRawPointer) -> Int32 {
     #if arch(wasm32)
-    let ret = Greeter.bridgeJSLiftParameter(_self).makeCustomGreeter()
+    let ret = BridgeJSRuntimeTests.Greeter.bridgeJSLiftParameter(_self).makeCustomGreeter()
     return JSTypedClosure(ret).bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Greeter_greetEnthusiastically")
-@_cdecl("bjs_Greeter_greetEnthusiastically")
-public func _bjs_Greeter_greetEnthusiastically(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_Greeter_greetEnthusiastically")
+@_cdecl("bjs_BridgeJSRuntimeTests_Greeter_greetEnthusiastically")
+public func _bjs_BridgeJSRuntimeTests_Greeter_greetEnthusiastically(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = Greeter.bridgeJSLiftParameter(_self).greetEnthusiastically()
+    let ret = BridgeJSRuntimeTests.Greeter.bridgeJSLiftParameter(_self).greetEnthusiastically()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Greeter_static_greetAnonymously")
-@_cdecl("bjs_Greeter_static_greetAnonymously")
-public func _bjs_Greeter_static_greetAnonymously() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_Greeter_static_greetAnonymously")
+@_cdecl("bjs_BridgeJSRuntimeTests_Greeter_static_greetAnonymously")
+public func _bjs_BridgeJSRuntimeTests_Greeter_static_greetAnonymously() -> Void {
     #if arch(wasm32)
-    let ret = Greeter.greetAnonymously()
+    let ret = BridgeJSRuntimeTests.Greeter.greetAnonymously()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Greeter_name_get")
-@_cdecl("bjs_Greeter_name_get")
-public func _bjs_Greeter_name_get(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_Greeter_name_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_Greeter_name_get")
+public func _bjs_BridgeJSRuntimeTests_Greeter_name_get(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = Greeter.bridgeJSLiftParameter(_self).name
+    let ret = BridgeJSRuntimeTests.Greeter.bridgeJSLiftParameter(_self).name
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Greeter_name_set")
-@_cdecl("bjs_Greeter_name_set")
-public func _bjs_Greeter_name_set(_ _self: UnsafeMutableRawPointer, _ valueBytes: Int32, _ valueLength: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_Greeter_name_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_Greeter_name_set")
+public func _bjs_BridgeJSRuntimeTests_Greeter_name_set(_ _self: UnsafeMutableRawPointer, _ valueBytes: Int32, _ valueLength: Int32) -> Void {
     #if arch(wasm32)
-    Greeter.bridgeJSLiftParameter(_self).name = String.bridgeJSLiftParameter(valueBytes, valueLength)
+    BridgeJSRuntimeTests.Greeter.bridgeJSLiftParameter(_self).name = String.bridgeJSLiftParameter(valueBytes, valueLength)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Greeter_prefix_get")
-@_cdecl("bjs_Greeter_prefix_get")
-public func _bjs_Greeter_prefix_get(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_Greeter_prefix_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_Greeter_prefix_get")
+public func _bjs_BridgeJSRuntimeTests_Greeter_prefix_get(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = Greeter.bridgeJSLiftParameter(_self).prefix
+    let ret = BridgeJSRuntimeTests.Greeter.bridgeJSLiftParameter(_self).prefix
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Greeter_nameCount_get")
-@_cdecl("bjs_Greeter_nameCount_get")
-public func _bjs_Greeter_nameCount_get(_ _self: UnsafeMutableRawPointer) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_Greeter_nameCount_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_Greeter_nameCount_get")
+public func _bjs_BridgeJSRuntimeTests_Greeter_nameCount_get(_ _self: UnsafeMutableRawPointer) -> Int32 {
     #if arch(wasm32)
-    let ret = Greeter.bridgeJSLiftParameter(_self).nameCount
+    let ret = BridgeJSRuntimeTests.Greeter.bridgeJSLiftParameter(_self).nameCount
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Greeter_static_defaultGreeting_get")
-@_cdecl("bjs_Greeter_static_defaultGreeting_get")
-public func _bjs_Greeter_static_defaultGreeting_get() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_Greeter_static_defaultGreeting_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_Greeter_static_defaultGreeting_get")
+public func _bjs_BridgeJSRuntimeTests_Greeter_static_defaultGreeting_get() -> Void {
     #if arch(wasm32)
-    let ret = Greeter.defaultGreeting
+    let ret = BridgeJSRuntimeTests.Greeter.defaultGreeting
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Greeter_deinit")
-@_cdecl("bjs_Greeter_deinit")
-public func _bjs_Greeter_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_Greeter_deinit")
+@_cdecl("bjs_BridgeJSRuntimeTests_Greeter_deinit")
+public func _bjs_BridgeJSRuntimeTests_Greeter_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    Unmanaged<Greeter>.fromOpaque(pointer).release()
+    Unmanaged<BridgeJSRuntimeTests.Greeter>.fromOpaque(pointer).release()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension Greeter: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
+extension BridgeJSRuntimeTests.Greeter: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
     public var jsValue: JSValue {
-        return .object(JSObject(id: UInt32(bitPattern: _bjs_Greeter_wrap(Unmanaged.passRetained(self).toOpaque()))))
+        return .object(JSObject(id: UInt32(bitPattern: _bjs_BridgeJSRuntimeTests_Greeter_wrap(Unmanaged.passRetained(self).toOpaque()))))
     }
     public consuming func bridgeJSLowerAsProtocolReturn() -> Int32 {
-        _bjs_Greeter_wrap(Unmanaged.passRetained(self).toOpaque())
+        _bjs_BridgeJSRuntimeTests_Greeter_wrap(Unmanaged.passRetained(self).toOpaque())
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_Greeter_wrap")
-fileprivate func _bjs_Greeter_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
+@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_BridgeJSRuntimeTests_Greeter_wrap")
+fileprivate func _bjs_BridgeJSRuntimeTests_Greeter_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
 #else
-fileprivate func _bjs_Greeter_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+fileprivate func _bjs_BridgeJSRuntimeTests_Greeter_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_Greeter_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
-    return _bjs_Greeter_wrap_extern(pointer)
+@inline(never) fileprivate func _bjs_BridgeJSRuntimeTests_Greeter_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+    return _bjs_BridgeJSRuntimeTests_Greeter_wrap_extern(pointer)
 }
 
-@_expose(wasm, "bjs_Calculator_square")
-@_cdecl("bjs_Calculator_square")
-public func _bjs_Calculator_square(_ _self: UnsafeMutableRawPointer, _ value: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_Calculator_square")
+@_cdecl("bjs_BridgeJSRuntimeTests_Calculator_square")
+public func _bjs_BridgeJSRuntimeTests_Calculator_square(_ _self: UnsafeMutableRawPointer, _ value: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = Calculator.bridgeJSLiftParameter(_self).square(value: Int.bridgeJSLiftParameter(value))
+    let ret = BridgeJSRuntimeTests.Calculator.bridgeJSLiftParameter(_self).square(value: Int.bridgeJSLiftParameter(value))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Calculator_add")
-@_cdecl("bjs_Calculator_add")
-public func _bjs_Calculator_add(_ _self: UnsafeMutableRawPointer, _ a: Int32, _ b: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_Calculator_add")
+@_cdecl("bjs_BridgeJSRuntimeTests_Calculator_add")
+public func _bjs_BridgeJSRuntimeTests_Calculator_add(_ _self: UnsafeMutableRawPointer, _ a: Int32, _ b: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = Calculator.bridgeJSLiftParameter(_self).add(a: Int.bridgeJSLiftParameter(a), b: Int.bridgeJSLiftParameter(b))
+    let ret = BridgeJSRuntimeTests.Calculator.bridgeJSLiftParameter(_self).add(a: Int.bridgeJSLiftParameter(a), b: Int.bridgeJSLiftParameter(b))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Calculator_asyncMakePoint")
-@_cdecl("bjs_Calculator_asyncMakePoint")
-public func _bjs_Calculator_asyncMakePoint(_ _self: UnsafeMutableRawPointer, _ x: Int32, _ y: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_Calculator_asyncMakePoint")
+@_cdecl("bjs_BridgeJSRuntimeTests_Calculator_asyncMakePoint")
+public func _bjs_BridgeJSRuntimeTests_Calculator_asyncMakePoint(_ _self: UnsafeMutableRawPointer, _ x: Int32, _ y: Int32) -> Int32 {
     #if arch(wasm32)
-    return _bjs_makePromise(resolve: Promise_resolve_11PublicPointV, reject: Promise_reject) {
-        return await Calculator.bridgeJSLiftParameter(_self).asyncMakePoint(x: Int.bridgeJSLiftParameter(x), y: Int.bridgeJSLiftParameter(y))
+    return _bjs_makePromise(resolve: Promise_resolve_32BridgeJSRuntimeTests_PublicPointV, reject: Promise_reject) {
+        return await BridgeJSRuntimeTests.Calculator.bridgeJSLiftParameter(_self).asyncMakePoint(x: Int.bridgeJSLiftParameter(x), y: Int.bridgeJSLiftParameter(y))
     }
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Calculator_deinit")
-@_cdecl("bjs_Calculator_deinit")
-public func _bjs_Calculator_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_Calculator_deinit")
+@_cdecl("bjs_BridgeJSRuntimeTests_Calculator_deinit")
+public func _bjs_BridgeJSRuntimeTests_Calculator_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    Unmanaged<Calculator>.fromOpaque(pointer).release()
+    Unmanaged<BridgeJSRuntimeTests.Calculator>.fromOpaque(pointer).release()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension Calculator: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
+extension BridgeJSRuntimeTests.Calculator: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
     var jsValue: JSValue {
-        return .object(JSObject(id: UInt32(bitPattern: _bjs_Calculator_wrap(Unmanaged.passRetained(self).toOpaque()))))
+        return .object(JSObject(id: UInt32(bitPattern: _bjs_BridgeJSRuntimeTests_Calculator_wrap(Unmanaged.passRetained(self).toOpaque()))))
     }
     consuming func bridgeJSLowerAsProtocolReturn() -> Int32 {
-        _bjs_Calculator_wrap(Unmanaged.passRetained(self).toOpaque())
+        _bjs_BridgeJSRuntimeTests_Calculator_wrap(Unmanaged.passRetained(self).toOpaque())
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_Calculator_wrap")
-fileprivate func _bjs_Calculator_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
+@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_BridgeJSRuntimeTests_Calculator_wrap")
+fileprivate func _bjs_BridgeJSRuntimeTests_Calculator_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
 #else
-fileprivate func _bjs_Calculator_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+fileprivate func _bjs_BridgeJSRuntimeTests_Calculator_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_Calculator_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
-    return _bjs_Calculator_wrap_extern(pointer)
+@inline(never) fileprivate func _bjs_BridgeJSRuntimeTests_Calculator_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+    return _bjs_BridgeJSRuntimeTests_Calculator_wrap_extern(pointer)
 }
 
-@_expose(wasm, "bjs_InternalGreeter_deinit")
-@_cdecl("bjs_InternalGreeter_deinit")
-public func _bjs_InternalGreeter_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_InternalGreeter_deinit")
+@_cdecl("bjs_BridgeJSRuntimeTests_InternalGreeter_deinit")
+public func _bjs_BridgeJSRuntimeTests_InternalGreeter_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    Unmanaged<InternalGreeter>.fromOpaque(pointer).release()
+    Unmanaged<BridgeJSRuntimeTests.InternalGreeter>.fromOpaque(pointer).release()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension InternalGreeter: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
+extension BridgeJSRuntimeTests.InternalGreeter: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
     internal var jsValue: JSValue {
-        return .object(JSObject(id: UInt32(bitPattern: _bjs_InternalGreeter_wrap(Unmanaged.passRetained(self).toOpaque()))))
+        return .object(JSObject(id: UInt32(bitPattern: _bjs_BridgeJSRuntimeTests_InternalGreeter_wrap(Unmanaged.passRetained(self).toOpaque()))))
     }
     internal consuming func bridgeJSLowerAsProtocolReturn() -> Int32 {
-        _bjs_InternalGreeter_wrap(Unmanaged.passRetained(self).toOpaque())
+        _bjs_BridgeJSRuntimeTests_InternalGreeter_wrap(Unmanaged.passRetained(self).toOpaque())
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_InternalGreeter_wrap")
-fileprivate func _bjs_InternalGreeter_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
+@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_BridgeJSRuntimeTests_InternalGreeter_wrap")
+fileprivate func _bjs_BridgeJSRuntimeTests_InternalGreeter_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
 #else
-fileprivate func _bjs_InternalGreeter_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+fileprivate func _bjs_BridgeJSRuntimeTests_InternalGreeter_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_InternalGreeter_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
-    return _bjs_InternalGreeter_wrap_extern(pointer)
+@inline(never) fileprivate func _bjs_BridgeJSRuntimeTests_InternalGreeter_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+    return _bjs_BridgeJSRuntimeTests_InternalGreeter_wrap_extern(pointer)
 }
 
-@_expose(wasm, "bjs_PublicGreeter_deinit")
-@_cdecl("bjs_PublicGreeter_deinit")
-public func _bjs_PublicGreeter_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_PublicGreeter_deinit")
+@_cdecl("bjs_BridgeJSRuntimeTests_PublicGreeter_deinit")
+public func _bjs_BridgeJSRuntimeTests_PublicGreeter_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    Unmanaged<PublicGreeter>.fromOpaque(pointer).release()
+    Unmanaged<BridgeJSRuntimeTests.PublicGreeter>.fromOpaque(pointer).release()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension PublicGreeter: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
+extension BridgeJSRuntimeTests.PublicGreeter: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
     public var jsValue: JSValue {
-        return .object(JSObject(id: UInt32(bitPattern: _bjs_PublicGreeter_wrap(Unmanaged.passRetained(self).toOpaque()))))
+        return .object(JSObject(id: UInt32(bitPattern: _bjs_BridgeJSRuntimeTests_PublicGreeter_wrap(Unmanaged.passRetained(self).toOpaque()))))
     }
     public consuming func bridgeJSLowerAsProtocolReturn() -> Int32 {
-        _bjs_PublicGreeter_wrap(Unmanaged.passRetained(self).toOpaque())
+        _bjs_BridgeJSRuntimeTests_PublicGreeter_wrap(Unmanaged.passRetained(self).toOpaque())
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_PublicGreeter_wrap")
-fileprivate func _bjs_PublicGreeter_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
+@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_BridgeJSRuntimeTests_PublicGreeter_wrap")
+fileprivate func _bjs_BridgeJSRuntimeTests_PublicGreeter_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
 #else
-fileprivate func _bjs_PublicGreeter_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+fileprivate func _bjs_BridgeJSRuntimeTests_PublicGreeter_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_PublicGreeter_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
-    return _bjs_PublicGreeter_wrap_extern(pointer)
+@inline(never) fileprivate func _bjs_BridgeJSRuntimeTests_PublicGreeter_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+    return _bjs_BridgeJSRuntimeTests_PublicGreeter_wrap_extern(pointer)
 }
 
-@_expose(wasm, "bjs_PackageGreeter_deinit")
-@_cdecl("bjs_PackageGreeter_deinit")
-public func _bjs_PackageGreeter_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_PackageGreeter_deinit")
+@_cdecl("bjs_BridgeJSRuntimeTests_PackageGreeter_deinit")
+public func _bjs_BridgeJSRuntimeTests_PackageGreeter_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    Unmanaged<PackageGreeter>.fromOpaque(pointer).release()
+    Unmanaged<BridgeJSRuntimeTests.PackageGreeter>.fromOpaque(pointer).release()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension PackageGreeter: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
+extension BridgeJSRuntimeTests.PackageGreeter: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
     package var jsValue: JSValue {
-        return .object(JSObject(id: UInt32(bitPattern: _bjs_PackageGreeter_wrap(Unmanaged.passRetained(self).toOpaque()))))
+        return .object(JSObject(id: UInt32(bitPattern: _bjs_BridgeJSRuntimeTests_PackageGreeter_wrap(Unmanaged.passRetained(self).toOpaque()))))
     }
     package consuming func bridgeJSLowerAsProtocolReturn() -> Int32 {
-        _bjs_PackageGreeter_wrap(Unmanaged.passRetained(self).toOpaque())
+        _bjs_BridgeJSRuntimeTests_PackageGreeter_wrap(Unmanaged.passRetained(self).toOpaque())
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_PackageGreeter_wrap")
-fileprivate func _bjs_PackageGreeter_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
+@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_BridgeJSRuntimeTests_PackageGreeter_wrap")
+fileprivate func _bjs_BridgeJSRuntimeTests_PackageGreeter_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
 #else
-fileprivate func _bjs_PackageGreeter_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+fileprivate func _bjs_BridgeJSRuntimeTests_PackageGreeter_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_PackageGreeter_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
-    return _bjs_PackageGreeter_wrap_extern(pointer)
+@inline(never) fileprivate func _bjs_BridgeJSRuntimeTests_PackageGreeter_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+    return _bjs_BridgeJSRuntimeTests_PackageGreeter_wrap_extern(pointer)
 }
 
-@_expose(wasm, "bjs_Utils_Converter_init")
-@_cdecl("bjs_Utils_Converter_init")
-public func _bjs_Utils_Converter_init() -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_Utils_Converter_init")
+@_cdecl("bjs_BridgeJSRuntimeTests_Utils_Converter_init")
+public func _bjs_BridgeJSRuntimeTests_Utils_Converter_init() -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = Utils.Converter()
+    let ret = BridgeJSRuntimeTests.Utils.Converter()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Utils_Converter_toString")
-@_cdecl("bjs_Utils_Converter_toString")
-public func _bjs_Utils_Converter_toString(_ _self: UnsafeMutableRawPointer, _ value: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_Utils_Converter_toString")
+@_cdecl("bjs_BridgeJSRuntimeTests_Utils_Converter_toString")
+public func _bjs_BridgeJSRuntimeTests_Utils_Converter_toString(_ _self: UnsafeMutableRawPointer, _ value: Int32) -> Void {
     #if arch(wasm32)
-    let ret = Utils.Converter.bridgeJSLiftParameter(_self).toString(value: Int.bridgeJSLiftParameter(value))
+    let ret = BridgeJSRuntimeTests.Utils.Converter.bridgeJSLiftParameter(_self).toString(value: Int.bridgeJSLiftParameter(value))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Utils_Converter_precision_get")
-@_cdecl("bjs_Utils_Converter_precision_get")
-public func _bjs_Utils_Converter_precision_get(_ _self: UnsafeMutableRawPointer) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_Utils_Converter_precision_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_Utils_Converter_precision_get")
+public func _bjs_BridgeJSRuntimeTests_Utils_Converter_precision_get(_ _self: UnsafeMutableRawPointer) -> Int32 {
     #if arch(wasm32)
-    let ret = Utils.Converter.bridgeJSLiftParameter(_self).precision
+    let ret = BridgeJSRuntimeTests.Utils.Converter.bridgeJSLiftParameter(_self).precision
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Utils_Converter_precision_set")
-@_cdecl("bjs_Utils_Converter_precision_set")
-public func _bjs_Utils_Converter_precision_set(_ _self: UnsafeMutableRawPointer, _ value: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_Utils_Converter_precision_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_Utils_Converter_precision_set")
+public func _bjs_BridgeJSRuntimeTests_Utils_Converter_precision_set(_ _self: UnsafeMutableRawPointer, _ value: Int32) -> Void {
     #if arch(wasm32)
-    Utils.Converter.bridgeJSLiftParameter(_self).precision = Int.bridgeJSLiftParameter(value)
+    BridgeJSRuntimeTests.Utils.Converter.bridgeJSLiftParameter(_self).precision = Int.bridgeJSLiftParameter(value)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Utils_Converter_deinit")
-@_cdecl("bjs_Utils_Converter_deinit")
-public func _bjs_Utils_Converter_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_Utils_Converter_deinit")
+@_cdecl("bjs_BridgeJSRuntimeTests_Utils_Converter_deinit")
+public func _bjs_BridgeJSRuntimeTests_Utils_Converter_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    Unmanaged<Utils.Converter>.fromOpaque(pointer).release()
+    Unmanaged<BridgeJSRuntimeTests.Utils.Converter>.fromOpaque(pointer).release()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension Utils.Converter: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
+extension BridgeJSRuntimeTests.Utils.Converter: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
     var jsValue: JSValue {
-        return .object(JSObject(id: UInt32(bitPattern: _bjs_Utils_Converter_wrap(Unmanaged.passRetained(self).toOpaque()))))
+        return .object(JSObject(id: UInt32(bitPattern: _bjs_BridgeJSRuntimeTests_Utils_Converter_wrap(Unmanaged.passRetained(self).toOpaque()))))
     }
     consuming func bridgeJSLowerAsProtocolReturn() -> Int32 {
-        _bjs_Utils_Converter_wrap(Unmanaged.passRetained(self).toOpaque())
+        _bjs_BridgeJSRuntimeTests_Utils_Converter_wrap(Unmanaged.passRetained(self).toOpaque())
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_Utils_Converter_wrap")
-fileprivate func _bjs_Utils_Converter_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
+@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_BridgeJSRuntimeTests_Utils_Converter_wrap")
+fileprivate func _bjs_BridgeJSRuntimeTests_Utils_Converter_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
 #else
-fileprivate func _bjs_Utils_Converter_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+fileprivate func _bjs_BridgeJSRuntimeTests_Utils_Converter_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_Utils_Converter_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
-    return _bjs_Utils_Converter_wrap_extern(pointer)
+@inline(never) fileprivate func _bjs_BridgeJSRuntimeTests_Utils_Converter_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+    return _bjs_BridgeJSRuntimeTests_Utils_Converter_wrap_extern(pointer)
 }
 
-@_expose(wasm, "bjs_Networking_API_HTTPServer_init")
-@_cdecl("bjs_Networking_API_HTTPServer_init")
-public func _bjs_Networking_API_HTTPServer_init() -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_Networking_API_HTTPServer_init")
+@_cdecl("bjs_BridgeJSRuntimeTests_Networking_API_HTTPServer_init")
+public func _bjs_BridgeJSRuntimeTests_Networking_API_HTTPServer_init() -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = Networking.API.HTTPServer()
+    let ret = BridgeJSRuntimeTests.Networking.API.HTTPServer()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Networking_API_HTTPServer_call")
-@_cdecl("bjs_Networking_API_HTTPServer_call")
-public func _bjs_Networking_API_HTTPServer_call(_ _self: UnsafeMutableRawPointer, _ method: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_Networking_API_HTTPServer_call")
+@_cdecl("bjs_BridgeJSRuntimeTests_Networking_API_HTTPServer_call")
+public func _bjs_BridgeJSRuntimeTests_Networking_API_HTTPServer_call(_ _self: UnsafeMutableRawPointer, _ method: Int32) -> Void {
     #if arch(wasm32)
-    Networking.API.HTTPServer.bridgeJSLiftParameter(_self).call(_: Networking.API.Method.bridgeJSLiftParameter(method))
+    BridgeJSRuntimeTests.Networking.API.HTTPServer.bridgeJSLiftParameter(_self).call(_: BridgeJSRuntimeTests.Networking.API.Method.bridgeJSLiftParameter(method))
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Networking_API_HTTPServer_deinit")
-@_cdecl("bjs_Networking_API_HTTPServer_deinit")
-public func _bjs_Networking_API_HTTPServer_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_Networking_API_HTTPServer_deinit")
+@_cdecl("bjs_BridgeJSRuntimeTests_Networking_API_HTTPServer_deinit")
+public func _bjs_BridgeJSRuntimeTests_Networking_API_HTTPServer_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    Unmanaged<Networking.API.HTTPServer>.fromOpaque(pointer).release()
+    Unmanaged<BridgeJSRuntimeTests.Networking.API.HTTPServer>.fromOpaque(pointer).release()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension Networking.API.HTTPServer: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
+extension BridgeJSRuntimeTests.Networking.API.HTTPServer: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
     var jsValue: JSValue {
-        return .object(JSObject(id: UInt32(bitPattern: _bjs_Networking_API_HTTPServer_wrap(Unmanaged.passRetained(self).toOpaque()))))
+        return .object(JSObject(id: UInt32(bitPattern: _bjs_BridgeJSRuntimeTests_Networking_API_HTTPServer_wrap(Unmanaged.passRetained(self).toOpaque()))))
     }
     consuming func bridgeJSLowerAsProtocolReturn() -> Int32 {
-        _bjs_Networking_API_HTTPServer_wrap(Unmanaged.passRetained(self).toOpaque())
+        _bjs_BridgeJSRuntimeTests_Networking_API_HTTPServer_wrap(Unmanaged.passRetained(self).toOpaque())
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_Networking_API_HTTPServer_wrap")
-fileprivate func _bjs_Networking_API_HTTPServer_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
+@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_BridgeJSRuntimeTests_Networking_API_HTTPServer_wrap")
+fileprivate func _bjs_BridgeJSRuntimeTests_Networking_API_HTTPServer_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
 #else
-fileprivate func _bjs_Networking_API_HTTPServer_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+fileprivate func _bjs_BridgeJSRuntimeTests_Networking_API_HTTPServer_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_Networking_API_HTTPServer_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
-    return _bjs_Networking_API_HTTPServer_wrap_extern(pointer)
+@inline(never) fileprivate func _bjs_BridgeJSRuntimeTests_Networking_API_HTTPServer_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+    return _bjs_BridgeJSRuntimeTests_Networking_API_HTTPServer_wrap_extern(pointer)
 }
 
-@_expose(wasm, "bjs___Swift_Foundation_UUID_init")
-@_cdecl("bjs___Swift_Foundation_UUID_init")
-public func _bjs___Swift_Foundation_UUID_init(_ valueBytes: Int32, _ valueLength: Int32) -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_UUID_init")
+@_cdecl("bjs_BridgeJSRuntimeTests_UUID_init")
+public func _bjs_BridgeJSRuntimeTests_UUID_init(_ valueBytes: Int32, _ valueLength: Int32) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = UUID(value: String.bridgeJSLiftParameter(valueBytes, valueLength))
+    let ret = BridgeJSRuntimeTests.UUID(value: String.bridgeJSLiftParameter(valueBytes, valueLength))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs___Swift_Foundation_UUID_uuidString")
-@_cdecl("bjs___Swift_Foundation_UUID_uuidString")
-public func _bjs___Swift_Foundation_UUID_uuidString(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_UUID_uuidString")
+@_cdecl("bjs_BridgeJSRuntimeTests_UUID_uuidString")
+public func _bjs_BridgeJSRuntimeTests_UUID_uuidString(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = UUID.bridgeJSLiftParameter(_self).uuidString()
+    let ret = BridgeJSRuntimeTests.UUID.bridgeJSLiftParameter(_self).uuidString()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs___Swift_Foundation_UUID_static_fromValue")
-@_cdecl("bjs___Swift_Foundation_UUID_static_fromValue")
-public func _bjs___Swift_Foundation_UUID_static_fromValue(_ valueBytes: Int32, _ valueLength: Int32) -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_UUID_static_fromValue")
+@_cdecl("bjs_BridgeJSRuntimeTests_UUID_static_fromValue")
+public func _bjs_BridgeJSRuntimeTests_UUID_static_fromValue(_ valueBytes: Int32, _ valueLength: Int32) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = UUID.fromValue(_: String.bridgeJSLiftParameter(valueBytes, valueLength))
+    let ret = BridgeJSRuntimeTests.UUID.fromValue(_: String.bridgeJSLiftParameter(valueBytes, valueLength))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs___Swift_Foundation_UUID_static_placeholder_get")
-@_cdecl("bjs___Swift_Foundation_UUID_static_placeholder_get")
-public func _bjs___Swift_Foundation_UUID_static_placeholder_get() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_UUID_static_placeholder_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_UUID_static_placeholder_get")
+public func _bjs_BridgeJSRuntimeTests_UUID_static_placeholder_get() -> Void {
     #if arch(wasm32)
-    let ret = UUID.placeholder
+    let ret = BridgeJSRuntimeTests.UUID.placeholder
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs___Swift_Foundation_UUID_deinit")
-@_cdecl("bjs___Swift_Foundation_UUID_deinit")
-public func _bjs___Swift_Foundation_UUID_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_UUID_deinit")
+@_cdecl("bjs_BridgeJSRuntimeTests_UUID_deinit")
+public func _bjs_BridgeJSRuntimeTests_UUID_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    Unmanaged<UUID>.fromOpaque(pointer).release()
+    Unmanaged<BridgeJSRuntimeTests.UUID>.fromOpaque(pointer).release()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension UUID: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
+extension BridgeJSRuntimeTests.UUID: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
     var jsValue: JSValue {
-        return .object(JSObject(id: UInt32(bitPattern: _bjs___Swift_Foundation_UUID_wrap(Unmanaged.passRetained(self).toOpaque()))))
+        return .object(JSObject(id: UInt32(bitPattern: _bjs_BridgeJSRuntimeTests_UUID_wrap(Unmanaged.passRetained(self).toOpaque()))))
     }
     consuming func bridgeJSLowerAsProtocolReturn() -> Int32 {
-        _bjs___Swift_Foundation_UUID_wrap(Unmanaged.passRetained(self).toOpaque())
+        _bjs_BridgeJSRuntimeTests_UUID_wrap(Unmanaged.passRetained(self).toOpaque())
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs___Swift_Foundation_UUID_wrap")
-fileprivate func _bjs___Swift_Foundation_UUID_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
+@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_BridgeJSRuntimeTests_UUID_wrap")
+fileprivate func _bjs_BridgeJSRuntimeTests_UUID_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
 #else
-fileprivate func _bjs___Swift_Foundation_UUID_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+fileprivate func _bjs_BridgeJSRuntimeTests_UUID_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs___Swift_Foundation_UUID_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
-    return _bjs___Swift_Foundation_UUID_wrap_extern(pointer)
+@inline(never) fileprivate func _bjs_BridgeJSRuntimeTests_UUID_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+    return _bjs_BridgeJSRuntimeTests_UUID_wrap_extern(pointer)
 }
 
-@_expose(wasm, "bjs_Networking_APIV2_Internal_TestServer_init")
-@_cdecl("bjs_Networking_APIV2_Internal_TestServer_init")
-public func _bjs_Networking_APIV2_Internal_TestServer_init() -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_Internal_TestServer_init")
+@_cdecl("bjs_BridgeJSRuntimeTests_Internal_TestServer_init")
+public func _bjs_BridgeJSRuntimeTests_Internal_TestServer_init() -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = Internal.TestServer()
+    let ret = BridgeJSRuntimeTests.Internal.TestServer()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Networking_APIV2_Internal_TestServer_call")
-@_cdecl("bjs_Networking_APIV2_Internal_TestServer_call")
-public func _bjs_Networking_APIV2_Internal_TestServer_call(_ _self: UnsafeMutableRawPointer, _ method: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_Internal_TestServer_call")
+@_cdecl("bjs_BridgeJSRuntimeTests_Internal_TestServer_call")
+public func _bjs_BridgeJSRuntimeTests_Internal_TestServer_call(_ _self: UnsafeMutableRawPointer, _ method: Int32) -> Void {
     #if arch(wasm32)
-    Internal.TestServer.bridgeJSLiftParameter(_self).call(_: Internal.SupportedMethod.bridgeJSLiftParameter(method))
+    BridgeJSRuntimeTests.Internal.TestServer.bridgeJSLiftParameter(_self).call(_: BridgeJSRuntimeTests.Internal.SupportedMethod.bridgeJSLiftParameter(method))
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Networking_APIV2_Internal_TestServer_deinit")
-@_cdecl("bjs_Networking_APIV2_Internal_TestServer_deinit")
-public func _bjs_Networking_APIV2_Internal_TestServer_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_Internal_TestServer_deinit")
+@_cdecl("bjs_BridgeJSRuntimeTests_Internal_TestServer_deinit")
+public func _bjs_BridgeJSRuntimeTests_Internal_TestServer_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    Unmanaged<Internal.TestServer>.fromOpaque(pointer).release()
+    Unmanaged<BridgeJSRuntimeTests.Internal.TestServer>.fromOpaque(pointer).release()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension Internal.TestServer: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
+extension BridgeJSRuntimeTests.Internal.TestServer: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
     var jsValue: JSValue {
-        return .object(JSObject(id: UInt32(bitPattern: _bjs_Networking_APIV2_Internal_TestServer_wrap(Unmanaged.passRetained(self).toOpaque()))))
+        return .object(JSObject(id: UInt32(bitPattern: _bjs_BridgeJSRuntimeTests_Internal_TestServer_wrap(Unmanaged.passRetained(self).toOpaque()))))
     }
     consuming func bridgeJSLowerAsProtocolReturn() -> Int32 {
-        _bjs_Networking_APIV2_Internal_TestServer_wrap(Unmanaged.passRetained(self).toOpaque())
+        _bjs_BridgeJSRuntimeTests_Internal_TestServer_wrap(Unmanaged.passRetained(self).toOpaque())
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_Networking_APIV2_Internal_TestServer_wrap")
-fileprivate func _bjs_Networking_APIV2_Internal_TestServer_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
+@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_BridgeJSRuntimeTests_Internal_TestServer_wrap")
+fileprivate func _bjs_BridgeJSRuntimeTests_Internal_TestServer_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
 #else
-fileprivate func _bjs_Networking_APIV2_Internal_TestServer_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+fileprivate func _bjs_BridgeJSRuntimeTests_Internal_TestServer_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_Networking_APIV2_Internal_TestServer_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
-    return _bjs_Networking_APIV2_Internal_TestServer_wrap_extern(pointer)
+@inline(never) fileprivate func _bjs_BridgeJSRuntimeTests_Internal_TestServer_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+    return _bjs_BridgeJSRuntimeTests_Internal_TestServer_wrap_extern(pointer)
 }
 
-@_expose(wasm, "bjs_SimplePropertyHolder_init")
-@_cdecl("bjs_SimplePropertyHolder_init")
-public func _bjs_SimplePropertyHolder_init(_ value: Int32) -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_SimplePropertyHolder_init")
+@_cdecl("bjs_BridgeJSRuntimeTests_SimplePropertyHolder_init")
+public func _bjs_BridgeJSRuntimeTests_SimplePropertyHolder_init(_ value: Int32) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = SimplePropertyHolder(value: Int.bridgeJSLiftParameter(value))
+    let ret = BridgeJSRuntimeTests.SimplePropertyHolder(value: Int.bridgeJSLiftParameter(value))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_SimplePropertyHolder_value_get")
-@_cdecl("bjs_SimplePropertyHolder_value_get")
-public func _bjs_SimplePropertyHolder_value_get(_ _self: UnsafeMutableRawPointer) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_SimplePropertyHolder_value_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_SimplePropertyHolder_value_get")
+public func _bjs_BridgeJSRuntimeTests_SimplePropertyHolder_value_get(_ _self: UnsafeMutableRawPointer) -> Int32 {
     #if arch(wasm32)
-    let ret = SimplePropertyHolder.bridgeJSLiftParameter(_self).value
+    let ret = BridgeJSRuntimeTests.SimplePropertyHolder.bridgeJSLiftParameter(_self).value
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_SimplePropertyHolder_value_set")
-@_cdecl("bjs_SimplePropertyHolder_value_set")
-public func _bjs_SimplePropertyHolder_value_set(_ _self: UnsafeMutableRawPointer, _ value: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_SimplePropertyHolder_value_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_SimplePropertyHolder_value_set")
+public func _bjs_BridgeJSRuntimeTests_SimplePropertyHolder_value_set(_ _self: UnsafeMutableRawPointer, _ value: Int32) -> Void {
     #if arch(wasm32)
-    SimplePropertyHolder.bridgeJSLiftParameter(_self).value = Int.bridgeJSLiftParameter(value)
+    BridgeJSRuntimeTests.SimplePropertyHolder.bridgeJSLiftParameter(_self).value = Int.bridgeJSLiftParameter(value)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_SimplePropertyHolder_deinit")
-@_cdecl("bjs_SimplePropertyHolder_deinit")
-public func _bjs_SimplePropertyHolder_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_SimplePropertyHolder_deinit")
+@_cdecl("bjs_BridgeJSRuntimeTests_SimplePropertyHolder_deinit")
+public func _bjs_BridgeJSRuntimeTests_SimplePropertyHolder_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    Unmanaged<SimplePropertyHolder>.fromOpaque(pointer).release()
+    Unmanaged<BridgeJSRuntimeTests.SimplePropertyHolder>.fromOpaque(pointer).release()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension SimplePropertyHolder: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
+extension BridgeJSRuntimeTests.SimplePropertyHolder: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
     var jsValue: JSValue {
-        return .object(JSObject(id: UInt32(bitPattern: _bjs_SimplePropertyHolder_wrap(Unmanaged.passRetained(self).toOpaque()))))
+        return .object(JSObject(id: UInt32(bitPattern: _bjs_BridgeJSRuntimeTests_SimplePropertyHolder_wrap(Unmanaged.passRetained(self).toOpaque()))))
     }
     consuming func bridgeJSLowerAsProtocolReturn() -> Int32 {
-        _bjs_SimplePropertyHolder_wrap(Unmanaged.passRetained(self).toOpaque())
+        _bjs_BridgeJSRuntimeTests_SimplePropertyHolder_wrap(Unmanaged.passRetained(self).toOpaque())
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_SimplePropertyHolder_wrap")
-fileprivate func _bjs_SimplePropertyHolder_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
+@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_BridgeJSRuntimeTests_SimplePropertyHolder_wrap")
+fileprivate func _bjs_BridgeJSRuntimeTests_SimplePropertyHolder_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
 #else
-fileprivate func _bjs_SimplePropertyHolder_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+fileprivate func _bjs_BridgeJSRuntimeTests_SimplePropertyHolder_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_SimplePropertyHolder_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
-    return _bjs_SimplePropertyHolder_wrap_extern(pointer)
+@inline(never) fileprivate func _bjs_BridgeJSRuntimeTests_SimplePropertyHolder_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+    return _bjs_BridgeJSRuntimeTests_SimplePropertyHolder_wrap_extern(pointer)
 }
 
-@_expose(wasm, "bjs_PropertyHolder_init")
-@_cdecl("bjs_PropertyHolder_init")
-public func _bjs_PropertyHolder_init(_ intValue: Int32, _ floatValue: Float32, _ doubleValue: Float64, _ boolValue: Int32, _ stringValueBytes: Int32, _ stringValueLength: Int32, _ jsObject: Int32, _ sibling: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_PropertyHolder_init")
+@_cdecl("bjs_BridgeJSRuntimeTests_PropertyHolder_init")
+public func _bjs_BridgeJSRuntimeTests_PropertyHolder_init(_ intValue: Int32, _ floatValue: Float32, _ doubleValue: Float64, _ boolValue: Int32, _ stringValueBytes: Int32, _ stringValueLength: Int32, _ jsObject: Int32, _ sibling: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = PropertyHolder(intValue: Int.bridgeJSLiftParameter(intValue), floatValue: Float.bridgeJSLiftParameter(floatValue), doubleValue: Double.bridgeJSLiftParameter(doubleValue), boolValue: Bool.bridgeJSLiftParameter(boolValue), stringValue: String.bridgeJSLiftParameter(stringValueBytes, stringValueLength), jsObject: JSObject.bridgeJSLiftParameter(jsObject), sibling: SimplePropertyHolder.bridgeJSLiftParameter(sibling))
+    let ret = BridgeJSRuntimeTests.PropertyHolder(intValue: Int.bridgeJSLiftParameter(intValue), floatValue: Float.bridgeJSLiftParameter(floatValue), doubleValue: Double.bridgeJSLiftParameter(doubleValue), boolValue: Bool.bridgeJSLiftParameter(boolValue), stringValue: String.bridgeJSLiftParameter(stringValueBytes, stringValueLength), jsObject: JSObject.bridgeJSLiftParameter(jsObject), sibling: BridgeJSRuntimeTests.SimplePropertyHolder.bridgeJSLiftParameter(sibling))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PropertyHolder_getAllValues")
-@_cdecl("bjs_PropertyHolder_getAllValues")
-public func _bjs_PropertyHolder_getAllValues(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_PropertyHolder_getAllValues")
+@_cdecl("bjs_BridgeJSRuntimeTests_PropertyHolder_getAllValues")
+public func _bjs_BridgeJSRuntimeTests_PropertyHolder_getAllValues(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = PropertyHolder.bridgeJSLiftParameter(_self).getAllValues()
+    let ret = BridgeJSRuntimeTests.PropertyHolder.bridgeJSLiftParameter(_self).getAllValues()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PropertyHolder_intValue_get")
-@_cdecl("bjs_PropertyHolder_intValue_get")
-public func _bjs_PropertyHolder_intValue_get(_ _self: UnsafeMutableRawPointer) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_PropertyHolder_intValue_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_PropertyHolder_intValue_get")
+public func _bjs_BridgeJSRuntimeTests_PropertyHolder_intValue_get(_ _self: UnsafeMutableRawPointer) -> Int32 {
     #if arch(wasm32)
-    let ret = PropertyHolder.bridgeJSLiftParameter(_self).intValue
+    let ret = BridgeJSRuntimeTests.PropertyHolder.bridgeJSLiftParameter(_self).intValue
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PropertyHolder_intValue_set")
-@_cdecl("bjs_PropertyHolder_intValue_set")
-public func _bjs_PropertyHolder_intValue_set(_ _self: UnsafeMutableRawPointer, _ value: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_PropertyHolder_intValue_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_PropertyHolder_intValue_set")
+public func _bjs_BridgeJSRuntimeTests_PropertyHolder_intValue_set(_ _self: UnsafeMutableRawPointer, _ value: Int32) -> Void {
     #if arch(wasm32)
-    PropertyHolder.bridgeJSLiftParameter(_self).intValue = Int.bridgeJSLiftParameter(value)
+    BridgeJSRuntimeTests.PropertyHolder.bridgeJSLiftParameter(_self).intValue = Int.bridgeJSLiftParameter(value)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PropertyHolder_floatValue_get")
-@_cdecl("bjs_PropertyHolder_floatValue_get")
-public func _bjs_PropertyHolder_floatValue_get(_ _self: UnsafeMutableRawPointer) -> Float32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_PropertyHolder_floatValue_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_PropertyHolder_floatValue_get")
+public func _bjs_BridgeJSRuntimeTests_PropertyHolder_floatValue_get(_ _self: UnsafeMutableRawPointer) -> Float32 {
     #if arch(wasm32)
-    let ret = PropertyHolder.bridgeJSLiftParameter(_self).floatValue
+    let ret = BridgeJSRuntimeTests.PropertyHolder.bridgeJSLiftParameter(_self).floatValue
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PropertyHolder_floatValue_set")
-@_cdecl("bjs_PropertyHolder_floatValue_set")
-public func _bjs_PropertyHolder_floatValue_set(_ _self: UnsafeMutableRawPointer, _ value: Float32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_PropertyHolder_floatValue_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_PropertyHolder_floatValue_set")
+public func _bjs_BridgeJSRuntimeTests_PropertyHolder_floatValue_set(_ _self: UnsafeMutableRawPointer, _ value: Float32) -> Void {
     #if arch(wasm32)
-    PropertyHolder.bridgeJSLiftParameter(_self).floatValue = Float.bridgeJSLiftParameter(value)
+    BridgeJSRuntimeTests.PropertyHolder.bridgeJSLiftParameter(_self).floatValue = Float.bridgeJSLiftParameter(value)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PropertyHolder_doubleValue_get")
-@_cdecl("bjs_PropertyHolder_doubleValue_get")
-public func _bjs_PropertyHolder_doubleValue_get(_ _self: UnsafeMutableRawPointer) -> Float64 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_PropertyHolder_doubleValue_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_PropertyHolder_doubleValue_get")
+public func _bjs_BridgeJSRuntimeTests_PropertyHolder_doubleValue_get(_ _self: UnsafeMutableRawPointer) -> Float64 {
     #if arch(wasm32)
-    let ret = PropertyHolder.bridgeJSLiftParameter(_self).doubleValue
+    let ret = BridgeJSRuntimeTests.PropertyHolder.bridgeJSLiftParameter(_self).doubleValue
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PropertyHolder_doubleValue_set")
-@_cdecl("bjs_PropertyHolder_doubleValue_set")
-public func _bjs_PropertyHolder_doubleValue_set(_ _self: UnsafeMutableRawPointer, _ value: Float64) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_PropertyHolder_doubleValue_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_PropertyHolder_doubleValue_set")
+public func _bjs_BridgeJSRuntimeTests_PropertyHolder_doubleValue_set(_ _self: UnsafeMutableRawPointer, _ value: Float64) -> Void {
     #if arch(wasm32)
-    PropertyHolder.bridgeJSLiftParameter(_self).doubleValue = Double.bridgeJSLiftParameter(value)
+    BridgeJSRuntimeTests.PropertyHolder.bridgeJSLiftParameter(_self).doubleValue = Double.bridgeJSLiftParameter(value)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PropertyHolder_boolValue_get")
-@_cdecl("bjs_PropertyHolder_boolValue_get")
-public func _bjs_PropertyHolder_boolValue_get(_ _self: UnsafeMutableRawPointer) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_PropertyHolder_boolValue_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_PropertyHolder_boolValue_get")
+public func _bjs_BridgeJSRuntimeTests_PropertyHolder_boolValue_get(_ _self: UnsafeMutableRawPointer) -> Int32 {
     #if arch(wasm32)
-    let ret = PropertyHolder.bridgeJSLiftParameter(_self).boolValue
+    let ret = BridgeJSRuntimeTests.PropertyHolder.bridgeJSLiftParameter(_self).boolValue
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PropertyHolder_boolValue_set")
-@_cdecl("bjs_PropertyHolder_boolValue_set")
-public func _bjs_PropertyHolder_boolValue_set(_ _self: UnsafeMutableRawPointer, _ value: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_PropertyHolder_boolValue_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_PropertyHolder_boolValue_set")
+public func _bjs_BridgeJSRuntimeTests_PropertyHolder_boolValue_set(_ _self: UnsafeMutableRawPointer, _ value: Int32) -> Void {
     #if arch(wasm32)
-    PropertyHolder.bridgeJSLiftParameter(_self).boolValue = Bool.bridgeJSLiftParameter(value)
+    BridgeJSRuntimeTests.PropertyHolder.bridgeJSLiftParameter(_self).boolValue = Bool.bridgeJSLiftParameter(value)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PropertyHolder_stringValue_get")
-@_cdecl("bjs_PropertyHolder_stringValue_get")
-public func _bjs_PropertyHolder_stringValue_get(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_PropertyHolder_stringValue_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_PropertyHolder_stringValue_get")
+public func _bjs_BridgeJSRuntimeTests_PropertyHolder_stringValue_get(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = PropertyHolder.bridgeJSLiftParameter(_self).stringValue
+    let ret = BridgeJSRuntimeTests.PropertyHolder.bridgeJSLiftParameter(_self).stringValue
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PropertyHolder_stringValue_set")
-@_cdecl("bjs_PropertyHolder_stringValue_set")
-public func _bjs_PropertyHolder_stringValue_set(_ _self: UnsafeMutableRawPointer, _ valueBytes: Int32, _ valueLength: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_PropertyHolder_stringValue_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_PropertyHolder_stringValue_set")
+public func _bjs_BridgeJSRuntimeTests_PropertyHolder_stringValue_set(_ _self: UnsafeMutableRawPointer, _ valueBytes: Int32, _ valueLength: Int32) -> Void {
     #if arch(wasm32)
-    PropertyHolder.bridgeJSLiftParameter(_self).stringValue = String.bridgeJSLiftParameter(valueBytes, valueLength)
+    BridgeJSRuntimeTests.PropertyHolder.bridgeJSLiftParameter(_self).stringValue = String.bridgeJSLiftParameter(valueBytes, valueLength)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PropertyHolder_readonlyInt_get")
-@_cdecl("bjs_PropertyHolder_readonlyInt_get")
-public func _bjs_PropertyHolder_readonlyInt_get(_ _self: UnsafeMutableRawPointer) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_PropertyHolder_readonlyInt_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_PropertyHolder_readonlyInt_get")
+public func _bjs_BridgeJSRuntimeTests_PropertyHolder_readonlyInt_get(_ _self: UnsafeMutableRawPointer) -> Int32 {
     #if arch(wasm32)
-    let ret = PropertyHolder.bridgeJSLiftParameter(_self).readonlyInt
+    let ret = BridgeJSRuntimeTests.PropertyHolder.bridgeJSLiftParameter(_self).readonlyInt
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PropertyHolder_readonlyFloat_get")
-@_cdecl("bjs_PropertyHolder_readonlyFloat_get")
-public func _bjs_PropertyHolder_readonlyFloat_get(_ _self: UnsafeMutableRawPointer) -> Float32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_PropertyHolder_readonlyFloat_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_PropertyHolder_readonlyFloat_get")
+public func _bjs_BridgeJSRuntimeTests_PropertyHolder_readonlyFloat_get(_ _self: UnsafeMutableRawPointer) -> Float32 {
     #if arch(wasm32)
-    let ret = PropertyHolder.bridgeJSLiftParameter(_self).readonlyFloat
+    let ret = BridgeJSRuntimeTests.PropertyHolder.bridgeJSLiftParameter(_self).readonlyFloat
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PropertyHolder_readonlyDouble_get")
-@_cdecl("bjs_PropertyHolder_readonlyDouble_get")
-public func _bjs_PropertyHolder_readonlyDouble_get(_ _self: UnsafeMutableRawPointer) -> Float64 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_PropertyHolder_readonlyDouble_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_PropertyHolder_readonlyDouble_get")
+public func _bjs_BridgeJSRuntimeTests_PropertyHolder_readonlyDouble_get(_ _self: UnsafeMutableRawPointer) -> Float64 {
     #if arch(wasm32)
-    let ret = PropertyHolder.bridgeJSLiftParameter(_self).readonlyDouble
+    let ret = BridgeJSRuntimeTests.PropertyHolder.bridgeJSLiftParameter(_self).readonlyDouble
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PropertyHolder_readonlyBool_get")
-@_cdecl("bjs_PropertyHolder_readonlyBool_get")
-public func _bjs_PropertyHolder_readonlyBool_get(_ _self: UnsafeMutableRawPointer) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_PropertyHolder_readonlyBool_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_PropertyHolder_readonlyBool_get")
+public func _bjs_BridgeJSRuntimeTests_PropertyHolder_readonlyBool_get(_ _self: UnsafeMutableRawPointer) -> Int32 {
     #if arch(wasm32)
-    let ret = PropertyHolder.bridgeJSLiftParameter(_self).readonlyBool
+    let ret = BridgeJSRuntimeTests.PropertyHolder.bridgeJSLiftParameter(_self).readonlyBool
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PropertyHolder_readonlyString_get")
-@_cdecl("bjs_PropertyHolder_readonlyString_get")
-public func _bjs_PropertyHolder_readonlyString_get(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_PropertyHolder_readonlyString_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_PropertyHolder_readonlyString_get")
+public func _bjs_BridgeJSRuntimeTests_PropertyHolder_readonlyString_get(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = PropertyHolder.bridgeJSLiftParameter(_self).readonlyString
+    let ret = BridgeJSRuntimeTests.PropertyHolder.bridgeJSLiftParameter(_self).readonlyString
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PropertyHolder_jsObject_get")
-@_cdecl("bjs_PropertyHolder_jsObject_get")
-public func _bjs_PropertyHolder_jsObject_get(_ _self: UnsafeMutableRawPointer) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_PropertyHolder_jsObject_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_PropertyHolder_jsObject_get")
+public func _bjs_BridgeJSRuntimeTests_PropertyHolder_jsObject_get(_ _self: UnsafeMutableRawPointer) -> Int32 {
     #if arch(wasm32)
-    let ret = PropertyHolder.bridgeJSLiftParameter(_self).jsObject
+    let ret = BridgeJSRuntimeTests.PropertyHolder.bridgeJSLiftParameter(_self).jsObject
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PropertyHolder_jsObject_set")
-@_cdecl("bjs_PropertyHolder_jsObject_set")
-public func _bjs_PropertyHolder_jsObject_set(_ _self: UnsafeMutableRawPointer, _ value: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_PropertyHolder_jsObject_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_PropertyHolder_jsObject_set")
+public func _bjs_BridgeJSRuntimeTests_PropertyHolder_jsObject_set(_ _self: UnsafeMutableRawPointer, _ value: Int32) -> Void {
     #if arch(wasm32)
-    PropertyHolder.bridgeJSLiftParameter(_self).jsObject = JSObject.bridgeJSLiftParameter(value)
+    BridgeJSRuntimeTests.PropertyHolder.bridgeJSLiftParameter(_self).jsObject = JSObject.bridgeJSLiftParameter(value)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PropertyHolder_sibling_get")
-@_cdecl("bjs_PropertyHolder_sibling_get")
-public func _bjs_PropertyHolder_sibling_get(_ _self: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_PropertyHolder_sibling_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_PropertyHolder_sibling_get")
+public func _bjs_BridgeJSRuntimeTests_PropertyHolder_sibling_get(_ _self: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = PropertyHolder.bridgeJSLiftParameter(_self).sibling
+    let ret = BridgeJSRuntimeTests.PropertyHolder.bridgeJSLiftParameter(_self).sibling
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PropertyHolder_sibling_set")
-@_cdecl("bjs_PropertyHolder_sibling_set")
-public func _bjs_PropertyHolder_sibling_set(_ _self: UnsafeMutableRawPointer, _ value: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_PropertyHolder_sibling_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_PropertyHolder_sibling_set")
+public func _bjs_BridgeJSRuntimeTests_PropertyHolder_sibling_set(_ _self: UnsafeMutableRawPointer, _ value: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    PropertyHolder.bridgeJSLiftParameter(_self).sibling = SimplePropertyHolder.bridgeJSLiftParameter(value)
+    BridgeJSRuntimeTests.PropertyHolder.bridgeJSLiftParameter(_self).sibling = BridgeJSRuntimeTests.SimplePropertyHolder.bridgeJSLiftParameter(value)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PropertyHolder_lazyValue_get")
-@_cdecl("bjs_PropertyHolder_lazyValue_get")
-public func _bjs_PropertyHolder_lazyValue_get(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_PropertyHolder_lazyValue_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_PropertyHolder_lazyValue_get")
+public func _bjs_BridgeJSRuntimeTests_PropertyHolder_lazyValue_get(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = PropertyHolder.bridgeJSLiftParameter(_self).lazyValue
+    let ret = BridgeJSRuntimeTests.PropertyHolder.bridgeJSLiftParameter(_self).lazyValue
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PropertyHolder_lazyValue_set")
-@_cdecl("bjs_PropertyHolder_lazyValue_set")
-public func _bjs_PropertyHolder_lazyValue_set(_ _self: UnsafeMutableRawPointer, _ valueBytes: Int32, _ valueLength: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_PropertyHolder_lazyValue_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_PropertyHolder_lazyValue_set")
+public func _bjs_BridgeJSRuntimeTests_PropertyHolder_lazyValue_set(_ _self: UnsafeMutableRawPointer, _ valueBytes: Int32, _ valueLength: Int32) -> Void {
     #if arch(wasm32)
-    PropertyHolder.bridgeJSLiftParameter(_self).lazyValue = String.bridgeJSLiftParameter(valueBytes, valueLength)
+    BridgeJSRuntimeTests.PropertyHolder.bridgeJSLiftParameter(_self).lazyValue = String.bridgeJSLiftParameter(valueBytes, valueLength)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PropertyHolder_computedReadonly_get")
-@_cdecl("bjs_PropertyHolder_computedReadonly_get")
-public func _bjs_PropertyHolder_computedReadonly_get(_ _self: UnsafeMutableRawPointer) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_PropertyHolder_computedReadonly_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_PropertyHolder_computedReadonly_get")
+public func _bjs_BridgeJSRuntimeTests_PropertyHolder_computedReadonly_get(_ _self: UnsafeMutableRawPointer) -> Int32 {
     #if arch(wasm32)
-    let ret = PropertyHolder.bridgeJSLiftParameter(_self).computedReadonly
+    let ret = BridgeJSRuntimeTests.PropertyHolder.bridgeJSLiftParameter(_self).computedReadonly
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PropertyHolder_computedReadWrite_get")
-@_cdecl("bjs_PropertyHolder_computedReadWrite_get")
-public func _bjs_PropertyHolder_computedReadWrite_get(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_PropertyHolder_computedReadWrite_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_PropertyHolder_computedReadWrite_get")
+public func _bjs_BridgeJSRuntimeTests_PropertyHolder_computedReadWrite_get(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = PropertyHolder.bridgeJSLiftParameter(_self).computedReadWrite
+    let ret = BridgeJSRuntimeTests.PropertyHolder.bridgeJSLiftParameter(_self).computedReadWrite
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PropertyHolder_computedReadWrite_set")
-@_cdecl("bjs_PropertyHolder_computedReadWrite_set")
-public func _bjs_PropertyHolder_computedReadWrite_set(_ _self: UnsafeMutableRawPointer, _ valueBytes: Int32, _ valueLength: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_PropertyHolder_computedReadWrite_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_PropertyHolder_computedReadWrite_set")
+public func _bjs_BridgeJSRuntimeTests_PropertyHolder_computedReadWrite_set(_ _self: UnsafeMutableRawPointer, _ valueBytes: Int32, _ valueLength: Int32) -> Void {
     #if arch(wasm32)
-    PropertyHolder.bridgeJSLiftParameter(_self).computedReadWrite = String.bridgeJSLiftParameter(valueBytes, valueLength)
+    BridgeJSRuntimeTests.PropertyHolder.bridgeJSLiftParameter(_self).computedReadWrite = String.bridgeJSLiftParameter(valueBytes, valueLength)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PropertyHolder_observedProperty_get")
-@_cdecl("bjs_PropertyHolder_observedProperty_get")
-public func _bjs_PropertyHolder_observedProperty_get(_ _self: UnsafeMutableRawPointer) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_PropertyHolder_observedProperty_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_PropertyHolder_observedProperty_get")
+public func _bjs_BridgeJSRuntimeTests_PropertyHolder_observedProperty_get(_ _self: UnsafeMutableRawPointer) -> Int32 {
     #if arch(wasm32)
-    let ret = PropertyHolder.bridgeJSLiftParameter(_self).observedProperty
+    let ret = BridgeJSRuntimeTests.PropertyHolder.bridgeJSLiftParameter(_self).observedProperty
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PropertyHolder_observedProperty_set")
-@_cdecl("bjs_PropertyHolder_observedProperty_set")
-public func _bjs_PropertyHolder_observedProperty_set(_ _self: UnsafeMutableRawPointer, _ value: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_PropertyHolder_observedProperty_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_PropertyHolder_observedProperty_set")
+public func _bjs_BridgeJSRuntimeTests_PropertyHolder_observedProperty_set(_ _self: UnsafeMutableRawPointer, _ value: Int32) -> Void {
     #if arch(wasm32)
-    PropertyHolder.bridgeJSLiftParameter(_self).observedProperty = Int.bridgeJSLiftParameter(value)
+    BridgeJSRuntimeTests.PropertyHolder.bridgeJSLiftParameter(_self).observedProperty = Int.bridgeJSLiftParameter(value)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PropertyHolder_deinit")
-@_cdecl("bjs_PropertyHolder_deinit")
-public func _bjs_PropertyHolder_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_PropertyHolder_deinit")
+@_cdecl("bjs_BridgeJSRuntimeTests_PropertyHolder_deinit")
+public func _bjs_BridgeJSRuntimeTests_PropertyHolder_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    Unmanaged<PropertyHolder>.fromOpaque(pointer).release()
+    Unmanaged<BridgeJSRuntimeTests.PropertyHolder>.fromOpaque(pointer).release()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension PropertyHolder: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
+extension BridgeJSRuntimeTests.PropertyHolder: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
     var jsValue: JSValue {
-        return .object(JSObject(id: UInt32(bitPattern: _bjs_PropertyHolder_wrap(Unmanaged.passRetained(self).toOpaque()))))
+        return .object(JSObject(id: UInt32(bitPattern: _bjs_BridgeJSRuntimeTests_PropertyHolder_wrap(Unmanaged.passRetained(self).toOpaque()))))
     }
     consuming func bridgeJSLowerAsProtocolReturn() -> Int32 {
-        _bjs_PropertyHolder_wrap(Unmanaged.passRetained(self).toOpaque())
+        _bjs_BridgeJSRuntimeTests_PropertyHolder_wrap(Unmanaged.passRetained(self).toOpaque())
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_PropertyHolder_wrap")
-fileprivate func _bjs_PropertyHolder_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
+@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_BridgeJSRuntimeTests_PropertyHolder_wrap")
+fileprivate func _bjs_BridgeJSRuntimeTests_PropertyHolder_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
 #else
-fileprivate func _bjs_PropertyHolder_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+fileprivate func _bjs_BridgeJSRuntimeTests_PropertyHolder_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_PropertyHolder_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
-    return _bjs_PropertyHolder_wrap_extern(pointer)
+@inline(never) fileprivate func _bjs_BridgeJSRuntimeTests_PropertyHolder_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+    return _bjs_BridgeJSRuntimeTests_PropertyHolder_wrap_extern(pointer)
 }
 
-@_expose(wasm, "bjs_MathUtils_static_add")
-@_cdecl("bjs_MathUtils_static_add")
-public func _bjs_MathUtils_static_add(_ a: Int32, _ b: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_MathUtils_static_add")
+@_cdecl("bjs_BridgeJSRuntimeTests_MathUtils_static_add")
+public func _bjs_BridgeJSRuntimeTests_MathUtils_static_add(_ a: Int32, _ b: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = MathUtils.add(a: Int.bridgeJSLiftParameter(a), b: Int.bridgeJSLiftParameter(b))
+    let ret = BridgeJSRuntimeTests.MathUtils.add(a: Int.bridgeJSLiftParameter(a), b: Int.bridgeJSLiftParameter(b))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_MathUtils_static_substract")
-@_cdecl("bjs_MathUtils_static_substract")
-public func _bjs_MathUtils_static_substract(_ a: Int32, _ b: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_MathUtils_static_substract")
+@_cdecl("bjs_BridgeJSRuntimeTests_MathUtils_static_substract")
+public func _bjs_BridgeJSRuntimeTests_MathUtils_static_substract(_ a: Int32, _ b: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = MathUtils.substract(a: Int.bridgeJSLiftParameter(a), b: Int.bridgeJSLiftParameter(b))
+    let ret = BridgeJSRuntimeTests.MathUtils.substract(a: Int.bridgeJSLiftParameter(a), b: Int.bridgeJSLiftParameter(b))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_MathUtils_deinit")
-@_cdecl("bjs_MathUtils_deinit")
-public func _bjs_MathUtils_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_MathUtils_deinit")
+@_cdecl("bjs_BridgeJSRuntimeTests_MathUtils_deinit")
+public func _bjs_BridgeJSRuntimeTests_MathUtils_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    Unmanaged<MathUtils>.fromOpaque(pointer).release()
+    Unmanaged<BridgeJSRuntimeTests.MathUtils>.fromOpaque(pointer).release()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension MathUtils: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
+extension BridgeJSRuntimeTests.MathUtils: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
     var jsValue: JSValue {
-        return .object(JSObject(id: UInt32(bitPattern: _bjs_MathUtils_wrap(Unmanaged.passRetained(self).toOpaque()))))
+        return .object(JSObject(id: UInt32(bitPattern: _bjs_BridgeJSRuntimeTests_MathUtils_wrap(Unmanaged.passRetained(self).toOpaque()))))
     }
     consuming func bridgeJSLowerAsProtocolReturn() -> Int32 {
-        _bjs_MathUtils_wrap(Unmanaged.passRetained(self).toOpaque())
+        _bjs_BridgeJSRuntimeTests_MathUtils_wrap(Unmanaged.passRetained(self).toOpaque())
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_MathUtils_wrap")
-fileprivate func _bjs_MathUtils_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
+@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_BridgeJSRuntimeTests_MathUtils_wrap")
+fileprivate func _bjs_BridgeJSRuntimeTests_MathUtils_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
 #else
-fileprivate func _bjs_MathUtils_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+fileprivate func _bjs_BridgeJSRuntimeTests_MathUtils_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_MathUtils_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
-    return _bjs_MathUtils_wrap_extern(pointer)
+@inline(never) fileprivate func _bjs_BridgeJSRuntimeTests_MathUtils_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+    return _bjs_BridgeJSRuntimeTests_MathUtils_wrap_extern(pointer)
 }
 
-@_expose(wasm, "bjs_StaticPropertyHolder_init")
-@_cdecl("bjs_StaticPropertyHolder_init")
-public func _bjs_StaticPropertyHolder_init() -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_StaticPropertyHolder_init")
+@_cdecl("bjs_BridgeJSRuntimeTests_StaticPropertyHolder_init")
+public func _bjs_BridgeJSRuntimeTests_StaticPropertyHolder_init() -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = StaticPropertyHolder()
+    let ret = BridgeJSRuntimeTests.StaticPropertyHolder()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_StaticPropertyHolder_static_staticConstant_get")
-@_cdecl("bjs_StaticPropertyHolder_static_staticConstant_get")
-public func _bjs_StaticPropertyHolder_static_staticConstant_get() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_staticConstant_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_staticConstant_get")
+public func _bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_staticConstant_get() -> Void {
     #if arch(wasm32)
-    let ret = StaticPropertyHolder.staticConstant
+    let ret = BridgeJSRuntimeTests.StaticPropertyHolder.staticConstant
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_StaticPropertyHolder_static_staticVariable_get")
-@_cdecl("bjs_StaticPropertyHolder_static_staticVariable_get")
-public func _bjs_StaticPropertyHolder_static_staticVariable_get() -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_staticVariable_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_staticVariable_get")
+public func _bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_staticVariable_get() -> Int32 {
     #if arch(wasm32)
-    let ret = StaticPropertyHolder.staticVariable
+    let ret = BridgeJSRuntimeTests.StaticPropertyHolder.staticVariable
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_StaticPropertyHolder_static_staticVariable_set")
-@_cdecl("bjs_StaticPropertyHolder_static_staticVariable_set")
-public func _bjs_StaticPropertyHolder_static_staticVariable_set(_ value: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_staticVariable_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_staticVariable_set")
+public func _bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_staticVariable_set(_ value: Int32) -> Void {
     #if arch(wasm32)
-    StaticPropertyHolder.staticVariable = Int.bridgeJSLiftParameter(value)
+    BridgeJSRuntimeTests.StaticPropertyHolder.staticVariable = Int.bridgeJSLiftParameter(value)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_StaticPropertyHolder_static_staticString_get")
-@_cdecl("bjs_StaticPropertyHolder_static_staticString_get")
-public func _bjs_StaticPropertyHolder_static_staticString_get() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_staticString_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_staticString_get")
+public func _bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_staticString_get() -> Void {
     #if arch(wasm32)
-    let ret = StaticPropertyHolder.staticString
+    let ret = BridgeJSRuntimeTests.StaticPropertyHolder.staticString
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_StaticPropertyHolder_static_staticString_set")
-@_cdecl("bjs_StaticPropertyHolder_static_staticString_set")
-public func _bjs_StaticPropertyHolder_static_staticString_set(_ valueBytes: Int32, _ valueLength: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_staticString_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_staticString_set")
+public func _bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_staticString_set(_ valueBytes: Int32, _ valueLength: Int32) -> Void {
     #if arch(wasm32)
-    StaticPropertyHolder.staticString = String.bridgeJSLiftParameter(valueBytes, valueLength)
+    BridgeJSRuntimeTests.StaticPropertyHolder.staticString = String.bridgeJSLiftParameter(valueBytes, valueLength)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_StaticPropertyHolder_static_staticBool_get")
-@_cdecl("bjs_StaticPropertyHolder_static_staticBool_get")
-public func _bjs_StaticPropertyHolder_static_staticBool_get() -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_staticBool_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_staticBool_get")
+public func _bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_staticBool_get() -> Int32 {
     #if arch(wasm32)
-    let ret = StaticPropertyHolder.staticBool
+    let ret = BridgeJSRuntimeTests.StaticPropertyHolder.staticBool
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_StaticPropertyHolder_static_staticBool_set")
-@_cdecl("bjs_StaticPropertyHolder_static_staticBool_set")
-public func _bjs_StaticPropertyHolder_static_staticBool_set(_ value: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_staticBool_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_staticBool_set")
+public func _bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_staticBool_set(_ value: Int32) -> Void {
     #if arch(wasm32)
-    StaticPropertyHolder.staticBool = Bool.bridgeJSLiftParameter(value)
+    BridgeJSRuntimeTests.StaticPropertyHolder.staticBool = Bool.bridgeJSLiftParameter(value)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_StaticPropertyHolder_static_staticFloat_get")
-@_cdecl("bjs_StaticPropertyHolder_static_staticFloat_get")
-public func _bjs_StaticPropertyHolder_static_staticFloat_get() -> Float32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_staticFloat_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_staticFloat_get")
+public func _bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_staticFloat_get() -> Float32 {
     #if arch(wasm32)
-    let ret = StaticPropertyHolder.staticFloat
+    let ret = BridgeJSRuntimeTests.StaticPropertyHolder.staticFloat
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_StaticPropertyHolder_static_staticFloat_set")
-@_cdecl("bjs_StaticPropertyHolder_static_staticFloat_set")
-public func _bjs_StaticPropertyHolder_static_staticFloat_set(_ value: Float32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_staticFloat_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_staticFloat_set")
+public func _bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_staticFloat_set(_ value: Float32) -> Void {
     #if arch(wasm32)
-    StaticPropertyHolder.staticFloat = Float.bridgeJSLiftParameter(value)
+    BridgeJSRuntimeTests.StaticPropertyHolder.staticFloat = Float.bridgeJSLiftParameter(value)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_StaticPropertyHolder_static_staticDouble_get")
-@_cdecl("bjs_StaticPropertyHolder_static_staticDouble_get")
-public func _bjs_StaticPropertyHolder_static_staticDouble_get() -> Float64 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_staticDouble_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_staticDouble_get")
+public func _bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_staticDouble_get() -> Float64 {
     #if arch(wasm32)
-    let ret = StaticPropertyHolder.staticDouble
+    let ret = BridgeJSRuntimeTests.StaticPropertyHolder.staticDouble
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_StaticPropertyHolder_static_staticDouble_set")
-@_cdecl("bjs_StaticPropertyHolder_static_staticDouble_set")
-public func _bjs_StaticPropertyHolder_static_staticDouble_set(_ value: Float64) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_staticDouble_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_staticDouble_set")
+public func _bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_staticDouble_set(_ value: Float64) -> Void {
     #if arch(wasm32)
-    StaticPropertyHolder.staticDouble = Double.bridgeJSLiftParameter(value)
+    BridgeJSRuntimeTests.StaticPropertyHolder.staticDouble = Double.bridgeJSLiftParameter(value)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_StaticPropertyHolder_static_computedProperty_get")
-@_cdecl("bjs_StaticPropertyHolder_static_computedProperty_get")
-public func _bjs_StaticPropertyHolder_static_computedProperty_get() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_computedProperty_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_computedProperty_get")
+public func _bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_computedProperty_get() -> Void {
     #if arch(wasm32)
-    let ret = StaticPropertyHolder.computedProperty
+    let ret = BridgeJSRuntimeTests.StaticPropertyHolder.computedProperty
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_StaticPropertyHolder_static_computedProperty_set")
-@_cdecl("bjs_StaticPropertyHolder_static_computedProperty_set")
-public func _bjs_StaticPropertyHolder_static_computedProperty_set(_ valueBytes: Int32, _ valueLength: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_computedProperty_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_computedProperty_set")
+public func _bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_computedProperty_set(_ valueBytes: Int32, _ valueLength: Int32) -> Void {
     #if arch(wasm32)
-    StaticPropertyHolder.computedProperty = String.bridgeJSLiftParameter(valueBytes, valueLength)
+    BridgeJSRuntimeTests.StaticPropertyHolder.computedProperty = String.bridgeJSLiftParameter(valueBytes, valueLength)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_StaticPropertyHolder_static_readOnlyComputed_get")
-@_cdecl("bjs_StaticPropertyHolder_static_readOnlyComputed_get")
-public func _bjs_StaticPropertyHolder_static_readOnlyComputed_get() -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_readOnlyComputed_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_readOnlyComputed_get")
+public func _bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_readOnlyComputed_get() -> Int32 {
     #if arch(wasm32)
-    let ret = StaticPropertyHolder.readOnlyComputed
+    let ret = BridgeJSRuntimeTests.StaticPropertyHolder.readOnlyComputed
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_StaticPropertyHolder_static_optionalString_get")
-@_cdecl("bjs_StaticPropertyHolder_static_optionalString_get")
-public func _bjs_StaticPropertyHolder_static_optionalString_get() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_optionalString_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_optionalString_get")
+public func _bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_optionalString_get() -> Void {
     #if arch(wasm32)
-    let ret = StaticPropertyHolder.optionalString
+    let ret = BridgeJSRuntimeTests.StaticPropertyHolder.optionalString
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_StaticPropertyHolder_static_optionalString_set")
-@_cdecl("bjs_StaticPropertyHolder_static_optionalString_set")
-public func _bjs_StaticPropertyHolder_static_optionalString_set(_ valueIsSome: Int32, _ valueBytes: Int32, _ valueLength: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_optionalString_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_optionalString_set")
+public func _bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_optionalString_set(_ valueIsSome: Int32, _ valueBytes: Int32, _ valueLength: Int32) -> Void {
     #if arch(wasm32)
-    StaticPropertyHolder.optionalString = Optional<String>.bridgeJSLiftParameter(valueIsSome, valueBytes, valueLength)
+    BridgeJSRuntimeTests.StaticPropertyHolder.optionalString = Optional<String>.bridgeJSLiftParameter(valueIsSome, valueBytes, valueLength)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_StaticPropertyHolder_static_optionalInt_get")
-@_cdecl("bjs_StaticPropertyHolder_static_optionalInt_get")
-public func _bjs_StaticPropertyHolder_static_optionalInt_get() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_optionalInt_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_optionalInt_get")
+public func _bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_optionalInt_get() -> Void {
     #if arch(wasm32)
-    let ret = StaticPropertyHolder.optionalInt
+    let ret = BridgeJSRuntimeTests.StaticPropertyHolder.optionalInt
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_StaticPropertyHolder_static_optionalInt_set")
-@_cdecl("bjs_StaticPropertyHolder_static_optionalInt_set")
-public func _bjs_StaticPropertyHolder_static_optionalInt_set(_ valueIsSome: Int32, _ valueValue: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_optionalInt_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_optionalInt_set")
+public func _bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_optionalInt_set(_ valueIsSome: Int32, _ valueValue: Int32) -> Void {
     #if arch(wasm32)
-    StaticPropertyHolder.optionalInt = Optional<Int>.bridgeJSLiftParameter(valueIsSome, valueValue)
+    BridgeJSRuntimeTests.StaticPropertyHolder.optionalInt = Optional<Int>.bridgeJSLiftParameter(valueIsSome, valueValue)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_StaticPropertyHolder_static_jsObjectProperty_get")
-@_cdecl("bjs_StaticPropertyHolder_static_jsObjectProperty_get")
-public func _bjs_StaticPropertyHolder_static_jsObjectProperty_get() -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_jsObjectProperty_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_jsObjectProperty_get")
+public func _bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_jsObjectProperty_get() -> Int32 {
     #if arch(wasm32)
-    let ret = StaticPropertyHolder.jsObjectProperty
+    let ret = BridgeJSRuntimeTests.StaticPropertyHolder.jsObjectProperty
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_StaticPropertyHolder_static_jsObjectProperty_set")
-@_cdecl("bjs_StaticPropertyHolder_static_jsObjectProperty_set")
-public func _bjs_StaticPropertyHolder_static_jsObjectProperty_set(_ value: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_jsObjectProperty_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_jsObjectProperty_set")
+public func _bjs_BridgeJSRuntimeTests_StaticPropertyHolder_static_jsObjectProperty_set(_ value: Int32) -> Void {
     #if arch(wasm32)
-    StaticPropertyHolder.jsObjectProperty = JSObject.bridgeJSLiftParameter(value)
+    BridgeJSRuntimeTests.StaticPropertyHolder.jsObjectProperty = JSObject.bridgeJSLiftParameter(value)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_StaticPropertyHolder_deinit")
-@_cdecl("bjs_StaticPropertyHolder_deinit")
-public func _bjs_StaticPropertyHolder_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_StaticPropertyHolder_deinit")
+@_cdecl("bjs_BridgeJSRuntimeTests_StaticPropertyHolder_deinit")
+public func _bjs_BridgeJSRuntimeTests_StaticPropertyHolder_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    Unmanaged<StaticPropertyHolder>.fromOpaque(pointer).release()
+    Unmanaged<BridgeJSRuntimeTests.StaticPropertyHolder>.fromOpaque(pointer).release()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension StaticPropertyHolder: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
+extension BridgeJSRuntimeTests.StaticPropertyHolder: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
     var jsValue: JSValue {
-        return .object(JSObject(id: UInt32(bitPattern: _bjs_StaticPropertyHolder_wrap(Unmanaged.passRetained(self).toOpaque()))))
+        return .object(JSObject(id: UInt32(bitPattern: _bjs_BridgeJSRuntimeTests_StaticPropertyHolder_wrap(Unmanaged.passRetained(self).toOpaque()))))
     }
     consuming func bridgeJSLowerAsProtocolReturn() -> Int32 {
-        _bjs_StaticPropertyHolder_wrap(Unmanaged.passRetained(self).toOpaque())
+        _bjs_BridgeJSRuntimeTests_StaticPropertyHolder_wrap(Unmanaged.passRetained(self).toOpaque())
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_StaticPropertyHolder_wrap")
-fileprivate func _bjs_StaticPropertyHolder_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
+@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_BridgeJSRuntimeTests_StaticPropertyHolder_wrap")
+fileprivate func _bjs_BridgeJSRuntimeTests_StaticPropertyHolder_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
 #else
-fileprivate func _bjs_StaticPropertyHolder_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+fileprivate func _bjs_BridgeJSRuntimeTests_StaticPropertyHolder_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_StaticPropertyHolder_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
-    return _bjs_StaticPropertyHolder_wrap_extern(pointer)
+@inline(never) fileprivate func _bjs_BridgeJSRuntimeTests_StaticPropertyHolder_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+    return _bjs_BridgeJSRuntimeTests_StaticPropertyHolder_wrap_extern(pointer)
 }
 
-@_expose(wasm, "bjs_DataProcessorManager_init")
-@_cdecl("bjs_DataProcessorManager_init")
-public func _bjs_DataProcessorManager_init(_ processor: Int32) -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DataProcessorManager_init")
+@_cdecl("bjs_BridgeJSRuntimeTests_DataProcessorManager_init")
+public func _bjs_BridgeJSRuntimeTests_DataProcessorManager_init(_ processor: Int32) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = DataProcessorManager(processor: AnyDataProcessor.bridgeJSLiftParameter(processor))
+    let ret = BridgeJSRuntimeTests.DataProcessorManager(processor: AnyDataProcessor.bridgeJSLiftParameter(processor))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DataProcessorManager_incrementByAmount")
-@_cdecl("bjs_DataProcessorManager_incrementByAmount")
-public func _bjs_DataProcessorManager_incrementByAmount(_ _self: UnsafeMutableRawPointer, _ amount: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DataProcessorManager_incrementByAmount")
+@_cdecl("bjs_BridgeJSRuntimeTests_DataProcessorManager_incrementByAmount")
+public func _bjs_BridgeJSRuntimeTests_DataProcessorManager_incrementByAmount(_ _self: UnsafeMutableRawPointer, _ amount: Int32) -> Void {
     #if arch(wasm32)
-    DataProcessorManager.bridgeJSLiftParameter(_self).incrementByAmount(_: Int.bridgeJSLiftParameter(amount))
+    BridgeJSRuntimeTests.DataProcessorManager.bridgeJSLiftParameter(_self).incrementByAmount(_: Int.bridgeJSLiftParameter(amount))
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DataProcessorManager_setProcessorLabel")
-@_cdecl("bjs_DataProcessorManager_setProcessorLabel")
-public func _bjs_DataProcessorManager_setProcessorLabel(_ _self: UnsafeMutableRawPointer, _ prefixBytes: Int32, _ prefixLength: Int32, _ suffixBytes: Int32, _ suffixLength: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DataProcessorManager_setProcessorLabel")
+@_cdecl("bjs_BridgeJSRuntimeTests_DataProcessorManager_setProcessorLabel")
+public func _bjs_BridgeJSRuntimeTests_DataProcessorManager_setProcessorLabel(_ _self: UnsafeMutableRawPointer, _ prefixBytes: Int32, _ prefixLength: Int32, _ suffixBytes: Int32, _ suffixLength: Int32) -> Void {
     #if arch(wasm32)
-    DataProcessorManager.bridgeJSLiftParameter(_self).setProcessorLabel(_: String.bridgeJSLiftParameter(prefixBytes, prefixLength), _: String.bridgeJSLiftParameter(suffixBytes, suffixLength))
+    BridgeJSRuntimeTests.DataProcessorManager.bridgeJSLiftParameter(_self).setProcessorLabel(_: String.bridgeJSLiftParameter(prefixBytes, prefixLength), _: String.bridgeJSLiftParameter(suffixBytes, suffixLength))
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DataProcessorManager_isProcessorEven")
-@_cdecl("bjs_DataProcessorManager_isProcessorEven")
-public func _bjs_DataProcessorManager_isProcessorEven(_ _self: UnsafeMutableRawPointer) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DataProcessorManager_isProcessorEven")
+@_cdecl("bjs_BridgeJSRuntimeTests_DataProcessorManager_isProcessorEven")
+public func _bjs_BridgeJSRuntimeTests_DataProcessorManager_isProcessorEven(_ _self: UnsafeMutableRawPointer) -> Int32 {
     #if arch(wasm32)
-    let ret = DataProcessorManager.bridgeJSLiftParameter(_self).isProcessorEven()
+    let ret = BridgeJSRuntimeTests.DataProcessorManager.bridgeJSLiftParameter(_self).isProcessorEven()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DataProcessorManager_getProcessorLabel")
-@_cdecl("bjs_DataProcessorManager_getProcessorLabel")
-public func _bjs_DataProcessorManager_getProcessorLabel(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DataProcessorManager_getProcessorLabel")
+@_cdecl("bjs_BridgeJSRuntimeTests_DataProcessorManager_getProcessorLabel")
+public func _bjs_BridgeJSRuntimeTests_DataProcessorManager_getProcessorLabel(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = DataProcessorManager.bridgeJSLiftParameter(_self).getProcessorLabel()
+    let ret = BridgeJSRuntimeTests.DataProcessorManager.bridgeJSLiftParameter(_self).getProcessorLabel()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DataProcessorManager_getCurrentValue")
-@_cdecl("bjs_DataProcessorManager_getCurrentValue")
-public func _bjs_DataProcessorManager_getCurrentValue(_ _self: UnsafeMutableRawPointer) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DataProcessorManager_getCurrentValue")
+@_cdecl("bjs_BridgeJSRuntimeTests_DataProcessorManager_getCurrentValue")
+public func _bjs_BridgeJSRuntimeTests_DataProcessorManager_getCurrentValue(_ _self: UnsafeMutableRawPointer) -> Int32 {
     #if arch(wasm32)
-    let ret = DataProcessorManager.bridgeJSLiftParameter(_self).getCurrentValue()
+    let ret = BridgeJSRuntimeTests.DataProcessorManager.bridgeJSLiftParameter(_self).getCurrentValue()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DataProcessorManager_incrementBoth")
-@_cdecl("bjs_DataProcessorManager_incrementBoth")
-public func _bjs_DataProcessorManager_incrementBoth(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DataProcessorManager_incrementBoth")
+@_cdecl("bjs_BridgeJSRuntimeTests_DataProcessorManager_incrementBoth")
+public func _bjs_BridgeJSRuntimeTests_DataProcessorManager_incrementBoth(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    DataProcessorManager.bridgeJSLiftParameter(_self).incrementBoth()
+    BridgeJSRuntimeTests.DataProcessorManager.bridgeJSLiftParameter(_self).incrementBoth()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DataProcessorManager_getBackupValue")
-@_cdecl("bjs_DataProcessorManager_getBackupValue")
-public func _bjs_DataProcessorManager_getBackupValue(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DataProcessorManager_getBackupValue")
+@_cdecl("bjs_BridgeJSRuntimeTests_DataProcessorManager_getBackupValue")
+public func _bjs_BridgeJSRuntimeTests_DataProcessorManager_getBackupValue(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = DataProcessorManager.bridgeJSLiftParameter(_self).getBackupValue()
+    let ret = BridgeJSRuntimeTests.DataProcessorManager.bridgeJSLiftParameter(_self).getBackupValue()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DataProcessorManager_hasBackup")
-@_cdecl("bjs_DataProcessorManager_hasBackup")
-public func _bjs_DataProcessorManager_hasBackup(_ _self: UnsafeMutableRawPointer) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DataProcessorManager_hasBackup")
+@_cdecl("bjs_BridgeJSRuntimeTests_DataProcessorManager_hasBackup")
+public func _bjs_BridgeJSRuntimeTests_DataProcessorManager_hasBackup(_ _self: UnsafeMutableRawPointer) -> Int32 {
     #if arch(wasm32)
-    let ret = DataProcessorManager.bridgeJSLiftParameter(_self).hasBackup()
+    let ret = BridgeJSRuntimeTests.DataProcessorManager.bridgeJSLiftParameter(_self).hasBackup()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DataProcessorManager_getProcessorOptionalTag")
-@_cdecl("bjs_DataProcessorManager_getProcessorOptionalTag")
-public func _bjs_DataProcessorManager_getProcessorOptionalTag(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DataProcessorManager_getProcessorOptionalTag")
+@_cdecl("bjs_BridgeJSRuntimeTests_DataProcessorManager_getProcessorOptionalTag")
+public func _bjs_BridgeJSRuntimeTests_DataProcessorManager_getProcessorOptionalTag(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = DataProcessorManager.bridgeJSLiftParameter(_self).getProcessorOptionalTag()
+    let ret = BridgeJSRuntimeTests.DataProcessorManager.bridgeJSLiftParameter(_self).getProcessorOptionalTag()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DataProcessorManager_setProcessorOptionalTag")
-@_cdecl("bjs_DataProcessorManager_setProcessorOptionalTag")
-public func _bjs_DataProcessorManager_setProcessorOptionalTag(_ _self: UnsafeMutableRawPointer, _ tagIsSome: Int32, _ tagBytes: Int32, _ tagLength: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DataProcessorManager_setProcessorOptionalTag")
+@_cdecl("bjs_BridgeJSRuntimeTests_DataProcessorManager_setProcessorOptionalTag")
+public func _bjs_BridgeJSRuntimeTests_DataProcessorManager_setProcessorOptionalTag(_ _self: UnsafeMutableRawPointer, _ tagIsSome: Int32, _ tagBytes: Int32, _ tagLength: Int32) -> Void {
     #if arch(wasm32)
-    DataProcessorManager.bridgeJSLiftParameter(_self).setProcessorOptionalTag(_: Optional<String>.bridgeJSLiftParameter(tagIsSome, tagBytes, tagLength))
+    BridgeJSRuntimeTests.DataProcessorManager.bridgeJSLiftParameter(_self).setProcessorOptionalTag(_: Optional<String>.bridgeJSLiftParameter(tagIsSome, tagBytes, tagLength))
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DataProcessorManager_getProcessorOptionalCount")
-@_cdecl("bjs_DataProcessorManager_getProcessorOptionalCount")
-public func _bjs_DataProcessorManager_getProcessorOptionalCount(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DataProcessorManager_getProcessorOptionalCount")
+@_cdecl("bjs_BridgeJSRuntimeTests_DataProcessorManager_getProcessorOptionalCount")
+public func _bjs_BridgeJSRuntimeTests_DataProcessorManager_getProcessorOptionalCount(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = DataProcessorManager.bridgeJSLiftParameter(_self).getProcessorOptionalCount()
+    let ret = BridgeJSRuntimeTests.DataProcessorManager.bridgeJSLiftParameter(_self).getProcessorOptionalCount()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DataProcessorManager_setProcessorOptionalCount")
-@_cdecl("bjs_DataProcessorManager_setProcessorOptionalCount")
-public func _bjs_DataProcessorManager_setProcessorOptionalCount(_ _self: UnsafeMutableRawPointer, _ countIsSome: Int32, _ countValue: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DataProcessorManager_setProcessorOptionalCount")
+@_cdecl("bjs_BridgeJSRuntimeTests_DataProcessorManager_setProcessorOptionalCount")
+public func _bjs_BridgeJSRuntimeTests_DataProcessorManager_setProcessorOptionalCount(_ _self: UnsafeMutableRawPointer, _ countIsSome: Int32, _ countValue: Int32) -> Void {
     #if arch(wasm32)
-    DataProcessorManager.bridgeJSLiftParameter(_self).setProcessorOptionalCount(_: Optional<Int>.bridgeJSLiftParameter(countIsSome, countValue))
+    BridgeJSRuntimeTests.DataProcessorManager.bridgeJSLiftParameter(_self).setProcessorOptionalCount(_: Optional<Int>.bridgeJSLiftParameter(countIsSome, countValue))
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DataProcessorManager_getProcessorDirection")
-@_cdecl("bjs_DataProcessorManager_getProcessorDirection")
-public func _bjs_DataProcessorManager_getProcessorDirection(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DataProcessorManager_getProcessorDirection")
+@_cdecl("bjs_BridgeJSRuntimeTests_DataProcessorManager_getProcessorDirection")
+public func _bjs_BridgeJSRuntimeTests_DataProcessorManager_getProcessorDirection(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = DataProcessorManager.bridgeJSLiftParameter(_self).getProcessorDirection()
+    let ret = BridgeJSRuntimeTests.DataProcessorManager.bridgeJSLiftParameter(_self).getProcessorDirection()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DataProcessorManager_setProcessorDirection")
-@_cdecl("bjs_DataProcessorManager_setProcessorDirection")
-public func _bjs_DataProcessorManager_setProcessorDirection(_ _self: UnsafeMutableRawPointer, _ directionIsSome: Int32, _ directionValue: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DataProcessorManager_setProcessorDirection")
+@_cdecl("bjs_BridgeJSRuntimeTests_DataProcessorManager_setProcessorDirection")
+public func _bjs_BridgeJSRuntimeTests_DataProcessorManager_setProcessorDirection(_ _self: UnsafeMutableRawPointer, _ directionIsSome: Int32, _ directionValue: Int32) -> Void {
     #if arch(wasm32)
-    DataProcessorManager.bridgeJSLiftParameter(_self).setProcessorDirection(_: Optional<Direction>.bridgeJSLiftParameter(directionIsSome, directionValue))
+    BridgeJSRuntimeTests.DataProcessorManager.bridgeJSLiftParameter(_self).setProcessorDirection(_: Optional<BridgeJSRuntimeTests.Direction>.bridgeJSLiftParameter(directionIsSome, directionValue))
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DataProcessorManager_getProcessorTheme")
-@_cdecl("bjs_DataProcessorManager_getProcessorTheme")
-public func _bjs_DataProcessorManager_getProcessorTheme(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DataProcessorManager_getProcessorTheme")
+@_cdecl("bjs_BridgeJSRuntimeTests_DataProcessorManager_getProcessorTheme")
+public func _bjs_BridgeJSRuntimeTests_DataProcessorManager_getProcessorTheme(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = DataProcessorManager.bridgeJSLiftParameter(_self).getProcessorTheme()
+    let ret = BridgeJSRuntimeTests.DataProcessorManager.bridgeJSLiftParameter(_self).getProcessorTheme()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DataProcessorManager_setProcessorTheme")
-@_cdecl("bjs_DataProcessorManager_setProcessorTheme")
-public func _bjs_DataProcessorManager_setProcessorTheme(_ _self: UnsafeMutableRawPointer, _ themeIsSome: Int32, _ themeBytes: Int32, _ themeLength: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DataProcessorManager_setProcessorTheme")
+@_cdecl("bjs_BridgeJSRuntimeTests_DataProcessorManager_setProcessorTheme")
+public func _bjs_BridgeJSRuntimeTests_DataProcessorManager_setProcessorTheme(_ _self: UnsafeMutableRawPointer, _ themeIsSome: Int32, _ themeBytes: Int32, _ themeLength: Int32) -> Void {
     #if arch(wasm32)
-    DataProcessorManager.bridgeJSLiftParameter(_self).setProcessorTheme(_: Optional<Theme>.bridgeJSLiftParameter(themeIsSome, themeBytes, themeLength))
+    BridgeJSRuntimeTests.DataProcessorManager.bridgeJSLiftParameter(_self).setProcessorTheme(_: Optional<BridgeJSRuntimeTests.Theme>.bridgeJSLiftParameter(themeIsSome, themeBytes, themeLength))
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DataProcessorManager_getProcessorHttpStatus")
-@_cdecl("bjs_DataProcessorManager_getProcessorHttpStatus")
-public func _bjs_DataProcessorManager_getProcessorHttpStatus(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DataProcessorManager_getProcessorHttpStatus")
+@_cdecl("bjs_BridgeJSRuntimeTests_DataProcessorManager_getProcessorHttpStatus")
+public func _bjs_BridgeJSRuntimeTests_DataProcessorManager_getProcessorHttpStatus(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = DataProcessorManager.bridgeJSLiftParameter(_self).getProcessorHttpStatus()
+    let ret = BridgeJSRuntimeTests.DataProcessorManager.bridgeJSLiftParameter(_self).getProcessorHttpStatus()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DataProcessorManager_setProcessorHttpStatus")
-@_cdecl("bjs_DataProcessorManager_setProcessorHttpStatus")
-public func _bjs_DataProcessorManager_setProcessorHttpStatus(_ _self: UnsafeMutableRawPointer, _ statusIsSome: Int32, _ statusValue: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DataProcessorManager_setProcessorHttpStatus")
+@_cdecl("bjs_BridgeJSRuntimeTests_DataProcessorManager_setProcessorHttpStatus")
+public func _bjs_BridgeJSRuntimeTests_DataProcessorManager_setProcessorHttpStatus(_ _self: UnsafeMutableRawPointer, _ statusIsSome: Int32, _ statusValue: Int32) -> Void {
     #if arch(wasm32)
-    DataProcessorManager.bridgeJSLiftParameter(_self).setProcessorHttpStatus(_: Optional<HttpStatus>.bridgeJSLiftParameter(statusIsSome, statusValue))
+    BridgeJSRuntimeTests.DataProcessorManager.bridgeJSLiftParameter(_self).setProcessorHttpStatus(_: Optional<BridgeJSRuntimeTests.HttpStatus>.bridgeJSLiftParameter(statusIsSome, statusValue))
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DataProcessorManager_getProcessorAPIResult")
-@_cdecl("bjs_DataProcessorManager_getProcessorAPIResult")
-public func _bjs_DataProcessorManager_getProcessorAPIResult(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DataProcessorManager_getProcessorAPIResult")
+@_cdecl("bjs_BridgeJSRuntimeTests_DataProcessorManager_getProcessorAPIResult")
+public func _bjs_BridgeJSRuntimeTests_DataProcessorManager_getProcessorAPIResult(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = DataProcessorManager.bridgeJSLiftParameter(_self).getProcessorAPIResult()
+    let ret = BridgeJSRuntimeTests.DataProcessorManager.bridgeJSLiftParameter(_self).getProcessorAPIResult()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DataProcessorManager_setProcessorAPIResult")
-@_cdecl("bjs_DataProcessorManager_setProcessorAPIResult")
-public func _bjs_DataProcessorManager_setProcessorAPIResult(_ _self: UnsafeMutableRawPointer, _ apiResultIsSome: Int32, _ apiResultCaseId: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DataProcessorManager_setProcessorAPIResult")
+@_cdecl("bjs_BridgeJSRuntimeTests_DataProcessorManager_setProcessorAPIResult")
+public func _bjs_BridgeJSRuntimeTests_DataProcessorManager_setProcessorAPIResult(_ _self: UnsafeMutableRawPointer, _ apiResultIsSome: Int32, _ apiResultCaseId: Int32) -> Void {
     #if arch(wasm32)
-    DataProcessorManager.bridgeJSLiftParameter(_self).setProcessorAPIResult(_: Optional<APIResult>.bridgeJSLiftParameter(apiResultIsSome, apiResultCaseId))
+    BridgeJSRuntimeTests.DataProcessorManager.bridgeJSLiftParameter(_self).setProcessorAPIResult(_: Optional<BridgeJSRuntimeTests.APIResult>.bridgeJSLiftParameter(apiResultIsSome, apiResultCaseId))
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DataProcessorManager_processor_get")
-@_cdecl("bjs_DataProcessorManager_processor_get")
-public func _bjs_DataProcessorManager_processor_get(_ _self: UnsafeMutableRawPointer) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DataProcessorManager_processor_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_DataProcessorManager_processor_get")
+public func _bjs_BridgeJSRuntimeTests_DataProcessorManager_processor_get(_ _self: UnsafeMutableRawPointer) -> Int32 {
     #if arch(wasm32)
-    let ret = DataProcessorManager.bridgeJSLiftParameter(_self).processor as! _BridgedSwiftProtocolExportable
+    let ret = BridgeJSRuntimeTests.DataProcessorManager.bridgeJSLiftParameter(_self).processor as! _BridgedSwiftProtocolExportable
     return ret.bridgeJSLowerAsProtocolReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DataProcessorManager_processor_set")
-@_cdecl("bjs_DataProcessorManager_processor_set")
-public func _bjs_DataProcessorManager_processor_set(_ _self: UnsafeMutableRawPointer, _ value: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DataProcessorManager_processor_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_DataProcessorManager_processor_set")
+public func _bjs_BridgeJSRuntimeTests_DataProcessorManager_processor_set(_ _self: UnsafeMutableRawPointer, _ value: Int32) -> Void {
     #if arch(wasm32)
-    DataProcessorManager.bridgeJSLiftParameter(_self).processor = AnyDataProcessor.bridgeJSLiftParameter(value)
+    BridgeJSRuntimeTests.DataProcessorManager.bridgeJSLiftParameter(_self).processor = AnyDataProcessor.bridgeJSLiftParameter(value)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DataProcessorManager_backupProcessor_get")
-@_cdecl("bjs_DataProcessorManager_backupProcessor_get")
-public func _bjs_DataProcessorManager_backupProcessor_get(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DataProcessorManager_backupProcessor_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_DataProcessorManager_backupProcessor_get")
+public func _bjs_BridgeJSRuntimeTests_DataProcessorManager_backupProcessor_get(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = DataProcessorManager.bridgeJSLiftParameter(_self).backupProcessor
+    let ret = BridgeJSRuntimeTests.DataProcessorManager.bridgeJSLiftParameter(_self).backupProcessor
     if let ret {
         _swift_js_return_optional_object(1, (ret as! _BridgedSwiftProtocolExportable).bridgeJSLowerAsProtocolReturn())
     } else {
@@ -12134,423 +12134,423 @@ public func _bjs_DataProcessorManager_backupProcessor_get(_ _self: UnsafeMutable
     #endif
 }
 
-@_expose(wasm, "bjs_DataProcessorManager_backupProcessor_set")
-@_cdecl("bjs_DataProcessorManager_backupProcessor_set")
-public func _bjs_DataProcessorManager_backupProcessor_set(_ _self: UnsafeMutableRawPointer, _ valueIsSome: Int32, _ valueValue: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DataProcessorManager_backupProcessor_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_DataProcessorManager_backupProcessor_set")
+public func _bjs_BridgeJSRuntimeTests_DataProcessorManager_backupProcessor_set(_ _self: UnsafeMutableRawPointer, _ valueIsSome: Int32, _ valueValue: Int32) -> Void {
     #if arch(wasm32)
-    DataProcessorManager.bridgeJSLiftParameter(_self).backupProcessor = Optional<AnyDataProcessor>.bridgeJSLiftParameter(valueIsSome, valueValue)
+    BridgeJSRuntimeTests.DataProcessorManager.bridgeJSLiftParameter(_self).backupProcessor = Optional<AnyDataProcessor>.bridgeJSLiftParameter(valueIsSome, valueValue)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DataProcessorManager_deinit")
-@_cdecl("bjs_DataProcessorManager_deinit")
-public func _bjs_DataProcessorManager_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_DataProcessorManager_deinit")
+@_cdecl("bjs_BridgeJSRuntimeTests_DataProcessorManager_deinit")
+public func _bjs_BridgeJSRuntimeTests_DataProcessorManager_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    Unmanaged<DataProcessorManager>.fromOpaque(pointer).release()
+    Unmanaged<BridgeJSRuntimeTests.DataProcessorManager>.fromOpaque(pointer).release()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension DataProcessorManager: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
+extension BridgeJSRuntimeTests.DataProcessorManager: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
     var jsValue: JSValue {
-        return .object(JSObject(id: UInt32(bitPattern: _bjs_DataProcessorManager_wrap(Unmanaged.passRetained(self).toOpaque()))))
+        return .object(JSObject(id: UInt32(bitPattern: _bjs_BridgeJSRuntimeTests_DataProcessorManager_wrap(Unmanaged.passRetained(self).toOpaque()))))
     }
     consuming func bridgeJSLowerAsProtocolReturn() -> Int32 {
-        _bjs_DataProcessorManager_wrap(Unmanaged.passRetained(self).toOpaque())
+        _bjs_BridgeJSRuntimeTests_DataProcessorManager_wrap(Unmanaged.passRetained(self).toOpaque())
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_DataProcessorManager_wrap")
-fileprivate func _bjs_DataProcessorManager_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
+@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_BridgeJSRuntimeTests_DataProcessorManager_wrap")
+fileprivate func _bjs_BridgeJSRuntimeTests_DataProcessorManager_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
 #else
-fileprivate func _bjs_DataProcessorManager_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+fileprivate func _bjs_BridgeJSRuntimeTests_DataProcessorManager_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_DataProcessorManager_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
-    return _bjs_DataProcessorManager_wrap_extern(pointer)
+@inline(never) fileprivate func _bjs_BridgeJSRuntimeTests_DataProcessorManager_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+    return _bjs_BridgeJSRuntimeTests_DataProcessorManager_wrap_extern(pointer)
 }
 
-@_expose(wasm, "bjs_SwiftDataProcessor_init")
-@_cdecl("bjs_SwiftDataProcessor_init")
-public func _bjs_SwiftDataProcessor_init() -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_SwiftDataProcessor_init")
+@_cdecl("bjs_BridgeJSRuntimeTests_SwiftDataProcessor_init")
+public func _bjs_BridgeJSRuntimeTests_SwiftDataProcessor_init() -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = SwiftDataProcessor()
+    let ret = BridgeJSRuntimeTests.SwiftDataProcessor()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_SwiftDataProcessor_increment")
-@_cdecl("bjs_SwiftDataProcessor_increment")
-public func _bjs_SwiftDataProcessor_increment(_ _self: UnsafeMutableRawPointer, _ amount: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_SwiftDataProcessor_increment")
+@_cdecl("bjs_BridgeJSRuntimeTests_SwiftDataProcessor_increment")
+public func _bjs_BridgeJSRuntimeTests_SwiftDataProcessor_increment(_ _self: UnsafeMutableRawPointer, _ amount: Int32) -> Void {
     #if arch(wasm32)
-    SwiftDataProcessor.bridgeJSLiftParameter(_self).increment(by: Int.bridgeJSLiftParameter(amount))
+    BridgeJSRuntimeTests.SwiftDataProcessor.bridgeJSLiftParameter(_self).increment(by: Int.bridgeJSLiftParameter(amount))
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_SwiftDataProcessor_getValue")
-@_cdecl("bjs_SwiftDataProcessor_getValue")
-public func _bjs_SwiftDataProcessor_getValue(_ _self: UnsafeMutableRawPointer) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_SwiftDataProcessor_getValue")
+@_cdecl("bjs_BridgeJSRuntimeTests_SwiftDataProcessor_getValue")
+public func _bjs_BridgeJSRuntimeTests_SwiftDataProcessor_getValue(_ _self: UnsafeMutableRawPointer) -> Int32 {
     #if arch(wasm32)
-    let ret = SwiftDataProcessor.bridgeJSLiftParameter(_self).getValue()
+    let ret = BridgeJSRuntimeTests.SwiftDataProcessor.bridgeJSLiftParameter(_self).getValue()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_SwiftDataProcessor_setLabelElements")
-@_cdecl("bjs_SwiftDataProcessor_setLabelElements")
-public func _bjs_SwiftDataProcessor_setLabelElements(_ _self: UnsafeMutableRawPointer, _ labelPrefixBytes: Int32, _ labelPrefixLength: Int32, _ labelSuffixBytes: Int32, _ labelSuffixLength: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_SwiftDataProcessor_setLabelElements")
+@_cdecl("bjs_BridgeJSRuntimeTests_SwiftDataProcessor_setLabelElements")
+public func _bjs_BridgeJSRuntimeTests_SwiftDataProcessor_setLabelElements(_ _self: UnsafeMutableRawPointer, _ labelPrefixBytes: Int32, _ labelPrefixLength: Int32, _ labelSuffixBytes: Int32, _ labelSuffixLength: Int32) -> Void {
     #if arch(wasm32)
-    SwiftDataProcessor.bridgeJSLiftParameter(_self).setLabelElements(_: String.bridgeJSLiftParameter(labelPrefixBytes, labelPrefixLength), _: String.bridgeJSLiftParameter(labelSuffixBytes, labelSuffixLength))
+    BridgeJSRuntimeTests.SwiftDataProcessor.bridgeJSLiftParameter(_self).setLabelElements(_: String.bridgeJSLiftParameter(labelPrefixBytes, labelPrefixLength), _: String.bridgeJSLiftParameter(labelSuffixBytes, labelSuffixLength))
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_SwiftDataProcessor_getLabel")
-@_cdecl("bjs_SwiftDataProcessor_getLabel")
-public func _bjs_SwiftDataProcessor_getLabel(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_SwiftDataProcessor_getLabel")
+@_cdecl("bjs_BridgeJSRuntimeTests_SwiftDataProcessor_getLabel")
+public func _bjs_BridgeJSRuntimeTests_SwiftDataProcessor_getLabel(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = SwiftDataProcessor.bridgeJSLiftParameter(_self).getLabel()
+    let ret = BridgeJSRuntimeTests.SwiftDataProcessor.bridgeJSLiftParameter(_self).getLabel()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_SwiftDataProcessor_isEven")
-@_cdecl("bjs_SwiftDataProcessor_isEven")
-public func _bjs_SwiftDataProcessor_isEven(_ _self: UnsafeMutableRawPointer) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_SwiftDataProcessor_isEven")
+@_cdecl("bjs_BridgeJSRuntimeTests_SwiftDataProcessor_isEven")
+public func _bjs_BridgeJSRuntimeTests_SwiftDataProcessor_isEven(_ _self: UnsafeMutableRawPointer) -> Int32 {
     #if arch(wasm32)
-    let ret = SwiftDataProcessor.bridgeJSLiftParameter(_self).isEven()
+    let ret = BridgeJSRuntimeTests.SwiftDataProcessor.bridgeJSLiftParameter(_self).isEven()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_SwiftDataProcessor_processGreeter")
-@_cdecl("bjs_SwiftDataProcessor_processGreeter")
-public func _bjs_SwiftDataProcessor_processGreeter(_ _self: UnsafeMutableRawPointer, _ greeter: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_SwiftDataProcessor_processGreeter")
+@_cdecl("bjs_BridgeJSRuntimeTests_SwiftDataProcessor_processGreeter")
+public func _bjs_BridgeJSRuntimeTests_SwiftDataProcessor_processGreeter(_ _self: UnsafeMutableRawPointer, _ greeter: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = SwiftDataProcessor.bridgeJSLiftParameter(_self).processGreeter(_: Greeter.bridgeJSLiftParameter(greeter))
+    let ret = BridgeJSRuntimeTests.SwiftDataProcessor.bridgeJSLiftParameter(_self).processGreeter(_: BridgeJSRuntimeTests.Greeter.bridgeJSLiftParameter(greeter))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_SwiftDataProcessor_createGreeter")
-@_cdecl("bjs_SwiftDataProcessor_createGreeter")
-public func _bjs_SwiftDataProcessor_createGreeter(_ _self: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_SwiftDataProcessor_createGreeter")
+@_cdecl("bjs_BridgeJSRuntimeTests_SwiftDataProcessor_createGreeter")
+public func _bjs_BridgeJSRuntimeTests_SwiftDataProcessor_createGreeter(_ _self: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = SwiftDataProcessor.bridgeJSLiftParameter(_self).createGreeter()
+    let ret = BridgeJSRuntimeTests.SwiftDataProcessor.bridgeJSLiftParameter(_self).createGreeter()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_SwiftDataProcessor_processOptionalGreeter")
-@_cdecl("bjs_SwiftDataProcessor_processOptionalGreeter")
-public func _bjs_SwiftDataProcessor_processOptionalGreeter(_ _self: UnsafeMutableRawPointer, _ greeterIsSome: Int32, _ greeterValue: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_SwiftDataProcessor_processOptionalGreeter")
+@_cdecl("bjs_BridgeJSRuntimeTests_SwiftDataProcessor_processOptionalGreeter")
+public func _bjs_BridgeJSRuntimeTests_SwiftDataProcessor_processOptionalGreeter(_ _self: UnsafeMutableRawPointer, _ greeterIsSome: Int32, _ greeterValue: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = SwiftDataProcessor.bridgeJSLiftParameter(_self).processOptionalGreeter(_: Optional<Greeter>.bridgeJSLiftParameter(greeterIsSome, greeterValue))
+    let ret = BridgeJSRuntimeTests.SwiftDataProcessor.bridgeJSLiftParameter(_self).processOptionalGreeter(_: Optional<BridgeJSRuntimeTests.Greeter>.bridgeJSLiftParameter(greeterIsSome, greeterValue))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_SwiftDataProcessor_createOptionalGreeter")
-@_cdecl("bjs_SwiftDataProcessor_createOptionalGreeter")
-public func _bjs_SwiftDataProcessor_createOptionalGreeter(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_SwiftDataProcessor_createOptionalGreeter")
+@_cdecl("bjs_BridgeJSRuntimeTests_SwiftDataProcessor_createOptionalGreeter")
+public func _bjs_BridgeJSRuntimeTests_SwiftDataProcessor_createOptionalGreeter(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = SwiftDataProcessor.bridgeJSLiftParameter(_self).createOptionalGreeter()
+    let ret = BridgeJSRuntimeTests.SwiftDataProcessor.bridgeJSLiftParameter(_self).createOptionalGreeter()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_SwiftDataProcessor_handleAPIResult")
-@_cdecl("bjs_SwiftDataProcessor_handleAPIResult")
-public func _bjs_SwiftDataProcessor_handleAPIResult(_ _self: UnsafeMutableRawPointer, _ resultIsSome: Int32, _ resultCaseId: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_SwiftDataProcessor_handleAPIResult")
+@_cdecl("bjs_BridgeJSRuntimeTests_SwiftDataProcessor_handleAPIResult")
+public func _bjs_BridgeJSRuntimeTests_SwiftDataProcessor_handleAPIResult(_ _self: UnsafeMutableRawPointer, _ resultIsSome: Int32, _ resultCaseId: Int32) -> Void {
     #if arch(wasm32)
-    SwiftDataProcessor.bridgeJSLiftParameter(_self).handleAPIResult(_: Optional<APIResult>.bridgeJSLiftParameter(resultIsSome, resultCaseId))
+    BridgeJSRuntimeTests.SwiftDataProcessor.bridgeJSLiftParameter(_self).handleAPIResult(_: Optional<BridgeJSRuntimeTests.APIResult>.bridgeJSLiftParameter(resultIsSome, resultCaseId))
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_SwiftDataProcessor_getAPIResult")
-@_cdecl("bjs_SwiftDataProcessor_getAPIResult")
-public func _bjs_SwiftDataProcessor_getAPIResult(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_SwiftDataProcessor_getAPIResult")
+@_cdecl("bjs_BridgeJSRuntimeTests_SwiftDataProcessor_getAPIResult")
+public func _bjs_BridgeJSRuntimeTests_SwiftDataProcessor_getAPIResult(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = SwiftDataProcessor.bridgeJSLiftParameter(_self).getAPIResult()
+    let ret = BridgeJSRuntimeTests.SwiftDataProcessor.bridgeJSLiftParameter(_self).getAPIResult()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_SwiftDataProcessor_count_get")
-@_cdecl("bjs_SwiftDataProcessor_count_get")
-public func _bjs_SwiftDataProcessor_count_get(_ _self: UnsafeMutableRawPointer) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_SwiftDataProcessor_count_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_SwiftDataProcessor_count_get")
+public func _bjs_BridgeJSRuntimeTests_SwiftDataProcessor_count_get(_ _self: UnsafeMutableRawPointer) -> Int32 {
     #if arch(wasm32)
-    let ret = SwiftDataProcessor.bridgeJSLiftParameter(_self).count
+    let ret = BridgeJSRuntimeTests.SwiftDataProcessor.bridgeJSLiftParameter(_self).count
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_SwiftDataProcessor_count_set")
-@_cdecl("bjs_SwiftDataProcessor_count_set")
-public func _bjs_SwiftDataProcessor_count_set(_ _self: UnsafeMutableRawPointer, _ value: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_SwiftDataProcessor_count_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_SwiftDataProcessor_count_set")
+public func _bjs_BridgeJSRuntimeTests_SwiftDataProcessor_count_set(_ _self: UnsafeMutableRawPointer, _ value: Int32) -> Void {
     #if arch(wasm32)
-    SwiftDataProcessor.bridgeJSLiftParameter(_self).count = Int.bridgeJSLiftParameter(value)
+    BridgeJSRuntimeTests.SwiftDataProcessor.bridgeJSLiftParameter(_self).count = Int.bridgeJSLiftParameter(value)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_SwiftDataProcessor_name_get")
-@_cdecl("bjs_SwiftDataProcessor_name_get")
-public func _bjs_SwiftDataProcessor_name_get(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_SwiftDataProcessor_name_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_SwiftDataProcessor_name_get")
+public func _bjs_BridgeJSRuntimeTests_SwiftDataProcessor_name_get(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = SwiftDataProcessor.bridgeJSLiftParameter(_self).name
+    let ret = BridgeJSRuntimeTests.SwiftDataProcessor.bridgeJSLiftParameter(_self).name
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_SwiftDataProcessor_optionalTag_get")
-@_cdecl("bjs_SwiftDataProcessor_optionalTag_get")
-public func _bjs_SwiftDataProcessor_optionalTag_get(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_SwiftDataProcessor_optionalTag_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_SwiftDataProcessor_optionalTag_get")
+public func _bjs_BridgeJSRuntimeTests_SwiftDataProcessor_optionalTag_get(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = SwiftDataProcessor.bridgeJSLiftParameter(_self).optionalTag
+    let ret = BridgeJSRuntimeTests.SwiftDataProcessor.bridgeJSLiftParameter(_self).optionalTag
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_SwiftDataProcessor_optionalTag_set")
-@_cdecl("bjs_SwiftDataProcessor_optionalTag_set")
-public func _bjs_SwiftDataProcessor_optionalTag_set(_ _self: UnsafeMutableRawPointer, _ valueIsSome: Int32, _ valueBytes: Int32, _ valueLength: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_SwiftDataProcessor_optionalTag_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_SwiftDataProcessor_optionalTag_set")
+public func _bjs_BridgeJSRuntimeTests_SwiftDataProcessor_optionalTag_set(_ _self: UnsafeMutableRawPointer, _ valueIsSome: Int32, _ valueBytes: Int32, _ valueLength: Int32) -> Void {
     #if arch(wasm32)
-    SwiftDataProcessor.bridgeJSLiftParameter(_self).optionalTag = Optional<String>.bridgeJSLiftParameter(valueIsSome, valueBytes, valueLength)
+    BridgeJSRuntimeTests.SwiftDataProcessor.bridgeJSLiftParameter(_self).optionalTag = Optional<String>.bridgeJSLiftParameter(valueIsSome, valueBytes, valueLength)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_SwiftDataProcessor_optionalCount_get")
-@_cdecl("bjs_SwiftDataProcessor_optionalCount_get")
-public func _bjs_SwiftDataProcessor_optionalCount_get(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_SwiftDataProcessor_optionalCount_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_SwiftDataProcessor_optionalCount_get")
+public func _bjs_BridgeJSRuntimeTests_SwiftDataProcessor_optionalCount_get(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = SwiftDataProcessor.bridgeJSLiftParameter(_self).optionalCount
+    let ret = BridgeJSRuntimeTests.SwiftDataProcessor.bridgeJSLiftParameter(_self).optionalCount
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_SwiftDataProcessor_optionalCount_set")
-@_cdecl("bjs_SwiftDataProcessor_optionalCount_set")
-public func _bjs_SwiftDataProcessor_optionalCount_set(_ _self: UnsafeMutableRawPointer, _ valueIsSome: Int32, _ valueValue: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_SwiftDataProcessor_optionalCount_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_SwiftDataProcessor_optionalCount_set")
+public func _bjs_BridgeJSRuntimeTests_SwiftDataProcessor_optionalCount_set(_ _self: UnsafeMutableRawPointer, _ valueIsSome: Int32, _ valueValue: Int32) -> Void {
     #if arch(wasm32)
-    SwiftDataProcessor.bridgeJSLiftParameter(_self).optionalCount = Optional<Int>.bridgeJSLiftParameter(valueIsSome, valueValue)
+    BridgeJSRuntimeTests.SwiftDataProcessor.bridgeJSLiftParameter(_self).optionalCount = Optional<Int>.bridgeJSLiftParameter(valueIsSome, valueValue)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_SwiftDataProcessor_direction_get")
-@_cdecl("bjs_SwiftDataProcessor_direction_get")
-public func _bjs_SwiftDataProcessor_direction_get(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_SwiftDataProcessor_direction_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_SwiftDataProcessor_direction_get")
+public func _bjs_BridgeJSRuntimeTests_SwiftDataProcessor_direction_get(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = SwiftDataProcessor.bridgeJSLiftParameter(_self).direction
+    let ret = BridgeJSRuntimeTests.SwiftDataProcessor.bridgeJSLiftParameter(_self).direction
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_SwiftDataProcessor_direction_set")
-@_cdecl("bjs_SwiftDataProcessor_direction_set")
-public func _bjs_SwiftDataProcessor_direction_set(_ _self: UnsafeMutableRawPointer, _ valueIsSome: Int32, _ valueValue: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_SwiftDataProcessor_direction_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_SwiftDataProcessor_direction_set")
+public func _bjs_BridgeJSRuntimeTests_SwiftDataProcessor_direction_set(_ _self: UnsafeMutableRawPointer, _ valueIsSome: Int32, _ valueValue: Int32) -> Void {
     #if arch(wasm32)
-    SwiftDataProcessor.bridgeJSLiftParameter(_self).direction = Optional<Direction>.bridgeJSLiftParameter(valueIsSome, valueValue)
+    BridgeJSRuntimeTests.SwiftDataProcessor.bridgeJSLiftParameter(_self).direction = Optional<BridgeJSRuntimeTests.Direction>.bridgeJSLiftParameter(valueIsSome, valueValue)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_SwiftDataProcessor_optionalTheme_get")
-@_cdecl("bjs_SwiftDataProcessor_optionalTheme_get")
-public func _bjs_SwiftDataProcessor_optionalTheme_get(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_SwiftDataProcessor_optionalTheme_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_SwiftDataProcessor_optionalTheme_get")
+public func _bjs_BridgeJSRuntimeTests_SwiftDataProcessor_optionalTheme_get(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = SwiftDataProcessor.bridgeJSLiftParameter(_self).optionalTheme
+    let ret = BridgeJSRuntimeTests.SwiftDataProcessor.bridgeJSLiftParameter(_self).optionalTheme
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_SwiftDataProcessor_optionalTheme_set")
-@_cdecl("bjs_SwiftDataProcessor_optionalTheme_set")
-public func _bjs_SwiftDataProcessor_optionalTheme_set(_ _self: UnsafeMutableRawPointer, _ valueIsSome: Int32, _ valueBytes: Int32, _ valueLength: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_SwiftDataProcessor_optionalTheme_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_SwiftDataProcessor_optionalTheme_set")
+public func _bjs_BridgeJSRuntimeTests_SwiftDataProcessor_optionalTheme_set(_ _self: UnsafeMutableRawPointer, _ valueIsSome: Int32, _ valueBytes: Int32, _ valueLength: Int32) -> Void {
     #if arch(wasm32)
-    SwiftDataProcessor.bridgeJSLiftParameter(_self).optionalTheme = Optional<Theme>.bridgeJSLiftParameter(valueIsSome, valueBytes, valueLength)
+    BridgeJSRuntimeTests.SwiftDataProcessor.bridgeJSLiftParameter(_self).optionalTheme = Optional<BridgeJSRuntimeTests.Theme>.bridgeJSLiftParameter(valueIsSome, valueBytes, valueLength)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_SwiftDataProcessor_httpStatus_get")
-@_cdecl("bjs_SwiftDataProcessor_httpStatus_get")
-public func _bjs_SwiftDataProcessor_httpStatus_get(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_SwiftDataProcessor_httpStatus_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_SwiftDataProcessor_httpStatus_get")
+public func _bjs_BridgeJSRuntimeTests_SwiftDataProcessor_httpStatus_get(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = SwiftDataProcessor.bridgeJSLiftParameter(_self).httpStatus
+    let ret = BridgeJSRuntimeTests.SwiftDataProcessor.bridgeJSLiftParameter(_self).httpStatus
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_SwiftDataProcessor_httpStatus_set")
-@_cdecl("bjs_SwiftDataProcessor_httpStatus_set")
-public func _bjs_SwiftDataProcessor_httpStatus_set(_ _self: UnsafeMutableRawPointer, _ valueIsSome: Int32, _ valueValue: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_SwiftDataProcessor_httpStatus_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_SwiftDataProcessor_httpStatus_set")
+public func _bjs_BridgeJSRuntimeTests_SwiftDataProcessor_httpStatus_set(_ _self: UnsafeMutableRawPointer, _ valueIsSome: Int32, _ valueValue: Int32) -> Void {
     #if arch(wasm32)
-    SwiftDataProcessor.bridgeJSLiftParameter(_self).httpStatus = Optional<HttpStatus>.bridgeJSLiftParameter(valueIsSome, valueValue)
+    BridgeJSRuntimeTests.SwiftDataProcessor.bridgeJSLiftParameter(_self).httpStatus = Optional<BridgeJSRuntimeTests.HttpStatus>.bridgeJSLiftParameter(valueIsSome, valueValue)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_SwiftDataProcessor_apiResult_get")
-@_cdecl("bjs_SwiftDataProcessor_apiResult_get")
-public func _bjs_SwiftDataProcessor_apiResult_get(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_SwiftDataProcessor_apiResult_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_SwiftDataProcessor_apiResult_get")
+public func _bjs_BridgeJSRuntimeTests_SwiftDataProcessor_apiResult_get(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = SwiftDataProcessor.bridgeJSLiftParameter(_self).apiResult
+    let ret = BridgeJSRuntimeTests.SwiftDataProcessor.bridgeJSLiftParameter(_self).apiResult
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_SwiftDataProcessor_apiResult_set")
-@_cdecl("bjs_SwiftDataProcessor_apiResult_set")
-public func _bjs_SwiftDataProcessor_apiResult_set(_ _self: UnsafeMutableRawPointer, _ valueIsSome: Int32, _ valueCaseId: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_SwiftDataProcessor_apiResult_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_SwiftDataProcessor_apiResult_set")
+public func _bjs_BridgeJSRuntimeTests_SwiftDataProcessor_apiResult_set(_ _self: UnsafeMutableRawPointer, _ valueIsSome: Int32, _ valueCaseId: Int32) -> Void {
     #if arch(wasm32)
-    SwiftDataProcessor.bridgeJSLiftParameter(_self).apiResult = Optional<APIResult>.bridgeJSLiftParameter(valueIsSome, valueCaseId)
+    BridgeJSRuntimeTests.SwiftDataProcessor.bridgeJSLiftParameter(_self).apiResult = Optional<BridgeJSRuntimeTests.APIResult>.bridgeJSLiftParameter(valueIsSome, valueCaseId)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_SwiftDataProcessor_helper_get")
-@_cdecl("bjs_SwiftDataProcessor_helper_get")
-public func _bjs_SwiftDataProcessor_helper_get(_ _self: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_SwiftDataProcessor_helper_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_SwiftDataProcessor_helper_get")
+public func _bjs_BridgeJSRuntimeTests_SwiftDataProcessor_helper_get(_ _self: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = SwiftDataProcessor.bridgeJSLiftParameter(_self).helper
+    let ret = BridgeJSRuntimeTests.SwiftDataProcessor.bridgeJSLiftParameter(_self).helper
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_SwiftDataProcessor_helper_set")
-@_cdecl("bjs_SwiftDataProcessor_helper_set")
-public func _bjs_SwiftDataProcessor_helper_set(_ _self: UnsafeMutableRawPointer, _ value: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_SwiftDataProcessor_helper_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_SwiftDataProcessor_helper_set")
+public func _bjs_BridgeJSRuntimeTests_SwiftDataProcessor_helper_set(_ _self: UnsafeMutableRawPointer, _ value: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    SwiftDataProcessor.bridgeJSLiftParameter(_self).helper = Greeter.bridgeJSLiftParameter(value)
+    BridgeJSRuntimeTests.SwiftDataProcessor.bridgeJSLiftParameter(_self).helper = BridgeJSRuntimeTests.Greeter.bridgeJSLiftParameter(value)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_SwiftDataProcessor_optionalHelper_get")
-@_cdecl("bjs_SwiftDataProcessor_optionalHelper_get")
-public func _bjs_SwiftDataProcessor_optionalHelper_get(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_SwiftDataProcessor_optionalHelper_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_SwiftDataProcessor_optionalHelper_get")
+public func _bjs_BridgeJSRuntimeTests_SwiftDataProcessor_optionalHelper_get(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = SwiftDataProcessor.bridgeJSLiftParameter(_self).optionalHelper
+    let ret = BridgeJSRuntimeTests.SwiftDataProcessor.bridgeJSLiftParameter(_self).optionalHelper
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_SwiftDataProcessor_optionalHelper_set")
-@_cdecl("bjs_SwiftDataProcessor_optionalHelper_set")
-public func _bjs_SwiftDataProcessor_optionalHelper_set(_ _self: UnsafeMutableRawPointer, _ valueIsSome: Int32, _ valueValue: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_SwiftDataProcessor_optionalHelper_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_SwiftDataProcessor_optionalHelper_set")
+public func _bjs_BridgeJSRuntimeTests_SwiftDataProcessor_optionalHelper_set(_ _self: UnsafeMutableRawPointer, _ valueIsSome: Int32, _ valueValue: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    SwiftDataProcessor.bridgeJSLiftParameter(_self).optionalHelper = Optional<Greeter>.bridgeJSLiftParameter(valueIsSome, valueValue)
+    BridgeJSRuntimeTests.SwiftDataProcessor.bridgeJSLiftParameter(_self).optionalHelper = Optional<BridgeJSRuntimeTests.Greeter>.bridgeJSLiftParameter(valueIsSome, valueValue)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_SwiftDataProcessor_deinit")
-@_cdecl("bjs_SwiftDataProcessor_deinit")
-public func _bjs_SwiftDataProcessor_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_SwiftDataProcessor_deinit")
+@_cdecl("bjs_BridgeJSRuntimeTests_SwiftDataProcessor_deinit")
+public func _bjs_BridgeJSRuntimeTests_SwiftDataProcessor_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    Unmanaged<SwiftDataProcessor>.fromOpaque(pointer).release()
+    Unmanaged<BridgeJSRuntimeTests.SwiftDataProcessor>.fromOpaque(pointer).release()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension SwiftDataProcessor: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
+extension BridgeJSRuntimeTests.SwiftDataProcessor: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
     var jsValue: JSValue {
-        return .object(JSObject(id: UInt32(bitPattern: _bjs_SwiftDataProcessor_wrap(Unmanaged.passRetained(self).toOpaque()))))
+        return .object(JSObject(id: UInt32(bitPattern: _bjs_BridgeJSRuntimeTests_SwiftDataProcessor_wrap(Unmanaged.passRetained(self).toOpaque()))))
     }
     consuming func bridgeJSLowerAsProtocolReturn() -> Int32 {
-        _bjs_SwiftDataProcessor_wrap(Unmanaged.passRetained(self).toOpaque())
+        _bjs_BridgeJSRuntimeTests_SwiftDataProcessor_wrap(Unmanaged.passRetained(self).toOpaque())
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_SwiftDataProcessor_wrap")
-fileprivate func _bjs_SwiftDataProcessor_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
+@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_BridgeJSRuntimeTests_SwiftDataProcessor_wrap")
+fileprivate func _bjs_BridgeJSRuntimeTests_SwiftDataProcessor_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
 #else
-fileprivate func _bjs_SwiftDataProcessor_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+fileprivate func _bjs_BridgeJSRuntimeTests_SwiftDataProcessor_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_SwiftDataProcessor_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
-    return _bjs_SwiftDataProcessor_wrap_extern(pointer)
+@inline(never) fileprivate func _bjs_BridgeJSRuntimeTests_SwiftDataProcessor_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+    return _bjs_BridgeJSRuntimeTests_SwiftDataProcessor_wrap_extern(pointer)
 }
 
-@_expose(wasm, "bjs_ProtocolReturnTests_static_createNativeProcessor")
-@_cdecl("bjs_ProtocolReturnTests_static_createNativeProcessor")
-public func _bjs_ProtocolReturnTests_static_createNativeProcessor() -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ProtocolReturnTests_static_createNativeProcessor")
+@_cdecl("bjs_BridgeJSRuntimeTests_ProtocolReturnTests_static_createNativeProcessor")
+public func _bjs_BridgeJSRuntimeTests_ProtocolReturnTests_static_createNativeProcessor() -> Int32 {
     #if arch(wasm32)
-    let ret = ProtocolReturnTests.createNativeProcessor() as! _BridgedSwiftProtocolExportable
+    let ret = BridgeJSRuntimeTests.ProtocolReturnTests.createNativeProcessor() as! _BridgedSwiftProtocolExportable
     return ret.bridgeJSLowerAsProtocolReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_ProtocolReturnTests_static_createNativeProcessorOptional")
-@_cdecl("bjs_ProtocolReturnTests_static_createNativeProcessorOptional")
-public func _bjs_ProtocolReturnTests_static_createNativeProcessorOptional() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ProtocolReturnTests_static_createNativeProcessorOptional")
+@_cdecl("bjs_BridgeJSRuntimeTests_ProtocolReturnTests_static_createNativeProcessorOptional")
+public func _bjs_BridgeJSRuntimeTests_ProtocolReturnTests_static_createNativeProcessorOptional() -> Void {
     #if arch(wasm32)
-    let ret = ProtocolReturnTests.createNativeProcessorOptional()
+    let ret = BridgeJSRuntimeTests.ProtocolReturnTests.createNativeProcessorOptional()
     if let ret {
         _swift_js_return_optional_object(1, (ret as! _BridgedSwiftProtocolExportable).bridgeJSLowerAsProtocolReturn())
     } else {
@@ -12561,11 +12561,11 @@ public func _bjs_ProtocolReturnTests_static_createNativeProcessorOptional() -> V
     #endif
 }
 
-@_expose(wasm, "bjs_ProtocolReturnTests_static_createNativeProcessorNil")
-@_cdecl("bjs_ProtocolReturnTests_static_createNativeProcessorNil")
-public func _bjs_ProtocolReturnTests_static_createNativeProcessorNil() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ProtocolReturnTests_static_createNativeProcessorNil")
+@_cdecl("bjs_BridgeJSRuntimeTests_ProtocolReturnTests_static_createNativeProcessorNil")
+public func _bjs_BridgeJSRuntimeTests_ProtocolReturnTests_static_createNativeProcessorNil() -> Void {
     #if arch(wasm32)
-    let ret = ProtocolReturnTests.createNativeProcessorNil()
+    let ret = BridgeJSRuntimeTests.ProtocolReturnTests.createNativeProcessorNil()
     if let ret {
         _swift_js_return_optional_object(1, (ret as! _BridgedSwiftProtocolExportable).bridgeJSLowerAsProtocolReturn())
     } else {
@@ -12576,11 +12576,11 @@ public func _bjs_ProtocolReturnTests_static_createNativeProcessorNil() -> Void {
     #endif
 }
 
-@_expose(wasm, "bjs_ProtocolReturnTests_static_createNativeProcessorArray")
-@_cdecl("bjs_ProtocolReturnTests_static_createNativeProcessorArray")
-public func _bjs_ProtocolReturnTests_static_createNativeProcessorArray() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ProtocolReturnTests_static_createNativeProcessorArray")
+@_cdecl("bjs_BridgeJSRuntimeTests_ProtocolReturnTests_static_createNativeProcessorArray")
+public func _bjs_BridgeJSRuntimeTests_ProtocolReturnTests_static_createNativeProcessorArray() -> Void {
     #if arch(wasm32)
-    let ret = ProtocolReturnTests.createNativeProcessorArray()
+    let ret = BridgeJSRuntimeTests.ProtocolReturnTests.createNativeProcessorArray()
     for __bjs_elem_ret in ret {
         _swift_js_push_i32((__bjs_elem_ret as! _BridgedSwiftProtocolExportable).bridgeJSLowerAsProtocolReturn())
     }
@@ -12590,11 +12590,11 @@ public func _bjs_ProtocolReturnTests_static_createNativeProcessorArray() -> Void
     #endif
 }
 
-@_expose(wasm, "bjs_ProtocolReturnTests_static_createNativeProcessorDictionary")
-@_cdecl("bjs_ProtocolReturnTests_static_createNativeProcessorDictionary")
-public func _bjs_ProtocolReturnTests_static_createNativeProcessorDictionary() -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ProtocolReturnTests_static_createNativeProcessorDictionary")
+@_cdecl("bjs_BridgeJSRuntimeTests_ProtocolReturnTests_static_createNativeProcessorDictionary")
+public func _bjs_BridgeJSRuntimeTests_ProtocolReturnTests_static_createNativeProcessorDictionary() -> Void {
     #if arch(wasm32)
-    let ret = ProtocolReturnTests.createNativeProcessorDictionary()
+    let ret = BridgeJSRuntimeTests.ProtocolReturnTests.createNativeProcessorDictionary()
     for __bjs_kv_ret in ret {
         __bjs_kv_ret.key.bridgeJSStackPush()
         _swift_js_push_i32((__bjs_kv_ret.value as! _BridgedSwiftProtocolExportable).bridgeJSLowerAsProtocolReturn())
@@ -12605,733 +12605,733 @@ public func _bjs_ProtocolReturnTests_static_createNativeProcessorDictionary() ->
     #endif
 }
 
-@_expose(wasm, "bjs_ProtocolReturnTests_deinit")
-@_cdecl("bjs_ProtocolReturnTests_deinit")
-public func _bjs_ProtocolReturnTests_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_ProtocolReturnTests_deinit")
+@_cdecl("bjs_BridgeJSRuntimeTests_ProtocolReturnTests_deinit")
+public func _bjs_BridgeJSRuntimeTests_ProtocolReturnTests_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    Unmanaged<ProtocolReturnTests>.fromOpaque(pointer).release()
+    Unmanaged<BridgeJSRuntimeTests.ProtocolReturnTests>.fromOpaque(pointer).release()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension ProtocolReturnTests: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
+extension BridgeJSRuntimeTests.ProtocolReturnTests: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
     var jsValue: JSValue {
-        return .object(JSObject(id: UInt32(bitPattern: _bjs_ProtocolReturnTests_wrap(Unmanaged.passRetained(self).toOpaque()))))
+        return .object(JSObject(id: UInt32(bitPattern: _bjs_BridgeJSRuntimeTests_ProtocolReturnTests_wrap(Unmanaged.passRetained(self).toOpaque()))))
     }
     consuming func bridgeJSLowerAsProtocolReturn() -> Int32 {
-        _bjs_ProtocolReturnTests_wrap(Unmanaged.passRetained(self).toOpaque())
+        _bjs_BridgeJSRuntimeTests_ProtocolReturnTests_wrap(Unmanaged.passRetained(self).toOpaque())
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_ProtocolReturnTests_wrap")
-fileprivate func _bjs_ProtocolReturnTests_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
+@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_BridgeJSRuntimeTests_ProtocolReturnTests_wrap")
+fileprivate func _bjs_BridgeJSRuntimeTests_ProtocolReturnTests_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
 #else
-fileprivate func _bjs_ProtocolReturnTests_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+fileprivate func _bjs_BridgeJSRuntimeTests_ProtocolReturnTests_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_ProtocolReturnTests_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
-    return _bjs_ProtocolReturnTests_wrap_extern(pointer)
+@inline(never) fileprivate func _bjs_BridgeJSRuntimeTests_ProtocolReturnTests_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+    return _bjs_BridgeJSRuntimeTests_ProtocolReturnTests_wrap_extern(pointer)
 }
 
-@_expose(wasm, "bjs_TextProcessor_init")
-@_cdecl("bjs_TextProcessor_init")
-public func _bjs_TextProcessor_init(_ transform: Int32) -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_TextProcessor_init")
+@_cdecl("bjs_BridgeJSRuntimeTests_TextProcessor_init")
+public func _bjs_BridgeJSRuntimeTests_TextProcessor_init(_ transform: Int32) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = TextProcessor(transform: _BJS_Closure_20BridgeJSRuntimeTestsSS_SS.bridgeJSLift(transform))
+    let ret = BridgeJSRuntimeTests.TextProcessor(transform: _BJS_Closure_20BridgeJSRuntimeTestsSS_SS.bridgeJSLift(transform))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_TextProcessor_process")
-@_cdecl("bjs_TextProcessor_process")
-public func _bjs_TextProcessor_process(_ _self: UnsafeMutableRawPointer, _ textBytes: Int32, _ textLength: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_TextProcessor_process")
+@_cdecl("bjs_BridgeJSRuntimeTests_TextProcessor_process")
+public func _bjs_BridgeJSRuntimeTests_TextProcessor_process(_ _self: UnsafeMutableRawPointer, _ textBytes: Int32, _ textLength: Int32) -> Void {
     #if arch(wasm32)
-    let ret = TextProcessor.bridgeJSLiftParameter(_self).process(_: String.bridgeJSLiftParameter(textBytes, textLength))
+    let ret = BridgeJSRuntimeTests.TextProcessor.bridgeJSLiftParameter(_self).process(_: String.bridgeJSLiftParameter(textBytes, textLength))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_TextProcessor_processWithCustom")
-@_cdecl("bjs_TextProcessor_processWithCustom")
-public func _bjs_TextProcessor_processWithCustom(_ _self: UnsafeMutableRawPointer, _ textBytes: Int32, _ textLength: Int32, _ customTransform: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_TextProcessor_processWithCustom")
+@_cdecl("bjs_BridgeJSRuntimeTests_TextProcessor_processWithCustom")
+public func _bjs_BridgeJSRuntimeTests_TextProcessor_processWithCustom(_ _self: UnsafeMutableRawPointer, _ textBytes: Int32, _ textLength: Int32, _ customTransform: Int32) -> Void {
     #if arch(wasm32)
-    let ret = TextProcessor.bridgeJSLiftParameter(_self).processWithCustom(_: String.bridgeJSLiftParameter(textBytes, textLength), customTransform: _BJS_Closure_20BridgeJSRuntimeTestsSiSSSd_SS.bridgeJSLift(customTransform))
+    let ret = BridgeJSRuntimeTests.TextProcessor.bridgeJSLiftParameter(_self).processWithCustom(_: String.bridgeJSLiftParameter(textBytes, textLength), customTransform: _BJS_Closure_20BridgeJSRuntimeTestsSiSSSd_SS.bridgeJSLift(customTransform))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_TextProcessor_getTransform")
-@_cdecl("bjs_TextProcessor_getTransform")
-public func _bjs_TextProcessor_getTransform(_ _self: UnsafeMutableRawPointer) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_TextProcessor_getTransform")
+@_cdecl("bjs_BridgeJSRuntimeTests_TextProcessor_getTransform")
+public func _bjs_BridgeJSRuntimeTests_TextProcessor_getTransform(_ _self: UnsafeMutableRawPointer) -> Int32 {
     #if arch(wasm32)
-    let ret = TextProcessor.bridgeJSLiftParameter(_self).getTransform()
+    let ret = BridgeJSRuntimeTests.TextProcessor.bridgeJSLiftParameter(_self).getTransform()
     return JSTypedClosure(ret).bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_TextProcessor_processOptionalString")
-@_cdecl("bjs_TextProcessor_processOptionalString")
-public func _bjs_TextProcessor_processOptionalString(_ _self: UnsafeMutableRawPointer, _ callback: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_TextProcessor_processOptionalString")
+@_cdecl("bjs_BridgeJSRuntimeTests_TextProcessor_processOptionalString")
+public func _bjs_BridgeJSRuntimeTests_TextProcessor_processOptionalString(_ _self: UnsafeMutableRawPointer, _ callback: Int32) -> Void {
     #if arch(wasm32)
-    let ret = TextProcessor.bridgeJSLiftParameter(_self).processOptionalString(_: _BJS_Closure_20BridgeJSRuntimeTestsSqSS_SS.bridgeJSLift(callback))
+    let ret = BridgeJSRuntimeTests.TextProcessor.bridgeJSLiftParameter(_self).processOptionalString(_: _BJS_Closure_20BridgeJSRuntimeTestsSqSS_SS.bridgeJSLift(callback))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_TextProcessor_processOptionalInt")
-@_cdecl("bjs_TextProcessor_processOptionalInt")
-public func _bjs_TextProcessor_processOptionalInt(_ _self: UnsafeMutableRawPointer, _ callback: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_TextProcessor_processOptionalInt")
+@_cdecl("bjs_BridgeJSRuntimeTests_TextProcessor_processOptionalInt")
+public func _bjs_BridgeJSRuntimeTests_TextProcessor_processOptionalInt(_ _self: UnsafeMutableRawPointer, _ callback: Int32) -> Void {
     #if arch(wasm32)
-    let ret = TextProcessor.bridgeJSLiftParameter(_self).processOptionalInt(_: _BJS_Closure_20BridgeJSRuntimeTestsSqSi_SS.bridgeJSLift(callback))
+    let ret = BridgeJSRuntimeTests.TextProcessor.bridgeJSLiftParameter(_self).processOptionalInt(_: _BJS_Closure_20BridgeJSRuntimeTestsSqSi_SS.bridgeJSLift(callback))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_TextProcessor_processOptionalGreeter")
-@_cdecl("bjs_TextProcessor_processOptionalGreeter")
-public func _bjs_TextProcessor_processOptionalGreeter(_ _self: UnsafeMutableRawPointer, _ callback: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_TextProcessor_processOptionalGreeter")
+@_cdecl("bjs_BridgeJSRuntimeTests_TextProcessor_processOptionalGreeter")
+public func _bjs_BridgeJSRuntimeTests_TextProcessor_processOptionalGreeter(_ _self: UnsafeMutableRawPointer, _ callback: Int32) -> Void {
     #if arch(wasm32)
-    let ret = TextProcessor.bridgeJSLiftParameter(_self).processOptionalGreeter(_: _BJS_Closure_20BridgeJSRuntimeTestsSq7GreeterC_SS.bridgeJSLift(callback))
+    let ret = BridgeJSRuntimeTests.TextProcessor.bridgeJSLiftParameter(_self).processOptionalGreeter(_: _BJS_Closure_20BridgeJSRuntimeTestsSq28BridgeJSRuntimeTests_GreeterC_SS.bridgeJSLift(callback))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_TextProcessor_makeOptionalStringFormatter")
-@_cdecl("bjs_TextProcessor_makeOptionalStringFormatter")
-public func _bjs_TextProcessor_makeOptionalStringFormatter(_ _self: UnsafeMutableRawPointer) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_TextProcessor_makeOptionalStringFormatter")
+@_cdecl("bjs_BridgeJSRuntimeTests_TextProcessor_makeOptionalStringFormatter")
+public func _bjs_BridgeJSRuntimeTests_TextProcessor_makeOptionalStringFormatter(_ _self: UnsafeMutableRawPointer) -> Int32 {
     #if arch(wasm32)
-    let ret = TextProcessor.bridgeJSLiftParameter(_self).makeOptionalStringFormatter()
+    let ret = BridgeJSRuntimeTests.TextProcessor.bridgeJSLiftParameter(_self).makeOptionalStringFormatter()
     return JSTypedClosure(ret).bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_TextProcessor_makeOptionalGreeterCreator")
-@_cdecl("bjs_TextProcessor_makeOptionalGreeterCreator")
-public func _bjs_TextProcessor_makeOptionalGreeterCreator(_ _self: UnsafeMutableRawPointer) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_TextProcessor_makeOptionalGreeterCreator")
+@_cdecl("bjs_BridgeJSRuntimeTests_TextProcessor_makeOptionalGreeterCreator")
+public func _bjs_BridgeJSRuntimeTests_TextProcessor_makeOptionalGreeterCreator(_ _self: UnsafeMutableRawPointer) -> Int32 {
     #if arch(wasm32)
-    let ret = TextProcessor.bridgeJSLiftParameter(_self).makeOptionalGreeterCreator()
+    let ret = BridgeJSRuntimeTests.TextProcessor.bridgeJSLiftParameter(_self).makeOptionalGreeterCreator()
     return JSTypedClosure(ret).bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_TextProcessor_processDirection")
-@_cdecl("bjs_TextProcessor_processDirection")
-public func _bjs_TextProcessor_processDirection(_ _self: UnsafeMutableRawPointer, _ callback: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_TextProcessor_processDirection")
+@_cdecl("bjs_BridgeJSRuntimeTests_TextProcessor_processDirection")
+public func _bjs_BridgeJSRuntimeTests_TextProcessor_processDirection(_ _self: UnsafeMutableRawPointer, _ callback: Int32) -> Void {
     #if arch(wasm32)
-    let ret = TextProcessor.bridgeJSLiftParameter(_self).processDirection(_: _BJS_Closure_20BridgeJSRuntimeTests9DirectionO_SS.bridgeJSLift(callback))
+    let ret = BridgeJSRuntimeTests.TextProcessor.bridgeJSLiftParameter(_self).processDirection(_: _BJS_Closure_20BridgeJSRuntimeTests30BridgeJSRuntimeTests_DirectionO_SS.bridgeJSLift(callback))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_TextProcessor_processTheme")
-@_cdecl("bjs_TextProcessor_processTheme")
-public func _bjs_TextProcessor_processTheme(_ _self: UnsafeMutableRawPointer, _ callback: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_TextProcessor_processTheme")
+@_cdecl("bjs_BridgeJSRuntimeTests_TextProcessor_processTheme")
+public func _bjs_BridgeJSRuntimeTests_TextProcessor_processTheme(_ _self: UnsafeMutableRawPointer, _ callback: Int32) -> Void {
     #if arch(wasm32)
-    let ret = TextProcessor.bridgeJSLiftParameter(_self).processTheme(_: _BJS_Closure_20BridgeJSRuntimeTests5ThemeO_SS.bridgeJSLift(callback))
+    let ret = BridgeJSRuntimeTests.TextProcessor.bridgeJSLiftParameter(_self).processTheme(_: _BJS_Closure_20BridgeJSRuntimeTests26BridgeJSRuntimeTests_ThemeO_SS.bridgeJSLift(callback))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_TextProcessor_processHttpStatus")
-@_cdecl("bjs_TextProcessor_processHttpStatus")
-public func _bjs_TextProcessor_processHttpStatus(_ _self: UnsafeMutableRawPointer, _ callback: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_TextProcessor_processHttpStatus")
+@_cdecl("bjs_BridgeJSRuntimeTests_TextProcessor_processHttpStatus")
+public func _bjs_BridgeJSRuntimeTests_TextProcessor_processHttpStatus(_ _self: UnsafeMutableRawPointer, _ callback: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = TextProcessor.bridgeJSLiftParameter(_self).processHttpStatus(_: _BJS_Closure_20BridgeJSRuntimeTests10HttpStatusO_Si.bridgeJSLift(callback))
+    let ret = BridgeJSRuntimeTests.TextProcessor.bridgeJSLiftParameter(_self).processHttpStatus(_: _BJS_Closure_20BridgeJSRuntimeTests31BridgeJSRuntimeTests_HttpStatusO_Si.bridgeJSLift(callback))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_TextProcessor_processAPIResult")
-@_cdecl("bjs_TextProcessor_processAPIResult")
-public func _bjs_TextProcessor_processAPIResult(_ _self: UnsafeMutableRawPointer, _ callback: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_TextProcessor_processAPIResult")
+@_cdecl("bjs_BridgeJSRuntimeTests_TextProcessor_processAPIResult")
+public func _bjs_BridgeJSRuntimeTests_TextProcessor_processAPIResult(_ _self: UnsafeMutableRawPointer, _ callback: Int32) -> Void {
     #if arch(wasm32)
-    let ret = TextProcessor.bridgeJSLiftParameter(_self).processAPIResult(_: _BJS_Closure_20BridgeJSRuntimeTests9APIResultO_SS.bridgeJSLift(callback))
+    let ret = BridgeJSRuntimeTests.TextProcessor.bridgeJSLiftParameter(_self).processAPIResult(_: _BJS_Closure_20BridgeJSRuntimeTests30BridgeJSRuntimeTests_APIResultO_SS.bridgeJSLift(callback))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_TextProcessor_makeDirectionChecker")
-@_cdecl("bjs_TextProcessor_makeDirectionChecker")
-public func _bjs_TextProcessor_makeDirectionChecker(_ _self: UnsafeMutableRawPointer) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_TextProcessor_makeDirectionChecker")
+@_cdecl("bjs_BridgeJSRuntimeTests_TextProcessor_makeDirectionChecker")
+public func _bjs_BridgeJSRuntimeTests_TextProcessor_makeDirectionChecker(_ _self: UnsafeMutableRawPointer) -> Int32 {
     #if arch(wasm32)
-    let ret = TextProcessor.bridgeJSLiftParameter(_self).makeDirectionChecker()
+    let ret = BridgeJSRuntimeTests.TextProcessor.bridgeJSLiftParameter(_self).makeDirectionChecker()
     return JSTypedClosure(ret).bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_TextProcessor_makeThemeValidator")
-@_cdecl("bjs_TextProcessor_makeThemeValidator")
-public func _bjs_TextProcessor_makeThemeValidator(_ _self: UnsafeMutableRawPointer) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_TextProcessor_makeThemeValidator")
+@_cdecl("bjs_BridgeJSRuntimeTests_TextProcessor_makeThemeValidator")
+public func _bjs_BridgeJSRuntimeTests_TextProcessor_makeThemeValidator(_ _self: UnsafeMutableRawPointer) -> Int32 {
     #if arch(wasm32)
-    let ret = TextProcessor.bridgeJSLiftParameter(_self).makeThemeValidator()
+    let ret = BridgeJSRuntimeTests.TextProcessor.bridgeJSLiftParameter(_self).makeThemeValidator()
     return JSTypedClosure(ret).bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_TextProcessor_makeStatusCodeExtractor")
-@_cdecl("bjs_TextProcessor_makeStatusCodeExtractor")
-public func _bjs_TextProcessor_makeStatusCodeExtractor(_ _self: UnsafeMutableRawPointer) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_TextProcessor_makeStatusCodeExtractor")
+@_cdecl("bjs_BridgeJSRuntimeTests_TextProcessor_makeStatusCodeExtractor")
+public func _bjs_BridgeJSRuntimeTests_TextProcessor_makeStatusCodeExtractor(_ _self: UnsafeMutableRawPointer) -> Int32 {
     #if arch(wasm32)
-    let ret = TextProcessor.bridgeJSLiftParameter(_self).makeStatusCodeExtractor()
+    let ret = BridgeJSRuntimeTests.TextProcessor.bridgeJSLiftParameter(_self).makeStatusCodeExtractor()
     return JSTypedClosure(ret).bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_TextProcessor_makeAPIResultHandler")
-@_cdecl("bjs_TextProcessor_makeAPIResultHandler")
-public func _bjs_TextProcessor_makeAPIResultHandler(_ _self: UnsafeMutableRawPointer) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_TextProcessor_makeAPIResultHandler")
+@_cdecl("bjs_BridgeJSRuntimeTests_TextProcessor_makeAPIResultHandler")
+public func _bjs_BridgeJSRuntimeTests_TextProcessor_makeAPIResultHandler(_ _self: UnsafeMutableRawPointer) -> Int32 {
     #if arch(wasm32)
-    let ret = TextProcessor.bridgeJSLiftParameter(_self).makeAPIResultHandler()
+    let ret = BridgeJSRuntimeTests.TextProcessor.bridgeJSLiftParameter(_self).makeAPIResultHandler()
     return JSTypedClosure(ret).bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_TextProcessor_processOptionalDirection")
-@_cdecl("bjs_TextProcessor_processOptionalDirection")
-public func _bjs_TextProcessor_processOptionalDirection(_ _self: UnsafeMutableRawPointer, _ callback: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_TextProcessor_processOptionalDirection")
+@_cdecl("bjs_BridgeJSRuntimeTests_TextProcessor_processOptionalDirection")
+public func _bjs_BridgeJSRuntimeTests_TextProcessor_processOptionalDirection(_ _self: UnsafeMutableRawPointer, _ callback: Int32) -> Void {
     #if arch(wasm32)
-    let ret = TextProcessor.bridgeJSLiftParameter(_self).processOptionalDirection(_: _BJS_Closure_20BridgeJSRuntimeTestsSq9DirectionO_SS.bridgeJSLift(callback))
+    let ret = BridgeJSRuntimeTests.TextProcessor.bridgeJSLiftParameter(_self).processOptionalDirection(_: _BJS_Closure_20BridgeJSRuntimeTestsSq30BridgeJSRuntimeTests_DirectionO_SS.bridgeJSLift(callback))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_TextProcessor_processOptionalTheme")
-@_cdecl("bjs_TextProcessor_processOptionalTheme")
-public func _bjs_TextProcessor_processOptionalTheme(_ _self: UnsafeMutableRawPointer, _ callback: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_TextProcessor_processOptionalTheme")
+@_cdecl("bjs_BridgeJSRuntimeTests_TextProcessor_processOptionalTheme")
+public func _bjs_BridgeJSRuntimeTests_TextProcessor_processOptionalTheme(_ _self: UnsafeMutableRawPointer, _ callback: Int32) -> Void {
     #if arch(wasm32)
-    let ret = TextProcessor.bridgeJSLiftParameter(_self).processOptionalTheme(_: _BJS_Closure_20BridgeJSRuntimeTestsSq5ThemeO_SS.bridgeJSLift(callback))
+    let ret = BridgeJSRuntimeTests.TextProcessor.bridgeJSLiftParameter(_self).processOptionalTheme(_: _BJS_Closure_20BridgeJSRuntimeTestsSq26BridgeJSRuntimeTests_ThemeO_SS.bridgeJSLift(callback))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_TextProcessor_processOptionalAPIResult")
-@_cdecl("bjs_TextProcessor_processOptionalAPIResult")
-public func _bjs_TextProcessor_processOptionalAPIResult(_ _self: UnsafeMutableRawPointer, _ callback: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_TextProcessor_processOptionalAPIResult")
+@_cdecl("bjs_BridgeJSRuntimeTests_TextProcessor_processOptionalAPIResult")
+public func _bjs_BridgeJSRuntimeTests_TextProcessor_processOptionalAPIResult(_ _self: UnsafeMutableRawPointer, _ callback: Int32) -> Void {
     #if arch(wasm32)
-    let ret = TextProcessor.bridgeJSLiftParameter(_self).processOptionalAPIResult(_: _BJS_Closure_20BridgeJSRuntimeTestsSq9APIResultO_SS.bridgeJSLift(callback))
+    let ret = BridgeJSRuntimeTests.TextProcessor.bridgeJSLiftParameter(_self).processOptionalAPIResult(_: _BJS_Closure_20BridgeJSRuntimeTestsSq30BridgeJSRuntimeTests_APIResultO_SS.bridgeJSLift(callback))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_TextProcessor_makeOptionalDirectionFormatter")
-@_cdecl("bjs_TextProcessor_makeOptionalDirectionFormatter")
-public func _bjs_TextProcessor_makeOptionalDirectionFormatter(_ _self: UnsafeMutableRawPointer) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_TextProcessor_makeOptionalDirectionFormatter")
+@_cdecl("bjs_BridgeJSRuntimeTests_TextProcessor_makeOptionalDirectionFormatter")
+public func _bjs_BridgeJSRuntimeTests_TextProcessor_makeOptionalDirectionFormatter(_ _self: UnsafeMutableRawPointer) -> Int32 {
     #if arch(wasm32)
-    let ret = TextProcessor.bridgeJSLiftParameter(_self).makeOptionalDirectionFormatter()
+    let ret = BridgeJSRuntimeTests.TextProcessor.bridgeJSLiftParameter(_self).makeOptionalDirectionFormatter()
     return JSTypedClosure(ret).bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_TextProcessor_processDataProcessor")
-@_cdecl("bjs_TextProcessor_processDataProcessor")
-public func _bjs_TextProcessor_processDataProcessor(_ _self: UnsafeMutableRawPointer, _ callback: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_TextProcessor_processDataProcessor")
+@_cdecl("bjs_BridgeJSRuntimeTests_TextProcessor_processDataProcessor")
+public func _bjs_BridgeJSRuntimeTests_TextProcessor_processDataProcessor(_ _self: UnsafeMutableRawPointer, _ callback: Int32) -> Void {
     #if arch(wasm32)
-    let ret = TextProcessor.bridgeJSLiftParameter(_self).processDataProcessor(_: _BJS_Closure_20BridgeJSRuntimeTests13DataProcessorP_SS.bridgeJSLift(callback))
+    let ret = BridgeJSRuntimeTests.TextProcessor.bridgeJSLiftParameter(_self).processDataProcessor(_: _BJS_Closure_20BridgeJSRuntimeTests34BridgeJSRuntimeTests_DataProcessorP_SS.bridgeJSLift(callback))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_TextProcessor_makeDataProcessorFactory")
-@_cdecl("bjs_TextProcessor_makeDataProcessorFactory")
-public func _bjs_TextProcessor_makeDataProcessorFactory(_ _self: UnsafeMutableRawPointer) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_TextProcessor_makeDataProcessorFactory")
+@_cdecl("bjs_BridgeJSRuntimeTests_TextProcessor_makeDataProcessorFactory")
+public func _bjs_BridgeJSRuntimeTests_TextProcessor_makeDataProcessorFactory(_ _self: UnsafeMutableRawPointer) -> Int32 {
     #if arch(wasm32)
-    let ret = TextProcessor.bridgeJSLiftParameter(_self).makeDataProcessorFactory()
+    let ret = BridgeJSRuntimeTests.TextProcessor.bridgeJSLiftParameter(_self).makeDataProcessorFactory()
     return JSTypedClosure(ret).bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_TextProcessor_roundtripDataProcessor")
-@_cdecl("bjs_TextProcessor_roundtripDataProcessor")
-public func _bjs_TextProcessor_roundtripDataProcessor(_ _self: UnsafeMutableRawPointer, _ callback: Int32) -> Int32 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_TextProcessor_roundtripDataProcessor")
+@_cdecl("bjs_BridgeJSRuntimeTests_TextProcessor_roundtripDataProcessor")
+public func _bjs_BridgeJSRuntimeTests_TextProcessor_roundtripDataProcessor(_ _self: UnsafeMutableRawPointer, _ callback: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = TextProcessor.bridgeJSLiftParameter(_self).roundtripDataProcessor(_: _BJS_Closure_20BridgeJSRuntimeTests13DataProcessorP_13DataProcessorP.bridgeJSLift(callback))
+    let ret = BridgeJSRuntimeTests.TextProcessor.bridgeJSLiftParameter(_self).roundtripDataProcessor(_: _BJS_Closure_20BridgeJSRuntimeTests34BridgeJSRuntimeTests_DataProcessorP_34BridgeJSRuntimeTests_DataProcessorP.bridgeJSLift(callback))
     return JSTypedClosure(ret).bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_TextProcessor_processOptionalDataProcessor")
-@_cdecl("bjs_TextProcessor_processOptionalDataProcessor")
-public func _bjs_TextProcessor_processOptionalDataProcessor(_ _self: UnsafeMutableRawPointer, _ callback: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_TextProcessor_processOptionalDataProcessor")
+@_cdecl("bjs_BridgeJSRuntimeTests_TextProcessor_processOptionalDataProcessor")
+public func _bjs_BridgeJSRuntimeTests_TextProcessor_processOptionalDataProcessor(_ _self: UnsafeMutableRawPointer, _ callback: Int32) -> Void {
     #if arch(wasm32)
-    let ret = TextProcessor.bridgeJSLiftParameter(_self).processOptionalDataProcessor(_: _BJS_Closure_20BridgeJSRuntimeTestsSq13DataProcessorP_SS.bridgeJSLift(callback))
+    let ret = BridgeJSRuntimeTests.TextProcessor.bridgeJSLiftParameter(_self).processOptionalDataProcessor(_: _BJS_Closure_20BridgeJSRuntimeTestsSq34BridgeJSRuntimeTests_DataProcessorP_SS.bridgeJSLift(callback))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_TextProcessor_processVector")
-@_cdecl("bjs_TextProcessor_processVector")
-public func _bjs_TextProcessor_processVector(_ _self: UnsafeMutableRawPointer, _ callback: Int32) -> Float64 {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_TextProcessor_processVector")
+@_cdecl("bjs_BridgeJSRuntimeTests_TextProcessor_processVector")
+public func _bjs_BridgeJSRuntimeTests_TextProcessor_processVector(_ _self: UnsafeMutableRawPointer, _ callback: Int32) -> Float64 {
     #if arch(wasm32)
-    let ret = TextProcessor.bridgeJSLiftParameter(_self).processVector(_: _BJS_Closure_20BridgeJSRuntimeTestsSd_8Vector2DV.bridgeJSLift(callback))
+    let ret = BridgeJSRuntimeTests.TextProcessor.bridgeJSLiftParameter(_self).processVector(_: _BJS_Closure_20BridgeJSRuntimeTestsSd_29BridgeJSRuntimeTests_Vector2DV.bridgeJSLift(callback))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_TextProcessor_processOptionalVector")
-@_cdecl("bjs_TextProcessor_processOptionalVector")
-public func _bjs_TextProcessor_processOptionalVector(_ _self: UnsafeMutableRawPointer, _ callback: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_TextProcessor_processOptionalVector")
+@_cdecl("bjs_BridgeJSRuntimeTests_TextProcessor_processOptionalVector")
+public func _bjs_BridgeJSRuntimeTests_TextProcessor_processOptionalVector(_ _self: UnsafeMutableRawPointer, _ callback: Int32) -> Void {
     #if arch(wasm32)
-    let ret = TextProcessor.bridgeJSLiftParameter(_self).processOptionalVector(_: _BJS_Closure_20BridgeJSRuntimeTestsSd_Sq8Vector2DV.bridgeJSLift(callback))
+    let ret = BridgeJSRuntimeTests.TextProcessor.bridgeJSLiftParameter(_self).processOptionalVector(_: _BJS_Closure_20BridgeJSRuntimeTestsSd_Sq29BridgeJSRuntimeTests_Vector2DV.bridgeJSLift(callback))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_TextProcessor_deinit")
-@_cdecl("bjs_TextProcessor_deinit")
-public func _bjs_TextProcessor_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_TextProcessor_deinit")
+@_cdecl("bjs_BridgeJSRuntimeTests_TextProcessor_deinit")
+public func _bjs_BridgeJSRuntimeTests_TextProcessor_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    Unmanaged<TextProcessor>.fromOpaque(pointer).release()
+    Unmanaged<BridgeJSRuntimeTests.TextProcessor>.fromOpaque(pointer).release()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension TextProcessor: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
+extension BridgeJSRuntimeTests.TextProcessor: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
     var jsValue: JSValue {
-        return .object(JSObject(id: UInt32(bitPattern: _bjs_TextProcessor_wrap(Unmanaged.passRetained(self).toOpaque()))))
+        return .object(JSObject(id: UInt32(bitPattern: _bjs_BridgeJSRuntimeTests_TextProcessor_wrap(Unmanaged.passRetained(self).toOpaque()))))
     }
     consuming func bridgeJSLowerAsProtocolReturn() -> Int32 {
-        _bjs_TextProcessor_wrap(Unmanaged.passRetained(self).toOpaque())
+        _bjs_BridgeJSRuntimeTests_TextProcessor_wrap(Unmanaged.passRetained(self).toOpaque())
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_TextProcessor_wrap")
-fileprivate func _bjs_TextProcessor_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
+@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_BridgeJSRuntimeTests_TextProcessor_wrap")
+fileprivate func _bjs_BridgeJSRuntimeTests_TextProcessor_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
 #else
-fileprivate func _bjs_TextProcessor_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+fileprivate func _bjs_BridgeJSRuntimeTests_TextProcessor_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_TextProcessor_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
-    return _bjs_TextProcessor_wrap_extern(pointer)
+@inline(never) fileprivate func _bjs_BridgeJSRuntimeTests_TextProcessor_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+    return _bjs_BridgeJSRuntimeTests_TextProcessor_wrap_extern(pointer)
 }
 
-@_expose(wasm, "bjs_NestedTypeHost_init")
-@_cdecl("bjs_NestedTypeHost_init")
-public func _bjs_NestedTypeHost_init() -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_NestedTypeHost_init")
+@_cdecl("bjs_BridgeJSRuntimeTests_NestedTypeHost_init")
+public func _bjs_BridgeJSRuntimeTests_NestedTypeHost_init() -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = NestedTypeHost()
+    let ret = BridgeJSRuntimeTests.NestedTypeHost()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_NestedTypeHost_describe")
-@_cdecl("bjs_NestedTypeHost_describe")
-public func _bjs_NestedTypeHost_describe(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_NestedTypeHost_describe")
+@_cdecl("bjs_BridgeJSRuntimeTests_NestedTypeHost_describe")
+public func _bjs_BridgeJSRuntimeTests_NestedTypeHost_describe(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = NestedTypeHost.bridgeJSLiftParameter(_self).describe()
+    let ret = BridgeJSRuntimeTests.NestedTypeHost.bridgeJSLiftParameter(_self).describe()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_NestedTypeHost_deinit")
-@_cdecl("bjs_NestedTypeHost_deinit")
-public func _bjs_NestedTypeHost_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_NestedTypeHost_deinit")
+@_cdecl("bjs_BridgeJSRuntimeTests_NestedTypeHost_deinit")
+public func _bjs_BridgeJSRuntimeTests_NestedTypeHost_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    Unmanaged<NestedTypeHost>.fromOpaque(pointer).release()
+    Unmanaged<BridgeJSRuntimeTests.NestedTypeHost>.fromOpaque(pointer).release()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension NestedTypeHost: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
+extension BridgeJSRuntimeTests.NestedTypeHost: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
     var jsValue: JSValue {
-        return .object(JSObject(id: UInt32(bitPattern: _bjs_NestedTypeHost_wrap(Unmanaged.passRetained(self).toOpaque()))))
+        return .object(JSObject(id: UInt32(bitPattern: _bjs_BridgeJSRuntimeTests_NestedTypeHost_wrap(Unmanaged.passRetained(self).toOpaque()))))
     }
     consuming func bridgeJSLowerAsProtocolReturn() -> Int32 {
-        _bjs_NestedTypeHost_wrap(Unmanaged.passRetained(self).toOpaque())
+        _bjs_BridgeJSRuntimeTests_NestedTypeHost_wrap(Unmanaged.passRetained(self).toOpaque())
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_NestedTypeHost_wrap")
-fileprivate func _bjs_NestedTypeHost_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
+@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_BridgeJSRuntimeTests_NestedTypeHost_wrap")
+fileprivate func _bjs_BridgeJSRuntimeTests_NestedTypeHost_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
 #else
-fileprivate func _bjs_NestedTypeHost_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+fileprivate func _bjs_BridgeJSRuntimeTests_NestedTypeHost_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_NestedTypeHost_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
-    return _bjs_NestedTypeHost_wrap_extern(pointer)
+@inline(never) fileprivate func _bjs_BridgeJSRuntimeTests_NestedTypeHost_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+    return _bjs_BridgeJSRuntimeTests_NestedTypeHost_wrap_extern(pointer)
 }
 
-@_expose(wasm, "bjs_OptionalHolder_init")
-@_cdecl("bjs_OptionalHolder_init")
-public func _bjs_OptionalHolder_init(_ nullableGreeterIsSome: Int32, _ nullableGreeterValue: UnsafeMutableRawPointer, _ undefinedNumberIsSome: Int32, _ undefinedNumberValue: Float64) -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_OptionalHolder_init")
+@_cdecl("bjs_BridgeJSRuntimeTests_OptionalHolder_init")
+public func _bjs_BridgeJSRuntimeTests_OptionalHolder_init(_ nullableGreeterIsSome: Int32, _ nullableGreeterValue: UnsafeMutableRawPointer, _ undefinedNumberIsSome: Int32, _ undefinedNumberValue: Float64) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = OptionalHolder(nullableGreeter: Optional<Greeter>.bridgeJSLiftParameter(nullableGreeterIsSome, nullableGreeterValue), undefinedNumber: JSUndefinedOr<Double>.bridgeJSLiftParameter(undefinedNumberIsSome, undefinedNumberValue))
+    let ret = BridgeJSRuntimeTests.OptionalHolder(nullableGreeter: Optional<BridgeJSRuntimeTests.Greeter>.bridgeJSLiftParameter(nullableGreeterIsSome, nullableGreeterValue), undefinedNumber: JSUndefinedOr<Double>.bridgeJSLiftParameter(undefinedNumberIsSome, undefinedNumberValue))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_OptionalHolder_nullableGreeter_get")
-@_cdecl("bjs_OptionalHolder_nullableGreeter_get")
-public func _bjs_OptionalHolder_nullableGreeter_get(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_OptionalHolder_nullableGreeter_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_OptionalHolder_nullableGreeter_get")
+public func _bjs_BridgeJSRuntimeTests_OptionalHolder_nullableGreeter_get(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = OptionalHolder.bridgeJSLiftParameter(_self).nullableGreeter
+    let ret = BridgeJSRuntimeTests.OptionalHolder.bridgeJSLiftParameter(_self).nullableGreeter
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_OptionalHolder_nullableGreeter_set")
-@_cdecl("bjs_OptionalHolder_nullableGreeter_set")
-public func _bjs_OptionalHolder_nullableGreeter_set(_ _self: UnsafeMutableRawPointer, _ valueIsSome: Int32, _ valueValue: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_OptionalHolder_nullableGreeter_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_OptionalHolder_nullableGreeter_set")
+public func _bjs_BridgeJSRuntimeTests_OptionalHolder_nullableGreeter_set(_ _self: UnsafeMutableRawPointer, _ valueIsSome: Int32, _ valueValue: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    OptionalHolder.bridgeJSLiftParameter(_self).nullableGreeter = Optional<Greeter>.bridgeJSLiftParameter(valueIsSome, valueValue)
+    BridgeJSRuntimeTests.OptionalHolder.bridgeJSLiftParameter(_self).nullableGreeter = Optional<BridgeJSRuntimeTests.Greeter>.bridgeJSLiftParameter(valueIsSome, valueValue)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_OptionalHolder_undefinedNumber_get")
-@_cdecl("bjs_OptionalHolder_undefinedNumber_get")
-public func _bjs_OptionalHolder_undefinedNumber_get(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_OptionalHolder_undefinedNumber_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_OptionalHolder_undefinedNumber_get")
+public func _bjs_BridgeJSRuntimeTests_OptionalHolder_undefinedNumber_get(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = OptionalHolder.bridgeJSLiftParameter(_self).undefinedNumber
+    let ret = BridgeJSRuntimeTests.OptionalHolder.bridgeJSLiftParameter(_self).undefinedNumber
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_OptionalHolder_undefinedNumber_set")
-@_cdecl("bjs_OptionalHolder_undefinedNumber_set")
-public func _bjs_OptionalHolder_undefinedNumber_set(_ _self: UnsafeMutableRawPointer, _ valueIsSome: Int32, _ valueValue: Float64) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_OptionalHolder_undefinedNumber_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_OptionalHolder_undefinedNumber_set")
+public func _bjs_BridgeJSRuntimeTests_OptionalHolder_undefinedNumber_set(_ _self: UnsafeMutableRawPointer, _ valueIsSome: Int32, _ valueValue: Float64) -> Void {
     #if arch(wasm32)
-    OptionalHolder.bridgeJSLiftParameter(_self).undefinedNumber = JSUndefinedOr<Double>.bridgeJSLiftParameter(valueIsSome, valueValue)
+    BridgeJSRuntimeTests.OptionalHolder.bridgeJSLiftParameter(_self).undefinedNumber = JSUndefinedOr<Double>.bridgeJSLiftParameter(valueIsSome, valueValue)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_OptionalHolder_deinit")
-@_cdecl("bjs_OptionalHolder_deinit")
-public func _bjs_OptionalHolder_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_OptionalHolder_deinit")
+@_cdecl("bjs_BridgeJSRuntimeTests_OptionalHolder_deinit")
+public func _bjs_BridgeJSRuntimeTests_OptionalHolder_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    Unmanaged<OptionalHolder>.fromOpaque(pointer).release()
+    Unmanaged<BridgeJSRuntimeTests.OptionalHolder>.fromOpaque(pointer).release()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension OptionalHolder: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
+extension BridgeJSRuntimeTests.OptionalHolder: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
     var jsValue: JSValue {
-        return .object(JSObject(id: UInt32(bitPattern: _bjs_OptionalHolder_wrap(Unmanaged.passRetained(self).toOpaque()))))
+        return .object(JSObject(id: UInt32(bitPattern: _bjs_BridgeJSRuntimeTests_OptionalHolder_wrap(Unmanaged.passRetained(self).toOpaque()))))
     }
     consuming func bridgeJSLowerAsProtocolReturn() -> Int32 {
-        _bjs_OptionalHolder_wrap(Unmanaged.passRetained(self).toOpaque())
+        _bjs_BridgeJSRuntimeTests_OptionalHolder_wrap(Unmanaged.passRetained(self).toOpaque())
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_OptionalHolder_wrap")
-fileprivate func _bjs_OptionalHolder_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
+@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_BridgeJSRuntimeTests_OptionalHolder_wrap")
+fileprivate func _bjs_BridgeJSRuntimeTests_OptionalHolder_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
 #else
-fileprivate func _bjs_OptionalHolder_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+fileprivate func _bjs_BridgeJSRuntimeTests_OptionalHolder_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_OptionalHolder_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
-    return _bjs_OptionalHolder_wrap_extern(pointer)
+@inline(never) fileprivate func _bjs_BridgeJSRuntimeTests_OptionalHolder_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+    return _bjs_BridgeJSRuntimeTests_OptionalHolder_wrap_extern(pointer)
 }
 
-@_expose(wasm, "bjs_OptionalPropertyHolder_init")
-@_cdecl("bjs_OptionalPropertyHolder_init")
-public func _bjs_OptionalPropertyHolder_init(_ optionalNameIsSome: Int32, _ optionalNameBytes: Int32, _ optionalNameLength: Int32) -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_OptionalPropertyHolder_init")
+@_cdecl("bjs_BridgeJSRuntimeTests_OptionalPropertyHolder_init")
+public func _bjs_BridgeJSRuntimeTests_OptionalPropertyHolder_init(_ optionalNameIsSome: Int32, _ optionalNameBytes: Int32, _ optionalNameLength: Int32) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = OptionalPropertyHolder(optionalName: Optional<String>.bridgeJSLiftParameter(optionalNameIsSome, optionalNameBytes, optionalNameLength))
+    let ret = BridgeJSRuntimeTests.OptionalPropertyHolder(optionalName: Optional<String>.bridgeJSLiftParameter(optionalNameIsSome, optionalNameBytes, optionalNameLength))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_OptionalPropertyHolder_optionalName_get")
-@_cdecl("bjs_OptionalPropertyHolder_optionalName_get")
-public func _bjs_OptionalPropertyHolder_optionalName_get(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_OptionalPropertyHolder_optionalName_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_OptionalPropertyHolder_optionalName_get")
+public func _bjs_BridgeJSRuntimeTests_OptionalPropertyHolder_optionalName_get(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = OptionalPropertyHolder.bridgeJSLiftParameter(_self).optionalName
+    let ret = BridgeJSRuntimeTests.OptionalPropertyHolder.bridgeJSLiftParameter(_self).optionalName
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_OptionalPropertyHolder_optionalName_set")
-@_cdecl("bjs_OptionalPropertyHolder_optionalName_set")
-public func _bjs_OptionalPropertyHolder_optionalName_set(_ _self: UnsafeMutableRawPointer, _ valueIsSome: Int32, _ valueBytes: Int32, _ valueLength: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_OptionalPropertyHolder_optionalName_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_OptionalPropertyHolder_optionalName_set")
+public func _bjs_BridgeJSRuntimeTests_OptionalPropertyHolder_optionalName_set(_ _self: UnsafeMutableRawPointer, _ valueIsSome: Int32, _ valueBytes: Int32, _ valueLength: Int32) -> Void {
     #if arch(wasm32)
-    OptionalPropertyHolder.bridgeJSLiftParameter(_self).optionalName = Optional<String>.bridgeJSLiftParameter(valueIsSome, valueBytes, valueLength)
+    BridgeJSRuntimeTests.OptionalPropertyHolder.bridgeJSLiftParameter(_self).optionalName = Optional<String>.bridgeJSLiftParameter(valueIsSome, valueBytes, valueLength)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_OptionalPropertyHolder_optionalAge_get")
-@_cdecl("bjs_OptionalPropertyHolder_optionalAge_get")
-public func _bjs_OptionalPropertyHolder_optionalAge_get(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_OptionalPropertyHolder_optionalAge_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_OptionalPropertyHolder_optionalAge_get")
+public func _bjs_BridgeJSRuntimeTests_OptionalPropertyHolder_optionalAge_get(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = OptionalPropertyHolder.bridgeJSLiftParameter(_self).optionalAge
+    let ret = BridgeJSRuntimeTests.OptionalPropertyHolder.bridgeJSLiftParameter(_self).optionalAge
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_OptionalPropertyHolder_optionalAge_set")
-@_cdecl("bjs_OptionalPropertyHolder_optionalAge_set")
-public func _bjs_OptionalPropertyHolder_optionalAge_set(_ _self: UnsafeMutableRawPointer, _ valueIsSome: Int32, _ valueValue: Int32) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_OptionalPropertyHolder_optionalAge_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_OptionalPropertyHolder_optionalAge_set")
+public func _bjs_BridgeJSRuntimeTests_OptionalPropertyHolder_optionalAge_set(_ _self: UnsafeMutableRawPointer, _ valueIsSome: Int32, _ valueValue: Int32) -> Void {
     #if arch(wasm32)
-    OptionalPropertyHolder.bridgeJSLiftParameter(_self).optionalAge = Optional<Int>.bridgeJSLiftParameter(valueIsSome, valueValue)
+    BridgeJSRuntimeTests.OptionalPropertyHolder.bridgeJSLiftParameter(_self).optionalAge = Optional<Int>.bridgeJSLiftParameter(valueIsSome, valueValue)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_OptionalPropertyHolder_optionalGreeter_get")
-@_cdecl("bjs_OptionalPropertyHolder_optionalGreeter_get")
-public func _bjs_OptionalPropertyHolder_optionalGreeter_get(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_OptionalPropertyHolder_optionalGreeter_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_OptionalPropertyHolder_optionalGreeter_get")
+public func _bjs_BridgeJSRuntimeTests_OptionalPropertyHolder_optionalGreeter_get(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = OptionalPropertyHolder.bridgeJSLiftParameter(_self).optionalGreeter
+    let ret = BridgeJSRuntimeTests.OptionalPropertyHolder.bridgeJSLiftParameter(_self).optionalGreeter
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_OptionalPropertyHolder_optionalGreeter_set")
-@_cdecl("bjs_OptionalPropertyHolder_optionalGreeter_set")
-public func _bjs_OptionalPropertyHolder_optionalGreeter_set(_ _self: UnsafeMutableRawPointer, _ valueIsSome: Int32, _ valueValue: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_OptionalPropertyHolder_optionalGreeter_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_OptionalPropertyHolder_optionalGreeter_set")
+public func _bjs_BridgeJSRuntimeTests_OptionalPropertyHolder_optionalGreeter_set(_ _self: UnsafeMutableRawPointer, _ valueIsSome: Int32, _ valueValue: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    OptionalPropertyHolder.bridgeJSLiftParameter(_self).optionalGreeter = Optional<Greeter>.bridgeJSLiftParameter(valueIsSome, valueValue)
+    BridgeJSRuntimeTests.OptionalPropertyHolder.bridgeJSLiftParameter(_self).optionalGreeter = Optional<BridgeJSRuntimeTests.Greeter>.bridgeJSLiftParameter(valueIsSome, valueValue)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_OptionalPropertyHolder_deinit")
-@_cdecl("bjs_OptionalPropertyHolder_deinit")
-public func _bjs_OptionalPropertyHolder_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_OptionalPropertyHolder_deinit")
+@_cdecl("bjs_BridgeJSRuntimeTests_OptionalPropertyHolder_deinit")
+public func _bjs_BridgeJSRuntimeTests_OptionalPropertyHolder_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    Unmanaged<OptionalPropertyHolder>.fromOpaque(pointer).release()
+    Unmanaged<BridgeJSRuntimeTests.OptionalPropertyHolder>.fromOpaque(pointer).release()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension OptionalPropertyHolder: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
+extension BridgeJSRuntimeTests.OptionalPropertyHolder: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
     var jsValue: JSValue {
-        return .object(JSObject(id: UInt32(bitPattern: _bjs_OptionalPropertyHolder_wrap(Unmanaged.passRetained(self).toOpaque()))))
+        return .object(JSObject(id: UInt32(bitPattern: _bjs_BridgeJSRuntimeTests_OptionalPropertyHolder_wrap(Unmanaged.passRetained(self).toOpaque()))))
     }
     consuming func bridgeJSLowerAsProtocolReturn() -> Int32 {
-        _bjs_OptionalPropertyHolder_wrap(Unmanaged.passRetained(self).toOpaque())
+        _bjs_BridgeJSRuntimeTests_OptionalPropertyHolder_wrap(Unmanaged.passRetained(self).toOpaque())
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_OptionalPropertyHolder_wrap")
-fileprivate func _bjs_OptionalPropertyHolder_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
+@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_BridgeJSRuntimeTests_OptionalPropertyHolder_wrap")
+fileprivate func _bjs_BridgeJSRuntimeTests_OptionalPropertyHolder_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
 #else
-fileprivate func _bjs_OptionalPropertyHolder_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+fileprivate func _bjs_BridgeJSRuntimeTests_OptionalPropertyHolder_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_OptionalPropertyHolder_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
-    return _bjs_OptionalPropertyHolder_wrap_extern(pointer)
+@inline(never) fileprivate func _bjs_BridgeJSRuntimeTests_OptionalPropertyHolder_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+    return _bjs_BridgeJSRuntimeTests_OptionalPropertyHolder_wrap_extern(pointer)
 }
 
-@_expose(wasm, "bjs_Container_init")
-@_cdecl("bjs_Container_init")
-public func _bjs_Container_init() -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_Container_init")
+@_cdecl("bjs_BridgeJSRuntimeTests_Container_init")
+public func _bjs_BridgeJSRuntimeTests_Container_init() -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let _tmp_config = Optional<Config>.bridgeJSLiftParameter()
-    let _tmp_location = DataPoint.bridgeJSLiftParameter()
-    let ret = Container(location: _tmp_location, config: _tmp_config)
+    let _tmp_config = Optional<BridgeJSRuntimeTests.Config>.bridgeJSLiftParameter()
+    let _tmp_location = BridgeJSRuntimeTests.DataPoint.bridgeJSLiftParameter()
+    let ret = BridgeJSRuntimeTests.Container(location: _tmp_location, config: _tmp_config)
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Container_location_get")
-@_cdecl("bjs_Container_location_get")
-public func _bjs_Container_location_get(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_Container_location_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_Container_location_get")
+public func _bjs_BridgeJSRuntimeTests_Container_location_get(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = Container.bridgeJSLiftParameter(_self).location
+    let ret = BridgeJSRuntimeTests.Container.bridgeJSLiftParameter(_self).location
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Container_location_set")
-@_cdecl("bjs_Container_location_set")
-public func _bjs_Container_location_set(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_Container_location_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_Container_location_set")
+public func _bjs_BridgeJSRuntimeTests_Container_location_set(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    Container.bridgeJSLiftParameter(_self).location = DataPoint.bridgeJSLiftParameter()
+    BridgeJSRuntimeTests.Container.bridgeJSLiftParameter(_self).location = BridgeJSRuntimeTests.DataPoint.bridgeJSLiftParameter()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Container_config_get")
-@_cdecl("bjs_Container_config_get")
-public func _bjs_Container_config_get(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_Container_config_get")
+@_cdecl("bjs_BridgeJSRuntimeTests_Container_config_get")
+public func _bjs_BridgeJSRuntimeTests_Container_config_get(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = Container.bridgeJSLiftParameter(_self).config
+    let ret = BridgeJSRuntimeTests.Container.bridgeJSLiftParameter(_self).config
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Container_config_set")
-@_cdecl("bjs_Container_config_set")
-public func _bjs_Container_config_set(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_Container_config_set")
+@_cdecl("bjs_BridgeJSRuntimeTests_Container_config_set")
+public func _bjs_BridgeJSRuntimeTests_Container_config_set(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    Container.bridgeJSLiftParameter(_self).config = Optional<Config>.bridgeJSLiftParameter()
+    BridgeJSRuntimeTests.Container.bridgeJSLiftParameter(_self).config = Optional<BridgeJSRuntimeTests.Config>.bridgeJSLiftParameter()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Container_deinit")
-@_cdecl("bjs_Container_deinit")
-public func _bjs_Container_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_Container_deinit")
+@_cdecl("bjs_BridgeJSRuntimeTests_Container_deinit")
+public func _bjs_BridgeJSRuntimeTests_Container_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    Unmanaged<Container>.fromOpaque(pointer).release()
+    Unmanaged<BridgeJSRuntimeTests.Container>.fromOpaque(pointer).release()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension Container: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
+extension BridgeJSRuntimeTests.Container: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
     var jsValue: JSValue {
-        return .object(JSObject(id: UInt32(bitPattern: _bjs_Container_wrap(Unmanaged.passRetained(self).toOpaque()))))
+        return .object(JSObject(id: UInt32(bitPattern: _bjs_BridgeJSRuntimeTests_Container_wrap(Unmanaged.passRetained(self).toOpaque()))))
     }
     consuming func bridgeJSLowerAsProtocolReturn() -> Int32 {
-        _bjs_Container_wrap(Unmanaged.passRetained(self).toOpaque())
+        _bjs_BridgeJSRuntimeTests_Container_wrap(Unmanaged.passRetained(self).toOpaque())
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_Container_wrap")
-fileprivate func _bjs_Container_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
+@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_BridgeJSRuntimeTests_Container_wrap")
+fileprivate func _bjs_BridgeJSRuntimeTests_Container_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
 #else
-fileprivate func _bjs_Container_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+fileprivate func _bjs_BridgeJSRuntimeTests_Container_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_Container_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
-    return _bjs_Container_wrap_extern(pointer)
+@inline(never) fileprivate func _bjs_BridgeJSRuntimeTests_Container_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+    return _bjs_BridgeJSRuntimeTests_Container_wrap_extern(pointer)
 }
 
-@_expose(wasm, "bjs_LeakCheck_init")
-@_cdecl("bjs_LeakCheck_init")
-public func _bjs_LeakCheck_init() -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_LeakCheck_init")
+@_cdecl("bjs_BridgeJSRuntimeTests_LeakCheck_init")
+public func _bjs_BridgeJSRuntimeTests_LeakCheck_init() -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = LeakCheck()
+    let ret = BridgeJSRuntimeTests.LeakCheck()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_LeakCheck_deinit")
-@_cdecl("bjs_LeakCheck_deinit")
-public func _bjs_LeakCheck_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_BridgeJSRuntimeTests_LeakCheck_deinit")
+@_cdecl("bjs_BridgeJSRuntimeTests_LeakCheck_deinit")
+public func _bjs_BridgeJSRuntimeTests_LeakCheck_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    Unmanaged<LeakCheck>.fromOpaque(pointer).release()
+    Unmanaged<BridgeJSRuntimeTests.LeakCheck>.fromOpaque(pointer).release()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension LeakCheck: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
+extension BridgeJSRuntimeTests.LeakCheck: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
     public var jsValue: JSValue {
-        return .object(JSObject(id: UInt32(bitPattern: _bjs_LeakCheck_wrap(Unmanaged.passRetained(self).toOpaque()))))
+        return .object(JSObject(id: UInt32(bitPattern: _bjs_BridgeJSRuntimeTests_LeakCheck_wrap(Unmanaged.passRetained(self).toOpaque()))))
     }
     public consuming func bridgeJSLowerAsProtocolReturn() -> Int32 {
-        _bjs_LeakCheck_wrap(Unmanaged.passRetained(self).toOpaque())
+        _bjs_BridgeJSRuntimeTests_LeakCheck_wrap(Unmanaged.passRetained(self).toOpaque())
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_LeakCheck_wrap")
-fileprivate func _bjs_LeakCheck_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
+@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_BridgeJSRuntimeTests_LeakCheck_wrap")
+fileprivate func _bjs_BridgeJSRuntimeTests_LeakCheck_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
 #else
-fileprivate func _bjs_LeakCheck_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+fileprivate func _bjs_BridgeJSRuntimeTests_LeakCheck_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_LeakCheck_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
-    return _bjs_LeakCheck_wrap_extern(pointer)
+@inline(never) fileprivate func _bjs_BridgeJSRuntimeTests_LeakCheck_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+    return _bjs_BridgeJSRuntimeTests_LeakCheck_wrap_extern(pointer)
 }
 
 @JSFunction func Promise_reject(_ promise: JSObject, _ value: JSValue) throws(JSException)
@@ -13481,24 +13481,24 @@ func _$Promise_resolve_Sb(_ promise: JSObject, _ value: Bool) throws(JSException
     if let error = _swift_js_take_exception() { throw error }
 }
 
-@JSFunction func Promise_resolve_7GreeterC(_ promise: JSObject, _ value: Greeter) throws(JSException)
+@JSFunction func Promise_resolve_28BridgeJSRuntimeTests_GreeterC(_ promise: JSObject, _ value: BridgeJSRuntimeTests.Greeter) throws(JSException)
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "promise_resolve_BridgeJSRuntimeTests_7GreeterC")
-fileprivate func promise_resolve_BridgeJSRuntimeTests_7GreeterC_extern(_ promise: Int32, _ value: UnsafeMutableRawPointer) -> Void
+@_extern(wasm, module: "bjs", name: "promise_resolve_BridgeJSRuntimeTests_28BridgeJSRuntimeTests_GreeterC")
+fileprivate func promise_resolve_BridgeJSRuntimeTests_28BridgeJSRuntimeTests_GreeterC_extern(_ promise: Int32, _ value: UnsafeMutableRawPointer) -> Void
 #else
-fileprivate func promise_resolve_BridgeJSRuntimeTests_7GreeterC_extern(_ promise: Int32, _ value: UnsafeMutableRawPointer) -> Void {
+fileprivate func promise_resolve_BridgeJSRuntimeTests_28BridgeJSRuntimeTests_GreeterC_extern(_ promise: Int32, _ value: UnsafeMutableRawPointer) -> Void {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func promise_resolve_BridgeJSRuntimeTests_7GreeterC(_ promise: Int32, _ value: UnsafeMutableRawPointer) -> Void {
-    return promise_resolve_BridgeJSRuntimeTests_7GreeterC_extern(promise, value)
+@inline(never) fileprivate func promise_resolve_BridgeJSRuntimeTests_28BridgeJSRuntimeTests_GreeterC(_ promise: Int32, _ value: UnsafeMutableRawPointer) -> Void {
+    return promise_resolve_BridgeJSRuntimeTests_28BridgeJSRuntimeTests_GreeterC_extern(promise, value)
 }
 
-func _$Promise_resolve_7GreeterC(_ promise: JSObject, _ value: Greeter) throws(JSException) -> Void {
+func _$Promise_resolve_28BridgeJSRuntimeTests_GreeterC(_ promise: JSObject, _ value: BridgeJSRuntimeTests.Greeter) throws(JSException) -> Void {
     let promiseValue = promise.bridgeJSLowerParameter()
     let valuePointer = value.bridgeJSLowerParameter()
-    promise_resolve_BridgeJSRuntimeTests_7GreeterC(promiseValue, valuePointer)
+    promise_resolve_BridgeJSRuntimeTests_28BridgeJSRuntimeTests_GreeterC(promiseValue, valuePointer)
     if let error = _swift_js_take_exception() { throw error }
 }
 
@@ -13523,407 +13523,407 @@ func _$Promise_resolve_8JSObjectC(_ promise: JSObject, _ value: JSObject) throws
     if let error = _swift_js_take_exception() { throw error }
 }
 
-@JSFunction func Promise_resolve_5ThemeO(_ promise: JSObject, _ value: Theme) throws(JSException)
+@JSFunction func Promise_resolve_26BridgeJSRuntimeTests_ThemeO(_ promise: JSObject, _ value: BridgeJSRuntimeTests.Theme) throws(JSException)
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "promise_resolve_BridgeJSRuntimeTests_5ThemeO")
-fileprivate func promise_resolve_BridgeJSRuntimeTests_5ThemeO_extern(_ promise: Int32, _ valueBytes: Int32, _ valueLength: Int32) -> Void
+@_extern(wasm, module: "bjs", name: "promise_resolve_BridgeJSRuntimeTests_26BridgeJSRuntimeTests_ThemeO")
+fileprivate func promise_resolve_BridgeJSRuntimeTests_26BridgeJSRuntimeTests_ThemeO_extern(_ promise: Int32, _ valueBytes: Int32, _ valueLength: Int32) -> Void
 #else
-fileprivate func promise_resolve_BridgeJSRuntimeTests_5ThemeO_extern(_ promise: Int32, _ valueBytes: Int32, _ valueLength: Int32) -> Void {
+fileprivate func promise_resolve_BridgeJSRuntimeTests_26BridgeJSRuntimeTests_ThemeO_extern(_ promise: Int32, _ valueBytes: Int32, _ valueLength: Int32) -> Void {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func promise_resolve_BridgeJSRuntimeTests_5ThemeO(_ promise: Int32, _ valueBytes: Int32, _ valueLength: Int32) -> Void {
-    return promise_resolve_BridgeJSRuntimeTests_5ThemeO_extern(promise, valueBytes, valueLength)
+@inline(never) fileprivate func promise_resolve_BridgeJSRuntimeTests_26BridgeJSRuntimeTests_ThemeO(_ promise: Int32, _ valueBytes: Int32, _ valueLength: Int32) -> Void {
+    return promise_resolve_BridgeJSRuntimeTests_26BridgeJSRuntimeTests_ThemeO_extern(promise, valueBytes, valueLength)
 }
 
-func _$Promise_resolve_5ThemeO(_ promise: JSObject, _ value: Theme) throws(JSException) -> Void {
+func _$Promise_resolve_26BridgeJSRuntimeTests_ThemeO(_ promise: JSObject, _ value: BridgeJSRuntimeTests.Theme) throws(JSException) -> Void {
     let promiseValue = promise.bridgeJSLowerParameter()
     value.bridgeJSWithLoweredParameter { (valueBytes, valueLength) in
-        promise_resolve_BridgeJSRuntimeTests_5ThemeO(promiseValue, valueBytes, valueLength)
+        promise_resolve_BridgeJSRuntimeTests_26BridgeJSRuntimeTests_ThemeO(promiseValue, valueBytes, valueLength)
     }
     if let error = _swift_js_take_exception() { throw error }
 }
 
-@JSFunction func Promise_resolve_9DirectionO(_ promise: JSObject, _ value: Direction) throws(JSException)
+@JSFunction func Promise_resolve_30BridgeJSRuntimeTests_DirectionO(_ promise: JSObject, _ value: BridgeJSRuntimeTests.Direction) throws(JSException)
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "promise_resolve_BridgeJSRuntimeTests_9DirectionO")
-fileprivate func promise_resolve_BridgeJSRuntimeTests_9DirectionO_extern(_ promise: Int32, _ value: Int32) -> Void
+@_extern(wasm, module: "bjs", name: "promise_resolve_BridgeJSRuntimeTests_30BridgeJSRuntimeTests_DirectionO")
+fileprivate func promise_resolve_BridgeJSRuntimeTests_30BridgeJSRuntimeTests_DirectionO_extern(_ promise: Int32, _ value: Int32) -> Void
 #else
-fileprivate func promise_resolve_BridgeJSRuntimeTests_9DirectionO_extern(_ promise: Int32, _ value: Int32) -> Void {
+fileprivate func promise_resolve_BridgeJSRuntimeTests_30BridgeJSRuntimeTests_DirectionO_extern(_ promise: Int32, _ value: Int32) -> Void {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func promise_resolve_BridgeJSRuntimeTests_9DirectionO(_ promise: Int32, _ value: Int32) -> Void {
-    return promise_resolve_BridgeJSRuntimeTests_9DirectionO_extern(promise, value)
+@inline(never) fileprivate func promise_resolve_BridgeJSRuntimeTests_30BridgeJSRuntimeTests_DirectionO(_ promise: Int32, _ value: Int32) -> Void {
+    return promise_resolve_BridgeJSRuntimeTests_30BridgeJSRuntimeTests_DirectionO_extern(promise, value)
 }
 
-func _$Promise_resolve_9DirectionO(_ promise: JSObject, _ value: Direction) throws(JSException) -> Void {
+func _$Promise_resolve_30BridgeJSRuntimeTests_DirectionO(_ promise: JSObject, _ value: BridgeJSRuntimeTests.Direction) throws(JSException) -> Void {
     let promiseValue = promise.bridgeJSLowerParameter()
     let valueValue = value.bridgeJSLowerParameter()
-    promise_resolve_BridgeJSRuntimeTests_9DirectionO(promiseValue, valueValue)
+    promise_resolve_BridgeJSRuntimeTests_30BridgeJSRuntimeTests_DirectionO(promiseValue, valueValue)
     if let error = _swift_js_take_exception() { throw error }
 }
 
-@JSFunction func Promise_resolve_Sq5ThemeO(_ promise: JSObject, _ value: Optional<Theme>) throws(JSException)
+@JSFunction func Promise_resolve_Sq26BridgeJSRuntimeTests_ThemeO(_ promise: JSObject, _ value: Optional<BridgeJSRuntimeTests.Theme>) throws(JSException)
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "promise_resolve_BridgeJSRuntimeTests_Sq5ThemeO")
-fileprivate func promise_resolve_BridgeJSRuntimeTests_Sq5ThemeO_extern(_ promise: Int32, _ valueIsSome: Int32, _ valueBytes: Int32, _ valueLength: Int32) -> Void
+@_extern(wasm, module: "bjs", name: "promise_resolve_BridgeJSRuntimeTests_Sq26BridgeJSRuntimeTests_ThemeO")
+fileprivate func promise_resolve_BridgeJSRuntimeTests_Sq26BridgeJSRuntimeTests_ThemeO_extern(_ promise: Int32, _ valueIsSome: Int32, _ valueBytes: Int32, _ valueLength: Int32) -> Void
 #else
-fileprivate func promise_resolve_BridgeJSRuntimeTests_Sq5ThemeO_extern(_ promise: Int32, _ valueIsSome: Int32, _ valueBytes: Int32, _ valueLength: Int32) -> Void {
+fileprivate func promise_resolve_BridgeJSRuntimeTests_Sq26BridgeJSRuntimeTests_ThemeO_extern(_ promise: Int32, _ valueIsSome: Int32, _ valueBytes: Int32, _ valueLength: Int32) -> Void {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func promise_resolve_BridgeJSRuntimeTests_Sq5ThemeO(_ promise: Int32, _ valueIsSome: Int32, _ valueBytes: Int32, _ valueLength: Int32) -> Void {
-    return promise_resolve_BridgeJSRuntimeTests_Sq5ThemeO_extern(promise, valueIsSome, valueBytes, valueLength)
+@inline(never) fileprivate func promise_resolve_BridgeJSRuntimeTests_Sq26BridgeJSRuntimeTests_ThemeO(_ promise: Int32, _ valueIsSome: Int32, _ valueBytes: Int32, _ valueLength: Int32) -> Void {
+    return promise_resolve_BridgeJSRuntimeTests_Sq26BridgeJSRuntimeTests_ThemeO_extern(promise, valueIsSome, valueBytes, valueLength)
 }
 
-func _$Promise_resolve_Sq5ThemeO(_ promise: JSObject, _ value: Optional<Theme>) throws(JSException) -> Void {
+func _$Promise_resolve_Sq26BridgeJSRuntimeTests_ThemeO(_ promise: JSObject, _ value: Optional<BridgeJSRuntimeTests.Theme>) throws(JSException) -> Void {
     let promiseValue = promise.bridgeJSLowerParameter()
     value.bridgeJSWithLoweredParameter { (valueIsSome, valueBytes, valueLength) in
-        promise_resolve_BridgeJSRuntimeTests_Sq5ThemeO(promiseValue, valueIsSome, valueBytes, valueLength)
+        promise_resolve_BridgeJSRuntimeTests_Sq26BridgeJSRuntimeTests_ThemeO(promiseValue, valueIsSome, valueBytes, valueLength)
     }
     if let error = _swift_js_take_exception() { throw error }
 }
 
-@JSFunction func Promise_resolve_Sq9DirectionO(_ promise: JSObject, _ value: Optional<Direction>) throws(JSException)
+@JSFunction func Promise_resolve_Sq30BridgeJSRuntimeTests_DirectionO(_ promise: JSObject, _ value: Optional<BridgeJSRuntimeTests.Direction>) throws(JSException)
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "promise_resolve_BridgeJSRuntimeTests_Sq9DirectionO")
-fileprivate func promise_resolve_BridgeJSRuntimeTests_Sq9DirectionO_extern(_ promise: Int32, _ valueIsSome: Int32, _ valueValue: Int32) -> Void
+@_extern(wasm, module: "bjs", name: "promise_resolve_BridgeJSRuntimeTests_Sq30BridgeJSRuntimeTests_DirectionO")
+fileprivate func promise_resolve_BridgeJSRuntimeTests_Sq30BridgeJSRuntimeTests_DirectionO_extern(_ promise: Int32, _ valueIsSome: Int32, _ valueValue: Int32) -> Void
 #else
-fileprivate func promise_resolve_BridgeJSRuntimeTests_Sq9DirectionO_extern(_ promise: Int32, _ valueIsSome: Int32, _ valueValue: Int32) -> Void {
+fileprivate func promise_resolve_BridgeJSRuntimeTests_Sq30BridgeJSRuntimeTests_DirectionO_extern(_ promise: Int32, _ valueIsSome: Int32, _ valueValue: Int32) -> Void {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func promise_resolve_BridgeJSRuntimeTests_Sq9DirectionO(_ promise: Int32, _ valueIsSome: Int32, _ valueValue: Int32) -> Void {
-    return promise_resolve_BridgeJSRuntimeTests_Sq9DirectionO_extern(promise, valueIsSome, valueValue)
+@inline(never) fileprivate func promise_resolve_BridgeJSRuntimeTests_Sq30BridgeJSRuntimeTests_DirectionO(_ promise: Int32, _ valueIsSome: Int32, _ valueValue: Int32) -> Void {
+    return promise_resolve_BridgeJSRuntimeTests_Sq30BridgeJSRuntimeTests_DirectionO_extern(promise, valueIsSome, valueValue)
 }
 
-func _$Promise_resolve_Sq9DirectionO(_ promise: JSObject, _ value: Optional<Direction>) throws(JSException) -> Void {
+func _$Promise_resolve_Sq30BridgeJSRuntimeTests_DirectionO(_ promise: JSObject, _ value: Optional<BridgeJSRuntimeTests.Direction>) throws(JSException) -> Void {
     let promiseValue = promise.bridgeJSLowerParameter()
     let (valueIsSome, valueValue) = value.bridgeJSLowerParameter()
-    promise_resolve_BridgeJSRuntimeTests_Sq9DirectionO(promiseValue, valueIsSome, valueValue)
+    promise_resolve_BridgeJSRuntimeTests_Sq30BridgeJSRuntimeTests_DirectionO(promiseValue, valueIsSome, valueValue)
     if let error = _swift_js_take_exception() { throw error }
 }
 
-@JSFunction func Promise_resolve_Sa9DirectionO(_ promise: JSObject, _ value: [Direction]) throws(JSException)
+@JSFunction func Promise_resolve_Sa30BridgeJSRuntimeTests_DirectionO(_ promise: JSObject, _ value: [BridgeJSRuntimeTests.Direction]) throws(JSException)
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "promise_resolve_BridgeJSRuntimeTests_Sa9DirectionO")
-fileprivate func promise_resolve_BridgeJSRuntimeTests_Sa9DirectionO_extern(_ promise: Int32) -> Void
+@_extern(wasm, module: "bjs", name: "promise_resolve_BridgeJSRuntimeTests_Sa30BridgeJSRuntimeTests_DirectionO")
+fileprivate func promise_resolve_BridgeJSRuntimeTests_Sa30BridgeJSRuntimeTests_DirectionO_extern(_ promise: Int32) -> Void
 #else
-fileprivate func promise_resolve_BridgeJSRuntimeTests_Sa9DirectionO_extern(_ promise: Int32) -> Void {
+fileprivate func promise_resolve_BridgeJSRuntimeTests_Sa30BridgeJSRuntimeTests_DirectionO_extern(_ promise: Int32) -> Void {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func promise_resolve_BridgeJSRuntimeTests_Sa9DirectionO(_ promise: Int32) -> Void {
-    return promise_resolve_BridgeJSRuntimeTests_Sa9DirectionO_extern(promise)
+@inline(never) fileprivate func promise_resolve_BridgeJSRuntimeTests_Sa30BridgeJSRuntimeTests_DirectionO(_ promise: Int32) -> Void {
+    return promise_resolve_BridgeJSRuntimeTests_Sa30BridgeJSRuntimeTests_DirectionO_extern(promise)
 }
 
-func _$Promise_resolve_Sa9DirectionO(_ promise: JSObject, _ value: [Direction]) throws(JSException) -> Void {
+func _$Promise_resolve_Sa30BridgeJSRuntimeTests_DirectionO(_ promise: JSObject, _ value: [BridgeJSRuntimeTests.Direction]) throws(JSException) -> Void {
     let promiseValue = promise.bridgeJSLowerParameter()
     let _ = value.bridgeJSLowerParameter()
-    promise_resolve_BridgeJSRuntimeTests_Sa9DirectionO(promiseValue)
+    promise_resolve_BridgeJSRuntimeTests_Sa30BridgeJSRuntimeTests_DirectionO(promiseValue)
     if let error = _swift_js_take_exception() { throw error }
 }
 
-@JSFunction func Promise_resolve_SD9DirectionO(_ promise: JSObject, _ value: [String: Direction]) throws(JSException)
+@JSFunction func Promise_resolve_SD30BridgeJSRuntimeTests_DirectionO(_ promise: JSObject, _ value: [String: BridgeJSRuntimeTests.Direction]) throws(JSException)
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "promise_resolve_BridgeJSRuntimeTests_SD9DirectionO")
-fileprivate func promise_resolve_BridgeJSRuntimeTests_SD9DirectionO_extern(_ promise: Int32) -> Void
+@_extern(wasm, module: "bjs", name: "promise_resolve_BridgeJSRuntimeTests_SD30BridgeJSRuntimeTests_DirectionO")
+fileprivate func promise_resolve_BridgeJSRuntimeTests_SD30BridgeJSRuntimeTests_DirectionO_extern(_ promise: Int32) -> Void
 #else
-fileprivate func promise_resolve_BridgeJSRuntimeTests_SD9DirectionO_extern(_ promise: Int32) -> Void {
+fileprivate func promise_resolve_BridgeJSRuntimeTests_SD30BridgeJSRuntimeTests_DirectionO_extern(_ promise: Int32) -> Void {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func promise_resolve_BridgeJSRuntimeTests_SD9DirectionO(_ promise: Int32) -> Void {
-    return promise_resolve_BridgeJSRuntimeTests_SD9DirectionO_extern(promise)
+@inline(never) fileprivate func promise_resolve_BridgeJSRuntimeTests_SD30BridgeJSRuntimeTests_DirectionO(_ promise: Int32) -> Void {
+    return promise_resolve_BridgeJSRuntimeTests_SD30BridgeJSRuntimeTests_DirectionO_extern(promise)
 }
 
-func _$Promise_resolve_SD9DirectionO(_ promise: JSObject, _ value: [String: Direction]) throws(JSException) -> Void {
+func _$Promise_resolve_SD30BridgeJSRuntimeTests_DirectionO(_ promise: JSObject, _ value: [String: BridgeJSRuntimeTests.Direction]) throws(JSException) -> Void {
     let promiseValue = promise.bridgeJSLowerParameter()
     let _ = value.bridgeJSLowerParameter()
-    promise_resolve_BridgeJSRuntimeTests_SD9DirectionO(promiseValue)
+    promise_resolve_BridgeJSRuntimeTests_SD30BridgeJSRuntimeTests_DirectionO(promiseValue)
     if let error = _swift_js_take_exception() { throw error }
 }
 
-@JSFunction func Promise_resolve_Sa5ThemeO(_ promise: JSObject, _ value: [Theme]) throws(JSException)
+@JSFunction func Promise_resolve_Sa26BridgeJSRuntimeTests_ThemeO(_ promise: JSObject, _ value: [BridgeJSRuntimeTests.Theme]) throws(JSException)
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "promise_resolve_BridgeJSRuntimeTests_Sa5ThemeO")
-fileprivate func promise_resolve_BridgeJSRuntimeTests_Sa5ThemeO_extern(_ promise: Int32) -> Void
+@_extern(wasm, module: "bjs", name: "promise_resolve_BridgeJSRuntimeTests_Sa26BridgeJSRuntimeTests_ThemeO")
+fileprivate func promise_resolve_BridgeJSRuntimeTests_Sa26BridgeJSRuntimeTests_ThemeO_extern(_ promise: Int32) -> Void
 #else
-fileprivate func promise_resolve_BridgeJSRuntimeTests_Sa5ThemeO_extern(_ promise: Int32) -> Void {
+fileprivate func promise_resolve_BridgeJSRuntimeTests_Sa26BridgeJSRuntimeTests_ThemeO_extern(_ promise: Int32) -> Void {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func promise_resolve_BridgeJSRuntimeTests_Sa5ThemeO(_ promise: Int32) -> Void {
-    return promise_resolve_BridgeJSRuntimeTests_Sa5ThemeO_extern(promise)
+@inline(never) fileprivate func promise_resolve_BridgeJSRuntimeTests_Sa26BridgeJSRuntimeTests_ThemeO(_ promise: Int32) -> Void {
+    return promise_resolve_BridgeJSRuntimeTests_Sa26BridgeJSRuntimeTests_ThemeO_extern(promise)
 }
 
-func _$Promise_resolve_Sa5ThemeO(_ promise: JSObject, _ value: [Theme]) throws(JSException) -> Void {
+func _$Promise_resolve_Sa26BridgeJSRuntimeTests_ThemeO(_ promise: JSObject, _ value: [BridgeJSRuntimeTests.Theme]) throws(JSException) -> Void {
     let promiseValue = promise.bridgeJSLowerParameter()
     let _ = value.bridgeJSLowerParameter()
-    promise_resolve_BridgeJSRuntimeTests_Sa5ThemeO(promiseValue)
+    promise_resolve_BridgeJSRuntimeTests_Sa26BridgeJSRuntimeTests_ThemeO(promiseValue)
     if let error = _swift_js_take_exception() { throw error }
 }
 
-@JSFunction func Promise_resolve_SD5ThemeO(_ promise: JSObject, _ value: [String: Theme]) throws(JSException)
+@JSFunction func Promise_resolve_SD26BridgeJSRuntimeTests_ThemeO(_ promise: JSObject, _ value: [String: BridgeJSRuntimeTests.Theme]) throws(JSException)
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "promise_resolve_BridgeJSRuntimeTests_SD5ThemeO")
-fileprivate func promise_resolve_BridgeJSRuntimeTests_SD5ThemeO_extern(_ promise: Int32) -> Void
+@_extern(wasm, module: "bjs", name: "promise_resolve_BridgeJSRuntimeTests_SD26BridgeJSRuntimeTests_ThemeO")
+fileprivate func promise_resolve_BridgeJSRuntimeTests_SD26BridgeJSRuntimeTests_ThemeO_extern(_ promise: Int32) -> Void
 #else
-fileprivate func promise_resolve_BridgeJSRuntimeTests_SD5ThemeO_extern(_ promise: Int32) -> Void {
+fileprivate func promise_resolve_BridgeJSRuntimeTests_SD26BridgeJSRuntimeTests_ThemeO_extern(_ promise: Int32) -> Void {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func promise_resolve_BridgeJSRuntimeTests_SD5ThemeO(_ promise: Int32) -> Void {
-    return promise_resolve_BridgeJSRuntimeTests_SD5ThemeO_extern(promise)
+@inline(never) fileprivate func promise_resolve_BridgeJSRuntimeTests_SD26BridgeJSRuntimeTests_ThemeO(_ promise: Int32) -> Void {
+    return promise_resolve_BridgeJSRuntimeTests_SD26BridgeJSRuntimeTests_ThemeO_extern(promise)
 }
 
-func _$Promise_resolve_SD5ThemeO(_ promise: JSObject, _ value: [String: Theme]) throws(JSException) -> Void {
+func _$Promise_resolve_SD26BridgeJSRuntimeTests_ThemeO(_ promise: JSObject, _ value: [String: BridgeJSRuntimeTests.Theme]) throws(JSException) -> Void {
     let promiseValue = promise.bridgeJSLowerParameter()
     let _ = value.bridgeJSLowerParameter()
-    promise_resolve_BridgeJSRuntimeTests_SD5ThemeO(promiseValue)
+    promise_resolve_BridgeJSRuntimeTests_SD26BridgeJSRuntimeTests_ThemeO(promiseValue)
     if let error = _swift_js_take_exception() { throw error }
 }
 
-@JSFunction func Promise_resolve_8FileSizeO(_ promise: JSObject, _ value: FileSize) throws(JSException)
+@JSFunction func Promise_resolve_29BridgeJSRuntimeTests_FileSizeO(_ promise: JSObject, _ value: BridgeJSRuntimeTests.FileSize) throws(JSException)
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "promise_resolve_BridgeJSRuntimeTests_8FileSizeO")
-fileprivate func promise_resolve_BridgeJSRuntimeTests_8FileSizeO_extern(_ promise: Int32, _ value: Int64) -> Void
+@_extern(wasm, module: "bjs", name: "promise_resolve_BridgeJSRuntimeTests_29BridgeJSRuntimeTests_FileSizeO")
+fileprivate func promise_resolve_BridgeJSRuntimeTests_29BridgeJSRuntimeTests_FileSizeO_extern(_ promise: Int32, _ value: Int64) -> Void
 #else
-fileprivate func promise_resolve_BridgeJSRuntimeTests_8FileSizeO_extern(_ promise: Int32, _ value: Int64) -> Void {
+fileprivate func promise_resolve_BridgeJSRuntimeTests_29BridgeJSRuntimeTests_FileSizeO_extern(_ promise: Int32, _ value: Int64) -> Void {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func promise_resolve_BridgeJSRuntimeTests_8FileSizeO(_ promise: Int32, _ value: Int64) -> Void {
-    return promise_resolve_BridgeJSRuntimeTests_8FileSizeO_extern(promise, value)
+@inline(never) fileprivate func promise_resolve_BridgeJSRuntimeTests_29BridgeJSRuntimeTests_FileSizeO(_ promise: Int32, _ value: Int64) -> Void {
+    return promise_resolve_BridgeJSRuntimeTests_29BridgeJSRuntimeTests_FileSizeO_extern(promise, value)
 }
 
-func _$Promise_resolve_8FileSizeO(_ promise: JSObject, _ value: FileSize) throws(JSException) -> Void {
+func _$Promise_resolve_29BridgeJSRuntimeTests_FileSizeO(_ promise: JSObject, _ value: BridgeJSRuntimeTests.FileSize) throws(JSException) -> Void {
     let promiseValue = promise.bridgeJSLowerParameter()
     let valueValue = value.bridgeJSLowerParameter()
-    promise_resolve_BridgeJSRuntimeTests_8FileSizeO(promiseValue, valueValue)
+    promise_resolve_BridgeJSRuntimeTests_29BridgeJSRuntimeTests_FileSizeO(promiseValue, valueValue)
     if let error = _swift_js_take_exception() { throw error }
 }
 
-@JSFunction func Promise_resolve_Sq8FileSizeO(_ promise: JSObject, _ value: Optional<FileSize>) throws(JSException)
+@JSFunction func Promise_resolve_Sq29BridgeJSRuntimeTests_FileSizeO(_ promise: JSObject, _ value: Optional<BridgeJSRuntimeTests.FileSize>) throws(JSException)
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "promise_resolve_BridgeJSRuntimeTests_Sq8FileSizeO")
-fileprivate func promise_resolve_BridgeJSRuntimeTests_Sq8FileSizeO_extern(_ promise: Int32, _ valueIsSome: Int32, _ valueValue: Int64) -> Void
+@_extern(wasm, module: "bjs", name: "promise_resolve_BridgeJSRuntimeTests_Sq29BridgeJSRuntimeTests_FileSizeO")
+fileprivate func promise_resolve_BridgeJSRuntimeTests_Sq29BridgeJSRuntimeTests_FileSizeO_extern(_ promise: Int32, _ valueIsSome: Int32, _ valueValue: Int64) -> Void
 #else
-fileprivate func promise_resolve_BridgeJSRuntimeTests_Sq8FileSizeO_extern(_ promise: Int32, _ valueIsSome: Int32, _ valueValue: Int64) -> Void {
+fileprivate func promise_resolve_BridgeJSRuntimeTests_Sq29BridgeJSRuntimeTests_FileSizeO_extern(_ promise: Int32, _ valueIsSome: Int32, _ valueValue: Int64) -> Void {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func promise_resolve_BridgeJSRuntimeTests_Sq8FileSizeO(_ promise: Int32, _ valueIsSome: Int32, _ valueValue: Int64) -> Void {
-    return promise_resolve_BridgeJSRuntimeTests_Sq8FileSizeO_extern(promise, valueIsSome, valueValue)
+@inline(never) fileprivate func promise_resolve_BridgeJSRuntimeTests_Sq29BridgeJSRuntimeTests_FileSizeO(_ promise: Int32, _ valueIsSome: Int32, _ valueValue: Int64) -> Void {
+    return promise_resolve_BridgeJSRuntimeTests_Sq29BridgeJSRuntimeTests_FileSizeO_extern(promise, valueIsSome, valueValue)
 }
 
-func _$Promise_resolve_Sq8FileSizeO(_ promise: JSObject, _ value: Optional<FileSize>) throws(JSException) -> Void {
+func _$Promise_resolve_Sq29BridgeJSRuntimeTests_FileSizeO(_ promise: JSObject, _ value: Optional<BridgeJSRuntimeTests.FileSize>) throws(JSException) -> Void {
     let promiseValue = promise.bridgeJSLowerParameter()
     let (valueIsSome, valueValue) = value.bridgeJSLowerParameter()
-    promise_resolve_BridgeJSRuntimeTests_Sq8FileSizeO(promiseValue, valueIsSome, valueValue)
+    promise_resolve_BridgeJSRuntimeTests_Sq29BridgeJSRuntimeTests_FileSizeO(promiseValue, valueIsSome, valueValue)
     if let error = _swift_js_take_exception() { throw error }
 }
 
-@JSFunction func Promise_resolve_18AsyncPayloadResultO(_ promise: JSObject, _ value: AsyncPayloadResult) throws(JSException)
+@JSFunction func Promise_resolve_39BridgeJSRuntimeTests_AsyncPayloadResultO(_ promise: JSObject, _ value: BridgeJSRuntimeTests.AsyncPayloadResult) throws(JSException)
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "promise_resolve_BridgeJSRuntimeTests_18AsyncPayloadResultO")
-fileprivate func promise_resolve_BridgeJSRuntimeTests_18AsyncPayloadResultO_extern(_ promise: Int32, _ value: Int32) -> Void
+@_extern(wasm, module: "bjs", name: "promise_resolve_BridgeJSRuntimeTests_39BridgeJSRuntimeTests_AsyncPayloadResultO")
+fileprivate func promise_resolve_BridgeJSRuntimeTests_39BridgeJSRuntimeTests_AsyncPayloadResultO_extern(_ promise: Int32, _ value: Int32) -> Void
 #else
-fileprivate func promise_resolve_BridgeJSRuntimeTests_18AsyncPayloadResultO_extern(_ promise: Int32, _ value: Int32) -> Void {
+fileprivate func promise_resolve_BridgeJSRuntimeTests_39BridgeJSRuntimeTests_AsyncPayloadResultO_extern(_ promise: Int32, _ value: Int32) -> Void {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func promise_resolve_BridgeJSRuntimeTests_18AsyncPayloadResultO(_ promise: Int32, _ value: Int32) -> Void {
-    return promise_resolve_BridgeJSRuntimeTests_18AsyncPayloadResultO_extern(promise, value)
+@inline(never) fileprivate func promise_resolve_BridgeJSRuntimeTests_39BridgeJSRuntimeTests_AsyncPayloadResultO(_ promise: Int32, _ value: Int32) -> Void {
+    return promise_resolve_BridgeJSRuntimeTests_39BridgeJSRuntimeTests_AsyncPayloadResultO_extern(promise, value)
 }
 
-func _$Promise_resolve_18AsyncPayloadResultO(_ promise: JSObject, _ value: AsyncPayloadResult) throws(JSException) -> Void {
+func _$Promise_resolve_39BridgeJSRuntimeTests_AsyncPayloadResultO(_ promise: JSObject, _ value: BridgeJSRuntimeTests.AsyncPayloadResult) throws(JSException) -> Void {
     let promiseValue = promise.bridgeJSLowerParameter()
     let valueCaseId = value.bridgeJSLowerParameter()
-    promise_resolve_BridgeJSRuntimeTests_18AsyncPayloadResultO(promiseValue, valueCaseId)
+    promise_resolve_BridgeJSRuntimeTests_39BridgeJSRuntimeTests_AsyncPayloadResultO(promiseValue, valueCaseId)
     if let error = _swift_js_take_exception() { throw error }
 }
 
-@JSFunction func Promise_resolve_Sq18AsyncPayloadResultO(_ promise: JSObject, _ value: Optional<AsyncPayloadResult>) throws(JSException)
+@JSFunction func Promise_resolve_Sq39BridgeJSRuntimeTests_AsyncPayloadResultO(_ promise: JSObject, _ value: Optional<BridgeJSRuntimeTests.AsyncPayloadResult>) throws(JSException)
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "promise_resolve_BridgeJSRuntimeTests_Sq18AsyncPayloadResultO")
-fileprivate func promise_resolve_BridgeJSRuntimeTests_Sq18AsyncPayloadResultO_extern(_ promise: Int32, _ valueIsSome: Int32, _ valueCaseId: Int32) -> Void
+@_extern(wasm, module: "bjs", name: "promise_resolve_BridgeJSRuntimeTests_Sq39BridgeJSRuntimeTests_AsyncPayloadResultO")
+fileprivate func promise_resolve_BridgeJSRuntimeTests_Sq39BridgeJSRuntimeTests_AsyncPayloadResultO_extern(_ promise: Int32, _ valueIsSome: Int32, _ valueCaseId: Int32) -> Void
 #else
-fileprivate func promise_resolve_BridgeJSRuntimeTests_Sq18AsyncPayloadResultO_extern(_ promise: Int32, _ valueIsSome: Int32, _ valueCaseId: Int32) -> Void {
+fileprivate func promise_resolve_BridgeJSRuntimeTests_Sq39BridgeJSRuntimeTests_AsyncPayloadResultO_extern(_ promise: Int32, _ valueIsSome: Int32, _ valueCaseId: Int32) -> Void {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func promise_resolve_BridgeJSRuntimeTests_Sq18AsyncPayloadResultO(_ promise: Int32, _ valueIsSome: Int32, _ valueCaseId: Int32) -> Void {
-    return promise_resolve_BridgeJSRuntimeTests_Sq18AsyncPayloadResultO_extern(promise, valueIsSome, valueCaseId)
+@inline(never) fileprivate func promise_resolve_BridgeJSRuntimeTests_Sq39BridgeJSRuntimeTests_AsyncPayloadResultO(_ promise: Int32, _ valueIsSome: Int32, _ valueCaseId: Int32) -> Void {
+    return promise_resolve_BridgeJSRuntimeTests_Sq39BridgeJSRuntimeTests_AsyncPayloadResultO_extern(promise, valueIsSome, valueCaseId)
 }
 
-func _$Promise_resolve_Sq18AsyncPayloadResultO(_ promise: JSObject, _ value: Optional<AsyncPayloadResult>) throws(JSException) -> Void {
+func _$Promise_resolve_Sq39BridgeJSRuntimeTests_AsyncPayloadResultO(_ promise: JSObject, _ value: Optional<BridgeJSRuntimeTests.AsyncPayloadResult>) throws(JSException) -> Void {
     let promiseValue = promise.bridgeJSLowerParameter()
     let (valueIsSome, valueCaseId) = value.bridgeJSLowerParameter()
-    promise_resolve_BridgeJSRuntimeTests_Sq18AsyncPayloadResultO(promiseValue, valueIsSome, valueCaseId)
+    promise_resolve_BridgeJSRuntimeTests_Sq39BridgeJSRuntimeTests_AsyncPayloadResultO(promiseValue, valueIsSome, valueCaseId)
     if let error = _swift_js_take_exception() { throw error }
 }
 
-@JSFunction func Promise_resolve_11PublicPointV(_ promise: JSObject, _ value: PublicPoint) throws(JSException)
+@JSFunction func Promise_resolve_32BridgeJSRuntimeTests_PublicPointV(_ promise: JSObject, _ value: BridgeJSRuntimeTests.PublicPoint) throws(JSException)
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "promise_resolve_BridgeJSRuntimeTests_11PublicPointV")
-fileprivate func promise_resolve_BridgeJSRuntimeTests_11PublicPointV_extern(_ promise: Int32, _ value: Int32) -> Void
+@_extern(wasm, module: "bjs", name: "promise_resolve_BridgeJSRuntimeTests_32BridgeJSRuntimeTests_PublicPointV")
+fileprivate func promise_resolve_BridgeJSRuntimeTests_32BridgeJSRuntimeTests_PublicPointV_extern(_ promise: Int32, _ value: Int32) -> Void
 #else
-fileprivate func promise_resolve_BridgeJSRuntimeTests_11PublicPointV_extern(_ promise: Int32, _ value: Int32) -> Void {
+fileprivate func promise_resolve_BridgeJSRuntimeTests_32BridgeJSRuntimeTests_PublicPointV_extern(_ promise: Int32, _ value: Int32) -> Void {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func promise_resolve_BridgeJSRuntimeTests_11PublicPointV(_ promise: Int32, _ value: Int32) -> Void {
-    return promise_resolve_BridgeJSRuntimeTests_11PublicPointV_extern(promise, value)
+@inline(never) fileprivate func promise_resolve_BridgeJSRuntimeTests_32BridgeJSRuntimeTests_PublicPointV(_ promise: Int32, _ value: Int32) -> Void {
+    return promise_resolve_BridgeJSRuntimeTests_32BridgeJSRuntimeTests_PublicPointV_extern(promise, value)
 }
 
-func _$Promise_resolve_11PublicPointV(_ promise: JSObject, _ value: PublicPoint) throws(JSException) -> Void {
+func _$Promise_resolve_32BridgeJSRuntimeTests_PublicPointV(_ promise: JSObject, _ value: BridgeJSRuntimeTests.PublicPoint) throws(JSException) -> Void {
     let promiseValue = promise.bridgeJSLowerParameter()
     let valueObjectId = value.bridgeJSLowerParameter()
-    promise_resolve_BridgeJSRuntimeTests_11PublicPointV(promiseValue, valueObjectId)
+    promise_resolve_BridgeJSRuntimeTests_32BridgeJSRuntimeTests_PublicPointV(promiseValue, valueObjectId)
     if let error = _swift_js_take_exception() { throw error }
 }
 
-@JSFunction func Promise_resolve_7ContactV(_ promise: JSObject, _ value: Contact) throws(JSException)
+@JSFunction func Promise_resolve_28BridgeJSRuntimeTests_ContactV(_ promise: JSObject, _ value: BridgeJSRuntimeTests.Contact) throws(JSException)
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "promise_resolve_BridgeJSRuntimeTests_7ContactV")
-fileprivate func promise_resolve_BridgeJSRuntimeTests_7ContactV_extern(_ promise: Int32, _ value: Int32) -> Void
+@_extern(wasm, module: "bjs", name: "promise_resolve_BridgeJSRuntimeTests_28BridgeJSRuntimeTests_ContactV")
+fileprivate func promise_resolve_BridgeJSRuntimeTests_28BridgeJSRuntimeTests_ContactV_extern(_ promise: Int32, _ value: Int32) -> Void
 #else
-fileprivate func promise_resolve_BridgeJSRuntimeTests_7ContactV_extern(_ promise: Int32, _ value: Int32) -> Void {
+fileprivate func promise_resolve_BridgeJSRuntimeTests_28BridgeJSRuntimeTests_ContactV_extern(_ promise: Int32, _ value: Int32) -> Void {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func promise_resolve_BridgeJSRuntimeTests_7ContactV(_ promise: Int32, _ value: Int32) -> Void {
-    return promise_resolve_BridgeJSRuntimeTests_7ContactV_extern(promise, value)
+@inline(never) fileprivate func promise_resolve_BridgeJSRuntimeTests_28BridgeJSRuntimeTests_ContactV(_ promise: Int32, _ value: Int32) -> Void {
+    return promise_resolve_BridgeJSRuntimeTests_28BridgeJSRuntimeTests_ContactV_extern(promise, value)
 }
 
-func _$Promise_resolve_7ContactV(_ promise: JSObject, _ value: Contact) throws(JSException) -> Void {
+func _$Promise_resolve_28BridgeJSRuntimeTests_ContactV(_ promise: JSObject, _ value: BridgeJSRuntimeTests.Contact) throws(JSException) -> Void {
     let promiseValue = promise.bridgeJSLowerParameter()
     let valueObjectId = value.bridgeJSLowerParameter()
-    promise_resolve_BridgeJSRuntimeTests_7ContactV(promiseValue, valueObjectId)
+    promise_resolve_BridgeJSRuntimeTests_28BridgeJSRuntimeTests_ContactV(promiseValue, valueObjectId)
     if let error = _swift_js_take_exception() { throw error }
 }
 
-@JSFunction func Promise_resolve_Sa11PublicPointV(_ promise: JSObject, _ value: [PublicPoint]) throws(JSException)
+@JSFunction func Promise_resolve_Sa32BridgeJSRuntimeTests_PublicPointV(_ promise: JSObject, _ value: [BridgeJSRuntimeTests.PublicPoint]) throws(JSException)
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "promise_resolve_BridgeJSRuntimeTests_Sa11PublicPointV")
-fileprivate func promise_resolve_BridgeJSRuntimeTests_Sa11PublicPointV_extern(_ promise: Int32) -> Void
+@_extern(wasm, module: "bjs", name: "promise_resolve_BridgeJSRuntimeTests_Sa32BridgeJSRuntimeTests_PublicPointV")
+fileprivate func promise_resolve_BridgeJSRuntimeTests_Sa32BridgeJSRuntimeTests_PublicPointV_extern(_ promise: Int32) -> Void
 #else
-fileprivate func promise_resolve_BridgeJSRuntimeTests_Sa11PublicPointV_extern(_ promise: Int32) -> Void {
+fileprivate func promise_resolve_BridgeJSRuntimeTests_Sa32BridgeJSRuntimeTests_PublicPointV_extern(_ promise: Int32) -> Void {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func promise_resolve_BridgeJSRuntimeTests_Sa11PublicPointV(_ promise: Int32) -> Void {
-    return promise_resolve_BridgeJSRuntimeTests_Sa11PublicPointV_extern(promise)
+@inline(never) fileprivate func promise_resolve_BridgeJSRuntimeTests_Sa32BridgeJSRuntimeTests_PublicPointV(_ promise: Int32) -> Void {
+    return promise_resolve_BridgeJSRuntimeTests_Sa32BridgeJSRuntimeTests_PublicPointV_extern(promise)
 }
 
-func _$Promise_resolve_Sa11PublicPointV(_ promise: JSObject, _ value: [PublicPoint]) throws(JSException) -> Void {
+func _$Promise_resolve_Sa32BridgeJSRuntimeTests_PublicPointV(_ promise: JSObject, _ value: [BridgeJSRuntimeTests.PublicPoint]) throws(JSException) -> Void {
     let promiseValue = promise.bridgeJSLowerParameter()
     let _ = value.bridgeJSLowerParameter()
-    promise_resolve_BridgeJSRuntimeTests_Sa11PublicPointV(promiseValue)
+    promise_resolve_BridgeJSRuntimeTests_Sa32BridgeJSRuntimeTests_PublicPointV(promiseValue)
     if let error = _swift_js_take_exception() { throw error }
 }
 
-@JSFunction func Promise_resolve_Sq11PublicPointV(_ promise: JSObject, _ value: Optional<PublicPoint>) throws(JSException)
+@JSFunction func Promise_resolve_Sq32BridgeJSRuntimeTests_PublicPointV(_ promise: JSObject, _ value: Optional<BridgeJSRuntimeTests.PublicPoint>) throws(JSException)
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "promise_resolve_BridgeJSRuntimeTests_Sq11PublicPointV")
-fileprivate func promise_resolve_BridgeJSRuntimeTests_Sq11PublicPointV_extern(_ promise: Int32, _ value: Int32) -> Void
+@_extern(wasm, module: "bjs", name: "promise_resolve_BridgeJSRuntimeTests_Sq32BridgeJSRuntimeTests_PublicPointV")
+fileprivate func promise_resolve_BridgeJSRuntimeTests_Sq32BridgeJSRuntimeTests_PublicPointV_extern(_ promise: Int32, _ value: Int32) -> Void
 #else
-fileprivate func promise_resolve_BridgeJSRuntimeTests_Sq11PublicPointV_extern(_ promise: Int32, _ value: Int32) -> Void {
+fileprivate func promise_resolve_BridgeJSRuntimeTests_Sq32BridgeJSRuntimeTests_PublicPointV_extern(_ promise: Int32, _ value: Int32) -> Void {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func promise_resolve_BridgeJSRuntimeTests_Sq11PublicPointV(_ promise: Int32, _ value: Int32) -> Void {
-    return promise_resolve_BridgeJSRuntimeTests_Sq11PublicPointV_extern(promise, value)
+@inline(never) fileprivate func promise_resolve_BridgeJSRuntimeTests_Sq32BridgeJSRuntimeTests_PublicPointV(_ promise: Int32, _ value: Int32) -> Void {
+    return promise_resolve_BridgeJSRuntimeTests_Sq32BridgeJSRuntimeTests_PublicPointV_extern(promise, value)
 }
 
-func _$Promise_resolve_Sq11PublicPointV(_ promise: JSObject, _ value: Optional<PublicPoint>) throws(JSException) -> Void {
+func _$Promise_resolve_Sq32BridgeJSRuntimeTests_PublicPointV(_ promise: JSObject, _ value: Optional<BridgeJSRuntimeTests.PublicPoint>) throws(JSException) -> Void {
     let promiseValue = promise.bridgeJSLowerParameter()
     let valueIsSome = value.bridgeJSLowerParameter()
-    promise_resolve_BridgeJSRuntimeTests_Sq11PublicPointV(promiseValue, valueIsSome)
+    promise_resolve_BridgeJSRuntimeTests_Sq32BridgeJSRuntimeTests_PublicPointV(promiseValue, valueIsSome)
     if let error = _swift_js_take_exception() { throw error }
 }
 
-@JSFunction func Promise_resolve_SD11PublicPointV(_ promise: JSObject, _ value: [String: PublicPoint]) throws(JSException)
+@JSFunction func Promise_resolve_SD32BridgeJSRuntimeTests_PublicPointV(_ promise: JSObject, _ value: [String: BridgeJSRuntimeTests.PublicPoint]) throws(JSException)
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "promise_resolve_BridgeJSRuntimeTests_SD11PublicPointV")
-fileprivate func promise_resolve_BridgeJSRuntimeTests_SD11PublicPointV_extern(_ promise: Int32) -> Void
+@_extern(wasm, module: "bjs", name: "promise_resolve_BridgeJSRuntimeTests_SD32BridgeJSRuntimeTests_PublicPointV")
+fileprivate func promise_resolve_BridgeJSRuntimeTests_SD32BridgeJSRuntimeTests_PublicPointV_extern(_ promise: Int32) -> Void
 #else
-fileprivate func promise_resolve_BridgeJSRuntimeTests_SD11PublicPointV_extern(_ promise: Int32) -> Void {
+fileprivate func promise_resolve_BridgeJSRuntimeTests_SD32BridgeJSRuntimeTests_PublicPointV_extern(_ promise: Int32) -> Void {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func promise_resolve_BridgeJSRuntimeTests_SD11PublicPointV(_ promise: Int32) -> Void {
-    return promise_resolve_BridgeJSRuntimeTests_SD11PublicPointV_extern(promise)
+@inline(never) fileprivate func promise_resolve_BridgeJSRuntimeTests_SD32BridgeJSRuntimeTests_PublicPointV(_ promise: Int32) -> Void {
+    return promise_resolve_BridgeJSRuntimeTests_SD32BridgeJSRuntimeTests_PublicPointV_extern(promise)
 }
 
-func _$Promise_resolve_SD11PublicPointV(_ promise: JSObject, _ value: [String: PublicPoint]) throws(JSException) -> Void {
+func _$Promise_resolve_SD32BridgeJSRuntimeTests_PublicPointV(_ promise: JSObject, _ value: [String: BridgeJSRuntimeTests.PublicPoint]) throws(JSException) -> Void {
     let promiseValue = promise.bridgeJSLowerParameter()
     let _ = value.bridgeJSLowerParameter()
-    promise_resolve_BridgeJSRuntimeTests_SD11PublicPointV(promiseValue)
+    promise_resolve_BridgeJSRuntimeTests_SD32BridgeJSRuntimeTests_PublicPointV(promiseValue)
     if let error = _swift_js_take_exception() { throw error }
 }
 
-@JSFunction func Promise_resolve_9DataPointV(_ promise: JSObject, _ value: DataPoint) throws(JSException)
+@JSFunction func Promise_resolve_30BridgeJSRuntimeTests_DataPointV(_ promise: JSObject, _ value: BridgeJSRuntimeTests.DataPoint) throws(JSException)
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "promise_resolve_BridgeJSRuntimeTests_9DataPointV")
-fileprivate func promise_resolve_BridgeJSRuntimeTests_9DataPointV_extern(_ promise: Int32, _ value: Int32) -> Void
+@_extern(wasm, module: "bjs", name: "promise_resolve_BridgeJSRuntimeTests_30BridgeJSRuntimeTests_DataPointV")
+fileprivate func promise_resolve_BridgeJSRuntimeTests_30BridgeJSRuntimeTests_DataPointV_extern(_ promise: Int32, _ value: Int32) -> Void
 #else
-fileprivate func promise_resolve_BridgeJSRuntimeTests_9DataPointV_extern(_ promise: Int32, _ value: Int32) -> Void {
+fileprivate func promise_resolve_BridgeJSRuntimeTests_30BridgeJSRuntimeTests_DataPointV_extern(_ promise: Int32, _ value: Int32) -> Void {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func promise_resolve_BridgeJSRuntimeTests_9DataPointV(_ promise: Int32, _ value: Int32) -> Void {
-    return promise_resolve_BridgeJSRuntimeTests_9DataPointV_extern(promise, value)
+@inline(never) fileprivate func promise_resolve_BridgeJSRuntimeTests_30BridgeJSRuntimeTests_DataPointV(_ promise: Int32, _ value: Int32) -> Void {
+    return promise_resolve_BridgeJSRuntimeTests_30BridgeJSRuntimeTests_DataPointV_extern(promise, value)
 }
 
-func _$Promise_resolve_9DataPointV(_ promise: JSObject, _ value: DataPoint) throws(JSException) -> Void {
+func _$Promise_resolve_30BridgeJSRuntimeTests_DataPointV(_ promise: JSObject, _ value: BridgeJSRuntimeTests.DataPoint) throws(JSException) -> Void {
     let promiseValue = promise.bridgeJSLowerParameter()
     let valueObjectId = value.bridgeJSLowerParameter()
-    promise_resolve_BridgeJSRuntimeTests_9DataPointV(promiseValue, valueObjectId)
+    promise_resolve_BridgeJSRuntimeTests_30BridgeJSRuntimeTests_DataPointV(promiseValue, valueObjectId)
     if let error = _swift_js_take_exception() { throw error }
 }
 
-extension Polygon: _BridgedSwiftAlias, _BridgedSwiftStackType {}
+extension BridgeJSRuntimeTests.Polygon: _BridgedSwiftAlias, _BridgedSwiftStackType {}
 
-extension Tag: _BridgedSwiftAlias, _BridgedSwiftStackType {}
+extension BridgeJSRuntimeTests.Tag: _BridgedSwiftAlias, _BridgedSwiftStackType {}
 
-extension TagHolder: _BridgedSwiftAlias, _BridgedSwiftStackType {}
+extension BridgeJSRuntimeTests.TagHolder: _BridgedSwiftAlias, _BridgedSwiftStackType {}
 
-extension Coordinate: _BridgedSwiftAlias, _BridgedSwiftStruct {}
+extension BridgeJSRuntimeTests.Coordinate: _BridgedSwiftAlias, _BridgedSwiftStruct {}
 
-extension Priority: _BridgedSwiftAlias, _BridgedSwiftStackType {}
+extension BridgeJSRuntimeTests.Priority: _BridgedSwiftAlias, _BridgedSwiftStackType {}
 
-extension Alert: _BridgedSwiftAlias, _BridgedSwiftCaseEnum {}
+extension BridgeJSRuntimeTests.Alert: _BridgedSwiftAlias, _BridgedSwiftCaseEnum {}
 
-extension UserId: _BridgedSwiftAlias, _BridgedSwiftStackType {}
+extension BridgeJSRuntimeTests.UserId: _BridgedSwiftAlias, _BridgedSwiftStackType {}
 
-extension Tagged: _BridgedSwiftAlias, _BridgedSwiftStackType {}
+extension BridgeJSRuntimeTests.Tagged: _BridgedSwiftAlias, _BridgedSwiftStackType {}
 
-extension Canvas: _BridgedSwiftAlias, _BridgedSwiftStackType {}
+extension BridgeJSRuntimeTests.Canvas: _BridgedSwiftAlias, _BridgedSwiftStackType {}
 
-extension AliasedTag: _BridgedSwiftAlias, _BridgedSwiftAssociatedValueEnum {}
+extension BridgeJSRuntimeTests.AliasedTag: _BridgedSwiftAlias, _BridgedSwiftAssociatedValueEnum {}
 
-extension Boxed: _BridgedSwiftAlias, _BridgedSwiftStackType {}
+extension BridgeJSRuntimeTests.Boxed: _BridgedSwiftAlias, _BridgedSwiftStackType {}
 
 #if arch(wasm32)
 @_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_Surface_init")
@@ -14066,7 +14066,7 @@ fileprivate func bjs_AliasImports_jsRoundTripOptionalUserId_static_extern(_ valu
     return bjs_AliasImports_jsRoundTripOptionalUserId_static_extern(valueIsSome, valueValue)
 }
 
-func _$AliasImports_jsRoundTripTagged(_ value: Tagged) throws(JSException) -> Tagged {
+func _$AliasImports_jsRoundTripTagged(_ value: BridgeJSRuntimeTests.Tagged) throws(JSException) -> BridgeJSRuntimeTests.Tagged {
     let ret0 = value.bridgeJSWithLoweredParameter { (valueBytes, valueLength) in
         let ret = bjs_AliasImports_jsRoundTripTagged_static(valueBytes, valueLength)
         return ret
@@ -14075,72 +14075,72 @@ func _$AliasImports_jsRoundTripTagged(_ value: Tagged) throws(JSException) -> Ta
     if let error = _swift_js_take_exception() {
         throw error
     }
-    return Tagged.bridgeJSLiftReturn(ret)
+    return BridgeJSRuntimeTests.Tagged.bridgeJSLiftReturn(ret)
 }
 
-func _$AliasImports_jsRoundTripOptionalTagged(_ value: Optional<Tagged>) throws(JSException) -> Optional<Tagged> {
+func _$AliasImports_jsRoundTripOptionalTagged(_ value: Optional<BridgeJSRuntimeTests.Tagged>) throws(JSException) -> Optional<BridgeJSRuntimeTests.Tagged> {
     value.bridgeJSWithLoweredParameter { (valueIsSome, valueBytes, valueLength) in
         bjs_AliasImports_jsRoundTripOptionalTagged_static(valueIsSome, valueBytes, valueLength)
     }
     if let error = _swift_js_take_exception() {
         throw error
     }
-    return Optional<Tagged>.bridgeJSLiftReturnFromSideChannel()
+    return Optional<BridgeJSRuntimeTests.Tagged>.bridgeJSLiftReturnFromSideChannel()
 }
 
-func _$AliasImports_jsProduceOptionalCanvas(_ label: Optional<String>) throws(JSException) -> Optional<Canvas> {
+func _$AliasImports_jsProduceOptionalCanvas(_ label: Optional<String>) throws(JSException) -> Optional<BridgeJSRuntimeTests.Canvas> {
     label.bridgeJSWithLoweredParameter { (labelIsSome, labelBytes, labelLength) in
         bjs_AliasImports_jsProduceOptionalCanvas_static(labelIsSome, labelBytes, labelLength)
     }
     if let error = _swift_js_take_exception() {
         throw error
     }
-    return Optional<Canvas>.bridgeJSLiftReturn()
+    return Optional<BridgeJSRuntimeTests.Canvas>.bridgeJSLiftReturn()
 }
 
-func _$AliasImports_jsRoundTripAliasedTags(_ values: [Optional<AliasedTag>]) throws(JSException) -> [Optional<AliasedTag>] {
+func _$AliasImports_jsRoundTripAliasedTags(_ values: [Optional<BridgeJSRuntimeTests.AliasedTag>]) throws(JSException) -> [Optional<BridgeJSRuntimeTests.AliasedTag>] {
     let _ = values.bridgeJSLowerParameter()
     bjs_AliasImports_jsRoundTripAliasedTags_static()
     if let error = _swift_js_take_exception() {
         throw error
     }
-    return [Optional<AliasedTag>].bridgeJSLiftReturn()
+    return [Optional<BridgeJSRuntimeTests.AliasedTag>].bridgeJSLiftReturn()
 }
 
-func _$AliasImports_jsRoundTripPolygon(_ value: Polygon) throws(JSException) -> Polygon {
+func _$AliasImports_jsRoundTripPolygon(_ value: BridgeJSRuntimeTests.Polygon) throws(JSException) -> BridgeJSRuntimeTests.Polygon {
     let valuePointer = value.bridgeJSLowerParameter()
     let ret = bjs_AliasImports_jsRoundTripPolygon_static(valuePointer)
     if let error = _swift_js_take_exception() {
         throw error
     }
-    return Polygon.bridgeJSLiftReturn(ret)
+    return BridgeJSRuntimeTests.Polygon.bridgeJSLiftReturn(ret)
 }
 
-func _$AliasImports_jsRoundTripCoordinate(_ value: Coordinate) throws(JSException) -> Coordinate {
+func _$AliasImports_jsRoundTripCoordinate(_ value: BridgeJSRuntimeTests.Coordinate) throws(JSException) -> BridgeJSRuntimeTests.Coordinate {
     let valueObjectId = value.bridgeJSLowerParameter()
     let ret = bjs_AliasImports_jsRoundTripCoordinate_static(valueObjectId)
     if let error = _swift_js_take_exception() {
         throw error
     }
-    return Coordinate.bridgeJSLiftReturn(ret)
+    return BridgeJSRuntimeTests.Coordinate.bridgeJSLiftReturn(ret)
 }
 
-func _$AliasImports_jsRoundTripUserId(_ value: UserId) throws(JSException) -> UserId {
+func _$AliasImports_jsRoundTripUserId(_ value: BridgeJSRuntimeTests.UserId) throws(JSException) -> BridgeJSRuntimeTests.UserId {
     let valueValue = value.bridgeJSLowerParameter()
     let ret = bjs_AliasImports_jsRoundTripUserId_static(valueValue)
     if let error = _swift_js_take_exception() {
         throw error
     }
-    return UserId.bridgeJSLiftReturn(ret)
+    return BridgeJSRuntimeTests.UserId.bridgeJSLiftReturn(ret)
 }
 
-func _$AliasImports_jsRoundTripOptionalUserId(_ value: Optional<UserId>) throws(JSException) -> Optional<UserId> {
+func _$AliasImports_jsRoundTripOptionalUserId(_ value: Optional<BridgeJSRuntimeTests.UserId>) throws(JSException) -> Optional<BridgeJSRuntimeTests.UserId> {
     let (valueIsSome, valueValue) = value.bridgeJSLowerParameter()
     bjs_AliasImports_jsRoundTripOptionalUserId_static(valueIsSome, valueValue)
     if let error = _swift_js_take_exception() {
         throw error
     }
-    return Optional<UserId>.bridgeJSLiftReturnFromSideChannel()
+    return Optional<BridgeJSRuntimeTests.UserId>.bridgeJSLiftReturnFromSideChannel()
 }
 
 #if arch(wasm32)
@@ -14794,9 +14794,9 @@ func _$AsyncImportImports_jsAsyncRoundTripStringArray(_ values: [String]) async 
     return resolved
 }
 
-func _$AsyncImportImports_jsAsyncRoundTripFeatureFlag(_ v: FeatureFlag) async throws(JSException) -> FeatureFlag {
+func _$AsyncImportImports_jsAsyncRoundTripFeatureFlag(_ v: BridgeJSRuntimeTests.FeatureFlag) async throws(JSException) -> BridgeJSRuntimeTests.FeatureFlag {
     let resolved = try await _bjs_awaitPromise(makeResolveClosure: {
-            JSTypedClosure<(sending FeatureFlag) -> Void>($0)
+            JSTypedClosure<(sending BridgeJSRuntimeTests.FeatureFlag) -> Void>($0)
         }, makeRejectClosure: {
             JSTypedClosure<(sending JSValue) -> Void>($0)
         }) { resolveRef, rejectRef in
@@ -14807,9 +14807,9 @@ func _$AsyncImportImports_jsAsyncRoundTripFeatureFlag(_ v: FeatureFlag) async th
     return resolved
 }
 
-func _$AsyncImportImports_jsAsyncRoundTripAssociatedValueEnum(_ v: AsyncImportedPayloadResult) async throws(JSException) -> AsyncImportedPayloadResult {
+func _$AsyncImportImports_jsAsyncRoundTripAssociatedValueEnum(_ v: BridgeJSRuntimeTests.AsyncImportedPayloadResult) async throws(JSException) -> BridgeJSRuntimeTests.AsyncImportedPayloadResult {
     let resolved = try await _bjs_awaitPromise(makeResolveClosure: {
-            JSTypedClosure<(sending AsyncImportedPayloadResult) -> Void>($0)
+            JSTypedClosure<(sending BridgeJSRuntimeTests.AsyncImportedPayloadResult) -> Void>($0)
         }, makeRejectClosure: {
             JSTypedClosure<(sending JSValue) -> Void>($0)
         }) { resolveRef, rejectRef in
@@ -14819,9 +14819,9 @@ func _$AsyncImportImports_jsAsyncRoundTripAssociatedValueEnum(_ v: AsyncImported
     return resolved
 }
 
-func _$AsyncImportImports_jsAsyncRoundTripOptionalAssociatedValueEnum(_ v: Optional<AsyncImportedPayloadResult>) async throws(JSException) -> Optional<AsyncImportedPayloadResult> {
+func _$AsyncImportImports_jsAsyncRoundTripOptionalAssociatedValueEnum(_ v: Optional<BridgeJSRuntimeTests.AsyncImportedPayloadResult>) async throws(JSException) -> Optional<BridgeJSRuntimeTests.AsyncImportedPayloadResult> {
     let resolved = try await _bjs_awaitPromise(makeResolveClosure: {
-            JSTypedClosure<(sending Optional<AsyncImportedPayloadResult>) -> Void>($0)
+            JSTypedClosure<(sending Optional<BridgeJSRuntimeTests.AsyncImportedPayloadResult>) -> Void>($0)
         }, makeRejectClosure: {
             JSTypedClosure<(sending JSValue) -> Void>($0)
         }) { resolveRef, rejectRef in
@@ -15665,7 +15665,7 @@ fileprivate func bjs_jsRoundTripFeatureFlag_extern(_ flagBytes: Int32, _ flagLen
     return bjs_jsRoundTripFeatureFlag_extern(flagBytes, flagLength)
 }
 
-func _$jsRoundTripFeatureFlag(_ flag: FeatureFlag) throws(JSException) -> FeatureFlag {
+func _$jsRoundTripFeatureFlag(_ flag: BridgeJSRuntimeTests.FeatureFlag) throws(JSException) -> BridgeJSRuntimeTests.FeatureFlag {
     let ret0 = flag.bridgeJSWithLoweredParameter { (flagBytes, flagLength) in
         let ret = bjs_jsRoundTripFeatureFlag(flagBytes, flagLength)
         return ret
@@ -15674,7 +15674,7 @@ func _$jsRoundTripFeatureFlag(_ flag: FeatureFlag) throws(JSException) -> Featur
     if let error = _swift_js_take_exception() {
         throw error
     }
-    return FeatureFlag.bridgeJSLiftReturn(ret)
+    return BridgeJSRuntimeTests.FeatureFlag.bridgeJSLiftReturn(ret)
 }
 
 #if arch(wasm32)
@@ -16400,13 +16400,13 @@ fileprivate func bjs_jsRoundTripLightColor_extern(_ value: Int32) -> Int32 {
     return bjs_jsRoundTripLightColor_extern(value)
 }
 
-func _$jsRoundTripLightColor(_ value: LightColor) throws(JSException) -> LightColor {
+func _$jsRoundTripLightColor(_ value: BridgeJSRuntimeTests.LightColor) throws(JSException) -> BridgeJSRuntimeTests.LightColor {
     let valueValue = value.bridgeJSLowerParameter()
     let ret = bjs_jsRoundTripLightColor(valueValue)
     if let error = _swift_js_take_exception() {
         throw error
     }
-    return LightColor.bridgeJSLiftReturn(ret)
+    return BridgeJSRuntimeTests.LightColor.bridgeJSLiftReturn(ret)
 }
 
 #if arch(wasm32)
@@ -16421,13 +16421,13 @@ fileprivate func bjs_jsRoundTripImportedPayloadSignal_extern(_ value: Int32) -> 
     return bjs_jsRoundTripImportedPayloadSignal_extern(value)
 }
 
-func _$jsRoundTripImportedPayloadSignal(_ value: ImportedPayloadSignal) throws(JSException) -> ImportedPayloadSignal {
+func _$jsRoundTripImportedPayloadSignal(_ value: BridgeJSRuntimeTests.ImportedPayloadSignal) throws(JSException) -> BridgeJSRuntimeTests.ImportedPayloadSignal {
     let valueCaseId = value.bridgeJSLowerParameter()
     let ret = bjs_jsRoundTripImportedPayloadSignal(valueCaseId)
     if let error = _swift_js_take_exception() {
         throw error
     }
-    return ImportedPayloadSignal.bridgeJSLiftReturn(ret)
+    return BridgeJSRuntimeTests.ImportedPayloadSignal.bridgeJSLiftReturn(ret)
 }
 
 #if arch(wasm32)
@@ -16442,13 +16442,13 @@ fileprivate func bjs_jsRoundTripOptionalImportedPayloadSignal_extern(_ valueIsSo
     return bjs_jsRoundTripOptionalImportedPayloadSignal_extern(valueIsSome, valueCaseId)
 }
 
-func _$jsRoundTripOptionalImportedPayloadSignal(_ value: Optional<ImportedPayloadSignal>) throws(JSException) -> Optional<ImportedPayloadSignal> {
+func _$jsRoundTripOptionalImportedPayloadSignal(_ value: Optional<BridgeJSRuntimeTests.ImportedPayloadSignal>) throws(JSException) -> Optional<BridgeJSRuntimeTests.ImportedPayloadSignal> {
     let (valueIsSome, valueCaseId) = value.bridgeJSLowerParameter()
     let ret = bjs_jsRoundTripOptionalImportedPayloadSignal(valueIsSome, valueCaseId)
     if let error = _swift_js_take_exception() {
         throw error
     }
-    return Optional<ImportedPayloadSignal>.bridgeJSLiftReturn(ret)
+    return Optional<BridgeJSRuntimeTests.ImportedPayloadSignal>.bridgeJSLiftReturn(ret)
 }
 
 #if arch(wasm32)
@@ -16463,7 +16463,7 @@ fileprivate func bjs_jsTranslatePoint_extern(_ point: Int32, _ dx: Int32, _ dy: 
     return bjs_jsTranslatePoint_extern(point, dx, dy)
 }
 
-func _$jsTranslatePoint(_ point: Point, _ dx: Int, _ dy: Int) throws(JSException) -> Point {
+func _$jsTranslatePoint(_ point: BridgeJSRuntimeTests.Point, _ dx: Int, _ dy: Int) throws(JSException) -> BridgeJSRuntimeTests.Point {
     let pointObjectId = point.bridgeJSLowerParameter()
     let dxValue = dx.bridgeJSLowerParameter()
     let dyValue = dy.bridgeJSLowerParameter()
@@ -16471,7 +16471,7 @@ func _$jsTranslatePoint(_ point: Point, _ dx: Int, _ dy: Int) throws(JSException
     if let error = _swift_js_take_exception() {
         throw error
     }
-    return Point.bridgeJSLiftReturn(ret)
+    return BridgeJSRuntimeTests.Point.bridgeJSLiftReturn(ret)
 }
 
 #if arch(wasm32)
@@ -16486,13 +16486,13 @@ fileprivate func bjs_jsRoundTripOptionalPoint_extern(_ point: Int32) -> Void {
     return bjs_jsRoundTripOptionalPoint_extern(point)
 }
 
-func _$jsRoundTripOptionalPoint(_ point: Optional<Point>) throws(JSException) -> Optional<Point> {
+func _$jsRoundTripOptionalPoint(_ point: Optional<BridgeJSRuntimeTests.Point>) throws(JSException) -> Optional<BridgeJSRuntimeTests.Point> {
     let pointIsSome = point.bridgeJSLowerParameter()
     bjs_jsRoundTripOptionalPoint(pointIsSome)
     if let error = _swift_js_take_exception() {
         throw error
     }
-    return Optional<Point>.bridgeJSLiftReturn()
+    return Optional<BridgeJSRuntimeTests.Point>.bridgeJSLiftReturn()
 }
 
 #if arch(wasm32)
@@ -17485,34 +17485,34 @@ fileprivate func bjs_SwiftClassSupportImports_jsConsumeOptionalLeakCheck_static_
     return bjs_SwiftClassSupportImports_jsConsumeOptionalLeakCheck_static_extern(valueIsSome, valuePointer)
 }
 
-func _$SwiftClassSupportImports_jsRoundTripGreeter(_ greeter: Greeter) throws(JSException) -> Greeter {
+func _$SwiftClassSupportImports_jsRoundTripGreeter(_ greeter: BridgeJSRuntimeTests.Greeter) throws(JSException) -> BridgeJSRuntimeTests.Greeter {
     let greeterPointer = greeter.bridgeJSLowerParameter()
     let ret = bjs_SwiftClassSupportImports_jsRoundTripGreeter_static(greeterPointer)
     if let error = _swift_js_take_exception() {
         throw error
     }
-    return Greeter.bridgeJSLiftReturn(ret)
+    return BridgeJSRuntimeTests.Greeter.bridgeJSLiftReturn(ret)
 }
 
-func _$SwiftClassSupportImports_jsRoundTripUUID(_ uuid: UUID) throws(JSException) -> UUID {
+func _$SwiftClassSupportImports_jsRoundTripUUID(_ uuid: BridgeJSRuntimeTests.UUID) throws(JSException) -> BridgeJSRuntimeTests.UUID {
     let uuidPointer = uuid.bridgeJSLowerParameter()
     let ret = bjs_SwiftClassSupportImports_jsRoundTripUUID_static(uuidPointer)
     if let error = _swift_js_take_exception() {
         throw error
     }
-    return UUID.bridgeJSLiftReturn(ret)
+    return BridgeJSRuntimeTests.UUID.bridgeJSLiftReturn(ret)
 }
 
-func _$SwiftClassSupportImports_jsRoundTripOptionalGreeter(_ greeter: Optional<Greeter>) throws(JSException) -> Optional<Greeter> {
+func _$SwiftClassSupportImports_jsRoundTripOptionalGreeter(_ greeter: Optional<BridgeJSRuntimeTests.Greeter>) throws(JSException) -> Optional<BridgeJSRuntimeTests.Greeter> {
     let (greeterIsSome, greeterPointer) = greeter.bridgeJSLowerParameter()
     let ret = bjs_SwiftClassSupportImports_jsRoundTripOptionalGreeter_static(greeterIsSome, greeterPointer)
     if let error = _swift_js_take_exception() {
         throw error
     }
-    return Optional<Greeter>.bridgeJSLiftReturn(ret)
+    return Optional<BridgeJSRuntimeTests.Greeter>.bridgeJSLiftReturn(ret)
 }
 
-func _$SwiftClassSupportImports_jsConsumeLeakCheck(_ value: LeakCheck) throws(JSException) -> Void {
+func _$SwiftClassSupportImports_jsConsumeLeakCheck(_ value: BridgeJSRuntimeTests.LeakCheck) throws(JSException) -> Void {
     let valuePointer = value.bridgeJSLowerParameter()
     bjs_SwiftClassSupportImports_jsConsumeLeakCheck_static(valuePointer)
     if let error = _swift_js_take_exception() {
@@ -17520,7 +17520,7 @@ func _$SwiftClassSupportImports_jsConsumeLeakCheck(_ value: LeakCheck) throws(JS
     }
 }
 
-func _$SwiftClassSupportImports_jsConsumeOptionalLeakCheck(_ value: Optional<LeakCheck>) throws(JSException) -> Void {
+func _$SwiftClassSupportImports_jsConsumeOptionalLeakCheck(_ value: Optional<BridgeJSRuntimeTests.LeakCheck>) throws(JSException) -> Void {
     let (valueIsSome, valuePointer) = value.bridgeJSLowerParameter()
     bjs_SwiftClassSupportImports_jsConsumeOptionalLeakCheck_static(valueIsSome, valuePointer)
     if let error = _swift_js_take_exception() {

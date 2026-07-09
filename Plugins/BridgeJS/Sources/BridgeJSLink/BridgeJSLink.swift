@@ -1220,13 +1220,63 @@ public struct BridgeJSLink {
         return printer.lines.joined(separator: "\n")
     }
 
+    /// Fails the link when two modules export the same public JS name at the same
+    /// namespace path. The internal ABI names are module-qualified and never collide,
+    /// but the public `exports` surface is flat, so same-named exports would silently
+    /// shadow each other.
+    private func validatePublicExportNameUniqueness() throws {
+        struct Entry {
+            let moduleName: String
+            let kind: String
+        }
+        var seen: [String: Entry] = [:]
+
+        func check(namespace: [String]?, name: String, kind: String, moduleName: String) throws {
+            let publicPath = ((namespace ?? []) + [name]).joined(separator: ".")
+            if let existing = seen[publicPath], existing.moduleName != moduleName {
+                throw BridgeJSLinkError(
+                    message:
+                        "Duplicate exported name '\(publicPath)': \(existing.kind) exported by module "
+                        + "'\(existing.moduleName)' conflicts with \(kind) exported by module '\(moduleName)'. "
+                        + "Rename one of them or place them in different namespaces "
+                        + "(e.g. @JS(namespace: \"...\"))."
+                )
+            }
+            if seen[publicPath] == nil {
+                seen[publicPath] = Entry(moduleName: moduleName, kind: kind)
+            }
+        }
+
+        for unified in skeletons {
+            guard let exported = unified.exported else { continue }
+            let moduleName = unified.moduleName
+            for klass in exported.classes {
+                try check(namespace: klass.namespace, name: klass.name, kind: "class", moduleName: moduleName)
+            }
+            for structDef in exported.structs {
+                try check(namespace: structDef.namespace, name: structDef.name, kind: "struct", moduleName: moduleName)
+            }
+            // Namespace enums are skipped: same-named namespaces from different modules
+            // intentionally merge into a single JS namespace object.
+            for enumDef in exported.enums where enumDef.enumType != .namespace {
+                try check(namespace: enumDef.namespace, name: enumDef.name, kind: "enum", moduleName: moduleName)
+            }
+            for function in exported.functions where function.staticContext == nil {
+                try check(namespace: function.namespace, name: function.name, kind: "function", moduleName: moduleName)
+            }
+        }
+    }
+
     public func link() throws -> (outputJs: String, outputDts: String) {
+        try validatePublicExportNameUniqueness()
         intrinsicRegistry.reset()
+        // Keyed by the module-qualified `swiftCallName`, which is what `BridgeType`
+        // payloads carry, so same-named classes from different modules don't collide.
         intrinsicRegistry.classNamespaces = skeletons.reduce(into: [:]) { result, unified in
             guard let skeleton = unified.exported else { return }
             for klass in skeleton.classes {
                 if let namespace = klass.namespace {
-                    result[klass.name] = namespace
+                    result[klass.swiftCallName] = namespace
                 }
             }
         }
@@ -1242,9 +1292,11 @@ public struct BridgeJSLink {
         for skeleton in skeletons.compactMap(\.exported) {
             for enumDef in skeleton.enums where enumDef.enumType == .associatedValue {
                 printer.write(
-                    "const \(enumDef.name)Helpers = __bjs_create\(enumDef.valuesName)Helpers();"
+                    "const \(enumDef.abiName)Helpers = __bjs_create\(enumDef.abiName)Helpers();"
                 )
-                printer.write("\(JSGlueVariableScope.reservedEnumHelpers).\(enumDef.name) = \(enumDef.name)Helpers;")
+                printer.write(
+                    "\(JSGlueVariableScope.reservedEnumHelpers).\(enumDef.abiName) = \(enumDef.abiName)Helpers;"
+                )
                 printer.nextLine()
             }
         }
@@ -3971,23 +4023,25 @@ extension BridgeType {
         case .jsValue:
             return "any"
         case .swiftHeapObject(let name):
-            return name
+            // Exported Swift type payloads are module-qualified; the public TS surface is
+            // flat, so drop the module prefix for display.
+            return Self.dropModulePrefix(name)
         case .unsafePointer:
             return "number"
         case .nullable(let wrappedType, let kind):
             return "\(wrappedType.tsType) | \(kind.absenceLiteral)"
         case .caseEnum(let name):
-            return "\(name)Tag"
+            return "\(Self.dropModulePrefix(name))Tag"
         case .rawValueEnum(let name, _):
-            return "\(name)Tag"
+            return "\(Self.dropModulePrefix(name))Tag"
         case .associatedValueEnum(let name):
-            return "\(name)Tag"
+            return "\(Self.dropModulePrefix(name))Tag"
         case .swiftStruct(let name):
-            return name
+            return Self.dropModulePrefix(name)
         case .namespaceEnum(let name):
-            return name
+            return Self.dropModulePrefix(name)
         case .swiftProtocol(let name):
-            return name
+            return Self.dropModulePrefix(name)
         case .closure(let signature, _):
             let paramTypes = signature.parameters.enumerated().map { index, param in
                 "arg\(index): \(param.tsType)"

@@ -34,7 +34,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "Shape.Kind",
+        "swiftCallName" : "TestModule.Shape.Kind",
         "tsFullPath" : "Shape.Kind"
       },
       {
@@ -64,7 +64,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "Widget.Variant",
+        "swiftCallName" : "TestModule.Widget.Variant",
         "tsFullPath" : "Widget.Variant"
       },
       {
@@ -95,7 +95,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "Widget.Layout.Alignment",
+        "swiftCallName" : "TestModule.Widget.Layout.Alignment",
         "tsFullPath" : "Widget.Layout.Alignment"
       }
     ],
@@ -109,7 +109,7 @@
     "structs" : [
       {
         "constructor" : {
-          "abiName" : "bjs_Shape_init",
+          "abiName" : "bjs_TestModule_Shape_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -143,11 +143,11 @@
             }
           }
         ],
-        "swiftCallName" : "Shape"
+        "swiftCallName" : "TestModule.Shape"
       },
       {
         "constructor" : {
-          "abiName" : "bjs_Widget_init",
+          "abiName" : "bjs_TestModule_Widget_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -181,7 +181,7 @@
             }
           }
         ],
-        "swiftCallName" : "Widget"
+        "swiftCallName" : "TestModule.Widget"
       },
       {
         "methods" : [
@@ -209,11 +209,11 @@
             }
           }
         ],
-        "swiftCallName" : "Widget.Layout"
+        "swiftCallName" : "TestModule.Widget.Layout"
       },
       {
         "constructor" : {
-          "abiName" : "bjs_Widget_Bounds_init",
+          "abiName" : "bjs_TestModule_Widget_Bounds_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -248,7 +248,7 @@
         },
         "methods" : [
           {
-            "abiName" : "bjs_Widget_Bounds_static_zero",
+            "abiName" : "bjs_TestModule_Widget_Bounds_static_zero",
             "effects" : {
               "isAsync" : false,
               "isStatic" : true,
@@ -260,12 +260,12 @@
             ],
             "returnType" : {
               "swiftStruct" : {
-                "_0" : "Widget.Bounds"
+                "_0" : "TestModule.Widget.Bounds"
               }
             },
             "staticContext" : {
               "structName" : {
-                "_0" : "Widget_Bounds"
+                "_0" : "TestModule_Widget_Bounds"
               }
             }
           }
@@ -313,7 +313,7 @@
             "name" : "dimensions",
             "staticContext" : {
               "structName" : {
-                "_0" : "Widget_Bounds"
+                "_0" : "TestModule_Widget_Bounds"
               }
             },
             "type" : {
@@ -326,7 +326,7 @@
             }
           }
         ],
-        "swiftCallName" : "Widget.Bounds"
+        "swiftCallName" : "TestModule.Widget.Bounds"
       }
     ]
   },

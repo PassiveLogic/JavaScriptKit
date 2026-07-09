@@ -36,7 +36,7 @@ export async function createInstantiator(options, swift) {
 
     let _exports = null;
     let bjs = null;
-    const __bjs_createAccount_CredentialsHelpers = () => ({
+    const __bjs_createTestModule_Account_CredentialsHelpers = () => ({
         lower: (value) => {
             const bytes = textEncoder.encode(value.token);
             const id = swift.memory.retain(bytes);
@@ -123,11 +123,11 @@ export async function createInstantiator(options, swift) {
                 const copy = memory.buffer.slice(ptr, ptr + byteLen);
                 taStack.push(Array.from(new Ctor(copy)));
             }
-            bjs["swift_js_struct_lower_Account_Credentials"] = function(objectId) {
-                structHelpers.Account_Credentials.lower(swift.memory.getObject(objectId));
+            bjs["swift_js_struct_lower_TestModule_Account_Credentials"] = function(objectId) {
+                structHelpers.TestModule_Account_Credentials.lower(swift.memory.getObject(objectId));
             }
-            bjs["swift_js_struct_lift_Account_Credentials"] = function() {
-                const value = structHelpers.Account_Credentials.lift();
+            bjs["swift_js_struct_lift_TestModule_Account_Credentials"] = function() {
+                const value = structHelpers.TestModule_Account_Credentials.lift();
                 return swift.memory.retain(value);
             }
             const __bjs_promiseSettlers = Symbol("JavaScriptKit.promiseSettlers");
@@ -231,7 +231,7 @@ export async function createInstantiator(options, swift) {
             if (!importObject["TestModule"]) {
                 importObject["TestModule"] = {};
             }
-            importObject["TestModule"]["bjs_Account_wrap"] = function(pointer) {
+            importObject["TestModule"]["bjs_TestModule_Account_wrap"] = function(pointer) {
                 const obj = _exports['Account'].__construct(pointer);
                 return swift.memory.retain(obj);
             };
@@ -303,23 +303,23 @@ export async function createInstantiator(options, swift) {
             }
             class Account extends SwiftHeapObject {
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_Account_deinit, Account.prototype, null);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_TestModule_Account_deinit, Account.prototype, null);
                 }
 
                 constructor(name) {
                     const nameBytes = textEncoder.encode(name);
                     const nameId = swift.memory.retain(nameBytes);
-                    const ret = instance.exports.bjs_Account_init(nameId, nameBytes.length);
+                    const ret = instance.exports.bjs_TestModule_Account_init(nameId, nameBytes.length);
                     return Account.__construct(ret);
                 }
                 describe() {
-                    instance.exports.bjs_Account_describe(this.pointer);
+                    instance.exports.bjs_TestModule_Account_describe(this.pointer);
                     const ret = tmpRetString;
                     tmpRetString = undefined;
                     return ret;
                 }
                 get name() {
-                    instance.exports.bjs_Account_name_get(this.pointer);
+                    instance.exports.bjs_TestModule_Account_name_get(this.pointer);
                     const ret = tmpRetString;
                     tmpRetString = undefined;
                     return ret;
@@ -327,23 +327,23 @@ export async function createInstantiator(options, swift) {
                 set name(value) {
                     const valueBytes = textEncoder.encode(value);
                     const valueId = swift.memory.retain(valueBytes);
-                    instance.exports.bjs_Account_name_set(this.pointer, valueId, valueBytes.length);
+                    instance.exports.bjs_TestModule_Account_name_set(this.pointer, valueId, valueBytes.length);
                 }
                 get role() {
-                    instance.exports.bjs_Account_role_get(this.pointer);
+                    instance.exports.bjs_TestModule_Account_role_get(this.pointer);
                     const ret = tmpRetString;
                     tmpRetString = undefined;
                     return ret;
                 }
                 static get defaultRole() {
-                    instance.exports.bjs_Account_static_defaultRole_get();
+                    instance.exports.bjs_TestModule_Account_static_defaultRole_get();
                     const ret = tmpRetString;
                     tmpRetString = undefined;
                     return ret;
                 }
             }
-            const Account_CredentialsHelpers = __bjs_createAccount_CredentialsHelpers();
-            structHelpers.Account_Credentials = Account_CredentialsHelpers;
+            const TestModule_Account_CredentialsHelpers = __bjs_createTestModule_Account_CredentialsHelpers();
+            structHelpers.TestModule_Account_Credentials = TestModule_Account_CredentialsHelpers;
 
             const exports = {
                 Account: Object.assign(Account, {
@@ -352,17 +352,17 @@ export async function createInstantiator(options, swift) {
                         init: function(token) {
                             const tokenBytes = textEncoder.encode(token);
                             const tokenId = swift.memory.retain(tokenBytes);
-                            instance.exports.bjs_Account_Credentials_init(tokenId, tokenBytes.length);
-                            const structValue = structHelpers.Account_Credentials.lift();
+                            instance.exports.bjs_TestModule_Account_Credentials_init(tokenId, tokenBytes.length);
+                            const structValue = structHelpers.TestModule_Account_Credentials.lift();
                             return structValue;
                         },
                         get maxLength() {
-                            const ret = instance.exports.bjs_Account_Credentials_static_maxLength_get();
+                            const ret = instance.exports.bjs_TestModule_Account_Credentials_static_maxLength_get();
                             return ret;
                         },
                         empty: function() {
-                            instance.exports.bjs_Account_Credentials_static_empty();
-                            const structValue = structHelpers.Account_Credentials.lift();
+                            instance.exports.bjs_TestModule_Account_Credentials_static_empty();
+                            const structValue = structHelpers.TestModule_Account_Credentials.lift();
                             return structValue;
                         },
                     },

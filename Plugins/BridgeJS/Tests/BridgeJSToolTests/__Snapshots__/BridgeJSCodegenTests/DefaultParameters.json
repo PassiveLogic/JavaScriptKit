@@ -6,7 +6,7 @@
     "classes" : [
       {
         "constructor" : {
-          "abiName" : "bjs_DefaultGreeter_init",
+          "abiName" : "bjs_TestModule_DefaultGreeter_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -40,11 +40,11 @@
             }
           }
         ],
-        "swiftCallName" : "DefaultGreeter"
+        "swiftCallName" : "TestModule.DefaultGreeter"
       },
       {
         "constructor" : {
-          "abiName" : "bjs_EmptyGreeter_init",
+          "abiName" : "bjs_TestModule_EmptyGreeter_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -61,11 +61,11 @@
         "properties" : [
 
         ],
-        "swiftCallName" : "EmptyGreeter"
+        "swiftCallName" : "TestModule.EmptyGreeter"
       },
       {
         "constructor" : {
-          "abiName" : "bjs_ConstructorDefaults_init",
+          "abiName" : "bjs_TestModule_ConstructorDefaults_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -120,7 +120,7 @@
             {
               "defaultValue" : {
                 "enumCase" : {
-                  "_0" : "Status",
+                  "_0" : "TestModule.Status",
                   "_1" : "active"
                 }
               },
@@ -128,7 +128,7 @@
               "name" : "status",
               "type" : {
                 "caseEnum" : {
-                  "_0" : "Status"
+                  "_0" : "TestModule.Status"
                 }
               }
             },
@@ -197,7 +197,7 @@
             "name" : "status",
             "type" : {
               "caseEnum" : {
-                "_0" : "Status"
+                "_0" : "TestModule.Status"
               }
             }
           },
@@ -217,7 +217,7 @@
             }
           }
         ],
-        "swiftCallName" : "ConstructorDefaults"
+        "swiftCallName" : "TestModule.ConstructorDefaults"
       }
     ],
     "enums" : [
@@ -251,14 +251,14 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "Status",
+        "swiftCallName" : "TestModule.Status",
         "tsFullPath" : "Status"
       }
     ],
     "exposeToGlobal" : false,
     "functions" : [
       {
-        "abiName" : "bjs_testStringDefault",
+        "abiName" : "bjs_TestModule_testStringDefault",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -288,7 +288,7 @@
         }
       },
       {
-        "abiName" : "bjs_testNegativeIntDefault",
+        "abiName" : "bjs_TestModule_testNegativeIntDefault",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -324,7 +324,7 @@
         }
       },
       {
-        "abiName" : "bjs_testBoolDefault",
+        "abiName" : "bjs_TestModule_testBoolDefault",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -354,7 +354,7 @@
         }
       },
       {
-        "abiName" : "bjs_testNegativeFloatDefault",
+        "abiName" : "bjs_TestModule_testNegativeFloatDefault",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -384,7 +384,7 @@
         }
       },
       {
-        "abiName" : "bjs_testDoubleDefault",
+        "abiName" : "bjs_TestModule_testDoubleDefault",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -414,7 +414,7 @@
         }
       },
       {
-        "abiName" : "bjs_testOptionalDefault",
+        "abiName" : "bjs_TestModule_testOptionalDefault",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -454,7 +454,7 @@
         }
       },
       {
-        "abiName" : "bjs_testOptionalStringDefault",
+        "abiName" : "bjs_TestModule_testOptionalStringDefault",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -494,7 +494,7 @@
         }
       },
       {
-        "abiName" : "bjs_testMultipleDefaults",
+        "abiName" : "bjs_TestModule_testMultipleDefaults",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -555,7 +555,7 @@
         }
       },
       {
-        "abiName" : "bjs_testEnumDefault",
+        "abiName" : "bjs_TestModule_testEnumDefault",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -566,7 +566,7 @@
           {
             "defaultValue" : {
               "enumCase" : {
-                "_0" : "Status",
+                "_0" : "TestModule.Status",
                 "_1" : "active"
               }
             },
@@ -574,19 +574,19 @@
             "name" : "status",
             "type" : {
               "caseEnum" : {
-                "_0" : "Status"
+                "_0" : "TestModule.Status"
               }
             }
           }
         ],
         "returnType" : {
           "caseEnum" : {
-            "_0" : "Status"
+            "_0" : "TestModule.Status"
           }
         }
       },
       {
-        "abiName" : "bjs_testComplexInit",
+        "abiName" : "bjs_TestModule_testComplexInit",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -611,19 +611,19 @@
             "name" : "greeter",
             "type" : {
               "swiftHeapObject" : {
-                "_0" : "DefaultGreeter"
+                "_0" : "TestModule.DefaultGreeter"
               }
             }
           }
         ],
         "returnType" : {
           "swiftHeapObject" : {
-            "_0" : "DefaultGreeter"
+            "_0" : "TestModule.DefaultGreeter"
           }
         }
       },
       {
-        "abiName" : "bjs_testEmptyInit",
+        "abiName" : "bjs_TestModule_testEmptyInit",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -641,19 +641,19 @@
             "name" : "greeter",
             "type" : {
               "swiftHeapObject" : {
-                "_0" : "EmptyGreeter"
+                "_0" : "TestModule.EmptyGreeter"
               }
             }
           }
         ],
         "returnType" : {
           "swiftHeapObject" : {
-            "_0" : "EmptyGreeter"
+            "_0" : "TestModule.EmptyGreeter"
           }
         }
       },
       {
-        "abiName" : "bjs_testOptionalStructDefault",
+        "abiName" : "bjs_TestModule_testOptionalStructDefault",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -673,7 +673,7 @@
               "nullable" : {
                 "_0" : {
                   "swiftStruct" : {
-                    "_0" : "Config"
+                    "_0" : "TestModule.Config"
                   }
                 },
                 "_1" : "null"
@@ -685,7 +685,7 @@
           "nullable" : {
             "_0" : {
               "swiftStruct" : {
-                "_0" : "Config"
+                "_0" : "TestModule.Config"
               }
             },
             "_1" : "null"
@@ -693,7 +693,7 @@
         }
       },
       {
-        "abiName" : "bjs_testOptionalStructWithValueDefault",
+        "abiName" : "bjs_TestModule_testOptionalStructWithValueDefault",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -739,7 +739,7 @@
               "nullable" : {
                 "_0" : {
                   "swiftStruct" : {
-                    "_0" : "Config"
+                    "_0" : "TestModule.Config"
                   }
                 },
                 "_1" : "null"
@@ -751,7 +751,7 @@
           "nullable" : {
             "_0" : {
               "swiftStruct" : {
-                "_0" : "Config"
+                "_0" : "TestModule.Config"
               }
             },
             "_1" : "null"
@@ -759,7 +759,7 @@
         }
       },
       {
-        "abiName" : "bjs_testIntArrayDefault",
+        "abiName" : "bjs_TestModule_testIntArrayDefault",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -819,7 +819,7 @@
         }
       },
       {
-        "abiName" : "bjs_testStringArrayDefault",
+        "abiName" : "bjs_TestModule_testStringArrayDefault",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -873,7 +873,7 @@
         }
       },
       {
-        "abiName" : "bjs_testDoubleArrayDefault",
+        "abiName" : "bjs_TestModule_testDoubleArrayDefault",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -927,7 +927,7 @@
         }
       },
       {
-        "abiName" : "bjs_testBoolArrayDefault",
+        "abiName" : "bjs_TestModule_testBoolArrayDefault",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -981,7 +981,7 @@
         }
       },
       {
-        "abiName" : "bjs_testEmptyArrayDefault",
+        "abiName" : "bjs_TestModule_testEmptyArrayDefault",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1027,7 +1027,7 @@
         }
       },
       {
-        "abiName" : "bjs_testMixedWithArrayDefault",
+        "abiName" : "bjs_TestModule_testMixedWithArrayDefault",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1152,11 +1152,11 @@
             }
           }
         ],
-        "swiftCallName" : "Config"
+        "swiftCallName" : "TestModule.Config"
       },
       {
         "constructor" : {
-          "abiName" : "bjs_MathOperations_init",
+          "abiName" : "bjs_TestModule_MathOperations_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -1181,7 +1181,7 @@
         },
         "methods" : [
           {
-            "abiName" : "bjs_MathOperations_add",
+            "abiName" : "bjs_TestModule_MathOperations_add",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -1220,7 +1220,7 @@
             }
           },
           {
-            "abiName" : "bjs_MathOperations_multiply",
+            "abiName" : "bjs_TestModule_MathOperations_multiply",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -1254,7 +1254,7 @@
             }
           },
           {
-            "abiName" : "bjs_MathOperations_static_subtract",
+            "abiName" : "bjs_TestModule_MathOperations_static_subtract",
             "effects" : {
               "isAsync" : false,
               "isStatic" : true,
@@ -1293,7 +1293,7 @@
             },
             "staticContext" : {
               "structName" : {
-                "_0" : "MathOperations"
+                "_0" : "TestModule_MathOperations"
               }
             }
           }
@@ -1311,7 +1311,7 @@
             }
           }
         ],
-        "swiftCallName" : "MathOperations"
+        "swiftCallName" : "TestModule.MathOperations"
       }
     ]
   },

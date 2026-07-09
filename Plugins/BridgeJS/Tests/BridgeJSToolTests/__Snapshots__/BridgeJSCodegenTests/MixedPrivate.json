@@ -6,7 +6,7 @@
     "classes" : [
       {
         "constructor" : {
-          "abiName" : "bjs_PrivateAPI_PrivateClass_init",
+          "abiName" : "bjs_TestModule_PrivateClass_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -18,7 +18,7 @@
         },
         "methods" : [
           {
-            "abiName" : "bjs_PrivateAPI_PrivateClass_greet",
+            "abiName" : "bjs_TestModule_PrivateClass_greet",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -42,7 +42,7 @@
         "properties" : [
 
         ],
-        "swiftCallName" : "PrivateClass"
+        "swiftCallName" : "TestModule.PrivateClass"
       }
     ],
     "enums" : [
@@ -51,7 +51,7 @@
     "exposeToGlobal" : false,
     "functions" : [
       {
-        "abiName" : "bjs_PrivateAPI_privateFunction",
+        "abiName" : "bjs_TestModule_PrivateAPI_privateFunction",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,

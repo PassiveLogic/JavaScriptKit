@@ -127,7 +127,7 @@ export async function createInstantiator(options, swift) {
         return jsValue;
     }
 
-    const __bjs_createAsyncPayloadResultValuesHelpers = () => ({
+    const __bjs_createTestModule_AsyncPayloadResultHelpers = () => ({
         lower: (value) => {
             const enumTag = value.tag;
             switch (enumTag) {
@@ -246,19 +246,19 @@ export async function createInstantiator(options, swift) {
                 promise[__bjs_promiseSettlers] = { resolve, reject };
                 return swift.memory.retain(promise);
             }
-            bjs["promise_resolve_TestModule_18AsyncPayloadResultO"] = function(promise, value) {
+            bjs["promise_resolve_TestModule_29TestModule_AsyncPayloadResultO"] = function(promise, value) {
                 try {
-                    const enumValue = enumHelpers.AsyncPayloadResult.lift(value);
+                    const enumValue = enumHelpers.TestModule_AsyncPayloadResult.lift(value);
                     swift.memory.getObject(promise)[__bjs_promiseSettlers].resolve(enumValue);
                 } catch (error) {
                     setException(error);
                 }
             }
-            bjs["promise_resolve_TestModule_Sq18AsyncPayloadResultO"] = function(promise, valueIsSome, valueCaseId) {
+            bjs["promise_resolve_TestModule_Sq29TestModule_AsyncPayloadResultO"] = function(promise, valueIsSome, valueCaseId) {
                 try {
                     let optResult;
                     if (valueIsSome) {
-                        const enumValue = enumHelpers.AsyncPayloadResult.lift(valueCaseId);
+                        const enumValue = enumHelpers.TestModule_AsyncPayloadResult.lift(valueCaseId);
                         optResult = enumValue;
                     } else {
                         optResult = null;
@@ -380,27 +380,27 @@ export async function createInstantiator(options, swift) {
         /** @param {WebAssembly.Instance} instance */
         createExports: (instance) => {
             const js = swift.memory.heap;
-            const AsyncPayloadResultHelpers = __bjs_createAsyncPayloadResultValuesHelpers();
-            enumHelpers.AsyncPayloadResult = AsyncPayloadResultHelpers;
+            const TestModule_AsyncPayloadResultHelpers = __bjs_createTestModule_AsyncPayloadResultHelpers();
+            enumHelpers.TestModule_AsyncPayloadResult = TestModule_AsyncPayloadResultHelpers;
 
             const exports = {
-                asyncRoundTripAssociatedValueEnum: function bjs_asyncRoundTripAssociatedValueEnum(value) {
-                    const valueCaseId = enumHelpers.AsyncPayloadResult.lower(value);
-                    const ret = instance.exports.bjs_asyncRoundTripAssociatedValueEnum(valueCaseId);
+                asyncRoundTripAssociatedValueEnum: function bjs_TestModule_asyncRoundTripAssociatedValueEnum(value) {
+                    const valueCaseId = enumHelpers.TestModule_AsyncPayloadResult.lower(value);
+                    const ret = instance.exports.bjs_TestModule_asyncRoundTripAssociatedValueEnum(valueCaseId);
                     const ret1 = swift.memory.getObject(ret);
                     swift.memory.release(ret);
                     return ret1;
                 },
-                asyncRoundTripOptionalAssociatedValueEnum: function bjs_asyncRoundTripOptionalAssociatedValueEnum(value) {
+                asyncRoundTripOptionalAssociatedValueEnum: function bjs_TestModule_asyncRoundTripOptionalAssociatedValueEnum(value) {
                     const isSome = value != null;
                     let result;
                     if (isSome) {
-                        const valueCaseId = enumHelpers.AsyncPayloadResult.lower(value);
+                        const valueCaseId = enumHelpers.TestModule_AsyncPayloadResult.lower(value);
                         result = valueCaseId;
                     } else {
                         result = 0;
                     }
-                    const ret = instance.exports.bjs_asyncRoundTripOptionalAssociatedValueEnum(+isSome, result);
+                    const ret = instance.exports.bjs_TestModule_asyncRoundTripOptionalAssociatedValueEnum(+isSome, result);
                     const ret1 = swift.memory.getObject(ret);
                     swift.memory.release(ret);
                     return ret1;

@@ -1,11 +1,11 @@
 struct AnyHasOptionalUserId: HasOptionalUserId, _BridgedSwiftProtocolWrapper {
     let jsObject: JSObject
 
-    var userId: Optional<UserId> {
+    var userId: Optional<TestModule.UserId> {
         get {
             let jsObjectValue = jsObject.bridgeJSLowerParameter()
             bjs_HasOptionalUserId_userId_get(jsObjectValue)
-            return Optional<UserId>.bridgeJSLiftReturnFromSideChannel()
+            return Optional<TestModule.UserId>.bridgeJSLiftReturnFromSideChannel()
         }
     }
 
@@ -26,15 +26,15 @@ fileprivate func bjs_HasOptionalUserId_userId_get_extern(_ jsObject: Int32) -> V
     return bjs_HasOptionalUserId_userId_get_extern(jsObject)
 }
 
-extension InnerTag: _BridgedSwiftAssociatedValueEnum {
-    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPopPayload(_ caseId: Int32) -> InnerTag {
+extension TestModule.InnerTag: _BridgedSwiftAssociatedValueEnum {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPopPayload(_ caseId: Int32) -> TestModule.InnerTag {
         switch caseId {
         case 0:
             return .payload(Int.bridgeJSStackPop())
         case 1:
             return .empty
         default:
-            fatalError("Unknown InnerTag case ID: \(caseId)")
+            fatalError("Unknown TestModule.InnerTag case ID: \(caseId)")
         }
     }
 
@@ -49,45 +49,45 @@ extension InnerTag: _BridgedSwiftAssociatedValueEnum {
     }
 }
 
-@_expose(wasm, "bjs_roundtripPolygon")
-@_cdecl("bjs_roundtripPolygon")
-public func _bjs_roundtripPolygon(_ polygon: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_TestModule_roundtripPolygon")
+@_cdecl("bjs_TestModule_roundtripPolygon")
+public func _bjs_TestModule_roundtripPolygon(_ polygon: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = roundtripPolygon(_: Polygon.bridgeJSLiftParameter(polygon))
+    let ret = roundtripPolygon(_: TestModule.Polygon.bridgeJSLiftParameter(polygon))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_optionalPolygon")
-@_cdecl("bjs_optionalPolygon")
-public func _bjs_optionalPolygon(_ polygonIsSome: Int32, _ polygonValue: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_TestModule_optionalPolygon")
+@_cdecl("bjs_TestModule_optionalPolygon")
+public func _bjs_TestModule_optionalPolygon(_ polygonIsSome: Int32, _ polygonValue: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = optionalPolygon(_: Optional<Polygon>.bridgeJSLiftParameter(polygonIsSome, polygonValue))
+    let ret = optionalPolygon(_: Optional<TestModule.Polygon>.bridgeJSLiftParameter(polygonIsSome, polygonValue))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_polygonArray")
-@_cdecl("bjs_polygonArray")
-public func _bjs_polygonArray() -> Void {
+@_expose(wasm, "bjs_TestModule_polygonArray")
+@_cdecl("bjs_TestModule_polygonArray")
+public func _bjs_TestModule_polygonArray() -> Void {
     #if arch(wasm32)
-    let ret = polygonArray(_: [Polygon].bridgeJSStackPop())
+    let ret = polygonArray(_: [TestModule.Polygon].bridgeJSStackPop())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_validatePolygon")
-@_cdecl("bjs_validatePolygon")
-public func _bjs_validatePolygon(_ polygon: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_TestModule_validatePolygon")
+@_cdecl("bjs_TestModule_validatePolygon")
+public func _bjs_TestModule_validatePolygon(_ polygon: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
     do {
-        let ret = try validatePolygon(_: Polygon.bridgeJSLiftParameter(polygon))
+        let ret = try validatePolygon(_: TestModule.Polygon.bridgeJSLiftParameter(polygon))
         return ret.bridgeJSLowerReturn()
     } catch let error {
         if let error = error.thrownValue.object {
@@ -107,9 +107,9 @@ public func _bjs_validatePolygon(_ polygon: UnsafeMutableRawPointer) -> UnsafeMu
     #endif
 }
 
-@_expose(wasm, "bjs_makeTag")
-@_cdecl("bjs_makeTag")
-public func _bjs_makeTag(_ nameBytes: Int32, _ nameLength: Int32) -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_TestModule_makeTag")
+@_cdecl("bjs_TestModule_makeTag")
+public func _bjs_TestModule_makeTag(_ nameBytes: Int32, _ nameLength: Int32) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
     let ret = makeTag(_: String.bridgeJSLiftParameter(nameBytes, nameLength))
     return ret.bridgeJSLowerReturn()
@@ -118,20 +118,20 @@ public func _bjs_makeTag(_ nameBytes: Int32, _ nameLength: Int32) -> UnsafeMutab
     #endif
 }
 
-@_expose(wasm, "bjs_roundtripTags")
-@_cdecl("bjs_roundtripTags")
-public func _bjs_roundtripTags() -> Void {
+@_expose(wasm, "bjs_TestModule_roundtripTags")
+@_cdecl("bjs_TestModule_roundtripTags")
+public func _bjs_TestModule_roundtripTags() -> Void {
     #if arch(wasm32)
-    let ret = roundtripTags(_: [Optional<AliasedTag>].bridgeJSStackPop())
+    let ret = roundtripTags(_: [Optional<TestModule.AliasedTag>].bridgeJSStackPop())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_describeUser")
-@_cdecl("bjs_describeUser")
-public func _bjs_describeUser(_ owner: Int32) -> Int32 {
+@_expose(wasm, "bjs_TestModule_describeUser")
+@_cdecl("bjs_TestModule_describeUser")
+public func _bjs_TestModule_describeUser(_ owner: Int32) -> Int32 {
     #if arch(wasm32)
     let ret = describeUser(_: AnyHasOptionalUserId.bridgeJSLiftParameter(owner)) as! _BridgedSwiftProtocolExportable
     return ret.bridgeJSLowerAsProtocolReturn()
@@ -140,134 +140,134 @@ public func _bjs_describeUser(_ owner: Int32) -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_PolygonReference_init")
-@_cdecl("bjs_PolygonReference_init")
-public func _bjs_PolygonReference_init(_ underlying: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_TestModule_PolygonReference_init")
+@_cdecl("bjs_TestModule_PolygonReference_init")
+public func _bjs_TestModule_PolygonReference_init(_ underlying: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = PolygonReference(underlying: Polygon.bridgeJSLiftParameter(underlying))
+    let ret = TestModule.PolygonReference(underlying: TestModule.Polygon.bridgeJSLiftParameter(underlying))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PolygonReference_snapshot")
-@_cdecl("bjs_PolygonReference_snapshot")
-public func _bjs_PolygonReference_snapshot(_ _self: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_TestModule_PolygonReference_snapshot")
+@_cdecl("bjs_TestModule_PolygonReference_snapshot")
+public func _bjs_TestModule_PolygonReference_snapshot(_ _self: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = PolygonReference.bridgeJSLiftParameter(_self).snapshot()
+    let ret = TestModule.PolygonReference.bridgeJSLiftParameter(_self).snapshot()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PolygonReference_merge")
-@_cdecl("bjs_PolygonReference_merge")
-public func _bjs_PolygonReference_merge(_ _self: UnsafeMutableRawPointer, _ other: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_TestModule_PolygonReference_merge")
+@_cdecl("bjs_TestModule_PolygonReference_merge")
+public func _bjs_TestModule_PolygonReference_merge(_ _self: UnsafeMutableRawPointer, _ other: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = PolygonReference.bridgeJSLiftParameter(_self).merge(_: Polygon.bridgeJSLiftParameter(other))
+    let ret = TestModule.PolygonReference.bridgeJSLiftParameter(_self).merge(_: TestModule.Polygon.bridgeJSLiftParameter(other))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PolygonReference_static_origin")
-@_cdecl("bjs_PolygonReference_static_origin")
-public func _bjs_PolygonReference_static_origin() -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_TestModule_PolygonReference_static_origin")
+@_cdecl("bjs_TestModule_PolygonReference_static_origin")
+public func _bjs_TestModule_PolygonReference_static_origin() -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = PolygonReference.origin()
+    let ret = TestModule.PolygonReference.origin()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PolygonReference_deinit")
-@_cdecl("bjs_PolygonReference_deinit")
-public func _bjs_PolygonReference_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_TestModule_PolygonReference_deinit")
+@_cdecl("bjs_TestModule_PolygonReference_deinit")
+public func _bjs_TestModule_PolygonReference_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    Unmanaged<PolygonReference>.fromOpaque(pointer).release()
+    Unmanaged<TestModule.PolygonReference>.fromOpaque(pointer).release()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension PolygonReference: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
+extension TestModule.PolygonReference: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
     var jsValue: JSValue {
-        return .object(JSObject(id: UInt32(bitPattern: _bjs_PolygonReference_wrap(Unmanaged.passRetained(self).toOpaque()))))
+        return .object(JSObject(id: UInt32(bitPattern: _bjs_TestModule_PolygonReference_wrap(Unmanaged.passRetained(self).toOpaque()))))
     }
     consuming func bridgeJSLowerAsProtocolReturn() -> Int32 {
-        _bjs_PolygonReference_wrap(Unmanaged.passRetained(self).toOpaque())
+        _bjs_TestModule_PolygonReference_wrap(Unmanaged.passRetained(self).toOpaque())
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "TestModule", name: "bjs_PolygonReference_wrap")
-fileprivate func _bjs_PolygonReference_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
+@_extern(wasm, module: "TestModule", name: "bjs_TestModule_PolygonReference_wrap")
+fileprivate func _bjs_TestModule_PolygonReference_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
 #else
-fileprivate func _bjs_PolygonReference_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+fileprivate func _bjs_TestModule_PolygonReference_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_PolygonReference_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
-    return _bjs_PolygonReference_wrap_extern(pointer)
+@inline(never) fileprivate func _bjs_TestModule_PolygonReference_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+    return _bjs_TestModule_PolygonReference_wrap_extern(pointer)
 }
 
-@_expose(wasm, "bjs_TagReference_init")
-@_cdecl("bjs_TagReference_init")
-public func _bjs_TagReference_init(_ underlying: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_TestModule_TagReference_init")
+@_cdecl("bjs_TestModule_TagReference_init")
+public func _bjs_TestModule_TagReference_init(_ underlying: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = TagReference(underlying: Tag.bridgeJSLiftParameter(underlying))
+    let ret = TestModule.TagReference(underlying: TestModule.Tag.bridgeJSLiftParameter(underlying))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_TagReference_deinit")
-@_cdecl("bjs_TagReference_deinit")
-public func _bjs_TagReference_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_TestModule_TagReference_deinit")
+@_cdecl("bjs_TestModule_TagReference_deinit")
+public func _bjs_TestModule_TagReference_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    Unmanaged<TagReference>.fromOpaque(pointer).release()
+    Unmanaged<TestModule.TagReference>.fromOpaque(pointer).release()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension TagReference: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
+extension TestModule.TagReference: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
     var jsValue: JSValue {
-        return .object(JSObject(id: UInt32(bitPattern: _bjs_TagReference_wrap(Unmanaged.passRetained(self).toOpaque()))))
+        return .object(JSObject(id: UInt32(bitPattern: _bjs_TestModule_TagReference_wrap(Unmanaged.passRetained(self).toOpaque()))))
     }
     consuming func bridgeJSLowerAsProtocolReturn() -> Int32 {
-        _bjs_TagReference_wrap(Unmanaged.passRetained(self).toOpaque())
+        _bjs_TestModule_TagReference_wrap(Unmanaged.passRetained(self).toOpaque())
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "TestModule", name: "bjs_TagReference_wrap")
-fileprivate func _bjs_TagReference_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
+@_extern(wasm, module: "TestModule", name: "bjs_TestModule_TagReference_wrap")
+fileprivate func _bjs_TestModule_TagReference_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
 #else
-fileprivate func _bjs_TagReference_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+fileprivate func _bjs_TestModule_TagReference_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_TagReference_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
-    return _bjs_TagReference_wrap_extern(pointer)
+@inline(never) fileprivate func _bjs_TestModule_TagReference_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+    return _bjs_TestModule_TagReference_wrap_extern(pointer)
 }
 
-extension Polygon: _BridgedSwiftAlias, _BridgedSwiftStackType {}
+extension TestModule.Polygon: _BridgedSwiftAlias, _BridgedSwiftStackType {}
 
-extension Tag: _BridgedSwiftAlias, _BridgedSwiftStackType {}
+extension TestModule.Tag: _BridgedSwiftAlias, _BridgedSwiftStackType {}
 
-extension Tagged: _BridgedSwiftAlias, _BridgedSwiftStackType {}
+extension TestModule.Tagged: _BridgedSwiftAlias, _BridgedSwiftStackType {}
 
-extension Canvas: _BridgedSwiftAlias, _BridgedSwiftStackType {}
+extension TestModule.Canvas: _BridgedSwiftAlias, _BridgedSwiftStackType {}
 
-extension AliasedTag: _BridgedSwiftAlias, _BridgedSwiftAssociatedValueEnum {}
+extension TestModule.AliasedTag: _BridgedSwiftAlias, _BridgedSwiftAssociatedValueEnum {}
 
-extension UserId: _BridgedSwiftAlias, _BridgedSwiftStackType {}
+extension TestModule.UserId: _BridgedSwiftAlias, _BridgedSwiftStackType {}
 
 #if arch(wasm32)
 @_extern(wasm, module: "TestModule", name: "bjs_acceptTagged")
@@ -281,7 +281,7 @@ fileprivate func bjs_acceptTagged_extern(_ taggedBytes: Int32, _ taggedLength: I
     return bjs_acceptTagged_extern(taggedBytes, taggedLength)
 }
 
-func _$acceptTagged(_ tagged: Tagged) throws(JSException) -> Void {
+func _$acceptTagged(_ tagged: TestModule.Tagged) throws(JSException) -> Void {
     tagged.bridgeJSWithLoweredParameter { (taggedBytes, taggedLength) in
         bjs_acceptTagged(taggedBytes, taggedLength)
     }
@@ -302,7 +302,7 @@ fileprivate func bjs_acceptOptionalTagged_extern(_ taggedIsSome: Int32, _ tagged
     return bjs_acceptOptionalTagged_extern(taggedIsSome, taggedBytes, taggedLength)
 }
 
-func _$acceptOptionalTagged(_ tagged: Optional<Tagged>) throws(JSException) -> Void {
+func _$acceptOptionalTagged(_ tagged: Optional<TestModule.Tagged>) throws(JSException) -> Void {
     tagged.bridgeJSWithLoweredParameter { (taggedIsSome, taggedBytes, taggedLength) in
         bjs_acceptOptionalTagged(taggedIsSome, taggedBytes, taggedLength)
     }
@@ -323,7 +323,7 @@ fileprivate func bjs_roundtripTagged_extern(_ taggedBytes: Int32, _ taggedLength
     return bjs_roundtripTagged_extern(taggedBytes, taggedLength)
 }
 
-func _$roundtripTagged(_ tagged: Tagged) throws(JSException) -> Tagged {
+func _$roundtripTagged(_ tagged: TestModule.Tagged) throws(JSException) -> TestModule.Tagged {
     let ret0 = tagged.bridgeJSWithLoweredParameter { (taggedBytes, taggedLength) in
         let ret = bjs_roundtripTagged(taggedBytes, taggedLength)
         return ret
@@ -332,7 +332,7 @@ func _$roundtripTagged(_ tagged: Tagged) throws(JSException) -> Tagged {
     if let error = _swift_js_take_exception() {
         throw error
     }
-    return Tagged.bridgeJSLiftReturn(ret)
+    return TestModule.Tagged.bridgeJSLiftReturn(ret)
 }
 
 #if arch(wasm32)
@@ -347,12 +347,12 @@ fileprivate func bjs_produceOptionalCanvas_extern() -> Void {
     return bjs_produceOptionalCanvas_extern()
 }
 
-func _$produceOptionalCanvas() throws(JSException) -> Optional<Canvas> {
+func _$produceOptionalCanvas() throws(JSException) -> Optional<TestModule.Canvas> {
     bjs_produceOptionalCanvas()
     if let error = _swift_js_take_exception() {
         throw error
     }
-    return Optional<Canvas>.bridgeJSLiftReturn()
+    return Optional<TestModule.Canvas>.bridgeJSLiftReturn()
 }
 
 #if arch(wasm32)

@@ -1,8 +1,8 @@
-extension Point: _BridgedSwiftStruct {
-    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> Point {
+extension TestModule.Point: _BridgedSwiftStruct {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> TestModule.Point {
         let y = Int.bridgeJSStackPop()
         let x = Int.bridgeJSStackPop()
-        return Point(x: x, y: y)
+        return TestModule.Point(x: x, y: y)
     }
 
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSStackPush() {
@@ -11,39 +11,39 @@ extension Point: _BridgedSwiftStruct {
     }
 
     init(unsafelyCopying jsObject: JSObject) {
-        _bjs_struct_lower_Point(jsObject.bridgeJSLowerParameter())
+        _bjs_struct_lower_TestModule_Point(jsObject.bridgeJSLowerParameter())
         self = Self.bridgeJSStackPop()
     }
 
     func toJSObject() -> JSObject {
         let __bjs_self = self
         __bjs_self.bridgeJSStackPush()
-        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_Point()))
+        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_TestModule_Point()))
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_Point")
-fileprivate func _bjs_struct_lower_Point_extern(_ objectId: Int32) -> Void
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_TestModule_Point")
+fileprivate func _bjs_struct_lower_TestModule_Point_extern(_ objectId: Int32) -> Void
 #else
-fileprivate func _bjs_struct_lower_Point_extern(_ objectId: Int32) -> Void {
+fileprivate func _bjs_struct_lower_TestModule_Point_extern(_ objectId: Int32) -> Void {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lower_Point(_ objectId: Int32) -> Void {
-    return _bjs_struct_lower_Point_extern(objectId)
+@inline(never) fileprivate func _bjs_struct_lower_TestModule_Point(_ objectId: Int32) -> Void {
+    return _bjs_struct_lower_TestModule_Point_extern(objectId)
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_Point")
-fileprivate func _bjs_struct_lift_Point_extern() -> Int32
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_TestModule_Point")
+fileprivate func _bjs_struct_lift_TestModule_Point_extern() -> Int32
 #else
-fileprivate func _bjs_struct_lift_Point_extern() -> Int32 {
+fileprivate func _bjs_struct_lift_TestModule_Point_extern() -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lift_Point() -> Int32 {
-    return _bjs_struct_lift_Point_extern()
+@inline(never) fileprivate func _bjs_struct_lift_TestModule_Point() -> Int32 {
+    return _bjs_struct_lift_TestModule_Point_extern()
 }
 
 #if arch(wasm32)
@@ -58,7 +58,7 @@ fileprivate func bjs_translate_extern(_ point: Int32, _ dx: Int32, _ dy: Int32) 
     return bjs_translate_extern(point, dx, dy)
 }
 
-func _$translate(_ point: Point, _ dx: Int, _ dy: Int) throws(JSException) -> Point {
+func _$translate(_ point: TestModule.Point, _ dx: Int, _ dy: Int) throws(JSException) -> TestModule.Point {
     let pointObjectId = point.bridgeJSLowerParameter()
     let dxValue = dx.bridgeJSLowerParameter()
     let dyValue = dy.bridgeJSLowerParameter()
@@ -66,7 +66,7 @@ func _$translate(_ point: Point, _ dx: Int, _ dy: Int) throws(JSException) -> Po
     if let error = _swift_js_take_exception() {
         throw error
     }
-    return Point.bridgeJSLiftReturn(ret)
+    return TestModule.Point.bridgeJSLiftReturn(ret)
 }
 
 #if arch(wasm32)
@@ -81,11 +81,11 @@ fileprivate func bjs_roundTripOptional_extern(_ point: Int32) -> Void {
     return bjs_roundTripOptional_extern(point)
 }
 
-func _$roundTripOptional(_ point: Optional<Point>) throws(JSException) -> Optional<Point> {
+func _$roundTripOptional(_ point: Optional<TestModule.Point>) throws(JSException) -> Optional<TestModule.Point> {
     let pointIsSome = point.bridgeJSLowerParameter()
     bjs_roundTripOptional(pointIsSome)
     if let error = _swift_js_take_exception() {
         throw error
     }
-    return Optional<Point>.bridgeJSLiftReturn()
+    return Optional<TestModule.Point>.bridgeJSLiftReturn()
 }

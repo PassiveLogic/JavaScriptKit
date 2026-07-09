@@ -338,9 +338,9 @@ public func _invoke_swift_closure_TestModule_10TestModulesSS_y(_ boxPtr: UnsafeM
     #endif
 }
 
-@_expose(wasm, "bjs_runValidator")
-@_cdecl("bjs_runValidator")
-public func _bjs_runValidator(_ cb: Int32) -> Void {
+@_expose(wasm, "bjs_TestModule_runValidator")
+@_cdecl("bjs_TestModule_runValidator")
+public func _bjs_TestModule_runValidator(_ cb: Int32) -> Void {
     #if arch(wasm32)
     runValidator(_: _BJS_Closure_10TestModuleKSS_Sb.bridgeJSLift(cb))
     #else
@@ -348,9 +348,9 @@ public func _bjs_runValidator(_ cb: Int32) -> Void {
     #endif
 }
 
-@_expose(wasm, "bjs_loadEach")
-@_cdecl("bjs_loadEach")
-public func _bjs_loadEach(_ fetch: Int32) -> Void {
+@_expose(wasm, "bjs_TestModule_loadEach")
+@_cdecl("bjs_TestModule_loadEach")
+public func _bjs_TestModule_loadEach(_ fetch: Int32) -> Void {
     #if arch(wasm32)
     loadEach(_: _BJS_Closure_10TestModuleYaKSS_SS.bridgeJSLift(fetch))
     #else

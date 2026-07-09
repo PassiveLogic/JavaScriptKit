@@ -12,7 +12,7 @@
         "properties" : [
 
         ],
-        "swiftCallName" : "User"
+        "swiftCallName" : "TestModule.User"
       }
     ],
     "enums" : [
@@ -96,7 +96,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "APIResult",
+        "swiftCallName" : "TestModule.APIResult",
         "tsFullPath" : "APIResult"
       },
       {
@@ -279,7 +279,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "ComplexResult",
+        "swiftCallName" : "TestModule.ComplexResult",
         "tsFullPath" : "ComplexResult"
       },
       {
@@ -294,7 +294,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "Utilities",
+        "swiftCallName" : "TestModule.Utilities",
         "tsFullPath" : "Utilities"
       },
       {
@@ -374,7 +374,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "Utilities.Result",
+        "swiftCallName" : "TestModule.Utilities.Result",
         "tsFullPath" : "Utilities.Result"
       },
       {
@@ -425,7 +425,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "NetworkingResult",
+        "swiftCallName" : "TestModule.NetworkingResult",
         "tsFullPath" : "API.NetworkingResult"
       },
       {
@@ -532,7 +532,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "APIOptionalResult",
+        "swiftCallName" : "TestModule.APIOptionalResult",
         "tsFullPath" : "APIOptionalResult"
       },
       {
@@ -561,7 +561,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "Precision",
+        "swiftCallName" : "TestModule.Precision",
         "tsFullPath" : "Precision"
       },
       {
@@ -599,7 +599,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "CardinalDirection",
+        "swiftCallName" : "TestModule.CardinalDirection",
         "tsFullPath" : "CardinalDirection"
       },
       {
@@ -609,7 +609,7 @@
               {
                 "type" : {
                   "rawValueEnum" : {
-                    "_0" : "Precision",
+                    "_0" : "TestModule.Precision",
                     "_1" : "Float"
                   }
                 }
@@ -622,7 +622,7 @@
               {
                 "type" : {
                   "caseEnum" : {
-                    "_0" : "CardinalDirection"
+                    "_0" : "TestModule.CardinalDirection"
                   }
                 }
               }
@@ -636,7 +636,7 @@
                   "nullable" : {
                     "_0" : {
                       "rawValueEnum" : {
-                        "_0" : "Precision",
+                        "_0" : "TestModule.Precision",
                         "_1" : "Float"
                       }
                     },
@@ -654,7 +654,7 @@
                   "nullable" : {
                     "_0" : {
                       "caseEnum" : {
-                        "_0" : "CardinalDirection"
+                        "_0" : "TestModule.CardinalDirection"
                       }
                     },
                     "_1" : "null"
@@ -679,7 +679,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "TypedPayloadResult",
+        "swiftCallName" : "TestModule.TypedPayloadResult",
         "tsFullPath" : "TypedPayloadResult"
       },
       {
@@ -689,7 +689,7 @@
               {
                 "type" : {
                   "swiftStruct" : {
-                    "_0" : "Point"
+                    "_0" : "TestModule.Point"
                   }
                 }
               }
@@ -701,7 +701,7 @@
               {
                 "type" : {
                   "swiftHeapObject" : {
-                    "_0" : "User"
+                    "_0" : "TestModule.User"
                   }
                 }
               }
@@ -725,7 +725,7 @@
               {
                 "type" : {
                   "associatedValueEnum" : {
-                    "_0" : "APIResult"
+                    "_0" : "TestModule.APIResult"
                   }
                 }
               }
@@ -766,7 +766,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "AllTypesResult",
+        "swiftCallName" : "TestModule.AllTypesResult",
         "tsFullPath" : "AllTypesResult"
       },
       {
@@ -778,7 +778,7 @@
                   "nullable" : {
                     "_0" : {
                       "swiftStruct" : {
-                        "_0" : "Point"
+                        "_0" : "TestModule.Point"
                       }
                     },
                     "_1" : "null"
@@ -795,7 +795,7 @@
                   "nullable" : {
                     "_0" : {
                       "swiftHeapObject" : {
-                        "_0" : "User"
+                        "_0" : "TestModule.User"
                       }
                     },
                     "_1" : "null"
@@ -829,7 +829,7 @@
                   "nullable" : {
                     "_0" : {
                       "associatedValueEnum" : {
-                        "_0" : "APIResult"
+                        "_0" : "TestModule.APIResult"
                       }
                     },
                     "_1" : "null"
@@ -878,14 +878,14 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "OptionalAllTypesResult",
+        "swiftCallName" : "TestModule.OptionalAllTypesResult",
         "tsFullPath" : "OptionalAllTypesResult"
       }
     ],
     "exposeToGlobal" : false,
     "functions" : [
       {
-        "abiName" : "bjs_handle",
+        "abiName" : "bjs_TestModule_handle",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -898,7 +898,7 @@
             "name" : "result",
             "type" : {
               "associatedValueEnum" : {
-                "_0" : "APIResult"
+                "_0" : "TestModule.APIResult"
               }
             }
           }
@@ -910,7 +910,7 @@
         }
       },
       {
-        "abiName" : "bjs_getResult",
+        "abiName" : "bjs_TestModule_getResult",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -922,12 +922,12 @@
         ],
         "returnType" : {
           "associatedValueEnum" : {
-            "_0" : "APIResult"
+            "_0" : "TestModule.APIResult"
           }
         }
       },
       {
-        "abiName" : "bjs_roundtripAPIResult",
+        "abiName" : "bjs_TestModule_roundtripAPIResult",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -940,19 +940,19 @@
             "name" : "result",
             "type" : {
               "associatedValueEnum" : {
-                "_0" : "APIResult"
+                "_0" : "TestModule.APIResult"
               }
             }
           }
         ],
         "returnType" : {
           "associatedValueEnum" : {
-            "_0" : "APIResult"
+            "_0" : "TestModule.APIResult"
           }
         }
       },
       {
-        "abiName" : "bjs_roundTripOptionalAPIResult",
+        "abiName" : "bjs_TestModule_roundTripOptionalAPIResult",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -967,7 +967,7 @@
               "nullable" : {
                 "_0" : {
                   "associatedValueEnum" : {
-                    "_0" : "APIResult"
+                    "_0" : "TestModule.APIResult"
                   }
                 },
                 "_1" : "null"
@@ -979,7 +979,7 @@
           "nullable" : {
             "_0" : {
               "associatedValueEnum" : {
-                "_0" : "APIResult"
+                "_0" : "TestModule.APIResult"
               }
             },
             "_1" : "null"
@@ -987,7 +987,7 @@
         }
       },
       {
-        "abiName" : "bjs_handleComplex",
+        "abiName" : "bjs_TestModule_handleComplex",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1000,7 +1000,7 @@
             "name" : "result",
             "type" : {
               "associatedValueEnum" : {
-                "_0" : "ComplexResult"
+                "_0" : "TestModule.ComplexResult"
               }
             }
           }
@@ -1012,7 +1012,7 @@
         }
       },
       {
-        "abiName" : "bjs_getComplexResult",
+        "abiName" : "bjs_TestModule_getComplexResult",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1024,12 +1024,12 @@
         ],
         "returnType" : {
           "associatedValueEnum" : {
-            "_0" : "ComplexResult"
+            "_0" : "TestModule.ComplexResult"
           }
         }
       },
       {
-        "abiName" : "bjs_roundtripComplexResult",
+        "abiName" : "bjs_TestModule_roundtripComplexResult",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1042,19 +1042,19 @@
             "name" : "result",
             "type" : {
               "associatedValueEnum" : {
-                "_0" : "ComplexResult"
+                "_0" : "TestModule.ComplexResult"
               }
             }
           }
         ],
         "returnType" : {
           "associatedValueEnum" : {
-            "_0" : "ComplexResult"
+            "_0" : "TestModule.ComplexResult"
           }
         }
       },
       {
-        "abiName" : "bjs_roundTripOptionalComplexResult",
+        "abiName" : "bjs_TestModule_roundTripOptionalComplexResult",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1069,7 +1069,7 @@
               "nullable" : {
                 "_0" : {
                   "associatedValueEnum" : {
-                    "_0" : "ComplexResult"
+                    "_0" : "TestModule.ComplexResult"
                   }
                 },
                 "_1" : "null"
@@ -1081,7 +1081,7 @@
           "nullable" : {
             "_0" : {
               "associatedValueEnum" : {
-                "_0" : "ComplexResult"
+                "_0" : "TestModule.ComplexResult"
               }
             },
             "_1" : "null"
@@ -1089,7 +1089,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundTripOptionalUtilitiesResult",
+        "abiName" : "bjs_TestModule_roundTripOptionalUtilitiesResult",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1104,7 +1104,7 @@
               "nullable" : {
                 "_0" : {
                   "associatedValueEnum" : {
-                    "_0" : "Utilities.Result"
+                    "_0" : "TestModule.Utilities.Result"
                   }
                 },
                 "_1" : "null"
@@ -1116,7 +1116,7 @@
           "nullable" : {
             "_0" : {
               "associatedValueEnum" : {
-                "_0" : "Utilities.Result"
+                "_0" : "TestModule.Utilities.Result"
               }
             },
             "_1" : "null"
@@ -1124,7 +1124,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundTripOptionalNetworkingResult",
+        "abiName" : "bjs_TestModule_roundTripOptionalNetworkingResult",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1139,7 +1139,7 @@
               "nullable" : {
                 "_0" : {
                   "associatedValueEnum" : {
-                    "_0" : "NetworkingResult"
+                    "_0" : "TestModule.NetworkingResult"
                   }
                 },
                 "_1" : "null"
@@ -1151,7 +1151,7 @@
           "nullable" : {
             "_0" : {
               "associatedValueEnum" : {
-                "_0" : "NetworkingResult"
+                "_0" : "TestModule.NetworkingResult"
               }
             },
             "_1" : "null"
@@ -1159,7 +1159,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundTripOptionalAPIOptionalResult",
+        "abiName" : "bjs_TestModule_roundTripOptionalAPIOptionalResult",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1174,7 +1174,7 @@
               "nullable" : {
                 "_0" : {
                   "associatedValueEnum" : {
-                    "_0" : "APIOptionalResult"
+                    "_0" : "TestModule.APIOptionalResult"
                   }
                 },
                 "_1" : "null"
@@ -1186,7 +1186,7 @@
           "nullable" : {
             "_0" : {
               "associatedValueEnum" : {
-                "_0" : "APIOptionalResult"
+                "_0" : "TestModule.APIOptionalResult"
               }
             },
             "_1" : "null"
@@ -1194,7 +1194,7 @@
         }
       },
       {
-        "abiName" : "bjs_compareAPIResults",
+        "abiName" : "bjs_TestModule_compareAPIResults",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1209,7 +1209,7 @@
               "nullable" : {
                 "_0" : {
                   "associatedValueEnum" : {
-                    "_0" : "APIOptionalResult"
+                    "_0" : "TestModule.APIOptionalResult"
                   }
                 },
                 "_1" : "null"
@@ -1223,7 +1223,7 @@
               "nullable" : {
                 "_0" : {
                   "associatedValueEnum" : {
-                    "_0" : "APIOptionalResult"
+                    "_0" : "TestModule.APIOptionalResult"
                   }
                 },
                 "_1" : "null"
@@ -1235,7 +1235,7 @@
           "nullable" : {
             "_0" : {
               "associatedValueEnum" : {
-                "_0" : "APIOptionalResult"
+                "_0" : "TestModule.APIOptionalResult"
               }
             },
             "_1" : "null"
@@ -1243,7 +1243,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundTripTypedPayloadResult",
+        "abiName" : "bjs_TestModule_roundTripTypedPayloadResult",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1256,19 +1256,19 @@
             "name" : "result",
             "type" : {
               "associatedValueEnum" : {
-                "_0" : "TypedPayloadResult"
+                "_0" : "TestModule.TypedPayloadResult"
               }
             }
           }
         ],
         "returnType" : {
           "associatedValueEnum" : {
-            "_0" : "TypedPayloadResult"
+            "_0" : "TestModule.TypedPayloadResult"
           }
         }
       },
       {
-        "abiName" : "bjs_roundTripOptionalTypedPayloadResult",
+        "abiName" : "bjs_TestModule_roundTripOptionalTypedPayloadResult",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1283,7 +1283,7 @@
               "nullable" : {
                 "_0" : {
                   "associatedValueEnum" : {
-                    "_0" : "TypedPayloadResult"
+                    "_0" : "TestModule.TypedPayloadResult"
                   }
                 },
                 "_1" : "null"
@@ -1295,7 +1295,7 @@
           "nullable" : {
             "_0" : {
               "associatedValueEnum" : {
-                "_0" : "TypedPayloadResult"
+                "_0" : "TestModule.TypedPayloadResult"
               }
             },
             "_1" : "null"
@@ -1303,7 +1303,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundTripAllTypesResult",
+        "abiName" : "bjs_TestModule_roundTripAllTypesResult",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1316,19 +1316,19 @@
             "name" : "result",
             "type" : {
               "associatedValueEnum" : {
-                "_0" : "AllTypesResult"
+                "_0" : "TestModule.AllTypesResult"
               }
             }
           }
         ],
         "returnType" : {
           "associatedValueEnum" : {
-            "_0" : "AllTypesResult"
+            "_0" : "TestModule.AllTypesResult"
           }
         }
       },
       {
-        "abiName" : "bjs_roundTripOptionalAllTypesResult",
+        "abiName" : "bjs_TestModule_roundTripOptionalAllTypesResult",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1343,7 +1343,7 @@
               "nullable" : {
                 "_0" : {
                   "associatedValueEnum" : {
-                    "_0" : "AllTypesResult"
+                    "_0" : "TestModule.AllTypesResult"
                   }
                 },
                 "_1" : "null"
@@ -1355,7 +1355,7 @@
           "nullable" : {
             "_0" : {
               "associatedValueEnum" : {
-                "_0" : "AllTypesResult"
+                "_0" : "TestModule.AllTypesResult"
               }
             },
             "_1" : "null"
@@ -1363,7 +1363,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundTripOptionalPayloadResult",
+        "abiName" : "bjs_TestModule_roundTripOptionalPayloadResult",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1376,19 +1376,19 @@
             "name" : "result",
             "type" : {
               "associatedValueEnum" : {
-                "_0" : "OptionalAllTypesResult"
+                "_0" : "TestModule.OptionalAllTypesResult"
               }
             }
           }
         ],
         "returnType" : {
           "associatedValueEnum" : {
-            "_0" : "OptionalAllTypesResult"
+            "_0" : "TestModule.OptionalAllTypesResult"
           }
         }
       },
       {
-        "abiName" : "bjs_roundTripOptionalPayloadResultOpt",
+        "abiName" : "bjs_TestModule_roundTripOptionalPayloadResultOpt",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1403,7 +1403,7 @@
               "nullable" : {
                 "_0" : {
                   "associatedValueEnum" : {
-                    "_0" : "OptionalAllTypesResult"
+                    "_0" : "TestModule.OptionalAllTypesResult"
                   }
                 },
                 "_1" : "null"
@@ -1415,7 +1415,7 @@
           "nullable" : {
             "_0" : {
               "associatedValueEnum" : {
-                "_0" : "OptionalAllTypesResult"
+                "_0" : "TestModule.OptionalAllTypesResult"
               }
             },
             "_1" : "null"
@@ -1454,7 +1454,7 @@
             }
           }
         ],
-        "swiftCallName" : "Point"
+        "swiftCallName" : "TestModule.Point"
       }
     ]
   },

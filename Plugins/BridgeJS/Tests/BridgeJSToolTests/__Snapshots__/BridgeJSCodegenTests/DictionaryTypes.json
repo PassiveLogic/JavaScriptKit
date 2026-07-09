@@ -12,7 +12,7 @@
         "properties" : [
 
         ],
-        "swiftCallName" : "Box"
+        "swiftCallName" : "TestModule.Box"
       }
     ],
     "enums" : [
@@ -21,7 +21,7 @@
     "exposeToGlobal" : false,
     "functions" : [
       {
-        "abiName" : "bjs_mirrorDictionary",
+        "abiName" : "bjs_TestModule_mirrorDictionary",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -60,7 +60,7 @@
         }
       },
       {
-        "abiName" : "bjs_optionalDictionary",
+        "abiName" : "bjs_TestModule_optionalDictionary",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -103,7 +103,7 @@
         }
       },
       {
-        "abiName" : "bjs_nestedDictionary",
+        "abiName" : "bjs_TestModule_nestedDictionary",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -150,7 +150,7 @@
         }
       },
       {
-        "abiName" : "bjs_boxDictionary",
+        "abiName" : "bjs_TestModule_boxDictionary",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -165,7 +165,7 @@
               "dictionary" : {
                 "_0" : {
                   "swiftHeapObject" : {
-                    "_0" : "Box"
+                    "_0" : "TestModule.Box"
                   }
                 }
               }
@@ -176,14 +176,14 @@
           "dictionary" : {
             "_0" : {
               "swiftHeapObject" : {
-                "_0" : "Box"
+                "_0" : "TestModule.Box"
               }
             }
           }
         }
       },
       {
-        "abiName" : "bjs_optionalBoxDictionary",
+        "abiName" : "bjs_TestModule_optionalBoxDictionary",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -200,7 +200,7 @@
                   "nullable" : {
                     "_0" : {
                       "swiftHeapObject" : {
-                        "_0" : "Box"
+                        "_0" : "TestModule.Box"
                       }
                     },
                     "_1" : "null"
@@ -216,7 +216,7 @@
               "nullable" : {
                 "_0" : {
                   "swiftHeapObject" : {
-                    "_0" : "Box"
+                    "_0" : "TestModule.Box"
                   }
                 },
                 "_1" : "null"
@@ -226,7 +226,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundtripCounters",
+        "abiName" : "bjs_TestModule_roundtripCounters",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -239,14 +239,14 @@
             "name" : "counters",
             "type" : {
               "swiftStruct" : {
-                "_0" : "Counters"
+                "_0" : "TestModule.Counters"
               }
             }
           }
         ],
         "returnType" : {
           "swiftStruct" : {
-            "_0" : "Counters"
+            "_0" : "TestModule.Counters"
           }
         }
       }
@@ -294,7 +294,7 @@
             }
           }
         ],
-        "swiftCallName" : "Counters"
+        "swiftCallName" : "TestModule.Counters"
       }
     ]
   },

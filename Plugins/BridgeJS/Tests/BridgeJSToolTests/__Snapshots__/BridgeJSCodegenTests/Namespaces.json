@@ -6,7 +6,7 @@
     "classes" : [
       {
         "constructor" : {
-          "abiName" : "bjs___Swift_Foundation_Greeter_init",
+          "abiName" : "bjs_TestModule_Greeter_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -27,7 +27,7 @@
         "documentation" : "A greeter living in a namespace.",
         "methods" : [
           {
-            "abiName" : "bjs___Swift_Foundation_Greeter_greet",
+            "abiName" : "bjs_TestModule_Greeter_greet",
             "documentation" : "Produces a greeting for the configured name.\n- Returns: The greeting message.",
             "effects" : {
               "isAsync" : false,
@@ -45,7 +45,7 @@
             }
           },
           {
-            "abiName" : "bjs___Swift_Foundation_Greeter_static_makeDefault",
+            "abiName" : "bjs_TestModule_Greeter_static_makeDefault",
             "effects" : {
               "isAsync" : false,
               "isStatic" : true,
@@ -57,12 +57,12 @@
             ],
             "returnType" : {
               "swiftHeapObject" : {
-                "_0" : "Greeter"
+                "_0" : "TestModule.Greeter"
               }
             },
             "staticContext" : {
               "className" : {
-                "_0" : "__Swift_Foundation_Greeter"
+                "_0" : "TestModule_Greeter"
               }
             }
           }
@@ -79,7 +79,7 @@
             "name" : "defaultGreeting",
             "staticContext" : {
               "className" : {
-                "_0" : "__Swift_Foundation_Greeter"
+                "_0" : "TestModule_Greeter"
               }
             },
             "type" : {
@@ -89,11 +89,11 @@
             }
           }
         ],
-        "swiftCallName" : "Greeter"
+        "swiftCallName" : "TestModule.Greeter"
       },
       {
         "constructor" : {
-          "abiName" : "bjs_Utils_Converters_Converter_init",
+          "abiName" : "bjs_TestModule_Converter_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -105,7 +105,7 @@
         },
         "methods" : [
           {
-            "abiName" : "bjs_Utils_Converters_Converter_toString",
+            "abiName" : "bjs_TestModule_Converter_toString",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -141,12 +141,12 @@
         "properties" : [
 
         ],
-        "swiftCallName" : "Converter"
+        "swiftCallName" : "TestModule.Converter"
       },
       {
         "methods" : [
           {
-            "abiName" : "bjs___Swift_Foundation_UUID_uuidString",
+            "abiName" : "bjs_TestModule_UUID_uuidString",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -171,11 +171,11 @@
         "properties" : [
 
         ],
-        "swiftCallName" : "UUID"
+        "swiftCallName" : "TestModule.UUID"
       },
       {
         "constructor" : {
-          "abiName" : "bjs_Collections_Container_init",
+          "abiName" : "bjs_TestModule_Container_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -187,7 +187,7 @@
         },
         "methods" : [
           {
-            "abiName" : "bjs_Collections_Container_getItems",
+            "abiName" : "bjs_TestModule_Container_getItems",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -201,14 +201,14 @@
               "array" : {
                 "_0" : {
                   "swiftHeapObject" : {
-                    "_0" : "Greeter"
+                    "_0" : "TestModule.Greeter"
                   }
                 }
               }
             }
           },
           {
-            "abiName" : "bjs_Collections_Container_addItem",
+            "abiName" : "bjs_TestModule_Container_addItem",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -221,7 +221,7 @@
                 "name" : "item",
                 "type" : {
                   "swiftHeapObject" : {
-                    "_0" : "Greeter"
+                    "_0" : "TestModule.Greeter"
                   }
                 }
               }
@@ -240,7 +240,7 @@
         "properties" : [
 
         ],
-        "swiftCallName" : "Container"
+        "swiftCallName" : "TestModule.Container"
       }
     ],
     "enums" : [
@@ -249,7 +249,7 @@
     "exposeToGlobal" : false,
     "functions" : [
       {
-        "abiName" : "bjs_plainFunction",
+        "abiName" : "bjs_TestModule_plainFunction",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -266,7 +266,7 @@
         }
       },
       {
-        "abiName" : "bjs_MyModule_Utils_namespacedFunction",
+        "abiName" : "bjs_TestModule_MyModule_Utils_namespacedFunction",
         "documentation" : "A namespaced free function.\n- Returns: A fixed namespaced string.",
         "effects" : {
           "isAsync" : false,

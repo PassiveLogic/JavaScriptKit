@@ -6,7 +6,7 @@
     "classes" : [
       {
         "constructor" : {
-          "abiName" : "bjs_Helper_init",
+          "abiName" : "bjs_TestModule_Helper_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -29,7 +29,7 @@
         },
         "methods" : [
           {
-            "abiName" : "bjs_Helper_increment",
+            "abiName" : "bjs_TestModule_Helper_increment",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -62,11 +62,11 @@
             }
           }
         ],
-        "swiftCallName" : "Helper"
+        "swiftCallName" : "TestModule.Helper"
       },
       {
         "constructor" : {
-          "abiName" : "bjs_MyViewController_init",
+          "abiName" : "bjs_TestModule_MyViewController_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -78,7 +78,7 @@
               "name" : "delegate",
               "type" : {
                 "swiftProtocol" : {
-                  "_0" : "MyViewControllerDelegate"
+                  "_0" : "TestModule.MyViewControllerDelegate"
                 }
               }
             }
@@ -86,7 +86,7 @@
         },
         "methods" : [
           {
-            "abiName" : "bjs_MyViewController_triggerEvent",
+            "abiName" : "bjs_TestModule_MyViewController_triggerEvent",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -103,7 +103,7 @@
             }
           },
           {
-            "abiName" : "bjs_MyViewController_updateValue",
+            "abiName" : "bjs_TestModule_MyViewController_updateValue",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -128,7 +128,7 @@
             }
           },
           {
-            "abiName" : "bjs_MyViewController_updateCount",
+            "abiName" : "bjs_TestModule_MyViewController_updateCount",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -156,7 +156,7 @@
             }
           },
           {
-            "abiName" : "bjs_MyViewController_updateLabel",
+            "abiName" : "bjs_TestModule_MyViewController_updateLabel",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -190,7 +190,7 @@
             }
           },
           {
-            "abiName" : "bjs_MyViewController_checkEvenCount",
+            "abiName" : "bjs_TestModule_MyViewController_checkEvenCount",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -207,7 +207,7 @@
             }
           },
           {
-            "abiName" : "bjs_MyViewController_sendHelper",
+            "abiName" : "bjs_TestModule_MyViewController_sendHelper",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -220,7 +220,7 @@
                 "name" : "helper",
                 "type" : {
                   "swiftHeapObject" : {
-                    "_0" : "Helper"
+                    "_0" : "TestModule.Helper"
                   }
                 }
               }
@@ -240,7 +240,7 @@
             "name" : "delegate",
             "type" : {
               "swiftProtocol" : {
-                "_0" : "MyViewControllerDelegate"
+                "_0" : "TestModule.MyViewControllerDelegate"
               }
             }
           },
@@ -252,7 +252,7 @@
               "nullable" : {
                 "_0" : {
                   "swiftProtocol" : {
-                    "_0" : "MyViewControllerDelegate"
+                    "_0" : "TestModule.MyViewControllerDelegate"
                   }
                 },
                 "_1" : "null"
@@ -260,11 +260,11 @@
             }
           }
         ],
-        "swiftCallName" : "MyViewController"
+        "swiftCallName" : "TestModule.MyViewController"
       },
       {
         "constructor" : {
-          "abiName" : "bjs_DelegateManager_init",
+          "abiName" : "bjs_TestModule_DelegateManager_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -278,7 +278,7 @@
                 "array" : {
                   "_0" : {
                     "swiftProtocol" : {
-                      "_0" : "MyViewControllerDelegate"
+                      "_0" : "TestModule.MyViewControllerDelegate"
                     }
                   }
                 }
@@ -288,7 +288,7 @@
         },
         "methods" : [
           {
-            "abiName" : "bjs_DelegateManager_notifyAll",
+            "abiName" : "bjs_TestModule_DelegateManager_notifyAll",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -315,7 +315,7 @@
               "array" : {
                 "_0" : {
                   "swiftProtocol" : {
-                    "_0" : "MyViewControllerDelegate"
+                    "_0" : "TestModule.MyViewControllerDelegate"
                   }
                 }
               }
@@ -329,14 +329,14 @@
               "dictionary" : {
                 "_0" : {
                   "swiftProtocol" : {
-                    "_0" : "MyViewControllerDelegate"
+                    "_0" : "TestModule.MyViewControllerDelegate"
                   }
                 }
               }
             }
           }
         ],
-        "swiftCallName" : "DelegateManager"
+        "swiftCallName" : "TestModule.DelegateManager"
       }
     ],
     "enums" : [
@@ -375,7 +375,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "Direction",
+        "swiftCallName" : "TestModule.Direction",
         "tsFullPath" : "Direction"
       },
       {
@@ -404,7 +404,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "ExampleEnum",
+        "swiftCallName" : "TestModule.ExampleEnum",
         "tsFullPath" : "ExampleEnum"
       },
       {
@@ -445,7 +445,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "Result",
+        "swiftCallName" : "TestModule.Result",
         "tsFullPath" : "Result"
       },
       {
@@ -481,14 +481,14 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "Priority",
+        "swiftCallName" : "TestModule.Priority",
         "tsFullPath" : "Priority"
       }
     ],
     "exposeToGlobal" : false,
     "functions" : [
       {
-        "abiName" : "bjs_processDelegates",
+        "abiName" : "bjs_TestModule_processDelegates",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -503,7 +503,7 @@
               "array" : {
                 "_0" : {
                   "swiftProtocol" : {
-                    "_0" : "MyViewControllerDelegate"
+                    "_0" : "TestModule.MyViewControllerDelegate"
                   }
                 }
               }
@@ -514,14 +514,14 @@
           "array" : {
             "_0" : {
               "swiftProtocol" : {
-                "_0" : "MyViewControllerDelegate"
+                "_0" : "TestModule.MyViewControllerDelegate"
               }
             }
           }
         }
       },
       {
-        "abiName" : "bjs_processDelegatesByName",
+        "abiName" : "bjs_TestModule_processDelegatesByName",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -536,7 +536,7 @@
               "dictionary" : {
                 "_0" : {
                   "swiftProtocol" : {
-                    "_0" : "MyViewControllerDelegate"
+                    "_0" : "TestModule.MyViewControllerDelegate"
                   }
                 }
               }
@@ -547,7 +547,7 @@
           "dictionary" : {
             "_0" : {
               "swiftProtocol" : {
-                "_0" : "MyViewControllerDelegate"
+                "_0" : "TestModule.MyViewControllerDelegate"
               }
             }
           }
@@ -692,7 +692,7 @@
                 "name" : "helper",
                 "type" : {
                   "swiftHeapObject" : {
-                    "_0" : "Helper"
+                    "_0" : "TestModule.Helper"
                   }
                 }
               }
@@ -716,7 +716,7 @@
             ],
             "returnType" : {
               "swiftHeapObject" : {
-                "_0" : "Helper"
+                "_0" : "TestModule.Helper"
               }
             }
           },
@@ -736,7 +736,7 @@
                   "nullable" : {
                     "_0" : {
                       "swiftHeapObject" : {
-                        "_0" : "Helper"
+                        "_0" : "TestModule.Helper"
                       }
                     },
                     "_1" : "null"
@@ -765,7 +765,7 @@
               "nullable" : {
                 "_0" : {
                   "swiftHeapObject" : {
-                    "_0" : "Helper"
+                    "_0" : "TestModule.Helper"
                   }
                 },
                 "_1" : "null"
@@ -785,7 +785,7 @@
             ],
             "returnType" : {
               "rawValueEnum" : {
-                "_0" : "ExampleEnum",
+                "_0" : "TestModule.ExampleEnum",
                 "_1" : "String"
               }
             }
@@ -804,7 +804,7 @@
                 "name" : "result",
                 "type" : {
                   "associatedValueEnum" : {
-                    "_0" : "Result"
+                    "_0" : "TestModule.Result"
                   }
                 }
               }
@@ -828,7 +828,7 @@
             ],
             "returnType" : {
               "associatedValueEnum" : {
-                "_0" : "Result"
+                "_0" : "TestModule.Result"
               }
             }
           }
@@ -877,7 +877,7 @@
               "nullable" : {
                 "_0" : {
                   "rawValueEnum" : {
-                    "_0" : "ExampleEnum",
+                    "_0" : "TestModule.ExampleEnum",
                     "_1" : "String"
                   }
                 },
@@ -890,7 +890,7 @@
             "name" : "rawStringEnum",
             "type" : {
               "rawValueEnum" : {
-                "_0" : "ExampleEnum",
+                "_0" : "TestModule.ExampleEnum",
                 "_1" : "String"
               }
             }
@@ -900,7 +900,7 @@
             "name" : "result",
             "type" : {
               "associatedValueEnum" : {
-                "_0" : "Result"
+                "_0" : "TestModule.Result"
               }
             }
           },
@@ -911,7 +911,7 @@
               "nullable" : {
                 "_0" : {
                   "associatedValueEnum" : {
-                    "_0" : "Result"
+                    "_0" : "TestModule.Result"
                   }
                 },
                 "_1" : "null"
@@ -923,7 +923,7 @@
             "name" : "direction",
             "type" : {
               "caseEnum" : {
-                "_0" : "Direction"
+                "_0" : "TestModule.Direction"
               }
             }
           },
@@ -934,7 +934,7 @@
               "nullable" : {
                 "_0" : {
                   "caseEnum" : {
-                    "_0" : "Direction"
+                    "_0" : "TestModule.Direction"
                   }
                 },
                 "_1" : "null"
@@ -946,7 +946,7 @@
             "name" : "priority",
             "type" : {
               "rawValueEnum" : {
-                "_0" : "Priority",
+                "_0" : "TestModule.Priority",
                 "_1" : "Int"
               }
             }
@@ -958,7 +958,7 @@
               "nullable" : {
                 "_0" : {
                   "rawValueEnum" : {
-                    "_0" : "Priority",
+                    "_0" : "TestModule.Priority",
                     "_1" : "Int"
                   }
                 },

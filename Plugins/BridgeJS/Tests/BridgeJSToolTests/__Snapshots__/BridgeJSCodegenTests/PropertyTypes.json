@@ -6,7 +6,7 @@
     "classes" : [
       {
         "constructor" : {
-          "abiName" : "bjs_PropertyHolder_init",
+          "abiName" : "bjs_TestModule_PropertyHolder_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -74,7 +74,7 @@
         },
         "methods" : [
           {
-            "abiName" : "bjs_PropertyHolder_getAllValues",
+            "abiName" : "bjs_TestModule_PropertyHolder_getAllValues",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -215,7 +215,7 @@
             "name" : "sibling",
             "type" : {
               "swiftHeapObject" : {
-                "_0" : "PropertyHolder"
+                "_0" : "TestModule.PropertyHolder"
               }
             }
           },
@@ -266,7 +266,7 @@
             }
           }
         ],
-        "swiftCallName" : "PropertyHolder"
+        "swiftCallName" : "TestModule.PropertyHolder"
       }
     ],
     "enums" : [
@@ -275,7 +275,7 @@
     "exposeToGlobal" : false,
     "functions" : [
       {
-        "abiName" : "bjs_createPropertyHolder",
+        "abiName" : "bjs_TestModule_createPropertyHolder",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -343,12 +343,12 @@
         ],
         "returnType" : {
           "swiftHeapObject" : {
-            "_0" : "PropertyHolder"
+            "_0" : "TestModule.PropertyHolder"
           }
         }
       },
       {
-        "abiName" : "bjs_testPropertyHolder",
+        "abiName" : "bjs_TestModule_testPropertyHolder",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -361,7 +361,7 @@
             "name" : "holder",
             "type" : {
               "swiftHeapObject" : {
-                "_0" : "PropertyHolder"
+                "_0" : "TestModule.PropertyHolder"
               }
             }
           }

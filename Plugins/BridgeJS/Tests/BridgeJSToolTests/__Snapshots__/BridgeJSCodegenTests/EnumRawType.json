@@ -40,7 +40,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "Theme",
+        "swiftCallName" : "TestModule.Theme",
         "tsFullPath" : "Theme"
       },
       {
@@ -76,7 +76,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "TSTheme",
+        "swiftCallName" : "TestModule.TSTheme",
         "tsFullPath" : "TSTheme"
       },
       {
@@ -105,7 +105,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "FeatureFlag",
+        "swiftCallName" : "TestModule.FeatureFlag",
         "tsFullPath" : "FeatureFlag"
       },
       {
@@ -141,7 +141,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "HttpStatus",
+        "swiftCallName" : "TestModule.HttpStatus",
         "tsFullPath" : "HttpStatus"
       },
       {
@@ -177,7 +177,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "TSHttpStatus",
+        "swiftCallName" : "TestModule.TSHttpStatus",
         "tsFullPath" : "TSHttpStatus"
       },
       {
@@ -227,7 +227,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "Priority",
+        "swiftCallName" : "TestModule.Priority",
         "tsFullPath" : "Priority"
       },
       {
@@ -270,7 +270,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "FileSize",
+        "swiftCallName" : "TestModule.FileSize",
         "tsFullPath" : "FileSize"
       },
       {
@@ -306,7 +306,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "UserId",
+        "swiftCallName" : "TestModule.UserId",
         "tsFullPath" : "UserId"
       },
       {
@@ -342,7 +342,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "TokenId",
+        "swiftCallName" : "TestModule.TokenId",
         "tsFullPath" : "TokenId"
       },
       {
@@ -378,7 +378,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "SessionId",
+        "swiftCallName" : "TestModule.SessionId",
         "tsFullPath" : "SessionId"
       },
       {
@@ -414,7 +414,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "Precision",
+        "swiftCallName" : "TestModule.Precision",
         "tsFullPath" : "Precision"
       },
       {
@@ -457,14 +457,14 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "Ratio",
+        "swiftCallName" : "TestModule.Ratio",
         "tsFullPath" : "Ratio"
       }
     ],
     "exposeToGlobal" : false,
     "functions" : [
       {
-        "abiName" : "bjs_setTheme",
+        "abiName" : "bjs_TestModule_setTheme",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -477,7 +477,7 @@
             "name" : "theme",
             "type" : {
               "rawValueEnum" : {
-                "_0" : "Theme",
+                "_0" : "TestModule.Theme",
                 "_1" : "String"
               }
             }
@@ -490,7 +490,7 @@
         }
       },
       {
-        "abiName" : "bjs_getTheme",
+        "abiName" : "bjs_TestModule_getTheme",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -502,13 +502,13 @@
         ],
         "returnType" : {
           "rawValueEnum" : {
-            "_0" : "Theme",
+            "_0" : "TestModule.Theme",
             "_1" : "String"
           }
         }
       },
       {
-        "abiName" : "bjs_roundTripOptionalTheme",
+        "abiName" : "bjs_TestModule_roundTripOptionalTheme",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -523,7 +523,7 @@
               "nullable" : {
                 "_0" : {
                   "rawValueEnum" : {
-                    "_0" : "Theme",
+                    "_0" : "TestModule.Theme",
                     "_1" : "String"
                   }
                 },
@@ -536,7 +536,7 @@
           "nullable" : {
             "_0" : {
               "rawValueEnum" : {
-                "_0" : "Theme",
+                "_0" : "TestModule.Theme",
                 "_1" : "String"
               }
             },
@@ -545,7 +545,7 @@
         }
       },
       {
-        "abiName" : "bjs_setTSTheme",
+        "abiName" : "bjs_TestModule_setTSTheme",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -558,7 +558,7 @@
             "name" : "theme",
             "type" : {
               "rawValueEnum" : {
-                "_0" : "TSTheme",
+                "_0" : "TestModule.TSTheme",
                 "_1" : "String"
               }
             }
@@ -571,7 +571,7 @@
         }
       },
       {
-        "abiName" : "bjs_getTSTheme",
+        "abiName" : "bjs_TestModule_getTSTheme",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -583,13 +583,13 @@
         ],
         "returnType" : {
           "rawValueEnum" : {
-            "_0" : "TSTheme",
+            "_0" : "TestModule.TSTheme",
             "_1" : "String"
           }
         }
       },
       {
-        "abiName" : "bjs_roundTripOptionalTSTheme",
+        "abiName" : "bjs_TestModule_roundTripOptionalTSTheme",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -604,7 +604,7 @@
               "nullable" : {
                 "_0" : {
                   "rawValueEnum" : {
-                    "_0" : "TSTheme",
+                    "_0" : "TestModule.TSTheme",
                     "_1" : "String"
                   }
                 },
@@ -617,7 +617,7 @@
           "nullable" : {
             "_0" : {
               "rawValueEnum" : {
-                "_0" : "TSTheme",
+                "_0" : "TestModule.TSTheme",
                 "_1" : "String"
               }
             },
@@ -626,7 +626,7 @@
         }
       },
       {
-        "abiName" : "bjs_setFeatureFlag",
+        "abiName" : "bjs_TestModule_setFeatureFlag",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -639,7 +639,7 @@
             "name" : "flag",
             "type" : {
               "rawValueEnum" : {
-                "_0" : "FeatureFlag",
+                "_0" : "TestModule.FeatureFlag",
                 "_1" : "String"
               }
             }
@@ -652,7 +652,7 @@
         }
       },
       {
-        "abiName" : "bjs_getFeatureFlag",
+        "abiName" : "bjs_TestModule_getFeatureFlag",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -664,13 +664,13 @@
         ],
         "returnType" : {
           "rawValueEnum" : {
-            "_0" : "FeatureFlag",
+            "_0" : "TestModule.FeatureFlag",
             "_1" : "String"
           }
         }
       },
       {
-        "abiName" : "bjs_roundTripOptionalFeatureFlag",
+        "abiName" : "bjs_TestModule_roundTripOptionalFeatureFlag",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -685,7 +685,7 @@
               "nullable" : {
                 "_0" : {
                   "rawValueEnum" : {
-                    "_0" : "FeatureFlag",
+                    "_0" : "TestModule.FeatureFlag",
                     "_1" : "String"
                   }
                 },
@@ -698,7 +698,7 @@
           "nullable" : {
             "_0" : {
               "rawValueEnum" : {
-                "_0" : "FeatureFlag",
+                "_0" : "TestModule.FeatureFlag",
                 "_1" : "String"
               }
             },
@@ -707,7 +707,7 @@
         }
       },
       {
-        "abiName" : "bjs_setHttpStatus",
+        "abiName" : "bjs_TestModule_setHttpStatus",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -720,7 +720,7 @@
             "name" : "status",
             "type" : {
               "rawValueEnum" : {
-                "_0" : "HttpStatus",
+                "_0" : "TestModule.HttpStatus",
                 "_1" : "Int"
               }
             }
@@ -733,7 +733,7 @@
         }
       },
       {
-        "abiName" : "bjs_getHttpStatus",
+        "abiName" : "bjs_TestModule_getHttpStatus",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -745,13 +745,13 @@
         ],
         "returnType" : {
           "rawValueEnum" : {
-            "_0" : "HttpStatus",
+            "_0" : "TestModule.HttpStatus",
             "_1" : "Int"
           }
         }
       },
       {
-        "abiName" : "bjs_roundTripOptionalHttpStatus",
+        "abiName" : "bjs_TestModule_roundTripOptionalHttpStatus",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -766,7 +766,7 @@
               "nullable" : {
                 "_0" : {
                   "rawValueEnum" : {
-                    "_0" : "HttpStatus",
+                    "_0" : "TestModule.HttpStatus",
                     "_1" : "Int"
                   }
                 },
@@ -779,7 +779,7 @@
           "nullable" : {
             "_0" : {
               "rawValueEnum" : {
-                "_0" : "HttpStatus",
+                "_0" : "TestModule.HttpStatus",
                 "_1" : "Int"
               }
             },
@@ -788,7 +788,7 @@
         }
       },
       {
-        "abiName" : "bjs_setTSHttpStatus",
+        "abiName" : "bjs_TestModule_setTSHttpStatus",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -801,7 +801,7 @@
             "name" : "status",
             "type" : {
               "rawValueEnum" : {
-                "_0" : "TSHttpStatus",
+                "_0" : "TestModule.TSHttpStatus",
                 "_1" : "Int"
               }
             }
@@ -814,7 +814,7 @@
         }
       },
       {
-        "abiName" : "bjs_getTSHttpStatus",
+        "abiName" : "bjs_TestModule_getTSHttpStatus",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -826,13 +826,13 @@
         ],
         "returnType" : {
           "rawValueEnum" : {
-            "_0" : "TSHttpStatus",
+            "_0" : "TestModule.TSHttpStatus",
             "_1" : "Int"
           }
         }
       },
       {
-        "abiName" : "bjs_roundTripOptionalHttpStatus",
+        "abiName" : "bjs_TestModule_roundTripOptionalHttpStatus",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -847,7 +847,7 @@
               "nullable" : {
                 "_0" : {
                   "rawValueEnum" : {
-                    "_0" : "TSHttpStatus",
+                    "_0" : "TestModule.TSHttpStatus",
                     "_1" : "Int"
                   }
                 },
@@ -860,7 +860,7 @@
           "nullable" : {
             "_0" : {
               "rawValueEnum" : {
-                "_0" : "TSHttpStatus",
+                "_0" : "TestModule.TSHttpStatus",
                 "_1" : "Int"
               }
             },
@@ -869,7 +869,7 @@
         }
       },
       {
-        "abiName" : "bjs_setPriority",
+        "abiName" : "bjs_TestModule_setPriority",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -882,7 +882,7 @@
             "name" : "priority",
             "type" : {
               "rawValueEnum" : {
-                "_0" : "Priority",
+                "_0" : "TestModule.Priority",
                 "_1" : "Int32"
               }
             }
@@ -895,7 +895,7 @@
         }
       },
       {
-        "abiName" : "bjs_getPriority",
+        "abiName" : "bjs_TestModule_getPriority",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -907,13 +907,13 @@
         ],
         "returnType" : {
           "rawValueEnum" : {
-            "_0" : "Priority",
+            "_0" : "TestModule.Priority",
             "_1" : "Int32"
           }
         }
       },
       {
-        "abiName" : "bjs_roundTripOptionalPriority",
+        "abiName" : "bjs_TestModule_roundTripOptionalPriority",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -928,7 +928,7 @@
               "nullable" : {
                 "_0" : {
                   "rawValueEnum" : {
-                    "_0" : "Priority",
+                    "_0" : "TestModule.Priority",
                     "_1" : "Int32"
                   }
                 },
@@ -941,7 +941,7 @@
           "nullable" : {
             "_0" : {
               "rawValueEnum" : {
-                "_0" : "Priority",
+                "_0" : "TestModule.Priority",
                 "_1" : "Int32"
               }
             },
@@ -950,7 +950,7 @@
         }
       },
       {
-        "abiName" : "bjs_setFileSize",
+        "abiName" : "bjs_TestModule_setFileSize",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -963,7 +963,7 @@
             "name" : "size",
             "type" : {
               "rawValueEnum" : {
-                "_0" : "FileSize",
+                "_0" : "TestModule.FileSize",
                 "_1" : "Int64"
               }
             }
@@ -976,7 +976,7 @@
         }
       },
       {
-        "abiName" : "bjs_getFileSize",
+        "abiName" : "bjs_TestModule_getFileSize",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -988,13 +988,13 @@
         ],
         "returnType" : {
           "rawValueEnum" : {
-            "_0" : "FileSize",
+            "_0" : "TestModule.FileSize",
             "_1" : "Int64"
           }
         }
       },
       {
-        "abiName" : "bjs_roundTripOptionalFileSize",
+        "abiName" : "bjs_TestModule_roundTripOptionalFileSize",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1009,7 +1009,7 @@
               "nullable" : {
                 "_0" : {
                   "rawValueEnum" : {
-                    "_0" : "FileSize",
+                    "_0" : "TestModule.FileSize",
                     "_1" : "Int64"
                   }
                 },
@@ -1022,7 +1022,7 @@
           "nullable" : {
             "_0" : {
               "rawValueEnum" : {
-                "_0" : "FileSize",
+                "_0" : "TestModule.FileSize",
                 "_1" : "Int64"
               }
             },
@@ -1031,7 +1031,7 @@
         }
       },
       {
-        "abiName" : "bjs_setUserId",
+        "abiName" : "bjs_TestModule_setUserId",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1044,7 +1044,7 @@
             "name" : "id",
             "type" : {
               "rawValueEnum" : {
-                "_0" : "UserId",
+                "_0" : "TestModule.UserId",
                 "_1" : "UInt"
               }
             }
@@ -1057,7 +1057,7 @@
         }
       },
       {
-        "abiName" : "bjs_getUserId",
+        "abiName" : "bjs_TestModule_getUserId",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1069,13 +1069,13 @@
         ],
         "returnType" : {
           "rawValueEnum" : {
-            "_0" : "UserId",
+            "_0" : "TestModule.UserId",
             "_1" : "UInt"
           }
         }
       },
       {
-        "abiName" : "bjs_roundTripOptionalUserId",
+        "abiName" : "bjs_TestModule_roundTripOptionalUserId",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1090,7 +1090,7 @@
               "nullable" : {
                 "_0" : {
                   "rawValueEnum" : {
-                    "_0" : "UserId",
+                    "_0" : "TestModule.UserId",
                     "_1" : "UInt"
                   }
                 },
@@ -1103,7 +1103,7 @@
           "nullable" : {
             "_0" : {
               "rawValueEnum" : {
-                "_0" : "UserId",
+                "_0" : "TestModule.UserId",
                 "_1" : "UInt"
               }
             },
@@ -1112,7 +1112,7 @@
         }
       },
       {
-        "abiName" : "bjs_setTokenId",
+        "abiName" : "bjs_TestModule_setTokenId",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1125,7 +1125,7 @@
             "name" : "token",
             "type" : {
               "rawValueEnum" : {
-                "_0" : "TokenId",
+                "_0" : "TestModule.TokenId",
                 "_1" : "UInt32"
               }
             }
@@ -1138,7 +1138,7 @@
         }
       },
       {
-        "abiName" : "bjs_getTokenId",
+        "abiName" : "bjs_TestModule_getTokenId",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1150,13 +1150,13 @@
         ],
         "returnType" : {
           "rawValueEnum" : {
-            "_0" : "TokenId",
+            "_0" : "TestModule.TokenId",
             "_1" : "UInt32"
           }
         }
       },
       {
-        "abiName" : "bjs_roundTripOptionalTokenId",
+        "abiName" : "bjs_TestModule_roundTripOptionalTokenId",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1171,7 +1171,7 @@
               "nullable" : {
                 "_0" : {
                   "rawValueEnum" : {
-                    "_0" : "TokenId",
+                    "_0" : "TestModule.TokenId",
                     "_1" : "UInt32"
                   }
                 },
@@ -1184,7 +1184,7 @@
           "nullable" : {
             "_0" : {
               "rawValueEnum" : {
-                "_0" : "TokenId",
+                "_0" : "TestModule.TokenId",
                 "_1" : "UInt32"
               }
             },
@@ -1193,7 +1193,7 @@
         }
       },
       {
-        "abiName" : "bjs_setSessionId",
+        "abiName" : "bjs_TestModule_setSessionId",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1206,7 +1206,7 @@
             "name" : "session",
             "type" : {
               "rawValueEnum" : {
-                "_0" : "SessionId",
+                "_0" : "TestModule.SessionId",
                 "_1" : "UInt64"
               }
             }
@@ -1219,7 +1219,7 @@
         }
       },
       {
-        "abiName" : "bjs_getSessionId",
+        "abiName" : "bjs_TestModule_getSessionId",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1231,13 +1231,13 @@
         ],
         "returnType" : {
           "rawValueEnum" : {
-            "_0" : "SessionId",
+            "_0" : "TestModule.SessionId",
             "_1" : "UInt64"
           }
         }
       },
       {
-        "abiName" : "bjs_roundTripOptionalSessionId",
+        "abiName" : "bjs_TestModule_roundTripOptionalSessionId",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1252,7 +1252,7 @@
               "nullable" : {
                 "_0" : {
                   "rawValueEnum" : {
-                    "_0" : "SessionId",
+                    "_0" : "TestModule.SessionId",
                     "_1" : "UInt64"
                   }
                 },
@@ -1265,7 +1265,7 @@
           "nullable" : {
             "_0" : {
               "rawValueEnum" : {
-                "_0" : "SessionId",
+                "_0" : "TestModule.SessionId",
                 "_1" : "UInt64"
               }
             },
@@ -1274,7 +1274,7 @@
         }
       },
       {
-        "abiName" : "bjs_setPrecision",
+        "abiName" : "bjs_TestModule_setPrecision",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1287,7 +1287,7 @@
             "name" : "precision",
             "type" : {
               "rawValueEnum" : {
-                "_0" : "Precision",
+                "_0" : "TestModule.Precision",
                 "_1" : "Float"
               }
             }
@@ -1300,7 +1300,7 @@
         }
       },
       {
-        "abiName" : "bjs_getPrecision",
+        "abiName" : "bjs_TestModule_getPrecision",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1312,13 +1312,13 @@
         ],
         "returnType" : {
           "rawValueEnum" : {
-            "_0" : "Precision",
+            "_0" : "TestModule.Precision",
             "_1" : "Float"
           }
         }
       },
       {
-        "abiName" : "bjs_roundTripOptionalPrecision",
+        "abiName" : "bjs_TestModule_roundTripOptionalPrecision",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1333,7 +1333,7 @@
               "nullable" : {
                 "_0" : {
                   "rawValueEnum" : {
-                    "_0" : "Precision",
+                    "_0" : "TestModule.Precision",
                     "_1" : "Float"
                   }
                 },
@@ -1346,7 +1346,7 @@
           "nullable" : {
             "_0" : {
               "rawValueEnum" : {
-                "_0" : "Precision",
+                "_0" : "TestModule.Precision",
                 "_1" : "Float"
               }
             },
@@ -1355,7 +1355,7 @@
         }
       },
       {
-        "abiName" : "bjs_setRatio",
+        "abiName" : "bjs_TestModule_setRatio",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1368,7 +1368,7 @@
             "name" : "ratio",
             "type" : {
               "rawValueEnum" : {
-                "_0" : "Ratio",
+                "_0" : "TestModule.Ratio",
                 "_1" : "Double"
               }
             }
@@ -1381,7 +1381,7 @@
         }
       },
       {
-        "abiName" : "bjs_getRatio",
+        "abiName" : "bjs_TestModule_getRatio",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1393,13 +1393,13 @@
         ],
         "returnType" : {
           "rawValueEnum" : {
-            "_0" : "Ratio",
+            "_0" : "TestModule.Ratio",
             "_1" : "Double"
           }
         }
       },
       {
-        "abiName" : "bjs_roundTripOptionalRatio",
+        "abiName" : "bjs_TestModule_roundTripOptionalRatio",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1414,7 +1414,7 @@
               "nullable" : {
                 "_0" : {
                   "rawValueEnum" : {
-                    "_0" : "Ratio",
+                    "_0" : "TestModule.Ratio",
                     "_1" : "Double"
                   }
                 },
@@ -1427,7 +1427,7 @@
           "nullable" : {
             "_0" : {
               "rawValueEnum" : {
-                "_0" : "Ratio",
+                "_0" : "TestModule.Ratio",
                 "_1" : "Double"
               }
             },
@@ -1436,7 +1436,7 @@
         }
       },
       {
-        "abiName" : "bjs_processTheme",
+        "abiName" : "bjs_TestModule_processTheme",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1449,7 +1449,7 @@
             "name" : "theme",
             "type" : {
               "rawValueEnum" : {
-                "_0" : "Theme",
+                "_0" : "TestModule.Theme",
                 "_1" : "String"
               }
             }
@@ -1457,13 +1457,13 @@
         ],
         "returnType" : {
           "rawValueEnum" : {
-            "_0" : "HttpStatus",
+            "_0" : "TestModule.HttpStatus",
             "_1" : "Int"
           }
         }
       },
       {
-        "abiName" : "bjs_convertPriority",
+        "abiName" : "bjs_TestModule_convertPriority",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1476,7 +1476,7 @@
             "name" : "status",
             "type" : {
               "rawValueEnum" : {
-                "_0" : "HttpStatus",
+                "_0" : "TestModule.HttpStatus",
                 "_1" : "Int"
               }
             }
@@ -1484,13 +1484,13 @@
         ],
         "returnType" : {
           "rawValueEnum" : {
-            "_0" : "Priority",
+            "_0" : "TestModule.Priority",
             "_1" : "Int32"
           }
         }
       },
       {
-        "abiName" : "bjs_validateSession",
+        "abiName" : "bjs_TestModule_validateSession",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1503,7 +1503,7 @@
             "name" : "session",
             "type" : {
               "rawValueEnum" : {
-                "_0" : "SessionId",
+                "_0" : "TestModule.SessionId",
                 "_1" : "UInt64"
               }
             }
@@ -1511,7 +1511,7 @@
         ],
         "returnType" : {
           "rawValueEnum" : {
-            "_0" : "Theme",
+            "_0" : "TestModule.Theme",
             "_1" : "String"
           }
         }
@@ -1541,7 +1541,7 @@
                 "name" : "flag",
                 "type" : {
                   "rawValueEnum" : {
-                    "_0" : "FeatureFlag",
+                    "_0" : "TestModule.FeatureFlag",
                     "_1" : "String"
                   }
                 }
@@ -1566,7 +1566,7 @@
             ],
             "returnType" : {
               "rawValueEnum" : {
-                "_0" : "FeatureFlag",
+                "_0" : "TestModule.FeatureFlag",
                 "_1" : "String"
               }
             }

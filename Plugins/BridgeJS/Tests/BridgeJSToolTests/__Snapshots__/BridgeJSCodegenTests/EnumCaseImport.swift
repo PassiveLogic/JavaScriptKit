@@ -1,12 +1,12 @@
-extension Signal: _BridgedSwiftCaseEnum {
+extension TestModule.Signal: _BridgedSwiftCaseEnum {
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSLowerParameter() -> Int32 {
         return bridgeJSRawValue
     }
-    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftReturn(_ value: Int32) -> Signal {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftReturn(_ value: Int32) -> TestModule.Signal {
         return bridgeJSLiftParameter(value)
     }
-    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftParameter(_ value: Int32) -> Signal {
-        return Signal(bridgeJSRawValue: value)!
+    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftParameter(_ value: Int32) -> TestModule.Signal {
+        return TestModule.Signal(bridgeJSRawValue: value)!
     }
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSLowerReturn() -> Int32 {
         return bridgeJSLowerParameter()
@@ -69,16 +69,16 @@ fileprivate func bjs_SignalControls_current_extern(_ self: Int32) -> Int32 {
     return bjs_SignalControls_current_extern(self)
 }
 
-func _$SignalControls_roundTrip(_ signal: Signal) throws(JSException) -> Signal {
+func _$SignalControls_roundTrip(_ signal: TestModule.Signal) throws(JSException) -> TestModule.Signal {
     let signalValue = signal.bridgeJSLowerParameter()
     let ret = bjs_SignalControls_roundTrip_static(signalValue)
     if let error = _swift_js_take_exception() {
         throw error
     }
-    return Signal.bridgeJSLiftReturn(ret)
+    return TestModule.Signal.bridgeJSLiftReturn(ret)
 }
 
-func _$SignalControls_send(_ self: JSObject, _ signal: Signal) throws(JSException) -> Void {
+func _$SignalControls_send(_ self: JSObject, _ signal: TestModule.Signal) throws(JSException) -> Void {
     let selfValue = self.bridgeJSLowerParameter()
     let signalValue = signal.bridgeJSLowerParameter()
     bjs_SignalControls_send(selfValue, signalValue)
@@ -87,11 +87,11 @@ func _$SignalControls_send(_ self: JSObject, _ signal: Signal) throws(JSExceptio
     }
 }
 
-func _$SignalControls_current(_ self: JSObject) throws(JSException) -> Signal {
+func _$SignalControls_current(_ self: JSObject) throws(JSException) -> TestModule.Signal {
     let selfValue = self.bridgeJSLowerParameter()
     let ret = bjs_SignalControls_current(selfValue)
     if let error = _swift_js_take_exception() {
         throw error
     }
-    return Signal.bridgeJSLiftReturn(ret)
+    return TestModule.Signal.bridgeJSLiftReturn(ret)
 }

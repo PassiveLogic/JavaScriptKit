@@ -1,35 +1,35 @@
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "invoke_js_callback_TestModule_10TestModuleAl7Polygon_Si")
-fileprivate func invoke_js_callback_TestModule_10TestModuleAl7Polygon_Si_extern(_ callback: Int32, _ param0: UnsafeMutableRawPointer) -> Int32
+@_extern(wasm, module: "bjs", name: "invoke_js_callback_TestModule_10TestModuleAl18TestModule_Polygon_Si")
+fileprivate func invoke_js_callback_TestModule_10TestModuleAl18TestModule_Polygon_Si_extern(_ callback: Int32, _ param0: UnsafeMutableRawPointer) -> Int32
 #else
-fileprivate func invoke_js_callback_TestModule_10TestModuleAl7Polygon_Si_extern(_ callback: Int32, _ param0: UnsafeMutableRawPointer) -> Int32 {
+fileprivate func invoke_js_callback_TestModule_10TestModuleAl18TestModule_Polygon_Si_extern(_ callback: Int32, _ param0: UnsafeMutableRawPointer) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func invoke_js_callback_TestModule_10TestModuleAl7Polygon_Si(_ callback: Int32, _ param0: UnsafeMutableRawPointer) -> Int32 {
-    return invoke_js_callback_TestModule_10TestModuleAl7Polygon_Si_extern(callback, param0)
+@inline(never) fileprivate func invoke_js_callback_TestModule_10TestModuleAl18TestModule_Polygon_Si(_ callback: Int32, _ param0: UnsafeMutableRawPointer) -> Int32 {
+    return invoke_js_callback_TestModule_10TestModuleAl18TestModule_Polygon_Si_extern(callback, param0)
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "make_swift_closure_TestModule_10TestModuleAl7Polygon_Si")
-fileprivate func make_swift_closure_TestModule_10TestModuleAl7Polygon_Si_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
+@_extern(wasm, module: "bjs", name: "make_swift_closure_TestModule_10TestModuleAl18TestModule_Polygon_Si")
+fileprivate func make_swift_closure_TestModule_10TestModuleAl18TestModule_Polygon_Si_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
 #else
-fileprivate func make_swift_closure_TestModule_10TestModuleAl7Polygon_Si_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+fileprivate func make_swift_closure_TestModule_10TestModuleAl18TestModule_Polygon_Si_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func make_swift_closure_TestModule_10TestModuleAl7Polygon_Si(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
-    return make_swift_closure_TestModule_10TestModuleAl7Polygon_Si_extern(boxPtr, file, line)
+@inline(never) fileprivate func make_swift_closure_TestModule_10TestModuleAl18TestModule_Polygon_Si(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+    return make_swift_closure_TestModule_10TestModuleAl18TestModule_Polygon_Si_extern(boxPtr, file, line)
 }
 
-private enum _BJS_Closure_10TestModuleAl7Polygon_Si {
-    static func bridgeJSLift(_ callbackId: Int32) -> (Polygon) -> Int {
+private enum _BJS_Closure_10TestModuleAl18TestModule_Polygon_Si {
+    static func bridgeJSLift(_ callbackId: Int32) -> (TestModule.Polygon) -> Int {
         let callback = JSObject.bridgeJSLiftParameter(callbackId)
         return { [callback] param0 in
             #if arch(wasm32)
             let callbackValue = callback.bridgeJSLowerParameter()
             let param0Pointer = param0.bridgeJSLowerParameter()
-            let ret = invoke_js_callback_TestModule_10TestModuleAl7Polygon_Si(callbackValue, param0Pointer)
+            let ret = invoke_js_callback_TestModule_10TestModuleAl18TestModule_Polygon_Si(callbackValue, param0Pointer)
             return Int.bridgeJSLiftReturn(ret)
             #else
             fatalError("Only available on WebAssembly")
@@ -38,10 +38,10 @@ private enum _BJS_Closure_10TestModuleAl7Polygon_Si {
     }
 }
 
-extension JSTypedClosure where Signature == (Polygon) -> Int {
-    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping (Polygon) -> Int) {
+extension JSTypedClosure where Signature == (TestModule.Polygon) -> Int {
+    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping (TestModule.Polygon) -> Int) {
         self.init(
-            makeClosure: make_swift_closure_TestModule_10TestModuleAl7Polygon_Si,
+            makeClosure: make_swift_closure_TestModule_10TestModuleAl18TestModule_Polygon_Si,
             body: body,
             fileID: fileID,
             line: line
@@ -49,12 +49,12 @@ extension JSTypedClosure where Signature == (Polygon) -> Int {
     }
 }
 
-@_expose(wasm, "invoke_swift_closure_TestModule_10TestModuleAl7Polygon_Si")
-@_cdecl("invoke_swift_closure_TestModule_10TestModuleAl7Polygon_Si")
-public func _invoke_swift_closure_TestModule_10TestModuleAl7Polygon_Si(_ boxPtr: UnsafeMutableRawPointer, _ param0: UnsafeMutableRawPointer) -> Int32 {
+@_expose(wasm, "invoke_swift_closure_TestModule_10TestModuleAl18TestModule_Polygon_Si")
+@_cdecl("invoke_swift_closure_TestModule_10TestModuleAl18TestModule_Polygon_Si")
+public func _invoke_swift_closure_TestModule_10TestModuleAl18TestModule_Polygon_Si(_ boxPtr: UnsafeMutableRawPointer, _ param0: UnsafeMutableRawPointer) -> Int32 {
     #if arch(wasm32)
-    let closure = Unmanaged<_BridgeJSTypedClosureBox<(Polygon) -> Int>>.fromOpaque(boxPtr).takeUnretainedValue().closure
-    let result = closure(Polygon.bridgeJSLiftParameter(param0))
+    let closure = Unmanaged<_BridgeJSTypedClosureBox<(TestModule.Polygon) -> Int>>.fromOpaque(boxPtr).takeUnretainedValue().closure
+    let result = closure(TestModule.Polygon.bridgeJSLiftParameter(param0))
     return result.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
@@ -62,37 +62,37 @@ public func _invoke_swift_closure_TestModule_10TestModuleAl7Polygon_Si(_ boxPtr:
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "invoke_js_callback_TestModule_10TestModuley_Al7Polygon")
-fileprivate func invoke_js_callback_TestModule_10TestModuley_Al7Polygon_extern(_ callback: Int32) -> UnsafeMutableRawPointer
+@_extern(wasm, module: "bjs", name: "invoke_js_callback_TestModule_10TestModuley_Al18TestModule_Polygon")
+fileprivate func invoke_js_callback_TestModule_10TestModuley_Al18TestModule_Polygon_extern(_ callback: Int32) -> UnsafeMutableRawPointer
 #else
-fileprivate func invoke_js_callback_TestModule_10TestModuley_Al7Polygon_extern(_ callback: Int32) -> UnsafeMutableRawPointer {
+fileprivate func invoke_js_callback_TestModule_10TestModuley_Al18TestModule_Polygon_extern(_ callback: Int32) -> UnsafeMutableRawPointer {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func invoke_js_callback_TestModule_10TestModuley_Al7Polygon(_ callback: Int32) -> UnsafeMutableRawPointer {
-    return invoke_js_callback_TestModule_10TestModuley_Al7Polygon_extern(callback)
+@inline(never) fileprivate func invoke_js_callback_TestModule_10TestModuley_Al18TestModule_Polygon(_ callback: Int32) -> UnsafeMutableRawPointer {
+    return invoke_js_callback_TestModule_10TestModuley_Al18TestModule_Polygon_extern(callback)
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "make_swift_closure_TestModule_10TestModuley_Al7Polygon")
-fileprivate func make_swift_closure_TestModule_10TestModuley_Al7Polygon_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
+@_extern(wasm, module: "bjs", name: "make_swift_closure_TestModule_10TestModuley_Al18TestModule_Polygon")
+fileprivate func make_swift_closure_TestModule_10TestModuley_Al18TestModule_Polygon_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32
 #else
-fileprivate func make_swift_closure_TestModule_10TestModuley_Al7Polygon_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+fileprivate func make_swift_closure_TestModule_10TestModuley_Al18TestModule_Polygon_extern(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func make_swift_closure_TestModule_10TestModuley_Al7Polygon(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
-    return make_swift_closure_TestModule_10TestModuley_Al7Polygon_extern(boxPtr, file, line)
+@inline(never) fileprivate func make_swift_closure_TestModule_10TestModuley_Al18TestModule_Polygon(_ boxPtr: UnsafeMutableRawPointer, _ file: UnsafePointer<UInt8>, _ line: UInt32) -> Int32 {
+    return make_swift_closure_TestModule_10TestModuley_Al18TestModule_Polygon_extern(boxPtr, file, line)
 }
 
-private enum _BJS_Closure_10TestModuley_Al7Polygon {
-    static func bridgeJSLift(_ callbackId: Int32) -> () -> Polygon {
+private enum _BJS_Closure_10TestModuley_Al18TestModule_Polygon {
+    static func bridgeJSLift(_ callbackId: Int32) -> () -> TestModule.Polygon {
         let callback = JSObject.bridgeJSLiftParameter(callbackId)
         return { [callback] in
             #if arch(wasm32)
             let callbackValue = callback.bridgeJSLowerParameter()
-            let ret = invoke_js_callback_TestModule_10TestModuley_Al7Polygon(callbackValue)
-            return Polygon.bridgeJSLiftReturn(ret)
+            let ret = invoke_js_callback_TestModule_10TestModuley_Al18TestModule_Polygon(callbackValue)
+            return TestModule.Polygon.bridgeJSLiftReturn(ret)
             #else
             fatalError("Only available on WebAssembly")
             #endif
@@ -100,10 +100,10 @@ private enum _BJS_Closure_10TestModuley_Al7Polygon {
     }
 }
 
-extension JSTypedClosure where Signature == () -> Polygon {
-    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping () -> Polygon) {
+extension JSTypedClosure where Signature == () -> TestModule.Polygon {
+    init(fileID: StaticString = #fileID, line: UInt32 = #line, _ body: @escaping () -> TestModule.Polygon) {
         self.init(
-            makeClosure: make_swift_closure_TestModule_10TestModuley_Al7Polygon,
+            makeClosure: make_swift_closure_TestModule_10TestModuley_Al18TestModule_Polygon,
             body: body,
             fileID: fileID,
             line: line
@@ -111,11 +111,11 @@ extension JSTypedClosure where Signature == () -> Polygon {
     }
 }
 
-@_expose(wasm, "invoke_swift_closure_TestModule_10TestModuley_Al7Polygon")
-@_cdecl("invoke_swift_closure_TestModule_10TestModuley_Al7Polygon")
-public func _invoke_swift_closure_TestModule_10TestModuley_Al7Polygon(_ boxPtr: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
+@_expose(wasm, "invoke_swift_closure_TestModule_10TestModuley_Al18TestModule_Polygon")
+@_cdecl("invoke_swift_closure_TestModule_10TestModuley_Al18TestModule_Polygon")
+public func _invoke_swift_closure_TestModule_10TestModuley_Al18TestModule_Polygon(_ boxPtr: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let closure = Unmanaged<_BridgeJSTypedClosureBox<() -> Polygon>>.fromOpaque(boxPtr).takeUnretainedValue().closure
+    let closure = Unmanaged<_BridgeJSTypedClosureBox<() -> TestModule.Polygon>>.fromOpaque(boxPtr).takeUnretainedValue().closure
     let result = closure()
     return result.bridgeJSLowerReturn()
     #else
@@ -123,9 +123,9 @@ public func _invoke_swift_closure_TestModule_10TestModuley_Al7Polygon(_ boxPtr: 
     #endif
 }
 
-@_expose(wasm, "bjs_makePolygonFactory")
-@_cdecl("bjs_makePolygonFactory")
-public func _bjs_makePolygonFactory() -> Int32 {
+@_expose(wasm, "bjs_TestModule_makePolygonFactory")
+@_cdecl("bjs_TestModule_makePolygonFactory")
+public func _bjs_TestModule_makePolygonFactory() -> Int32 {
     #if arch(wasm32)
     let ret = makePolygonFactory()
     return JSTypedClosure(ret).bridgeJSLowerReturn()
@@ -134,9 +134,9 @@ public func _bjs_makePolygonFactory() -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_makePolygonInspector")
-@_cdecl("bjs_makePolygonInspector")
-public func _bjs_makePolygonInspector() -> Int32 {
+@_expose(wasm, "bjs_TestModule_makePolygonInspector")
+@_cdecl("bjs_TestModule_makePolygonInspector")
+public func _bjs_TestModule_makePolygonInspector() -> Int32 {
     #if arch(wasm32)
     let ret = makePolygonInspector()
     return JSTypedClosure(ret).bridgeJSLowerReturn()
@@ -145,46 +145,46 @@ public func _bjs_makePolygonInspector() -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_PolygonReference_init")
-@_cdecl("bjs_PolygonReference_init")
-public func _bjs_PolygonReference_init(_ sides: Int32) -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_TestModule_PolygonReference_init")
+@_cdecl("bjs_TestModule_PolygonReference_init")
+public func _bjs_TestModule_PolygonReference_init(_ sides: Int32) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = PolygonReference(sides: Int.bridgeJSLiftParameter(sides))
+    let ret = TestModule.PolygonReference(sides: Int.bridgeJSLiftParameter(sides))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PolygonReference_deinit")
-@_cdecl("bjs_PolygonReference_deinit")
-public func _bjs_PolygonReference_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_TestModule_PolygonReference_deinit")
+@_cdecl("bjs_TestModule_PolygonReference_deinit")
+public func _bjs_TestModule_PolygonReference_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    Unmanaged<PolygonReference>.fromOpaque(pointer).release()
+    Unmanaged<TestModule.PolygonReference>.fromOpaque(pointer).release()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension PolygonReference: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
+extension TestModule.PolygonReference: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
     var jsValue: JSValue {
-        return .object(JSObject(id: UInt32(bitPattern: _bjs_PolygonReference_wrap(Unmanaged.passRetained(self).toOpaque()))))
+        return .object(JSObject(id: UInt32(bitPattern: _bjs_TestModule_PolygonReference_wrap(Unmanaged.passRetained(self).toOpaque()))))
     }
     consuming func bridgeJSLowerAsProtocolReturn() -> Int32 {
-        _bjs_PolygonReference_wrap(Unmanaged.passRetained(self).toOpaque())
+        _bjs_TestModule_PolygonReference_wrap(Unmanaged.passRetained(self).toOpaque())
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "TestModule", name: "bjs_PolygonReference_wrap")
-fileprivate func _bjs_PolygonReference_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
+@_extern(wasm, module: "TestModule", name: "bjs_TestModule_PolygonReference_wrap")
+fileprivate func _bjs_TestModule_PolygonReference_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
 #else
-fileprivate func _bjs_PolygonReference_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+fileprivate func _bjs_TestModule_PolygonReference_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_PolygonReference_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
-    return _bjs_PolygonReference_wrap_extern(pointer)
+@inline(never) fileprivate func _bjs_TestModule_PolygonReference_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+    return _bjs_TestModule_PolygonReference_wrap_extern(pointer)
 }
 
-extension Polygon: _BridgedSwiftAlias, _BridgedSwiftStackType {}
+extension TestModule.Polygon: _BridgedSwiftAlias, _BridgedSwiftStackType {}

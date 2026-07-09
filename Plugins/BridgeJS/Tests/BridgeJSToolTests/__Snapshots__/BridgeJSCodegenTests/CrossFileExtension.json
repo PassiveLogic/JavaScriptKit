@@ -6,7 +6,7 @@
     "classes" : [
       {
         "constructor" : {
-          "abiName" : "bjs_Greeter_init",
+          "abiName" : "bjs_TestModule_Greeter_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -26,7 +26,7 @@
         },
         "methods" : [
           {
-            "abiName" : "bjs_Greeter_greet",
+            "abiName" : "bjs_TestModule_Greeter_greet",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -43,7 +43,7 @@
             }
           },
           {
-            "abiName" : "bjs_Greeter_greetFormally",
+            "abiName" : "bjs_TestModule_Greeter_greetFormally",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -64,7 +64,7 @@
         "properties" : [
 
         ],
-        "swiftCallName" : "Greeter"
+        "swiftCallName" : "TestModule.Greeter"
       }
     ],
     "enums" : [

@@ -6,7 +6,7 @@
     "classes" : [
       {
         "constructor" : {
-          "abiName" : "bjs_PlayBridgeJS_init",
+          "abiName" : "bjs_PlayBridgeJS_PlayBridgeJS_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -18,7 +18,7 @@
         },
         "methods" : [
           {
-            "abiName" : "bjs_PlayBridgeJS_updateDetailed",
+            "abiName" : "bjs_PlayBridgeJS_PlayBridgeJS_updateDetailed",
             "documentation" : "Structured entry point used by the playground so JS doesn't need to parse diagnostics.",
             "effects" : {
               "isAsync" : false,
@@ -48,7 +48,7 @@
             ],
             "returnType" : {
               "swiftStruct" : {
-                "_0" : "PlayBridgeJSResult"
+                "_0" : "PlayBridgeJS.PlayBridgeJSResult"
               }
             }
           }
@@ -57,7 +57,7 @@
         "properties" : [
 
         ],
-        "swiftCallName" : "PlayBridgeJS"
+        "swiftCallName" : "PlayBridgeJS.PlayBridgeJS"
       }
     ],
     "enums" : [
@@ -118,7 +118,7 @@
             }
           }
         ],
-        "swiftCallName" : "PlayBridgeJSOutput"
+        "swiftCallName" : "PlayBridgeJS.PlayBridgeJSOutput"
       },
       {
         "methods" : [
@@ -199,7 +199,7 @@
             }
           }
         ],
-        "swiftCallName" : "PlayBridgeJSDiagnostic"
+        "swiftCallName" : "PlayBridgeJS.PlayBridgeJSDiagnostic"
       },
       {
         "methods" : [
@@ -215,7 +215,7 @@
               "nullable" : {
                 "_0" : {
                   "swiftStruct" : {
-                    "_0" : "PlayBridgeJSOutput"
+                    "_0" : "PlayBridgeJS.PlayBridgeJSOutput"
                   }
                 },
                 "_1" : "null"
@@ -230,14 +230,14 @@
               "array" : {
                 "_0" : {
                   "swiftStruct" : {
-                    "_0" : "PlayBridgeJSDiagnostic"
+                    "_0" : "PlayBridgeJS.PlayBridgeJSDiagnostic"
                   }
                 }
               }
             }
           }
         ],
-        "swiftCallName" : "PlayBridgeJSResult"
+        "swiftCallName" : "PlayBridgeJS.PlayBridgeJSResult"
       }
     ]
   },

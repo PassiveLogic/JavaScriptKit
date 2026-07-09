@@ -208,15 +208,15 @@ export async function createInstantiator(options, swift) {
             if (!importObject["TestModule"]) {
                 importObject["TestModule"] = {};
             }
-            importObject["TestModule"]["bjs_Greeter_wrap"] = function(pointer) {
+            importObject["TestModule"]["bjs_TestModule_Greeter_wrap"] = function(pointer) {
                 const obj = _exports['Greeter'].__construct(pointer);
                 return swift.memory.retain(obj);
             };
-            importObject["TestModule"]["bjs_PackageGreeter_wrap"] = function(pointer) {
+            importObject["TestModule"]["bjs_TestModule_PackageGreeter_wrap"] = function(pointer) {
                 const obj = _exports['PackageGreeter'].__construct(pointer);
                 return swift.memory.retain(obj);
             };
-            importObject["TestModule"]["bjs_PublicGreeter_wrap"] = function(pointer) {
+            importObject["TestModule"]["bjs_TestModule_PublicGreeter_wrap"] = function(pointer) {
                 const obj = _exports['PublicGreeter'].__construct(pointer);
                 return swift.memory.retain(obj);
             };
@@ -307,17 +307,17 @@ export async function createInstantiator(options, swift) {
             }
             class Greeter extends SwiftHeapObject {
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_Greeter_deinit, Greeter.prototype, null);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_TestModule_Greeter_deinit, Greeter.prototype, null);
                 }
 
                 constructor(name) {
                     const nameBytes = textEncoder.encode(name);
                     const nameId = swift.memory.retain(nameBytes);
-                    const ret = instance.exports.bjs_Greeter_init(nameId, nameBytes.length);
+                    const ret = instance.exports.bjs_TestModule_Greeter_init(nameId, nameBytes.length);
                     return Greeter.__construct(ret);
                 }
                 greet() {
-                    instance.exports.bjs_Greeter_greet(this.pointer);
+                    instance.exports.bjs_TestModule_Greeter_greet(this.pointer);
                     const ret = tmpRetString;
                     tmpRetString = undefined;
                     return ret;
@@ -325,22 +325,22 @@ export async function createInstantiator(options, swift) {
                 changeName(name) {
                     const nameBytes = textEncoder.encode(name);
                     const nameId = swift.memory.retain(nameBytes);
-                    instance.exports.bjs_Greeter_changeName(this.pointer, nameId, nameBytes.length);
+                    instance.exports.bjs_TestModule_Greeter_changeName(this.pointer, nameId, nameBytes.length);
                 }
                 greetEnthusiastically() {
-                    instance.exports.bjs_Greeter_greetEnthusiastically(this.pointer);
+                    instance.exports.bjs_TestModule_Greeter_greetEnthusiastically(this.pointer);
                     const ret = tmpRetString;
                     tmpRetString = undefined;
                     return ret;
                 }
                 static greetAnonymously() {
-                    instance.exports.bjs_Greeter_static_greetAnonymously();
+                    instance.exports.bjs_TestModule_Greeter_static_greetAnonymously();
                     const ret = tmpRetString;
                     tmpRetString = undefined;
                     return ret;
                 }
                 get name() {
-                    instance.exports.bjs_Greeter_name_get(this.pointer);
+                    instance.exports.bjs_TestModule_Greeter_name_get(this.pointer);
                     const ret = tmpRetString;
                     tmpRetString = undefined;
                     return ret;
@@ -348,14 +348,14 @@ export async function createInstantiator(options, swift) {
                 set name(value) {
                     const valueBytes = textEncoder.encode(value);
                     const valueId = swift.memory.retain(valueBytes);
-                    instance.exports.bjs_Greeter_name_set(this.pointer, valueId, valueBytes.length);
+                    instance.exports.bjs_TestModule_Greeter_name_set(this.pointer, valueId, valueBytes.length);
                 }
                 get nameCount() {
-                    const ret = instance.exports.bjs_Greeter_nameCount_get(this.pointer);
+                    const ret = instance.exports.bjs_TestModule_Greeter_nameCount_get(this.pointer);
                     return ret;
                 }
                 static get defaultGreeting() {
-                    instance.exports.bjs_Greeter_static_defaultGreeting_get();
+                    instance.exports.bjs_TestModule_Greeter_static_defaultGreeting_get();
                     const ret = tmpRetString;
                     tmpRetString = undefined;
                     return ret;
@@ -363,19 +363,19 @@ export async function createInstantiator(options, swift) {
             }
             class PublicGreeter extends SwiftHeapObject {
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_PublicGreeter_deinit, PublicGreeter.prototype, null);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_TestModule_PublicGreeter_deinit, PublicGreeter.prototype, null);
                 }
 
             }
             class PackageGreeter extends SwiftHeapObject {
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_PackageGreeter_deinit, PackageGreeter.prototype, null);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_TestModule_PackageGreeter_deinit, PackageGreeter.prototype, null);
                 }
 
             }
             const exports = {
-                takeGreeter: function bjs_takeGreeter(greeter) {
-                    instance.exports.bjs_takeGreeter(greeter.pointer);
+                takeGreeter: function bjs_TestModule_takeGreeter(greeter) {
+                    instance.exports.bjs_TestModule_takeGreeter(greeter.pointer);
                 },
                 Greeter,
                 PackageGreeter,

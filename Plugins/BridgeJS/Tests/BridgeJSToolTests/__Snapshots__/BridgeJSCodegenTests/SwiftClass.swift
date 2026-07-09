@@ -1,201 +1,201 @@
-@_expose(wasm, "bjs_takeGreeter")
-@_cdecl("bjs_takeGreeter")
-public func _bjs_takeGreeter(_ greeter: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_TestModule_takeGreeter")
+@_cdecl("bjs_TestModule_takeGreeter")
+public func _bjs_TestModule_takeGreeter(_ greeter: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    takeGreeter(greeter: Greeter.bridgeJSLiftParameter(greeter))
+    takeGreeter(greeter: TestModule.Greeter.bridgeJSLiftParameter(greeter))
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Greeter_init")
-@_cdecl("bjs_Greeter_init")
-public func _bjs_Greeter_init(_ nameBytes: Int32, _ nameLength: Int32) -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_TestModule_Greeter_init")
+@_cdecl("bjs_TestModule_Greeter_init")
+public func _bjs_TestModule_Greeter_init(_ nameBytes: Int32, _ nameLength: Int32) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = Greeter(name: String.bridgeJSLiftParameter(nameBytes, nameLength))
+    let ret = TestModule.Greeter(name: String.bridgeJSLiftParameter(nameBytes, nameLength))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Greeter_greet")
-@_cdecl("bjs_Greeter_greet")
-public func _bjs_Greeter_greet(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_TestModule_Greeter_greet")
+@_cdecl("bjs_TestModule_Greeter_greet")
+public func _bjs_TestModule_Greeter_greet(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = Greeter.bridgeJSLiftParameter(_self).greet()
+    let ret = TestModule.Greeter.bridgeJSLiftParameter(_self).greet()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Greeter_changeName")
-@_cdecl("bjs_Greeter_changeName")
-public func _bjs_Greeter_changeName(_ _self: UnsafeMutableRawPointer, _ nameBytes: Int32, _ nameLength: Int32) -> Void {
+@_expose(wasm, "bjs_TestModule_Greeter_changeName")
+@_cdecl("bjs_TestModule_Greeter_changeName")
+public func _bjs_TestModule_Greeter_changeName(_ _self: UnsafeMutableRawPointer, _ nameBytes: Int32, _ nameLength: Int32) -> Void {
     #if arch(wasm32)
-    Greeter.bridgeJSLiftParameter(_self).changeName(name: String.bridgeJSLiftParameter(nameBytes, nameLength))
+    TestModule.Greeter.bridgeJSLiftParameter(_self).changeName(name: String.bridgeJSLiftParameter(nameBytes, nameLength))
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Greeter_greetEnthusiastically")
-@_cdecl("bjs_Greeter_greetEnthusiastically")
-public func _bjs_Greeter_greetEnthusiastically(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_TestModule_Greeter_greetEnthusiastically")
+@_cdecl("bjs_TestModule_Greeter_greetEnthusiastically")
+public func _bjs_TestModule_Greeter_greetEnthusiastically(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = Greeter.bridgeJSLiftParameter(_self).greetEnthusiastically()
+    let ret = TestModule.Greeter.bridgeJSLiftParameter(_self).greetEnthusiastically()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Greeter_static_greetAnonymously")
-@_cdecl("bjs_Greeter_static_greetAnonymously")
-public func _bjs_Greeter_static_greetAnonymously() -> Void {
+@_expose(wasm, "bjs_TestModule_Greeter_static_greetAnonymously")
+@_cdecl("bjs_TestModule_Greeter_static_greetAnonymously")
+public func _bjs_TestModule_Greeter_static_greetAnonymously() -> Void {
     #if arch(wasm32)
-    let ret = Greeter.greetAnonymously()
+    let ret = TestModule.Greeter.greetAnonymously()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Greeter_name_get")
-@_cdecl("bjs_Greeter_name_get")
-public func _bjs_Greeter_name_get(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_TestModule_Greeter_name_get")
+@_cdecl("bjs_TestModule_Greeter_name_get")
+public func _bjs_TestModule_Greeter_name_get(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = Greeter.bridgeJSLiftParameter(_self).name
+    let ret = TestModule.Greeter.bridgeJSLiftParameter(_self).name
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Greeter_name_set")
-@_cdecl("bjs_Greeter_name_set")
-public func _bjs_Greeter_name_set(_ _self: UnsafeMutableRawPointer, _ valueBytes: Int32, _ valueLength: Int32) -> Void {
+@_expose(wasm, "bjs_TestModule_Greeter_name_set")
+@_cdecl("bjs_TestModule_Greeter_name_set")
+public func _bjs_TestModule_Greeter_name_set(_ _self: UnsafeMutableRawPointer, _ valueBytes: Int32, _ valueLength: Int32) -> Void {
     #if arch(wasm32)
-    Greeter.bridgeJSLiftParameter(_self).name = String.bridgeJSLiftParameter(valueBytes, valueLength)
+    TestModule.Greeter.bridgeJSLiftParameter(_self).name = String.bridgeJSLiftParameter(valueBytes, valueLength)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Greeter_nameCount_get")
-@_cdecl("bjs_Greeter_nameCount_get")
-public func _bjs_Greeter_nameCount_get(_ _self: UnsafeMutableRawPointer) -> Int32 {
+@_expose(wasm, "bjs_TestModule_Greeter_nameCount_get")
+@_cdecl("bjs_TestModule_Greeter_nameCount_get")
+public func _bjs_TestModule_Greeter_nameCount_get(_ _self: UnsafeMutableRawPointer) -> Int32 {
     #if arch(wasm32)
-    let ret = Greeter.bridgeJSLiftParameter(_self).nameCount
+    let ret = TestModule.Greeter.bridgeJSLiftParameter(_self).nameCount
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Greeter_static_defaultGreeting_get")
-@_cdecl("bjs_Greeter_static_defaultGreeting_get")
-public func _bjs_Greeter_static_defaultGreeting_get() -> Void {
+@_expose(wasm, "bjs_TestModule_Greeter_static_defaultGreeting_get")
+@_cdecl("bjs_TestModule_Greeter_static_defaultGreeting_get")
+public func _bjs_TestModule_Greeter_static_defaultGreeting_get() -> Void {
     #if arch(wasm32)
-    let ret = Greeter.defaultGreeting
+    let ret = TestModule.Greeter.defaultGreeting
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Greeter_deinit")
-@_cdecl("bjs_Greeter_deinit")
-public func _bjs_Greeter_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_TestModule_Greeter_deinit")
+@_cdecl("bjs_TestModule_Greeter_deinit")
+public func _bjs_TestModule_Greeter_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    Unmanaged<Greeter>.fromOpaque(pointer).release()
+    Unmanaged<TestModule.Greeter>.fromOpaque(pointer).release()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension Greeter: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
+extension TestModule.Greeter: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
     var jsValue: JSValue {
-        return .object(JSObject(id: UInt32(bitPattern: _bjs_Greeter_wrap(Unmanaged.passRetained(self).toOpaque()))))
+        return .object(JSObject(id: UInt32(bitPattern: _bjs_TestModule_Greeter_wrap(Unmanaged.passRetained(self).toOpaque()))))
     }
     consuming func bridgeJSLowerAsProtocolReturn() -> Int32 {
-        _bjs_Greeter_wrap(Unmanaged.passRetained(self).toOpaque())
+        _bjs_TestModule_Greeter_wrap(Unmanaged.passRetained(self).toOpaque())
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "TestModule", name: "bjs_Greeter_wrap")
-fileprivate func _bjs_Greeter_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
+@_extern(wasm, module: "TestModule", name: "bjs_TestModule_Greeter_wrap")
+fileprivate func _bjs_TestModule_Greeter_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
 #else
-fileprivate func _bjs_Greeter_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+fileprivate func _bjs_TestModule_Greeter_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_Greeter_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
-    return _bjs_Greeter_wrap_extern(pointer)
+@inline(never) fileprivate func _bjs_TestModule_Greeter_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+    return _bjs_TestModule_Greeter_wrap_extern(pointer)
 }
 
-@_expose(wasm, "bjs_PublicGreeter_deinit")
-@_cdecl("bjs_PublicGreeter_deinit")
-public func _bjs_PublicGreeter_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_TestModule_PublicGreeter_deinit")
+@_cdecl("bjs_TestModule_PublicGreeter_deinit")
+public func _bjs_TestModule_PublicGreeter_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    Unmanaged<PublicGreeter>.fromOpaque(pointer).release()
+    Unmanaged<TestModule.PublicGreeter>.fromOpaque(pointer).release()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension PublicGreeter: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
+extension TestModule.PublicGreeter: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
     public var jsValue: JSValue {
-        return .object(JSObject(id: UInt32(bitPattern: _bjs_PublicGreeter_wrap(Unmanaged.passRetained(self).toOpaque()))))
+        return .object(JSObject(id: UInt32(bitPattern: _bjs_TestModule_PublicGreeter_wrap(Unmanaged.passRetained(self).toOpaque()))))
     }
     public consuming func bridgeJSLowerAsProtocolReturn() -> Int32 {
-        _bjs_PublicGreeter_wrap(Unmanaged.passRetained(self).toOpaque())
+        _bjs_TestModule_PublicGreeter_wrap(Unmanaged.passRetained(self).toOpaque())
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "TestModule", name: "bjs_PublicGreeter_wrap")
-fileprivate func _bjs_PublicGreeter_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
+@_extern(wasm, module: "TestModule", name: "bjs_TestModule_PublicGreeter_wrap")
+fileprivate func _bjs_TestModule_PublicGreeter_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
 #else
-fileprivate func _bjs_PublicGreeter_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+fileprivate func _bjs_TestModule_PublicGreeter_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_PublicGreeter_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
-    return _bjs_PublicGreeter_wrap_extern(pointer)
+@inline(never) fileprivate func _bjs_TestModule_PublicGreeter_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+    return _bjs_TestModule_PublicGreeter_wrap_extern(pointer)
 }
 
-@_expose(wasm, "bjs_PackageGreeter_deinit")
-@_cdecl("bjs_PackageGreeter_deinit")
-public func _bjs_PackageGreeter_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_TestModule_PackageGreeter_deinit")
+@_cdecl("bjs_TestModule_PackageGreeter_deinit")
+public func _bjs_TestModule_PackageGreeter_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    Unmanaged<PackageGreeter>.fromOpaque(pointer).release()
+    Unmanaged<TestModule.PackageGreeter>.fromOpaque(pointer).release()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension PackageGreeter: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
+extension TestModule.PackageGreeter: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
     package var jsValue: JSValue {
-        return .object(JSObject(id: UInt32(bitPattern: _bjs_PackageGreeter_wrap(Unmanaged.passRetained(self).toOpaque()))))
+        return .object(JSObject(id: UInt32(bitPattern: _bjs_TestModule_PackageGreeter_wrap(Unmanaged.passRetained(self).toOpaque()))))
     }
     package consuming func bridgeJSLowerAsProtocolReturn() -> Int32 {
-        _bjs_PackageGreeter_wrap(Unmanaged.passRetained(self).toOpaque())
+        _bjs_TestModule_PackageGreeter_wrap(Unmanaged.passRetained(self).toOpaque())
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "TestModule", name: "bjs_PackageGreeter_wrap")
-fileprivate func _bjs_PackageGreeter_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
+@_extern(wasm, module: "TestModule", name: "bjs_TestModule_PackageGreeter_wrap")
+fileprivate func _bjs_TestModule_PackageGreeter_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
 #else
-fileprivate func _bjs_PackageGreeter_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+fileprivate func _bjs_TestModule_PackageGreeter_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_PackageGreeter_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
-    return _bjs_PackageGreeter_wrap_extern(pointer)
+@inline(never) fileprivate func _bjs_TestModule_PackageGreeter_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+    return _bjs_TestModule_PackageGreeter_wrap_extern(pointer)
 }
 
 #if arch(wasm32)
@@ -210,13 +210,13 @@ fileprivate func bjs_jsRoundTripGreeter_extern(_ greeter: UnsafeMutableRawPointe
     return bjs_jsRoundTripGreeter_extern(greeter)
 }
 
-func _$jsRoundTripGreeter(_ greeter: Greeter) throws(JSException) -> Greeter {
+func _$jsRoundTripGreeter(_ greeter: TestModule.Greeter) throws(JSException) -> TestModule.Greeter {
     let greeterPointer = greeter.bridgeJSLowerParameter()
     let ret = bjs_jsRoundTripGreeter(greeterPointer)
     if let error = _swift_js_take_exception() {
         throw error
     }
-    return Greeter.bridgeJSLiftReturn(ret)
+    return TestModule.Greeter.bridgeJSLiftReturn(ret)
 }
 
 #if arch(wasm32)
@@ -231,11 +231,11 @@ fileprivate func bjs_jsRoundTripOptionalGreeter_extern(_ greeterIsSome: Int32, _
     return bjs_jsRoundTripOptionalGreeter_extern(greeterIsSome, greeterPointer)
 }
 
-func _$jsRoundTripOptionalGreeter(_ greeter: Optional<Greeter>) throws(JSException) -> Optional<Greeter> {
+func _$jsRoundTripOptionalGreeter(_ greeter: Optional<TestModule.Greeter>) throws(JSException) -> Optional<TestModule.Greeter> {
     let (greeterIsSome, greeterPointer) = greeter.bridgeJSLowerParameter()
     let ret = bjs_jsRoundTripOptionalGreeter(greeterIsSome, greeterPointer)
     if let error = _swift_js_take_exception() {
         throw error
     }
-    return Optional<Greeter>.bridgeJSLiftReturn(ret)
+    return Optional<TestModule.Greeter>.bridgeJSLiftReturn(ret)
 }

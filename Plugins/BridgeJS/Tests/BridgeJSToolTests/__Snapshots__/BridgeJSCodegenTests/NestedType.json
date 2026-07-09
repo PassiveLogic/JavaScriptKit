@@ -7,7 +7,7 @@
       {
         "methods" : [
           {
-            "abiName" : "bjs_User_getName",
+            "abiName" : "bjs_TestModule_User_getName",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -28,12 +28,12 @@
         "properties" : [
 
         ],
-        "swiftCallName" : "User"
+        "swiftCallName" : "TestModule.User"
       },
       {
         "methods" : [
           {
-            "abiName" : "bjs_Player_getTag",
+            "abiName" : "bjs_TestModule_Player_getTag",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -54,7 +54,7 @@
         "properties" : [
 
         ],
-        "swiftCallName" : "Player"
+        "swiftCallName" : "TestModule.Player"
       }
     ],
     "enums" : [
@@ -107,7 +107,7 @@
             }
           }
         ],
-        "swiftCallName" : "User.Stats"
+        "swiftCallName" : "TestModule.User.Stats"
       },
       {
         "methods" : [
@@ -148,7 +148,7 @@
             }
           }
         ],
-        "swiftCallName" : "Player.Stats"
+        "swiftCallName" : "TestModule.Player.Stats"
       }
     ]
   },

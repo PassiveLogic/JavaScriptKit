@@ -42,7 +42,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "Direction",
+        "swiftCallName" : "TestModule.Direction",
         "tsFullPath" : "Direction"
       },
       {
@@ -74,7 +74,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "Status",
+        "swiftCallName" : "TestModule.Status",
         "tsFullPath" : "Status"
       },
       {
@@ -112,7 +112,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "TSDirection",
+        "swiftCallName" : "TestModule.TSDirection",
         "tsFullPath" : "TSDirection"
       },
       {
@@ -133,14 +133,14 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "PublicStatus",
+        "swiftCallName" : "TestModule.PublicStatus",
         "tsFullPath" : "PublicStatus"
       }
     ],
     "exposeToGlobal" : false,
     "functions" : [
       {
-        "abiName" : "bjs_setDirection",
+        "abiName" : "bjs_TestModule_setDirection",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -153,7 +153,7 @@
             "name" : "direction",
             "type" : {
               "caseEnum" : {
-                "_0" : "Direction"
+                "_0" : "TestModule.Direction"
               }
             }
           }
@@ -165,7 +165,7 @@
         }
       },
       {
-        "abiName" : "bjs_getDirection",
+        "abiName" : "bjs_TestModule_getDirection",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -177,12 +177,12 @@
         ],
         "returnType" : {
           "caseEnum" : {
-            "_0" : "Direction"
+            "_0" : "TestModule.Direction"
           }
         }
       },
       {
-        "abiName" : "bjs_processDirection",
+        "abiName" : "bjs_TestModule_processDirection",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -195,19 +195,19 @@
             "name" : "input",
             "type" : {
               "caseEnum" : {
-                "_0" : "Direction"
+                "_0" : "TestModule.Direction"
               }
             }
           }
         ],
         "returnType" : {
           "caseEnum" : {
-            "_0" : "Status"
+            "_0" : "TestModule.Status"
           }
         }
       },
       {
-        "abiName" : "bjs_roundTripOptionalDirection",
+        "abiName" : "bjs_TestModule_roundTripOptionalDirection",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -222,7 +222,7 @@
               "nullable" : {
                 "_0" : {
                   "caseEnum" : {
-                    "_0" : "Direction"
+                    "_0" : "TestModule.Direction"
                   }
                 },
                 "_1" : "null"
@@ -234,7 +234,7 @@
           "nullable" : {
             "_0" : {
               "caseEnum" : {
-                "_0" : "Direction"
+                "_0" : "TestModule.Direction"
               }
             },
             "_1" : "null"
@@ -242,7 +242,7 @@
         }
       },
       {
-        "abiName" : "bjs_setTSDirection",
+        "abiName" : "bjs_TestModule_setTSDirection",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -255,7 +255,7 @@
             "name" : "direction",
             "type" : {
               "caseEnum" : {
-                "_0" : "TSDirection"
+                "_0" : "TestModule.TSDirection"
               }
             }
           }
@@ -267,7 +267,7 @@
         }
       },
       {
-        "abiName" : "bjs_getTSDirection",
+        "abiName" : "bjs_TestModule_getTSDirection",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -279,12 +279,12 @@
         ],
         "returnType" : {
           "caseEnum" : {
-            "_0" : "TSDirection"
+            "_0" : "TestModule.TSDirection"
           }
         }
       },
       {
-        "abiName" : "bjs_roundTripOptionalTSDirection",
+        "abiName" : "bjs_TestModule_roundTripOptionalTSDirection",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -299,7 +299,7 @@
               "nullable" : {
                 "_0" : {
                   "caseEnum" : {
-                    "_0" : "TSDirection"
+                    "_0" : "TestModule.TSDirection"
                   }
                 },
                 "_1" : "null"
@@ -311,7 +311,7 @@
           "nullable" : {
             "_0" : {
               "caseEnum" : {
-                "_0" : "TSDirection"
+                "_0" : "TestModule.TSDirection"
               }
             },
             "_1" : "null"

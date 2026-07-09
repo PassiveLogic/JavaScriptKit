@@ -6,7 +6,7 @@
     "classes" : [
       {
         "constructor" : {
-          "abiName" : "bjs_Greeter_init",
+          "abiName" : "bjs_TestModule_Greeter_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -31,7 +31,7 @@
         },
         "methods" : [
           {
-            "abiName" : "bjs_Greeter_greet",
+            "abiName" : "bjs_TestModule_Greeter_greet",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -48,7 +48,7 @@
             }
           },
           {
-            "abiName" : "bjs_Greeter_changeName",
+            "abiName" : "bjs_TestModule_Greeter_changeName",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -96,11 +96,11 @@
             }
           }
         ],
-        "swiftCallName" : "Greeter"
+        "swiftCallName" : "TestModule.Greeter"
       },
       {
         "constructor" : {
-          "abiName" : "bjs_OptionalPropertyHolder_init",
+          "abiName" : "bjs_TestModule_OptionalPropertyHolder_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -156,7 +156,7 @@
               "nullable" : {
                 "_0" : {
                   "swiftHeapObject" : {
-                    "_0" : "Greeter"
+                    "_0" : "TestModule.Greeter"
                   }
                 },
                 "_1" : "null"
@@ -164,7 +164,7 @@
             }
           }
         ],
-        "swiftCallName" : "OptionalPropertyHolder"
+        "swiftCallName" : "TestModule.OptionalPropertyHolder"
       }
     ],
     "enums" : [
@@ -173,7 +173,7 @@
     "exposeToGlobal" : false,
     "functions" : [
       {
-        "abiName" : "bjs_roundTripOptionalClass",
+        "abiName" : "bjs_TestModule_roundTripOptionalClass",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -188,7 +188,7 @@
               "nullable" : {
                 "_0" : {
                   "swiftHeapObject" : {
-                    "_0" : "Greeter"
+                    "_0" : "TestModule.Greeter"
                   }
                 },
                 "_1" : "null"
@@ -200,7 +200,7 @@
           "nullable" : {
             "_0" : {
               "swiftHeapObject" : {
-                "_0" : "Greeter"
+                "_0" : "TestModule.Greeter"
               }
             },
             "_1" : "null"
@@ -208,7 +208,7 @@
         }
       },
       {
-        "abiName" : "bjs_testOptionalPropertyRoundtrip",
+        "abiName" : "bjs_TestModule_testOptionalPropertyRoundtrip",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -223,7 +223,7 @@
               "nullable" : {
                 "_0" : {
                   "swiftHeapObject" : {
-                    "_0" : "OptionalPropertyHolder"
+                    "_0" : "TestModule.OptionalPropertyHolder"
                   }
                 },
                 "_1" : "null"
@@ -235,7 +235,7 @@
           "nullable" : {
             "_0" : {
               "swiftHeapObject" : {
-                "_0" : "OptionalPropertyHolder"
+                "_0" : "TestModule.OptionalPropertyHolder"
               }
             },
             "_1" : "null"
@@ -243,7 +243,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundTripExportedOptionalJSObject",
+        "abiName" : "bjs_TestModule_roundTripExportedOptionalJSObject",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -278,7 +278,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundTripExportedOptionalJSClass",
+        "abiName" : "bjs_TestModule_roundTripExportedOptionalJSClass",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -313,7 +313,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundTripString",
+        "abiName" : "bjs_TestModule_roundTripString",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -348,7 +348,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundTripInt",
+        "abiName" : "bjs_TestModule_roundTripInt",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -389,7 +389,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundTripInt8",
+        "abiName" : "bjs_TestModule_roundTripInt8",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -430,7 +430,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundTripUInt8",
+        "abiName" : "bjs_TestModule_roundTripUInt8",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -471,7 +471,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundTripInt16",
+        "abiName" : "bjs_TestModule_roundTripInt16",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -512,7 +512,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundTripUInt16",
+        "abiName" : "bjs_TestModule_roundTripUInt16",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -553,7 +553,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundTripInt32",
+        "abiName" : "bjs_TestModule_roundTripInt32",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -594,7 +594,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundTripUInt32",
+        "abiName" : "bjs_TestModule_roundTripUInt32",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -635,7 +635,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundTripBool",
+        "abiName" : "bjs_TestModule_roundTripBool",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -670,7 +670,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundTripFloat",
+        "abiName" : "bjs_TestModule_roundTripFloat",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -705,7 +705,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundTripDouble",
+        "abiName" : "bjs_TestModule_roundTripDouble",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -740,7 +740,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundTripSyntax",
+        "abiName" : "bjs_TestModule_roundTripSyntax",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -775,7 +775,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundTripMixSyntax",
+        "abiName" : "bjs_TestModule_roundTripMixSyntax",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -810,7 +810,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundTripSwiftSyntax",
+        "abiName" : "bjs_TestModule_roundTripSwiftSyntax",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -845,7 +845,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundTripMixedSwiftSyntax",
+        "abiName" : "bjs_TestModule_roundTripMixedSwiftSyntax",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -880,7 +880,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundTripWithSpaces",
+        "abiName" : "bjs_TestModule_roundTripWithSpaces",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -915,7 +915,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundTripAlias",
+        "abiName" : "bjs_TestModule_roundTripAlias",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -956,7 +956,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundTripOptionalAlias",
+        "abiName" : "bjs_TestModule_roundTripOptionalAlias",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -991,7 +991,7 @@
         }
       },
       {
-        "abiName" : "bjs_testMixedOptionals",
+        "abiName" : "bjs_TestModule_testMixedOptionals",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,

@@ -12,7 +12,7 @@
     "exposeToGlobal" : false,
     "functions" : [
       {
-        "abiName" : "bjs_makeFoo",
+        "abiName" : "bjs_TestModule_makeFoo",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -29,7 +29,7 @@
         }
       },
       {
-        "abiName" : "bjs_processFooArray",
+        "abiName" : "bjs_TestModule_processFooArray",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -62,7 +62,7 @@
         }
       },
       {
-        "abiName" : "bjs_processOptionalFooArray",
+        "abiName" : "bjs_TestModule_processOptionalFooArray",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -105,7 +105,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundtripFooContainer",
+        "abiName" : "bjs_TestModule_roundtripFooContainer",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -118,14 +118,14 @@
             "name" : "container",
             "type" : {
               "swiftStruct" : {
-                "_0" : "FooContainer"
+                "_0" : "TestModule.FooContainer"
               }
             }
           }
         ],
         "returnType" : {
           "swiftStruct" : {
-            "_0" : "FooContainer"
+            "_0" : "TestModule.FooContainer"
           }
         }
       }
@@ -166,7 +166,7 @@
             }
           }
         ],
-        "swiftCallName" : "FooContainer"
+        "swiftCallName" : "TestModule.FooContainer"
       }
     ]
   },

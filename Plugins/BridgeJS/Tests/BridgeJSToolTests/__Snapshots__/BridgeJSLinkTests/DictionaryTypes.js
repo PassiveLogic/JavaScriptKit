@@ -31,7 +31,7 @@ export async function createInstantiator(options, swift) {
 
     let _exports = null;
     let bjs = null;
-    const __bjs_createCountersHelpers = () => ({
+    const __bjs_createTestModule_CountersHelpers = () => ({
         lower: (value) => {
             const bytes = textEncoder.encode(value.name);
             const id = swift.memory.retain(bytes);
@@ -147,11 +147,11 @@ export async function createInstantiator(options, swift) {
                 const copy = memory.buffer.slice(ptr, ptr + byteLen);
                 taStack.push(Array.from(new Ctor(copy)));
             }
-            bjs["swift_js_struct_lower_Counters"] = function(objectId) {
-                structHelpers.Counters.lower(swift.memory.getObject(objectId));
+            bjs["swift_js_struct_lower_TestModule_Counters"] = function(objectId) {
+                structHelpers.TestModule_Counters.lower(swift.memory.getObject(objectId));
             }
-            bjs["swift_js_struct_lift_Counters"] = function() {
-                const value = structHelpers.Counters.lift();
+            bjs["swift_js_struct_lift_TestModule_Counters"] = function() {
+                const value = structHelpers.TestModule_Counters.lift();
                 return swift.memory.retain(value);
             }
             const __bjs_promiseSettlers = Symbol("JavaScriptKit.promiseSettlers");
@@ -255,7 +255,7 @@ export async function createInstantiator(options, swift) {
             if (!importObject["TestModule"]) {
                 importObject["TestModule"] = {};
             }
-            importObject["TestModule"]["bjs_Box_wrap"] = function(pointer) {
+            importObject["TestModule"]["bjs_TestModule_Box_wrap"] = function(pointer) {
                 const obj = _exports['Box'].__construct(pointer);
                 return swift.memory.retain(obj);
             };
@@ -352,15 +352,15 @@ export async function createInstantiator(options, swift) {
             }
             class Box extends SwiftHeapObject {
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_Box_deinit, Box.prototype, null);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_TestModule_Box_deinit, Box.prototype, null);
                 }
 
             }
-            const CountersHelpers = __bjs_createCountersHelpers();
-            structHelpers.Counters = CountersHelpers;
+            const TestModule_CountersHelpers = __bjs_createTestModule_CountersHelpers();
+            structHelpers.TestModule_Counters = TestModule_CountersHelpers;
 
             const exports = {
-                mirrorDictionary: function bjs_mirrorDictionary(values) {
+                mirrorDictionary: function bjs_TestModule_mirrorDictionary(values) {
                     const entries = Object.entries(values);
                     for (const entry of entries) {
                         const [key, value] = entry;
@@ -371,7 +371,7 @@ export async function createInstantiator(options, swift) {
                         i32Stack.push((value | 0));
                     }
                     i32Stack.push(entries.length);
-                    instance.exports.bjs_mirrorDictionary();
+                    instance.exports.bjs_TestModule_mirrorDictionary();
                     const dictLen = i32Stack.pop();
                     const dictResult = {};
                     for (let i = 0; i < dictLen; i++) {
@@ -381,7 +381,7 @@ export async function createInstantiator(options, swift) {
                     }
                     return dictResult;
                 },
-                optionalDictionary: function bjs_optionalDictionary(values) {
+                optionalDictionary: function bjs_TestModule_optionalDictionary(values) {
                     const isSome = values != null;
                     if (isSome) {
                         const entries = Object.entries(values);
@@ -399,7 +399,7 @@ export async function createInstantiator(options, swift) {
                         i32Stack.push(entries.length);
                     }
                     i32Stack.push(+isSome);
-                    instance.exports.bjs_optionalDictionary();
+                    instance.exports.bjs_TestModule_optionalDictionary();
                     const isSome1 = i32Stack.pop();
                     let optResult;
                     if (isSome1) {
@@ -416,7 +416,7 @@ export async function createInstantiator(options, swift) {
                     }
                     return optResult;
                 },
-                nestedDictionary: function bjs_nestedDictionary(values) {
+                nestedDictionary: function bjs_TestModule_nestedDictionary(values) {
                     const entries = Object.entries(values);
                     for (const entry of entries) {
                         const [key, value] = entry;
@@ -430,7 +430,7 @@ export async function createInstantiator(options, swift) {
                         i32Stack.push(value.length);
                     }
                     i32Stack.push(entries.length);
-                    instance.exports.bjs_nestedDictionary();
+                    instance.exports.bjs_TestModule_nestedDictionary();
                     const dictLen = i32Stack.pop();
                     const dictResult = {};
                     for (let i = 0; i < dictLen; i++) {
@@ -451,7 +451,7 @@ export async function createInstantiator(options, swift) {
                     }
                     return dictResult;
                 },
-                boxDictionary: function bjs_boxDictionary(boxes) {
+                boxDictionary: function bjs_TestModule_boxDictionary(boxes) {
                     const entries = Object.entries(boxes);
                     for (const entry of entries) {
                         const [key, value] = entry;
@@ -462,7 +462,7 @@ export async function createInstantiator(options, swift) {
                         ptrStack.push(value.pointer);
                     }
                     i32Stack.push(entries.length);
-                    instance.exports.bjs_boxDictionary();
+                    instance.exports.bjs_TestModule_boxDictionary();
                     const dictLen = i32Stack.pop();
                     const dictResult = {};
                     for (let i = 0; i < dictLen; i++) {
@@ -473,7 +473,7 @@ export async function createInstantiator(options, swift) {
                     }
                     return dictResult;
                 },
-                optionalBoxDictionary: function bjs_optionalBoxDictionary(boxes) {
+                optionalBoxDictionary: function bjs_TestModule_optionalBoxDictionary(boxes) {
                     const entries = Object.entries(boxes);
                     for (const entry of entries) {
                         const [key, value] = entry;
@@ -488,7 +488,7 @@ export async function createInstantiator(options, swift) {
                         i32Stack.push(isSome);
                     }
                     i32Stack.push(entries.length);
-                    instance.exports.bjs_optionalBoxDictionary();
+                    instance.exports.bjs_TestModule_optionalBoxDictionary();
                     const dictLen = i32Stack.pop();
                     const dictResult = {};
                     for (let i = 0; i < dictLen; i++) {
@@ -506,10 +506,10 @@ export async function createInstantiator(options, swift) {
                     }
                     return dictResult;
                 },
-                roundtripCounters: function bjs_roundtripCounters(counters) {
-                    structHelpers.Counters.lower(counters);
-                    instance.exports.bjs_roundtripCounters();
-                    const structValue = structHelpers.Counters.lift();
+                roundtripCounters: function bjs_TestModule_roundtripCounters(counters) {
+                    structHelpers.TestModule_Counters.lower(counters);
+                    instance.exports.bjs_TestModule_roundtripCounters();
+                    const structValue = structHelpers.TestModule_Counters.lift();
                     return structValue;
                 },
                 Box,

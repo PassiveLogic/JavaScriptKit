@@ -6,7 +6,7 @@
     "classes" : [
       {
         "constructor" : {
-          "abiName" : "bjs_JSValueHolder_init",
+          "abiName" : "bjs_TestModule_JSValueHolder_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -40,7 +40,7 @@
         },
         "methods" : [
           {
-            "abiName" : "bjs_JSValueHolder_update",
+            "abiName" : "bjs_TestModule_JSValueHolder_update",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -79,7 +79,7 @@
             }
           },
           {
-            "abiName" : "bjs_JSValueHolder_echo",
+            "abiName" : "bjs_TestModule_JSValueHolder_echo",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -104,7 +104,7 @@
             }
           },
           {
-            "abiName" : "bjs_JSValueHolder_echoOptional",
+            "abiName" : "bjs_TestModule_JSValueHolder_echoOptional",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -167,7 +167,7 @@
             }
           }
         ],
-        "swiftCallName" : "JSValueHolder"
+        "swiftCallName" : "TestModule.JSValueHolder"
       }
     ],
     "enums" : [
@@ -176,7 +176,7 @@
     "exposeToGlobal" : false,
     "functions" : [
       {
-        "abiName" : "bjs_roundTripJSValue",
+        "abiName" : "bjs_TestModule_roundTripJSValue",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -201,7 +201,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundTripOptionalJSValue",
+        "abiName" : "bjs_TestModule_roundTripOptionalJSValue",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -236,7 +236,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundTripJSValueArray",
+        "abiName" : "bjs_TestModule_roundTripJSValueArray",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -269,7 +269,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundTripOptionalJSValueArray",
+        "abiName" : "bjs_TestModule_roundTripOptionalJSValueArray",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,

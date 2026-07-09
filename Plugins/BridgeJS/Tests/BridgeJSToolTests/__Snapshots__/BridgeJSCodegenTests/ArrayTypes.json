@@ -12,11 +12,11 @@
         "properties" : [
 
         ],
-        "swiftCallName" : "Item"
+        "swiftCallName" : "TestModule.Item"
       },
       {
         "constructor" : {
-          "abiName" : "bjs_MultiArrayContainer_init",
+          "abiName" : "bjs_TestModule_MultiArrayContainer_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -91,7 +91,7 @@
             }
           }
         ],
-        "swiftCallName" : "MultiArrayContainer"
+        "swiftCallName" : "TestModule.MultiArrayContainer"
       }
     ],
     "enums" : [
@@ -130,7 +130,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "Direction",
+        "swiftCallName" : "TestModule.Direction",
         "tsFullPath" : "Direction"
       },
       {
@@ -166,14 +166,14 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "Status",
+        "swiftCallName" : "TestModule.Status",
         "tsFullPath" : "Status"
       }
     ],
     "exposeToGlobal" : false,
     "functions" : [
       {
-        "abiName" : "bjs_processIntArray",
+        "abiName" : "bjs_TestModule_processIntArray",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -212,7 +212,7 @@
         }
       },
       {
-        "abiName" : "bjs_processStringArray",
+        "abiName" : "bjs_TestModule_processStringArray",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -245,7 +245,7 @@
         }
       },
       {
-        "abiName" : "bjs_processDoubleArray",
+        "abiName" : "bjs_TestModule_processDoubleArray",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -278,7 +278,7 @@
         }
       },
       {
-        "abiName" : "bjs_processBoolArray",
+        "abiName" : "bjs_TestModule_processBoolArray",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -311,7 +311,7 @@
         }
       },
       {
-        "abiName" : "bjs_processPointArray",
+        "abiName" : "bjs_TestModule_processPointArray",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -326,7 +326,7 @@
               "array" : {
                 "_0" : {
                   "swiftStruct" : {
-                    "_0" : "Point"
+                    "_0" : "TestModule.Point"
                   }
                 }
               }
@@ -337,14 +337,14 @@
           "array" : {
             "_0" : {
               "swiftStruct" : {
-                "_0" : "Point"
+                "_0" : "TestModule.Point"
               }
             }
           }
         }
       },
       {
-        "abiName" : "bjs_processDirectionArray",
+        "abiName" : "bjs_TestModule_processDirectionArray",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -359,7 +359,7 @@
               "array" : {
                 "_0" : {
                   "caseEnum" : {
-                    "_0" : "Direction"
+                    "_0" : "TestModule.Direction"
                   }
                 }
               }
@@ -370,14 +370,14 @@
           "array" : {
             "_0" : {
               "caseEnum" : {
-                "_0" : "Direction"
+                "_0" : "TestModule.Direction"
               }
             }
           }
         }
       },
       {
-        "abiName" : "bjs_processStatusArray",
+        "abiName" : "bjs_TestModule_processStatusArray",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -392,7 +392,7 @@
               "array" : {
                 "_0" : {
                   "rawValueEnum" : {
-                    "_0" : "Status",
+                    "_0" : "TestModule.Status",
                     "_1" : "Int"
                   }
                 }
@@ -404,7 +404,7 @@
           "array" : {
             "_0" : {
               "rawValueEnum" : {
-                "_0" : "Status",
+                "_0" : "TestModule.Status",
                 "_1" : "Int"
               }
             }
@@ -412,7 +412,7 @@
         }
       },
       {
-        "abiName" : "bjs_sumIntArray",
+        "abiName" : "bjs_TestModule_sumIntArray",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -447,7 +447,7 @@
         }
       },
       {
-        "abiName" : "bjs_findFirstPoint",
+        "abiName" : "bjs_TestModule_findFirstPoint",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -462,7 +462,7 @@
               "array" : {
                 "_0" : {
                   "swiftStruct" : {
-                    "_0" : "Point"
+                    "_0" : "TestModule.Point"
                   }
                 }
               }
@@ -480,12 +480,12 @@
         ],
         "returnType" : {
           "swiftStruct" : {
-            "_0" : "Point"
+            "_0" : "TestModule.Point"
           }
         }
       },
       {
-        "abiName" : "bjs_processUnsafeRawPointerArray",
+        "abiName" : "bjs_TestModule_processUnsafeRawPointerArray",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -522,7 +522,7 @@
         }
       },
       {
-        "abiName" : "bjs_processUnsafeMutableRawPointerArray",
+        "abiName" : "bjs_TestModule_processUnsafeMutableRawPointerArray",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -559,7 +559,7 @@
         }
       },
       {
-        "abiName" : "bjs_processOpaquePointerArray",
+        "abiName" : "bjs_TestModule_processOpaquePointerArray",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -596,7 +596,7 @@
         }
       },
       {
-        "abiName" : "bjs_processOptionalIntArray",
+        "abiName" : "bjs_TestModule_processOptionalIntArray",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -645,7 +645,7 @@
         }
       },
       {
-        "abiName" : "bjs_processOptionalStringArray",
+        "abiName" : "bjs_TestModule_processOptionalStringArray",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -688,7 +688,7 @@
         }
       },
       {
-        "abiName" : "bjs_processOptionalArray",
+        "abiName" : "bjs_TestModule_processOptionalArray",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -737,7 +737,7 @@
         }
       },
       {
-        "abiName" : "bjs_processOptionalPointArray",
+        "abiName" : "bjs_TestModule_processOptionalPointArray",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -754,7 +754,7 @@
                   "nullable" : {
                     "_0" : {
                       "swiftStruct" : {
-                        "_0" : "Point"
+                        "_0" : "TestModule.Point"
                       }
                     },
                     "_1" : "null"
@@ -770,7 +770,7 @@
               "nullable" : {
                 "_0" : {
                   "swiftStruct" : {
-                    "_0" : "Point"
+                    "_0" : "TestModule.Point"
                   }
                 },
                 "_1" : "null"
@@ -780,7 +780,7 @@
         }
       },
       {
-        "abiName" : "bjs_processOptionalDirectionArray",
+        "abiName" : "bjs_TestModule_processOptionalDirectionArray",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -797,7 +797,7 @@
                   "nullable" : {
                     "_0" : {
                       "caseEnum" : {
-                        "_0" : "Direction"
+                        "_0" : "TestModule.Direction"
                       }
                     },
                     "_1" : "null"
@@ -813,7 +813,7 @@
               "nullable" : {
                 "_0" : {
                   "caseEnum" : {
-                    "_0" : "Direction"
+                    "_0" : "TestModule.Direction"
                   }
                 },
                 "_1" : "null"
@@ -823,7 +823,7 @@
         }
       },
       {
-        "abiName" : "bjs_processOptionalStatusArray",
+        "abiName" : "bjs_TestModule_processOptionalStatusArray",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -840,7 +840,7 @@
                   "nullable" : {
                     "_0" : {
                       "rawValueEnum" : {
-                        "_0" : "Status",
+                        "_0" : "TestModule.Status",
                         "_1" : "Int"
                       }
                     },
@@ -857,7 +857,7 @@
               "nullable" : {
                 "_0" : {
                   "rawValueEnum" : {
-                    "_0" : "Status",
+                    "_0" : "TestModule.Status",
                     "_1" : "Int"
                   }
                 },
@@ -868,7 +868,7 @@
         }
       },
       {
-        "abiName" : "bjs_processNestedIntArray",
+        "abiName" : "bjs_TestModule_processNestedIntArray",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -915,7 +915,7 @@
         }
       },
       {
-        "abiName" : "bjs_processNestedStringArray",
+        "abiName" : "bjs_TestModule_processNestedStringArray",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -956,7 +956,7 @@
         }
       },
       {
-        "abiName" : "bjs_processNestedPointArray",
+        "abiName" : "bjs_TestModule_processNestedPointArray",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -973,7 +973,7 @@
                   "array" : {
                     "_0" : {
                       "swiftStruct" : {
-                        "_0" : "Point"
+                        "_0" : "TestModule.Point"
                       }
                     }
                   }
@@ -988,7 +988,7 @@
               "array" : {
                 "_0" : {
                   "swiftStruct" : {
-                    "_0" : "Point"
+                    "_0" : "TestModule.Point"
                   }
                 }
               }
@@ -997,7 +997,7 @@
         }
       },
       {
-        "abiName" : "bjs_processItemArray",
+        "abiName" : "bjs_TestModule_processItemArray",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1012,7 +1012,7 @@
               "array" : {
                 "_0" : {
                   "swiftHeapObject" : {
-                    "_0" : "Item"
+                    "_0" : "TestModule.Item"
                   }
                 }
               }
@@ -1023,14 +1023,14 @@
           "array" : {
             "_0" : {
               "swiftHeapObject" : {
-                "_0" : "Item"
+                "_0" : "TestModule.Item"
               }
             }
           }
         }
       },
       {
-        "abiName" : "bjs_processNestedItemArray",
+        "abiName" : "bjs_TestModule_processNestedItemArray",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1047,7 +1047,7 @@
                   "array" : {
                     "_0" : {
                       "swiftHeapObject" : {
-                        "_0" : "Item"
+                        "_0" : "TestModule.Item"
                       }
                     }
                   }
@@ -1062,7 +1062,7 @@
               "array" : {
                 "_0" : {
                   "swiftHeapObject" : {
-                    "_0" : "Item"
+                    "_0" : "TestModule.Item"
                   }
                 }
               }
@@ -1071,7 +1071,7 @@
         }
       },
       {
-        "abiName" : "bjs_processJSObjectArray",
+        "abiName" : "bjs_TestModule_processJSObjectArray",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1104,7 +1104,7 @@
         }
       },
       {
-        "abiName" : "bjs_processOptionalJSObjectArray",
+        "abiName" : "bjs_TestModule_processOptionalJSObjectArray",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1147,7 +1147,7 @@
         }
       },
       {
-        "abiName" : "bjs_processNestedJSObjectArray",
+        "abiName" : "bjs_TestModule_processNestedJSObjectArray",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1188,7 +1188,7 @@
         }
       },
       {
-        "abiName" : "bjs_multiArrayParams",
+        "abiName" : "bjs_TestModule_multiArrayParams",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1236,7 +1236,7 @@
         }
       },
       {
-        "abiName" : "bjs_multiOptionalArrayParams",
+        "abiName" : "bjs_TestModule_multiOptionalArrayParams",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1325,7 +1325,7 @@
             }
           }
         ],
-        "swiftCallName" : "Point"
+        "swiftCallName" : "TestModule.Point"
       }
     ]
   },

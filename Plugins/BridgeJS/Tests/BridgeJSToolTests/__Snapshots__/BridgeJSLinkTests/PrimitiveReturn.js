@@ -238,24 +238,24 @@ export async function createInstantiator(options, swift) {
         createExports: (instance) => {
             const js = swift.memory.heap;
             const exports = {
-                checkInt: function bjs_checkInt() {
-                    const ret = instance.exports.bjs_checkInt();
+                checkInt: function bjs_TestModule_checkInt() {
+                    const ret = instance.exports.bjs_TestModule_checkInt();
                     return ret;
                 },
-                checkUInt: function bjs_checkUInt() {
-                    const ret = instance.exports.bjs_checkUInt();
+                checkUInt: function bjs_TestModule_checkUInt() {
+                    const ret = instance.exports.bjs_TestModule_checkUInt();
                     return ret >>> 0;
                 },
-                checkFloat: function bjs_checkFloat() {
-                    const ret = instance.exports.bjs_checkFloat();
+                checkFloat: function bjs_TestModule_checkFloat() {
+                    const ret = instance.exports.bjs_TestModule_checkFloat();
                     return ret;
                 },
-                checkDouble: function bjs_checkDouble() {
-                    const ret = instance.exports.bjs_checkDouble();
+                checkDouble: function bjs_TestModule_checkDouble() {
+                    const ret = instance.exports.bjs_TestModule_checkDouble();
                     return ret;
                 },
-                checkBool: function bjs_checkBool() {
-                    const ret = instance.exports.bjs_checkBool();
+                checkBool: function bjs_TestModule_checkBool() {
+                    const ret = instance.exports.bjs_TestModule_checkBool();
                     return ret !== 0;
                 },
             };

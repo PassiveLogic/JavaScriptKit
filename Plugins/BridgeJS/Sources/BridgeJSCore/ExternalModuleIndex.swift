@@ -31,6 +31,18 @@ public struct ExternalModuleIndex {
             guard let exported = skeleton.exported else { continue }
             var moduleEntries = entriesByModule[moduleName] ?? [:]
 
+            // Skeleton `swiftCallName`s are module-qualified (`Module.[Nesting.]Name`),
+            // but consumers reference dependency types without the module prefix (or with
+            // an explicit module qualifier handled separately), so index them by the
+            // module-stripped dot path while keeping the qualified name in the payload.
+            func lookupPath(for swiftCallName: String) -> String {
+                let prefix = "\(moduleName)."
+                if swiftCallName.hasPrefix(prefix) {
+                    return String(swiftCallName.dropFirst(prefix.count))
+                }
+                return swiftCallName
+            }
+
             func register(dotPath: String, bridgeType: BridgeType) {
                 let externalType = ExternalType(moduleName: moduleName, bridgeType: bridgeType)
                 if moduleEntries[dotPath] == nil {
@@ -40,10 +52,16 @@ public struct ExternalModuleIndex {
             }
 
             for klass in exported.classes {
-                register(dotPath: klass.swiftCallName, bridgeType: .swiftHeapObject(klass.swiftCallName))
+                register(
+                    dotPath: lookupPath(for: klass.swiftCallName),
+                    bridgeType: .swiftHeapObject(klass.swiftCallName)
+                )
             }
             for structDef in exported.structs {
-                register(dotPath: structDef.swiftCallName, bridgeType: .swiftStruct(structDef.swiftCallName))
+                register(
+                    dotPath: lookupPath(for: structDef.swiftCallName),
+                    bridgeType: .swiftStruct(structDef.swiftCallName)
+                )
             }
             for enumDef in exported.enums {
                 let bridgeType: BridgeType
@@ -58,14 +76,14 @@ public struct ExternalModuleIndex {
                 case .namespace:
                     bridgeType = .namespaceEnum(enumDef.swiftCallName)
                 }
-                register(dotPath: enumDef.swiftCallName, bridgeType: bridgeType)
+                register(dotPath: lookupPath(for: enumDef.swiftCallName), bridgeType: bridgeType)
             }
             for proto in exported.protocols {
-                register(dotPath: proto.name, bridgeType: .swiftProtocol(proto.name))
+                register(dotPath: proto.name, bridgeType: .swiftProtocol("\(moduleName).\(proto.name)"))
             }
             for alias in exported.aliases {
                 register(
-                    dotPath: alias.swiftCallName,
+                    dotPath: lookupPath(for: alias.swiftCallName),
                     bridgeType: .alias(name: alias.swiftCallName, underlying: alias.underlying)
                 )
             }

@@ -1,12 +1,12 @@
-extension Calculator: _BridgedSwiftCaseEnum {
+extension TestModule.Calculator: _BridgedSwiftCaseEnum {
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSLowerParameter() -> Int32 {
         return bridgeJSRawValue
     }
-    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftReturn(_ value: Int32) -> Calculator {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftReturn(_ value: Int32) -> TestModule.Calculator {
         return bridgeJSLiftParameter(value)
     }
-    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftParameter(_ value: Int32) -> Calculator {
-        return Calculator(bridgeJSRawValue: value)!
+    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftParameter(_ value: Int32) -> TestModule.Calculator {
+        return TestModule.Calculator(bridgeJSRawValue: value)!
     }
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSLowerReturn() -> Int32 {
         return bridgeJSLowerParameter()
@@ -33,48 +33,48 @@ extension Calculator: _BridgedSwiftCaseEnum {
     }
 }
 
-@_expose(wasm, "bjs_Calculator_static_square")
-@_cdecl("bjs_Calculator_static_square")
-public func _bjs_Calculator_static_square(_ value: Int32) -> Int32 {
+@_expose(wasm, "bjs_TestModule_Calculator_static_square")
+@_cdecl("bjs_TestModule_Calculator_static_square")
+public func _bjs_TestModule_Calculator_static_square(_ value: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = Calculator.square(value: Int.bridgeJSLiftParameter(value))
+    let ret = TestModule.Calculator.square(value: Int.bridgeJSLiftParameter(value))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Calculator_static_cube")
-@_cdecl("bjs_Calculator_static_cube")
-public func _bjs_Calculator_static_cube(_ value: Int32) -> Int32 {
+@_expose(wasm, "bjs_TestModule_Calculator_static_cube")
+@_cdecl("bjs_TestModule_Calculator_static_cube")
+public func _bjs_TestModule_Calculator_static_cube(_ value: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = Calculator.cube(value: Int.bridgeJSLiftParameter(value))
+    let ret = TestModule.Calculator.cube(value: Int.bridgeJSLiftParameter(value))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Calculator_static_version_get")
-@_cdecl("bjs_Calculator_static_version_get")
-public func _bjs_Calculator_static_version_get() -> Void {
+@_expose(wasm, "bjs_TestModule_Calculator_static_version_get")
+@_cdecl("bjs_TestModule_Calculator_static_version_get")
+public func _bjs_TestModule_Calculator_static_version_get() -> Void {
     #if arch(wasm32)
-    let ret = Calculator.version
+    let ret = TestModule.Calculator.version
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension APIResult: _BridgedSwiftAssociatedValueEnum {
-    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPopPayload(_ caseId: Int32) -> APIResult {
+extension TestModule.APIResult: _BridgedSwiftAssociatedValueEnum {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPopPayload(_ caseId: Int32) -> TestModule.APIResult {
         switch caseId {
         case 0:
             return .success(String.bridgeJSStackPop())
         case 1:
             return .failure(Int.bridgeJSStackPop())
         default:
-            fatalError("Unknown APIResult case ID: \(caseId)")
+            fatalError("Unknown TestModule.APIResult case ID: \(caseId)")
         }
     }
 
@@ -90,121 +90,121 @@ extension APIResult: _BridgedSwiftAssociatedValueEnum {
     }
 }
 
-@_expose(wasm, "bjs_APIResult_static_roundtrip")
-@_cdecl("bjs_APIResult_static_roundtrip")
-public func _bjs_APIResult_static_roundtrip(_ value: Int32) -> Void {
+@_expose(wasm, "bjs_TestModule_APIResult_static_roundtrip")
+@_cdecl("bjs_TestModule_APIResult_static_roundtrip")
+public func _bjs_TestModule_APIResult_static_roundtrip(_ value: Int32) -> Void {
     #if arch(wasm32)
-    let ret = APIResult.roundtrip(value: APIResult.bridgeJSLiftParameter(value))
+    let ret = TestModule.APIResult.roundtrip(value: TestModule.APIResult.bridgeJSLiftParameter(value))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Utils_String_static_uppercase")
-@_cdecl("bjs_Utils_String_static_uppercase")
-public func _bjs_Utils_String_static_uppercase(_ textBytes: Int32, _ textLength: Int32) -> Void {
+@_expose(wasm, "bjs_TestModule_Utils_String_static_uppercase")
+@_cdecl("bjs_TestModule_Utils_String_static_uppercase")
+public func _bjs_TestModule_Utils_String_static_uppercase(_ textBytes: Int32, _ textLength: Int32) -> Void {
     #if arch(wasm32)
-    let ret = Utils.String.uppercase(_: String.bridgeJSLiftParameter(textBytes, textLength))
+    let ret = TestModule.Utils.String.uppercase(_: String.bridgeJSLiftParameter(textBytes, textLength))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_MathUtils_init")
-@_cdecl("bjs_MathUtils_init")
-public func _bjs_MathUtils_init() -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_TestModule_MathUtils_init")
+@_cdecl("bjs_TestModule_MathUtils_init")
+public func _bjs_TestModule_MathUtils_init() -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = MathUtils()
+    let ret = TestModule.MathUtils()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_MathUtils_static_subtract")
-@_cdecl("bjs_MathUtils_static_subtract")
-public func _bjs_MathUtils_static_subtract(_ a: Int32, _ b: Int32) -> Int32 {
+@_expose(wasm, "bjs_TestModule_MathUtils_static_subtract")
+@_cdecl("bjs_TestModule_MathUtils_static_subtract")
+public func _bjs_TestModule_MathUtils_static_subtract(_ a: Int32, _ b: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = MathUtils.subtract(a: Int.bridgeJSLiftParameter(a), b: Int.bridgeJSLiftParameter(b))
+    let ret = TestModule.MathUtils.subtract(a: Int.bridgeJSLiftParameter(a), b: Int.bridgeJSLiftParameter(b))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_MathUtils_static_add")
-@_cdecl("bjs_MathUtils_static_add")
-public func _bjs_MathUtils_static_add(_ a: Int32, _ b: Int32) -> Int32 {
+@_expose(wasm, "bjs_TestModule_MathUtils_static_add")
+@_cdecl("bjs_TestModule_MathUtils_static_add")
+public func _bjs_TestModule_MathUtils_static_add(_ a: Int32, _ b: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = MathUtils.add(a: Int.bridgeJSLiftParameter(a), b: Int.bridgeJSLiftParameter(b))
+    let ret = TestModule.MathUtils.add(a: Int.bridgeJSLiftParameter(a), b: Int.bridgeJSLiftParameter(b))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_MathUtils_multiply")
-@_cdecl("bjs_MathUtils_multiply")
-public func _bjs_MathUtils_multiply(_ _self: UnsafeMutableRawPointer, _ x: Int32, _ y: Int32) -> Int32 {
+@_expose(wasm, "bjs_TestModule_MathUtils_multiply")
+@_cdecl("bjs_TestModule_MathUtils_multiply")
+public func _bjs_TestModule_MathUtils_multiply(_ _self: UnsafeMutableRawPointer, _ x: Int32, _ y: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = MathUtils.bridgeJSLiftParameter(_self).multiply(x: Int.bridgeJSLiftParameter(x), y: Int.bridgeJSLiftParameter(y))
+    let ret = TestModule.MathUtils.bridgeJSLiftParameter(_self).multiply(x: Int.bridgeJSLiftParameter(x), y: Int.bridgeJSLiftParameter(y))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_MathUtils_static_divide")
-@_cdecl("bjs_MathUtils_static_divide")
-public func _bjs_MathUtils_static_divide(_ a: Int32, _ b: Int32) -> Int32 {
+@_expose(wasm, "bjs_TestModule_MathUtils_static_divide")
+@_cdecl("bjs_TestModule_MathUtils_static_divide")
+public func _bjs_TestModule_MathUtils_static_divide(_ a: Int32, _ b: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = MathUtils.divide(a: Int.bridgeJSLiftParameter(a), b: Int.bridgeJSLiftParameter(b))
+    let ret = TestModule.MathUtils.divide(a: Int.bridgeJSLiftParameter(a), b: Int.bridgeJSLiftParameter(b))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_MathUtils_static_pi_get")
-@_cdecl("bjs_MathUtils_static_pi_get")
-public func _bjs_MathUtils_static_pi_get() -> Float64 {
+@_expose(wasm, "bjs_TestModule_MathUtils_static_pi_get")
+@_cdecl("bjs_TestModule_MathUtils_static_pi_get")
+public func _bjs_TestModule_MathUtils_static_pi_get() -> Float64 {
     #if arch(wasm32)
-    let ret = MathUtils.pi
+    let ret = TestModule.MathUtils.pi
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_MathUtils_deinit")
-@_cdecl("bjs_MathUtils_deinit")
-public func _bjs_MathUtils_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_TestModule_MathUtils_deinit")
+@_cdecl("bjs_TestModule_MathUtils_deinit")
+public func _bjs_TestModule_MathUtils_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    Unmanaged<MathUtils>.fromOpaque(pointer).release()
+    Unmanaged<TestModule.MathUtils>.fromOpaque(pointer).release()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension MathUtils: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
+extension TestModule.MathUtils: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
     var jsValue: JSValue {
-        return .object(JSObject(id: UInt32(bitPattern: _bjs_MathUtils_wrap(Unmanaged.passRetained(self).toOpaque()))))
+        return .object(JSObject(id: UInt32(bitPattern: _bjs_TestModule_MathUtils_wrap(Unmanaged.passRetained(self).toOpaque()))))
     }
     consuming func bridgeJSLowerAsProtocolReturn() -> Int32 {
-        _bjs_MathUtils_wrap(Unmanaged.passRetained(self).toOpaque())
+        _bjs_TestModule_MathUtils_wrap(Unmanaged.passRetained(self).toOpaque())
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "TestModule", name: "bjs_MathUtils_wrap")
-fileprivate func _bjs_MathUtils_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
+@_extern(wasm, module: "TestModule", name: "bjs_TestModule_MathUtils_wrap")
+fileprivate func _bjs_TestModule_MathUtils_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
 #else
-fileprivate func _bjs_MathUtils_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+fileprivate func _bjs_TestModule_MathUtils_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_MathUtils_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
-    return _bjs_MathUtils_wrap_extern(pointer)
+@inline(never) fileprivate func _bjs_TestModule_MathUtils_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+    return _bjs_TestModule_MathUtils_wrap_extern(pointer)
 }

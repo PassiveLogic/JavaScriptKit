@@ -2,10 +2,10 @@
   "exported" : {
     "aliases" : [
       {
-        "swiftCallName" : "Color",
+        "swiftCallName" : "TestModule.Color",
         "underlying" : {
           "swiftHeapObject" : {
-            "_0" : "ColorBox"
+            "_0" : "TestModule.ColorBox"
           }
         }
       }
@@ -13,7 +13,7 @@
     "classes" : [
       {
         "constructor" : {
-          "abiName" : "bjs_ColorBox_init",
+          "abiName" : "bjs_TestModule_ColorBox_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -38,7 +38,7 @@
         "properties" : [
 
         ],
-        "swiftCallName" : "ColorBox"
+        "swiftCallName" : "TestModule.ColorBox"
       }
     ],
     "enums" : [
@@ -47,7 +47,7 @@
     "exposeToGlobal" : false,
     "functions" : [
       {
-        "abiName" : "bjs_roundtripColor",
+        "abiName" : "bjs_TestModule_roundtripColor",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -60,10 +60,10 @@
             "name" : "color",
             "type" : {
               "alias" : {
-                "name" : "Color",
+                "name" : "TestModule.Color",
                 "underlying" : {
                   "swiftHeapObject" : {
-                    "_0" : "ColorBox"
+                    "_0" : "TestModule.ColorBox"
                   }
                 }
               }
@@ -72,10 +72,10 @@
         ],
         "returnType" : {
           "alias" : {
-            "name" : "Color",
+            "name" : "TestModule.Color",
             "underlying" : {
               "swiftHeapObject" : {
-                "_0" : "ColorBox"
+                "_0" : "TestModule.ColorBox"
               }
             }
           }

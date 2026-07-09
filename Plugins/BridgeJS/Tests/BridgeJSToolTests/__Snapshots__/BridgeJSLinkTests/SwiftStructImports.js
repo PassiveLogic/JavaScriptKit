@@ -31,7 +31,7 @@ export async function createInstantiator(options, swift) {
 
     let _exports = null;
     let bjs = null;
-    const __bjs_createPointHelpers = () => ({
+    const __bjs_createTestModule_PointHelpers = () => ({
         lower: (value) => {
             i32Stack.push((value.x | 0));
             i32Stack.push((value.y | 0));
@@ -118,11 +118,11 @@ export async function createInstantiator(options, swift) {
                 const copy = memory.buffer.slice(ptr, ptr + byteLen);
                 taStack.push(Array.from(new Ctor(copy)));
             }
-            bjs["swift_js_struct_lower_Point"] = function(objectId) {
-                structHelpers.Point.lower(swift.memory.getObject(objectId));
+            bjs["swift_js_struct_lower_TestModule_Point"] = function(objectId) {
+                structHelpers.TestModule_Point.lower(swift.memory.getObject(objectId));
             }
-            bjs["swift_js_struct_lift_Point"] = function() {
-                const value = structHelpers.Point.lift();
+            bjs["swift_js_struct_lift_TestModule_Point"] = function() {
+                const value = structHelpers.TestModule_Point.lift();
                 return swift.memory.retain(value);
             }
             const __bjs_promiseSettlers = Symbol("JavaScriptKit.promiseSettlers");
@@ -237,7 +237,7 @@ export async function createInstantiator(options, swift) {
                 try {
                     let optResult;
                     if (point) {
-                        const struct = structHelpers.Point.lift();
+                        const struct = structHelpers.TestModule_Point.lift();
                         optResult = struct;
                     } else {
                         optResult = null;
@@ -245,7 +245,7 @@ export async function createInstantiator(options, swift) {
                     let ret = imports.roundTripOptional(optResult);
                     const isSome = ret != null;
                     if (isSome) {
-                        structHelpers.Point.lower(ret);
+                        structHelpers.TestModule_Point.lower(ret);
                     }
                     i32Stack.push(isSome ? 1 : 0);
                 } catch (error) {
@@ -266,8 +266,8 @@ export async function createInstantiator(options, swift) {
         /** @param {WebAssembly.Instance} instance */
         createExports: (instance) => {
             const js = swift.memory.heap;
-            const PointHelpers = __bjs_createPointHelpers();
-            structHelpers.Point = PointHelpers;
+            const TestModule_PointHelpers = __bjs_createTestModule_PointHelpers();
+            structHelpers.TestModule_Point = TestModule_PointHelpers;
 
             const exports = {
             };

@@ -33,7 +33,7 @@ import Testing
         )
         #expect(app.usedExternalModules == ["Core"])
         let function = try #require(app.exported?.functions.first(where: { $0.name == "currentVelocity" }))
-        #expect(function.returnType == .swiftStruct("Vector3D"))
+        #expect(function.returnType == .swiftStruct("Core.Vector3D"))
     }
 
     @Test
@@ -56,7 +56,7 @@ import Testing
         )
         #expect(app.usedExternalModules == ["Core"])
         let function = try #require(app.exported?.functions.first(where: { $0.name == "makeEmitter" }))
-        #expect(function.returnType == .swiftHeapObject("Emitter"))
+        #expect(function.returnType == .swiftHeapObject("Core.Emitter"))
     }
 
     @Test
@@ -83,7 +83,7 @@ import Testing
         )
         #expect(app.usedExternalModules == ["Core"])
         let function = try #require(app.exported?.functions.first(where: { $0.name == "unitBox" }))
-        #expect(function.returnType == .swiftStruct("Geometry.BoundingBox"))
+        #expect(function.returnType == .swiftStruct("Core.Geometry.BoundingBox"))
     }
 
     @Test
@@ -104,7 +104,7 @@ import Testing
             dependencies: [(moduleName: "Core", skeleton: core)]
         )
         let function = try #require(app.exported?.functions.first(where: { $0.name == "fromCore" }))
-        #expect(function.returnType == .swiftStruct("Vector3D"))
+        #expect(function.returnType == .swiftStruct("Core.Vector3D"))
     }
 
     @Test
@@ -125,8 +125,8 @@ import Testing
             dependencies: [(moduleName: "Core", skeleton: core)]
         )
         let function = try #require(app.exported?.functions.first(where: { $0.name == "scatter" }))
-        #expect(function.returnType == .nullable(.swiftStruct("Point"), .null))
-        #expect(function.parameters.first?.type == .array(.nullable(.swiftStruct("Point"), .null)))
+        #expect(function.returnType == .nullable(.swiftStruct("Core.Point"), .null))
+        #expect(function.parameters.first?.type == .array(.nullable(.swiftStruct("Core.Point"), .null)))
     }
 
     // MARK: - Diagnostics
@@ -243,8 +243,8 @@ import Testing
             dependencies: [(moduleName: "Core", skeleton: core)]
         )
         let function = try #require(app.exported?.functions.first(where: { $0.name == "opposite" }))
-        #expect(function.returnType == .caseEnum("Direction"))
-        #expect(function.parameters.first?.type == .caseEnum("Direction"))
+        #expect(function.returnType == .caseEnum("Core.Direction"))
+        #expect(function.parameters.first?.type == .caseEnum("Core.Direction"))
     }
 
     @Test
@@ -261,7 +261,7 @@ import Testing
             dependencies: [(moduleName: "Core", skeleton: core)]
         )
         let function = try #require(app.exported?.functions.first(where: { $0.name == "describe" }))
-        #expect(function.parameters.first?.type == .rawValueEnum("HTTPMethod", .string))
+        #expect(function.parameters.first?.type == .rawValueEnum("Core.HTTPMethod", .string))
     }
 
     @Test
@@ -278,7 +278,7 @@ import Testing
             dependencies: [(moduleName: "Core", skeleton: core)]
         )
         let function = try #require(app.exported?.functions.first(where: { $0.name == "area" }))
-        #expect(function.parameters.first?.type == .associatedValueEnum("Shape"))
+        #expect(function.parameters.first?.type == .associatedValueEnum("Core.Shape"))
     }
 
     @Test
@@ -299,7 +299,7 @@ import Testing
             dependencies: [(moduleName: "Core", skeleton: core)]
         )
         let function = try #require(app.exported?.functions.first(where: { $0.name == "dummy" }))
-        #expect(function.returnType == .nullable(.namespaceEnum("Utils"), .null))
+        #expect(function.returnType == .nullable(.namespaceEnum("Core.Utils"), .null))
     }
 
     // MARK: - Structural positions
@@ -318,7 +318,7 @@ import Testing
             dependencies: [(moduleName: "Core", skeleton: core)]
         )
         let function = try #require(app.exported?.functions.first(where: { $0.name == "names" }))
-        #expect(function.parameters.first?.type == .dictionary(.swiftStruct("Vector3D")))
+        #expect(function.parameters.first?.type == .dictionary(.swiftStruct("Core.Vector3D")))
     }
 
     @Test
@@ -339,7 +339,7 @@ import Testing
         )
         let particle = try #require(app.exported?.structs.first(where: { $0.name == "Particle" }))
         let positionProperty = try #require(particle.properties.first(where: { $0.name == "position" }))
-        #expect(positionProperty.type == .swiftStruct("Vector3D"))
+        #expect(positionProperty.type == .swiftStruct("Core.Vector3D"))
         #expect(app.usedExternalModules == ["Core"])
     }
 
@@ -399,8 +399,8 @@ import Testing
             ]
         )
         let function = try #require(app.exported?.functions.first(where: { $0.name == "position" }))
-        #expect(function.returnType == .swiftStruct("Vector3D"))
-        #expect(function.parameters.first?.type == .swiftStruct("Particle"))
+        #expect(function.returnType == .swiftStruct("Core.Vector3D"))
+        #expect(function.parameters.first?.type == .swiftStruct("Domain.Particle"))
         #expect(app.usedExternalModules == ["Core", "Domain"])
     }
 

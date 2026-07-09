@@ -6,7 +6,7 @@
     "classes" : [
       {
         "constructor" : {
-          "abiName" : "bjs_GlobalNetworking_API_TestHTTPServer_init",
+          "abiName" : "bjs_BridgeJSGlobalTests_GlobalNetworking_API_TestHTTPServer_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -18,7 +18,7 @@
         },
         "methods" : [
           {
-            "abiName" : "bjs_GlobalNetworking_API_TestHTTPServer_call",
+            "abiName" : "bjs_BridgeJSGlobalTests_GlobalNetworking_API_TestHTTPServer_call",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -35,7 +35,7 @@
                 "name" : "method",
                 "type" : {
                   "caseEnum" : {
-                    "_0" : "GlobalNetworking.API.CallMethod"
+                    "_0" : "BridgeJSGlobalTests.GlobalNetworking.API.CallMethod"
                   }
                 }
               }
@@ -55,11 +55,11 @@
         "properties" : [
 
         ],
-        "swiftCallName" : "GlobalNetworking.API.TestHTTPServer"
+        "swiftCallName" : "BridgeJSGlobalTests.GlobalNetworking.API.TestHTTPServer"
       },
       {
         "constructor" : {
-          "abiName" : "bjs_GlobalNetworking_APIV2_Internal_TestInternalServer_init",
+          "abiName" : "bjs_BridgeJSGlobalTests_Internal_TestInternalServer_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -71,7 +71,7 @@
         },
         "methods" : [
           {
-            "abiName" : "bjs_GlobalNetworking_APIV2_Internal_TestInternalServer_call",
+            "abiName" : "bjs_BridgeJSGlobalTests_Internal_TestInternalServer_call",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -89,7 +89,7 @@
                 "name" : "method",
                 "type" : {
                   "caseEnum" : {
-                    "_0" : "Internal.SupportedServerMethod"
+                    "_0" : "BridgeJSGlobalTests.Internal.SupportedServerMethod"
                   }
                 }
               }
@@ -110,11 +110,11 @@
         "properties" : [
 
         ],
-        "swiftCallName" : "Internal.TestInternalServer"
+        "swiftCallName" : "BridgeJSGlobalTests.Internal.TestInternalServer"
       },
       {
         "constructor" : {
-          "abiName" : "bjs_GlobalUtils_PublicConverter_init",
+          "abiName" : "bjs_BridgeJSGlobalTests_GlobalUtils_PublicConverter_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -126,7 +126,7 @@
         },
         "methods" : [
           {
-            "abiName" : "bjs_GlobalUtils_PublicConverter_toString",
+            "abiName" : "bjs_BridgeJSGlobalTests_GlobalUtils_PublicConverter_toString",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -179,7 +179,7 @@
             }
           }
         ],
-        "swiftCallName" : "GlobalUtils.PublicConverter"
+        "swiftCallName" : "BridgeJSGlobalTests.GlobalUtils.PublicConverter"
       }
     ],
     "enums" : [
@@ -195,7 +195,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "GlobalNetworking",
+        "swiftCallName" : "BridgeJSGlobalTests.GlobalNetworking",
         "tsFullPath" : "GlobalNetworking"
       },
       {
@@ -213,7 +213,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "GlobalNetworking.API",
+        "swiftCallName" : "BridgeJSGlobalTests.GlobalNetworking.API",
         "tsFullPath" : "GlobalNetworking.API"
       },
       {
@@ -255,7 +255,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "GlobalNetworking.API.CallMethod",
+        "swiftCallName" : "BridgeJSGlobalTests.GlobalNetworking.API.CallMethod",
         "tsFullPath" : "GlobalNetworking.API.CallMethod"
       },
       {
@@ -270,7 +270,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "GlobalConfiguration",
+        "swiftCallName" : "BridgeJSGlobalTests.GlobalConfiguration",
         "tsFullPath" : "GlobalConfiguration"
       },
       {
@@ -316,7 +316,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "GlobalConfiguration.PublicLogLevel",
+        "swiftCallName" : "BridgeJSGlobalTests.GlobalConfiguration.PublicLogLevel",
         "tsFullPath" : "GlobalConfiguration.PublicLogLevel"
       },
       {
@@ -355,7 +355,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "GlobalConfiguration.AvailablePort",
+        "swiftCallName" : "BridgeJSGlobalTests.GlobalConfiguration.AvailablePort",
         "tsFullPath" : "GlobalConfiguration.AvailablePort"
       },
       {
@@ -374,7 +374,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "Internal",
+        "swiftCallName" : "BridgeJSGlobalTests.Internal",
         "tsFullPath" : "GlobalNetworking.APIV2.Internal"
       },
       {
@@ -405,7 +405,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "Internal.SupportedServerMethod",
+        "swiftCallName" : "BridgeJSGlobalTests.Internal.SupportedServerMethod",
         "tsFullPath" : "GlobalNetworking.APIV2.Internal.SupportedServerMethod"
       },
       {
@@ -427,7 +427,7 @@
             ],
             "staticContext" : {
               "namespaceEnum" : {
-                "_0" : "GlobalStaticPropertyNamespace"
+                "_0" : "BridgeJSGlobalTests.GlobalStaticPropertyNamespace"
               }
             },
             "type" : {
@@ -445,7 +445,7 @@
             ],
             "staticContext" : {
               "namespaceEnum" : {
-                "_0" : "GlobalStaticPropertyNamespace"
+                "_0" : "BridgeJSGlobalTests.GlobalStaticPropertyNamespace"
               }
             },
             "type" : {
@@ -455,7 +455,7 @@
             }
           }
         ],
-        "swiftCallName" : "GlobalStaticPropertyNamespace",
+        "swiftCallName" : "BridgeJSGlobalTests.GlobalStaticPropertyNamespace",
         "tsFullPath" : "GlobalStaticPropertyNamespace"
       },
       {
@@ -481,7 +481,7 @@
             ],
             "staticContext" : {
               "namespaceEnum" : {
-                "_0" : "GlobalStaticPropertyNamespace.NestedProperties"
+                "_0" : "BridgeJSGlobalTests.GlobalStaticPropertyNamespace.NestedProperties"
               }
             },
             "type" : {
@@ -503,7 +503,7 @@
             ],
             "staticContext" : {
               "namespaceEnum" : {
-                "_0" : "GlobalStaticPropertyNamespace.NestedProperties"
+                "_0" : "BridgeJSGlobalTests.GlobalStaticPropertyNamespace.NestedProperties"
               }
             },
             "type" : {
@@ -522,7 +522,7 @@
             ],
             "staticContext" : {
               "namespaceEnum" : {
-                "_0" : "GlobalStaticPropertyNamespace.NestedProperties"
+                "_0" : "BridgeJSGlobalTests.GlobalStaticPropertyNamespace.NestedProperties"
               }
             },
             "type" : {
@@ -532,7 +532,7 @@
             }
           }
         ],
-        "swiftCallName" : "GlobalStaticPropertyNamespace.NestedProperties",
+        "swiftCallName" : "BridgeJSGlobalTests.GlobalStaticPropertyNamespace.NestedProperties",
         "tsFullPath" : "GlobalStaticPropertyNamespace.NestedProperties"
       },
       {
@@ -547,7 +547,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "GlobalUtils",
+        "swiftCallName" : "BridgeJSGlobalTests.GlobalUtils",
         "tsFullPath" : "GlobalUtils"
       }
     ],

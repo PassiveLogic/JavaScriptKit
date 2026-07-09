@@ -1,6 +1,6 @@
-@_expose(wasm, "bjs_throwsSomething")
-@_cdecl("bjs_throwsSomething")
-public func _bjs_throwsSomething() -> Void {
+@_expose(wasm, "bjs_TestModule_throwsSomething")
+@_cdecl("bjs_TestModule_throwsSomething")
+public func _bjs_TestModule_throwsSomething() -> Void {
     #if arch(wasm32)
     do {
         try throwsSomething()

@@ -208,11 +208,11 @@ export async function createInstantiator(options, swift) {
             if (!importObject["TestModule"]) {
                 importObject["TestModule"] = {};
             }
-            importObject["TestModule"]["bjs_Greeter_wrap"] = function(pointer) {
+            importObject["TestModule"]["bjs_TestModule_Greeter_wrap"] = function(pointer) {
                 const obj = _exports['Greeter'].__construct(pointer);
                 return swift.memory.retain(obj);
             };
-            importObject["TestModule"]["bjs_OptionalPropertyHolder_wrap"] = function(pointer) {
+            importObject["TestModule"]["bjs_TestModule_OptionalPropertyHolder_wrap"] = function(pointer) {
                 const obj = _exports['OptionalPropertyHolder'].__construct(pointer);
                 return swift.memory.retain(obj);
             };
@@ -568,7 +568,7 @@ export async function createInstantiator(options, swift) {
             }
             class Greeter extends SwiftHeapObject {
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_Greeter_deinit, Greeter.prototype, null);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_TestModule_Greeter_deinit, Greeter.prototype, null);
                 }
 
                 constructor(name) {
@@ -583,11 +583,11 @@ export async function createInstantiator(options, swift) {
                         result = 0;
                         result1 = 0;
                     }
-                    const ret = instance.exports.bjs_Greeter_init(+isSome, result, result1);
+                    const ret = instance.exports.bjs_TestModule_Greeter_init(+isSome, result, result1);
                     return Greeter.__construct(ret);
                 }
                 greet() {
-                    instance.exports.bjs_Greeter_greet(this.pointer);
+                    instance.exports.bjs_TestModule_Greeter_greet(this.pointer);
                     const ret = tmpRetString;
                     tmpRetString = undefined;
                     return ret;
@@ -604,10 +604,10 @@ export async function createInstantiator(options, swift) {
                         result = 0;
                         result1 = 0;
                     }
-                    instance.exports.bjs_Greeter_changeName(this.pointer, +isSome, result, result1);
+                    instance.exports.bjs_TestModule_Greeter_changeName(this.pointer, +isSome, result, result1);
                 }
                 get name() {
-                    instance.exports.bjs_Greeter_name_get(this.pointer);
+                    instance.exports.bjs_TestModule_Greeter_name_get(this.pointer);
                     const optResult = tmpRetString;
                     tmpRetString = undefined;
                     return optResult;
@@ -624,20 +624,20 @@ export async function createInstantiator(options, swift) {
                         result = 0;
                         result1 = 0;
                     }
-                    instance.exports.bjs_Greeter_name_set(this.pointer, +isSome, result, result1);
+                    instance.exports.bjs_TestModule_Greeter_name_set(this.pointer, +isSome, result, result1);
                 }
             }
             class OptionalPropertyHolder extends SwiftHeapObject {
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_OptionalPropertyHolder_deinit, OptionalPropertyHolder.prototype, null);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_TestModule_OptionalPropertyHolder_deinit, OptionalPropertyHolder.prototype, null);
                 }
 
                 constructor() {
-                    const ret = instance.exports.bjs_OptionalPropertyHolder_init();
+                    const ret = instance.exports.bjs_TestModule_OptionalPropertyHolder_init();
                     return OptionalPropertyHolder.__construct(ret);
                 }
                 get optionalName() {
-                    instance.exports.bjs_OptionalPropertyHolder_optionalName_get(this.pointer);
+                    instance.exports.bjs_TestModule_OptionalPropertyHolder_optionalName_get(this.pointer);
                     const optResult = tmpRetString;
                     tmpRetString = undefined;
                     return optResult;
@@ -654,20 +654,20 @@ export async function createInstantiator(options, swift) {
                         result = 0;
                         result1 = 0;
                     }
-                    instance.exports.bjs_OptionalPropertyHolder_optionalName_set(this.pointer, +isSome, result, result1);
+                    instance.exports.bjs_TestModule_OptionalPropertyHolder_optionalName_set(this.pointer, +isSome, result, result1);
                 }
                 get optionalAge() {
-                    instance.exports.bjs_OptionalPropertyHolder_optionalAge_get(this.pointer);
+                    instance.exports.bjs_TestModule_OptionalPropertyHolder_optionalAge_get(this.pointer);
                     const optResult = tmpRetOptionalInt;
                     tmpRetOptionalInt = undefined;
                     return optResult;
                 }
                 set optionalAge(value) {
                     const isSome = value != null;
-                    instance.exports.bjs_OptionalPropertyHolder_optionalAge_set(this.pointer, +isSome, isSome ? value : 0);
+                    instance.exports.bjs_TestModule_OptionalPropertyHolder_optionalAge_set(this.pointer, +isSome, isSome ? value : 0);
                 }
                 get optionalGreeter() {
-                    instance.exports.bjs_OptionalPropertyHolder_optionalGreeter_get(this.pointer);
+                    instance.exports.bjs_TestModule_OptionalPropertyHolder_optionalGreeter_get(this.pointer);
                     const pointer = tmpRetOptionalHeapObject;
                     tmpRetOptionalHeapObject = undefined;
                     const optResult = pointer === null ? null : Greeter.__construct(pointer);
@@ -681,11 +681,11 @@ export async function createInstantiator(options, swift) {
                     } else {
                         result = 0;
                     }
-                    instance.exports.bjs_OptionalPropertyHolder_optionalGreeter_set(this.pointer, +isSome, result);
+                    instance.exports.bjs_TestModule_OptionalPropertyHolder_optionalGreeter_set(this.pointer, +isSome, result);
                 }
             }
             const exports = {
-                roundTripOptionalClass: function bjs_roundTripOptionalClass(value) {
+                roundTripOptionalClass: function bjs_TestModule_roundTripOptionalClass(value) {
                     const isSome = value != null;
                     let result;
                     if (isSome) {
@@ -693,13 +693,13 @@ export async function createInstantiator(options, swift) {
                     } else {
                         result = 0;
                     }
-                    instance.exports.bjs_roundTripOptionalClass(+isSome, result);
+                    instance.exports.bjs_TestModule_roundTripOptionalClass(+isSome, result);
                     const pointer = tmpRetOptionalHeapObject;
                     tmpRetOptionalHeapObject = undefined;
                     const optResult = pointer === null ? null : Greeter.__construct(pointer);
                     return optResult;
                 },
-                testOptionalPropertyRoundtrip: function bjs_testOptionalPropertyRoundtrip(holder) {
+                testOptionalPropertyRoundtrip: function bjs_TestModule_testOptionalPropertyRoundtrip(holder) {
                     const isSome = holder != null;
                     let result;
                     if (isSome) {
@@ -707,13 +707,13 @@ export async function createInstantiator(options, swift) {
                     } else {
                         result = 0;
                     }
-                    instance.exports.bjs_testOptionalPropertyRoundtrip(+isSome, result);
+                    instance.exports.bjs_TestModule_testOptionalPropertyRoundtrip(+isSome, result);
                     const pointer = tmpRetOptionalHeapObject;
                     tmpRetOptionalHeapObject = undefined;
                     const optResult = pointer === null ? null : OptionalPropertyHolder.__construct(pointer);
                     return optResult;
                 },
-                roundTripExportedOptionalJSObject: function bjs_roundTripExportedOptionalJSObject(value) {
+                roundTripExportedOptionalJSObject: function bjs_TestModule_roundTripExportedOptionalJSObject(value) {
                     const isSome = value != null;
                     let result;
                     if (isSome) {
@@ -721,7 +721,7 @@ export async function createInstantiator(options, swift) {
                     } else {
                         result = 0;
                     }
-                    instance.exports.bjs_roundTripExportedOptionalJSObject(+isSome, result);
+                    instance.exports.bjs_TestModule_roundTripExportedOptionalJSObject(+isSome, result);
                     const isSome1 = i32Stack.pop();
                     let optResult;
                     if (isSome1) {
@@ -734,7 +734,7 @@ export async function createInstantiator(options, swift) {
                     }
                     return optResult;
                 },
-                roundTripExportedOptionalJSClass: function bjs_roundTripExportedOptionalJSClass(value) {
+                roundTripExportedOptionalJSClass: function bjs_TestModule_roundTripExportedOptionalJSClass(value) {
                     const isSome = value != null;
                     let result;
                     if (isSome) {
@@ -742,7 +742,7 @@ export async function createInstantiator(options, swift) {
                     } else {
                         result = 0;
                     }
-                    instance.exports.bjs_roundTripExportedOptionalJSClass(+isSome, result);
+                    instance.exports.bjs_TestModule_roundTripExportedOptionalJSClass(+isSome, result);
                     const isSome1 = i32Stack.pop();
                     let optResult;
                     if (isSome1) {
@@ -755,7 +755,7 @@ export async function createInstantiator(options, swift) {
                     }
                     return optResult;
                 },
-                roundTripString: function bjs_roundTripString(name) {
+                roundTripString: function bjs_TestModule_roundTripString(name) {
                     const isSome = name != null;
                     let result, result1;
                     if (isSome) {
@@ -767,82 +767,82 @@ export async function createInstantiator(options, swift) {
                         result = 0;
                         result1 = 0;
                     }
-                    instance.exports.bjs_roundTripString(+isSome, result, result1);
+                    instance.exports.bjs_TestModule_roundTripString(+isSome, result, result1);
                     const optResult = tmpRetString;
                     tmpRetString = undefined;
                     return optResult;
                 },
-                roundTripInt: function bjs_roundTripInt(value) {
+                roundTripInt: function bjs_TestModule_roundTripInt(value) {
                     const isSome = value != null;
-                    instance.exports.bjs_roundTripInt(+isSome, isSome ? value : 0);
+                    instance.exports.bjs_TestModule_roundTripInt(+isSome, isSome ? value : 0);
                     const optResult = tmpRetOptionalInt;
                     tmpRetOptionalInt = undefined;
                     return optResult;
                 },
-                roundTripInt8: function bjs_roundTripInt8(value) {
+                roundTripInt8: function bjs_TestModule_roundTripInt8(value) {
                     const isSome = value != null;
-                    instance.exports.bjs_roundTripInt8(+isSome, isSome ? value : 0);
+                    instance.exports.bjs_TestModule_roundTripInt8(+isSome, isSome ? value : 0);
                     const optResult = tmpRetOptionalInt;
                     tmpRetOptionalInt = undefined;
                     return optResult;
                 },
-                roundTripUInt8: function bjs_roundTripUInt8(value) {
+                roundTripUInt8: function bjs_TestModule_roundTripUInt8(value) {
                     const isSome = value != null;
-                    instance.exports.bjs_roundTripUInt8(+isSome, isSome ? value : 0);
+                    instance.exports.bjs_TestModule_roundTripUInt8(+isSome, isSome ? value : 0);
                     const optResult = tmpRetOptionalInt;
                     tmpRetOptionalInt = undefined;
                     return optResult;
                 },
-                roundTripInt16: function bjs_roundTripInt16(value) {
+                roundTripInt16: function bjs_TestModule_roundTripInt16(value) {
                     const isSome = value != null;
-                    instance.exports.bjs_roundTripInt16(+isSome, isSome ? value : 0);
+                    instance.exports.bjs_TestModule_roundTripInt16(+isSome, isSome ? value : 0);
                     const optResult = tmpRetOptionalInt;
                     tmpRetOptionalInt = undefined;
                     return optResult;
                 },
-                roundTripUInt16: function bjs_roundTripUInt16(value) {
+                roundTripUInt16: function bjs_TestModule_roundTripUInt16(value) {
                     const isSome = value != null;
-                    instance.exports.bjs_roundTripUInt16(+isSome, isSome ? value : 0);
+                    instance.exports.bjs_TestModule_roundTripUInt16(+isSome, isSome ? value : 0);
                     const optResult = tmpRetOptionalInt;
                     tmpRetOptionalInt = undefined;
                     return optResult;
                 },
-                roundTripInt32: function bjs_roundTripInt32(value) {
+                roundTripInt32: function bjs_TestModule_roundTripInt32(value) {
                     const isSome = value != null;
-                    instance.exports.bjs_roundTripInt32(+isSome, isSome ? value : 0);
+                    instance.exports.bjs_TestModule_roundTripInt32(+isSome, isSome ? value : 0);
                     const optResult = tmpRetOptionalInt;
                     tmpRetOptionalInt = undefined;
                     return optResult;
                 },
-                roundTripUInt32: function bjs_roundTripUInt32(value) {
+                roundTripUInt32: function bjs_TestModule_roundTripUInt32(value) {
                     const isSome = value != null;
-                    instance.exports.bjs_roundTripUInt32(+isSome, isSome ? value : 0);
+                    instance.exports.bjs_TestModule_roundTripUInt32(+isSome, isSome ? value : 0);
                     const optResult = tmpRetOptionalInt;
                     tmpRetOptionalInt = undefined;
                     return optResult;
                 },
-                roundTripBool: function bjs_roundTripBool(flag) {
+                roundTripBool: function bjs_TestModule_roundTripBool(flag) {
                     const isSome = flag != null;
-                    instance.exports.bjs_roundTripBool(+isSome, isSome ? flag ? 1 : 0 : 0);
+                    instance.exports.bjs_TestModule_roundTripBool(+isSome, isSome ? flag ? 1 : 0 : 0);
                     const optResult = tmpRetOptionalBool;
                     tmpRetOptionalBool = undefined;
                     return optResult;
                 },
-                roundTripFloat: function bjs_roundTripFloat(number) {
+                roundTripFloat: function bjs_TestModule_roundTripFloat(number) {
                     const isSome = number != null;
-                    instance.exports.bjs_roundTripFloat(+isSome, isSome ? number : 0.0);
+                    instance.exports.bjs_TestModule_roundTripFloat(+isSome, isSome ? number : 0.0);
                     const optResult = tmpRetOptionalFloat;
                     tmpRetOptionalFloat = undefined;
                     return optResult;
                 },
-                roundTripDouble: function bjs_roundTripDouble(precision) {
+                roundTripDouble: function bjs_TestModule_roundTripDouble(precision) {
                     const isSome = precision != null;
-                    instance.exports.bjs_roundTripDouble(+isSome, isSome ? precision : 0.0);
+                    instance.exports.bjs_TestModule_roundTripDouble(+isSome, isSome ? precision : 0.0);
                     const optResult = tmpRetOptionalDouble;
                     tmpRetOptionalDouble = undefined;
                     return optResult;
                 },
-                roundTripSyntax: function bjs_roundTripSyntax(name) {
+                roundTripSyntax: function bjs_TestModule_roundTripSyntax(name) {
                     const isSome = name != null;
                     let result, result1;
                     if (isSome) {
@@ -854,12 +854,12 @@ export async function createInstantiator(options, swift) {
                         result = 0;
                         result1 = 0;
                     }
-                    instance.exports.bjs_roundTripSyntax(+isSome, result, result1);
+                    instance.exports.bjs_TestModule_roundTripSyntax(+isSome, result, result1);
                     const optResult = tmpRetString;
                     tmpRetString = undefined;
                     return optResult;
                 },
-                roundTripMixSyntax: function bjs_roundTripMixSyntax(name) {
+                roundTripMixSyntax: function bjs_TestModule_roundTripMixSyntax(name) {
                     const isSome = name != null;
                     let result, result1;
                     if (isSome) {
@@ -871,12 +871,12 @@ export async function createInstantiator(options, swift) {
                         result = 0;
                         result1 = 0;
                     }
-                    instance.exports.bjs_roundTripMixSyntax(+isSome, result, result1);
+                    instance.exports.bjs_TestModule_roundTripMixSyntax(+isSome, result, result1);
                     const optResult = tmpRetString;
                     tmpRetString = undefined;
                     return optResult;
                 },
-                roundTripSwiftSyntax: function bjs_roundTripSwiftSyntax(name) {
+                roundTripSwiftSyntax: function bjs_TestModule_roundTripSwiftSyntax(name) {
                     const isSome = name != null;
                     let result, result1;
                     if (isSome) {
@@ -888,12 +888,12 @@ export async function createInstantiator(options, swift) {
                         result = 0;
                         result1 = 0;
                     }
-                    instance.exports.bjs_roundTripSwiftSyntax(+isSome, result, result1);
+                    instance.exports.bjs_TestModule_roundTripSwiftSyntax(+isSome, result, result1);
                     const optResult = tmpRetString;
                     tmpRetString = undefined;
                     return optResult;
                 },
-                roundTripMixedSwiftSyntax: function bjs_roundTripMixedSwiftSyntax(name) {
+                roundTripMixedSwiftSyntax: function bjs_TestModule_roundTripMixedSwiftSyntax(name) {
                     const isSome = name != null;
                     let result, result1;
                     if (isSome) {
@@ -905,26 +905,26 @@ export async function createInstantiator(options, swift) {
                         result = 0;
                         result1 = 0;
                     }
-                    instance.exports.bjs_roundTripMixedSwiftSyntax(+isSome, result, result1);
+                    instance.exports.bjs_TestModule_roundTripMixedSwiftSyntax(+isSome, result, result1);
                     const optResult = tmpRetString;
                     tmpRetString = undefined;
                     return optResult;
                 },
-                roundTripWithSpaces: function bjs_roundTripWithSpaces(value) {
+                roundTripWithSpaces: function bjs_TestModule_roundTripWithSpaces(value) {
                     const isSome = value != null;
-                    instance.exports.bjs_roundTripWithSpaces(+isSome, isSome ? value : 0.0);
+                    instance.exports.bjs_TestModule_roundTripWithSpaces(+isSome, isSome ? value : 0.0);
                     const optResult = tmpRetOptionalDouble;
                     tmpRetOptionalDouble = undefined;
                     return optResult;
                 },
-                roundTripAlias: function bjs_roundTripAlias(age) {
+                roundTripAlias: function bjs_TestModule_roundTripAlias(age) {
                     const isSome = age != null;
-                    instance.exports.bjs_roundTripAlias(+isSome, isSome ? age : 0);
+                    instance.exports.bjs_TestModule_roundTripAlias(+isSome, isSome ? age : 0);
                     const optResult = tmpRetOptionalInt;
                     tmpRetOptionalInt = undefined;
                     return optResult;
                 },
-                roundTripOptionalAlias: function bjs_roundTripOptionalAlias(name) {
+                roundTripOptionalAlias: function bjs_TestModule_roundTripOptionalAlias(name) {
                     const isSome = name != null;
                     let result, result1;
                     if (isSome) {
@@ -936,12 +936,12 @@ export async function createInstantiator(options, swift) {
                         result = 0;
                         result1 = 0;
                     }
-                    instance.exports.bjs_roundTripOptionalAlias(+isSome, result, result1);
+                    instance.exports.bjs_TestModule_roundTripOptionalAlias(+isSome, result, result1);
                     const optResult = tmpRetString;
                     tmpRetString = undefined;
                     return optResult;
                 },
-                testMixedOptionals: function bjs_testMixedOptionals(firstName, lastName, age, active) {
+                testMixedOptionals: function bjs_TestModule_testMixedOptionals(firstName, lastName, age, active) {
                     const isSome = firstName != null;
                     let result, result1;
                     if (isSome) {
@@ -965,7 +965,7 @@ export async function createInstantiator(options, swift) {
                         result3 = 0;
                     }
                     const isSome2 = age != null;
-                    instance.exports.bjs_testMixedOptionals(+isSome, result, result1, +isSome1, result2, result3, +isSome2, isSome2 ? age : 0, active);
+                    instance.exports.bjs_TestModule_testMixedOptionals(+isSome, result, result1, +isSome1, result2, result3, +isSome2, isSome2 ? age : 0, active);
                     const optResult = tmpRetString;
                     tmpRetString = undefined;
                     return optResult;

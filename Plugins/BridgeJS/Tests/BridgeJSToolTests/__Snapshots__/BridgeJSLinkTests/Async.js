@@ -130,7 +130,7 @@ export async function createInstantiator(options, swift) {
         return jsValue;
     }
 
-    const __bjs_createAsyncPointHelpers = () => ({
+    const __bjs_createTestModule_AsyncPointHelpers = () => ({
         lower: (value) => {
             i32Stack.push((value.x | 0));
             i32Stack.push((value.y | 0));
@@ -216,11 +216,11 @@ export async function createInstantiator(options, swift) {
                 const copy = memory.buffer.slice(ptr, ptr + byteLen);
                 taStack.push(Array.from(new Ctor(copy)));
             }
-            bjs["swift_js_struct_lower_AsyncPoint"] = function(objectId) {
-                structHelpers.AsyncPoint.lower(swift.memory.getObject(objectId));
+            bjs["swift_js_struct_lower_TestModule_AsyncPoint"] = function(objectId) {
+                structHelpers.TestModule_AsyncPoint.lower(swift.memory.getObject(objectId));
             }
-            bjs["swift_js_struct_lift_AsyncPoint"] = function() {
-                const value = structHelpers.AsyncPoint.lift();
+            bjs["swift_js_struct_lift_TestModule_AsyncPoint"] = function() {
+                const value = structHelpers.TestModule_AsyncPoint.lift();
                 return swift.memory.retain(value);
             }
             const __bjs_promiseSettlers = Symbol("JavaScriptKit.promiseSettlers");
@@ -280,7 +280,7 @@ export async function createInstantiator(options, swift) {
                     setException(error);
                 }
             }
-            bjs["promise_resolve_TestModule_10AsyncPointV"] = function(promise, value) {
+            bjs["promise_resolve_TestModule_21TestModule_AsyncPointV"] = function(promise, value) {
                 try {
                     const value1 = swift.memory.getObject(value);
                     swift.memory.release(value);
@@ -289,14 +289,14 @@ export async function createInstantiator(options, swift) {
                     setException(error);
                 }
             }
-            bjs["promise_resolve_TestModule_14AsyncDirectionO"] = function(promise, value) {
+            bjs["promise_resolve_TestModule_25TestModule_AsyncDirectionO"] = function(promise, value) {
                 try {
                     swift.memory.getObject(promise)[__bjs_promiseSettlers].resolve(value);
                 } catch (error) {
                     setException(error);
                 }
             }
-            bjs["promise_resolve_TestModule_10AsyncThemeO"] = function(promise, valueBytes, valueCount) {
+            bjs["promise_resolve_TestModule_21TestModule_AsyncThemeO"] = function(promise, valueBytes, valueCount) {
                 try {
                     const string = decodeString(valueBytes, valueCount);
                     swift.memory.getObject(promise)[__bjs_promiseSettlers].resolve(string);
@@ -304,14 +304,14 @@ export async function createInstantiator(options, swift) {
                     setException(error);
                 }
             }
-            bjs["promise_resolve_TestModule_Sq14AsyncDirectionO"] = function(promise, valueIsSome, valueWrappedValue) {
+            bjs["promise_resolve_TestModule_Sq25TestModule_AsyncDirectionO"] = function(promise, valueIsSome, valueWrappedValue) {
                 try {
                     swift.memory.getObject(promise)[__bjs_promiseSettlers].resolve(valueIsSome ? valueWrappedValue : null);
                 } catch (error) {
                     setException(error);
                 }
             }
-            bjs["promise_resolve_TestModule_Sq10AsyncThemeO"] = function(promise, valueIsSome, valueBytes, valueCount) {
+            bjs["promise_resolve_TestModule_Sq21TestModule_AsyncThemeO"] = function(promise, valueIsSome, valueBytes, valueCount) {
                 try {
                     let optResult;
                     if (valueIsSome) {
@@ -325,11 +325,11 @@ export async function createInstantiator(options, swift) {
                     setException(error);
                 }
             }
-            bjs["promise_resolve_TestModule_Sq10AsyncPointV"] = function(promise, value) {
+            bjs["promise_resolve_TestModule_Sq21TestModule_AsyncPointV"] = function(promise, value) {
                 try {
                     let optResult;
                     if (value) {
-                        const struct = structHelpers.AsyncPoint.lift();
+                        const struct = structHelpers.TestModule_AsyncPoint.lift();
                         optResult = struct;
                     } else {
                         optResult = null;
@@ -339,7 +339,7 @@ export async function createInstantiator(options, swift) {
                     setException(error);
                 }
             }
-            bjs["promise_resolve_TestModule_Sa10AsyncPointV"] = function(promise) {
+            bjs["promise_resolve_TestModule_Sa21TestModule_AsyncPointV"] = function(promise) {
                 try {
                     const arrayLen = i32Stack.pop();
                     let arrayResult;
@@ -348,7 +348,7 @@ export async function createInstantiator(options, swift) {
                     } else {
                         arrayResult = [];
                         for (let i = 0; i < arrayLen; i++) {
-                            const struct = structHelpers.AsyncPoint.lift();
+                            const struct = structHelpers.TestModule_AsyncPoint.lift();
                             arrayResult.push(struct);
                         }
                         arrayResult.reverse();
@@ -358,7 +358,7 @@ export async function createInstantiator(options, swift) {
                     setException(error);
                 }
             }
-            bjs["promise_resolve_TestModule_Sa14AsyncDirectionO"] = function(promise) {
+            bjs["promise_resolve_TestModule_Sa25TestModule_AsyncDirectionO"] = function(promise) {
                 try {
                     const arrayLen = i32Stack.pop();
                     let arrayResult;
@@ -377,12 +377,12 @@ export async function createInstantiator(options, swift) {
                     setException(error);
                 }
             }
-            bjs["promise_resolve_TestModule_SD10AsyncPointV"] = function(promise) {
+            bjs["promise_resolve_TestModule_SD21TestModule_AsyncPointV"] = function(promise) {
                 try {
                     const dictLen = i32Stack.pop();
                     const dictResult = {};
                     for (let i = 0; i < dictLen; i++) {
-                        const struct = structHelpers.AsyncPoint.lift();
+                        const struct = structHelpers.TestModule_AsyncPoint.lift();
                         const string = strStack.pop();
                         dictResult[string] = struct;
                     }
@@ -391,7 +391,7 @@ export async function createInstantiator(options, swift) {
                     setException(error);
                 }
             }
-            bjs["promise_resolve_TestModule_SD14AsyncDirectionO"] = function(promise) {
+            bjs["promise_resolve_TestModule_SD25TestModule_AsyncDirectionO"] = function(promise) {
                 try {
                     const dictLen = i32Stack.pop();
                     const dictResult = {};
@@ -517,64 +517,64 @@ export async function createInstantiator(options, swift) {
         /** @param {WebAssembly.Instance} instance */
         createExports: (instance) => {
             const js = swift.memory.heap;
-            const AsyncPointHelpers = __bjs_createAsyncPointHelpers();
-            structHelpers.AsyncPoint = AsyncPointHelpers;
+            const TestModule_AsyncPointHelpers = __bjs_createTestModule_AsyncPointHelpers();
+            structHelpers.TestModule_AsyncPoint = TestModule_AsyncPointHelpers;
 
             const exports = {
-                asyncReturnVoid: function bjs_asyncReturnVoid() {
-                    const ret = instance.exports.bjs_asyncReturnVoid();
+                asyncReturnVoid: function bjs_TestModule_asyncReturnVoid() {
+                    const ret = instance.exports.bjs_TestModule_asyncReturnVoid();
                     const ret1 = swift.memory.getObject(ret);
                     swift.memory.release(ret);
                     return ret1;
                 },
-                asyncRoundTripInt: function bjs_asyncRoundTripInt(v) {
-                    const ret = instance.exports.bjs_asyncRoundTripInt(v);
+                asyncRoundTripInt: function bjs_TestModule_asyncRoundTripInt(v) {
+                    const ret = instance.exports.bjs_TestModule_asyncRoundTripInt(v);
                     const ret1 = swift.memory.getObject(ret);
                     swift.memory.release(ret);
                     return ret1;
                 },
-                asyncRoundTripString: function bjs_asyncRoundTripString(v) {
+                asyncRoundTripString: function bjs_TestModule_asyncRoundTripString(v) {
                     const vBytes = textEncoder.encode(v);
                     const vId = swift.memory.retain(vBytes);
-                    const ret = instance.exports.bjs_asyncRoundTripString(vId, vBytes.length);
+                    const ret = instance.exports.bjs_TestModule_asyncRoundTripString(vId, vBytes.length);
                     const ret1 = swift.memory.getObject(ret);
                     swift.memory.release(ret);
                     return ret1;
                 },
-                asyncRoundTripBool: function bjs_asyncRoundTripBool(v) {
-                    const ret = instance.exports.bjs_asyncRoundTripBool(v);
+                asyncRoundTripBool: function bjs_TestModule_asyncRoundTripBool(v) {
+                    const ret = instance.exports.bjs_TestModule_asyncRoundTripBool(v);
                     const ret1 = swift.memory.getObject(ret);
                     swift.memory.release(ret);
                     return ret1;
                 },
-                asyncRoundTripFloat: function bjs_asyncRoundTripFloat(v) {
-                    const ret = instance.exports.bjs_asyncRoundTripFloat(v);
+                asyncRoundTripFloat: function bjs_TestModule_asyncRoundTripFloat(v) {
+                    const ret = instance.exports.bjs_TestModule_asyncRoundTripFloat(v);
                     const ret1 = swift.memory.getObject(ret);
                     swift.memory.release(ret);
                     return ret1;
                 },
-                asyncRoundTripDouble: function bjs_asyncRoundTripDouble(v) {
-                    const ret = instance.exports.bjs_asyncRoundTripDouble(v);
+                asyncRoundTripDouble: function bjs_TestModule_asyncRoundTripDouble(v) {
+                    const ret = instance.exports.bjs_TestModule_asyncRoundTripDouble(v);
                     const ret1 = swift.memory.getObject(ret);
                     swift.memory.release(ret);
                     return ret1;
                 },
-                asyncRoundTripJSObject: function bjs_asyncRoundTripJSObject(v) {
-                    const ret = instance.exports.bjs_asyncRoundTripJSObject(swift.memory.retain(v));
+                asyncRoundTripJSObject: function bjs_TestModule_asyncRoundTripJSObject(v) {
+                    const ret = instance.exports.bjs_TestModule_asyncRoundTripJSObject(swift.memory.retain(v));
                     const ret1 = swift.memory.getObject(ret);
                     swift.memory.release(ret);
                     return ret1;
                 },
-                asyncRoundTripStruct: function bjs_asyncRoundTripStruct(v) {
-                    structHelpers.AsyncPoint.lower(v);
-                    const ret = instance.exports.bjs_asyncRoundTripStruct();
+                asyncRoundTripStruct: function bjs_TestModule_asyncRoundTripStruct(v) {
+                    structHelpers.TestModule_AsyncPoint.lower(v);
+                    const ret = instance.exports.bjs_TestModule_asyncRoundTripStruct();
                     const ret1 = swift.memory.getObject(ret);
                     swift.memory.release(ret);
                     return ret1;
                 },
-                asyncRoundTripStructThrows: function bjs_asyncRoundTripStructThrows(v) {
-                    structHelpers.AsyncPoint.lower(v);
-                    const ret = instance.exports.bjs_asyncRoundTripStructThrows();
+                asyncRoundTripStructThrows: function bjs_TestModule_asyncRoundTripStructThrows(v) {
+                    structHelpers.TestModule_AsyncPoint.lower(v);
+                    const ret = instance.exports.bjs_TestModule_asyncRoundTripStructThrows();
                     const ret1 = swift.memory.getObject(ret);
                     swift.memory.release(ret);
                     if (tmpRetException) {
@@ -585,8 +585,8 @@ export async function createInstantiator(options, swift) {
                     }
                     return ret1;
                 },
-                asyncThrowsZeroArg: function bjs_asyncThrowsZeroArg() {
-                    const ret = instance.exports.bjs_asyncThrowsZeroArg();
+                asyncThrowsZeroArg: function bjs_TestModule_asyncThrowsZeroArg() {
+                    const ret = instance.exports.bjs_TestModule_asyncThrowsZeroArg();
                     const ret1 = swift.memory.getObject(ret);
                     swift.memory.release(ret);
                     if (tmpRetException) {
@@ -597,36 +597,36 @@ export async function createInstantiator(options, swift) {
                     }
                     return ret1;
                 },
-                asyncCombineStructs: function bjs_asyncCombineStructs(a, b) {
-                    structHelpers.AsyncPoint.lower(a);
-                    structHelpers.AsyncPoint.lower(b);
-                    const ret = instance.exports.bjs_asyncCombineStructs();
+                asyncCombineStructs: function bjs_TestModule_asyncCombineStructs(a, b) {
+                    structHelpers.TestModule_AsyncPoint.lower(a);
+                    structHelpers.TestModule_AsyncPoint.lower(b);
+                    const ret = instance.exports.bjs_TestModule_asyncCombineStructs();
                     const ret1 = swift.memory.getObject(ret);
                     swift.memory.release(ret);
                     return ret1;
                 },
-                asyncRoundTripEnum: function bjs_asyncRoundTripEnum(v) {
-                    const ret = instance.exports.bjs_asyncRoundTripEnum(v);
+                asyncRoundTripEnum: function bjs_TestModule_asyncRoundTripEnum(v) {
+                    const ret = instance.exports.bjs_TestModule_asyncRoundTripEnum(v);
                     const ret1 = swift.memory.getObject(ret);
                     swift.memory.release(ret);
                     return ret1;
                 },
-                asyncRoundTripRawEnum: function bjs_asyncRoundTripRawEnum(v) {
+                asyncRoundTripRawEnum: function bjs_TestModule_asyncRoundTripRawEnum(v) {
                     const vBytes = textEncoder.encode(v);
                     const vId = swift.memory.retain(vBytes);
-                    const ret = instance.exports.bjs_asyncRoundTripRawEnum(vId, vBytes.length);
+                    const ret = instance.exports.bjs_TestModule_asyncRoundTripRawEnum(vId, vBytes.length);
                     const ret1 = swift.memory.getObject(ret);
                     swift.memory.release(ret);
                     return ret1;
                 },
-                asyncRoundTripOptionalEnum: function bjs_asyncRoundTripOptionalEnum(v) {
+                asyncRoundTripOptionalEnum: function bjs_TestModule_asyncRoundTripOptionalEnum(v) {
                     const isSome = v != null;
-                    const ret = instance.exports.bjs_asyncRoundTripOptionalEnum(+isSome, isSome ? v : 0);
+                    const ret = instance.exports.bjs_TestModule_asyncRoundTripOptionalEnum(+isSome, isSome ? v : 0);
                     const ret1 = swift.memory.getObject(ret);
                     swift.memory.release(ret);
                     return ret1;
                 },
-                asyncRoundTripOptionalRawEnum: function bjs_asyncRoundTripOptionalRawEnum(v) {
+                asyncRoundTripOptionalRawEnum: function bjs_TestModule_asyncRoundTripOptionalRawEnum(v) {
                     const isSome = v != null;
                     let result, result1;
                     if (isSome) {
@@ -638,43 +638,43 @@ export async function createInstantiator(options, swift) {
                         result = 0;
                         result1 = 0;
                     }
-                    const ret = instance.exports.bjs_asyncRoundTripOptionalRawEnum(+isSome, result, result1);
+                    const ret = instance.exports.bjs_TestModule_asyncRoundTripOptionalRawEnum(+isSome, result, result1);
                     const ret1 = swift.memory.getObject(ret);
                     swift.memory.release(ret);
                     return ret1;
                 },
-                asyncRoundTripOptionalStruct: function bjs_asyncRoundTripOptionalStruct(v) {
+                asyncRoundTripOptionalStruct: function bjs_TestModule_asyncRoundTripOptionalStruct(v) {
                     const isSome = v != null;
                     if (isSome) {
-                        structHelpers.AsyncPoint.lower(v);
+                        structHelpers.TestModule_AsyncPoint.lower(v);
                     }
                     i32Stack.push(+isSome);
-                    const ret = instance.exports.bjs_asyncRoundTripOptionalStruct();
+                    const ret = instance.exports.bjs_TestModule_asyncRoundTripOptionalStruct();
                     const ret1 = swift.memory.getObject(ret);
                     swift.memory.release(ret);
                     return ret1;
                 },
-                asyncRoundTripStructArray: function bjs_asyncRoundTripStructArray(v) {
+                asyncRoundTripStructArray: function bjs_TestModule_asyncRoundTripStructArray(v) {
                     for (const elem of v) {
-                        structHelpers.AsyncPoint.lower(elem);
+                        structHelpers.TestModule_AsyncPoint.lower(elem);
                     }
                     i32Stack.push(v.length);
-                    const ret = instance.exports.bjs_asyncRoundTripStructArray();
+                    const ret = instance.exports.bjs_TestModule_asyncRoundTripStructArray();
                     const ret1 = swift.memory.getObject(ret);
                     swift.memory.release(ret);
                     return ret1;
                 },
-                asyncRoundTripEnumArray: function bjs_asyncRoundTripEnumArray(v) {
+                asyncRoundTripEnumArray: function bjs_TestModule_asyncRoundTripEnumArray(v) {
                     for (const elem of v) {
                         i32Stack.push((elem | 0));
                     }
                     i32Stack.push(v.length);
-                    const ret = instance.exports.bjs_asyncRoundTripEnumArray();
+                    const ret = instance.exports.bjs_TestModule_asyncRoundTripEnumArray();
                     const ret1 = swift.memory.getObject(ret);
                     swift.memory.release(ret);
                     return ret1;
                 },
-                asyncRoundTripStructDictionary: function bjs_asyncRoundTripStructDictionary(v) {
+                asyncRoundTripStructDictionary: function bjs_TestModule_asyncRoundTripStructDictionary(v) {
                     const entries = Object.entries(v);
                     for (const entry of entries) {
                         const [key, value] = entry;
@@ -682,15 +682,15 @@ export async function createInstantiator(options, swift) {
                         const id = swift.memory.retain(bytes);
                         i32Stack.push(bytes.length);
                         i32Stack.push(id);
-                        structHelpers.AsyncPoint.lower(value);
+                        structHelpers.TestModule_AsyncPoint.lower(value);
                     }
                     i32Stack.push(entries.length);
-                    const ret = instance.exports.bjs_asyncRoundTripStructDictionary();
+                    const ret = instance.exports.bjs_TestModule_asyncRoundTripStructDictionary();
                     const ret1 = swift.memory.getObject(ret);
                     swift.memory.release(ret);
                     return ret1;
                 },
-                asyncRoundTripEnumDictionary: function bjs_asyncRoundTripEnumDictionary(v) {
+                asyncRoundTripEnumDictionary: function bjs_TestModule_asyncRoundTripEnumDictionary(v) {
                     const entries = Object.entries(v);
                     for (const entry of entries) {
                         const [key, value] = entry;
@@ -701,7 +701,7 @@ export async function createInstantiator(options, swift) {
                         i32Stack.push((value | 0));
                     }
                     i32Stack.push(entries.length);
-                    const ret = instance.exports.bjs_asyncRoundTripEnumDictionary();
+                    const ret = instance.exports.bjs_TestModule_asyncRoundTripEnumDictionary();
                     const ret1 = swift.memory.getObject(ret);
                     swift.memory.release(ret);
                     return ret1;

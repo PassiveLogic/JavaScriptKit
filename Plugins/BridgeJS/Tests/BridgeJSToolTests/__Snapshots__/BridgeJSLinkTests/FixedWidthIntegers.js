@@ -292,36 +292,36 @@ export async function createInstantiator(options, swift) {
         createExports: (instance) => {
             const js = swift.memory.heap;
             const exports = {
-                roundTripInt8: function bjs_roundTripInt8(v) {
-                    const ret = instance.exports.bjs_roundTripInt8(v);
+                roundTripInt8: function bjs_TestModule_roundTripInt8(v) {
+                    const ret = instance.exports.bjs_TestModule_roundTripInt8(v);
                     return ret;
                 },
-                roundTripUInt8: function bjs_roundTripUInt8(v) {
-                    const ret = instance.exports.bjs_roundTripUInt8(v);
+                roundTripUInt8: function bjs_TestModule_roundTripUInt8(v) {
+                    const ret = instance.exports.bjs_TestModule_roundTripUInt8(v);
                     return ret >>> 0;
                 },
-                roundTripInt16: function bjs_roundTripInt16(v) {
-                    const ret = instance.exports.bjs_roundTripInt16(v);
+                roundTripInt16: function bjs_TestModule_roundTripInt16(v) {
+                    const ret = instance.exports.bjs_TestModule_roundTripInt16(v);
                     return ret;
                 },
-                roundTripUInt16: function bjs_roundTripUInt16(v) {
-                    const ret = instance.exports.bjs_roundTripUInt16(v);
+                roundTripUInt16: function bjs_TestModule_roundTripUInt16(v) {
+                    const ret = instance.exports.bjs_TestModule_roundTripUInt16(v);
                     return ret >>> 0;
                 },
-                roundTripInt32: function bjs_roundTripInt32(v) {
-                    const ret = instance.exports.bjs_roundTripInt32(v);
+                roundTripInt32: function bjs_TestModule_roundTripInt32(v) {
+                    const ret = instance.exports.bjs_TestModule_roundTripInt32(v);
                     return ret;
                 },
-                roundTripUInt32: function bjs_roundTripUInt32(v) {
-                    const ret = instance.exports.bjs_roundTripUInt32(v);
+                roundTripUInt32: function bjs_TestModule_roundTripUInt32(v) {
+                    const ret = instance.exports.bjs_TestModule_roundTripUInt32(v);
                     return ret >>> 0;
                 },
-                roundTripInt64: function bjs_roundTripInt64(v) {
-                    const ret = instance.exports.bjs_roundTripInt64(v);
+                roundTripInt64: function bjs_TestModule_roundTripInt64(v) {
+                    const ret = instance.exports.bjs_TestModule_roundTripInt64(v);
                     return ret;
                 },
-                roundTripUInt64: function bjs_roundTripUInt64(v) {
-                    const ret = instance.exports.bjs_roundTripUInt64(v);
+                roundTripUInt64: function bjs_TestModule_roundTripUInt64(v) {
+                    const ret = instance.exports.bjs_TestModule_roundTripUInt64(v);
                     return BigInt.asUintN(64, ret);
                 },
             };

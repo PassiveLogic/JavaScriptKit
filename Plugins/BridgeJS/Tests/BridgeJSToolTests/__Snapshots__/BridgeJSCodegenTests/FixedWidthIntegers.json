@@ -12,7 +12,7 @@
     "exposeToGlobal" : false,
     "functions" : [
       {
-        "abiName" : "bjs_roundTripInt8",
+        "abiName" : "bjs_TestModule_roundTripInt8",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -43,7 +43,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundTripUInt8",
+        "abiName" : "bjs_TestModule_roundTripUInt8",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -74,7 +74,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundTripInt16",
+        "abiName" : "bjs_TestModule_roundTripInt16",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -105,7 +105,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundTripUInt16",
+        "abiName" : "bjs_TestModule_roundTripUInt16",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -136,7 +136,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundTripInt32",
+        "abiName" : "bjs_TestModule_roundTripInt32",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -167,7 +167,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundTripUInt32",
+        "abiName" : "bjs_TestModule_roundTripUInt32",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -198,7 +198,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundTripInt64",
+        "abiName" : "bjs_TestModule_roundTripInt64",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -229,7 +229,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundTripUInt64",
+        "abiName" : "bjs_TestModule_roundTripUInt64",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,

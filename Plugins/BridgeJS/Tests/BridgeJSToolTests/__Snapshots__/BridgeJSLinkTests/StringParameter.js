@@ -236,15 +236,15 @@ export async function createInstantiator(options, swift) {
         createExports: (instance) => {
             const js = swift.memory.heap;
             const exports = {
-                checkString: function bjs_checkString(a) {
+                checkString: function bjs_TestModule_checkString(a) {
                     const aBytes = textEncoder.encode(a);
                     const aId = swift.memory.retain(aBytes);
-                    instance.exports.bjs_checkString(aId, aBytes.length);
+                    instance.exports.bjs_TestModule_checkString(aId, aBytes.length);
                 },
-                roundtripString: function bjs_roundtripString(a) {
+                roundtripString: function bjs_TestModule_roundtripString(a) {
                     const aBytes = textEncoder.encode(a);
                     const aId = swift.memory.retain(aBytes);
-                    instance.exports.bjs_roundtripString(aId, aBytes.length);
+                    instance.exports.bjs_TestModule_roundtripString(aId, aBytes.length);
                     const ret = tmpRetString;
                     tmpRetString = undefined;
                     return ret;

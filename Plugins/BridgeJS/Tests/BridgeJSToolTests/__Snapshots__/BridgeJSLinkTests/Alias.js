@@ -37,7 +37,7 @@ export async function createInstantiator(options, swift) {
 
     let _exports = null;
     let bjs = null;
-    const __bjs_createInnerTagValuesHelpers = () => ({
+    const __bjs_createTestModule_InnerTagHelpers = () => ({
         lower: (value) => {
             const enumTag = value.tag;
             switch (enumTag) {
@@ -240,11 +240,11 @@ export async function createInstantiator(options, swift) {
             if (!importObject["TestModule"]) {
                 importObject["TestModule"] = {};
             }
-            importObject["TestModule"]["bjs_PolygonReference_wrap"] = function(pointer) {
+            importObject["TestModule"]["bjs_TestModule_PolygonReference_wrap"] = function(pointer) {
                 const obj = _exports['PolygonReference'].__construct(pointer);
                 return swift.memory.retain(obj);
             };
-            importObject["TestModule"]["bjs_TagReference_wrap"] = function(pointer) {
+            importObject["TestModule"]["bjs_TestModule_TagReference_wrap"] = function(pointer) {
                 const obj = _exports['TagReference'].__construct(pointer);
                 return swift.memory.retain(obj);
             };
@@ -387,45 +387,45 @@ export async function createInstantiator(options, swift) {
             }
             class PolygonReference extends SwiftHeapObject {
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_PolygonReference_deinit, PolygonReference.prototype, null);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_TestModule_PolygonReference_deinit, PolygonReference.prototype, null);
                 }
 
                 constructor(underlying) {
-                    const ret = instance.exports.bjs_PolygonReference_init(underlying.pointer);
+                    const ret = instance.exports.bjs_TestModule_PolygonReference_init(underlying.pointer);
                     return PolygonReference.__construct(ret);
                 }
                 snapshot() {
-                    const ret = instance.exports.bjs_PolygonReference_snapshot(this.pointer);
+                    const ret = instance.exports.bjs_TestModule_PolygonReference_snapshot(this.pointer);
                     return PolygonReference.__construct(ret);
                 }
                 merge(other) {
-                    const ret = instance.exports.bjs_PolygonReference_merge(this.pointer, other.pointer);
+                    const ret = instance.exports.bjs_TestModule_PolygonReference_merge(this.pointer, other.pointer);
                     return PolygonReference.__construct(ret);
                 }
                 static origin() {
-                    const ret = instance.exports.bjs_PolygonReference_static_origin();
+                    const ret = instance.exports.bjs_TestModule_PolygonReference_static_origin();
                     return PolygonReference.__construct(ret);
                 }
             }
             class TagReference extends SwiftHeapObject {
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_TagReference_deinit, TagReference.prototype, null);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_TestModule_TagReference_deinit, TagReference.prototype, null);
                 }
 
                 constructor(underlying) {
-                    const ret = instance.exports.bjs_TagReference_init(underlying.pointer);
+                    const ret = instance.exports.bjs_TestModule_TagReference_init(underlying.pointer);
                     return TagReference.__construct(ret);
                 }
             }
-            const InnerTagHelpers = __bjs_createInnerTagValuesHelpers();
-            enumHelpers.InnerTag = InnerTagHelpers;
+            const TestModule_InnerTagHelpers = __bjs_createTestModule_InnerTagHelpers();
+            enumHelpers.TestModule_InnerTag = TestModule_InnerTagHelpers;
 
             const exports = {
-                roundtripPolygon: function bjs_roundtripPolygon(polygon) {
-                    const ret = instance.exports.bjs_roundtripPolygon(polygon.pointer);
+                roundtripPolygon: function bjs_TestModule_roundtripPolygon(polygon) {
+                    const ret = instance.exports.bjs_TestModule_roundtripPolygon(polygon.pointer);
                     return PolygonReference.__construct(ret);
                 },
-                optionalPolygon: function bjs_optionalPolygon(polygon) {
+                optionalPolygon: function bjs_TestModule_optionalPolygon(polygon) {
                     const isSome = polygon != null;
                     let result;
                     if (isSome) {
@@ -433,18 +433,18 @@ export async function createInstantiator(options, swift) {
                     } else {
                         result = 0;
                     }
-                    instance.exports.bjs_optionalPolygon(+isSome, result);
+                    instance.exports.bjs_TestModule_optionalPolygon(+isSome, result);
                     const pointer = tmpRetOptionalHeapObject;
                     tmpRetOptionalHeapObject = undefined;
                     const optResult = pointer === null ? null : PolygonReference.__construct(pointer);
                     return optResult;
                 },
-                polygonArray: function bjs_polygonArray(polygons) {
+                polygonArray: function bjs_TestModule_polygonArray(polygons) {
                     for (const elem of polygons) {
                         ptrStack.push(elem.pointer);
                     }
                     i32Stack.push(polygons.length);
-                    instance.exports.bjs_polygonArray();
+                    instance.exports.bjs_TestModule_polygonArray();
                     const arrayLen = i32Stack.pop();
                     let arrayResult;
                     if (arrayLen === -1) {
@@ -460,8 +460,8 @@ export async function createInstantiator(options, swift) {
                     }
                     return arrayResult;
                 },
-                validatePolygon: function bjs_validatePolygon(polygon) {
-                    const ret = instance.exports.bjs_validatePolygon(polygon.pointer);
+                validatePolygon: function bjs_TestModule_validatePolygon(polygon) {
+                    const ret = instance.exports.bjs_TestModule_validatePolygon(polygon.pointer);
                     if (tmpRetException) {
                         const error = swift.memory.getObject(tmpRetException);
                         swift.memory.release(tmpRetException);
@@ -470,23 +470,23 @@ export async function createInstantiator(options, swift) {
                     }
                     return PolygonReference.__construct(ret);
                 },
-                makeTag: function bjs_makeTag(name) {
+                makeTag: function bjs_TestModule_makeTag(name) {
                     const nameBytes = textEncoder.encode(name);
                     const nameId = swift.memory.retain(nameBytes);
-                    const ret = instance.exports.bjs_makeTag(nameId, nameBytes.length);
+                    const ret = instance.exports.bjs_TestModule_makeTag(nameId, nameBytes.length);
                     return TagReference.__construct(ret);
                 },
-                roundtripTags: function bjs_roundtripTags(xs) {
+                roundtripTags: function bjs_TestModule_roundtripTags(xs) {
                     for (const elem of xs) {
                         const isSome = elem != null ? 1 : 0;
                         if (isSome) {
-                            const caseId = enumHelpers.InnerTag.lower(elem);
+                            const caseId = enumHelpers.TestModule_InnerTag.lower(elem);
                             i32Stack.push(caseId);
                         }
                         i32Stack.push(isSome);
                     }
                     i32Stack.push(xs.length);
-                    instance.exports.bjs_roundtripTags();
+                    instance.exports.bjs_TestModule_roundtripTags();
                     const arrayLen = i32Stack.pop();
                     let arrayResult;
                     if (arrayLen === -1) {
@@ -499,7 +499,7 @@ export async function createInstantiator(options, swift) {
                             if (isSome1 === 0) {
                                 optValue = null;
                             } else {
-                                const enumValue = enumHelpers.InnerTag.lift(i32Stack.pop());
+                                const enumValue = enumHelpers.TestModule_InnerTag.lift(i32Stack.pop());
                                 optValue = enumValue;
                             }
                             arrayResult.push(optValue);
@@ -508,8 +508,8 @@ export async function createInstantiator(options, swift) {
                     }
                     return arrayResult;
                 },
-                describeUser: function bjs_describeUser(owner) {
-                    const ret = instance.exports.bjs_describeUser(swift.memory.retain(owner));
+                describeUser: function bjs_TestModule_describeUser(owner) {
+                    const ret = instance.exports.bjs_TestModule_describeUser(swift.memory.retain(owner));
                     const ret1 = swift.memory.getObject(ret);
                     swift.memory.release(ret);
                     return ret1;

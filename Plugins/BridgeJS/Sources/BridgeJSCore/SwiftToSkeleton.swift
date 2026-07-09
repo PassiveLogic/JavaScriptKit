@@ -393,12 +393,12 @@ public final class SwiftToSkeleton {
 
         if let typeDecl = typeDeclResolver.resolve(type) {
             if typeDecl.is(ProtocolDeclSyntax.self) {
-                let swiftCallName = SwiftToSkeleton.computeSwiftCallName(for: typeDecl, itemName: typeDecl.name.text)
+                let swiftCallName = exportedSwiftCallName(for: typeDecl, itemName: typeDecl.name.text)
                 return .swiftProtocol(swiftCallName)
             }
 
             if let enumDecl = typeDecl.as(EnumDeclSyntax.self) {
-                let swiftCallName = SwiftToSkeleton.computeSwiftCallName(for: enumDecl, itemName: enumDecl.name.text)
+                let swiftCallName = exportedSwiftCallName(for: enumDecl, itemName: enumDecl.name.text)
                 if let jsAttribute = enumDecl.attributes.firstJSAttribute,
                     let aliasTarget = extractAliasTarget(from: jsAttribute)
                 {
@@ -437,13 +437,14 @@ public final class SwiftToSkeleton {
             }
 
             if let structDecl = typeDecl.as(StructDeclSyntax.self) {
-                let swiftCallName = SwiftToSkeleton.computeSwiftCallName(
-                    for: structDecl,
-                    itemName: structDecl.name.text
-                )
                 if structDecl.attributes.hasAttribute(name: "JSClass") {
-                    return .jsObject(swiftCallName)
+                    // Imported JS object wrappers are not module-qualified; imports are
+                    // already namespaced per module via the import object.
+                    return .jsObject(
+                        SwiftToSkeleton.computeSwiftCallName(for: structDecl, itemName: structDecl.name.text)
+                    )
                 }
+                let swiftCallName = exportedSwiftCallName(for: structDecl, itemName: structDecl.name.text)
                 if let jsAttribute = structDecl.attributes.firstJSAttribute,
                     let aliasTarget = extractAliasTarget(from: jsAttribute)
                 {
@@ -455,17 +456,17 @@ public final class SwiftToSkeleton {
             guard typeDecl.is(ClassDeclSyntax.self) || typeDecl.is(ActorDeclSyntax.self) else {
                 return nil
             }
-            let swiftCallName = SwiftToSkeleton.computeSwiftCallName(for: typeDecl, itemName: typeDecl.name.text)
 
             // A type annotated with @JSClass is a JavaScript object wrapper (imported),
             // even if it is declared as a Swift class.
             if let classDecl = typeDecl.as(ClassDeclSyntax.self), classDecl.attributes.hasAttribute(name: "JSClass") {
-                return .jsObject(swiftCallName)
+                return .jsObject(SwiftToSkeleton.computeSwiftCallName(for: typeDecl, itemName: typeDecl.name.text))
             }
             if let actorDecl = typeDecl.as(ActorDeclSyntax.self), actorDecl.attributes.hasAttribute(name: "JSClass") {
-                return .jsObject(swiftCallName)
+                return .jsObject(SwiftToSkeleton.computeSwiftCallName(for: typeDecl, itemName: typeDecl.name.text))
             }
 
+            let swiftCallName = exportedSwiftCallName(for: typeDecl, itemName: typeDecl.name.text)
             if let classDecl = typeDecl.as(ClassDeclSyntax.self),
                 let jsAttribute = classDecl.attributes.firstJSAttribute,
                 let aliasTarget = extractAliasTarget(from: jsAttribute)
@@ -632,6 +633,17 @@ public final class SwiftToSkeleton {
         }
 
         return nil
+    }
+
+    /// Computes the module-qualified Swift call name for an exported `@JS` type
+    /// (e.g. "MyModule.Networking.API.HTTPServer").
+    ///
+    /// The result serves two purposes:
+    /// - It is a valid Swift expression usable at call sites in the generated glue code.
+    /// - Replacing `.` with `_` yields the type's ABI identity (`abiName`), which is
+    ///   unique across modules because it starts with the module name.
+    func exportedSwiftCallName(for node: some SyntaxProtocol, itemName: String) -> String {
+        "\(moduleName).\(SwiftToSkeleton.computeSwiftCallName(for: node, itemName: itemName))"
     }
 
     /// Computes the full Swift call name by walking up the AST hierarchy to find all parent enums
@@ -1297,7 +1309,7 @@ private final class ExportSwiftAPICollector: SyntaxAnyVisitor {
 
             let isNamespaceEnum = exportedEnumByName[enumKey]?.cases.isEmpty ?? true
             let swiftCallName = exportedEnumByName[enumKey]?.swiftCallName ?? enumName
-            staticContext = isNamespaceEnum ? .namespaceEnum(swiftCallName) : .enumName(enumName)
+            staticContext = isNamespaceEnum ? .namespaceEnum(swiftCallName) : .enumName(swiftCallName)
         case .protocolBody(_, _):
             return nil
         case .structBody(_, let structKey):
@@ -1318,9 +1330,12 @@ private final class ExportSwiftAPICollector: SyntaxAnyVisitor {
         default:
             classNameForABI = nil
         }
+        // Prefix the namespace context with the module name so top-level function thunk
+        // names are unique across modules. Type-scoped contexts (className/staticContext)
+        // are already module-qualified through the type's abiName/swiftCallName.
         abiName = ABINameGenerator.generateABIName(
             baseName: name,
-            namespace: finalNamespace,
+            namespace: [parent.moduleName] + (finalNamespace ?? []),
             staticContext: isStatic ? staticContext : nil,
             className: classNameForABI
         )
@@ -1647,7 +1662,7 @@ private final class ExportSwiftAPICollector: SyntaxAnyVisitor {
             resolvedNamespace: namespaceResult.namespace,
             parentTypeNamespace: computeParentTypeNamespace(for: node)
         )
-        let swiftCallName = SwiftToSkeleton.computeSwiftCallName(for: node, itemName: name)
+        let swiftCallName = parent.exportedSwiftCallName(for: node, itemName: name)
         let explicitAccessControl = computeExplicitAtLeastInternalAccessControl(
             for: node,
             message: "Class visibility must be at least internal"
@@ -1742,7 +1757,7 @@ private final class ExportSwiftAPICollector: SyntaxAnyVisitor {
         jsAttribute: AttributeSyntax,
         aliasTarget: TypeSyntax
     ) {
-        let swiftCallName = SwiftToSkeleton.computeSwiftCallName(for: node, itemName: node.name.text)
+        let swiftCallName = parent.exportedSwiftCallName(for: node, itemName: node.name.text)
         if extractNamespace(from: jsAttribute) != nil {
             errors.append(
                 DiagnosticError(
@@ -1805,7 +1820,7 @@ private final class ExportSwiftAPICollector: SyntaxAnyVisitor {
             parentTypeNamespace: computeParentTypeNamespace(for: node)
         )
         let emitStyle = extractEnumStyle(from: jsAttribute) ?? .const
-        let swiftCallName = SwiftToSkeleton.computeSwiftCallName(for: node, itemName: name)
+        let swiftCallName = parent.exportedSwiftCallName(for: node, itemName: name)
         let explicitAccessControl = computeExplicitAtLeastInternalAccessControl(
             for: node,
             message: "Enum visibility must be at least internal"
@@ -1987,7 +2002,7 @@ private final class ExportSwiftAPICollector: SyntaxAnyVisitor {
             resolvedNamespace: namespaceResult.namespace,
             parentTypeNamespace: computeParentTypeNamespace(for: node)
         )
-        let swiftCallName = SwiftToSkeleton.computeSwiftCallName(for: node, itemName: name)
+        let swiftCallName = parent.exportedSwiftCallName(for: node, itemName: name)
         let explicitAccessControl = computeExplicitAtLeastInternalAccessControl(
             for: node,
             message: "Struct visibility must be at least internal"

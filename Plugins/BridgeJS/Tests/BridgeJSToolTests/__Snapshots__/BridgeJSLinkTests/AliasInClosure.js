@@ -232,7 +232,7 @@ export async function createInstantiator(options, swift) {
                 const func = swift.memory.getObject(funcRef);
                 func.__unregister();
             }
-            bjs["invoke_js_callback_TestModule_10TestModuleAl7Polygon_Si"] = function(callbackId, param0) {
+            bjs["invoke_js_callback_TestModule_10TestModuleAl18TestModule_Polygon_Si"] = function(callbackId, param0) {
                 try {
                     const callback = swift.memory.getObject(callbackId);
                     let ret = callback(_exports['PolygonReference'].__construct(param0));
@@ -242,9 +242,9 @@ export async function createInstantiator(options, swift) {
                     return 0
                 }
             }
-            bjs["make_swift_closure_TestModule_10TestModuleAl7Polygon_Si"] = function(boxPtr, file, line) {
-                const lower_closure_TestModule_10TestModuleAl7Polygon_Si = function(param0) {
-                    const ret = instance.exports.invoke_swift_closure_TestModule_10TestModuleAl7Polygon_Si(boxPtr, param0.pointer);
+            bjs["make_swift_closure_TestModule_10TestModuleAl18TestModule_Polygon_Si"] = function(boxPtr, file, line) {
+                const lower_closure_TestModule_10TestModuleAl18TestModule_Polygon_Si = function(param0) {
+                    const ret = instance.exports.invoke_swift_closure_TestModule_10TestModuleAl18TestModule_Polygon_Si(boxPtr, param0.pointer);
                     if (tmpRetException) {
                         const error = swift.memory.getObject(tmpRetException);
                         swift.memory.release(tmpRetException);
@@ -253,9 +253,9 @@ export async function createInstantiator(options, swift) {
                     }
                     return ret;
                 };
-                return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModuleAl7Polygon_Si);
+                return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModuleAl18TestModule_Polygon_Si);
             }
-            bjs["invoke_js_callback_TestModule_10TestModuley_Al7Polygon"] = function(callbackId) {
+            bjs["invoke_js_callback_TestModule_10TestModuley_Al18TestModule_Polygon"] = function(callbackId) {
                 try {
                     const callback = swift.memory.getObject(callbackId);
                     let ret = callback();
@@ -265,9 +265,9 @@ export async function createInstantiator(options, swift) {
                     return 0
                 }
             }
-            bjs["make_swift_closure_TestModule_10TestModuley_Al7Polygon"] = function(boxPtr, file, line) {
-                const lower_closure_TestModule_10TestModuley_Al7Polygon = function() {
-                    const ret = instance.exports.invoke_swift_closure_TestModule_10TestModuley_Al7Polygon(boxPtr);
+            bjs["make_swift_closure_TestModule_10TestModuley_Al18TestModule_Polygon"] = function(boxPtr, file, line) {
+                const lower_closure_TestModule_10TestModuley_Al18TestModule_Polygon = function() {
+                    const ret = instance.exports.invoke_swift_closure_TestModule_10TestModuley_Al18TestModule_Polygon(boxPtr);
                     if (tmpRetException) {
                         const error = swift.memory.getObject(tmpRetException);
                         swift.memory.release(tmpRetException);
@@ -276,13 +276,13 @@ export async function createInstantiator(options, swift) {
                     }
                     return _exports['PolygonReference'].__construct(ret);
                 };
-                return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModuley_Al7Polygon);
+                return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModuley_Al18TestModule_Polygon);
             }
             // Wrapper functions for module: TestModule
             if (!importObject["TestModule"]) {
                 importObject["TestModule"] = {};
             }
-            importObject["TestModule"]["bjs_PolygonReference_wrap"] = function(pointer) {
+            importObject["TestModule"]["bjs_TestModule_PolygonReference_wrap"] = function(pointer) {
                 const obj = _exports['PolygonReference'].__construct(pointer);
                 return swift.memory.retain(obj);
             };
@@ -354,21 +354,21 @@ export async function createInstantiator(options, swift) {
             }
             class PolygonReference extends SwiftHeapObject {
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_PolygonReference_deinit, PolygonReference.prototype, null);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_TestModule_PolygonReference_deinit, PolygonReference.prototype, null);
                 }
 
                 constructor(sides) {
-                    const ret = instance.exports.bjs_PolygonReference_init(sides);
+                    const ret = instance.exports.bjs_TestModule_PolygonReference_init(sides);
                     return PolygonReference.__construct(ret);
                 }
             }
             const exports = {
-                makePolygonFactory: function bjs_makePolygonFactory() {
-                    const ret = instance.exports.bjs_makePolygonFactory();
+                makePolygonFactory: function bjs_TestModule_makePolygonFactory() {
+                    const ret = instance.exports.bjs_TestModule_makePolygonFactory();
                     return swift.memory.getObject(ret);
                 },
-                makePolygonInspector: function bjs_makePolygonInspector() {
-                    const ret = instance.exports.bjs_makePolygonInspector();
+                makePolygonInspector: function bjs_TestModule_makePolygonInspector() {
+                    const ret = instance.exports.bjs_TestModule_makePolygonInspector();
                     return swift.memory.getObject(ret);
                 },
                 PolygonReference,

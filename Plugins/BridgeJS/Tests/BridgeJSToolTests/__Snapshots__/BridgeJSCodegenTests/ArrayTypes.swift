@@ -1,12 +1,12 @@
-extension Direction: _BridgedSwiftCaseEnum {
+extension TestModule.Direction: _BridgedSwiftCaseEnum {
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSLowerParameter() -> Int32 {
         return bridgeJSRawValue
     }
-    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftReturn(_ value: Int32) -> Direction {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftReturn(_ value: Int32) -> TestModule.Direction {
         return bridgeJSLiftParameter(value)
     }
-    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftParameter(_ value: Int32) -> Direction {
-        return Direction(bridgeJSRawValue: value)!
+    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftParameter(_ value: Int32) -> TestModule.Direction {
+        return TestModule.Direction(bridgeJSRawValue: value)!
     }
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSLowerReturn() -> Int32 {
         return bridgeJSLowerParameter()
@@ -41,14 +41,14 @@ extension Direction: _BridgedSwiftCaseEnum {
     }
 }
 
-extension Status: _BridgedSwiftEnumNoPayload, _BridgedSwiftRawValueEnum {
+extension TestModule.Status: _BridgedSwiftEnumNoPayload, _BridgedSwiftRawValueEnum {
 }
 
-extension Point: _BridgedSwiftStruct {
-    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> Point {
+extension TestModule.Point: _BridgedSwiftStruct {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> TestModule.Point {
         let y = Double.bridgeJSStackPop()
         let x = Double.bridgeJSStackPop()
-        return Point(x: x, y: y)
+        return TestModule.Point(x: x, y: y)
     }
 
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSStackPush() {
@@ -57,44 +57,44 @@ extension Point: _BridgedSwiftStruct {
     }
 
     init(unsafelyCopying jsObject: JSObject) {
-        _bjs_struct_lower_Point(jsObject.bridgeJSLowerParameter())
+        _bjs_struct_lower_TestModule_Point(jsObject.bridgeJSLowerParameter())
         self = Self.bridgeJSStackPop()
     }
 
     func toJSObject() -> JSObject {
         let __bjs_self = self
         __bjs_self.bridgeJSStackPush()
-        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_Point()))
+        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_TestModule_Point()))
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_Point")
-fileprivate func _bjs_struct_lower_Point_extern(_ objectId: Int32) -> Void
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_TestModule_Point")
+fileprivate func _bjs_struct_lower_TestModule_Point_extern(_ objectId: Int32) -> Void
 #else
-fileprivate func _bjs_struct_lower_Point_extern(_ objectId: Int32) -> Void {
+fileprivate func _bjs_struct_lower_TestModule_Point_extern(_ objectId: Int32) -> Void {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lower_Point(_ objectId: Int32) -> Void {
-    return _bjs_struct_lower_Point_extern(objectId)
+@inline(never) fileprivate func _bjs_struct_lower_TestModule_Point(_ objectId: Int32) -> Void {
+    return _bjs_struct_lower_TestModule_Point_extern(objectId)
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_Point")
-fileprivate func _bjs_struct_lift_Point_extern() -> Int32
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_TestModule_Point")
+fileprivate func _bjs_struct_lift_TestModule_Point_extern() -> Int32
 #else
-fileprivate func _bjs_struct_lift_Point_extern() -> Int32 {
+fileprivate func _bjs_struct_lift_TestModule_Point_extern() -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lift_Point() -> Int32 {
-    return _bjs_struct_lift_Point_extern()
+@inline(never) fileprivate func _bjs_struct_lift_TestModule_Point() -> Int32 {
+    return _bjs_struct_lift_TestModule_Point_extern()
 }
 
-@_expose(wasm, "bjs_processIntArray")
-@_cdecl("bjs_processIntArray")
-public func _bjs_processIntArray() -> Void {
+@_expose(wasm, "bjs_TestModule_processIntArray")
+@_cdecl("bjs_TestModule_processIntArray")
+public func _bjs_TestModule_processIntArray() -> Void {
     #if arch(wasm32)
     let ret = processIntArray(_: [Int].bridgeJSStackPop())
     ret.bridgeJSStackPush()
@@ -103,9 +103,9 @@ public func _bjs_processIntArray() -> Void {
     #endif
 }
 
-@_expose(wasm, "bjs_processStringArray")
-@_cdecl("bjs_processStringArray")
-public func _bjs_processStringArray() -> Void {
+@_expose(wasm, "bjs_TestModule_processStringArray")
+@_cdecl("bjs_TestModule_processStringArray")
+public func _bjs_TestModule_processStringArray() -> Void {
     #if arch(wasm32)
     let ret = processStringArray(_: [String].bridgeJSStackPop())
     ret.bridgeJSStackPush()
@@ -114,9 +114,9 @@ public func _bjs_processStringArray() -> Void {
     #endif
 }
 
-@_expose(wasm, "bjs_processDoubleArray")
-@_cdecl("bjs_processDoubleArray")
-public func _bjs_processDoubleArray() -> Void {
+@_expose(wasm, "bjs_TestModule_processDoubleArray")
+@_cdecl("bjs_TestModule_processDoubleArray")
+public func _bjs_TestModule_processDoubleArray() -> Void {
     #if arch(wasm32)
     let ret = processDoubleArray(_: [Double].bridgeJSStackPop())
     ret.bridgeJSStackPush()
@@ -125,9 +125,9 @@ public func _bjs_processDoubleArray() -> Void {
     #endif
 }
 
-@_expose(wasm, "bjs_processBoolArray")
-@_cdecl("bjs_processBoolArray")
-public func _bjs_processBoolArray() -> Void {
+@_expose(wasm, "bjs_TestModule_processBoolArray")
+@_cdecl("bjs_TestModule_processBoolArray")
+public func _bjs_TestModule_processBoolArray() -> Void {
     #if arch(wasm32)
     let ret = processBoolArray(_: [Bool].bridgeJSStackPop())
     ret.bridgeJSStackPush()
@@ -136,42 +136,42 @@ public func _bjs_processBoolArray() -> Void {
     #endif
 }
 
-@_expose(wasm, "bjs_processPointArray")
-@_cdecl("bjs_processPointArray")
-public func _bjs_processPointArray() -> Void {
+@_expose(wasm, "bjs_TestModule_processPointArray")
+@_cdecl("bjs_TestModule_processPointArray")
+public func _bjs_TestModule_processPointArray() -> Void {
     #if arch(wasm32)
-    let ret = processPointArray(_: [Point].bridgeJSStackPop())
+    let ret = processPointArray(_: [TestModule.Point].bridgeJSStackPop())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_processDirectionArray")
-@_cdecl("bjs_processDirectionArray")
-public func _bjs_processDirectionArray() -> Void {
+@_expose(wasm, "bjs_TestModule_processDirectionArray")
+@_cdecl("bjs_TestModule_processDirectionArray")
+public func _bjs_TestModule_processDirectionArray() -> Void {
     #if arch(wasm32)
-    let ret = processDirectionArray(_: [Direction].bridgeJSStackPop())
+    let ret = processDirectionArray(_: [TestModule.Direction].bridgeJSStackPop())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_processStatusArray")
-@_cdecl("bjs_processStatusArray")
-public func _bjs_processStatusArray() -> Void {
+@_expose(wasm, "bjs_TestModule_processStatusArray")
+@_cdecl("bjs_TestModule_processStatusArray")
+public func _bjs_TestModule_processStatusArray() -> Void {
     #if arch(wasm32)
-    let ret = processStatusArray(_: [Status].bridgeJSStackPop())
+    let ret = processStatusArray(_: [TestModule.Status].bridgeJSStackPop())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_sumIntArray")
-@_cdecl("bjs_sumIntArray")
-public func _bjs_sumIntArray() -> Int32 {
+@_expose(wasm, "bjs_TestModule_sumIntArray")
+@_cdecl("bjs_TestModule_sumIntArray")
+public func _bjs_TestModule_sumIntArray() -> Int32 {
     #if arch(wasm32)
     let ret = sumIntArray(_: [Int].bridgeJSStackPop())
     return ret.bridgeJSLowerReturn()
@@ -180,20 +180,20 @@ public func _bjs_sumIntArray() -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_findFirstPoint")
-@_cdecl("bjs_findFirstPoint")
-public func _bjs_findFirstPoint(_ matchingBytes: Int32, _ matchingLength: Int32) -> Void {
+@_expose(wasm, "bjs_TestModule_findFirstPoint")
+@_cdecl("bjs_TestModule_findFirstPoint")
+public func _bjs_TestModule_findFirstPoint(_ matchingBytes: Int32, _ matchingLength: Int32) -> Void {
     #if arch(wasm32)
-    let ret = findFirstPoint(_: [Point].bridgeJSStackPop(), matching: String.bridgeJSLiftParameter(matchingBytes, matchingLength))
+    let ret = findFirstPoint(_: [TestModule.Point].bridgeJSStackPop(), matching: String.bridgeJSLiftParameter(matchingBytes, matchingLength))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_processUnsafeRawPointerArray")
-@_cdecl("bjs_processUnsafeRawPointerArray")
-public func _bjs_processUnsafeRawPointerArray() -> Void {
+@_expose(wasm, "bjs_TestModule_processUnsafeRawPointerArray")
+@_cdecl("bjs_TestModule_processUnsafeRawPointerArray")
+public func _bjs_TestModule_processUnsafeRawPointerArray() -> Void {
     #if arch(wasm32)
     let ret = processUnsafeRawPointerArray(_: [UnsafeRawPointer].bridgeJSStackPop())
     ret.bridgeJSStackPush()
@@ -202,9 +202,9 @@ public func _bjs_processUnsafeRawPointerArray() -> Void {
     #endif
 }
 
-@_expose(wasm, "bjs_processUnsafeMutableRawPointerArray")
-@_cdecl("bjs_processUnsafeMutableRawPointerArray")
-public func _bjs_processUnsafeMutableRawPointerArray() -> Void {
+@_expose(wasm, "bjs_TestModule_processUnsafeMutableRawPointerArray")
+@_cdecl("bjs_TestModule_processUnsafeMutableRawPointerArray")
+public func _bjs_TestModule_processUnsafeMutableRawPointerArray() -> Void {
     #if arch(wasm32)
     let ret = processUnsafeMutableRawPointerArray(_: [UnsafeMutableRawPointer].bridgeJSStackPop())
     ret.bridgeJSStackPush()
@@ -213,9 +213,9 @@ public func _bjs_processUnsafeMutableRawPointerArray() -> Void {
     #endif
 }
 
-@_expose(wasm, "bjs_processOpaquePointerArray")
-@_cdecl("bjs_processOpaquePointerArray")
-public func _bjs_processOpaquePointerArray() -> Void {
+@_expose(wasm, "bjs_TestModule_processOpaquePointerArray")
+@_cdecl("bjs_TestModule_processOpaquePointerArray")
+public func _bjs_TestModule_processOpaquePointerArray() -> Void {
     #if arch(wasm32)
     let ret = processOpaquePointerArray(_: [OpaquePointer].bridgeJSStackPop())
     ret.bridgeJSStackPush()
@@ -224,9 +224,9 @@ public func _bjs_processOpaquePointerArray() -> Void {
     #endif
 }
 
-@_expose(wasm, "bjs_processOptionalIntArray")
-@_cdecl("bjs_processOptionalIntArray")
-public func _bjs_processOptionalIntArray() -> Void {
+@_expose(wasm, "bjs_TestModule_processOptionalIntArray")
+@_cdecl("bjs_TestModule_processOptionalIntArray")
+public func _bjs_TestModule_processOptionalIntArray() -> Void {
     #if arch(wasm32)
     let ret = processOptionalIntArray(_: [Optional<Int>].bridgeJSStackPop())
     ret.bridgeJSStackPush()
@@ -235,9 +235,9 @@ public func _bjs_processOptionalIntArray() -> Void {
     #endif
 }
 
-@_expose(wasm, "bjs_processOptionalStringArray")
-@_cdecl("bjs_processOptionalStringArray")
-public func _bjs_processOptionalStringArray() -> Void {
+@_expose(wasm, "bjs_TestModule_processOptionalStringArray")
+@_cdecl("bjs_TestModule_processOptionalStringArray")
+public func _bjs_TestModule_processOptionalStringArray() -> Void {
     #if arch(wasm32)
     let ret = processOptionalStringArray(_: [Optional<String>].bridgeJSStackPop())
     ret.bridgeJSStackPush()
@@ -246,9 +246,9 @@ public func _bjs_processOptionalStringArray() -> Void {
     #endif
 }
 
-@_expose(wasm, "bjs_processOptionalArray")
-@_cdecl("bjs_processOptionalArray")
-public func _bjs_processOptionalArray() -> Void {
+@_expose(wasm, "bjs_TestModule_processOptionalArray")
+@_cdecl("bjs_TestModule_processOptionalArray")
+public func _bjs_TestModule_processOptionalArray() -> Void {
     #if arch(wasm32)
     let ret = processOptionalArray(_: Optional<[Int]>.bridgeJSLiftParameter())
     ret.bridgeJSStackPush()
@@ -257,42 +257,42 @@ public func _bjs_processOptionalArray() -> Void {
     #endif
 }
 
-@_expose(wasm, "bjs_processOptionalPointArray")
-@_cdecl("bjs_processOptionalPointArray")
-public func _bjs_processOptionalPointArray() -> Void {
+@_expose(wasm, "bjs_TestModule_processOptionalPointArray")
+@_cdecl("bjs_TestModule_processOptionalPointArray")
+public func _bjs_TestModule_processOptionalPointArray() -> Void {
     #if arch(wasm32)
-    let ret = processOptionalPointArray(_: [Optional<Point>].bridgeJSStackPop())
+    let ret = processOptionalPointArray(_: [Optional<TestModule.Point>].bridgeJSStackPop())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_processOptionalDirectionArray")
-@_cdecl("bjs_processOptionalDirectionArray")
-public func _bjs_processOptionalDirectionArray() -> Void {
+@_expose(wasm, "bjs_TestModule_processOptionalDirectionArray")
+@_cdecl("bjs_TestModule_processOptionalDirectionArray")
+public func _bjs_TestModule_processOptionalDirectionArray() -> Void {
     #if arch(wasm32)
-    let ret = processOptionalDirectionArray(_: [Optional<Direction>].bridgeJSStackPop())
+    let ret = processOptionalDirectionArray(_: [Optional<TestModule.Direction>].bridgeJSStackPop())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_processOptionalStatusArray")
-@_cdecl("bjs_processOptionalStatusArray")
-public func _bjs_processOptionalStatusArray() -> Void {
+@_expose(wasm, "bjs_TestModule_processOptionalStatusArray")
+@_cdecl("bjs_TestModule_processOptionalStatusArray")
+public func _bjs_TestModule_processOptionalStatusArray() -> Void {
     #if arch(wasm32)
-    let ret = processOptionalStatusArray(_: [Optional<Status>].bridgeJSStackPop())
+    let ret = processOptionalStatusArray(_: [Optional<TestModule.Status>].bridgeJSStackPop())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_processNestedIntArray")
-@_cdecl("bjs_processNestedIntArray")
-public func _bjs_processNestedIntArray() -> Void {
+@_expose(wasm, "bjs_TestModule_processNestedIntArray")
+@_cdecl("bjs_TestModule_processNestedIntArray")
+public func _bjs_TestModule_processNestedIntArray() -> Void {
     #if arch(wasm32)
     let ret = processNestedIntArray(_: [[Int]].bridgeJSStackPop())
     ret.bridgeJSStackPush()
@@ -301,9 +301,9 @@ public func _bjs_processNestedIntArray() -> Void {
     #endif
 }
 
-@_expose(wasm, "bjs_processNestedStringArray")
-@_cdecl("bjs_processNestedStringArray")
-public func _bjs_processNestedStringArray() -> Void {
+@_expose(wasm, "bjs_TestModule_processNestedStringArray")
+@_cdecl("bjs_TestModule_processNestedStringArray")
+public func _bjs_TestModule_processNestedStringArray() -> Void {
     #if arch(wasm32)
     let ret = processNestedStringArray(_: [[String]].bridgeJSStackPop())
     ret.bridgeJSStackPush()
@@ -312,42 +312,42 @@ public func _bjs_processNestedStringArray() -> Void {
     #endif
 }
 
-@_expose(wasm, "bjs_processNestedPointArray")
-@_cdecl("bjs_processNestedPointArray")
-public func _bjs_processNestedPointArray() -> Void {
+@_expose(wasm, "bjs_TestModule_processNestedPointArray")
+@_cdecl("bjs_TestModule_processNestedPointArray")
+public func _bjs_TestModule_processNestedPointArray() -> Void {
     #if arch(wasm32)
-    let ret = processNestedPointArray(_: [[Point]].bridgeJSStackPop())
+    let ret = processNestedPointArray(_: [[TestModule.Point]].bridgeJSStackPop())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_processItemArray")
-@_cdecl("bjs_processItemArray")
-public func _bjs_processItemArray() -> Void {
+@_expose(wasm, "bjs_TestModule_processItemArray")
+@_cdecl("bjs_TestModule_processItemArray")
+public func _bjs_TestModule_processItemArray() -> Void {
     #if arch(wasm32)
-    let ret = processItemArray(_: [Item].bridgeJSStackPop())
+    let ret = processItemArray(_: [TestModule.Item].bridgeJSStackPop())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_processNestedItemArray")
-@_cdecl("bjs_processNestedItemArray")
-public func _bjs_processNestedItemArray() -> Void {
+@_expose(wasm, "bjs_TestModule_processNestedItemArray")
+@_cdecl("bjs_TestModule_processNestedItemArray")
+public func _bjs_TestModule_processNestedItemArray() -> Void {
     #if arch(wasm32)
-    let ret = processNestedItemArray(_: [[Item]].bridgeJSStackPop())
+    let ret = processNestedItemArray(_: [[TestModule.Item]].bridgeJSStackPop())
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_processJSObjectArray")
-@_cdecl("bjs_processJSObjectArray")
-public func _bjs_processJSObjectArray() -> Void {
+@_expose(wasm, "bjs_TestModule_processJSObjectArray")
+@_cdecl("bjs_TestModule_processJSObjectArray")
+public func _bjs_TestModule_processJSObjectArray() -> Void {
     #if arch(wasm32)
     let ret = processJSObjectArray(_: [JSObject].bridgeJSStackPop())
     ret.bridgeJSStackPush()
@@ -356,9 +356,9 @@ public func _bjs_processJSObjectArray() -> Void {
     #endif
 }
 
-@_expose(wasm, "bjs_processOptionalJSObjectArray")
-@_cdecl("bjs_processOptionalJSObjectArray")
-public func _bjs_processOptionalJSObjectArray() -> Void {
+@_expose(wasm, "bjs_TestModule_processOptionalJSObjectArray")
+@_cdecl("bjs_TestModule_processOptionalJSObjectArray")
+public func _bjs_TestModule_processOptionalJSObjectArray() -> Void {
     #if arch(wasm32)
     let ret = processOptionalJSObjectArray(_: [Optional<JSObject>].bridgeJSStackPop())
     ret.bridgeJSStackPush()
@@ -367,9 +367,9 @@ public func _bjs_processOptionalJSObjectArray() -> Void {
     #endif
 }
 
-@_expose(wasm, "bjs_processNestedJSObjectArray")
-@_cdecl("bjs_processNestedJSObjectArray")
-public func _bjs_processNestedJSObjectArray() -> Void {
+@_expose(wasm, "bjs_TestModule_processNestedJSObjectArray")
+@_cdecl("bjs_TestModule_processNestedJSObjectArray")
+public func _bjs_TestModule_processNestedJSObjectArray() -> Void {
     #if arch(wasm32)
     let ret = processNestedJSObjectArray(_: [[JSObject]].bridgeJSStackPop())
     ret.bridgeJSStackPush()
@@ -378,9 +378,9 @@ public func _bjs_processNestedJSObjectArray() -> Void {
     #endif
 }
 
-@_expose(wasm, "bjs_multiArrayParams")
-@_cdecl("bjs_multiArrayParams")
-public func _bjs_multiArrayParams() -> Int32 {
+@_expose(wasm, "bjs_TestModule_multiArrayParams")
+@_cdecl("bjs_TestModule_multiArrayParams")
+public func _bjs_TestModule_multiArrayParams() -> Int32 {
     #if arch(wasm32)
     let _tmp_strs = [String].bridgeJSStackPop()
     let _tmp_nums = [Int].bridgeJSStackPop()
@@ -391,9 +391,9 @@ public func _bjs_multiArrayParams() -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_multiOptionalArrayParams")
-@_cdecl("bjs_multiOptionalArrayParams")
-public func _bjs_multiOptionalArrayParams() -> Int32 {
+@_expose(wasm, "bjs_TestModule_multiOptionalArrayParams")
+@_cdecl("bjs_TestModule_multiOptionalArrayParams")
+public func _bjs_TestModule_multiOptionalArrayParams() -> Int32 {
     #if arch(wasm32)
     let _tmp_b = Optional<[String]>.bridgeJSLiftParameter()
     let _tmp_a = Optional<[Int]>.bridgeJSLiftParameter()
@@ -404,101 +404,101 @@ public func _bjs_multiOptionalArrayParams() -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_Item_deinit")
-@_cdecl("bjs_Item_deinit")
-public func _bjs_Item_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_TestModule_Item_deinit")
+@_cdecl("bjs_TestModule_Item_deinit")
+public func _bjs_TestModule_Item_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    Unmanaged<Item>.fromOpaque(pointer).release()
+    Unmanaged<TestModule.Item>.fromOpaque(pointer).release()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension Item: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
+extension TestModule.Item: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
     var jsValue: JSValue {
-        return .object(JSObject(id: UInt32(bitPattern: _bjs_Item_wrap(Unmanaged.passRetained(self).toOpaque()))))
+        return .object(JSObject(id: UInt32(bitPattern: _bjs_TestModule_Item_wrap(Unmanaged.passRetained(self).toOpaque()))))
     }
     consuming func bridgeJSLowerAsProtocolReturn() -> Int32 {
-        _bjs_Item_wrap(Unmanaged.passRetained(self).toOpaque())
+        _bjs_TestModule_Item_wrap(Unmanaged.passRetained(self).toOpaque())
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "TestModule", name: "bjs_Item_wrap")
-fileprivate func _bjs_Item_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
+@_extern(wasm, module: "TestModule", name: "bjs_TestModule_Item_wrap")
+fileprivate func _bjs_TestModule_Item_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
 #else
-fileprivate func _bjs_Item_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+fileprivate func _bjs_TestModule_Item_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_Item_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
-    return _bjs_Item_wrap_extern(pointer)
+@inline(never) fileprivate func _bjs_TestModule_Item_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+    return _bjs_TestModule_Item_wrap_extern(pointer)
 }
 
-@_expose(wasm, "bjs_MultiArrayContainer_init")
-@_cdecl("bjs_MultiArrayContainer_init")
-public func _bjs_MultiArrayContainer_init() -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_TestModule_MultiArrayContainer_init")
+@_cdecl("bjs_TestModule_MultiArrayContainer_init")
+public func _bjs_TestModule_MultiArrayContainer_init() -> UnsafeMutableRawPointer {
     #if arch(wasm32)
     let _tmp_strs = [String].bridgeJSStackPop()
     let _tmp_nums = [Int].bridgeJSStackPop()
-    let ret = MultiArrayContainer(nums: _tmp_nums, strs: _tmp_strs)
+    let ret = TestModule.MultiArrayContainer(nums: _tmp_nums, strs: _tmp_strs)
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_MultiArrayContainer_numbers_get")
-@_cdecl("bjs_MultiArrayContainer_numbers_get")
-public func _bjs_MultiArrayContainer_numbers_get(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_TestModule_MultiArrayContainer_numbers_get")
+@_cdecl("bjs_TestModule_MultiArrayContainer_numbers_get")
+public func _bjs_TestModule_MultiArrayContainer_numbers_get(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = MultiArrayContainer.bridgeJSLiftParameter(_self).numbers
+    let ret = TestModule.MultiArrayContainer.bridgeJSLiftParameter(_self).numbers
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_MultiArrayContainer_strings_get")
-@_cdecl("bjs_MultiArrayContainer_strings_get")
-public func _bjs_MultiArrayContainer_strings_get(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_TestModule_MultiArrayContainer_strings_get")
+@_cdecl("bjs_TestModule_MultiArrayContainer_strings_get")
+public func _bjs_TestModule_MultiArrayContainer_strings_get(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = MultiArrayContainer.bridgeJSLiftParameter(_self).strings
+    let ret = TestModule.MultiArrayContainer.bridgeJSLiftParameter(_self).strings
     ret.bridgeJSStackPush()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_MultiArrayContainer_deinit")
-@_cdecl("bjs_MultiArrayContainer_deinit")
-public func _bjs_MultiArrayContainer_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_TestModule_MultiArrayContainer_deinit")
+@_cdecl("bjs_TestModule_MultiArrayContainer_deinit")
+public func _bjs_TestModule_MultiArrayContainer_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    Unmanaged<MultiArrayContainer>.fromOpaque(pointer).release()
+    Unmanaged<TestModule.MultiArrayContainer>.fromOpaque(pointer).release()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension MultiArrayContainer: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
+extension TestModule.MultiArrayContainer: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
     var jsValue: JSValue {
-        return .object(JSObject(id: UInt32(bitPattern: _bjs_MultiArrayContainer_wrap(Unmanaged.passRetained(self).toOpaque()))))
+        return .object(JSObject(id: UInt32(bitPattern: _bjs_TestModule_MultiArrayContainer_wrap(Unmanaged.passRetained(self).toOpaque()))))
     }
     consuming func bridgeJSLowerAsProtocolReturn() -> Int32 {
-        _bjs_MultiArrayContainer_wrap(Unmanaged.passRetained(self).toOpaque())
+        _bjs_TestModule_MultiArrayContainer_wrap(Unmanaged.passRetained(self).toOpaque())
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "TestModule", name: "bjs_MultiArrayContainer_wrap")
-fileprivate func _bjs_MultiArrayContainer_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
+@_extern(wasm, module: "TestModule", name: "bjs_TestModule_MultiArrayContainer_wrap")
+fileprivate func _bjs_TestModule_MultiArrayContainer_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
 #else
-fileprivate func _bjs_MultiArrayContainer_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+fileprivate func _bjs_TestModule_MultiArrayContainer_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_MultiArrayContainer_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
-    return _bjs_MultiArrayContainer_wrap_extern(pointer)
+@inline(never) fileprivate func _bjs_TestModule_MultiArrayContainer_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+    return _bjs_TestModule_MultiArrayContainer_wrap_extern(pointer)
 }
 
 #if arch(wasm32)

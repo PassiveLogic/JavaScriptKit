@@ -12,7 +12,7 @@
     "exposeToGlobal" : false,
     "functions" : [
       {
-        "abiName" : "bjs_processBytes",
+        "abiName" : "bjs_TestModule_processBytes",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -37,7 +37,7 @@
         }
       },
       {
-        "abiName" : "bjs_processFloats",
+        "abiName" : "bjs_TestModule_processFloats",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -62,7 +62,7 @@
         }
       },
       {
-        "abiName" : "bjs_processGenericDoubles",
+        "abiName" : "bjs_TestModule_processGenericDoubles",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -87,7 +87,7 @@
         }
       },
       {
-        "abiName" : "bjs_processGenericInts",
+        "abiName" : "bjs_TestModule_processGenericInts",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,

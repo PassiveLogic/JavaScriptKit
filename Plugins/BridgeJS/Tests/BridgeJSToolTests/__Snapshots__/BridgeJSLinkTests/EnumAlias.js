@@ -207,7 +207,7 @@ export async function createInstantiator(options, swift) {
             if (!importObject["TestModule"]) {
                 importObject["TestModule"] = {};
             }
-            importObject["TestModule"]["bjs_ColorBox_wrap"] = function(pointer) {
+            importObject["TestModule"]["bjs_TestModule_ColorBox_wrap"] = function(pointer) {
                 const obj = _exports['ColorBox'].__construct(pointer);
                 return swift.memory.retain(obj);
             };
@@ -279,19 +279,19 @@ export async function createInstantiator(options, swift) {
             }
             class ColorBox extends SwiftHeapObject {
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_ColorBox_deinit, ColorBox.prototype, null);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_TestModule_ColorBox_deinit, ColorBox.prototype, null);
                 }
 
                 constructor(name) {
                     const nameBytes = textEncoder.encode(name);
                     const nameId = swift.memory.retain(nameBytes);
-                    const ret = instance.exports.bjs_ColorBox_init(nameId, nameBytes.length);
+                    const ret = instance.exports.bjs_TestModule_ColorBox_init(nameId, nameBytes.length);
                     return ColorBox.__construct(ret);
                 }
             }
             const exports = {
-                roundtripColor: function bjs_roundtripColor(color) {
-                    const ret = instance.exports.bjs_roundtripColor(color.pointer);
+                roundtripColor: function bjs_TestModule_roundtripColor(color) {
+                    const ret = instance.exports.bjs_TestModule_roundtripColor(color.pointer);
                     return ColorBox.__construct(ret);
                 },
                 ColorBox,

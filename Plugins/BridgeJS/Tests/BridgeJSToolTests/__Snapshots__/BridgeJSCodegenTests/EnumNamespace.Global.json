@@ -6,7 +6,7 @@
     "classes" : [
       {
         "constructor" : {
-          "abiName" : "bjs_Utils_Converter_init",
+          "abiName" : "bjs_TestModule_Utils_Converter_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -18,7 +18,7 @@
         },
         "methods" : [
           {
-            "abiName" : "bjs_Utils_Converter_toString",
+            "abiName" : "bjs_TestModule_Utils_Converter_toString",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -71,11 +71,11 @@
             }
           }
         ],
-        "swiftCallName" : "Utils.Converter"
+        "swiftCallName" : "TestModule.Utils.Converter"
       },
       {
         "constructor" : {
-          "abiName" : "bjs_Networking_API_HTTPServer_init",
+          "abiName" : "bjs_TestModule_Networking_API_HTTPServer_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -87,7 +87,7 @@
         },
         "methods" : [
           {
-            "abiName" : "bjs_Networking_API_HTTPServer_call",
+            "abiName" : "bjs_TestModule_Networking_API_HTTPServer_call",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -104,7 +104,7 @@
                 "name" : "method",
                 "type" : {
                   "caseEnum" : {
-                    "_0" : "Networking.API.Method"
+                    "_0" : "TestModule.Networking.API.Method"
                   }
                 }
               }
@@ -124,11 +124,11 @@
         "properties" : [
 
         ],
-        "swiftCallName" : "Networking.API.HTTPServer"
+        "swiftCallName" : "TestModule.Networking.API.HTTPServer"
       },
       {
         "constructor" : {
-          "abiName" : "bjs_Networking_APIV2_Internal_TestServer_init",
+          "abiName" : "bjs_TestModule_Internal_TestServer_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -140,7 +140,7 @@
         },
         "methods" : [
           {
-            "abiName" : "bjs_Networking_APIV2_Internal_TestServer_call",
+            "abiName" : "bjs_TestModule_Internal_TestServer_call",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -158,7 +158,7 @@
                 "name" : "method",
                 "type" : {
                   "caseEnum" : {
-                    "_0" : "Internal.SupportedMethod"
+                    "_0" : "TestModule.Internal.SupportedMethod"
                   }
                 }
               }
@@ -179,11 +179,11 @@
         "properties" : [
 
         ],
-        "swiftCallName" : "Internal.TestServer"
+        "swiftCallName" : "TestModule.Internal.TestServer"
       },
       {
         "constructor" : {
-          "abiName" : "bjs_Formatting_Converter_init",
+          "abiName" : "bjs_TestModule_Formatting_Converter_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -195,7 +195,7 @@
         },
         "methods" : [
           {
-            "abiName" : "bjs_Formatting_Converter_format",
+            "abiName" : "bjs_TestModule_Formatting_Converter_format",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -233,7 +233,7 @@
         "properties" : [
 
         ],
-        "swiftCallName" : "Formatting.Converter"
+        "swiftCallName" : "TestModule.Formatting.Converter"
       }
     ],
     "enums" : [
@@ -249,7 +249,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "Utils",
+        "swiftCallName" : "TestModule.Utils",
         "tsFullPath" : "Utils"
       },
       {
@@ -264,7 +264,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "Networking",
+        "swiftCallName" : "TestModule.Networking",
         "tsFullPath" : "Networking"
       },
       {
@@ -282,7 +282,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "Networking.API",
+        "swiftCallName" : "TestModule.Networking.API",
         "tsFullPath" : "Networking.API"
       },
       {
@@ -324,7 +324,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "Networking.API.Method",
+        "swiftCallName" : "TestModule.Networking.API.Method",
         "tsFullPath" : "Networking.API.Method"
       },
       {
@@ -339,7 +339,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "Configuration",
+        "swiftCallName" : "TestModule.Configuration",
         "tsFullPath" : "Configuration"
       },
       {
@@ -385,7 +385,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "Configuration.LogLevel",
+        "swiftCallName" : "TestModule.Configuration.LogLevel",
         "tsFullPath" : "Configuration.LogLevel"
       },
       {
@@ -424,7 +424,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "Configuration.Port",
+        "swiftCallName" : "TestModule.Configuration.Port",
         "tsFullPath" : "Configuration.Port"
       },
       {
@@ -443,7 +443,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "Internal",
+        "swiftCallName" : "TestModule.Internal",
         "tsFullPath" : "Networking.APIV2.Internal"
       },
       {
@@ -474,7 +474,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "Internal.SupportedMethod",
+        "swiftCallName" : "TestModule.Internal.SupportedMethod",
         "tsFullPath" : "Networking.APIV2.Internal.SupportedMethod"
       },
       {
@@ -489,7 +489,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "Formatting",
+        "swiftCallName" : "TestModule.Formatting",
         "tsFullPath" : "Formatting"
       },
       {
@@ -504,7 +504,7 @@
         ],
         "staticMethods" : [
           {
-            "abiName" : "bjs_Services_Graph_GraphOperations_static_createGraph",
+            "abiName" : "bjs_TestModule_GraphOperations_static_createGraph",
             "effects" : {
               "isAsync" : false,
               "isStatic" : true,
@@ -540,12 +540,12 @@
             },
             "staticContext" : {
               "namespaceEnum" : {
-                "_0" : "GraphOperations"
+                "_0" : "TestModule.GraphOperations"
               }
             }
           },
           {
-            "abiName" : "bjs_Services_Graph_GraphOperations_static_nodeCount",
+            "abiName" : "bjs_TestModule_GraphOperations_static_nodeCount",
             "effects" : {
               "isAsync" : false,
               "isStatic" : true,
@@ -581,12 +581,12 @@
             },
             "staticContext" : {
               "namespaceEnum" : {
-                "_0" : "GraphOperations"
+                "_0" : "TestModule.GraphOperations"
               }
             }
           },
           {
-            "abiName" : "bjs_Services_Graph_GraphOperations_static_validate",
+            "abiName" : "bjs_TestModule_GraphOperations_static_validate",
             "effects" : {
               "isAsync" : false,
               "isStatic" : true,
@@ -619,7 +619,7 @@
             },
             "staticContext" : {
               "namespaceEnum" : {
-                "_0" : "GraphOperations"
+                "_0" : "TestModule.GraphOperations"
               }
             }
           }
@@ -627,7 +627,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "GraphOperations",
+        "swiftCallName" : "TestModule.GraphOperations",
         "tsFullPath" : "Services.Graph.GraphOperations"
       }
     ],

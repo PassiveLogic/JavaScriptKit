@@ -1,6 +1,6 @@
-@_expose(wasm, "bjs_roundTripInt8")
-@_cdecl("bjs_roundTripInt8")
-public func _bjs_roundTripInt8(_ v: Int32) -> Int32 {
+@_expose(wasm, "bjs_TestModule_roundTripInt8")
+@_cdecl("bjs_TestModule_roundTripInt8")
+public func _bjs_TestModule_roundTripInt8(_ v: Int32) -> Int32 {
     #if arch(wasm32)
     let ret = roundTripInt8(_: Int8.bridgeJSLiftParameter(v))
     return ret.bridgeJSLowerReturn()
@@ -9,9 +9,9 @@ public func _bjs_roundTripInt8(_ v: Int32) -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripUInt8")
-@_cdecl("bjs_roundTripUInt8")
-public func _bjs_roundTripUInt8(_ v: Int32) -> Int32 {
+@_expose(wasm, "bjs_TestModule_roundTripUInt8")
+@_cdecl("bjs_TestModule_roundTripUInt8")
+public func _bjs_TestModule_roundTripUInt8(_ v: Int32) -> Int32 {
     #if arch(wasm32)
     let ret = roundTripUInt8(_: UInt8.bridgeJSLiftParameter(v))
     return ret.bridgeJSLowerReturn()
@@ -20,9 +20,9 @@ public func _bjs_roundTripUInt8(_ v: Int32) -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripInt16")
-@_cdecl("bjs_roundTripInt16")
-public func _bjs_roundTripInt16(_ v: Int32) -> Int32 {
+@_expose(wasm, "bjs_TestModule_roundTripInt16")
+@_cdecl("bjs_TestModule_roundTripInt16")
+public func _bjs_TestModule_roundTripInt16(_ v: Int32) -> Int32 {
     #if arch(wasm32)
     let ret = roundTripInt16(_: Int16.bridgeJSLiftParameter(v))
     return ret.bridgeJSLowerReturn()
@@ -31,9 +31,9 @@ public func _bjs_roundTripInt16(_ v: Int32) -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripUInt16")
-@_cdecl("bjs_roundTripUInt16")
-public func _bjs_roundTripUInt16(_ v: Int32) -> Int32 {
+@_expose(wasm, "bjs_TestModule_roundTripUInt16")
+@_cdecl("bjs_TestModule_roundTripUInt16")
+public func _bjs_TestModule_roundTripUInt16(_ v: Int32) -> Int32 {
     #if arch(wasm32)
     let ret = roundTripUInt16(_: UInt16.bridgeJSLiftParameter(v))
     return ret.bridgeJSLowerReturn()
@@ -42,9 +42,9 @@ public func _bjs_roundTripUInt16(_ v: Int32) -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripInt32")
-@_cdecl("bjs_roundTripInt32")
-public func _bjs_roundTripInt32(_ v: Int32) -> Int32 {
+@_expose(wasm, "bjs_TestModule_roundTripInt32")
+@_cdecl("bjs_TestModule_roundTripInt32")
+public func _bjs_TestModule_roundTripInt32(_ v: Int32) -> Int32 {
     #if arch(wasm32)
     let ret = roundTripInt32(_: Int32.bridgeJSLiftParameter(v))
     return ret.bridgeJSLowerReturn()
@@ -53,9 +53,9 @@ public func _bjs_roundTripInt32(_ v: Int32) -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripUInt32")
-@_cdecl("bjs_roundTripUInt32")
-public func _bjs_roundTripUInt32(_ v: Int32) -> Int32 {
+@_expose(wasm, "bjs_TestModule_roundTripUInt32")
+@_cdecl("bjs_TestModule_roundTripUInt32")
+public func _bjs_TestModule_roundTripUInt32(_ v: Int32) -> Int32 {
     #if arch(wasm32)
     let ret = roundTripUInt32(_: UInt32.bridgeJSLiftParameter(v))
     return ret.bridgeJSLowerReturn()
@@ -64,9 +64,9 @@ public func _bjs_roundTripUInt32(_ v: Int32) -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripInt64")
-@_cdecl("bjs_roundTripInt64")
-public func _bjs_roundTripInt64(_ v: Int64) -> Int64 {
+@_expose(wasm, "bjs_TestModule_roundTripInt64")
+@_cdecl("bjs_TestModule_roundTripInt64")
+public func _bjs_TestModule_roundTripInt64(_ v: Int64) -> Int64 {
     #if arch(wasm32)
     let ret = roundTripInt64(_: Int64.bridgeJSLiftParameter(v))
     return ret.bridgeJSLowerReturn()
@@ -75,9 +75,9 @@ public func _bjs_roundTripInt64(_ v: Int64) -> Int64 {
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripUInt64")
-@_cdecl("bjs_roundTripUInt64")
-public func _bjs_roundTripUInt64(_ v: Int64) -> Int64 {
+@_expose(wasm, "bjs_TestModule_roundTripUInt64")
+@_cdecl("bjs_TestModule_roundTripUInt64")
+public func _bjs_TestModule_roundTripUInt64(_ v: Int64) -> Int64 {
     #if arch(wasm32)
     let ret = roundTripUInt64(_: UInt64.bridgeJSLiftParameter(v))
     return ret.bridgeJSLowerReturn()

@@ -85,7 +85,7 @@ import Testing
                 """
         )
         let resolveTypes = try #require(app.exported?.asyncPromiseResolveReturnTypes)
-        #expect(resolveTypes.contains { $0.mangleTypeName == "5PointV" })
+        #expect(resolveTypes.contains { $0.mangleTypeName == "9App_PointV" })
     }
 
     @Test
@@ -99,7 +99,7 @@ import Testing
                 """
         )
         let resolveTypes = try #require(app.exported?.asyncPromiseResolveReturnTypes)
-        #expect(resolveTypes.contains { $0.mangleTypeName == "5PointV" })
+        #expect(resolveTypes.contains { $0.mangleTypeName == "9App_PointV" })
     }
 
     @Test
@@ -111,7 +111,7 @@ import Testing
                 """
         )
         let resolveTypes = try #require(app.exported?.asyncPromiseResolveReturnTypes)
-        #expect(resolveTypes.contains { $0.mangleTypeName == "5ShapeO" })
+        #expect(resolveTypes.contains { $0.mangleTypeName == "9App_ShapeO" })
     }
 
     @Test
@@ -125,7 +125,7 @@ import Testing
                 """
         )
         let resolveTypes = try #require(app.exported?.asyncPromiseResolveReturnTypes)
-        #expect(resolveTypes.contains { $0.mangleTypeName == "5ShapeO" })
+        #expect(resolveTypes.contains { $0.mangleTypeName == "9App_ShapeO" })
     }
 
     // MARK: - Utilities

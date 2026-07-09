@@ -35,46 +35,46 @@ struct AnyMyViewControllerDelegate: MyViewControllerDelegate, _BridgedSwiftProto
         return Bool.bridgeJSLiftReturn(ret)
     }
 
-    func onHelperUpdated(_ helper: Helper) -> Void {
+    func onHelperUpdated(_ helper: TestModule.Helper) -> Void {
         let jsObjectValue = jsObject.bridgeJSLowerParameter()
         let helperPointer = helper.bridgeJSLowerParameter()
         _extern_onHelperUpdated(jsObjectValue, helperPointer)
     }
 
-    func createHelper() -> Helper {
+    func createHelper() -> TestModule.Helper {
         let jsObjectValue = jsObject.bridgeJSLowerParameter()
         let ret = _extern_createHelper(jsObjectValue)
-        return Helper.bridgeJSLiftReturn(ret)
+        return TestModule.Helper.bridgeJSLiftReturn(ret)
     }
 
-    func onOptionalHelperUpdated(_ helper: Optional<Helper>) -> Void {
+    func onOptionalHelperUpdated(_ helper: Optional<TestModule.Helper>) -> Void {
         let jsObjectValue = jsObject.bridgeJSLowerParameter()
         let (helperIsSome, helperPointer) = helper.bridgeJSLowerParameter()
         _extern_onOptionalHelperUpdated(jsObjectValue, helperIsSome, helperPointer)
     }
 
-    func createOptionalHelper() -> Optional<Helper> {
+    func createOptionalHelper() -> Optional<TestModule.Helper> {
         let jsObjectValue = jsObject.bridgeJSLowerParameter()
         let ret = _extern_createOptionalHelper(jsObjectValue)
-        return Optional<Helper>.bridgeJSLiftReturn(ret)
+        return Optional<TestModule.Helper>.bridgeJSLiftReturn(ret)
     }
 
-    func createEnum() -> ExampleEnum {
+    func createEnum() -> TestModule.ExampleEnum {
         let jsObjectValue = jsObject.bridgeJSLowerParameter()
         let ret = _extern_createEnum(jsObjectValue)
-        return ExampleEnum.bridgeJSLiftReturn(ret)
+        return TestModule.ExampleEnum.bridgeJSLiftReturn(ret)
     }
 
-    func handleResult(_ result: Result) -> Void {
+    func handleResult(_ result: TestModule.Result) -> Void {
         let jsObjectValue = jsObject.bridgeJSLowerParameter()
         let resultCaseId = result.bridgeJSLowerParameter()
         _extern_handleResult(jsObjectValue, resultCaseId)
     }
 
-    func getResult() -> Result {
+    func getResult() -> TestModule.Result {
         let jsObjectValue = jsObject.bridgeJSLowerParameter()
         let ret = _extern_getResult(jsObjectValue)
-        return Result.bridgeJSLiftReturn(ret)
+        return TestModule.Result.bridgeJSLiftReturn(ret)
     }
 
     var eventCount: Int {
@@ -112,11 +112,11 @@ struct AnyMyViewControllerDelegate: MyViewControllerDelegate, _BridgedSwiftProto
         }
     }
 
-    var optionalRawEnum: Optional<ExampleEnum> {
+    var optionalRawEnum: Optional<TestModule.ExampleEnum> {
         get {
             let jsObjectValue = jsObject.bridgeJSLowerParameter()
             bjs_MyViewControllerDelegate_optionalRawEnum_get(jsObjectValue)
-            return Optional<ExampleEnum>.bridgeJSLiftReturnFromSideChannel()
+            return Optional<TestModule.ExampleEnum>.bridgeJSLiftReturnFromSideChannel()
         }
         set {
             let jsObjectValue = jsObject.bridgeJSLowerParameter()
@@ -126,11 +126,11 @@ struct AnyMyViewControllerDelegate: MyViewControllerDelegate, _BridgedSwiftProto
         }
     }
 
-    var rawStringEnum: ExampleEnum {
+    var rawStringEnum: TestModule.ExampleEnum {
         get {
             let jsObjectValue = jsObject.bridgeJSLowerParameter()
             let ret = bjs_MyViewControllerDelegate_rawStringEnum_get(jsObjectValue)
-            return ExampleEnum.bridgeJSLiftReturn(ret)
+            return TestModule.ExampleEnum.bridgeJSLiftReturn(ret)
         }
         set {
             let jsObjectValue = jsObject.bridgeJSLowerParameter()
@@ -140,11 +140,11 @@ struct AnyMyViewControllerDelegate: MyViewControllerDelegate, _BridgedSwiftProto
         }
     }
 
-    var result: Result {
+    var result: TestModule.Result {
         get {
             let jsObjectValue = jsObject.bridgeJSLowerParameter()
             let ret = bjs_MyViewControllerDelegate_result_get(jsObjectValue)
-            return Result.bridgeJSLiftReturn(ret)
+            return TestModule.Result.bridgeJSLiftReturn(ret)
         }
         set {
             let jsObjectValue = jsObject.bridgeJSLowerParameter()
@@ -153,11 +153,11 @@ struct AnyMyViewControllerDelegate: MyViewControllerDelegate, _BridgedSwiftProto
         }
     }
 
-    var optionalResult: Optional<Result> {
+    var optionalResult: Optional<TestModule.Result> {
         get {
             let jsObjectValue = jsObject.bridgeJSLowerParameter()
             let ret = bjs_MyViewControllerDelegate_optionalResult_get(jsObjectValue)
-            return Optional<Result>.bridgeJSLiftReturn(ret)
+            return Optional<TestModule.Result>.bridgeJSLiftReturn(ret)
         }
         set {
             let jsObjectValue = jsObject.bridgeJSLowerParameter()
@@ -166,11 +166,11 @@ struct AnyMyViewControllerDelegate: MyViewControllerDelegate, _BridgedSwiftProto
         }
     }
 
-    var direction: Direction {
+    var direction: TestModule.Direction {
         get {
             let jsObjectValue = jsObject.bridgeJSLowerParameter()
             let ret = bjs_MyViewControllerDelegate_direction_get(jsObjectValue)
-            return Direction.bridgeJSLiftReturn(ret)
+            return TestModule.Direction.bridgeJSLiftReturn(ret)
         }
         set {
             let jsObjectValue = jsObject.bridgeJSLowerParameter()
@@ -179,11 +179,11 @@ struct AnyMyViewControllerDelegate: MyViewControllerDelegate, _BridgedSwiftProto
         }
     }
 
-    var directionOptional: Optional<Direction> {
+    var directionOptional: Optional<TestModule.Direction> {
         get {
             let jsObjectValue = jsObject.bridgeJSLowerParameter()
             let ret = bjs_MyViewControllerDelegate_directionOptional_get(jsObjectValue)
-            return Optional<Direction>.bridgeJSLiftReturn(ret)
+            return Optional<TestModule.Direction>.bridgeJSLiftReturn(ret)
         }
         set {
             let jsObjectValue = jsObject.bridgeJSLowerParameter()
@@ -192,11 +192,11 @@ struct AnyMyViewControllerDelegate: MyViewControllerDelegate, _BridgedSwiftProto
         }
     }
 
-    var priority: Priority {
+    var priority: TestModule.Priority {
         get {
             let jsObjectValue = jsObject.bridgeJSLowerParameter()
             let ret = bjs_MyViewControllerDelegate_priority_get(jsObjectValue)
-            return Priority.bridgeJSLiftReturn(ret)
+            return TestModule.Priority.bridgeJSLiftReturn(ret)
         }
         set {
             let jsObjectValue = jsObject.bridgeJSLowerParameter()
@@ -205,11 +205,11 @@ struct AnyMyViewControllerDelegate: MyViewControllerDelegate, _BridgedSwiftProto
         }
     }
 
-    var priorityOptional: Optional<Priority> {
+    var priorityOptional: Optional<TestModule.Priority> {
         get {
             let jsObjectValue = jsObject.bridgeJSLowerParameter()
             bjs_MyViewControllerDelegate_priorityOptional_get(jsObjectValue)
-            return Optional<Priority>.bridgeJSLiftReturnFromSideChannel()
+            return Optional<TestModule.Priority>.bridgeJSLiftReturnFromSideChannel()
         }
         set {
             let jsObjectValue = jsObject.bridgeJSLowerParameter()
@@ -619,15 +619,15 @@ fileprivate func bjs_MyViewControllerDelegate_priorityOptional_set_extern(_ jsOb
     return bjs_MyViewControllerDelegate_priorityOptional_set_extern(jsObject, newValueIsSome, newValueValue)
 }
 
-extension Direction: _BridgedSwiftCaseEnum {
+extension TestModule.Direction: _BridgedSwiftCaseEnum {
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSLowerParameter() -> Int32 {
         return bridgeJSRawValue
     }
-    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftReturn(_ value: Int32) -> Direction {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftReturn(_ value: Int32) -> TestModule.Direction {
         return bridgeJSLiftParameter(value)
     }
-    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftParameter(_ value: Int32) -> Direction {
-        return Direction(bridgeJSRawValue: value)!
+    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftParameter(_ value: Int32) -> TestModule.Direction {
+        return TestModule.Direction(bridgeJSRawValue: value)!
     }
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSLowerReturn() -> Int32 {
         return bridgeJSLowerParameter()
@@ -662,18 +662,18 @@ extension Direction: _BridgedSwiftCaseEnum {
     }
 }
 
-extension ExampleEnum: _BridgedSwiftEnumNoPayload, _BridgedSwiftRawValueEnum {
+extension TestModule.ExampleEnum: _BridgedSwiftEnumNoPayload, _BridgedSwiftRawValueEnum {
 }
 
-extension Result: _BridgedSwiftAssociatedValueEnum {
-    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPopPayload(_ caseId: Int32) -> Result {
+extension TestModule.Result: _BridgedSwiftAssociatedValueEnum {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPopPayload(_ caseId: Int32) -> TestModule.Result {
         switch caseId {
         case 0:
             return .success(String.bridgeJSStackPop())
         case 1:
             return .failure(Int.bridgeJSStackPop())
         default:
-            fatalError("Unknown Result case ID: \(caseId)")
+            fatalError("Unknown TestModule.Result case ID: \(caseId)")
         }
     }
 
@@ -689,12 +689,12 @@ extension Result: _BridgedSwiftAssociatedValueEnum {
     }
 }
 
-extension Priority: _BridgedSwiftEnumNoPayload, _BridgedSwiftRawValueEnum {
+extension TestModule.Priority: _BridgedSwiftEnumNoPayload, _BridgedSwiftRawValueEnum {
 }
 
-@_expose(wasm, "bjs_processDelegates")
-@_cdecl("bjs_processDelegates")
-public func _bjs_processDelegates() -> Void {
+@_expose(wasm, "bjs_TestModule_processDelegates")
+@_cdecl("bjs_TestModule_processDelegates")
+public func _bjs_TestModule_processDelegates() -> Void {
     #if arch(wasm32)
     let ret = processDelegates(_: [AnyMyViewControllerDelegate].bridgeJSStackPop())
     for __bjs_elem_ret in ret {
@@ -706,9 +706,9 @@ public func _bjs_processDelegates() -> Void {
     #endif
 }
 
-@_expose(wasm, "bjs_processDelegatesByName")
-@_cdecl("bjs_processDelegatesByName")
-public func _bjs_processDelegatesByName() -> Void {
+@_expose(wasm, "bjs_TestModule_processDelegatesByName")
+@_cdecl("bjs_TestModule_processDelegatesByName")
+public func _bjs_TestModule_processDelegatesByName() -> Void {
     #if arch(wasm32)
     let ret = processDelegatesByName(_: [String: AnyMyViewControllerDelegate].bridgeJSLiftParameter())
     for __bjs_kv_ret in ret {
@@ -721,178 +721,178 @@ public func _bjs_processDelegatesByName() -> Void {
     #endif
 }
 
-@_expose(wasm, "bjs_Helper_init")
-@_cdecl("bjs_Helper_init")
-public func _bjs_Helper_init(_ value: Int32) -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_TestModule_Helper_init")
+@_cdecl("bjs_TestModule_Helper_init")
+public func _bjs_TestModule_Helper_init(_ value: Int32) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = Helper(value: Int.bridgeJSLiftParameter(value))
+    let ret = TestModule.Helper(value: Int.bridgeJSLiftParameter(value))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Helper_increment")
-@_cdecl("bjs_Helper_increment")
-public func _bjs_Helper_increment(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_TestModule_Helper_increment")
+@_cdecl("bjs_TestModule_Helper_increment")
+public func _bjs_TestModule_Helper_increment(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    Helper.bridgeJSLiftParameter(_self).increment()
+    TestModule.Helper.bridgeJSLiftParameter(_self).increment()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Helper_value_get")
-@_cdecl("bjs_Helper_value_get")
-public func _bjs_Helper_value_get(_ _self: UnsafeMutableRawPointer) -> Int32 {
+@_expose(wasm, "bjs_TestModule_Helper_value_get")
+@_cdecl("bjs_TestModule_Helper_value_get")
+public func _bjs_TestModule_Helper_value_get(_ _self: UnsafeMutableRawPointer) -> Int32 {
     #if arch(wasm32)
-    let ret = Helper.bridgeJSLiftParameter(_self).value
+    let ret = TestModule.Helper.bridgeJSLiftParameter(_self).value
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Helper_value_set")
-@_cdecl("bjs_Helper_value_set")
-public func _bjs_Helper_value_set(_ _self: UnsafeMutableRawPointer, _ value: Int32) -> Void {
+@_expose(wasm, "bjs_TestModule_Helper_value_set")
+@_cdecl("bjs_TestModule_Helper_value_set")
+public func _bjs_TestModule_Helper_value_set(_ _self: UnsafeMutableRawPointer, _ value: Int32) -> Void {
     #if arch(wasm32)
-    Helper.bridgeJSLiftParameter(_self).value = Int.bridgeJSLiftParameter(value)
+    TestModule.Helper.bridgeJSLiftParameter(_self).value = Int.bridgeJSLiftParameter(value)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Helper_deinit")
-@_cdecl("bjs_Helper_deinit")
-public func _bjs_Helper_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_TestModule_Helper_deinit")
+@_cdecl("bjs_TestModule_Helper_deinit")
+public func _bjs_TestModule_Helper_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    Unmanaged<Helper>.fromOpaque(pointer).release()
+    Unmanaged<TestModule.Helper>.fromOpaque(pointer).release()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension Helper: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
+extension TestModule.Helper: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
     var jsValue: JSValue {
-        return .object(JSObject(id: UInt32(bitPattern: _bjs_Helper_wrap(Unmanaged.passRetained(self).toOpaque()))))
+        return .object(JSObject(id: UInt32(bitPattern: _bjs_TestModule_Helper_wrap(Unmanaged.passRetained(self).toOpaque()))))
     }
     consuming func bridgeJSLowerAsProtocolReturn() -> Int32 {
-        _bjs_Helper_wrap(Unmanaged.passRetained(self).toOpaque())
+        _bjs_TestModule_Helper_wrap(Unmanaged.passRetained(self).toOpaque())
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "TestModule", name: "bjs_Helper_wrap")
-fileprivate func _bjs_Helper_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
+@_extern(wasm, module: "TestModule", name: "bjs_TestModule_Helper_wrap")
+fileprivate func _bjs_TestModule_Helper_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
 #else
-fileprivate func _bjs_Helper_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+fileprivate func _bjs_TestModule_Helper_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_Helper_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
-    return _bjs_Helper_wrap_extern(pointer)
+@inline(never) fileprivate func _bjs_TestModule_Helper_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+    return _bjs_TestModule_Helper_wrap_extern(pointer)
 }
 
-@_expose(wasm, "bjs_MyViewController_init")
-@_cdecl("bjs_MyViewController_init")
-public func _bjs_MyViewController_init(_ delegate: Int32) -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_TestModule_MyViewController_init")
+@_cdecl("bjs_TestModule_MyViewController_init")
+public func _bjs_TestModule_MyViewController_init(_ delegate: Int32) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = MyViewController(delegate: AnyMyViewControllerDelegate.bridgeJSLiftParameter(delegate))
+    let ret = TestModule.MyViewController(delegate: AnyMyViewControllerDelegate.bridgeJSLiftParameter(delegate))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_MyViewController_triggerEvent")
-@_cdecl("bjs_MyViewController_triggerEvent")
-public func _bjs_MyViewController_triggerEvent(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_TestModule_MyViewController_triggerEvent")
+@_cdecl("bjs_TestModule_MyViewController_triggerEvent")
+public func _bjs_TestModule_MyViewController_triggerEvent(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    MyViewController.bridgeJSLiftParameter(_self).triggerEvent()
+    TestModule.MyViewController.bridgeJSLiftParameter(_self).triggerEvent()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_MyViewController_updateValue")
-@_cdecl("bjs_MyViewController_updateValue")
-public func _bjs_MyViewController_updateValue(_ _self: UnsafeMutableRawPointer, _ valueBytes: Int32, _ valueLength: Int32) -> Void {
+@_expose(wasm, "bjs_TestModule_MyViewController_updateValue")
+@_cdecl("bjs_TestModule_MyViewController_updateValue")
+public func _bjs_TestModule_MyViewController_updateValue(_ _self: UnsafeMutableRawPointer, _ valueBytes: Int32, _ valueLength: Int32) -> Void {
     #if arch(wasm32)
-    MyViewController.bridgeJSLiftParameter(_self).updateValue(_: String.bridgeJSLiftParameter(valueBytes, valueLength))
+    TestModule.MyViewController.bridgeJSLiftParameter(_self).updateValue(_: String.bridgeJSLiftParameter(valueBytes, valueLength))
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_MyViewController_updateCount")
-@_cdecl("bjs_MyViewController_updateCount")
-public func _bjs_MyViewController_updateCount(_ _self: UnsafeMutableRawPointer, _ count: Int32) -> Int32 {
+@_expose(wasm, "bjs_TestModule_MyViewController_updateCount")
+@_cdecl("bjs_TestModule_MyViewController_updateCount")
+public func _bjs_TestModule_MyViewController_updateCount(_ _self: UnsafeMutableRawPointer, _ count: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = MyViewController.bridgeJSLiftParameter(_self).updateCount(_: Int.bridgeJSLiftParameter(count))
+    let ret = TestModule.MyViewController.bridgeJSLiftParameter(_self).updateCount(_: Int.bridgeJSLiftParameter(count))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_MyViewController_updateLabel")
-@_cdecl("bjs_MyViewController_updateLabel")
-public func _bjs_MyViewController_updateLabel(_ _self: UnsafeMutableRawPointer, _ prefixBytes: Int32, _ prefixLength: Int32, _ suffixBytes: Int32, _ suffixLength: Int32) -> Void {
+@_expose(wasm, "bjs_TestModule_MyViewController_updateLabel")
+@_cdecl("bjs_TestModule_MyViewController_updateLabel")
+public func _bjs_TestModule_MyViewController_updateLabel(_ _self: UnsafeMutableRawPointer, _ prefixBytes: Int32, _ prefixLength: Int32, _ suffixBytes: Int32, _ suffixLength: Int32) -> Void {
     #if arch(wasm32)
-    MyViewController.bridgeJSLiftParameter(_self).updateLabel(_: String.bridgeJSLiftParameter(prefixBytes, prefixLength), _: String.bridgeJSLiftParameter(suffixBytes, suffixLength))
+    TestModule.MyViewController.bridgeJSLiftParameter(_self).updateLabel(_: String.bridgeJSLiftParameter(prefixBytes, prefixLength), _: String.bridgeJSLiftParameter(suffixBytes, suffixLength))
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_MyViewController_checkEvenCount")
-@_cdecl("bjs_MyViewController_checkEvenCount")
-public func _bjs_MyViewController_checkEvenCount(_ _self: UnsafeMutableRawPointer) -> Int32 {
+@_expose(wasm, "bjs_TestModule_MyViewController_checkEvenCount")
+@_cdecl("bjs_TestModule_MyViewController_checkEvenCount")
+public func _bjs_TestModule_MyViewController_checkEvenCount(_ _self: UnsafeMutableRawPointer) -> Int32 {
     #if arch(wasm32)
-    let ret = MyViewController.bridgeJSLiftParameter(_self).checkEvenCount()
+    let ret = TestModule.MyViewController.bridgeJSLiftParameter(_self).checkEvenCount()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_MyViewController_sendHelper")
-@_cdecl("bjs_MyViewController_sendHelper")
-public func _bjs_MyViewController_sendHelper(_ _self: UnsafeMutableRawPointer, _ helper: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_TestModule_MyViewController_sendHelper")
+@_cdecl("bjs_TestModule_MyViewController_sendHelper")
+public func _bjs_TestModule_MyViewController_sendHelper(_ _self: UnsafeMutableRawPointer, _ helper: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    MyViewController.bridgeJSLiftParameter(_self).sendHelper(_: Helper.bridgeJSLiftParameter(helper))
+    TestModule.MyViewController.bridgeJSLiftParameter(_self).sendHelper(_: TestModule.Helper.bridgeJSLiftParameter(helper))
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_MyViewController_delegate_get")
-@_cdecl("bjs_MyViewController_delegate_get")
-public func _bjs_MyViewController_delegate_get(_ _self: UnsafeMutableRawPointer) -> Int32 {
+@_expose(wasm, "bjs_TestModule_MyViewController_delegate_get")
+@_cdecl("bjs_TestModule_MyViewController_delegate_get")
+public func _bjs_TestModule_MyViewController_delegate_get(_ _self: UnsafeMutableRawPointer) -> Int32 {
     #if arch(wasm32)
-    let ret = MyViewController.bridgeJSLiftParameter(_self).delegate as! _BridgedSwiftProtocolExportable
+    let ret = TestModule.MyViewController.bridgeJSLiftParameter(_self).delegate as! _BridgedSwiftProtocolExportable
     return ret.bridgeJSLowerAsProtocolReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_MyViewController_delegate_set")
-@_cdecl("bjs_MyViewController_delegate_set")
-public func _bjs_MyViewController_delegate_set(_ _self: UnsafeMutableRawPointer, _ value: Int32) -> Void {
+@_expose(wasm, "bjs_TestModule_MyViewController_delegate_set")
+@_cdecl("bjs_TestModule_MyViewController_delegate_set")
+public func _bjs_TestModule_MyViewController_delegate_set(_ _self: UnsafeMutableRawPointer, _ value: Int32) -> Void {
     #if arch(wasm32)
-    MyViewController.bridgeJSLiftParameter(_self).delegate = AnyMyViewControllerDelegate.bridgeJSLiftParameter(value)
+    TestModule.MyViewController.bridgeJSLiftParameter(_self).delegate = AnyMyViewControllerDelegate.bridgeJSLiftParameter(value)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_MyViewController_secondDelegate_get")
-@_cdecl("bjs_MyViewController_secondDelegate_get")
-public func _bjs_MyViewController_secondDelegate_get(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_TestModule_MyViewController_secondDelegate_get")
+@_cdecl("bjs_TestModule_MyViewController_secondDelegate_get")
+public func _bjs_TestModule_MyViewController_secondDelegate_get(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = MyViewController.bridgeJSLiftParameter(_self).secondDelegate
+    let ret = TestModule.MyViewController.bridgeJSLiftParameter(_self).secondDelegate
     if let ret {
         _swift_js_return_optional_object(1, (ret as! _BridgedSwiftProtocolExportable).bridgeJSLowerAsProtocolReturn())
     } else {
@@ -903,73 +903,73 @@ public func _bjs_MyViewController_secondDelegate_get(_ _self: UnsafeMutableRawPo
     #endif
 }
 
-@_expose(wasm, "bjs_MyViewController_secondDelegate_set")
-@_cdecl("bjs_MyViewController_secondDelegate_set")
-public func _bjs_MyViewController_secondDelegate_set(_ _self: UnsafeMutableRawPointer, _ valueIsSome: Int32, _ valueValue: Int32) -> Void {
+@_expose(wasm, "bjs_TestModule_MyViewController_secondDelegate_set")
+@_cdecl("bjs_TestModule_MyViewController_secondDelegate_set")
+public func _bjs_TestModule_MyViewController_secondDelegate_set(_ _self: UnsafeMutableRawPointer, _ valueIsSome: Int32, _ valueValue: Int32) -> Void {
     #if arch(wasm32)
-    MyViewController.bridgeJSLiftParameter(_self).secondDelegate = Optional<AnyMyViewControllerDelegate>.bridgeJSLiftParameter(valueIsSome, valueValue)
+    TestModule.MyViewController.bridgeJSLiftParameter(_self).secondDelegate = Optional<AnyMyViewControllerDelegate>.bridgeJSLiftParameter(valueIsSome, valueValue)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_MyViewController_deinit")
-@_cdecl("bjs_MyViewController_deinit")
-public func _bjs_MyViewController_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_TestModule_MyViewController_deinit")
+@_cdecl("bjs_TestModule_MyViewController_deinit")
+public func _bjs_TestModule_MyViewController_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    Unmanaged<MyViewController>.fromOpaque(pointer).release()
+    Unmanaged<TestModule.MyViewController>.fromOpaque(pointer).release()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension MyViewController: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
+extension TestModule.MyViewController: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
     var jsValue: JSValue {
-        return .object(JSObject(id: UInt32(bitPattern: _bjs_MyViewController_wrap(Unmanaged.passRetained(self).toOpaque()))))
+        return .object(JSObject(id: UInt32(bitPattern: _bjs_TestModule_MyViewController_wrap(Unmanaged.passRetained(self).toOpaque()))))
     }
     consuming func bridgeJSLowerAsProtocolReturn() -> Int32 {
-        _bjs_MyViewController_wrap(Unmanaged.passRetained(self).toOpaque())
+        _bjs_TestModule_MyViewController_wrap(Unmanaged.passRetained(self).toOpaque())
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "TestModule", name: "bjs_MyViewController_wrap")
-fileprivate func _bjs_MyViewController_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
+@_extern(wasm, module: "TestModule", name: "bjs_TestModule_MyViewController_wrap")
+fileprivate func _bjs_TestModule_MyViewController_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
 #else
-fileprivate func _bjs_MyViewController_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+fileprivate func _bjs_TestModule_MyViewController_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_MyViewController_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
-    return _bjs_MyViewController_wrap_extern(pointer)
+@inline(never) fileprivate func _bjs_TestModule_MyViewController_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+    return _bjs_TestModule_MyViewController_wrap_extern(pointer)
 }
 
-@_expose(wasm, "bjs_DelegateManager_init")
-@_cdecl("bjs_DelegateManager_init")
-public func _bjs_DelegateManager_init() -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_TestModule_DelegateManager_init")
+@_cdecl("bjs_TestModule_DelegateManager_init")
+public func _bjs_TestModule_DelegateManager_init() -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = DelegateManager(delegates: [AnyMyViewControllerDelegate].bridgeJSStackPop())
+    let ret = TestModule.DelegateManager(delegates: [AnyMyViewControllerDelegate].bridgeJSStackPop())
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DelegateManager_notifyAll")
-@_cdecl("bjs_DelegateManager_notifyAll")
-public func _bjs_DelegateManager_notifyAll(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_TestModule_DelegateManager_notifyAll")
+@_cdecl("bjs_TestModule_DelegateManager_notifyAll")
+public func _bjs_TestModule_DelegateManager_notifyAll(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    DelegateManager.bridgeJSLiftParameter(_self).notifyAll()
+    TestModule.DelegateManager.bridgeJSLiftParameter(_self).notifyAll()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DelegateManager_delegates_get")
-@_cdecl("bjs_DelegateManager_delegates_get")
-public func _bjs_DelegateManager_delegates_get(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_TestModule_DelegateManager_delegates_get")
+@_cdecl("bjs_TestModule_DelegateManager_delegates_get")
+public func _bjs_TestModule_DelegateManager_delegates_get(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = DelegateManager.bridgeJSLiftParameter(_self).delegates
+    let ret = TestModule.DelegateManager.bridgeJSLiftParameter(_self).delegates
     for __bjs_elem_ret in ret {
         _swift_js_push_i32((__bjs_elem_ret as! _BridgedSwiftProtocolExportable).bridgeJSLowerAsProtocolReturn())
     }
@@ -979,21 +979,21 @@ public func _bjs_DelegateManager_delegates_get(_ _self: UnsafeMutableRawPointer)
     #endif
 }
 
-@_expose(wasm, "bjs_DelegateManager_delegates_set")
-@_cdecl("bjs_DelegateManager_delegates_set")
-public func _bjs_DelegateManager_delegates_set(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_TestModule_DelegateManager_delegates_set")
+@_cdecl("bjs_TestModule_DelegateManager_delegates_set")
+public func _bjs_TestModule_DelegateManager_delegates_set(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    DelegateManager.bridgeJSLiftParameter(_self).delegates = [AnyMyViewControllerDelegate].bridgeJSStackPop()
+    TestModule.DelegateManager.bridgeJSLiftParameter(_self).delegates = [AnyMyViewControllerDelegate].bridgeJSStackPop()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DelegateManager_delegatesByName_get")
-@_cdecl("bjs_DelegateManager_delegatesByName_get")
-public func _bjs_DelegateManager_delegatesByName_get(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_TestModule_DelegateManager_delegatesByName_get")
+@_cdecl("bjs_TestModule_DelegateManager_delegatesByName_get")
+public func _bjs_TestModule_DelegateManager_delegatesByName_get(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = DelegateManager.bridgeJSLiftParameter(_self).delegatesByName
+    let ret = TestModule.DelegateManager.bridgeJSLiftParameter(_self).delegatesByName
     for __bjs_kv_ret in ret {
         __bjs_kv_ret.key.bridgeJSStackPush()
         _swift_js_push_i32((__bjs_kv_ret.value as! _BridgedSwiftProtocolExportable).bridgeJSLowerAsProtocolReturn())
@@ -1004,43 +1004,43 @@ public func _bjs_DelegateManager_delegatesByName_get(_ _self: UnsafeMutableRawPo
     #endif
 }
 
-@_expose(wasm, "bjs_DelegateManager_delegatesByName_set")
-@_cdecl("bjs_DelegateManager_delegatesByName_set")
-public func _bjs_DelegateManager_delegatesByName_set(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_TestModule_DelegateManager_delegatesByName_set")
+@_cdecl("bjs_TestModule_DelegateManager_delegatesByName_set")
+public func _bjs_TestModule_DelegateManager_delegatesByName_set(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    DelegateManager.bridgeJSLiftParameter(_self).delegatesByName = [String: AnyMyViewControllerDelegate].bridgeJSLiftParameter()
+    TestModule.DelegateManager.bridgeJSLiftParameter(_self).delegatesByName = [String: AnyMyViewControllerDelegate].bridgeJSLiftParameter()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_DelegateManager_deinit")
-@_cdecl("bjs_DelegateManager_deinit")
-public func _bjs_DelegateManager_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_TestModule_DelegateManager_deinit")
+@_cdecl("bjs_TestModule_DelegateManager_deinit")
+public func _bjs_TestModule_DelegateManager_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    Unmanaged<DelegateManager>.fromOpaque(pointer).release()
+    Unmanaged<TestModule.DelegateManager>.fromOpaque(pointer).release()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension DelegateManager: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
+extension TestModule.DelegateManager: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
     var jsValue: JSValue {
-        return .object(JSObject(id: UInt32(bitPattern: _bjs_DelegateManager_wrap(Unmanaged.passRetained(self).toOpaque()))))
+        return .object(JSObject(id: UInt32(bitPattern: _bjs_TestModule_DelegateManager_wrap(Unmanaged.passRetained(self).toOpaque()))))
     }
     consuming func bridgeJSLowerAsProtocolReturn() -> Int32 {
-        _bjs_DelegateManager_wrap(Unmanaged.passRetained(self).toOpaque())
+        _bjs_TestModule_DelegateManager_wrap(Unmanaged.passRetained(self).toOpaque())
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "TestModule", name: "bjs_DelegateManager_wrap")
-fileprivate func _bjs_DelegateManager_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
+@_extern(wasm, module: "TestModule", name: "bjs_TestModule_DelegateManager_wrap")
+fileprivate func _bjs_TestModule_DelegateManager_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
 #else
-fileprivate func _bjs_DelegateManager_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+fileprivate func _bjs_TestModule_DelegateManager_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_DelegateManager_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
-    return _bjs_DelegateManager_wrap_extern(pointer)
+@inline(never) fileprivate func _bjs_TestModule_DelegateManager_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+    return _bjs_TestModule_DelegateManager_wrap_extern(pointer)
 }

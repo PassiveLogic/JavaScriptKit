@@ -218,26 +218,26 @@ export async function createInstantiator(options, swift) {
         createExports: (instance) => {
             const js = swift.memory.heap;
             const exports = {
-                processBytes: function bjs_processBytes(data) {
-                    const ret = instance.exports.bjs_processBytes(swift.memory.retain(data));
+                processBytes: function bjs_TestModule_processBytes(data) {
+                    const ret = instance.exports.bjs_TestModule_processBytes(swift.memory.retain(data));
                     const ret1 = swift.memory.getObject(ret);
                     swift.memory.release(ret);
                     return ret1;
                 },
-                processFloats: function bjs_processFloats(data) {
-                    const ret = instance.exports.bjs_processFloats(swift.memory.retain(data));
+                processFloats: function bjs_TestModule_processFloats(data) {
+                    const ret = instance.exports.bjs_TestModule_processFloats(swift.memory.retain(data));
                     const ret1 = swift.memory.getObject(ret);
                     swift.memory.release(ret);
                     return ret1;
                 },
-                processGenericDoubles: function bjs_processGenericDoubles(data) {
-                    const ret = instance.exports.bjs_processGenericDoubles(swift.memory.retain(data));
+                processGenericDoubles: function bjs_TestModule_processGenericDoubles(data) {
+                    const ret = instance.exports.bjs_TestModule_processGenericDoubles(swift.memory.retain(data));
                     const ret1 = swift.memory.getObject(ret);
                     swift.memory.release(ret);
                     return ret1;
                 },
-                processGenericInts: function bjs_processGenericInts(data) {
-                    const ret = instance.exports.bjs_processGenericInts(swift.memory.retain(data));
+                processGenericInts: function bjs_TestModule_processGenericInts(data) {
+                    const ret = instance.exports.bjs_TestModule_processGenericInts(swift.memory.retain(data));
                     const ret1 = swift.memory.getObject(ret);
                     swift.memory.release(ret);
                     return ret1;

@@ -50,7 +50,7 @@
             }
           }
         ],
-        "swiftCallName" : "Point"
+        "swiftCallName" : "TestModule.Point"
       }
     ]
   },
@@ -71,7 +71,7 @@
                 "name" : "point",
                 "type" : {
                   "swiftStruct" : {
-                    "_0" : "Point"
+                    "_0" : "TestModule.Point"
                   }
                 }
               },
@@ -100,7 +100,7 @@
             ],
             "returnType" : {
               "swiftStruct" : {
-                "_0" : "Point"
+                "_0" : "TestModule.Point"
               }
             }
           },
@@ -119,7 +119,7 @@
                   "nullable" : {
                     "_0" : {
                       "swiftStruct" : {
-                        "_0" : "Point"
+                        "_0" : "TestModule.Point"
                       }
                     },
                     "_1" : "null"
@@ -131,7 +131,7 @@
               "nullable" : {
                 "_0" : {
                   "swiftStruct" : {
-                    "_0" : "Point"
+                    "_0" : "TestModule.Point"
                   }
                 },
                 "_1" : "null"

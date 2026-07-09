@@ -227,8 +227,8 @@ export async function createInstantiator(options, swift) {
         createExports: (instance) => {
             const js = swift.memory.heap;
             const exports = {
-                check: function bjs_check() {
-                    instance.exports.bjs_check();
+                check: function bjs_TestModule_check() {
+                    instance.exports.bjs_TestModule_check();
                 },
             };
             _exports = exports;

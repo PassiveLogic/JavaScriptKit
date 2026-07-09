@@ -1,12 +1,12 @@
-extension Direction: _BridgedSwiftCaseEnum {
+extension TestModule.Direction: _BridgedSwiftCaseEnum {
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSLowerParameter() -> Int32 {
         return bridgeJSRawValue
     }
-    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftReturn(_ value: Int32) -> Direction {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftReturn(_ value: Int32) -> TestModule.Direction {
         return bridgeJSLiftParameter(value)
     }
-    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftParameter(_ value: Int32) -> Direction {
-        return Direction(bridgeJSRawValue: value)!
+    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftParameter(_ value: Int32) -> TestModule.Direction {
+        return TestModule.Direction(bridgeJSRawValue: value)!
     }
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSLowerReturn() -> Int32 {
         return bridgeJSLowerParameter()
@@ -41,15 +41,15 @@ extension Direction: _BridgedSwiftCaseEnum {
     }
 }
 
-extension Status: _BridgedSwiftCaseEnum {
+extension TestModule.Status: _BridgedSwiftCaseEnum {
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSLowerParameter() -> Int32 {
         return bridgeJSRawValue
     }
-    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftReturn(_ value: Int32) -> Status {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftReturn(_ value: Int32) -> TestModule.Status {
         return bridgeJSLiftParameter(value)
     }
-    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftParameter(_ value: Int32) -> Status {
-        return Status(bridgeJSRawValue: value)!
+    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftParameter(_ value: Int32) -> TestModule.Status {
+        return TestModule.Status(bridgeJSRawValue: value)!
     }
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSLowerReturn() -> Int32 {
         return bridgeJSLowerParameter()
@@ -80,15 +80,15 @@ extension Status: _BridgedSwiftCaseEnum {
     }
 }
 
-extension TSDirection: _BridgedSwiftCaseEnum {
+extension TestModule.TSDirection: _BridgedSwiftCaseEnum {
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSLowerParameter() -> Int32 {
         return bridgeJSRawValue
     }
-    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftReturn(_ value: Int32) -> TSDirection {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftReturn(_ value: Int32) -> TestModule.TSDirection {
         return bridgeJSLiftParameter(value)
     }
-    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftParameter(_ value: Int32) -> TSDirection {
-        return TSDirection(bridgeJSRawValue: value)!
+    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftParameter(_ value: Int32) -> TestModule.TSDirection {
+        return TestModule.TSDirection(bridgeJSRawValue: value)!
     }
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSLowerReturn() -> Int32 {
         return bridgeJSLowerParameter()
@@ -123,15 +123,15 @@ extension TSDirection: _BridgedSwiftCaseEnum {
     }
 }
 
-extension PublicStatus: _BridgedSwiftCaseEnum {
+extension TestModule.PublicStatus: _BridgedSwiftCaseEnum {
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSLowerParameter() -> Int32 {
         return bridgeJSRawValue
     }
-    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftReturn(_ value: Int32) -> PublicStatus {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftReturn(_ value: Int32) -> TestModule.PublicStatus {
         return bridgeJSLiftParameter(value)
     }
-    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftParameter(_ value: Int32) -> PublicStatus {
-        return PublicStatus(bridgeJSRawValue: value)!
+    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftParameter(_ value: Int32) -> TestModule.PublicStatus {
+        return TestModule.PublicStatus(bridgeJSRawValue: value)!
     }
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSLowerReturn() -> Int32 {
         return bridgeJSLowerParameter()
@@ -154,19 +154,19 @@ extension PublicStatus: _BridgedSwiftCaseEnum {
     }
 }
 
-@_expose(wasm, "bjs_setDirection")
-@_cdecl("bjs_setDirection")
-public func _bjs_setDirection(_ direction: Int32) -> Void {
+@_expose(wasm, "bjs_TestModule_setDirection")
+@_cdecl("bjs_TestModule_setDirection")
+public func _bjs_TestModule_setDirection(_ direction: Int32) -> Void {
     #if arch(wasm32)
-    setDirection(_: Direction.bridgeJSLiftParameter(direction))
+    setDirection(_: TestModule.Direction.bridgeJSLiftParameter(direction))
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_getDirection")
-@_cdecl("bjs_getDirection")
-public func _bjs_getDirection() -> Int32 {
+@_expose(wasm, "bjs_TestModule_getDirection")
+@_cdecl("bjs_TestModule_getDirection")
+public func _bjs_TestModule_getDirection() -> Int32 {
     #if arch(wasm32)
     let ret = getDirection()
     return ret.bridgeJSLowerReturn()
@@ -175,41 +175,41 @@ public func _bjs_getDirection() -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_processDirection")
-@_cdecl("bjs_processDirection")
-public func _bjs_processDirection(_ input: Int32) -> Int32 {
+@_expose(wasm, "bjs_TestModule_processDirection")
+@_cdecl("bjs_TestModule_processDirection")
+public func _bjs_TestModule_processDirection(_ input: Int32) -> Int32 {
     #if arch(wasm32)
-    let ret = processDirection(_: Direction.bridgeJSLiftParameter(input))
+    let ret = processDirection(_: TestModule.Direction.bridgeJSLiftParameter(input))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripOptionalDirection")
-@_cdecl("bjs_roundTripOptionalDirection")
-public func _bjs_roundTripOptionalDirection(_ inputIsSome: Int32, _ inputValue: Int32) -> Void {
+@_expose(wasm, "bjs_TestModule_roundTripOptionalDirection")
+@_cdecl("bjs_TestModule_roundTripOptionalDirection")
+public func _bjs_TestModule_roundTripOptionalDirection(_ inputIsSome: Int32, _ inputValue: Int32) -> Void {
     #if arch(wasm32)
-    let ret = roundTripOptionalDirection(_: Optional<Direction>.bridgeJSLiftParameter(inputIsSome, inputValue))
+    let ret = roundTripOptionalDirection(_: Optional<TestModule.Direction>.bridgeJSLiftParameter(inputIsSome, inputValue))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_setTSDirection")
-@_cdecl("bjs_setTSDirection")
-public func _bjs_setTSDirection(_ direction: Int32) -> Void {
+@_expose(wasm, "bjs_TestModule_setTSDirection")
+@_cdecl("bjs_TestModule_setTSDirection")
+public func _bjs_TestModule_setTSDirection(_ direction: Int32) -> Void {
     #if arch(wasm32)
-    setTSDirection(_: TSDirection.bridgeJSLiftParameter(direction))
+    setTSDirection(_: TestModule.TSDirection.bridgeJSLiftParameter(direction))
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_getTSDirection")
-@_cdecl("bjs_getTSDirection")
-public func _bjs_getTSDirection() -> Int32 {
+@_expose(wasm, "bjs_TestModule_getTSDirection")
+@_cdecl("bjs_TestModule_getTSDirection")
+public func _bjs_TestModule_getTSDirection() -> Int32 {
     #if arch(wasm32)
     let ret = getTSDirection()
     return ret.bridgeJSLowerReturn()
@@ -218,11 +218,11 @@ public func _bjs_getTSDirection() -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripOptionalTSDirection")
-@_cdecl("bjs_roundTripOptionalTSDirection")
-public func _bjs_roundTripOptionalTSDirection(_ inputIsSome: Int32, _ inputValue: Int32) -> Void {
+@_expose(wasm, "bjs_TestModule_roundTripOptionalTSDirection")
+@_cdecl("bjs_TestModule_roundTripOptionalTSDirection")
+public func _bjs_TestModule_roundTripOptionalTSDirection(_ inputIsSome: Int32, _ inputValue: Int32) -> Void {
     #if arch(wasm32)
-    let ret = roundTripOptionalTSDirection(_: Optional<TSDirection>.bridgeJSLiftParameter(inputIsSome, inputValue))
+    let ret = roundTripOptionalTSDirection(_: Optional<TestModule.TSDirection>.bridgeJSLiftParameter(inputIsSome, inputValue))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")

@@ -42,7 +42,7 @@ export async function createInstantiator(options, swift) {
 
     let _exports = null;
     let bjs = null;
-    const __bjs_createAPIResultValuesHelpers = () => ({
+    const __bjs_createTestModule_APIResultHelpers = () => ({
         lower: (value) => {
             const enumTag = value.tag;
             switch (enumTag) {
@@ -251,7 +251,7 @@ export async function createInstantiator(options, swift) {
             if (!importObject["TestModule"]) {
                 importObject["TestModule"] = {};
             }
-            importObject["TestModule"]["bjs_MathUtils_wrap"] = function(pointer) {
+            importObject["TestModule"]["bjs_TestModule_MathUtils_wrap"] = function(pointer) {
                 const obj = _exports['MathUtils'].__construct(pointer);
                 return swift.memory.retain(obj);
             };
@@ -323,36 +323,36 @@ export async function createInstantiator(options, swift) {
             }
             class MathUtils extends SwiftHeapObject {
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_MathUtils_deinit, MathUtils.prototype, null);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_TestModule_MathUtils_deinit, MathUtils.prototype, null);
                 }
 
                 constructor() {
-                    const ret = instance.exports.bjs_MathUtils_init();
+                    const ret = instance.exports.bjs_TestModule_MathUtils_init();
                     return MathUtils.__construct(ret);
                 }
                 static subtract(a, b) {
-                    const ret = instance.exports.bjs_MathUtils_static_subtract(a, b);
+                    const ret = instance.exports.bjs_TestModule_MathUtils_static_subtract(a, b);
                     return ret;
                 }
                 static add(a, b) {
-                    const ret = instance.exports.bjs_MathUtils_static_add(a, b);
+                    const ret = instance.exports.bjs_TestModule_MathUtils_static_add(a, b);
                     return ret;
                 }
                 multiply(x, y) {
-                    const ret = instance.exports.bjs_MathUtils_multiply(this.pointer, x, y);
+                    const ret = instance.exports.bjs_TestModule_MathUtils_multiply(this.pointer, x, y);
                     return ret;
                 }
                 static divide(a, b) {
-                    const ret = instance.exports.bjs_MathUtils_static_divide(a, b);
+                    const ret = instance.exports.bjs_TestModule_MathUtils_static_divide(a, b);
                     return ret;
                 }
                 static get pi() {
-                    const ret = instance.exports.bjs_MathUtils_static_pi_get();
+                    const ret = instance.exports.bjs_TestModule_MathUtils_static_pi_get();
                     return ret;
                 }
             }
-            const APIResultHelpers = __bjs_createAPIResultValuesHelpers();
-            enumHelpers.APIResult = APIResultHelpers;
+            const TestModule_APIResultHelpers = __bjs_createTestModule_APIResultHelpers();
+            enumHelpers.TestModule_APIResult = TestModule_APIResultHelpers;
 
             if (typeof globalThis.Utils === 'undefined') {
                 globalThis.Utils = {};
@@ -364,15 +364,15 @@ export async function createInstantiator(options, swift) {
                 Calculator: {
                     ...CalculatorValues,
                     square: function(value) {
-                        const ret = instance.exports.bjs_Calculator_static_square(value);
+                        const ret = instance.exports.bjs_TestModule_Calculator_static_square(value);
                         return ret;
                     },
                     cube: function(value) {
-                        const ret = instance.exports.bjs_Calculator_static_cube(value);
+                        const ret = instance.exports.bjs_TestModule_Calculator_static_cube(value);
                         return ret;
                     },
                     get version() {
-                        instance.exports.bjs_Calculator_static_version_get();
+                        instance.exports.bjs_TestModule_Calculator_static_version_get();
                         const ret = tmpRetString;
                         tmpRetString = undefined;
                         return ret;
@@ -381,19 +381,19 @@ export async function createInstantiator(options, swift) {
                 APIResult: {
                     ...APIResultValues,
                     roundtrip: function(value) {
-                        const valueCaseId = enumHelpers.APIResult.lower(value);
-                        instance.exports.bjs_APIResult_static_roundtrip(valueCaseId);
-                        const ret = enumHelpers.APIResult.lift(i32Stack.pop());
+                        const valueCaseId = enumHelpers.TestModule_APIResult.lower(value);
+                        instance.exports.bjs_TestModule_APIResult_static_roundtrip(valueCaseId);
+                        const ret = enumHelpers.TestModule_APIResult.lift(i32Stack.pop());
                         return ret;
                     }
                 },
                 MathUtils,
                 Utils: {
                     String: {
-                        uppercase: function bjs_Utils_String_static_uppercase(text) {
+                        uppercase: function bjs_TestModule_Utils_String_static_uppercase(text) {
                             const textBytes = textEncoder.encode(text);
                             const textId = swift.memory.retain(textBytes);
-                            instance.exports.bjs_Utils_String_static_uppercase(textId, textBytes.length);
+                            instance.exports.bjs_TestModule_Utils_String_static_uppercase(textId, textBytes.length);
                             const ret = tmpRetString;
                             tmpRetString = undefined;
                             return ret;

@@ -51,14 +51,14 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "AsyncPayloadResult",
+        "swiftCallName" : "TestModule.AsyncPayloadResult",
         "tsFullPath" : "AsyncPayloadResult"
       }
     ],
     "exposeToGlobal" : false,
     "functions" : [
       {
-        "abiName" : "bjs_asyncRoundTripAssociatedValueEnum",
+        "abiName" : "bjs_TestModule_asyncRoundTripAssociatedValueEnum",
         "effects" : {
           "isAsync" : true,
           "isStatic" : false,
@@ -71,19 +71,19 @@
             "name" : "value",
             "type" : {
               "associatedValueEnum" : {
-                "_0" : "AsyncPayloadResult"
+                "_0" : "TestModule.AsyncPayloadResult"
               }
             }
           }
         ],
         "returnType" : {
           "associatedValueEnum" : {
-            "_0" : "AsyncPayloadResult"
+            "_0" : "TestModule.AsyncPayloadResult"
           }
         }
       },
       {
-        "abiName" : "bjs_asyncRoundTripOptionalAssociatedValueEnum",
+        "abiName" : "bjs_TestModule_asyncRoundTripOptionalAssociatedValueEnum",
         "effects" : {
           "isAsync" : true,
           "isStatic" : false,
@@ -98,7 +98,7 @@
               "nullable" : {
                 "_0" : {
                   "associatedValueEnum" : {
-                    "_0" : "AsyncPayloadResult"
+                    "_0" : "TestModule.AsyncPayloadResult"
                   }
                 },
                 "_1" : "null"
@@ -110,7 +110,7 @@
           "nullable" : {
             "_0" : {
               "associatedValueEnum" : {
-                "_0" : "AsyncPayloadResult"
+                "_0" : "TestModule.AsyncPayloadResult"
               }
             },
             "_1" : "null"

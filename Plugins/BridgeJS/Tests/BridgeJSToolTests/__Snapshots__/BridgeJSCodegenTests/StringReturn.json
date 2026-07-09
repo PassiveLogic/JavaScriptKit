@@ -12,7 +12,7 @@
     "exposeToGlobal" : false,
     "functions" : [
       {
-        "abiName" : "bjs_checkString",
+        "abiName" : "bjs_TestModule_checkString",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,

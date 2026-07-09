@@ -1,6 +1,6 @@
-@_expose(wasm, "bjs_GlobalAPI_globalFunction")
-@_cdecl("bjs_GlobalAPI_globalFunction")
-public func _bjs_GlobalAPI_globalFunction() -> Void {
+@_expose(wasm, "bjs_TestModule_GlobalAPI_globalFunction")
+@_cdecl("bjs_TestModule_GlobalAPI_globalFunction")
+public func _bjs_TestModule_GlobalAPI_globalFunction() -> Void {
     #if arch(wasm32)
     let ret = globalFunction()
     return ret.bridgeJSLowerReturn()
@@ -9,55 +9,55 @@ public func _bjs_GlobalAPI_globalFunction() -> Void {
     #endif
 }
 
-@_expose(wasm, "bjs_GlobalAPI_GlobalClass_init")
-@_cdecl("bjs_GlobalAPI_GlobalClass_init")
-public func _bjs_GlobalAPI_GlobalClass_init() -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_TestModule_GlobalClass_init")
+@_cdecl("bjs_TestModule_GlobalClass_init")
+public func _bjs_TestModule_GlobalClass_init() -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = GlobalClass()
+    let ret = TestModule.GlobalClass()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_GlobalAPI_GlobalClass_greet")
-@_cdecl("bjs_GlobalAPI_GlobalClass_greet")
-public func _bjs_GlobalAPI_GlobalClass_greet(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_TestModule_GlobalClass_greet")
+@_cdecl("bjs_TestModule_GlobalClass_greet")
+public func _bjs_TestModule_GlobalClass_greet(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = GlobalClass.bridgeJSLiftParameter(_self).greet()
+    let ret = TestModule.GlobalClass.bridgeJSLiftParameter(_self).greet()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_GlobalAPI_GlobalClass_deinit")
-@_cdecl("bjs_GlobalAPI_GlobalClass_deinit")
-public func _bjs_GlobalAPI_GlobalClass_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_TestModule_GlobalClass_deinit")
+@_cdecl("bjs_TestModule_GlobalClass_deinit")
+public func _bjs_TestModule_GlobalClass_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    Unmanaged<GlobalClass>.fromOpaque(pointer).release()
+    Unmanaged<TestModule.GlobalClass>.fromOpaque(pointer).release()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension GlobalClass: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
+extension TestModule.GlobalClass: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
     var jsValue: JSValue {
-        return .object(JSObject(id: UInt32(bitPattern: _bjs_GlobalAPI_GlobalClass_wrap(Unmanaged.passRetained(self).toOpaque()))))
+        return .object(JSObject(id: UInt32(bitPattern: _bjs_TestModule_GlobalClass_wrap(Unmanaged.passRetained(self).toOpaque()))))
     }
     consuming func bridgeJSLowerAsProtocolReturn() -> Int32 {
-        _bjs_GlobalAPI_GlobalClass_wrap(Unmanaged.passRetained(self).toOpaque())
+        _bjs_TestModule_GlobalClass_wrap(Unmanaged.passRetained(self).toOpaque())
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "TestModule", name: "bjs_GlobalAPI_GlobalClass_wrap")
-fileprivate func _bjs_GlobalAPI_GlobalClass_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
+@_extern(wasm, module: "TestModule", name: "bjs_TestModule_GlobalClass_wrap")
+fileprivate func _bjs_TestModule_GlobalClass_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
 #else
-fileprivate func _bjs_GlobalAPI_GlobalClass_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+fileprivate func _bjs_TestModule_GlobalClass_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_GlobalAPI_GlobalClass_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
-    return _bjs_GlobalAPI_GlobalClass_wrap_extern(pointer)
+@inline(never) fileprivate func _bjs_TestModule_GlobalClass_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+    return _bjs_TestModule_GlobalClass_wrap_extern(pointer)
 }

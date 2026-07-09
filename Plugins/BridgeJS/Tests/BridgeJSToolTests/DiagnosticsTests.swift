@@ -188,7 +188,7 @@ import Testing
         #expect(skeleton.exported != nil)
         let structs = skeleton.exported?.structs ?? []
         #expect(structs.count == 1)
-        #expect(structs.first?.swiftCallName == "User.Stats")
+        #expect(structs.first?.swiftCallName == "TestModule.User.Stats")
     }
 
     @Test
@@ -211,7 +211,7 @@ import Testing
         #expect(skeleton.exported != nil)
         let classes = skeleton.exported?.classes ?? []
         #expect(classes.count == 1)
-        #expect(classes.first?.swiftCallName == "Container.Inner")
+        #expect(classes.first?.swiftCallName == "TestModule.Container.Inner")
     }
 
     @Test

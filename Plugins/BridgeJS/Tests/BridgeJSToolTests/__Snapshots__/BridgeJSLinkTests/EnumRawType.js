@@ -312,18 +312,18 @@ export async function createInstantiator(options, swift) {
         createExports: (instance) => {
             const js = swift.memory.heap;
             const exports = {
-                setTheme: function bjs_setTheme(theme) {
+                setTheme: function bjs_TestModule_setTheme(theme) {
                     const themeBytes = textEncoder.encode(theme);
                     const themeId = swift.memory.retain(themeBytes);
-                    instance.exports.bjs_setTheme(themeId, themeBytes.length);
+                    instance.exports.bjs_TestModule_setTheme(themeId, themeBytes.length);
                 },
-                getTheme: function bjs_getTheme() {
-                    instance.exports.bjs_getTheme();
+                getTheme: function bjs_TestModule_getTheme() {
+                    instance.exports.bjs_TestModule_getTheme();
                     const ret = tmpRetString;
                     tmpRetString = undefined;
                     return ret;
                 },
-                roundTripOptionalTheme: function bjs_roundTripOptionalTheme(input) {
+                roundTripOptionalTheme: function bjs_TestModule_roundTripOptionalTheme(input) {
                     const isSome = input != null;
                     let result, result1;
                     if (isSome) {
@@ -335,23 +335,23 @@ export async function createInstantiator(options, swift) {
                         result = 0;
                         result1 = 0;
                     }
-                    instance.exports.bjs_roundTripOptionalTheme(+isSome, result, result1);
+                    instance.exports.bjs_TestModule_roundTripOptionalTheme(+isSome, result, result1);
                     const optResult = tmpRetString;
                     tmpRetString = undefined;
                     return optResult;
                 },
-                setTSTheme: function bjs_setTSTheme(theme) {
+                setTSTheme: function bjs_TestModule_setTSTheme(theme) {
                     const themeBytes = textEncoder.encode(theme);
                     const themeId = swift.memory.retain(themeBytes);
-                    instance.exports.bjs_setTSTheme(themeId, themeBytes.length);
+                    instance.exports.bjs_TestModule_setTSTheme(themeId, themeBytes.length);
                 },
-                getTSTheme: function bjs_getTSTheme() {
-                    instance.exports.bjs_getTSTheme();
+                getTSTheme: function bjs_TestModule_getTSTheme() {
+                    instance.exports.bjs_TestModule_getTSTheme();
                     const ret = tmpRetString;
                     tmpRetString = undefined;
                     return ret;
                 },
-                roundTripOptionalTSTheme: function bjs_roundTripOptionalTSTheme(input) {
+                roundTripOptionalTSTheme: function bjs_TestModule_roundTripOptionalTSTheme(input) {
                     const isSome = input != null;
                     let result, result1;
                     if (isSome) {
@@ -363,23 +363,23 @@ export async function createInstantiator(options, swift) {
                         result = 0;
                         result1 = 0;
                     }
-                    instance.exports.bjs_roundTripOptionalTSTheme(+isSome, result, result1);
+                    instance.exports.bjs_TestModule_roundTripOptionalTSTheme(+isSome, result, result1);
                     const optResult = tmpRetString;
                     tmpRetString = undefined;
                     return optResult;
                 },
-                setFeatureFlag: function bjs_setFeatureFlag(flag) {
+                setFeatureFlag: function bjs_TestModule_setFeatureFlag(flag) {
                     const flagBytes = textEncoder.encode(flag);
                     const flagId = swift.memory.retain(flagBytes);
-                    instance.exports.bjs_setFeatureFlag(flagId, flagBytes.length);
+                    instance.exports.bjs_TestModule_setFeatureFlag(flagId, flagBytes.length);
                 },
-                getFeatureFlag: function bjs_getFeatureFlag() {
-                    instance.exports.bjs_getFeatureFlag();
+                getFeatureFlag: function bjs_TestModule_getFeatureFlag() {
+                    instance.exports.bjs_TestModule_getFeatureFlag();
                     const ret = tmpRetString;
                     tmpRetString = undefined;
                     return ret;
                 },
-                roundTripOptionalFeatureFlag: function bjs_roundTripOptionalFeatureFlag(input) {
+                roundTripOptionalFeatureFlag: function bjs_TestModule_roundTripOptionalFeatureFlag(input) {
                     const isSome = input != null;
                     let result, result1;
                     if (isSome) {
@@ -391,63 +391,63 @@ export async function createInstantiator(options, swift) {
                         result = 0;
                         result1 = 0;
                     }
-                    instance.exports.bjs_roundTripOptionalFeatureFlag(+isSome, result, result1);
+                    instance.exports.bjs_TestModule_roundTripOptionalFeatureFlag(+isSome, result, result1);
                     const optResult = tmpRetString;
                     tmpRetString = undefined;
                     return optResult;
                 },
-                setHttpStatus: function bjs_setHttpStatus(status) {
-                    instance.exports.bjs_setHttpStatus(status);
+                setHttpStatus: function bjs_TestModule_setHttpStatus(status) {
+                    instance.exports.bjs_TestModule_setHttpStatus(status);
                 },
-                getHttpStatus: function bjs_getHttpStatus() {
-                    const ret = instance.exports.bjs_getHttpStatus();
+                getHttpStatus: function bjs_TestModule_getHttpStatus() {
+                    const ret = instance.exports.bjs_TestModule_getHttpStatus();
                     return ret;
                 },
-                roundTripOptionalHttpStatus: function bjs_roundTripOptionalHttpStatus(input) {
+                roundTripOptionalHttpStatus: function bjs_TestModule_roundTripOptionalHttpStatus(input) {
                     const isSome = input != null;
-                    instance.exports.bjs_roundTripOptionalHttpStatus(+isSome, isSome ? input : 0);
+                    instance.exports.bjs_TestModule_roundTripOptionalHttpStatus(+isSome, isSome ? input : 0);
                     const optResult = tmpRetOptionalInt;
                     tmpRetOptionalInt = undefined;
                     return optResult;
                 },
-                setTSHttpStatus: function bjs_setTSHttpStatus(status) {
-                    instance.exports.bjs_setTSHttpStatus(status);
+                setTSHttpStatus: function bjs_TestModule_setTSHttpStatus(status) {
+                    instance.exports.bjs_TestModule_setTSHttpStatus(status);
                 },
-                getTSHttpStatus: function bjs_getTSHttpStatus() {
-                    const ret = instance.exports.bjs_getTSHttpStatus();
+                getTSHttpStatus: function bjs_TestModule_getTSHttpStatus() {
+                    const ret = instance.exports.bjs_TestModule_getTSHttpStatus();
                     return ret;
                 },
-                roundTripOptionalHttpStatus: function bjs_roundTripOptionalHttpStatus(input) {
+                roundTripOptionalHttpStatus: function bjs_TestModule_roundTripOptionalHttpStatus(input) {
                     const isSome = input != null;
-                    instance.exports.bjs_roundTripOptionalHttpStatus(+isSome, isSome ? input : 0);
+                    instance.exports.bjs_TestModule_roundTripOptionalHttpStatus(+isSome, isSome ? input : 0);
                     const optResult = tmpRetOptionalInt;
                     tmpRetOptionalInt = undefined;
                     return optResult;
                 },
-                setPriority: function bjs_setPriority(priority) {
-                    instance.exports.bjs_setPriority(priority);
+                setPriority: function bjs_TestModule_setPriority(priority) {
+                    instance.exports.bjs_TestModule_setPriority(priority);
                 },
-                getPriority: function bjs_getPriority() {
-                    const ret = instance.exports.bjs_getPriority();
+                getPriority: function bjs_TestModule_getPriority() {
+                    const ret = instance.exports.bjs_TestModule_getPriority();
                     return ret;
                 },
-                roundTripOptionalPriority: function bjs_roundTripOptionalPriority(input) {
+                roundTripOptionalPriority: function bjs_TestModule_roundTripOptionalPriority(input) {
                     const isSome = input != null;
-                    instance.exports.bjs_roundTripOptionalPriority(+isSome, isSome ? input : 0);
+                    instance.exports.bjs_TestModule_roundTripOptionalPriority(+isSome, isSome ? input : 0);
                     const optResult = tmpRetOptionalInt;
                     tmpRetOptionalInt = undefined;
                     return optResult;
                 },
-                setFileSize: function bjs_setFileSize(size) {
-                    instance.exports.bjs_setFileSize(size);
+                setFileSize: function bjs_TestModule_setFileSize(size) {
+                    instance.exports.bjs_TestModule_setFileSize(size);
                 },
-                getFileSize: function bjs_getFileSize() {
-                    const ret = instance.exports.bjs_getFileSize();
+                getFileSize: function bjs_TestModule_getFileSize() {
+                    const ret = instance.exports.bjs_TestModule_getFileSize();
                     return ret;
                 },
-                roundTripOptionalFileSize: function bjs_roundTripOptionalFileSize(input) {
+                roundTripOptionalFileSize: function bjs_TestModule_roundTripOptionalFileSize(input) {
                     const isSome = input != null;
-                    instance.exports.bjs_roundTripOptionalFileSize(+isSome, isSome ? input : 0n);
+                    instance.exports.bjs_TestModule_roundTripOptionalFileSize(+isSome, isSome ? input : 0n);
                     const isSome1 = i32Stack.pop();
                     let optResult;
                     if (isSome1) {
@@ -458,44 +458,44 @@ export async function createInstantiator(options, swift) {
                     }
                     return optResult;
                 },
-                setUserId: function bjs_setUserId(id) {
-                    instance.exports.bjs_setUserId(id);
+                setUserId: function bjs_TestModule_setUserId(id) {
+                    instance.exports.bjs_TestModule_setUserId(id);
                 },
-                getUserId: function bjs_getUserId() {
-                    const ret = instance.exports.bjs_getUserId();
+                getUserId: function bjs_TestModule_getUserId() {
+                    const ret = instance.exports.bjs_TestModule_getUserId();
                     return ret >>> 0;
                 },
-                roundTripOptionalUserId: function bjs_roundTripOptionalUserId(input) {
+                roundTripOptionalUserId: function bjs_TestModule_roundTripOptionalUserId(input) {
                     const isSome = input != null;
-                    instance.exports.bjs_roundTripOptionalUserId(+isSome, isSome ? input : 0);
+                    instance.exports.bjs_TestModule_roundTripOptionalUserId(+isSome, isSome ? input : 0);
                     const optResult = tmpRetOptionalInt;
                     tmpRetOptionalInt = undefined;
                     return optResult;
                 },
-                setTokenId: function bjs_setTokenId(token) {
-                    instance.exports.bjs_setTokenId(token);
+                setTokenId: function bjs_TestModule_setTokenId(token) {
+                    instance.exports.bjs_TestModule_setTokenId(token);
                 },
-                getTokenId: function bjs_getTokenId() {
-                    const ret = instance.exports.bjs_getTokenId();
+                getTokenId: function bjs_TestModule_getTokenId() {
+                    const ret = instance.exports.bjs_TestModule_getTokenId();
                     return ret >>> 0;
                 },
-                roundTripOptionalTokenId: function bjs_roundTripOptionalTokenId(input) {
+                roundTripOptionalTokenId: function bjs_TestModule_roundTripOptionalTokenId(input) {
                     const isSome = input != null;
-                    instance.exports.bjs_roundTripOptionalTokenId(+isSome, isSome ? input : 0);
+                    instance.exports.bjs_TestModule_roundTripOptionalTokenId(+isSome, isSome ? input : 0);
                     const optResult = tmpRetOptionalInt;
                     tmpRetOptionalInt = undefined;
                     return optResult;
                 },
-                setSessionId: function bjs_setSessionId(session) {
-                    instance.exports.bjs_setSessionId(session);
+                setSessionId: function bjs_TestModule_setSessionId(session) {
+                    instance.exports.bjs_TestModule_setSessionId(session);
                 },
-                getSessionId: function bjs_getSessionId() {
-                    const ret = instance.exports.bjs_getSessionId();
+                getSessionId: function bjs_TestModule_getSessionId() {
+                    const ret = instance.exports.bjs_TestModule_getSessionId();
                     return BigInt.asUintN(64, ret);
                 },
-                roundTripOptionalSessionId: function bjs_roundTripOptionalSessionId(input) {
+                roundTripOptionalSessionId: function bjs_TestModule_roundTripOptionalSessionId(input) {
                     const isSome = input != null;
-                    instance.exports.bjs_roundTripOptionalSessionId(+isSome, isSome ? input : 0n);
+                    instance.exports.bjs_TestModule_roundTripOptionalSessionId(+isSome, isSome ? input : 0n);
                     const isSome1 = i32Stack.pop();
                     let optResult;
                     if (isSome1) {
@@ -506,46 +506,46 @@ export async function createInstantiator(options, swift) {
                     }
                     return optResult;
                 },
-                setPrecision: function bjs_setPrecision(precision) {
-                    instance.exports.bjs_setPrecision(precision);
+                setPrecision: function bjs_TestModule_setPrecision(precision) {
+                    instance.exports.bjs_TestModule_setPrecision(precision);
                 },
-                getPrecision: function bjs_getPrecision() {
-                    const ret = instance.exports.bjs_getPrecision();
+                getPrecision: function bjs_TestModule_getPrecision() {
+                    const ret = instance.exports.bjs_TestModule_getPrecision();
                     return ret;
                 },
-                roundTripOptionalPrecision: function bjs_roundTripOptionalPrecision(input) {
+                roundTripOptionalPrecision: function bjs_TestModule_roundTripOptionalPrecision(input) {
                     const isSome = input != null;
-                    instance.exports.bjs_roundTripOptionalPrecision(+isSome, isSome ? input : 0.0);
+                    instance.exports.bjs_TestModule_roundTripOptionalPrecision(+isSome, isSome ? input : 0.0);
                     const optResult = tmpRetOptionalFloat;
                     tmpRetOptionalFloat = undefined;
                     return optResult;
                 },
-                setRatio: function bjs_setRatio(ratio) {
-                    instance.exports.bjs_setRatio(ratio);
+                setRatio: function bjs_TestModule_setRatio(ratio) {
+                    instance.exports.bjs_TestModule_setRatio(ratio);
                 },
-                getRatio: function bjs_getRatio() {
-                    const ret = instance.exports.bjs_getRatio();
+                getRatio: function bjs_TestModule_getRatio() {
+                    const ret = instance.exports.bjs_TestModule_getRatio();
                     return ret;
                 },
-                roundTripOptionalRatio: function bjs_roundTripOptionalRatio(input) {
+                roundTripOptionalRatio: function bjs_TestModule_roundTripOptionalRatio(input) {
                     const isSome = input != null;
-                    instance.exports.bjs_roundTripOptionalRatio(+isSome, isSome ? input : 0.0);
+                    instance.exports.bjs_TestModule_roundTripOptionalRatio(+isSome, isSome ? input : 0.0);
                     const optResult = tmpRetOptionalDouble;
                     tmpRetOptionalDouble = undefined;
                     return optResult;
                 },
-                processTheme: function bjs_processTheme(theme) {
+                processTheme: function bjs_TestModule_processTheme(theme) {
                     const themeBytes = textEncoder.encode(theme);
                     const themeId = swift.memory.retain(themeBytes);
-                    const ret = instance.exports.bjs_processTheme(themeId, themeBytes.length);
+                    const ret = instance.exports.bjs_TestModule_processTheme(themeId, themeBytes.length);
                     return ret;
                 },
-                convertPriority: function bjs_convertPriority(status) {
-                    const ret = instance.exports.bjs_convertPriority(status);
+                convertPriority: function bjs_TestModule_convertPriority(status) {
+                    const ret = instance.exports.bjs_TestModule_convertPriority(status);
                     return ret;
                 },
-                validateSession: function bjs_validateSession(session) {
-                    instance.exports.bjs_validateSession(session);
+                validateSession: function bjs_TestModule_validateSession(session) {
+                    instance.exports.bjs_TestModule_validateSession(session);
                     const ret = tmpRetString;
                     tmpRetString = undefined;
                     return ret;

@@ -2,10 +2,10 @@
   "exported" : {
     "aliases" : [
       {
-        "swiftCallName" : "Polygon",
+        "swiftCallName" : "TestModule.Polygon",
         "underlying" : {
           "swiftHeapObject" : {
-            "_0" : "PolygonReference"
+            "_0" : "TestModule.PolygonReference"
           }
         }
       }
@@ -13,7 +13,7 @@
     "classes" : [
       {
         "constructor" : {
-          "abiName" : "bjs_PolygonReference_init",
+          "abiName" : "bjs_TestModule_PolygonReference_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -41,7 +41,7 @@
         "properties" : [
 
         ],
-        "swiftCallName" : "PolygonReference"
+        "swiftCallName" : "TestModule.PolygonReference"
       }
     ],
     "enums" : [
@@ -50,7 +50,7 @@
     "exposeToGlobal" : false,
     "functions" : [
       {
-        "abiName" : "bjs_makePolygonFactory",
+        "abiName" : "bjs_TestModule_makePolygonFactory",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -65,17 +65,17 @@
             "_0" : {
               "isAsync" : false,
               "isThrows" : false,
-              "mangleName" : "10TestModuley_Al7Polygon",
+              "mangleName" : "10TestModuley_Al18TestModule_Polygon",
               "moduleName" : "TestModule",
               "parameters" : [
 
               ],
               "returnType" : {
                 "alias" : {
-                  "name" : "Polygon",
+                  "name" : "TestModule.Polygon",
                   "underlying" : {
                     "swiftHeapObject" : {
-                      "_0" : "PolygonReference"
+                      "_0" : "TestModule.PolygonReference"
                     }
                   }
                 }
@@ -87,7 +87,7 @@
         }
       },
       {
-        "abiName" : "bjs_makePolygonInspector",
+        "abiName" : "bjs_TestModule_makePolygonInspector",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -102,15 +102,15 @@
             "_0" : {
               "isAsync" : false,
               "isThrows" : false,
-              "mangleName" : "10TestModuleAl7Polygon_Si",
+              "mangleName" : "10TestModuleAl18TestModule_Polygon_Si",
               "moduleName" : "TestModule",
               "parameters" : [
                 {
                   "alias" : {
-                    "name" : "Polygon",
+                    "name" : "TestModule.Polygon",
                     "underlying" : {
                       "swiftHeapObject" : {
-                        "_0" : "PolygonReference"
+                        "_0" : "TestModule.PolygonReference"
                       }
                     }
                   }

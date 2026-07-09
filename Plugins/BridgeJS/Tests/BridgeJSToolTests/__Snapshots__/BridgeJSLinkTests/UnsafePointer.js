@@ -31,7 +31,7 @@ export async function createInstantiator(options, swift) {
 
     let _exports = null;
     let bjs = null;
-    const __bjs_createPointerFieldsHelpers = () => ({
+    const __bjs_createTestModule_PointerFieldsHelpers = () => ({
         lower: (value) => {
             ptrStack.push((value.raw | 0));
             ptrStack.push((value.mutRaw | 0));
@@ -123,11 +123,11 @@ export async function createInstantiator(options, swift) {
                 const copy = memory.buffer.slice(ptr, ptr + byteLen);
                 taStack.push(Array.from(new Ctor(copy)));
             }
-            bjs["swift_js_struct_lower_PointerFields"] = function(objectId) {
-                structHelpers.PointerFields.lower(swift.memory.getObject(objectId));
+            bjs["swift_js_struct_lower_TestModule_PointerFields"] = function(objectId) {
+                structHelpers.TestModule_PointerFields.lower(swift.memory.getObject(objectId));
             }
-            bjs["swift_js_struct_lift_PointerFields"] = function() {
-                const value = structHelpers.PointerFields.lift();
+            bjs["swift_js_struct_lift_TestModule_PointerFields"] = function() {
+                const value = structHelpers.TestModule_PointerFields.lift();
                 return swift.memory.retain(value);
             }
             const __bjs_promiseSettlers = Symbol("JavaScriptKit.promiseSettlers");
@@ -241,55 +241,55 @@ export async function createInstantiator(options, swift) {
         /** @param {WebAssembly.Instance} instance */
         createExports: (instance) => {
             const js = swift.memory.heap;
-            const PointerFieldsHelpers = __bjs_createPointerFieldsHelpers();
-            structHelpers.PointerFields = PointerFieldsHelpers;
+            const TestModule_PointerFieldsHelpers = __bjs_createTestModule_PointerFieldsHelpers();
+            structHelpers.TestModule_PointerFields = TestModule_PointerFieldsHelpers;
 
             const exports = {
-                takeUnsafeRawPointer: function bjs_takeUnsafeRawPointer(p) {
-                    instance.exports.bjs_takeUnsafeRawPointer(p);
+                takeUnsafeRawPointer: function bjs_TestModule_takeUnsafeRawPointer(p) {
+                    instance.exports.bjs_TestModule_takeUnsafeRawPointer(p);
                 },
-                takeUnsafeMutableRawPointer: function bjs_takeUnsafeMutableRawPointer(p) {
-                    instance.exports.bjs_takeUnsafeMutableRawPointer(p);
+                takeUnsafeMutableRawPointer: function bjs_TestModule_takeUnsafeMutableRawPointer(p) {
+                    instance.exports.bjs_TestModule_takeUnsafeMutableRawPointer(p);
                 },
-                takeOpaquePointer: function bjs_takeOpaquePointer(p) {
-                    instance.exports.bjs_takeOpaquePointer(p);
+                takeOpaquePointer: function bjs_TestModule_takeOpaquePointer(p) {
+                    instance.exports.bjs_TestModule_takeOpaquePointer(p);
                 },
-                takeUnsafePointer: function bjs_takeUnsafePointer(p) {
-                    instance.exports.bjs_takeUnsafePointer(p);
+                takeUnsafePointer: function bjs_TestModule_takeUnsafePointer(p) {
+                    instance.exports.bjs_TestModule_takeUnsafePointer(p);
                 },
-                takeUnsafeMutablePointer: function bjs_takeUnsafeMutablePointer(p) {
-                    instance.exports.bjs_takeUnsafeMutablePointer(p);
+                takeUnsafeMutablePointer: function bjs_TestModule_takeUnsafeMutablePointer(p) {
+                    instance.exports.bjs_TestModule_takeUnsafeMutablePointer(p);
                 },
-                returnUnsafeRawPointer: function bjs_returnUnsafeRawPointer() {
-                    const ret = instance.exports.bjs_returnUnsafeRawPointer();
+                returnUnsafeRawPointer: function bjs_TestModule_returnUnsafeRawPointer() {
+                    const ret = instance.exports.bjs_TestModule_returnUnsafeRawPointer();
                     return ret;
                 },
-                returnUnsafeMutableRawPointer: function bjs_returnUnsafeMutableRawPointer() {
-                    const ret = instance.exports.bjs_returnUnsafeMutableRawPointer();
+                returnUnsafeMutableRawPointer: function bjs_TestModule_returnUnsafeMutableRawPointer() {
+                    const ret = instance.exports.bjs_TestModule_returnUnsafeMutableRawPointer();
                     return ret;
                 },
-                returnOpaquePointer: function bjs_returnOpaquePointer() {
-                    const ret = instance.exports.bjs_returnOpaquePointer();
+                returnOpaquePointer: function bjs_TestModule_returnOpaquePointer() {
+                    const ret = instance.exports.bjs_TestModule_returnOpaquePointer();
                     return ret;
                 },
-                returnUnsafePointer: function bjs_returnUnsafePointer() {
-                    const ret = instance.exports.bjs_returnUnsafePointer();
+                returnUnsafePointer: function bjs_TestModule_returnUnsafePointer() {
+                    const ret = instance.exports.bjs_TestModule_returnUnsafePointer();
                     return ret;
                 },
-                returnUnsafeMutablePointer: function bjs_returnUnsafeMutablePointer() {
-                    const ret = instance.exports.bjs_returnUnsafeMutablePointer();
+                returnUnsafeMutablePointer: function bjs_TestModule_returnUnsafeMutablePointer() {
+                    const ret = instance.exports.bjs_TestModule_returnUnsafeMutablePointer();
                     return ret;
                 },
-                roundTripPointerFields: function bjs_roundTripPointerFields(value) {
-                    structHelpers.PointerFields.lower(value);
-                    instance.exports.bjs_roundTripPointerFields();
-                    const structValue = structHelpers.PointerFields.lift();
+                roundTripPointerFields: function bjs_TestModule_roundTripPointerFields(value) {
+                    structHelpers.TestModule_PointerFields.lower(value);
+                    instance.exports.bjs_TestModule_roundTripPointerFields();
+                    const structValue = structHelpers.TestModule_PointerFields.lift();
                     return structValue;
                 },
                 PointerFields: {
                     init: function(raw, mutRaw, opaque, ptr, mutPtr) {
-                        instance.exports.bjs_PointerFields_init(raw, mutRaw, opaque, ptr, mutPtr);
-                        const structValue = structHelpers.PointerFields.lift();
+                        instance.exports.bjs_TestModule_PointerFields_init(raw, mutRaw, opaque, ptr, mutPtr);
+                        const structValue = structHelpers.TestModule_PointerFields.lift();
                         return structValue;
                     },
                 },

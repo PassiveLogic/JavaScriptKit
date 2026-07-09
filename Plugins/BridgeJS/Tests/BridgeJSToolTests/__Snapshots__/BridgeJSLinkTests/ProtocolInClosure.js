@@ -232,7 +232,7 @@ export async function createInstantiator(options, swift) {
                 const func = swift.memory.getObject(funcRef);
                 func.__unregister();
             }
-            bjs["invoke_js_callback_TestModule_10TestModule10RenderableP_10RenderableP"] = function(callbackId, param0) {
+            bjs["invoke_js_callback_TestModule_10TestModule21TestModule_RenderableP_21TestModule_RenderableP"] = function(callbackId, param0) {
                 try {
                     const callback = swift.memory.getObject(callbackId);
                     let ret = callback(swift.memory.getObject(param0));
@@ -242,9 +242,9 @@ export async function createInstantiator(options, swift) {
                     return 0
                 }
             }
-            bjs["make_swift_closure_TestModule_10TestModule10RenderableP_10RenderableP"] = function(boxPtr, file, line) {
-                const lower_closure_TestModule_10TestModule10RenderableP_10RenderableP = function(param0) {
-                    const ret = instance.exports.invoke_swift_closure_TestModule_10TestModule10RenderableP_10RenderableP(boxPtr, swift.memory.retain(param0));
+            bjs["make_swift_closure_TestModule_10TestModule21TestModule_RenderableP_21TestModule_RenderableP"] = function(boxPtr, file, line) {
+                const lower_closure_TestModule_10TestModule21TestModule_RenderableP_21TestModule_RenderableP = function(param0) {
+                    const ret = instance.exports.invoke_swift_closure_TestModule_10TestModule21TestModule_RenderableP_21TestModule_RenderableP(boxPtr, swift.memory.retain(param0));
                     const ret1 = swift.memory.getObject(ret);
                     swift.memory.release(ret);
                     if (tmpRetException) {
@@ -255,9 +255,9 @@ export async function createInstantiator(options, swift) {
                     }
                     return ret1;
                 };
-                return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModule10RenderableP_10RenderableP);
+                return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModule21TestModule_RenderableP_21TestModule_RenderableP);
             }
-            bjs["invoke_js_callback_TestModule_10TestModule10RenderableP_SS"] = function(callbackId, param0) {
+            bjs["invoke_js_callback_TestModule_10TestModule21TestModule_RenderableP_SS"] = function(callbackId, param0) {
                 try {
                     const callback = swift.memory.getObject(callbackId);
                     let ret = callback(swift.memory.getObject(param0));
@@ -267,9 +267,9 @@ export async function createInstantiator(options, swift) {
                     setException(error);
                 }
             }
-            bjs["make_swift_closure_TestModule_10TestModule10RenderableP_SS"] = function(boxPtr, file, line) {
-                const lower_closure_TestModule_10TestModule10RenderableP_SS = function(param0) {
-                    instance.exports.invoke_swift_closure_TestModule_10TestModule10RenderableP_SS(boxPtr, swift.memory.retain(param0));
+            bjs["make_swift_closure_TestModule_10TestModule21TestModule_RenderableP_SS"] = function(boxPtr, file, line) {
+                const lower_closure_TestModule_10TestModule21TestModule_RenderableP_SS = function(param0) {
+                    instance.exports.invoke_swift_closure_TestModule_10TestModule21TestModule_RenderableP_SS(boxPtr, swift.memory.retain(param0));
                     const ret = tmpRetString;
                     tmpRetString = undefined;
                     if (tmpRetException) {
@@ -280,9 +280,9 @@ export async function createInstantiator(options, swift) {
                     }
                     return ret;
                 };
-                return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModule10RenderableP_SS);
+                return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModule21TestModule_RenderableP_SS);
             }
-            bjs["invoke_js_callback_TestModule_10TestModuleSq10RenderableP_SS"] = function(callbackId, param0IsSome, param0ObjectId) {
+            bjs["invoke_js_callback_TestModule_10TestModuleSq21TestModule_RenderableP_SS"] = function(callbackId, param0IsSome, param0ObjectId) {
                 try {
                     const callback = swift.memory.getObject(callbackId);
                     let ret = callback(param0IsSome ? swift.memory.getObject(param0ObjectId) : null);
@@ -292,8 +292,8 @@ export async function createInstantiator(options, swift) {
                     setException(error);
                 }
             }
-            bjs["make_swift_closure_TestModule_10TestModuleSq10RenderableP_SS"] = function(boxPtr, file, line) {
-                const lower_closure_TestModule_10TestModuleSq10RenderableP_SS = function(param0) {
+            bjs["make_swift_closure_TestModule_10TestModuleSq21TestModule_RenderableP_SS"] = function(boxPtr, file, line) {
+                const lower_closure_TestModule_10TestModuleSq21TestModule_RenderableP_SS = function(param0) {
                     const isSome = param0 != null;
                     let result;
                     if (isSome) {
@@ -301,7 +301,7 @@ export async function createInstantiator(options, swift) {
                     } else {
                         result = 0;
                     }
-                    instance.exports.invoke_swift_closure_TestModule_10TestModuleSq10RenderableP_SS(boxPtr, +isSome, result);
+                    instance.exports.invoke_swift_closure_TestModule_10TestModuleSq21TestModule_RenderableP_SS(boxPtr, +isSome, result);
                     const ret = tmpRetString;
                     tmpRetString = undefined;
                     if (tmpRetException) {
@@ -312,9 +312,9 @@ export async function createInstantiator(options, swift) {
                     }
                     return ret;
                 };
-                return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModuleSq10RenderableP_SS);
+                return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModuleSq21TestModule_RenderableP_SS);
             }
-            bjs["invoke_js_callback_TestModule_10TestModuley_10RenderableP"] = function(callbackId) {
+            bjs["invoke_js_callback_TestModule_10TestModuley_21TestModule_RenderableP"] = function(callbackId) {
                 try {
                     const callback = swift.memory.getObject(callbackId);
                     let ret = callback();
@@ -324,9 +324,9 @@ export async function createInstantiator(options, swift) {
                     return 0
                 }
             }
-            bjs["make_swift_closure_TestModule_10TestModuley_10RenderableP"] = function(boxPtr, file, line) {
-                const lower_closure_TestModule_10TestModuley_10RenderableP = function() {
-                    const ret = instance.exports.invoke_swift_closure_TestModule_10TestModuley_10RenderableP(boxPtr);
+            bjs["make_swift_closure_TestModule_10TestModuley_21TestModule_RenderableP"] = function(boxPtr, file, line) {
+                const lower_closure_TestModule_10TestModuley_21TestModule_RenderableP = function() {
+                    const ret = instance.exports.invoke_swift_closure_TestModule_10TestModuley_21TestModule_RenderableP(boxPtr);
                     const ret1 = swift.memory.getObject(ret);
                     swift.memory.release(ret);
                     if (tmpRetException) {
@@ -337,13 +337,13 @@ export async function createInstantiator(options, swift) {
                     }
                     return ret1;
                 };
-                return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModuley_10RenderableP);
+                return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModuley_21TestModule_RenderableP);
             }
             // Wrapper functions for module: TestModule
             if (!importObject["TestModule"]) {
                 importObject["TestModule"] = {};
             }
-            importObject["TestModule"]["bjs_Widget_wrap"] = function(pointer) {
+            importObject["TestModule"]["bjs_TestModule_Widget_wrap"] = function(pointer) {
                 const obj = _exports['Widget'].__construct(pointer);
                 return swift.memory.retain(obj);
             };
@@ -425,17 +425,17 @@ export async function createInstantiator(options, swift) {
             }
             class Widget extends SwiftHeapObject {
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_Widget_deinit, Widget.prototype, null);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_TestModule_Widget_deinit, Widget.prototype, null);
                 }
 
                 constructor(name) {
                     const nameBytes = textEncoder.encode(name);
                     const nameId = swift.memory.retain(nameBytes);
-                    const ret = instance.exports.bjs_Widget_init(nameId, nameBytes.length);
+                    const ret = instance.exports.bjs_TestModule_Widget_init(nameId, nameBytes.length);
                     return Widget.__construct(ret);
                 }
                 get name() {
-                    instance.exports.bjs_Widget_name_get(this.pointer);
+                    instance.exports.bjs_TestModule_Widget_name_get(this.pointer);
                     const ret = tmpRetString;
                     tmpRetString = undefined;
                     return ret;
@@ -443,31 +443,31 @@ export async function createInstantiator(options, swift) {
                 set name(value) {
                     const valueBytes = textEncoder.encode(value);
                     const valueId = swift.memory.retain(valueBytes);
-                    instance.exports.bjs_Widget_name_set(this.pointer, valueId, valueBytes.length);
+                    instance.exports.bjs_TestModule_Widget_name_set(this.pointer, valueId, valueBytes.length);
                 }
             }
             const exports = {
-                processRenderable: function bjs_processRenderable(item, transform) {
+                processRenderable: function bjs_TestModule_processRenderable(item, transform) {
                     const callbackId = swift.memory.retain(transform);
-                    instance.exports.bjs_processRenderable(swift.memory.retain(item), callbackId);
+                    instance.exports.bjs_TestModule_processRenderable(swift.memory.retain(item), callbackId);
                     const ret = tmpRetString;
                     tmpRetString = undefined;
                     return ret;
                 },
-                makeRenderableFactory: function bjs_makeRenderableFactory(defaultName) {
+                makeRenderableFactory: function bjs_TestModule_makeRenderableFactory(defaultName) {
                     const defaultNameBytes = textEncoder.encode(defaultName);
                     const defaultNameId = swift.memory.retain(defaultNameBytes);
-                    const ret = instance.exports.bjs_makeRenderableFactory(defaultNameId, defaultNameBytes.length);
+                    const ret = instance.exports.bjs_TestModule_makeRenderableFactory(defaultNameId, defaultNameBytes.length);
                     return swift.memory.getObject(ret);
                 },
-                roundtripRenderable: function bjs_roundtripRenderable(callback) {
+                roundtripRenderable: function bjs_TestModule_roundtripRenderable(callback) {
                     const callbackId = swift.memory.retain(callback);
-                    const ret = instance.exports.bjs_roundtripRenderable(callbackId);
+                    const ret = instance.exports.bjs_TestModule_roundtripRenderable(callbackId);
                     return swift.memory.getObject(ret);
                 },
-                processOptionalRenderable: function bjs_processOptionalRenderable(callback) {
+                processOptionalRenderable: function bjs_TestModule_processOptionalRenderable(callback) {
                     const callbackId = swift.memory.retain(callback);
-                    instance.exports.bjs_processOptionalRenderable(callbackId);
+                    instance.exports.bjs_TestModule_processOptionalRenderable(callbackId);
                     const ret = tmpRetString;
                     tmpRetString = undefined;
                     return ret;

@@ -175,7 +175,7 @@ export async function createInstantiator(options, swift) {
         return swift.memory.retain(real);
     };
 
-    const __bjs_createAnimalHelpers = () => ({
+    const __bjs_createTestModule_AnimalHelpers = () => ({
         lower: (value) => {
             const bytes = textEncoder.encode(value.type);
             const id = swift.memory.retain(bytes);
@@ -187,7 +187,7 @@ export async function createInstantiator(options, swift) {
             return { type: string };
         }
     });
-    const __bjs_createAPIResultValuesHelpers = () => ({
+    const __bjs_createTestModule_APIResultHelpers = () => ({
         lower: (value) => {
             const enumTag = value.tag;
             switch (enumTag) {
@@ -323,11 +323,11 @@ export async function createInstantiator(options, swift) {
                 const copy = memory.buffer.slice(ptr, ptr + byteLen);
                 taStack.push(Array.from(new Ctor(copy)));
             }
-            bjs["swift_js_struct_lower_Animal"] = function(objectId) {
-                structHelpers.Animal.lower(swift.memory.getObject(objectId));
+            bjs["swift_js_struct_lower_TestModule_Animal"] = function(objectId) {
+                structHelpers.TestModule_Animal.lower(swift.memory.getObject(objectId));
             }
-            bjs["swift_js_struct_lift_Animal"] = function() {
-                const value = structHelpers.Animal.lift();
+            bjs["swift_js_struct_lift_TestModule_Animal"] = function() {
+                const value = structHelpers.TestModule_Animal.lift();
                 return swift.memory.retain(value);
             }
             const __bjs_promiseSettlers = Symbol("JavaScriptKit.promiseSettlers");
@@ -345,7 +345,7 @@ export async function createInstantiator(options, swift) {
                     setException(error);
                 }
             }
-            bjs["promise_resolve_TestModule_6AnimalV"] = function(promise, value) {
+            bjs["promise_resolve_TestModule_17TestModule_AnimalV"] = function(promise, value) {
                 try {
                     const value1 = swift.memory.getObject(value);
                     swift.memory.release(value);
@@ -354,9 +354,9 @@ export async function createInstantiator(options, swift) {
                     setException(error);
                 }
             }
-            bjs["promise_resolve_TestModule_9APIResultO"] = function(promise, value) {
+            bjs["promise_resolve_TestModule_20TestModule_APIResultO"] = function(promise, value) {
                 try {
-                    const enumValue = enumHelpers.APIResult.lift(value);
+                    const enumValue = enumHelpers.TestModule_APIResult.lift(value);
                     swift.memory.getObject(promise)[__bjs_promiseSettlers].resolve(enumValue);
                 } catch (error) {
                     setException(error);
@@ -464,30 +464,7 @@ export async function createInstantiator(options, swift) {
                 const func = swift.memory.getObject(funcRef);
                 func.__unregister();
             }
-            bjs["invoke_js_callback_TestModule_10TestModule10HttpStatusO_10HttpStatusO"] = function(callbackId, param0) {
-                try {
-                    const callback = swift.memory.getObject(callbackId);
-                    let ret = callback(param0);
-                    return ret;
-                } catch (error) {
-                    setException(error);
-                    return 0
-                }
-            }
-            bjs["make_swift_closure_TestModule_10TestModule10HttpStatusO_10HttpStatusO"] = function(boxPtr, file, line) {
-                const lower_closure_TestModule_10TestModule10HttpStatusO_10HttpStatusO = function(param0) {
-                    const ret = instance.exports.invoke_swift_closure_TestModule_10TestModule10HttpStatusO_10HttpStatusO(boxPtr, param0);
-                    if (tmpRetException) {
-                        const error = swift.memory.getObject(tmpRetException);
-                        swift.memory.release(tmpRetException);
-                        tmpRetException = undefined;
-                        throw error;
-                    }
-                    return ret;
-                };
-                return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModule10HttpStatusO_10HttpStatusO);
-            }
-            bjs["invoke_js_callback_TestModule_10TestModule5ThemeO_5ThemeO"] = function(callbackId, param0Bytes, param0Count) {
+            bjs["invoke_js_callback_TestModule_10TestModule16TestModule_ThemeO_16TestModule_ThemeO"] = function(callbackId, param0Bytes, param0Count) {
                 try {
                     const callback = swift.memory.getObject(callbackId);
                     const string = decodeString(param0Bytes, param0Count);
@@ -498,11 +475,11 @@ export async function createInstantiator(options, swift) {
                     setException(error);
                 }
             }
-            bjs["make_swift_closure_TestModule_10TestModule5ThemeO_5ThemeO"] = function(boxPtr, file, line) {
-                const lower_closure_TestModule_10TestModule5ThemeO_5ThemeO = function(param0) {
+            bjs["make_swift_closure_TestModule_10TestModule16TestModule_ThemeO_16TestModule_ThemeO"] = function(boxPtr, file, line) {
+                const lower_closure_TestModule_10TestModule16TestModule_ThemeO_16TestModule_ThemeO = function(param0) {
                     const param0Bytes = textEncoder.encode(param0);
                     const param0Id = swift.memory.retain(param0Bytes);
-                    instance.exports.invoke_swift_closure_TestModule_10TestModule5ThemeO_5ThemeO(boxPtr, param0Id, param0Bytes.length);
+                    instance.exports.invoke_swift_closure_TestModule_10TestModule16TestModule_ThemeO_16TestModule_ThemeO(boxPtr, param0Id, param0Bytes.length);
                     const ret = tmpRetString;
                     tmpRetString = undefined;
                     if (tmpRetException) {
@@ -513,23 +490,23 @@ export async function createInstantiator(options, swift) {
                     }
                     return ret;
                 };
-                return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModule5ThemeO_5ThemeO);
+                return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModule16TestModule_ThemeO_16TestModule_ThemeO);
             }
-            bjs["invoke_js_callback_TestModule_10TestModule6AnimalV_6AnimalV"] = function(callbackId) {
+            bjs["invoke_js_callback_TestModule_10TestModule17TestModule_AnimalV_17TestModule_AnimalV"] = function(callbackId) {
                 try {
                     const callback = swift.memory.getObject(callbackId);
-                    const structValue = structHelpers.Animal.lift();
+                    const structValue = structHelpers.TestModule_Animal.lift();
                     let ret = callback(structValue);
-                    structHelpers.Animal.lower(ret);
+                    structHelpers.TestModule_Animal.lower(ret);
                 } catch (error) {
                     setException(error);
                 }
             }
-            bjs["make_swift_closure_TestModule_10TestModule6AnimalV_6AnimalV"] = function(boxPtr, file, line) {
-                const lower_closure_TestModule_10TestModule6AnimalV_6AnimalV = function(param0) {
-                    structHelpers.Animal.lower(param0);
-                    instance.exports.invoke_swift_closure_TestModule_10TestModule6AnimalV_6AnimalV(boxPtr);
-                    const structValue = structHelpers.Animal.lift();
+            bjs["make_swift_closure_TestModule_10TestModule17TestModule_AnimalV_17TestModule_AnimalV"] = function(boxPtr, file, line) {
+                const lower_closure_TestModule_10TestModule17TestModule_AnimalV_17TestModule_AnimalV = function(param0) {
+                    structHelpers.TestModule_Animal.lower(param0);
+                    instance.exports.invoke_swift_closure_TestModule_10TestModule17TestModule_AnimalV_17TestModule_AnimalV(boxPtr);
+                    const structValue = structHelpers.TestModule_Animal.lift();
                     if (tmpRetException) {
                         const error = swift.memory.getObject(tmpRetException);
                         swift.memory.release(tmpRetException);
@@ -538,9 +515,9 @@ export async function createInstantiator(options, swift) {
                     }
                     return structValue;
                 };
-                return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModule6AnimalV_6AnimalV);
+                return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModule17TestModule_AnimalV_17TestModule_AnimalV);
             }
-            bjs["invoke_js_callback_TestModule_10TestModule6PersonC_6PersonC"] = function(callbackId, param0) {
+            bjs["invoke_js_callback_TestModule_10TestModule17TestModule_PersonC_17TestModule_PersonC"] = function(callbackId, param0) {
                 try {
                     const callback = swift.memory.getObject(callbackId);
                     let ret = callback(_exports['Person'].__construct(param0));
@@ -550,9 +527,9 @@ export async function createInstantiator(options, swift) {
                     return 0
                 }
             }
-            bjs["make_swift_closure_TestModule_10TestModule6PersonC_6PersonC"] = function(boxPtr, file, line) {
-                const lower_closure_TestModule_10TestModule6PersonC_6PersonC = function(param0) {
-                    const ret = instance.exports.invoke_swift_closure_TestModule_10TestModule6PersonC_6PersonC(boxPtr, param0.pointer);
+            bjs["make_swift_closure_TestModule_10TestModule17TestModule_PersonC_17TestModule_PersonC"] = function(boxPtr, file, line) {
+                const lower_closure_TestModule_10TestModule17TestModule_PersonC_17TestModule_PersonC = function(param0) {
+                    const ret = instance.exports.invoke_swift_closure_TestModule_10TestModule17TestModule_PersonC_17TestModule_PersonC(boxPtr, param0.pointer);
                     if (tmpRetException) {
                         const error = swift.memory.getObject(tmpRetException);
                         swift.memory.release(tmpRetException);
@@ -561,24 +538,24 @@ export async function createInstantiator(options, swift) {
                     }
                     return _exports['Person'].__construct(ret);
                 };
-                return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModule6PersonC_6PersonC);
+                return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModule17TestModule_PersonC_17TestModule_PersonC);
             }
-            bjs["invoke_js_callback_TestModule_10TestModule9APIResultO_9APIResultO"] = function(callbackId, param0) {
+            bjs["invoke_js_callback_TestModule_10TestModule20TestModule_APIResultO_20TestModule_APIResultO"] = function(callbackId, param0) {
                 try {
                     const callback = swift.memory.getObject(callbackId);
-                    const enumValue = enumHelpers.APIResult.lift(param0);
+                    const enumValue = enumHelpers.TestModule_APIResult.lift(param0);
                     let ret = callback(enumValue);
-                    const caseId = enumHelpers.APIResult.lower(ret);
+                    const caseId = enumHelpers.TestModule_APIResult.lower(ret);
                     return caseId;
                 } catch (error) {
                     setException(error);
                 }
             }
-            bjs["make_swift_closure_TestModule_10TestModule9APIResultO_9APIResultO"] = function(boxPtr, file, line) {
-                const lower_closure_TestModule_10TestModule9APIResultO_9APIResultO = function(param0) {
-                    const param0CaseId = enumHelpers.APIResult.lower(param0);
-                    instance.exports.invoke_swift_closure_TestModule_10TestModule9APIResultO_9APIResultO(boxPtr, param0CaseId);
-                    const ret = enumHelpers.APIResult.lift(i32Stack.pop());
+            bjs["make_swift_closure_TestModule_10TestModule20TestModule_APIResultO_20TestModule_APIResultO"] = function(boxPtr, file, line) {
+                const lower_closure_TestModule_10TestModule20TestModule_APIResultO_20TestModule_APIResultO = function(param0) {
+                    const param0CaseId = enumHelpers.TestModule_APIResult.lower(param0);
+                    instance.exports.invoke_swift_closure_TestModule_10TestModule20TestModule_APIResultO_20TestModule_APIResultO(boxPtr, param0CaseId);
+                    const ret = enumHelpers.TestModule_APIResult.lift(i32Stack.pop());
                     if (tmpRetException) {
                         const error = swift.memory.getObject(tmpRetException);
                         swift.memory.release(tmpRetException);
@@ -587,9 +564,9 @@ export async function createInstantiator(options, swift) {
                     }
                     return ret;
                 };
-                return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModule9APIResultO_9APIResultO);
+                return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModule20TestModule_APIResultO_20TestModule_APIResultO);
             }
-            bjs["invoke_js_callback_TestModule_10TestModule9DirectionO_9DirectionO"] = function(callbackId, param0) {
+            bjs["invoke_js_callback_TestModule_10TestModule20TestModule_DirectionO_20TestModule_DirectionO"] = function(callbackId, param0) {
                 try {
                     const callback = swift.memory.getObject(callbackId);
                     let ret = callback(param0);
@@ -599,9 +576,9 @@ export async function createInstantiator(options, swift) {
                     return 0
                 }
             }
-            bjs["make_swift_closure_TestModule_10TestModule9DirectionO_9DirectionO"] = function(boxPtr, file, line) {
-                const lower_closure_TestModule_10TestModule9DirectionO_9DirectionO = function(param0) {
-                    const ret = instance.exports.invoke_swift_closure_TestModule_10TestModule9DirectionO_9DirectionO(boxPtr, param0);
+            bjs["make_swift_closure_TestModule_10TestModule20TestModule_DirectionO_20TestModule_DirectionO"] = function(boxPtr, file, line) {
+                const lower_closure_TestModule_10TestModule20TestModule_DirectionO_20TestModule_DirectionO = function(param0) {
+                    const ret = instance.exports.invoke_swift_closure_TestModule_10TestModule20TestModule_DirectionO_20TestModule_DirectionO(boxPtr, param0);
                     if (tmpRetException) {
                         const error = swift.memory.getObject(tmpRetException);
                         swift.memory.release(tmpRetException);
@@ -610,7 +587,30 @@ export async function createInstantiator(options, swift) {
                     }
                     return ret;
                 };
-                return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModule9DirectionO_9DirectionO);
+                return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModule20TestModule_DirectionO_20TestModule_DirectionO);
+            }
+            bjs["invoke_js_callback_TestModule_10TestModule21TestModule_HttpStatusO_21TestModule_HttpStatusO"] = function(callbackId, param0) {
+                try {
+                    const callback = swift.memory.getObject(callbackId);
+                    let ret = callback(param0);
+                    return ret;
+                } catch (error) {
+                    setException(error);
+                    return 0
+                }
+            }
+            bjs["make_swift_closure_TestModule_10TestModule21TestModule_HttpStatusO_21TestModule_HttpStatusO"] = function(boxPtr, file, line) {
+                const lower_closure_TestModule_10TestModule21TestModule_HttpStatusO_21TestModule_HttpStatusO = function(param0) {
+                    const ret = instance.exports.invoke_swift_closure_TestModule_10TestModule21TestModule_HttpStatusO_21TestModule_HttpStatusO(boxPtr, param0);
+                    if (tmpRetException) {
+                        const error = swift.memory.getObject(tmpRetException);
+                        swift.memory.release(tmpRetException);
+                        tmpRetException = undefined;
+                        throw error;
+                    }
+                    return ret;
+                };
+                return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModule21TestModule_HttpStatusO_21TestModule_HttpStatusO);
             }
             bjs["invoke_js_callback_TestModule_10TestModuleKSS_Sb"] = function(callbackId, param0Bytes, param0Count) {
                 try {
@@ -784,33 +784,7 @@ export async function createInstantiator(options, swift) {
                 };
                 return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModuleSi_Si);
             }
-            bjs["invoke_js_callback_TestModule_10TestModuleSq10HttpStatusO_Sq10HttpStatusO"] = function(callbackId, param0IsSome, param0WrappedValue) {
-                try {
-                    const callback = swift.memory.getObject(callbackId);
-                    let ret = callback(param0IsSome ? param0WrappedValue : null);
-                    const isSome = ret != null;
-                    bjs["swift_js_return_optional_int"](isSome ? 1 : 0, isSome ? (ret | 0) : 0);
-                } catch (error) {
-                    setException(error);
-                }
-            }
-            bjs["make_swift_closure_TestModule_10TestModuleSq10HttpStatusO_Sq10HttpStatusO"] = function(boxPtr, file, line) {
-                const lower_closure_TestModule_10TestModuleSq10HttpStatusO_Sq10HttpStatusO = function(param0) {
-                    const isSome = param0 != null;
-                    instance.exports.invoke_swift_closure_TestModule_10TestModuleSq10HttpStatusO_Sq10HttpStatusO(boxPtr, +isSome, isSome ? param0 : 0);
-                    const optResult = tmpRetOptionalInt;
-                    tmpRetOptionalInt = undefined;
-                    if (tmpRetException) {
-                        const error = swift.memory.getObject(tmpRetException);
-                        swift.memory.release(tmpRetException);
-                        tmpRetException = undefined;
-                        throw error;
-                    }
-                    return optResult;
-                };
-                return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModuleSq10HttpStatusO_Sq10HttpStatusO);
-            }
-            bjs["invoke_js_callback_TestModule_10TestModuleSq5ThemeO_Sq5ThemeO"] = function(callbackId, param0IsSome, param0Bytes, param0Count) {
+            bjs["invoke_js_callback_TestModule_10TestModuleSq16TestModule_ThemeO_Sq16TestModule_ThemeO"] = function(callbackId, param0IsSome, param0Bytes, param0Count) {
                 try {
                     const callback = swift.memory.getObject(callbackId);
                     let optResult;
@@ -827,8 +801,8 @@ export async function createInstantiator(options, swift) {
                     setException(error);
                 }
             }
-            bjs["make_swift_closure_TestModule_10TestModuleSq5ThemeO_Sq5ThemeO"] = function(boxPtr, file, line) {
-                const lower_closure_TestModule_10TestModuleSq5ThemeO_Sq5ThemeO = function(param0) {
+            bjs["make_swift_closure_TestModule_10TestModuleSq16TestModule_ThemeO_Sq16TestModule_ThemeO"] = function(boxPtr, file, line) {
+                const lower_closure_TestModule_10TestModuleSq16TestModule_ThemeO_Sq16TestModule_ThemeO = function(param0) {
                     const isSome = param0 != null;
                     let result, result1;
                     if (isSome) {
@@ -840,7 +814,7 @@ export async function createInstantiator(options, swift) {
                         result = 0;
                         result1 = 0;
                     }
-                    instance.exports.invoke_swift_closure_TestModule_10TestModuleSq5ThemeO_Sq5ThemeO(boxPtr, +isSome, result, result1);
+                    instance.exports.invoke_swift_closure_TestModule_10TestModuleSq16TestModule_ThemeO_Sq16TestModule_ThemeO(boxPtr, +isSome, result, result1);
                     const optResult = tmpRetString;
                     tmpRetString = undefined;
                     if (tmpRetException) {
@@ -851,14 +825,14 @@ export async function createInstantiator(options, swift) {
                     }
                     return optResult;
                 };
-                return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModuleSq5ThemeO_Sq5ThemeO);
+                return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModuleSq16TestModule_ThemeO_Sq16TestModule_ThemeO);
             }
-            bjs["invoke_js_callback_TestModule_10TestModuleSq6AnimalV_Sq6AnimalV"] = function(callbackId, param0) {
+            bjs["invoke_js_callback_TestModule_10TestModuleSq17TestModule_AnimalV_Sq17TestModule_AnimalV"] = function(callbackId, param0) {
                 try {
                     const callback = swift.memory.getObject(callbackId);
                     let optResult;
                     if (param0) {
-                        const struct = structHelpers.Animal.lift();
+                        const struct = structHelpers.TestModule_Animal.lift();
                         optResult = struct;
                     } else {
                         optResult = null;
@@ -866,23 +840,23 @@ export async function createInstantiator(options, swift) {
                     let ret = callback(optResult);
                     const isSome = ret != null;
                     if (isSome) {
-                        structHelpers.Animal.lower(ret);
+                        structHelpers.TestModule_Animal.lower(ret);
                     }
                     i32Stack.push(isSome ? 1 : 0);
                 } catch (error) {
                     setException(error);
                 }
             }
-            bjs["make_swift_closure_TestModule_10TestModuleSq6AnimalV_Sq6AnimalV"] = function(boxPtr, file, line) {
-                const lower_closure_TestModule_10TestModuleSq6AnimalV_Sq6AnimalV = function(param0) {
+            bjs["make_swift_closure_TestModule_10TestModuleSq17TestModule_AnimalV_Sq17TestModule_AnimalV"] = function(boxPtr, file, line) {
+                const lower_closure_TestModule_10TestModuleSq17TestModule_AnimalV_Sq17TestModule_AnimalV = function(param0) {
                     const isSome = param0 != null;
                     if (isSome) {
-                        structHelpers.Animal.lower(param0);
+                        structHelpers.TestModule_Animal.lower(param0);
                     }
                     i32Stack.push(+isSome);
-                    instance.exports.invoke_swift_closure_TestModule_10TestModuleSq6AnimalV_Sq6AnimalV(boxPtr);
+                    instance.exports.invoke_swift_closure_TestModule_10TestModuleSq17TestModule_AnimalV_Sq17TestModule_AnimalV(boxPtr);
                     const isSome1 = i32Stack.pop();
-                    const optResult = isSome1 ? structHelpers.Animal.lift() : null;
+                    const optResult = isSome1 ? structHelpers.TestModule_Animal.lift() : null;
                     if (tmpRetException) {
                         const error = swift.memory.getObject(tmpRetException);
                         swift.memory.release(tmpRetException);
@@ -891,9 +865,9 @@ export async function createInstantiator(options, swift) {
                     }
                     return optResult;
                 };
-                return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModuleSq6AnimalV_Sq6AnimalV);
+                return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModuleSq17TestModule_AnimalV_Sq17TestModule_AnimalV);
             }
-            bjs["invoke_js_callback_TestModule_10TestModuleSq6PersonC_Sq6PersonC"] = function(callbackId, param0IsSome, param0Pointer) {
+            bjs["invoke_js_callback_TestModule_10TestModuleSq17TestModule_PersonC_Sq17TestModule_PersonC"] = function(callbackId, param0IsSome, param0Pointer) {
                 try {
                     const callback = swift.memory.getObject(callbackId);
                     let ret = callback(param0IsSome ? _exports['Person'].__construct(param0Pointer) : null);
@@ -903,8 +877,8 @@ export async function createInstantiator(options, swift) {
                     setException(error);
                 }
             }
-            bjs["make_swift_closure_TestModule_10TestModuleSq6PersonC_Sq6PersonC"] = function(boxPtr, file, line) {
-                const lower_closure_TestModule_10TestModuleSq6PersonC_Sq6PersonC = function(param0) {
+            bjs["make_swift_closure_TestModule_10TestModuleSq17TestModule_PersonC_Sq17TestModule_PersonC"] = function(boxPtr, file, line) {
+                const lower_closure_TestModule_10TestModuleSq17TestModule_PersonC_Sq17TestModule_PersonC = function(param0) {
                     const isSome = param0 != null;
                     let result;
                     if (isSome) {
@@ -912,7 +886,7 @@ export async function createInstantiator(options, swift) {
                     } else {
                         result = 0;
                     }
-                    instance.exports.invoke_swift_closure_TestModule_10TestModuleSq6PersonC_Sq6PersonC(boxPtr, +isSome, result);
+                    instance.exports.invoke_swift_closure_TestModule_10TestModuleSq17TestModule_PersonC_Sq17TestModule_PersonC(boxPtr, +isSome, result);
                     const pointer = tmpRetOptionalHeapObject;
                     tmpRetOptionalHeapObject = undefined;
                     const optResult = pointer === null ? null : _exports['Person'].__construct(pointer);
@@ -924,14 +898,14 @@ export async function createInstantiator(options, swift) {
                     }
                     return optResult;
                 };
-                return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModuleSq6PersonC_Sq6PersonC);
+                return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModuleSq17TestModule_PersonC_Sq17TestModule_PersonC);
             }
-            bjs["invoke_js_callback_TestModule_10TestModuleSq9APIResultO_Sq9APIResultO"] = function(callbackId, param0IsSome, param0CaseId) {
+            bjs["invoke_js_callback_TestModule_10TestModuleSq20TestModule_APIResultO_Sq20TestModule_APIResultO"] = function(callbackId, param0IsSome, param0CaseId) {
                 try {
                     const callback = swift.memory.getObject(callbackId);
                     let optResult;
                     if (param0IsSome) {
-                        const enumValue = enumHelpers.APIResult.lift(param0CaseId);
+                        const enumValue = enumHelpers.TestModule_APIResult.lift(param0CaseId);
                         optResult = enumValue;
                     } else {
                         optResult = null;
@@ -939,7 +913,7 @@ export async function createInstantiator(options, swift) {
                     let ret = callback(optResult);
                     const isSome = ret != null;
                     if (isSome) {
-                        const caseId = enumHelpers.APIResult.lower(ret);
+                        const caseId = enumHelpers.TestModule_APIResult.lower(ret);
                         return caseId;
                     } else {
                         return -1;
@@ -948,19 +922,19 @@ export async function createInstantiator(options, swift) {
                     setException(error);
                 }
             }
-            bjs["make_swift_closure_TestModule_10TestModuleSq9APIResultO_Sq9APIResultO"] = function(boxPtr, file, line) {
-                const lower_closure_TestModule_10TestModuleSq9APIResultO_Sq9APIResultO = function(param0) {
+            bjs["make_swift_closure_TestModule_10TestModuleSq20TestModule_APIResultO_Sq20TestModule_APIResultO"] = function(boxPtr, file, line) {
+                const lower_closure_TestModule_10TestModuleSq20TestModule_APIResultO_Sq20TestModule_APIResultO = function(param0) {
                     const isSome = param0 != null;
                     let result;
                     if (isSome) {
-                        const param0CaseId = enumHelpers.APIResult.lower(param0);
+                        const param0CaseId = enumHelpers.TestModule_APIResult.lower(param0);
                         result = param0CaseId;
                     } else {
                         result = 0;
                     }
-                    instance.exports.invoke_swift_closure_TestModule_10TestModuleSq9APIResultO_Sq9APIResultO(boxPtr, +isSome, result);
+                    instance.exports.invoke_swift_closure_TestModule_10TestModuleSq20TestModule_APIResultO_Sq20TestModule_APIResultO(boxPtr, +isSome, result);
                     const tag = i32Stack.pop();
-                    const optResult = tag === -1 ? null : enumHelpers.APIResult.lift(tag);
+                    const optResult = tag === -1 ? null : enumHelpers.TestModule_APIResult.lift(tag);
                     if (tmpRetException) {
                         const error = swift.memory.getObject(tmpRetException);
                         swift.memory.release(tmpRetException);
@@ -969,9 +943,9 @@ export async function createInstantiator(options, swift) {
                     }
                     return optResult;
                 };
-                return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModuleSq9APIResultO_Sq9APIResultO);
+                return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModuleSq20TestModule_APIResultO_Sq20TestModule_APIResultO);
             }
-            bjs["invoke_js_callback_TestModule_10TestModuleSq9DirectionO_Sq9DirectionO"] = function(callbackId, param0IsSome, param0WrappedValue) {
+            bjs["invoke_js_callback_TestModule_10TestModuleSq20TestModule_DirectionO_Sq20TestModule_DirectionO"] = function(callbackId, param0IsSome, param0WrappedValue) {
                 try {
                     const callback = swift.memory.getObject(callbackId);
                     let ret = callback(param0IsSome ? param0WrappedValue : null);
@@ -981,10 +955,10 @@ export async function createInstantiator(options, swift) {
                     setException(error);
                 }
             }
-            bjs["make_swift_closure_TestModule_10TestModuleSq9DirectionO_Sq9DirectionO"] = function(boxPtr, file, line) {
-                const lower_closure_TestModule_10TestModuleSq9DirectionO_Sq9DirectionO = function(param0) {
+            bjs["make_swift_closure_TestModule_10TestModuleSq20TestModule_DirectionO_Sq20TestModule_DirectionO"] = function(boxPtr, file, line) {
+                const lower_closure_TestModule_10TestModuleSq20TestModule_DirectionO_Sq20TestModule_DirectionO = function(param0) {
                     const isSome = param0 != null;
-                    instance.exports.invoke_swift_closure_TestModule_10TestModuleSq9DirectionO_Sq9DirectionO(boxPtr, +isSome, isSome ? param0 : 0);
+                    instance.exports.invoke_swift_closure_TestModule_10TestModuleSq20TestModule_DirectionO_Sq20TestModule_DirectionO(boxPtr, +isSome, isSome ? param0 : 0);
                     const optResult = tmpRetOptionalInt;
                     tmpRetOptionalInt = undefined;
                     if (tmpRetException) {
@@ -995,7 +969,33 @@ export async function createInstantiator(options, swift) {
                     }
                     return optResult;
                 };
-                return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModuleSq9DirectionO_Sq9DirectionO);
+                return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModuleSq20TestModule_DirectionO_Sq20TestModule_DirectionO);
+            }
+            bjs["invoke_js_callback_TestModule_10TestModuleSq21TestModule_HttpStatusO_Sq21TestModule_HttpStatusO"] = function(callbackId, param0IsSome, param0WrappedValue) {
+                try {
+                    const callback = swift.memory.getObject(callbackId);
+                    let ret = callback(param0IsSome ? param0WrappedValue : null);
+                    const isSome = ret != null;
+                    bjs["swift_js_return_optional_int"](isSome ? 1 : 0, isSome ? (ret | 0) : 0);
+                } catch (error) {
+                    setException(error);
+                }
+            }
+            bjs["make_swift_closure_TestModule_10TestModuleSq21TestModule_HttpStatusO_Sq21TestModule_HttpStatusO"] = function(boxPtr, file, line) {
+                const lower_closure_TestModule_10TestModuleSq21TestModule_HttpStatusO_Sq21TestModule_HttpStatusO = function(param0) {
+                    const isSome = param0 != null;
+                    instance.exports.invoke_swift_closure_TestModule_10TestModuleSq21TestModule_HttpStatusO_Sq21TestModule_HttpStatusO(boxPtr, +isSome, isSome ? param0 : 0);
+                    const optResult = tmpRetOptionalInt;
+                    tmpRetOptionalInt = undefined;
+                    if (tmpRetException) {
+                        const error = swift.memory.getObject(tmpRetException);
+                        swift.memory.release(tmpRetException);
+                        tmpRetException = undefined;
+                        throw error;
+                    }
+                    return optResult;
+                };
+                return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModuleSq21TestModule_HttpStatusO_Sq21TestModule_HttpStatusO);
             }
             bjs["invoke_js_callback_TestModule_10TestModuleSqSS_SqSS"] = function(callbackId, param0IsSome, param0Bytes, param0Count) {
                 try {
@@ -1168,15 +1168,15 @@ export async function createInstantiator(options, swift) {
                 };
                 return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModuleYaKSS_SS);
             }
-            bjs["invoke_js_callback_TestModule_10TestModuleYaKSb_9APIResultO"] = function(resolveRef, rejectRef, callbackId, param0) {
+            bjs["invoke_js_callback_TestModule_10TestModuleYaKSb_20TestModule_APIResultO"] = function(resolveRef, rejectRef, callbackId, param0) {
                 const resolve = swift.memory.getObject(resolveRef);
                 const reject = swift.memory.getObject(rejectRef);
                 const callback = swift.memory.getObject(callbackId);
                 callback(param0 !== 0).then(resolve, reject);
             }
-            bjs["make_swift_closure_TestModule_10TestModuleYaKSb_9APIResultO"] = function(boxPtr, file, line) {
-                const lower_closure_TestModule_10TestModuleYaKSb_9APIResultO = function(param0) {
-                    const ret = instance.exports.invoke_swift_closure_TestModule_10TestModuleYaKSb_9APIResultO(boxPtr, param0);
+            bjs["make_swift_closure_TestModule_10TestModuleYaKSb_20TestModule_APIResultO"] = function(boxPtr, file, line) {
+                const lower_closure_TestModule_10TestModuleYaKSb_20TestModule_APIResultO = function(param0) {
+                    const ret = instance.exports.invoke_swift_closure_TestModule_10TestModuleYaKSb_20TestModule_APIResultO(boxPtr, param0);
                     const ret1 = swift.memory.getObject(ret);
                     swift.memory.release(ret);
                     if (tmpRetException) {
@@ -1187,25 +1187,25 @@ export async function createInstantiator(options, swift) {
                     }
                     return ret1;
                 };
-                return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModuleYaKSb_9APIResultO);
+                return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModuleYaKSb_20TestModule_APIResultO);
             }
-            bjs["invoke_js_callback_TestModule_10TestModuleYaSS_6AnimalV"] = function(resolveRef, rejectRef, callbackId, param0Bytes, param0Count) {
+            bjs["invoke_js_callback_TestModule_10TestModuleYaSS_17TestModule_AnimalV"] = function(resolveRef, rejectRef, callbackId, param0Bytes, param0Count) {
                 const resolve = swift.memory.getObject(resolveRef);
                 const reject = swift.memory.getObject(rejectRef);
                 const callback = swift.memory.getObject(callbackId);
                 const string = decodeString(param0Bytes, param0Count);
                 callback(string).then(resolve, reject);
             }
-            bjs["make_swift_closure_TestModule_10TestModuleYaSS_6AnimalV"] = function(boxPtr, file, line) {
-                const lower_closure_TestModule_10TestModuleYaSS_6AnimalV = function(param0) {
+            bjs["make_swift_closure_TestModule_10TestModuleYaSS_17TestModule_AnimalV"] = function(boxPtr, file, line) {
+                const lower_closure_TestModule_10TestModuleYaSS_17TestModule_AnimalV = function(param0) {
                     const param0Bytes = textEncoder.encode(param0);
                     const param0Id = swift.memory.retain(param0Bytes);
-                    const ret = instance.exports.invoke_swift_closure_TestModule_10TestModuleYaSS_6AnimalV(boxPtr, param0Id, param0Bytes.length);
+                    const ret = instance.exports.invoke_swift_closure_TestModule_10TestModuleYaSS_17TestModule_AnimalV(boxPtr, param0Id, param0Bytes.length);
                     const ret1 = swift.memory.getObject(ret);
                     swift.memory.release(ret);
                     return ret1;
                 };
-                return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModuleYaSS_6AnimalV);
+                return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModuleYaSS_17TestModule_AnimalV);
             }
             bjs["invoke_js_callback_TestModule_10TestModuleYaSS_SS"] = function(resolveRef, rejectRef, callbackId, param0Bytes, param0Count) {
                 const resolve = swift.memory.getObject(resolveRef);
@@ -1225,19 +1225,19 @@ export async function createInstantiator(options, swift) {
                 };
                 return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModuleYaSS_SS);
             }
-            bjs["invoke_js_callback_TestModule_10TestModules6AnimalV_y"] = function(callbackId) {
+            bjs["invoke_js_callback_TestModule_10TestModules17TestModule_AnimalV_y"] = function(callbackId) {
                 try {
                     const callback = swift.memory.getObject(callbackId);
-                    const structValue = structHelpers.Animal.lift();
+                    const structValue = structHelpers.TestModule_Animal.lift();
                     callback(structValue);
                 } catch (error) {
                     setException(error);
                 }
             }
-            bjs["make_swift_closure_TestModule_10TestModules6AnimalV_y"] = function(boxPtr, file, line) {
-                const lower_closure_TestModule_10TestModules6AnimalV_y = function(param0) {
-                    structHelpers.Animal.lower(param0);
-                    instance.exports.invoke_swift_closure_TestModule_10TestModules6AnimalV_y(boxPtr);
+            bjs["make_swift_closure_TestModule_10TestModules17TestModule_AnimalV_y"] = function(boxPtr, file, line) {
+                const lower_closure_TestModule_10TestModules17TestModule_AnimalV_y = function(param0) {
+                    structHelpers.TestModule_Animal.lower(param0);
+                    instance.exports.invoke_swift_closure_TestModule_10TestModules17TestModule_AnimalV_y(boxPtr);
                     if (tmpRetException) {
                         const error = swift.memory.getObject(tmpRetException);
                         swift.memory.release(tmpRetException);
@@ -1245,7 +1245,29 @@ export async function createInstantiator(options, swift) {
                         throw error;
                     }
                 };
-                return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModules6AnimalV_y);
+                return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModules17TestModule_AnimalV_y);
+            }
+            bjs["invoke_js_callback_TestModule_10TestModules20TestModule_APIResultO_y"] = function(callbackId, param0) {
+                try {
+                    const callback = swift.memory.getObject(callbackId);
+                    const enumValue = enumHelpers.TestModule_APIResult.lift(param0);
+                    callback(enumValue);
+                } catch (error) {
+                    setException(error);
+                }
+            }
+            bjs["make_swift_closure_TestModule_10TestModules20TestModule_APIResultO_y"] = function(boxPtr, file, line) {
+                const lower_closure_TestModule_10TestModules20TestModule_APIResultO_y = function(param0) {
+                    const param0CaseId = enumHelpers.TestModule_APIResult.lower(param0);
+                    instance.exports.invoke_swift_closure_TestModule_10TestModules20TestModule_APIResultO_y(boxPtr, param0CaseId);
+                    if (tmpRetException) {
+                        const error = swift.memory.getObject(tmpRetException);
+                        swift.memory.release(tmpRetException);
+                        tmpRetException = undefined;
+                        throw error;
+                    }
+                };
+                return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModules20TestModule_APIResultO_y);
             }
             bjs["invoke_js_callback_TestModule_10TestModules7JSValueV_y"] = function(callbackId, param0Kind, param0Payload1, param0Payload2) {
                 try {
@@ -1268,28 +1290,6 @@ export async function createInstantiator(options, swift) {
                     }
                 };
                 return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModules7JSValueV_y);
-            }
-            bjs["invoke_js_callback_TestModule_10TestModules9APIResultO_y"] = function(callbackId, param0) {
-                try {
-                    const callback = swift.memory.getObject(callbackId);
-                    const enumValue = enumHelpers.APIResult.lift(param0);
-                    callback(enumValue);
-                } catch (error) {
-                    setException(error);
-                }
-            }
-            bjs["make_swift_closure_TestModule_10TestModules9APIResultO_y"] = function(boxPtr, file, line) {
-                const lower_closure_TestModule_10TestModules9APIResultO_y = function(param0) {
-                    const param0CaseId = enumHelpers.APIResult.lower(param0);
-                    instance.exports.invoke_swift_closure_TestModule_10TestModules9APIResultO_y(boxPtr, param0CaseId);
-                    if (tmpRetException) {
-                        const error = swift.memory.getObject(tmpRetException);
-                        swift.memory.release(tmpRetException);
-                        tmpRetException = undefined;
-                        throw error;
-                    }
-                };
-                return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModules9APIResultO_y);
             }
             bjs["invoke_js_callback_TestModule_10TestModulesSS_y"] = function(callbackId, param0Bytes, param0Count) {
                 try {
@@ -1318,11 +1318,11 @@ export async function createInstantiator(options, swift) {
             if (!importObject["TestModule"]) {
                 importObject["TestModule"] = {};
             }
-            importObject["TestModule"]["bjs_Person_wrap"] = function(pointer) {
+            importObject["TestModule"]["bjs_TestModule_Person_wrap"] = function(pointer) {
                 const obj = _exports['Person'].__construct(pointer);
                 return swift.memory.retain(obj);
             };
-            importObject["TestModule"]["bjs_TestProcessor_wrap"] = function(pointer) {
+            importObject["TestModule"]["bjs_TestModule_TestProcessor_wrap"] = function(pointer) {
                 const obj = _exports['TestProcessor'].__construct(pointer);
                 return swift.memory.retain(obj);
             };
@@ -1394,171 +1394,171 @@ export async function createInstantiator(options, swift) {
             }
             class Person extends SwiftHeapObject {
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_Person_deinit, Person.prototype, null);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_TestModule_Person_deinit, Person.prototype, null);
                 }
 
                 constructor(name) {
                     const nameBytes = textEncoder.encode(name);
                     const nameId = swift.memory.retain(nameBytes);
-                    const ret = instance.exports.bjs_Person_init(nameId, nameBytes.length);
+                    const ret = instance.exports.bjs_TestModule_Person_init(nameId, nameBytes.length);
                     return Person.__construct(ret);
                 }
             }
             class TestProcessor extends SwiftHeapObject {
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_TestProcessor_deinit, TestProcessor.prototype, null);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_TestModule_TestProcessor_deinit, TestProcessor.prototype, null);
                 }
 
                 constructor(transform) {
                     const callbackId = swift.memory.retain(transform);
-                    const ret = instance.exports.bjs_TestProcessor_init(callbackId);
+                    const ret = instance.exports.bjs_TestModule_TestProcessor_init(callbackId);
                     return TestProcessor.__construct(ret);
                 }
             }
-            const AnimalHelpers = __bjs_createAnimalHelpers();
-            structHelpers.Animal = AnimalHelpers;
+            const TestModule_AnimalHelpers = __bjs_createTestModule_AnimalHelpers();
+            structHelpers.TestModule_Animal = TestModule_AnimalHelpers;
 
-            const APIResultHelpers = __bjs_createAPIResultValuesHelpers();
-            enumHelpers.APIResult = APIResultHelpers;
+            const TestModule_APIResultHelpers = __bjs_createTestModule_APIResultHelpers();
+            enumHelpers.TestModule_APIResult = TestModule_APIResultHelpers;
 
             const exports = {
-                roundtripAnimal: function bjs_roundtripAnimal(animalClosure) {
+                roundtripAnimal: function bjs_TestModule_roundtripAnimal(animalClosure) {
                     const callbackId = swift.memory.retain(animalClosure);
-                    const ret = instance.exports.bjs_roundtripAnimal(callbackId);
+                    const ret = instance.exports.bjs_TestModule_roundtripAnimal(callbackId);
                     return swift.memory.getObject(ret);
                 },
-                roundtripOptionalAnimal: function bjs_roundtripOptionalAnimal(animalClosure) {
+                roundtripOptionalAnimal: function bjs_TestModule_roundtripOptionalAnimal(animalClosure) {
                     const callbackId = swift.memory.retain(animalClosure);
-                    const ret = instance.exports.bjs_roundtripOptionalAnimal(callbackId);
+                    const ret = instance.exports.bjs_TestModule_roundtripOptionalAnimal(callbackId);
                     return swift.memory.getObject(ret);
                 },
-                roundtripString: function bjs_roundtripString(stringClosure) {
+                roundtripString: function bjs_TestModule_roundtripString(stringClosure) {
                     const callbackId = swift.memory.retain(stringClosure);
-                    const ret = instance.exports.bjs_roundtripString(callbackId);
+                    const ret = instance.exports.bjs_TestModule_roundtripString(callbackId);
                     return swift.memory.getObject(ret);
                 },
-                roundtripInt: function bjs_roundtripInt(intClosure) {
+                roundtripInt: function bjs_TestModule_roundtripInt(intClosure) {
                     const callbackId = swift.memory.retain(intClosure);
-                    const ret = instance.exports.bjs_roundtripInt(callbackId);
+                    const ret = instance.exports.bjs_TestModule_roundtripInt(callbackId);
                     return swift.memory.getObject(ret);
                 },
-                roundtripBool: function bjs_roundtripBool(boolClosure) {
+                roundtripBool: function bjs_TestModule_roundtripBool(boolClosure) {
                     const callbackId = swift.memory.retain(boolClosure);
-                    const ret = instance.exports.bjs_roundtripBool(callbackId);
+                    const ret = instance.exports.bjs_TestModule_roundtripBool(callbackId);
                     return swift.memory.getObject(ret);
                 },
-                roundtripFloat: function bjs_roundtripFloat(floatClosure) {
+                roundtripFloat: function bjs_TestModule_roundtripFloat(floatClosure) {
                     const callbackId = swift.memory.retain(floatClosure);
-                    const ret = instance.exports.bjs_roundtripFloat(callbackId);
+                    const ret = instance.exports.bjs_TestModule_roundtripFloat(callbackId);
                     return swift.memory.getObject(ret);
                 },
-                roundtripDouble: function bjs_roundtripDouble(doubleClosure) {
+                roundtripDouble: function bjs_TestModule_roundtripDouble(doubleClosure) {
                     const callbackId = swift.memory.retain(doubleClosure);
-                    const ret = instance.exports.bjs_roundtripDouble(callbackId);
+                    const ret = instance.exports.bjs_TestModule_roundtripDouble(callbackId);
                     return swift.memory.getObject(ret);
                 },
-                roundtripOptionalString: function bjs_roundtripOptionalString(stringClosure) {
+                roundtripOptionalString: function bjs_TestModule_roundtripOptionalString(stringClosure) {
                     const callbackId = swift.memory.retain(stringClosure);
-                    const ret = instance.exports.bjs_roundtripOptionalString(callbackId);
+                    const ret = instance.exports.bjs_TestModule_roundtripOptionalString(callbackId);
                     return swift.memory.getObject(ret);
                 },
-                roundtripOptionalInt: function bjs_roundtripOptionalInt(intClosure) {
+                roundtripOptionalInt: function bjs_TestModule_roundtripOptionalInt(intClosure) {
                     const callbackId = swift.memory.retain(intClosure);
-                    const ret = instance.exports.bjs_roundtripOptionalInt(callbackId);
+                    const ret = instance.exports.bjs_TestModule_roundtripOptionalInt(callbackId);
                     return swift.memory.getObject(ret);
                 },
-                roundtripOptionalBool: function bjs_roundtripOptionalBool(boolClosure) {
+                roundtripOptionalBool: function bjs_TestModule_roundtripOptionalBool(boolClosure) {
                     const callbackId = swift.memory.retain(boolClosure);
-                    const ret = instance.exports.bjs_roundtripOptionalBool(callbackId);
+                    const ret = instance.exports.bjs_TestModule_roundtripOptionalBool(callbackId);
                     return swift.memory.getObject(ret);
                 },
-                roundtripOptionalFloat: function bjs_roundtripOptionalFloat(floatClosure) {
+                roundtripOptionalFloat: function bjs_TestModule_roundtripOptionalFloat(floatClosure) {
                     const callbackId = swift.memory.retain(floatClosure);
-                    const ret = instance.exports.bjs_roundtripOptionalFloat(callbackId);
+                    const ret = instance.exports.bjs_TestModule_roundtripOptionalFloat(callbackId);
                     return swift.memory.getObject(ret);
                 },
-                roundtripOptionalDouble: function bjs_roundtripOptionalDouble(doubleClosure) {
+                roundtripOptionalDouble: function bjs_TestModule_roundtripOptionalDouble(doubleClosure) {
                     const callbackId = swift.memory.retain(doubleClosure);
-                    const ret = instance.exports.bjs_roundtripOptionalDouble(callbackId);
+                    const ret = instance.exports.bjs_TestModule_roundtripOptionalDouble(callbackId);
                     return swift.memory.getObject(ret);
                 },
-                roundtripPerson: function bjs_roundtripPerson(personClosure) {
+                roundtripPerson: function bjs_TestModule_roundtripPerson(personClosure) {
                     const callbackId = swift.memory.retain(personClosure);
-                    const ret = instance.exports.bjs_roundtripPerson(callbackId);
+                    const ret = instance.exports.bjs_TestModule_roundtripPerson(callbackId);
                     return swift.memory.getObject(ret);
                 },
-                roundtripOptionalPerson: function bjs_roundtripOptionalPerson(personClosure) {
+                roundtripOptionalPerson: function bjs_TestModule_roundtripOptionalPerson(personClosure) {
                     const callbackId = swift.memory.retain(personClosure);
-                    const ret = instance.exports.bjs_roundtripOptionalPerson(callbackId);
+                    const ret = instance.exports.bjs_TestModule_roundtripOptionalPerson(callbackId);
                     return swift.memory.getObject(ret);
                 },
-                makeThrowingParser: function bjs_makeThrowingParser() {
-                    const ret = instance.exports.bjs_makeThrowingParser();
+                makeThrowingParser: function bjs_TestModule_makeThrowingParser() {
+                    const ret = instance.exports.bjs_TestModule_makeThrowingParser();
                     return swift.memory.getObject(ret);
                 },
-                validateWith: function bjs_validateWith(validate) {
+                validateWith: function bjs_TestModule_validateWith(validate) {
                     const callbackId = swift.memory.retain(validate);
-                    instance.exports.bjs_validateWith(callbackId);
+                    instance.exports.bjs_TestModule_validateWith(callbackId);
                 },
-                makeFetcher: function bjs_makeFetcher() {
-                    const ret = instance.exports.bjs_makeFetcher();
+                makeFetcher: function bjs_TestModule_makeFetcher() {
+                    const ret = instance.exports.bjs_TestModule_makeFetcher();
                     return swift.memory.getObject(ret);
                 },
-                makeAsyncEcho: function bjs_makeAsyncEcho() {
-                    const ret = instance.exports.bjs_makeAsyncEcho();
+                makeAsyncEcho: function bjs_TestModule_makeAsyncEcho() {
+                    const ret = instance.exports.bjs_TestModule_makeAsyncEcho();
                     return swift.memory.getObject(ret);
                 },
-                makeAnimalLoader: function bjs_makeAnimalLoader() {
-                    const ret = instance.exports.bjs_makeAnimalLoader();
+                makeAnimalLoader: function bjs_TestModule_makeAnimalLoader() {
+                    const ret = instance.exports.bjs_TestModule_makeAnimalLoader();
                     return swift.memory.getObject(ret);
                 },
-                makeResultLoader: function bjs_makeResultLoader() {
-                    const ret = instance.exports.bjs_makeResultLoader();
+                makeResultLoader: function bjs_TestModule_makeResultLoader() {
+                    const ret = instance.exports.bjs_TestModule_makeResultLoader();
                     return swift.memory.getObject(ret);
                 },
-                roundtripDirection: function bjs_roundtripDirection(callback) {
+                roundtripDirection: function bjs_TestModule_roundtripDirection(callback) {
                     const callbackId = swift.memory.retain(callback);
-                    const ret = instance.exports.bjs_roundtripDirection(callbackId);
+                    const ret = instance.exports.bjs_TestModule_roundtripDirection(callbackId);
                     return swift.memory.getObject(ret);
                 },
-                roundtripTheme: function bjs_roundtripTheme(callback) {
+                roundtripTheme: function bjs_TestModule_roundtripTheme(callback) {
                     const callbackId = swift.memory.retain(callback);
-                    const ret = instance.exports.bjs_roundtripTheme(callbackId);
+                    const ret = instance.exports.bjs_TestModule_roundtripTheme(callbackId);
                     return swift.memory.getObject(ret);
                 },
-                roundtripHttpStatus: function bjs_roundtripHttpStatus(callback) {
+                roundtripHttpStatus: function bjs_TestModule_roundtripHttpStatus(callback) {
                     const callbackId = swift.memory.retain(callback);
-                    const ret = instance.exports.bjs_roundtripHttpStatus(callbackId);
+                    const ret = instance.exports.bjs_TestModule_roundtripHttpStatus(callbackId);
                     return swift.memory.getObject(ret);
                 },
-                roundtripAPIResult: function bjs_roundtripAPIResult(callback) {
+                roundtripAPIResult: function bjs_TestModule_roundtripAPIResult(callback) {
                     const callbackId = swift.memory.retain(callback);
-                    const ret = instance.exports.bjs_roundtripAPIResult(callbackId);
+                    const ret = instance.exports.bjs_TestModule_roundtripAPIResult(callbackId);
                     return swift.memory.getObject(ret);
                 },
-                roundtripOptionalDirection: function bjs_roundtripOptionalDirection(callback) {
+                roundtripOptionalDirection: function bjs_TestModule_roundtripOptionalDirection(callback) {
                     const callbackId = swift.memory.retain(callback);
-                    const ret = instance.exports.bjs_roundtripOptionalDirection(callbackId);
+                    const ret = instance.exports.bjs_TestModule_roundtripOptionalDirection(callbackId);
                     return swift.memory.getObject(ret);
                 },
-                roundtripOptionalTheme: function bjs_roundtripOptionalTheme(callback) {
+                roundtripOptionalTheme: function bjs_TestModule_roundtripOptionalTheme(callback) {
                     const callbackId = swift.memory.retain(callback);
-                    const ret = instance.exports.bjs_roundtripOptionalTheme(callbackId);
+                    const ret = instance.exports.bjs_TestModule_roundtripOptionalTheme(callbackId);
                     return swift.memory.getObject(ret);
                 },
-                roundtripOptionalHttpStatus: function bjs_roundtripOptionalHttpStatus(callback) {
+                roundtripOptionalHttpStatus: function bjs_TestModule_roundtripOptionalHttpStatus(callback) {
                     const callbackId = swift.memory.retain(callback);
-                    const ret = instance.exports.bjs_roundtripOptionalHttpStatus(callbackId);
+                    const ret = instance.exports.bjs_TestModule_roundtripOptionalHttpStatus(callbackId);
                     return swift.memory.getObject(ret);
                 },
-                roundtripOptionalAPIResult: function bjs_roundtripOptionalAPIResult(callback) {
+                roundtripOptionalAPIResult: function bjs_TestModule_roundtripOptionalAPIResult(callback) {
                     const callbackId = swift.memory.retain(callback);
-                    const ret = instance.exports.bjs_roundtripOptionalAPIResult(callbackId);
+                    const ret = instance.exports.bjs_TestModule_roundtripOptionalAPIResult(callbackId);
                     return swift.memory.getObject(ret);
                 },
-                roundtripOptionalDirection: function bjs_roundtripOptionalDirection(callback) {
+                roundtripOptionalDirection: function bjs_TestModule_roundtripOptionalDirection(callback) {
                     const callbackId = swift.memory.retain(callback);
-                    const ret = instance.exports.bjs_roundtripOptionalDirection(callbackId);
+                    const ret = instance.exports.bjs_TestModule_roundtripOptionalDirection(callbackId);
                     return swift.memory.getObject(ret);
                 },
                 Direction: DirectionValues,
@@ -1569,8 +1569,8 @@ export async function createInstantiator(options, swift) {
                     init: function(type) {
                         const typeBytes = textEncoder.encode(type);
                         const typeId = swift.memory.retain(typeBytes);
-                        instance.exports.bjs_Animal_init(typeId, typeBytes.length);
-                        const structValue = structHelpers.Animal.lift();
+                        instance.exports.bjs_TestModule_Animal_init(typeId, typeBytes.length);
+                        const structValue = structHelpers.TestModule_Animal.lift();
                         return structValue;
                     },
                 },

@@ -242,34 +242,34 @@ export async function createInstantiator(options, swift) {
         createExports: (instance) => {
             const js = swift.memory.heap;
             const exports = {
-                setDirection: function bjs_setDirection(direction) {
-                    instance.exports.bjs_setDirection(direction);
+                setDirection: function bjs_TestModule_setDirection(direction) {
+                    instance.exports.bjs_TestModule_setDirection(direction);
                 },
-                getDirection: function bjs_getDirection() {
-                    const ret = instance.exports.bjs_getDirection();
+                getDirection: function bjs_TestModule_getDirection() {
+                    const ret = instance.exports.bjs_TestModule_getDirection();
                     return ret;
                 },
-                processDirection: function bjs_processDirection(input) {
-                    const ret = instance.exports.bjs_processDirection(input);
+                processDirection: function bjs_TestModule_processDirection(input) {
+                    const ret = instance.exports.bjs_TestModule_processDirection(input);
                     return ret;
                 },
-                roundTripOptionalDirection: function bjs_roundTripOptionalDirection(input) {
+                roundTripOptionalDirection: function bjs_TestModule_roundTripOptionalDirection(input) {
                     const isSome = input != null;
-                    instance.exports.bjs_roundTripOptionalDirection(+isSome, isSome ? input : 0);
+                    instance.exports.bjs_TestModule_roundTripOptionalDirection(+isSome, isSome ? input : 0);
                     const optResult = tmpRetOptionalInt;
                     tmpRetOptionalInt = undefined;
                     return optResult;
                 },
-                setTSDirection: function bjs_setTSDirection(direction) {
-                    instance.exports.bjs_setTSDirection(direction);
+                setTSDirection: function bjs_TestModule_setTSDirection(direction) {
+                    instance.exports.bjs_TestModule_setTSDirection(direction);
                 },
-                getTSDirection: function bjs_getTSDirection() {
-                    const ret = instance.exports.bjs_getTSDirection();
+                getTSDirection: function bjs_TestModule_getTSDirection() {
+                    const ret = instance.exports.bjs_TestModule_getTSDirection();
                     return ret;
                 },
-                roundTripOptionalTSDirection: function bjs_roundTripOptionalTSDirection(input) {
+                roundTripOptionalTSDirection: function bjs_TestModule_roundTripOptionalTSDirection(input) {
                     const isSome = input != null;
-                    instance.exports.bjs_roundTripOptionalTSDirection(+isSome, isSome ? input : 0);
+                    instance.exports.bjs_TestModule_roundTripOptionalTSDirection(+isSome, isSome ? input : 0);
                     const optResult = tmpRetOptionalInt;
                     tmpRetOptionalInt = undefined;
                     return optResult;

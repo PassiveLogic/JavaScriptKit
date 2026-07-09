@@ -6,7 +6,7 @@
     "classes" : [
       {
         "constructor" : {
-          "abiName" : "bjs_Greeter_init",
+          "abiName" : "bjs_TestModule_Greeter_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -26,7 +26,7 @@
         },
         "methods" : [
           {
-            "abiName" : "bjs_Greeter_greet",
+            "abiName" : "bjs_TestModule_Greeter_greet",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -43,7 +43,7 @@
             }
           },
           {
-            "abiName" : "bjs_Greeter_changeName",
+            "abiName" : "bjs_TestModule_Greeter_changeName",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -68,7 +68,7 @@
             }
           },
           {
-            "abiName" : "bjs_Greeter_greetEnthusiastically",
+            "abiName" : "bjs_TestModule_Greeter_greetEnthusiastically",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -85,7 +85,7 @@
             }
           },
           {
-            "abiName" : "bjs_Greeter_static_greetAnonymously",
+            "abiName" : "bjs_TestModule_Greeter_static_greetAnonymously",
             "effects" : {
               "isAsync" : false,
               "isStatic" : true,
@@ -102,7 +102,7 @@
             },
             "staticContext" : {
               "className" : {
-                "_0" : "Greeter"
+                "_0" : "TestModule_Greeter"
               }
             }
           }
@@ -138,7 +138,7 @@
             "name" : "defaultGreeting",
             "staticContext" : {
               "className" : {
-                "_0" : "Greeter"
+                "_0" : "TestModule_Greeter"
               }
             },
             "type" : {
@@ -148,7 +148,7 @@
             }
           }
         ],
-        "swiftCallName" : "Greeter"
+        "swiftCallName" : "TestModule.Greeter"
       },
       {
         "explicitAccessControl" : "public",
@@ -159,7 +159,7 @@
         "properties" : [
 
         ],
-        "swiftCallName" : "PublicGreeter"
+        "swiftCallName" : "TestModule.PublicGreeter"
       },
       {
         "explicitAccessControl" : "package",
@@ -170,7 +170,7 @@
         "properties" : [
 
         ],
-        "swiftCallName" : "PackageGreeter"
+        "swiftCallName" : "TestModule.PackageGreeter"
       }
     ],
     "enums" : [
@@ -179,7 +179,7 @@
     "exposeToGlobal" : false,
     "functions" : [
       {
-        "abiName" : "bjs_takeGreeter",
+        "abiName" : "bjs_TestModule_takeGreeter",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -192,7 +192,7 @@
             "name" : "greeter",
             "type" : {
               "swiftHeapObject" : {
-                "_0" : "Greeter"
+                "_0" : "TestModule.Greeter"
               }
             }
           }
@@ -228,14 +228,14 @@
                 "name" : "greeter",
                 "type" : {
                   "swiftHeapObject" : {
-                    "_0" : "Greeter"
+                    "_0" : "TestModule.Greeter"
                   }
                 }
               }
             ],
             "returnType" : {
               "swiftHeapObject" : {
-                "_0" : "Greeter"
+                "_0" : "TestModule.Greeter"
               }
             }
           },
@@ -254,7 +254,7 @@
                   "nullable" : {
                     "_0" : {
                       "swiftHeapObject" : {
-                        "_0" : "Greeter"
+                        "_0" : "TestModule.Greeter"
                       }
                     },
                     "_1" : "null"
@@ -266,7 +266,7 @@
               "nullable" : {
                 "_0" : {
                   "swiftHeapObject" : {
-                    "_0" : "Greeter"
+                    "_0" : "TestModule.Greeter"
                   }
                 },
                 "_1" : "null"

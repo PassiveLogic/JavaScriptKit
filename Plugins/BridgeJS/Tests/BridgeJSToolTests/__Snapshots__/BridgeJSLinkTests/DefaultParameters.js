@@ -37,7 +37,7 @@ export async function createInstantiator(options, swift) {
 
     let _exports = null;
     let bjs = null;
-    const __bjs_createConfigHelpers = () => ({
+    const __bjs_createTestModule_ConfigHelpers = () => ({
         lower: (value) => {
             const bytes = textEncoder.encode(value.name);
             const id = swift.memory.retain(bytes);
@@ -53,7 +53,7 @@ export async function createInstantiator(options, swift) {
             return { name: string, value: int, enabled: bool };
         }
     });
-    const __bjs_createMathOperationsHelpers = () => ({
+    const __bjs_createTestModule_MathOperationsHelpers = () => ({
         lower: (value) => {
             f64Stack.push(value.baseValue);
         },
@@ -61,13 +61,13 @@ export async function createInstantiator(options, swift) {
             const f64 = f64Stack.pop();
             const instance1 = { baseValue: f64 };
             instance1.add = function(a, b = 10.0) {
-                structHelpers.MathOperations.lower(this);
-                const ret = instance.exports.bjs_MathOperations_add(a, b);
+                structHelpers.TestModule_MathOperations.lower(this);
+                const ret = instance.exports.bjs_TestModule_MathOperations_add(a, b);
                 return ret;
             }.bind(instance1);
             instance1.multiply = function(a, b) {
-                structHelpers.MathOperations.lower(this);
-                const ret = instance.exports.bjs_MathOperations_multiply(a, b);
+                structHelpers.TestModule_MathOperations.lower(this);
+                const ret = instance.exports.bjs_TestModule_MathOperations_multiply(a, b);
                 return ret;
             }.bind(instance1);
             return instance1;
@@ -148,18 +148,18 @@ export async function createInstantiator(options, swift) {
                 const copy = memory.buffer.slice(ptr, ptr + byteLen);
                 taStack.push(Array.from(new Ctor(copy)));
             }
-            bjs["swift_js_struct_lower_Config"] = function(objectId) {
-                structHelpers.Config.lower(swift.memory.getObject(objectId));
+            bjs["swift_js_struct_lower_TestModule_Config"] = function(objectId) {
+                structHelpers.TestModule_Config.lower(swift.memory.getObject(objectId));
             }
-            bjs["swift_js_struct_lift_Config"] = function() {
-                const value = structHelpers.Config.lift();
+            bjs["swift_js_struct_lift_TestModule_Config"] = function() {
+                const value = structHelpers.TestModule_Config.lift();
                 return swift.memory.retain(value);
             }
-            bjs["swift_js_struct_lower_MathOperations"] = function(objectId) {
-                structHelpers.MathOperations.lower(swift.memory.getObject(objectId));
+            bjs["swift_js_struct_lower_TestModule_MathOperations"] = function(objectId) {
+                structHelpers.TestModule_MathOperations.lower(swift.memory.getObject(objectId));
             }
-            bjs["swift_js_struct_lift_MathOperations"] = function() {
-                const value = structHelpers.MathOperations.lift();
+            bjs["swift_js_struct_lift_TestModule_MathOperations"] = function() {
+                const value = structHelpers.TestModule_MathOperations.lift();
                 return swift.memory.retain(value);
             }
             const __bjs_promiseSettlers = Symbol("JavaScriptKit.promiseSettlers");
@@ -263,15 +263,15 @@ export async function createInstantiator(options, swift) {
             if (!importObject["TestModule"]) {
                 importObject["TestModule"] = {};
             }
-            importObject["TestModule"]["bjs_ConstructorDefaults_wrap"] = function(pointer) {
+            importObject["TestModule"]["bjs_TestModule_ConstructorDefaults_wrap"] = function(pointer) {
                 const obj = _exports['ConstructorDefaults'].__construct(pointer);
                 return swift.memory.retain(obj);
             };
-            importObject["TestModule"]["bjs_DefaultGreeter_wrap"] = function(pointer) {
+            importObject["TestModule"]["bjs_TestModule_DefaultGreeter_wrap"] = function(pointer) {
                 const obj = _exports['DefaultGreeter'].__construct(pointer);
                 return swift.memory.retain(obj);
             };
-            importObject["TestModule"]["bjs_EmptyGreeter_wrap"] = function(pointer) {
+            importObject["TestModule"]["bjs_TestModule_EmptyGreeter_wrap"] = function(pointer) {
                 const obj = _exports['EmptyGreeter'].__construct(pointer);
                 return swift.memory.retain(obj);
             };
@@ -343,17 +343,17 @@ export async function createInstantiator(options, swift) {
             }
             class DefaultGreeter extends SwiftHeapObject {
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_DefaultGreeter_deinit, DefaultGreeter.prototype, null);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_TestModule_DefaultGreeter_deinit, DefaultGreeter.prototype, null);
                 }
 
                 constructor(name) {
                     const nameBytes = textEncoder.encode(name);
                     const nameId = swift.memory.retain(nameBytes);
-                    const ret = instance.exports.bjs_DefaultGreeter_init(nameId, nameBytes.length);
+                    const ret = instance.exports.bjs_TestModule_DefaultGreeter_init(nameId, nameBytes.length);
                     return DefaultGreeter.__construct(ret);
                 }
                 get name() {
-                    instance.exports.bjs_DefaultGreeter_name_get(this.pointer);
+                    instance.exports.bjs_TestModule_DefaultGreeter_name_get(this.pointer);
                     const ret = tmpRetString;
                     tmpRetString = undefined;
                     return ret;
@@ -361,22 +361,22 @@ export async function createInstantiator(options, swift) {
                 set name(value) {
                     const valueBytes = textEncoder.encode(value);
                     const valueId = swift.memory.retain(valueBytes);
-                    instance.exports.bjs_DefaultGreeter_name_set(this.pointer, valueId, valueBytes.length);
+                    instance.exports.bjs_TestModule_DefaultGreeter_name_set(this.pointer, valueId, valueBytes.length);
                 }
             }
             class EmptyGreeter extends SwiftHeapObject {
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_EmptyGreeter_deinit, EmptyGreeter.prototype, null);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_TestModule_EmptyGreeter_deinit, EmptyGreeter.prototype, null);
                 }
 
                 constructor() {
-                    const ret = instance.exports.bjs_EmptyGreeter_init();
+                    const ret = instance.exports.bjs_TestModule_EmptyGreeter_init();
                     return EmptyGreeter.__construct(ret);
                 }
             }
             class ConstructorDefaults extends SwiftHeapObject {
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_ConstructorDefaults_deinit, ConstructorDefaults.prototype, null);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_TestModule_ConstructorDefaults_deinit, ConstructorDefaults.prototype, null);
                 }
 
                 constructor(name = "Default", count = 42, enabled = true, status = StatusValues.Active, tag = null) {
@@ -393,11 +393,11 @@ export async function createInstantiator(options, swift) {
                         result = 0;
                         result1 = 0;
                     }
-                    const ret = instance.exports.bjs_ConstructorDefaults_init(nameId, nameBytes.length, count, enabled, status, +isSome, result, result1);
+                    const ret = instance.exports.bjs_TestModule_ConstructorDefaults_init(nameId, nameBytes.length, count, enabled, status, +isSome, result, result1);
                     return ConstructorDefaults.__construct(ret);
                 }
                 get name() {
-                    instance.exports.bjs_ConstructorDefaults_name_get(this.pointer);
+                    instance.exports.bjs_TestModule_ConstructorDefaults_name_get(this.pointer);
                     const ret = tmpRetString;
                     tmpRetString = undefined;
                     return ret;
@@ -405,31 +405,31 @@ export async function createInstantiator(options, swift) {
                 set name(value) {
                     const valueBytes = textEncoder.encode(value);
                     const valueId = swift.memory.retain(valueBytes);
-                    instance.exports.bjs_ConstructorDefaults_name_set(this.pointer, valueId, valueBytes.length);
+                    instance.exports.bjs_TestModule_ConstructorDefaults_name_set(this.pointer, valueId, valueBytes.length);
                 }
                 get count() {
-                    const ret = instance.exports.bjs_ConstructorDefaults_count_get(this.pointer);
+                    const ret = instance.exports.bjs_TestModule_ConstructorDefaults_count_get(this.pointer);
                     return ret;
                 }
                 set count(value) {
-                    instance.exports.bjs_ConstructorDefaults_count_set(this.pointer, value);
+                    instance.exports.bjs_TestModule_ConstructorDefaults_count_set(this.pointer, value);
                 }
                 get enabled() {
-                    const ret = instance.exports.bjs_ConstructorDefaults_enabled_get(this.pointer);
+                    const ret = instance.exports.bjs_TestModule_ConstructorDefaults_enabled_get(this.pointer);
                     return ret !== 0;
                 }
                 set enabled(value) {
-                    instance.exports.bjs_ConstructorDefaults_enabled_set(this.pointer, value);
+                    instance.exports.bjs_TestModule_ConstructorDefaults_enabled_set(this.pointer, value);
                 }
                 get status() {
-                    const ret = instance.exports.bjs_ConstructorDefaults_status_get(this.pointer);
+                    const ret = instance.exports.bjs_TestModule_ConstructorDefaults_status_get(this.pointer);
                     return ret;
                 }
                 set status(value) {
-                    instance.exports.bjs_ConstructorDefaults_status_set(this.pointer, value);
+                    instance.exports.bjs_TestModule_ConstructorDefaults_status_set(this.pointer, value);
                 }
                 get tag() {
-                    instance.exports.bjs_ConstructorDefaults_tag_get(this.pointer);
+                    instance.exports.bjs_TestModule_ConstructorDefaults_tag_get(this.pointer);
                     const optResult = tmpRetString;
                     tmpRetString = undefined;
                     return optResult;
@@ -446,41 +446,41 @@ export async function createInstantiator(options, swift) {
                         result = 0;
                         result1 = 0;
                     }
-                    instance.exports.bjs_ConstructorDefaults_tag_set(this.pointer, +isSome, result, result1);
+                    instance.exports.bjs_TestModule_ConstructorDefaults_tag_set(this.pointer, +isSome, result, result1);
                 }
             }
-            const ConfigHelpers = __bjs_createConfigHelpers();
-            structHelpers.Config = ConfigHelpers;
+            const TestModule_ConfigHelpers = __bjs_createTestModule_ConfigHelpers();
+            structHelpers.TestModule_Config = TestModule_ConfigHelpers;
 
-            const MathOperationsHelpers = __bjs_createMathOperationsHelpers();
-            structHelpers.MathOperations = MathOperationsHelpers;
+            const TestModule_MathOperationsHelpers = __bjs_createTestModule_MathOperationsHelpers();
+            structHelpers.TestModule_MathOperations = TestModule_MathOperationsHelpers;
 
             const exports = {
-                testStringDefault: function bjs_testStringDefault(message = "Hello World") {
+                testStringDefault: function bjs_TestModule_testStringDefault(message = "Hello World") {
                     const messageBytes = textEncoder.encode(message);
                     const messageId = swift.memory.retain(messageBytes);
-                    instance.exports.bjs_testStringDefault(messageId, messageBytes.length);
+                    instance.exports.bjs_TestModule_testStringDefault(messageId, messageBytes.length);
                     const ret = tmpRetString;
                     tmpRetString = undefined;
                     return ret;
                 },
-                testNegativeIntDefault: function bjs_testNegativeIntDefault(value = -42) {
-                    const ret = instance.exports.bjs_testNegativeIntDefault(value);
+                testNegativeIntDefault: function bjs_TestModule_testNegativeIntDefault(value = -42) {
+                    const ret = instance.exports.bjs_TestModule_testNegativeIntDefault(value);
                     return ret;
                 },
-                testBoolDefault: function bjs_testBoolDefault(flag = true) {
-                    const ret = instance.exports.bjs_testBoolDefault(flag);
+                testBoolDefault: function bjs_TestModule_testBoolDefault(flag = true) {
+                    const ret = instance.exports.bjs_TestModule_testBoolDefault(flag);
                     return ret !== 0;
                 },
-                testNegativeFloatDefault: function bjs_testNegativeFloatDefault(temp = -273.15) {
-                    const ret = instance.exports.bjs_testNegativeFloatDefault(temp);
+                testNegativeFloatDefault: function bjs_TestModule_testNegativeFloatDefault(temp = -273.15) {
+                    const ret = instance.exports.bjs_TestModule_testNegativeFloatDefault(temp);
                     return ret;
                 },
-                testDoubleDefault: function bjs_testDoubleDefault(precision = 2.718) {
-                    const ret = instance.exports.bjs_testDoubleDefault(precision);
+                testDoubleDefault: function bjs_TestModule_testDoubleDefault(precision = 2.718) {
+                    const ret = instance.exports.bjs_TestModule_testDoubleDefault(precision);
                     return ret;
                 },
-                testOptionalDefault: function bjs_testOptionalDefault(name = null) {
+                testOptionalDefault: function bjs_TestModule_testOptionalDefault(name = null) {
                     const isSome = name != null;
                     let result, result1;
                     if (isSome) {
@@ -492,12 +492,12 @@ export async function createInstantiator(options, swift) {
                         result = 0;
                         result1 = 0;
                     }
-                    instance.exports.bjs_testOptionalDefault(+isSome, result, result1);
+                    instance.exports.bjs_TestModule_testOptionalDefault(+isSome, result, result1);
                     const optResult = tmpRetString;
                     tmpRetString = undefined;
                     return optResult;
                 },
-                testOptionalStringDefault: function bjs_testOptionalStringDefault(greeting = "Hi") {
+                testOptionalStringDefault: function bjs_TestModule_testOptionalStringDefault(greeting = "Hi") {
                     const isSome = greeting != null;
                     let result, result1;
                     if (isSome) {
@@ -509,59 +509,59 @@ export async function createInstantiator(options, swift) {
                         result = 0;
                         result1 = 0;
                     }
-                    instance.exports.bjs_testOptionalStringDefault(+isSome, result, result1);
+                    instance.exports.bjs_TestModule_testOptionalStringDefault(+isSome, result, result1);
                     const optResult = tmpRetString;
                     tmpRetString = undefined;
                     return optResult;
                 },
-                testMultipleDefaults: function bjs_testMultipleDefaults(title = "Default Title", count = 10, enabled = false) {
+                testMultipleDefaults: function bjs_TestModule_testMultipleDefaults(title = "Default Title", count = 10, enabled = false) {
                     const titleBytes = textEncoder.encode(title);
                     const titleId = swift.memory.retain(titleBytes);
-                    instance.exports.bjs_testMultipleDefaults(titleId, titleBytes.length, count, enabled);
+                    instance.exports.bjs_TestModule_testMultipleDefaults(titleId, titleBytes.length, count, enabled);
                     const ret = tmpRetString;
                     tmpRetString = undefined;
                     return ret;
                 },
-                testEnumDefault: function bjs_testEnumDefault(status = StatusValues.Active) {
-                    const ret = instance.exports.bjs_testEnumDefault(status);
+                testEnumDefault: function bjs_TestModule_testEnumDefault(status = StatusValues.Active) {
+                    const ret = instance.exports.bjs_TestModule_testEnumDefault(status);
                     return ret;
                 },
-                testComplexInit: function bjs_testComplexInit(greeter = new DefaultGreeter("DefaultUser")) {
-                    const ret = instance.exports.bjs_testComplexInit(greeter.pointer);
+                testComplexInit: function bjs_TestModule_testComplexInit(greeter = new DefaultGreeter("DefaultUser")) {
+                    const ret = instance.exports.bjs_TestModule_testComplexInit(greeter.pointer);
                     return DefaultGreeter.__construct(ret);
                 },
-                testEmptyInit: function bjs_testEmptyInit(greeter = new EmptyGreeter()) {
-                    const ret = instance.exports.bjs_testEmptyInit(greeter.pointer);
+                testEmptyInit: function bjs_TestModule_testEmptyInit(greeter = new EmptyGreeter()) {
+                    const ret = instance.exports.bjs_TestModule_testEmptyInit(greeter.pointer);
                     return EmptyGreeter.__construct(ret);
                 },
-                testOptionalStructDefault: function bjs_testOptionalStructDefault(point = null) {
+                testOptionalStructDefault: function bjs_TestModule_testOptionalStructDefault(point = null) {
                     const isSome = point != null;
                     if (isSome) {
-                        structHelpers.Config.lower(point);
+                        structHelpers.TestModule_Config.lower(point);
                     }
                     i32Stack.push(+isSome);
-                    instance.exports.bjs_testOptionalStructDefault();
+                    instance.exports.bjs_TestModule_testOptionalStructDefault();
                     const isSome1 = i32Stack.pop();
-                    const optResult = isSome1 ? structHelpers.Config.lift() : null;
+                    const optResult = isSome1 ? structHelpers.TestModule_Config.lift() : null;
                     return optResult;
                 },
-                testOptionalStructWithValueDefault: function bjs_testOptionalStructWithValueDefault(point = { name: "default", value: 42, enabled: true }) {
+                testOptionalStructWithValueDefault: function bjs_TestModule_testOptionalStructWithValueDefault(point = { name: "default", value: 42, enabled: true }) {
                     const isSome = point != null;
                     if (isSome) {
-                        structHelpers.Config.lower(point);
+                        structHelpers.TestModule_Config.lower(point);
                     }
                     i32Stack.push(+isSome);
-                    instance.exports.bjs_testOptionalStructWithValueDefault();
+                    instance.exports.bjs_TestModule_testOptionalStructWithValueDefault();
                     const isSome1 = i32Stack.pop();
-                    const optResult = isSome1 ? structHelpers.Config.lift() : null;
+                    const optResult = isSome1 ? structHelpers.TestModule_Config.lift() : null;
                     return optResult;
                 },
-                testIntArrayDefault: function bjs_testIntArrayDefault(values = [1, 2, 3]) {
+                testIntArrayDefault: function bjs_TestModule_testIntArrayDefault(values = [1, 2, 3]) {
                     for (const elem of values) {
                         i32Stack.push((elem | 0));
                     }
                     i32Stack.push(values.length);
-                    instance.exports.bjs_testIntArrayDefault();
+                    instance.exports.bjs_TestModule_testIntArrayDefault();
                     const arrayLen = i32Stack.pop();
                     let arrayResult;
                     if (arrayLen === -1) {
@@ -576,7 +576,7 @@ export async function createInstantiator(options, swift) {
                     }
                     return arrayResult;
                 },
-                testStringArrayDefault: function bjs_testStringArrayDefault(names = ["a", "b", "c"]) {
+                testStringArrayDefault: function bjs_TestModule_testStringArrayDefault(names = ["a", "b", "c"]) {
                     for (const elem of names) {
                         const bytes = textEncoder.encode(elem);
                         const id = swift.memory.retain(bytes);
@@ -584,7 +584,7 @@ export async function createInstantiator(options, swift) {
                         i32Stack.push(id);
                     }
                     i32Stack.push(names.length);
-                    instance.exports.bjs_testStringArrayDefault();
+                    instance.exports.bjs_TestModule_testStringArrayDefault();
                     const arrayLen = i32Stack.pop();
                     let arrayResult;
                     if (arrayLen === -1) {
@@ -599,12 +599,12 @@ export async function createInstantiator(options, swift) {
                     }
                     return arrayResult;
                 },
-                testDoubleArrayDefault: function bjs_testDoubleArrayDefault(values = [1.5, 2.5, 3.5]) {
+                testDoubleArrayDefault: function bjs_TestModule_testDoubleArrayDefault(values = [1.5, 2.5, 3.5]) {
                     for (const elem of values) {
                         f64Stack.push(elem);
                     }
                     i32Stack.push(values.length);
-                    instance.exports.bjs_testDoubleArrayDefault();
+                    instance.exports.bjs_TestModule_testDoubleArrayDefault();
                     const arrayLen = i32Stack.pop();
                     let arrayResult;
                     if (arrayLen === -1) {
@@ -619,12 +619,12 @@ export async function createInstantiator(options, swift) {
                     }
                     return arrayResult;
                 },
-                testBoolArrayDefault: function bjs_testBoolArrayDefault(flags = [true, false, true]) {
+                testBoolArrayDefault: function bjs_TestModule_testBoolArrayDefault(flags = [true, false, true]) {
                     for (const elem of flags) {
                         i32Stack.push(elem ? 1 : 0);
                     }
                     i32Stack.push(flags.length);
-                    instance.exports.bjs_testBoolArrayDefault();
+                    instance.exports.bjs_TestModule_testBoolArrayDefault();
                     const arrayLen = i32Stack.pop();
                     let arrayResult;
                     if (arrayLen === -1) {
@@ -639,12 +639,12 @@ export async function createInstantiator(options, swift) {
                     }
                     return arrayResult;
                 },
-                testEmptyArrayDefault: function bjs_testEmptyArrayDefault(items = []) {
+                testEmptyArrayDefault: function bjs_TestModule_testEmptyArrayDefault(items = []) {
                     for (const elem of items) {
                         i32Stack.push((elem | 0));
                     }
                     i32Stack.push(items.length);
-                    instance.exports.bjs_testEmptyArrayDefault();
+                    instance.exports.bjs_TestModule_testEmptyArrayDefault();
                     const arrayLen = i32Stack.pop();
                     let arrayResult;
                     if (arrayLen === -1) {
@@ -659,14 +659,14 @@ export async function createInstantiator(options, swift) {
                     }
                     return arrayResult;
                 },
-                testMixedWithArrayDefault: function bjs_testMixedWithArrayDefault(name = "test", values = [10, 20, 30], enabled = true) {
+                testMixedWithArrayDefault: function bjs_TestModule_testMixedWithArrayDefault(name = "test", values = [10, 20, 30], enabled = true) {
                     const nameBytes = textEncoder.encode(name);
                     const nameId = swift.memory.retain(nameBytes);
                     for (const elem of values) {
                         i32Stack.push((elem | 0));
                     }
                     i32Stack.push(values.length);
-                    instance.exports.bjs_testMixedWithArrayDefault(nameId, nameBytes.length, enabled);
+                    instance.exports.bjs_TestModule_testMixedWithArrayDefault(nameId, nameBytes.length, enabled);
                     const ret = tmpRetString;
                     tmpRetString = undefined;
                     return ret;
@@ -677,12 +677,12 @@ export async function createInstantiator(options, swift) {
                 EmptyGreeter,
                 MathOperations: {
                     init: function(baseValue = 0.0) {
-                        instance.exports.bjs_MathOperations_init(baseValue);
-                        const structValue = structHelpers.MathOperations.lift();
+                        instance.exports.bjs_TestModule_MathOperations_init(baseValue);
+                        const structValue = structHelpers.TestModule_MathOperations.lift();
                         return structValue;
                     },
                     subtract: function(a, b = 5.0) {
-                        const ret = instance.exports.bjs_MathOperations_static_subtract(a, b);
+                        const ret = instance.exports.bjs_TestModule_MathOperations_static_subtract(a, b);
                         return ret;
                     },
                 },

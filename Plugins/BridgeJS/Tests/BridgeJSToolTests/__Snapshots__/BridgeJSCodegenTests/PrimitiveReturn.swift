@@ -1,6 +1,6 @@
-@_expose(wasm, "bjs_checkInt")
-@_cdecl("bjs_checkInt")
-public func _bjs_checkInt() -> Int32 {
+@_expose(wasm, "bjs_TestModule_checkInt")
+@_cdecl("bjs_TestModule_checkInt")
+public func _bjs_TestModule_checkInt() -> Int32 {
     #if arch(wasm32)
     let ret = checkInt()
     return ret.bridgeJSLowerReturn()
@@ -9,9 +9,9 @@ public func _bjs_checkInt() -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_checkUInt")
-@_cdecl("bjs_checkUInt")
-public func _bjs_checkUInt() -> Int32 {
+@_expose(wasm, "bjs_TestModule_checkUInt")
+@_cdecl("bjs_TestModule_checkUInt")
+public func _bjs_TestModule_checkUInt() -> Int32 {
     #if arch(wasm32)
     let ret = checkUInt()
     return ret.bridgeJSLowerReturn()
@@ -20,9 +20,9 @@ public func _bjs_checkUInt() -> Int32 {
     #endif
 }
 
-@_expose(wasm, "bjs_checkFloat")
-@_cdecl("bjs_checkFloat")
-public func _bjs_checkFloat() -> Float32 {
+@_expose(wasm, "bjs_TestModule_checkFloat")
+@_cdecl("bjs_TestModule_checkFloat")
+public func _bjs_TestModule_checkFloat() -> Float32 {
     #if arch(wasm32)
     let ret = checkFloat()
     return ret.bridgeJSLowerReturn()
@@ -31,9 +31,9 @@ public func _bjs_checkFloat() -> Float32 {
     #endif
 }
 
-@_expose(wasm, "bjs_checkDouble")
-@_cdecl("bjs_checkDouble")
-public func _bjs_checkDouble() -> Float64 {
+@_expose(wasm, "bjs_TestModule_checkDouble")
+@_cdecl("bjs_TestModule_checkDouble")
+public func _bjs_TestModule_checkDouble() -> Float64 {
     #if arch(wasm32)
     let ret = checkDouble()
     return ret.bridgeJSLowerReturn()
@@ -42,9 +42,9 @@ public func _bjs_checkDouble() -> Float64 {
     #endif
 }
 
-@_expose(wasm, "bjs_checkBool")
-@_cdecl("bjs_checkBool")
-public func _bjs_checkBool() -> Int32 {
+@_expose(wasm, "bjs_TestModule_checkBool")
+@_cdecl("bjs_TestModule_checkBool")
+public func _bjs_TestModule_checkBool() -> Int32 {
     #if arch(wasm32)
     let ret = checkBool()
     return ret.bridgeJSLowerReturn()

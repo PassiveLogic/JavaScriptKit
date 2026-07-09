@@ -1,6 +1,6 @@
-@_expose(wasm, "bjs_checkString")
-@_cdecl("bjs_checkString")
-public func _bjs_checkString() -> Void {
+@_expose(wasm, "bjs_TestModule_checkString")
+@_cdecl("bjs_TestModule_checkString")
+public func _bjs_TestModule_checkString() -> Void {
     #if arch(wasm32)
     let ret = checkString()
     return ret.bridgeJSLowerReturn()

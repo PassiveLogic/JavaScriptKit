@@ -1,5 +1,5 @@
-extension PayloadSignal: _BridgedSwiftAssociatedValueEnum {
-    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPopPayload(_ caseId: Int32) -> PayloadSignal {
+extension TestModule.PayloadSignal: _BridgedSwiftAssociatedValueEnum {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPopPayload(_ caseId: Int32) -> TestModule.PayloadSignal {
         switch caseId {
         case 0:
             return .start(String.bridgeJSStackPop())
@@ -8,7 +8,7 @@ extension PayloadSignal: _BridgedSwiftAssociatedValueEnum {
         case 2:
             return .idle
         default:
-            fatalError("Unknown PayloadSignal case ID: \(caseId)")
+            fatalError("Unknown TestModule.PayloadSignal case ID: \(caseId)")
         }
     }
 
@@ -74,16 +74,16 @@ fileprivate func bjs_PayloadSignalControls_roundTripOptional_extern(_ self: Int3
     return bjs_PayloadSignalControls_roundTripOptional_extern(self, signalIsSome, signalCaseId)
 }
 
-func _$PayloadSignalControls_roundTrip(_ signal: PayloadSignal) throws(JSException) -> PayloadSignal {
+func _$PayloadSignalControls_roundTrip(_ signal: TestModule.PayloadSignal) throws(JSException) -> TestModule.PayloadSignal {
     let signalCaseId = signal.bridgeJSLowerParameter()
     let ret = bjs_PayloadSignalControls_roundTrip_static(signalCaseId)
     if let error = _swift_js_take_exception() {
         throw error
     }
-    return PayloadSignal.bridgeJSLiftReturn(ret)
+    return TestModule.PayloadSignal.bridgeJSLiftReturn(ret)
 }
 
-func _$PayloadSignalControls_send(_ self: JSObject, _ signal: PayloadSignal) throws(JSException) -> Void {
+func _$PayloadSignalControls_send(_ self: JSObject, _ signal: TestModule.PayloadSignal) throws(JSException) -> Void {
     let selfValue = self.bridgeJSLowerParameter()
     let signalCaseId = signal.bridgeJSLowerParameter()
     bjs_PayloadSignalControls_send(selfValue, signalCaseId)
@@ -92,21 +92,21 @@ func _$PayloadSignalControls_send(_ self: JSObject, _ signal: PayloadSignal) thr
     }
 }
 
-func _$PayloadSignalControls_current(_ self: JSObject) throws(JSException) -> PayloadSignal {
+func _$PayloadSignalControls_current(_ self: JSObject) throws(JSException) -> TestModule.PayloadSignal {
     let selfValue = self.bridgeJSLowerParameter()
     let ret = bjs_PayloadSignalControls_current(selfValue)
     if let error = _swift_js_take_exception() {
         throw error
     }
-    return PayloadSignal.bridgeJSLiftReturn(ret)
+    return TestModule.PayloadSignal.bridgeJSLiftReturn(ret)
 }
 
-func _$PayloadSignalControls_roundTripOptional(_ self: JSObject, _ signal: Optional<PayloadSignal>) throws(JSException) -> Optional<PayloadSignal> {
+func _$PayloadSignalControls_roundTripOptional(_ self: JSObject, _ signal: Optional<TestModule.PayloadSignal>) throws(JSException) -> Optional<TestModule.PayloadSignal> {
     let selfValue = self.bridgeJSLowerParameter()
     let (signalIsSome, signalCaseId) = signal.bridgeJSLowerParameter()
     let ret = bjs_PayloadSignalControls_roundTripOptional(selfValue, signalIsSome, signalCaseId)
     if let error = _swift_js_take_exception() {
         throw error
     }
-    return Optional<PayloadSignal>.bridgeJSLiftReturn(ret)
+    return Optional<TestModule.PayloadSignal>.bridgeJSLiftReturn(ret)
 }

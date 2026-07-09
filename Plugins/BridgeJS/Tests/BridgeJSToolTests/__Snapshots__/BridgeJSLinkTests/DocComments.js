@@ -37,7 +37,7 @@ export async function createInstantiator(options, swift) {
 
     let _exports = null;
     let bjs = null;
-    const __bjs_createPointHelpers = () => ({
+    const __bjs_createTestModule_PointHelpers = () => ({
         lower: (value) => {
             f64Stack.push(value.x);
             f64Stack.push(value.y);
@@ -123,11 +123,11 @@ export async function createInstantiator(options, swift) {
                 const copy = memory.buffer.slice(ptr, ptr + byteLen);
                 taStack.push(Array.from(new Ctor(copy)));
             }
-            bjs["swift_js_struct_lower_Point"] = function(objectId) {
-                structHelpers.Point.lower(swift.memory.getObject(objectId));
+            bjs["swift_js_struct_lower_TestModule_Point"] = function(objectId) {
+                structHelpers.TestModule_Point.lower(swift.memory.getObject(objectId));
             }
-            bjs["swift_js_struct_lift_Point"] = function() {
-                const value = structHelpers.Point.lift();
+            bjs["swift_js_struct_lift_TestModule_Point"] = function() {
+                const value = structHelpers.TestModule_Point.lift();
                 return swift.memory.retain(value);
             }
             const __bjs_promiseSettlers = Symbol("JavaScriptKit.promiseSettlers");
@@ -231,7 +231,7 @@ export async function createInstantiator(options, swift) {
             if (!importObject["TestModule"]) {
                 importObject["TestModule"] = {};
             }
-            importObject["TestModule"]["bjs_Greeter_wrap"] = function(pointer) {
+            importObject["TestModule"]["bjs_TestModule_Greeter_wrap"] = function(pointer) {
                 const obj = _exports['Greeter'].__construct(pointer);
                 return swift.memory.retain(obj);
             };
@@ -320,23 +320,23 @@ export async function createInstantiator(options, swift) {
             }
             class Greeter extends SwiftHeapObject {
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_Greeter_deinit, Greeter.prototype, null);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_TestModule_Greeter_deinit, Greeter.prototype, null);
                 }
 
                 constructor(name) {
                     const nameBytes = textEncoder.encode(name);
                     const nameId = swift.memory.retain(nameBytes);
-                    const ret = instance.exports.bjs_Greeter_init(nameId, nameBytes.length);
+                    const ret = instance.exports.bjs_TestModule_Greeter_init(nameId, nameBytes.length);
                     return Greeter.__construct(ret);
                 }
                 greet() {
-                    instance.exports.bjs_Greeter_greet(this.pointer);
+                    instance.exports.bjs_TestModule_Greeter_greet(this.pointer);
                     const ret = tmpRetString;
                     tmpRetString = undefined;
                     return ret;
                 }
                 get name() {
-                    instance.exports.bjs_Greeter_name_get(this.pointer);
+                    instance.exports.bjs_TestModule_Greeter_name_get(this.pointer);
                     const ret = tmpRetString;
                     tmpRetString = undefined;
                     return ret;
@@ -344,37 +344,37 @@ export async function createInstantiator(options, swift) {
                 set name(value) {
                     const valueBytes = textEncoder.encode(value);
                     const valueId = swift.memory.retain(valueBytes);
-                    instance.exports.bjs_Greeter_name_set(this.pointer, valueId, valueBytes.length);
+                    instance.exports.bjs_TestModule_Greeter_name_set(this.pointer, valueId, valueBytes.length);
                 }
             }
-            const PointHelpers = __bjs_createPointHelpers();
-            structHelpers.Point = PointHelpers;
+            const TestModule_PointHelpers = __bjs_createTestModule_PointHelpers();
+            structHelpers.TestModule_Point = TestModule_PointHelpers;
 
             const exports = {
-                greet: function bjs_greet(name, greeting = "Hello") {
+                greet: function bjs_TestModule_greet(name, greeting = "Hello") {
                     const nameBytes = textEncoder.encode(name);
                     const nameId = swift.memory.retain(nameBytes);
                     const greetingBytes = textEncoder.encode(greeting);
                     const greetingId = swift.memory.retain(greetingBytes);
-                    instance.exports.bjs_greet(nameId, nameBytes.length, greetingId, greetingBytes.length);
+                    instance.exports.bjs_TestModule_greet(nameId, nameBytes.length, greetingId, greetingBytes.length);
                     const ret = tmpRetString;
                     tmpRetString = undefined;
                     return ret;
                 },
-                add: function bjs_add(a, b) {
-                    const ret = instance.exports.bjs_add(a, b);
+                add: function bjs_TestModule_add(a, b) {
+                    const ret = instance.exports.bjs_TestModule_add(a, b);
                     return ret;
                 },
-                trimmed: function bjs_trimmed() {
-                    instance.exports.bjs_trimmed();
+                trimmed: function bjs_TestModule_trimmed() {
+                    instance.exports.bjs_TestModule_trimmed();
                 },
-                hello: function bjs_hello() {
-                    instance.exports.bjs_hello();
+                hello: function bjs_TestModule_hello() {
+                    instance.exports.bjs_TestModule_hello();
                 },
-                parseInt: function bjs_parseInt(text) {
+                parseInt: function bjs_TestModule_parseInt(text) {
                     const textBytes = textEncoder.encode(text);
                     const textId = swift.memory.retain(textBytes);
-                    const ret = instance.exports.bjs_parseInt(textId, textBytes.length);
+                    const ret = instance.exports.bjs_TestModule_parseInt(textId, textBytes.length);
                     if (tmpRetException) {
                         const error = swift.memory.getObject(tmpRetException);
                         swift.memory.release(tmpRetException);
@@ -383,8 +383,8 @@ export async function createInstantiator(options, swift) {
                     }
                     return ret;
                 },
-                terminator: function bjs_terminator() {
-                    instance.exports.bjs_terminator();
+                terminator: function bjs_TestModule_terminator() {
+                    instance.exports.bjs_TestModule_terminator();
                     const ret = tmpRetString;
                     tmpRetString = undefined;
                     return ret;
@@ -394,13 +394,13 @@ export async function createInstantiator(options, swift) {
                     canonical: function(label) {
                         const labelBytes = textEncoder.encode(label);
                         const labelId = swift.memory.retain(labelBytes);
-                        instance.exports.bjs_Color_static_canonical(labelId, labelBytes.length);
+                        instance.exports.bjs_TestModule_Color_static_canonical(labelId, labelBytes.length);
                         const ret = tmpRetString;
                         tmpRetString = undefined;
                         return ret;
                     },
                     get fallback() {
-                        instance.exports.bjs_Color_static_fallback_get();
+                        instance.exports.bjs_TestModule_Color_static_fallback_get();
                         const ret = tmpRetString;
                         tmpRetString = undefined;
                         return ret;
@@ -408,8 +408,8 @@ export async function createInstantiator(options, swift) {
                 },
                 Greeter,
                 MathUtils: {
-                    double: function bjs_MathUtils_double(value) {
-                        const ret = instance.exports.bjs_MathUtils_double(value);
+                    double: function bjs_TestModule_MathUtils_double(value) {
+                        const ret = instance.exports.bjs_TestModule_MathUtils_double(value);
                         return ret;
                     },
                 },

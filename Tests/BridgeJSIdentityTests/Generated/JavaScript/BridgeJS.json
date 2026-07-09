@@ -6,7 +6,7 @@
     "classes" : [
       {
         "constructor" : {
-          "abiName" : "bjs_IdentityTestSubject_init",
+          "abiName" : "bjs_BridgeJSIdentityTests_IdentityTestSubject_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -59,11 +59,11 @@
             }
           }
         ],
-        "swiftCallName" : "IdentityTestSubject"
+        "swiftCallName" : "BridgeJSIdentityTests.IdentityTestSubject"
       },
       {
         "constructor" : {
-          "abiName" : "bjs_RetainLeakSubject_init",
+          "abiName" : "bjs_BridgeJSIdentityTests_RetainLeakSubject_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -103,11 +103,11 @@
             }
           }
         ],
-        "swiftCallName" : "RetainLeakSubject"
+        "swiftCallName" : "BridgeJSIdentityTests.RetainLeakSubject"
       },
       {
         "constructor" : {
-          "abiName" : "bjs_ArrayIdentityElement_init",
+          "abiName" : "bjs_BridgeJSIdentityTests_ArrayIdentityElement_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -147,7 +147,7 @@
             }
           }
         ],
-        "swiftCallName" : "ArrayIdentityElement"
+        "swiftCallName" : "BridgeJSIdentityTests.ArrayIdentityElement"
       }
     ],
     "enums" : [
@@ -156,7 +156,7 @@
     "exposeToGlobal" : false,
     "functions" : [
       {
-        "abiName" : "bjs_getSharedSubject",
+        "abiName" : "bjs_BridgeJSIdentityTests_getSharedSubject",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -168,12 +168,12 @@
         ],
         "returnType" : {
           "swiftHeapObject" : {
-            "_0" : "IdentityTestSubject"
+            "_0" : "BridgeJSIdentityTests.IdentityTestSubject"
           }
         }
       },
       {
-        "abiName" : "bjs_resetSharedSubject",
+        "abiName" : "bjs_BridgeJSIdentityTests_resetSharedSubject",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -190,7 +190,7 @@
         }
       },
       {
-        "abiName" : "bjs_getRetainLeakSubject",
+        "abiName" : "bjs_BridgeJSIdentityTests_getRetainLeakSubject",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -202,12 +202,12 @@
         ],
         "returnType" : {
           "swiftHeapObject" : {
-            "_0" : "RetainLeakSubject"
+            "_0" : "BridgeJSIdentityTests.RetainLeakSubject"
           }
         }
       },
       {
-        "abiName" : "bjs_resetRetainLeakSubject",
+        "abiName" : "bjs_BridgeJSIdentityTests_resetRetainLeakSubject",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -224,7 +224,7 @@
         }
       },
       {
-        "abiName" : "bjs_getRetainLeakDeinits",
+        "abiName" : "bjs_BridgeJSIdentityTests_getRetainLeakDeinits",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -244,7 +244,7 @@
         }
       },
       {
-        "abiName" : "bjs_resetRetainLeakDeinits",
+        "abiName" : "bjs_BridgeJSIdentityTests_resetRetainLeakDeinits",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -261,7 +261,7 @@
         }
       },
       {
-        "abiName" : "bjs_setupArrayPool",
+        "abiName" : "bjs_BridgeJSIdentityTests_setupArrayPool",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -289,7 +289,7 @@
         }
       },
       {
-        "abiName" : "bjs_getArrayPool",
+        "abiName" : "bjs_BridgeJSIdentityTests_getArrayPool",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -303,14 +303,14 @@
           "array" : {
             "_0" : {
               "swiftHeapObject" : {
-                "_0" : "ArrayIdentityElement"
+                "_0" : "BridgeJSIdentityTests.ArrayIdentityElement"
               }
             }
           }
         }
       },
       {
-        "abiName" : "bjs_getArrayPoolElement",
+        "abiName" : "bjs_BridgeJSIdentityTests_getArrayPoolElement",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -335,7 +335,7 @@
           "nullable" : {
             "_0" : {
               "swiftHeapObject" : {
-                "_0" : "ArrayIdentityElement"
+                "_0" : "BridgeJSIdentityTests.ArrayIdentityElement"
               }
             },
             "_1" : "null"
@@ -343,7 +343,7 @@
         }
       },
       {
-        "abiName" : "bjs_getArrayPoolDeinits",
+        "abiName" : "bjs_BridgeJSIdentityTests_getArrayPoolDeinits",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -363,7 +363,7 @@
         }
       },
       {
-        "abiName" : "bjs_resetArrayPoolDeinits",
+        "abiName" : "bjs_BridgeJSIdentityTests_resetArrayPoolDeinits",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -380,7 +380,7 @@
         }
       },
       {
-        "abiName" : "bjs_clearArrayPool",
+        "abiName" : "bjs_BridgeJSIdentityTests_clearArrayPool",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,

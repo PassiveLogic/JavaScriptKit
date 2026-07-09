@@ -1,11 +1,11 @@
-extension PointerFields: _BridgedSwiftStruct {
-    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> PointerFields {
+extension TestModule.PointerFields: _BridgedSwiftStruct {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> TestModule.PointerFields {
         let mutPtr = UnsafeMutablePointer<UInt8>.bridgeJSStackPop()
         let ptr = UnsafePointer<UInt8>.bridgeJSStackPop()
         let opaque = OpaquePointer.bridgeJSStackPop()
         let mutRaw = UnsafeMutableRawPointer.bridgeJSStackPop()
         let raw = UnsafeRawPointer.bridgeJSStackPop()
-        return PointerFields(raw: raw, mutRaw: mutRaw, opaque: opaque, ptr: ptr, mutPtr: mutPtr)
+        return TestModule.PointerFields(raw: raw, mutRaw: mutRaw, opaque: opaque, ptr: ptr, mutPtr: mutPtr)
     }
 
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSStackPush() {
@@ -17,55 +17,55 @@ extension PointerFields: _BridgedSwiftStruct {
     }
 
     init(unsafelyCopying jsObject: JSObject) {
-        _bjs_struct_lower_PointerFields(jsObject.bridgeJSLowerParameter())
+        _bjs_struct_lower_TestModule_PointerFields(jsObject.bridgeJSLowerParameter())
         self = Self.bridgeJSStackPop()
     }
 
     func toJSObject() -> JSObject {
         let __bjs_self = self
         __bjs_self.bridgeJSStackPush()
-        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_PointerFields()))
+        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_TestModule_PointerFields()))
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_PointerFields")
-fileprivate func _bjs_struct_lower_PointerFields_extern(_ objectId: Int32) -> Void
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_TestModule_PointerFields")
+fileprivate func _bjs_struct_lower_TestModule_PointerFields_extern(_ objectId: Int32) -> Void
 #else
-fileprivate func _bjs_struct_lower_PointerFields_extern(_ objectId: Int32) -> Void {
+fileprivate func _bjs_struct_lower_TestModule_PointerFields_extern(_ objectId: Int32) -> Void {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lower_PointerFields(_ objectId: Int32) -> Void {
-    return _bjs_struct_lower_PointerFields_extern(objectId)
+@inline(never) fileprivate func _bjs_struct_lower_TestModule_PointerFields(_ objectId: Int32) -> Void {
+    return _bjs_struct_lower_TestModule_PointerFields_extern(objectId)
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_PointerFields")
-fileprivate func _bjs_struct_lift_PointerFields_extern() -> Int32
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_TestModule_PointerFields")
+fileprivate func _bjs_struct_lift_TestModule_PointerFields_extern() -> Int32
 #else
-fileprivate func _bjs_struct_lift_PointerFields_extern() -> Int32 {
+fileprivate func _bjs_struct_lift_TestModule_PointerFields_extern() -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_struct_lift_PointerFields() -> Int32 {
-    return _bjs_struct_lift_PointerFields_extern()
+@inline(never) fileprivate func _bjs_struct_lift_TestModule_PointerFields() -> Int32 {
+    return _bjs_struct_lift_TestModule_PointerFields_extern()
 }
 
-@_expose(wasm, "bjs_PointerFields_init")
-@_cdecl("bjs_PointerFields_init")
-public func _bjs_PointerFields_init(_ raw: UnsafeMutableRawPointer, _ mutRaw: UnsafeMutableRawPointer, _ opaque: UnsafeMutableRawPointer, _ ptr: UnsafeMutableRawPointer, _ mutPtr: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_TestModule_PointerFields_init")
+@_cdecl("bjs_TestModule_PointerFields_init")
+public func _bjs_TestModule_PointerFields_init(_ raw: UnsafeMutableRawPointer, _ mutRaw: UnsafeMutableRawPointer, _ opaque: UnsafeMutableRawPointer, _ ptr: UnsafeMutableRawPointer, _ mutPtr: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = PointerFields(raw: UnsafeRawPointer.bridgeJSLiftParameter(raw), mutRaw: UnsafeMutableRawPointer.bridgeJSLiftParameter(mutRaw), opaque: OpaquePointer.bridgeJSLiftParameter(opaque), ptr: UnsafePointer<UInt8>.bridgeJSLiftParameter(ptr), mutPtr: UnsafeMutablePointer<UInt8>.bridgeJSLiftParameter(mutPtr))
+    let ret = TestModule.PointerFields(raw: UnsafeRawPointer.bridgeJSLiftParameter(raw), mutRaw: UnsafeMutableRawPointer.bridgeJSLiftParameter(mutRaw), opaque: OpaquePointer.bridgeJSLiftParameter(opaque), ptr: UnsafePointer<UInt8>.bridgeJSLiftParameter(ptr), mutPtr: UnsafeMutablePointer<UInt8>.bridgeJSLiftParameter(mutPtr))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_takeUnsafeRawPointer")
-@_cdecl("bjs_takeUnsafeRawPointer")
-public func _bjs_takeUnsafeRawPointer(_ p: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_TestModule_takeUnsafeRawPointer")
+@_cdecl("bjs_TestModule_takeUnsafeRawPointer")
+public func _bjs_TestModule_takeUnsafeRawPointer(_ p: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
     takeUnsafeRawPointer(_: UnsafeRawPointer.bridgeJSLiftParameter(p))
     #else
@@ -73,9 +73,9 @@ public func _bjs_takeUnsafeRawPointer(_ p: UnsafeMutableRawPointer) -> Void {
     #endif
 }
 
-@_expose(wasm, "bjs_takeUnsafeMutableRawPointer")
-@_cdecl("bjs_takeUnsafeMutableRawPointer")
-public func _bjs_takeUnsafeMutableRawPointer(_ p: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_TestModule_takeUnsafeMutableRawPointer")
+@_cdecl("bjs_TestModule_takeUnsafeMutableRawPointer")
+public func _bjs_TestModule_takeUnsafeMutableRawPointer(_ p: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
     takeUnsafeMutableRawPointer(_: UnsafeMutableRawPointer.bridgeJSLiftParameter(p))
     #else
@@ -83,9 +83,9 @@ public func _bjs_takeUnsafeMutableRawPointer(_ p: UnsafeMutableRawPointer) -> Vo
     #endif
 }
 
-@_expose(wasm, "bjs_takeOpaquePointer")
-@_cdecl("bjs_takeOpaquePointer")
-public func _bjs_takeOpaquePointer(_ p: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_TestModule_takeOpaquePointer")
+@_cdecl("bjs_TestModule_takeOpaquePointer")
+public func _bjs_TestModule_takeOpaquePointer(_ p: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
     takeOpaquePointer(_: OpaquePointer.bridgeJSLiftParameter(p))
     #else
@@ -93,9 +93,9 @@ public func _bjs_takeOpaquePointer(_ p: UnsafeMutableRawPointer) -> Void {
     #endif
 }
 
-@_expose(wasm, "bjs_takeUnsafePointer")
-@_cdecl("bjs_takeUnsafePointer")
-public func _bjs_takeUnsafePointer(_ p: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_TestModule_takeUnsafePointer")
+@_cdecl("bjs_TestModule_takeUnsafePointer")
+public func _bjs_TestModule_takeUnsafePointer(_ p: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
     takeUnsafePointer(_: UnsafePointer<UInt8>.bridgeJSLiftParameter(p))
     #else
@@ -103,9 +103,9 @@ public func _bjs_takeUnsafePointer(_ p: UnsafeMutableRawPointer) -> Void {
     #endif
 }
 
-@_expose(wasm, "bjs_takeUnsafeMutablePointer")
-@_cdecl("bjs_takeUnsafeMutablePointer")
-public func _bjs_takeUnsafeMutablePointer(_ p: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_TestModule_takeUnsafeMutablePointer")
+@_cdecl("bjs_TestModule_takeUnsafeMutablePointer")
+public func _bjs_TestModule_takeUnsafeMutablePointer(_ p: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
     takeUnsafeMutablePointer(_: UnsafeMutablePointer<UInt8>.bridgeJSLiftParameter(p))
     #else
@@ -113,9 +113,9 @@ public func _bjs_takeUnsafeMutablePointer(_ p: UnsafeMutableRawPointer) -> Void 
     #endif
 }
 
-@_expose(wasm, "bjs_returnUnsafeRawPointer")
-@_cdecl("bjs_returnUnsafeRawPointer")
-public func _bjs_returnUnsafeRawPointer() -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_TestModule_returnUnsafeRawPointer")
+@_cdecl("bjs_TestModule_returnUnsafeRawPointer")
+public func _bjs_TestModule_returnUnsafeRawPointer() -> UnsafeMutableRawPointer {
     #if arch(wasm32)
     let ret = returnUnsafeRawPointer()
     return ret.bridgeJSLowerReturn()
@@ -124,9 +124,9 @@ public func _bjs_returnUnsafeRawPointer() -> UnsafeMutableRawPointer {
     #endif
 }
 
-@_expose(wasm, "bjs_returnUnsafeMutableRawPointer")
-@_cdecl("bjs_returnUnsafeMutableRawPointer")
-public func _bjs_returnUnsafeMutableRawPointer() -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_TestModule_returnUnsafeMutableRawPointer")
+@_cdecl("bjs_TestModule_returnUnsafeMutableRawPointer")
+public func _bjs_TestModule_returnUnsafeMutableRawPointer() -> UnsafeMutableRawPointer {
     #if arch(wasm32)
     let ret = returnUnsafeMutableRawPointer()
     return ret.bridgeJSLowerReturn()
@@ -135,9 +135,9 @@ public func _bjs_returnUnsafeMutableRawPointer() -> UnsafeMutableRawPointer {
     #endif
 }
 
-@_expose(wasm, "bjs_returnOpaquePointer")
-@_cdecl("bjs_returnOpaquePointer")
-public func _bjs_returnOpaquePointer() -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_TestModule_returnOpaquePointer")
+@_cdecl("bjs_TestModule_returnOpaquePointer")
+public func _bjs_TestModule_returnOpaquePointer() -> UnsafeMutableRawPointer {
     #if arch(wasm32)
     let ret = returnOpaquePointer()
     return ret.bridgeJSLowerReturn()
@@ -146,9 +146,9 @@ public func _bjs_returnOpaquePointer() -> UnsafeMutableRawPointer {
     #endif
 }
 
-@_expose(wasm, "bjs_returnUnsafePointer")
-@_cdecl("bjs_returnUnsafePointer")
-public func _bjs_returnUnsafePointer() -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_TestModule_returnUnsafePointer")
+@_cdecl("bjs_TestModule_returnUnsafePointer")
+public func _bjs_TestModule_returnUnsafePointer() -> UnsafeMutableRawPointer {
     #if arch(wasm32)
     let ret = returnUnsafePointer()
     return ret.bridgeJSLowerReturn()
@@ -157,9 +157,9 @@ public func _bjs_returnUnsafePointer() -> UnsafeMutableRawPointer {
     #endif
 }
 
-@_expose(wasm, "bjs_returnUnsafeMutablePointer")
-@_cdecl("bjs_returnUnsafeMutablePointer")
-public func _bjs_returnUnsafeMutablePointer() -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_TestModule_returnUnsafeMutablePointer")
+@_cdecl("bjs_TestModule_returnUnsafeMutablePointer")
+public func _bjs_TestModule_returnUnsafeMutablePointer() -> UnsafeMutableRawPointer {
     #if arch(wasm32)
     let ret = returnUnsafeMutablePointer()
     return ret.bridgeJSLowerReturn()
@@ -168,11 +168,11 @@ public func _bjs_returnUnsafeMutablePointer() -> UnsafeMutableRawPointer {
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripPointerFields")
-@_cdecl("bjs_roundTripPointerFields")
-public func _bjs_roundTripPointerFields() -> Void {
+@_expose(wasm, "bjs_TestModule_roundTripPointerFields")
+@_cdecl("bjs_TestModule_roundTripPointerFields")
+public func _bjs_TestModule_roundTripPointerFields() -> Void {
     #if arch(wasm32)
-    let ret = roundTripPointerFields(_: PointerFields.bridgeJSLiftParameter())
+    let ret = roundTripPointerFields(_: TestModule.PointerFields.bridgeJSLiftParameter())
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")

@@ -151,7 +151,8 @@ struct IntrinsicJSFragment: Sendable {
         /// Whether the fragment has direct access to the SwiftHeapObject classes.
         /// If false, the fragment needs to use `_exports` to access the class.
         var hasDirectAccessToSwiftClass: Bool = true
-        /// Maps class names to their namespace path components for resolving `_exports` access.
+        /// Maps module-qualified class names (`Module.[Nesting.]Name`) to their JS
+        /// namespace path components for resolving `_exports` access.
         var classNamespaces: [String: [String]] = [:]
 
         func with<T>(_ keyPath: WritableKeyPath<PrintCodeContext, T>, _ value: T) -> PrintCodeContext {
@@ -164,20 +165,16 @@ struct IntrinsicJSFragment: Sendable {
             qualifiedName.split(separator: ".").last.map(String.init) ?? qualifiedName
         }
 
-        private func exportsAccess(forClass name: String) -> String {
-            if let namespace = classNamespaces[name], !namespace.isEmpty {
-                let path = namespace.map { ".\($0)" }.joined()
-                return "_exports\(path).\(name)"
-            }
-            return "_exports['\(name)']"
-        }
-
         func classReference(forQualifiedName qualifiedName: String) -> String {
-            if hasDirectAccessToSwiftClass {
-                return unqualifiedClassName(for: qualifiedName)
-            }
             let unqualified = unqualifiedClassName(for: qualifiedName)
-            return exportsAccess(forClass: unqualified)
+            if hasDirectAccessToSwiftClass {
+                return unqualified
+            }
+            if let namespace = classNamespaces[qualifiedName], !namespace.isEmpty {
+                let path = namespace.map { ".\($0)" }.joined()
+                return "_exports\(path).\(unqualified)"
+            }
+            return "_exports['\(unqualified)']"
         }
     }
 
@@ -894,11 +891,17 @@ struct IntrinsicJSFragment: Sendable {
         )
     }
 
+    /// Derives the `enumHelpers`/`structHelpers` registration key from a module-qualified
+    /// type payload (`Module.[Nesting.]Name`). Must match the defining type's `abiName`.
+    static func helperKey(_ fullName: String) -> String {
+        fullName.replacingOccurrences(of: ".", with: "_")
+    }
+
     private static func optionalLiftReturnAssociatedEnum(
         fullName: String,
         kind: JSOptionalKind
     ) -> IntrinsicJSFragment {
-        let base = fullName.components(separatedBy: ".").last ?? fullName
+        let base = helperKey(fullName)
         let absenceLiteral = kind.absenceLiteral
         return IntrinsicJSFragment(
             parameters: [],
@@ -1300,7 +1303,7 @@ struct IntrinsicJSFragment: Sendable {
             return try .optionalLowerParameter(wrappedType: wrappedType, kind: kind)
         case .rawValueEnum(_, .string): return .stringLowerParameter
         case .associatedValueEnum(let fullName):
-            let base = fullName.components(separatedBy: ".").last ?? fullName
+            let base = helperKey(fullName)
             return .associatedEnumLowerParameter(enumBase: base)
         case .swiftStruct(let fullName):
             let base = fullName.replacingOccurrences(of: ".", with: "_")
@@ -1319,7 +1322,10 @@ struct IntrinsicJSFragment: Sendable {
                 }
             )
         case .namespaceEnum(let string):
-            throw BridgeJSLinkError(message: "Namespace enums are not supported to be passed as parameters: \(string)")
+            throw BridgeJSLinkError(
+                message:
+                    "Namespace enums are not supported to be passed as parameters: \(BridgeType.dropModulePrefix(string))"
+            )
         case .array(let elementType):
             return try arrayLower(elementType: elementType)
         case .dictionary(let valueType):
@@ -1360,7 +1366,7 @@ struct IntrinsicJSFragment: Sendable {
             return .optionalLiftReturn(wrappedType: wrappedType, kind: kind)
         case .rawValueEnum(_, .string): return .stringLiftReturn
         case .associatedValueEnum(let fullName):
-            let base = fullName.components(separatedBy: ".").last ?? fullName
+            let base = helperKey(fullName)
             return .associatedEnumLiftReturn(enumBase: base)
         case .swiftStruct(let fullName):
             let base = fullName.replacingOccurrences(of: ".", with: "_")
@@ -1375,7 +1381,8 @@ struct IntrinsicJSFragment: Sendable {
             )
         case .namespaceEnum(let string):
             throw BridgeJSLinkError(
-                message: "Namespace enums are not supported to be returned from functions: \(string)"
+                message:
+                    "Namespace enums are not supported to be returned from functions: \(BridgeType.dropModulePrefix(string))"
             )
         case .array(let elementType):
             return try arrayLift(elementType: elementType)
@@ -1423,7 +1430,7 @@ struct IntrinsicJSFragment: Sendable {
             return try .optionalLiftParameter(wrappedType: wrappedType, kind: kind, context: context)
         case .rawValueEnum(_, .string): return .stringLiftParameter
         case .associatedValueEnum(let fullName):
-            let base = fullName.components(separatedBy: ".").last ?? fullName
+            let base = helperKey(fullName)
             return IntrinsicJSFragment(
                 parameters: ["caseId"],
                 printCode: { arguments, context in
@@ -1465,7 +1472,7 @@ struct IntrinsicJSFragment: Sendable {
         case .namespaceEnum(let string):
             throw BridgeJSLinkError(
                 message:
-                    "Namespace enums are not supported to be passed as parameters to imported JS functions: \(string)"
+                    "Namespace enums are not supported to be passed as parameters to imported JS functions: \(BridgeType.dropModulePrefix(string))"
             )
         case .array(let elementType):
             return try arrayLift(elementType: elementType)
@@ -1519,7 +1526,8 @@ struct IntrinsicJSFragment: Sendable {
             )
         case .namespaceEnum(let string):
             throw BridgeJSLinkError(
-                message: "Namespace enums are not supported to be returned from imported JS functions: \(string)"
+                message:
+                    "Namespace enums are not supported to be returned from imported JS functions: \(BridgeType.dropModulePrefix(string))"
             )
         case .array(let elementType):
             return try arrayLower(elementType: elementType)
@@ -1533,7 +1541,7 @@ struct IntrinsicJSFragment: Sendable {
     // MARK: - Enums Payload Fragments
 
     static func associatedValueLowerReturn(fullName: String) -> IntrinsicJSFragment {
-        let base = fullName.components(separatedBy: ".").last ?? fullName
+        let base = helperKey(fullName)
         return IntrinsicJSFragment(
             parameters: ["value"],
             printCode: { arguments, context in
@@ -1580,13 +1588,14 @@ struct IntrinsicJSFragment: Sendable {
     /// This is placed inside `createInstantiator` alongside struct helpers,
     /// so it has access to `_exports` for class references.
     static func associatedValueEnumHelperFactory(enumDefinition: ExportedEnum) -> IntrinsicJSFragment {
+        let factoryBase = enumDefinition.abiName
         return IntrinsicJSFragment(
             parameters: ["enumName"],
             printCode: { arguments, context in
                 let (scope, printer) = (context.scope, context.printer)
                 let enumName = arguments[0]
 
-                printer.write("const __bjs_create\(enumName)Helpers = () => ({")
+                printer.write("const __bjs_create\(factoryBase)Helpers = () => ({")
                 try printer.indent {
                     printer.write("lower: (value) => {")
                     try printer.indent {
@@ -2021,7 +2030,7 @@ struct IntrinsicJSFragment: Sendable {
                 }
             )
         case .associatedValueEnum(let fullName):
-            let base = fullName.components(separatedBy: ".").last ?? fullName
+            let base = helperKey(fullName)
             return IntrinsicJSFragment(
                 parameters: [],
                 printCode: { arguments, context in
@@ -2144,7 +2153,7 @@ struct IntrinsicJSFragment: Sendable {
             )
 
         case .associatedValueEnum(let fullName):
-            let base = fullName.components(separatedBy: ".").last ?? fullName
+            let base = helperKey(fullName)
             return IntrinsicJSFragment(
                 parameters: ["value"],
                 printCode: { arguments, context in

@@ -12,7 +12,7 @@
     "exposeToGlobal" : false,
     "functions" : [
       {
-        "abiName" : "bjs_checkInt",
+        "abiName" : "bjs_TestModule_checkInt",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -32,7 +32,7 @@
         }
       },
       {
-        "abiName" : "bjs_checkUInt",
+        "abiName" : "bjs_TestModule_checkUInt",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -52,7 +52,7 @@
         }
       },
       {
-        "abiName" : "bjs_checkFloat",
+        "abiName" : "bjs_TestModule_checkFloat",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -69,7 +69,7 @@
         }
       },
       {
-        "abiName" : "bjs_checkDouble",
+        "abiName" : "bjs_TestModule_checkDouble",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -86,7 +86,7 @@
         }
       },
       {
-        "abiName" : "bjs_checkBool",
+        "abiName" : "bjs_TestModule_checkBool",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,

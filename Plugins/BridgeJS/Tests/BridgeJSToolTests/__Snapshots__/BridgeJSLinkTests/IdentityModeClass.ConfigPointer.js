@@ -207,15 +207,15 @@ export async function createInstantiator(options, swift) {
             if (!importObject["TestModule"]) {
                 importObject["TestModule"] = {};
             }
-            importObject["TestModule"]["bjs_CachedModel_wrap"] = function(pointer) {
+            importObject["TestModule"]["bjs_TestModule_CachedModel_wrap"] = function(pointer) {
                 const obj = _exports['CachedModel'].__construct(pointer);
                 return swift.memory.retain(obj);
             };
-            importObject["TestModule"]["bjs_ExplicitlyUncachedModel_wrap"] = function(pointer) {
+            importObject["TestModule"]["bjs_TestModule_ExplicitlyUncachedModel_wrap"] = function(pointer) {
                 const obj = _exports['ExplicitlyUncachedModel'].__construct(pointer);
                 return swift.memory.retain(obj);
             };
-            importObject["TestModule"]["bjs_UncachedModel_wrap"] = function(pointer) {
+            importObject["TestModule"]["bjs_TestModule_UncachedModel_wrap"] = function(pointer) {
                 const obj = _exports['UncachedModel'].__construct(pointer);
                 return swift.memory.retain(obj);
             };
@@ -289,17 +289,17 @@ export async function createInstantiator(options, swift) {
                 static __identityCache = new Map();
 
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_CachedModel_deinit, CachedModel.prototype, CachedModel.__identityCache);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_TestModule_CachedModel_deinit, CachedModel.prototype, CachedModel.__identityCache);
                 }
 
                 constructor(name) {
                     const nameBytes = textEncoder.encode(name);
                     const nameId = swift.memory.retain(nameBytes);
-                    const ret = instance.exports.bjs_CachedModel_init(nameId, nameBytes.length);
+                    const ret = instance.exports.bjs_TestModule_CachedModel_init(nameId, nameBytes.length);
                     return CachedModel.__construct(ret);
                 }
                 get name() {
-                    instance.exports.bjs_CachedModel_name_get(this.pointer);
+                    instance.exports.bjs_TestModule_CachedModel_name_get(this.pointer);
                     const ret = tmpRetString;
                     tmpRetString = undefined;
                     return ret;
@@ -307,43 +307,43 @@ export async function createInstantiator(options, swift) {
                 set name(value) {
                     const valueBytes = textEncoder.encode(value);
                     const valueId = swift.memory.retain(valueBytes);
-                    instance.exports.bjs_CachedModel_name_set(this.pointer, valueId, valueBytes.length);
+                    instance.exports.bjs_TestModule_CachedModel_name_set(this.pointer, valueId, valueBytes.length);
                 }
             }
             class UncachedModel extends SwiftHeapObject {
                 static __identityCache = new Map();
 
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_UncachedModel_deinit, UncachedModel.prototype, UncachedModel.__identityCache);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_TestModule_UncachedModel_deinit, UncachedModel.prototype, UncachedModel.__identityCache);
                 }
 
                 constructor(value) {
-                    const ret = instance.exports.bjs_UncachedModel_init(value);
+                    const ret = instance.exports.bjs_TestModule_UncachedModel_init(value);
                     return UncachedModel.__construct(ret);
                 }
                 get value() {
-                    const ret = instance.exports.bjs_UncachedModel_value_get(this.pointer);
+                    const ret = instance.exports.bjs_TestModule_UncachedModel_value_get(this.pointer);
                     return ret;
                 }
                 set value(value) {
-                    instance.exports.bjs_UncachedModel_value_set(this.pointer, value);
+                    instance.exports.bjs_TestModule_UncachedModel_value_set(this.pointer, value);
                 }
             }
             class ExplicitlyUncachedModel extends SwiftHeapObject {
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_ExplicitlyUncachedModel_deinit, ExplicitlyUncachedModel.prototype, null);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_TestModule_ExplicitlyUncachedModel_deinit, ExplicitlyUncachedModel.prototype, null);
                 }
 
                 constructor(count) {
-                    const ret = instance.exports.bjs_ExplicitlyUncachedModel_init(count);
+                    const ret = instance.exports.bjs_TestModule_ExplicitlyUncachedModel_init(count);
                     return ExplicitlyUncachedModel.__construct(ret);
                 }
                 get count() {
-                    const ret = instance.exports.bjs_ExplicitlyUncachedModel_count_get(this.pointer);
+                    const ret = instance.exports.bjs_TestModule_ExplicitlyUncachedModel_count_get(this.pointer);
                     return ret;
                 }
                 set count(value) {
-                    instance.exports.bjs_ExplicitlyUncachedModel_count_set(this.pointer, value);
+                    instance.exports.bjs_TestModule_ExplicitlyUncachedModel_count_set(this.pointer, value);
                 }
             }
             const exports = {

@@ -5,14 +5,18 @@
 public protocol NamespacedExportedType {
     var name: String { get }
     var namespace: [String]? { get }
+    /// The module-qualified Swift name of the type (e.g. `MyModule.Networking.HTTPServer`).
+    var swiftCallName: String { get }
 }
 
 extension NamespacedExportedType {
+    /// The ABI identity of the type, derived from the module-qualified Swift name so
+    /// that same-named types exported by different modules never collide.
+    ///
+    /// Invariant: for any `BridgeType` payload referencing an exported Swift type,
+    /// `payload.replacingOccurrences(of: ".", with: "_")` equals the defining type's `abiName`.
     public var abiName: String {
-        if let namespace = namespace, !namespace.isEmpty {
-            return (namespace + [name]).joined(separator: "_")
-        }
-        return name
+        swiftCallName.split(separator: ".", omittingEmptySubsequences: false).joined(separator: "_")
     }
 }
 
@@ -31,6 +35,12 @@ public struct ABINameGenerator {
         className: String? = nil
     ) -> String {
 
+        // Context names may be module-qualified Swift names (e.g. `MyModule.Direction`);
+        // sanitize dots so the ABI name stays a valid Swift/wasm identifier.
+        func sanitize(_ name: String) -> String {
+            name.split(separator: ".", omittingEmptySubsequences: false).joined(separator: "_")
+        }
+
         let namespacePart: String?
         if let namespace = namespace, !namespace.isEmpty {
             namespacePart = namespace.joined(separator: "_")
@@ -42,12 +52,12 @@ public struct ABINameGenerator {
         if let staticContext = staticContext {
             switch staticContext {
             case .className(let name), .enumName(let name), .structName(let name):
-                contextPart = name
-            case .namespaceEnum:
-                contextPart = namespacePart
+                contextPart = sanitize(name)
+            case .namespaceEnum(let name):
+                contextPart = sanitize(name)
             }
         } else if let className = className {
-            contextPart = className
+            contextPart = sanitize(className)
         } else {
             contextPart = namespacePart
         }
@@ -1626,6 +1636,17 @@ extension BridgeType {
         }
     }
 
+    /// Returns the public display name for a module-qualified exported Swift type payload.
+    ///
+    /// Exported Swift type payloads are minted as `Module.[Nesting.]Name` (see
+    /// `SwiftToSkeleton.exportedSwiftCallName`). The public JS/TS surface stays flat, so
+    /// display names must not include the leading module component.
+    public static func dropModulePrefix(_ qualifiedName: String) -> String {
+        let components = qualifiedName.split(separator: ".")
+        guard components.count >= 2 else { return qualifiedName }
+        return components.dropFirst().joined(separator: ".")
+    }
+
     public var unaliased: BridgeType {
         switch self {
         case .alias(_, let underlying): return underlying.unaliased
@@ -1712,7 +1733,13 @@ extension BridgeType {
 
     /// Simplified Swift ABI-style mangled name
     /// https://github.com/swiftlang/swift/blob/main/docs/ABI/Mangling.rst#types
+    ///
+    /// Type names may be module-qualified (e.g. `MyModule.Point`); dots are replaced
+    /// with underscores because mangled names are embedded in Swift identifiers.
     public var mangleTypeName: String {
+        func sanitize(_ name: String) -> String {
+            name.split(separator: ".", omittingEmptySubsequences: false).joined(separator: "_")
+        }
         switch self {
         case .integer(let t): return t.mangleTypeName
         case .float: return "Sf"
@@ -1721,12 +1748,13 @@ extension BridgeType {
         case .bool: return "Sb"
         case .void: return "y"
         case .jsObject(let name):
-            let typeName = name ?? "JSObject"
+            let typeName = sanitize(name ?? "JSObject")
             return "\(typeName.count)\(typeName)C"
         case .jsValue:
             return "7JSValueV"
         case .swiftHeapObject(let name):
-            return "\(name.count)\(name)C"
+            let typeName = sanitize(name)
+            return "\(typeName.count)\(typeName)C"
         case .unsafePointer(let ptr):
             func sanitize(_ s: String) -> String {
                 s.filter { $0.isNumber || $0.isLetter }
@@ -1751,11 +1779,14 @@ extension BridgeType {
             .rawValueEnum(let name, _),
             .associatedValueEnum(let name),
             .namespaceEnum(let name):
-            return "\(name.count)\(name)O"
+            let typeName = sanitize(name)
+            return "\(typeName.count)\(typeName)O"
         case .swiftProtocol(let name):
-            return "\(name.count)\(name)P"
+            let typeName = sanitize(name)
+            return "\(typeName.count)\(typeName)P"
         case .swiftStruct(let name):
-            return "\(name.count)\(name)V"
+            let typeName = sanitize(name)
+            return "\(typeName.count)\(typeName)V"
         case .closure(let signature, let useJSTypedClosure):
             let params =
                 signature.parameters.isEmpty
@@ -1770,9 +1801,10 @@ extension BridgeType {
             // Dictionary mangling: "SD" prefix followed by value type (key is always String)
             return "SD\(valueType.mangleTypeName)"
         case .alias(let name, _):
-            // `name` is the namespace-qualified swiftCallName (unique), so the underlying
+            // `name` is the module-qualified swiftCallName (unique), so the underlying
             // representation isn't mangled in - aliases bridge via their JS type's ABI.
-            return "Al\(name.count)\(name)"
+            let typeName = sanitize(name)
+            return "Al\(typeName.count)\(typeName)"
         }
     }
 

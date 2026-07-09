@@ -493,13 +493,13 @@ export async function createInstantiator(options, swift) {
         createExports: (instance) => {
             const js = swift.memory.heap;
             const exports = {
-                runValidator: function bjs_runValidator(cb) {
+                runValidator: function bjs_TestModule_runValidator(cb) {
                     const callbackId = swift.memory.retain(cb);
-                    instance.exports.bjs_runValidator(callbackId);
+                    instance.exports.bjs_TestModule_runValidator(callbackId);
                 },
-                loadEach: function bjs_loadEach(fetch) {
+                loadEach: function bjs_TestModule_loadEach(fetch) {
                     const callbackId = swift.memory.retain(fetch);
-                    instance.exports.bjs_loadEach(callbackId);
+                    instance.exports.bjs_TestModule_loadEach(callbackId);
                 },
             };
             _exports = exports;

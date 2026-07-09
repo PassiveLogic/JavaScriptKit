@@ -30,7 +30,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "Signal",
+        "swiftCallName" : "TestModule.Signal",
         "tsFullPath" : "Signal"
       }
     ],
@@ -71,7 +71,7 @@
                     "name" : "signal",
                     "type" : {
                       "caseEnum" : {
-                        "_0" : "Signal"
+                        "_0" : "TestModule.Signal"
                       }
                     }
                   }
@@ -95,7 +95,7 @@
                 ],
                 "returnType" : {
                   "caseEnum" : {
-                    "_0" : "Signal"
+                    "_0" : "TestModule.Signal"
                   }
                 }
               }
@@ -118,14 +118,14 @@
                     "name" : "signal",
                     "type" : {
                       "caseEnum" : {
-                        "_0" : "Signal"
+                        "_0" : "TestModule.Signal"
                       }
                     }
                   }
                 ],
                 "returnType" : {
                   "caseEnum" : {
-                    "_0" : "Signal"
+                    "_0" : "TestModule.Signal"
                   }
                 }
               }

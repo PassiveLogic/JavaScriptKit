@@ -6,7 +6,7 @@
     "classes" : [
       {
         "constructor" : {
-          "abiName" : "bjs_MathUtils_init",
+          "abiName" : "bjs_TestModule_MathUtils_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -18,7 +18,7 @@
         },
         "methods" : [
           {
-            "abiName" : "bjs_MathUtils_static_subtract",
+            "abiName" : "bjs_TestModule_MathUtils_static_subtract",
             "effects" : {
               "isAsync" : false,
               "isStatic" : true,
@@ -61,12 +61,12 @@
             },
             "staticContext" : {
               "className" : {
-                "_0" : "MathUtils"
+                "_0" : "TestModule_MathUtils"
               }
             }
           },
           {
-            "abiName" : "bjs_MathUtils_static_add",
+            "abiName" : "bjs_TestModule_MathUtils_static_add",
             "effects" : {
               "isAsync" : false,
               "isStatic" : true,
@@ -109,12 +109,12 @@
             },
             "staticContext" : {
               "className" : {
-                "_0" : "MathUtils"
+                "_0" : "TestModule_MathUtils"
               }
             }
           },
           {
-            "abiName" : "bjs_MathUtils_multiply",
+            "abiName" : "bjs_TestModule_MathUtils_multiply",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -157,7 +157,7 @@
             }
           },
           {
-            "abiName" : "bjs_MathUtils_static_divide",
+            "abiName" : "bjs_TestModule_MathUtils_static_divide",
             "effects" : {
               "isAsync" : false,
               "isStatic" : true,
@@ -200,7 +200,7 @@
             },
             "staticContext" : {
               "className" : {
-                "_0" : "MathUtils"
+                "_0" : "TestModule_MathUtils"
               }
             }
           }
@@ -213,7 +213,7 @@
             "name" : "pi",
             "staticContext" : {
               "className" : {
-                "_0" : "MathUtils"
+                "_0" : "TestModule_MathUtils"
               }
             },
             "type" : {
@@ -223,7 +223,7 @@
             }
           }
         ],
-        "swiftCallName" : "MathUtils"
+        "swiftCallName" : "TestModule.MathUtils"
       }
     ],
     "enums" : [
@@ -246,7 +246,7 @@
         "name" : "Calculator",
         "staticMethods" : [
           {
-            "abiName" : "bjs_Calculator_static_square",
+            "abiName" : "bjs_TestModule_Calculator_static_square",
             "effects" : {
               "isAsync" : false,
               "isStatic" : true,
@@ -277,12 +277,12 @@
             },
             "staticContext" : {
               "enumName" : {
-                "_0" : "Calculator"
+                "_0" : "TestModule.Calculator"
               }
             }
           },
           {
-            "abiName" : "bjs_Calculator_static_cube",
+            "abiName" : "bjs_TestModule_Calculator_static_cube",
             "effects" : {
               "isAsync" : false,
               "isStatic" : true,
@@ -313,7 +313,7 @@
             },
             "staticContext" : {
               "enumName" : {
-                "_0" : "Calculator"
+                "_0" : "TestModule.Calculator"
               }
             }
           }
@@ -325,7 +325,7 @@
             "name" : "version",
             "staticContext" : {
               "enumName" : {
-                "_0" : "Calculator"
+                "_0" : "TestModule.Calculator"
               }
             },
             "type" : {
@@ -335,7 +335,7 @@
             }
           }
         ],
-        "swiftCallName" : "Calculator",
+        "swiftCallName" : "TestModule.Calculator",
         "tsFullPath" : "Calculator"
       },
       {
@@ -372,7 +372,7 @@
         "name" : "APIResult",
         "staticMethods" : [
           {
-            "abiName" : "bjs_APIResult_static_roundtrip",
+            "abiName" : "bjs_TestModule_APIResult_static_roundtrip",
             "effects" : {
               "isAsync" : false,
               "isStatic" : true,
@@ -385,19 +385,19 @@
                 "name" : "value",
                 "type" : {
                   "associatedValueEnum" : {
-                    "_0" : "APIResult"
+                    "_0" : "TestModule.APIResult"
                   }
                 }
               }
             ],
             "returnType" : {
               "associatedValueEnum" : {
-                "_0" : "APIResult"
+                "_0" : "TestModule.APIResult"
               }
             },
             "staticContext" : {
               "enumName" : {
-                "_0" : "APIResult"
+                "_0" : "TestModule.APIResult"
               }
             }
           }
@@ -405,7 +405,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "APIResult",
+        "swiftCallName" : "TestModule.APIResult",
         "tsFullPath" : "APIResult"
       },
       {
@@ -420,7 +420,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "Utils",
+        "swiftCallName" : "TestModule.Utils",
         "tsFullPath" : "Utils"
       },
       {
@@ -434,7 +434,7 @@
         ],
         "staticMethods" : [
           {
-            "abiName" : "bjs_Utils_String_static_uppercase",
+            "abiName" : "bjs_TestModule_Utils_String_static_uppercase",
             "effects" : {
               "isAsync" : false,
               "isStatic" : true,
@@ -463,7 +463,7 @@
             },
             "staticContext" : {
               "namespaceEnum" : {
-                "_0" : "Utils.String"
+                "_0" : "TestModule.Utils.String"
               }
             }
           }
@@ -471,7 +471,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "Utils.String",
+        "swiftCallName" : "TestModule.Utils.String",
         "tsFullPath" : "Utils.String"
       }
     ],

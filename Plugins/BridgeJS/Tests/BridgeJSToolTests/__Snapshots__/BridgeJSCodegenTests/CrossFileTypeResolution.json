@@ -6,7 +6,7 @@
     "classes" : [
       {
         "constructor" : {
-          "abiName" : "bjs_ClassB_init",
+          "abiName" : "bjs_TestModule_ClassB_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -23,7 +23,7 @@
         "properties" : [
 
         ],
-        "swiftCallName" : "ClassB"
+        "swiftCallName" : "TestModule.ClassB"
       },
       {
         "methods" : [
@@ -39,7 +39,7 @@
               "nullable" : {
                 "_0" : {
                   "swiftHeapObject" : {
-                    "_0" : "ClassB"
+                    "_0" : "TestModule.ClassB"
                   }
                 },
                 "_1" : "null"
@@ -47,7 +47,7 @@
             }
           }
         ],
-        "swiftCallName" : "ClassA"
+        "swiftCallName" : "TestModule.ClassA"
       }
     ],
     "enums" : [

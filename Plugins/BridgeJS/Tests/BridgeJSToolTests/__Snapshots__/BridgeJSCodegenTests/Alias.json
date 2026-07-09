@@ -2,23 +2,23 @@
   "exported" : {
     "aliases" : [
       {
-        "swiftCallName" : "Polygon",
+        "swiftCallName" : "TestModule.Polygon",
         "underlying" : {
           "swiftHeapObject" : {
-            "_0" : "PolygonReference"
+            "_0" : "TestModule.PolygonReference"
           }
         }
       },
       {
-        "swiftCallName" : "Tag",
+        "swiftCallName" : "TestModule.Tag",
         "underlying" : {
           "swiftHeapObject" : {
-            "_0" : "TagReference"
+            "_0" : "TestModule.TagReference"
           }
         }
       },
       {
-        "swiftCallName" : "Tagged",
+        "swiftCallName" : "TestModule.Tagged",
         "underlying" : {
           "string" : {
 
@@ -26,7 +26,7 @@
         }
       },
       {
-        "swiftCallName" : "Canvas",
+        "swiftCallName" : "TestModule.Canvas",
         "underlying" : {
           "jsObject" : {
             "_0" : "Surface"
@@ -34,15 +34,15 @@
         }
       },
       {
-        "swiftCallName" : "AliasedTag",
+        "swiftCallName" : "TestModule.AliasedTag",
         "underlying" : {
           "associatedValueEnum" : {
-            "_0" : "InnerTag"
+            "_0" : "TestModule.InnerTag"
           }
         }
       },
       {
-        "swiftCallName" : "UserId",
+        "swiftCallName" : "TestModule.UserId",
         "underlying" : {
           "integer" : {
             "_0" : {
@@ -56,7 +56,7 @@
     "classes" : [
       {
         "constructor" : {
-          "abiName" : "bjs_PolygonReference_init",
+          "abiName" : "bjs_TestModule_PolygonReference_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -68,10 +68,10 @@
               "name" : "underlying",
               "type" : {
                 "alias" : {
-                  "name" : "Polygon",
+                  "name" : "TestModule.Polygon",
                   "underlying" : {
                     "swiftHeapObject" : {
-                      "_0" : "PolygonReference"
+                      "_0" : "TestModule.PolygonReference"
                     }
                   }
                 }
@@ -81,7 +81,7 @@
         },
         "methods" : [
           {
-            "abiName" : "bjs_PolygonReference_snapshot",
+            "abiName" : "bjs_TestModule_PolygonReference_snapshot",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -93,17 +93,17 @@
             ],
             "returnType" : {
               "alias" : {
-                "name" : "Polygon",
+                "name" : "TestModule.Polygon",
                 "underlying" : {
                   "swiftHeapObject" : {
-                    "_0" : "PolygonReference"
+                    "_0" : "TestModule.PolygonReference"
                   }
                 }
               }
             }
           },
           {
-            "abiName" : "bjs_PolygonReference_merge",
+            "abiName" : "bjs_TestModule_PolygonReference_merge",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -116,10 +116,10 @@
                 "name" : "other",
                 "type" : {
                   "alias" : {
-                    "name" : "Polygon",
+                    "name" : "TestModule.Polygon",
                     "underlying" : {
                       "swiftHeapObject" : {
-                        "_0" : "PolygonReference"
+                        "_0" : "TestModule.PolygonReference"
                       }
                     }
                   }
@@ -128,17 +128,17 @@
             ],
             "returnType" : {
               "alias" : {
-                "name" : "Polygon",
+                "name" : "TestModule.Polygon",
                 "underlying" : {
                   "swiftHeapObject" : {
-                    "_0" : "PolygonReference"
+                    "_0" : "TestModule.PolygonReference"
                   }
                 }
               }
             }
           },
           {
-            "abiName" : "bjs_PolygonReference_static_origin",
+            "abiName" : "bjs_TestModule_PolygonReference_static_origin",
             "effects" : {
               "isAsync" : false,
               "isStatic" : true,
@@ -150,17 +150,17 @@
             ],
             "returnType" : {
               "alias" : {
-                "name" : "Polygon",
+                "name" : "TestModule.Polygon",
                 "underlying" : {
                   "swiftHeapObject" : {
-                    "_0" : "PolygonReference"
+                    "_0" : "TestModule.PolygonReference"
                   }
                 }
               }
             },
             "staticContext" : {
               "className" : {
-                "_0" : "PolygonReference"
+                "_0" : "TestModule_PolygonReference"
               }
             }
           }
@@ -169,11 +169,11 @@
         "properties" : [
 
         ],
-        "swiftCallName" : "PolygonReference"
+        "swiftCallName" : "TestModule.PolygonReference"
       },
       {
         "constructor" : {
-          "abiName" : "bjs_TagReference_init",
+          "abiName" : "bjs_TestModule_TagReference_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -185,10 +185,10 @@
               "name" : "underlying",
               "type" : {
                 "alias" : {
-                  "name" : "Tag",
+                  "name" : "TestModule.Tag",
                   "underlying" : {
                     "swiftHeapObject" : {
-                      "_0" : "TagReference"
+                      "_0" : "TestModule.TagReference"
                     }
                   }
                 }
@@ -203,7 +203,7 @@
         "properties" : [
 
         ],
-        "swiftCallName" : "TagReference"
+        "swiftCallName" : "TestModule.TagReference"
       }
     ],
     "enums" : [
@@ -239,14 +239,14 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "InnerTag",
+        "swiftCallName" : "TestModule.InnerTag",
         "tsFullPath" : "InnerTag"
       }
     ],
     "exposeToGlobal" : false,
     "functions" : [
       {
-        "abiName" : "bjs_roundtripPolygon",
+        "abiName" : "bjs_TestModule_roundtripPolygon",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -259,10 +259,10 @@
             "name" : "polygon",
             "type" : {
               "alias" : {
-                "name" : "Polygon",
+                "name" : "TestModule.Polygon",
                 "underlying" : {
                   "swiftHeapObject" : {
-                    "_0" : "PolygonReference"
+                    "_0" : "TestModule.PolygonReference"
                   }
                 }
               }
@@ -271,17 +271,17 @@
         ],
         "returnType" : {
           "alias" : {
-            "name" : "Polygon",
+            "name" : "TestModule.Polygon",
             "underlying" : {
               "swiftHeapObject" : {
-                "_0" : "PolygonReference"
+                "_0" : "TestModule.PolygonReference"
               }
             }
           }
         }
       },
       {
-        "abiName" : "bjs_optionalPolygon",
+        "abiName" : "bjs_TestModule_optionalPolygon",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -296,10 +296,10 @@
               "nullable" : {
                 "_0" : {
                   "alias" : {
-                    "name" : "Polygon",
+                    "name" : "TestModule.Polygon",
                     "underlying" : {
                       "swiftHeapObject" : {
-                        "_0" : "PolygonReference"
+                        "_0" : "TestModule.PolygonReference"
                       }
                     }
                   }
@@ -313,10 +313,10 @@
           "nullable" : {
             "_0" : {
               "alias" : {
-                "name" : "Polygon",
+                "name" : "TestModule.Polygon",
                 "underlying" : {
                   "swiftHeapObject" : {
-                    "_0" : "PolygonReference"
+                    "_0" : "TestModule.PolygonReference"
                   }
                 }
               }
@@ -326,7 +326,7 @@
         }
       },
       {
-        "abiName" : "bjs_polygonArray",
+        "abiName" : "bjs_TestModule_polygonArray",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -341,10 +341,10 @@
               "array" : {
                 "_0" : {
                   "alias" : {
-                    "name" : "Polygon",
+                    "name" : "TestModule.Polygon",
                     "underlying" : {
                       "swiftHeapObject" : {
-                        "_0" : "PolygonReference"
+                        "_0" : "TestModule.PolygonReference"
                       }
                     }
                   }
@@ -357,10 +357,10 @@
           "array" : {
             "_0" : {
               "alias" : {
-                "name" : "Polygon",
+                "name" : "TestModule.Polygon",
                 "underlying" : {
                   "swiftHeapObject" : {
-                    "_0" : "PolygonReference"
+                    "_0" : "TestModule.PolygonReference"
                   }
                 }
               }
@@ -369,7 +369,7 @@
         }
       },
       {
-        "abiName" : "bjs_validatePolygon",
+        "abiName" : "bjs_TestModule_validatePolygon",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -382,10 +382,10 @@
             "name" : "polygon",
             "type" : {
               "alias" : {
-                "name" : "Polygon",
+                "name" : "TestModule.Polygon",
                 "underlying" : {
                   "swiftHeapObject" : {
-                    "_0" : "PolygonReference"
+                    "_0" : "TestModule.PolygonReference"
                   }
                 }
               }
@@ -394,17 +394,17 @@
         ],
         "returnType" : {
           "alias" : {
-            "name" : "Polygon",
+            "name" : "TestModule.Polygon",
             "underlying" : {
               "swiftHeapObject" : {
-                "_0" : "PolygonReference"
+                "_0" : "TestModule.PolygonReference"
               }
             }
           }
         }
       },
       {
-        "abiName" : "bjs_makeTag",
+        "abiName" : "bjs_TestModule_makeTag",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -424,17 +424,17 @@
         ],
         "returnType" : {
           "alias" : {
-            "name" : "Tag",
+            "name" : "TestModule.Tag",
             "underlying" : {
               "swiftHeapObject" : {
-                "_0" : "TagReference"
+                "_0" : "TestModule.TagReference"
               }
             }
           }
         }
       },
       {
-        "abiName" : "bjs_roundtripTags",
+        "abiName" : "bjs_TestModule_roundtripTags",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -451,10 +451,10 @@
                   "nullable" : {
                     "_0" : {
                       "alias" : {
-                        "name" : "AliasedTag",
+                        "name" : "TestModule.AliasedTag",
                         "underlying" : {
                           "associatedValueEnum" : {
-                            "_0" : "InnerTag"
+                            "_0" : "TestModule.InnerTag"
                           }
                         }
                       }
@@ -472,10 +472,10 @@
               "nullable" : {
                 "_0" : {
                   "alias" : {
-                    "name" : "AliasedTag",
+                    "name" : "TestModule.AliasedTag",
                     "underlying" : {
                       "associatedValueEnum" : {
-                        "_0" : "InnerTag"
+                        "_0" : "TestModule.InnerTag"
                       }
                     }
                   }
@@ -487,7 +487,7 @@
         }
       },
       {
-        "abiName" : "bjs_describeUser",
+        "abiName" : "bjs_TestModule_describeUser",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -500,14 +500,14 @@
             "name" : "owner",
             "type" : {
               "swiftProtocol" : {
-                "_0" : "HasOptionalUserId"
+                "_0" : "TestModule.HasOptionalUserId"
               }
             }
           }
         ],
         "returnType" : {
           "swiftProtocol" : {
-            "_0" : "HasOptionalUserId"
+            "_0" : "TestModule.HasOptionalUserId"
           }
         }
       }
@@ -526,7 +526,7 @@
               "nullable" : {
                 "_0" : {
                   "alias" : {
-                    "name" : "UserId",
+                    "name" : "TestModule.UserId",
                     "underlying" : {
                       "integer" : {
                         "_0" : {
@@ -565,7 +565,7 @@
                 "name" : "tagged",
                 "type" : {
                   "alias" : {
-                    "name" : "Tagged",
+                    "name" : "TestModule.Tagged",
                     "underlying" : {
                       "string" : {
 
@@ -596,7 +596,7 @@
                   "nullable" : {
                     "_0" : {
                       "alias" : {
-                        "name" : "Tagged",
+                        "name" : "TestModule.Tagged",
                         "underlying" : {
                           "string" : {
 
@@ -628,7 +628,7 @@
                 "name" : "tagged",
                 "type" : {
                   "alias" : {
-                    "name" : "Tagged",
+                    "name" : "TestModule.Tagged",
                     "underlying" : {
                       "string" : {
 
@@ -640,7 +640,7 @@
             ],
             "returnType" : {
               "alias" : {
-                "name" : "Tagged",
+                "name" : "TestModule.Tagged",
                 "underlying" : {
                   "string" : {
 
@@ -664,7 +664,7 @@
               "nullable" : {
                 "_0" : {
                   "alias" : {
-                    "name" : "Canvas",
+                    "name" : "TestModule.Canvas",
                     "underlying" : {
                       "jsObject" : {
                         "_0" : "Surface"

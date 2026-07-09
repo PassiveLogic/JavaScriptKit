@@ -218,8 +218,8 @@ export async function createInstantiator(options, swift) {
         createExports: (instance) => {
             const js = swift.memory.heap;
             const exports = {
-                throwsSomething: function bjs_throwsSomething() {
-                    instance.exports.bjs_throwsSomething();
+                throwsSomething: function bjs_TestModule_throwsSomething() {
+                    instance.exports.bjs_TestModule_throwsSomething();
                     if (tmpRetException) {
                         const error = swift.memory.getObject(tmpRetException);
                         swift.memory.release(tmpRetException);

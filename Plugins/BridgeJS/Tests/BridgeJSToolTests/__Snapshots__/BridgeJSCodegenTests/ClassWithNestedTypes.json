@@ -6,7 +6,7 @@
     "classes" : [
       {
         "constructor" : {
-          "abiName" : "bjs_Account_init",
+          "abiName" : "bjs_TestModule_Account_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -26,7 +26,7 @@
         },
         "methods" : [
           {
-            "abiName" : "bjs_Account_describe",
+            "abiName" : "bjs_TestModule_Account_describe",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -61,7 +61,7 @@
             "name" : "role",
             "type" : {
               "rawValueEnum" : {
-                "_0" : "Account.Role",
+                "_0" : "TestModule.Account.Role",
                 "_1" : "String"
               }
             }
@@ -72,18 +72,18 @@
             "name" : "defaultRole",
             "staticContext" : {
               "className" : {
-                "_0" : "Account"
+                "_0" : "TestModule_Account"
               }
             },
             "type" : {
               "rawValueEnum" : {
-                "_0" : "Account.Role",
+                "_0" : "TestModule.Account.Role",
                 "_1" : "String"
               }
             }
           }
         ],
-        "swiftCallName" : "Account"
+        "swiftCallName" : "TestModule.Account"
       }
     ],
     "enums" : [
@@ -114,7 +114,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "Account.Role",
+        "swiftCallName" : "TestModule.Account.Role",
         "tsFullPath" : "Account.Role"
       }
     ],
@@ -128,7 +128,7 @@
     "structs" : [
       {
         "constructor" : {
-          "abiName" : "bjs_Account_Credentials_init",
+          "abiName" : "bjs_TestModule_Account_Credentials_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -148,7 +148,7 @@
         },
         "methods" : [
           {
-            "abiName" : "bjs_Account_Credentials_static_empty",
+            "abiName" : "bjs_TestModule_Account_Credentials_static_empty",
             "effects" : {
               "isAsync" : false,
               "isStatic" : true,
@@ -160,12 +160,12 @@
             ],
             "returnType" : {
               "swiftStruct" : {
-                "_0" : "Account.Credentials"
+                "_0" : "TestModule.Account.Credentials"
               }
             },
             "staticContext" : {
               "structName" : {
-                "_0" : "Account_Credentials"
+                "_0" : "TestModule_Account_Credentials"
               }
             }
           }
@@ -194,7 +194,7 @@
             "name" : "maxLength",
             "staticContext" : {
               "structName" : {
-                "_0" : "Account_Credentials"
+                "_0" : "TestModule_Account_Credentials"
               }
             },
             "type" : {
@@ -207,7 +207,7 @@
             }
           }
         ],
-        "swiftCallName" : "Account.Credentials"
+        "swiftCallName" : "TestModule.Account.Credentials"
       }
     ]
   },

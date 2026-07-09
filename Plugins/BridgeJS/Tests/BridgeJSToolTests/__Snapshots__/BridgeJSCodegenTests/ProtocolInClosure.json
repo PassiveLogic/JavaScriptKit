@@ -6,7 +6,7 @@
     "classes" : [
       {
         "constructor" : {
-          "abiName" : "bjs_Widget_init",
+          "abiName" : "bjs_TestModule_Widget_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -40,7 +40,7 @@
             }
           }
         ],
-        "swiftCallName" : "Widget"
+        "swiftCallName" : "TestModule.Widget"
       }
     ],
     "enums" : [
@@ -49,7 +49,7 @@
     "exposeToGlobal" : false,
     "functions" : [
       {
-        "abiName" : "bjs_processRenderable",
+        "abiName" : "bjs_TestModule_processRenderable",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -62,7 +62,7 @@
             "name" : "item",
             "type" : {
               "swiftProtocol" : {
-                "_0" : "Renderable"
+                "_0" : "TestModule.Renderable"
               }
             }
           },
@@ -74,12 +74,12 @@
                 "_0" : {
                   "isAsync" : false,
                   "isThrows" : false,
-                  "mangleName" : "10TestModule10RenderableP_SS",
+                  "mangleName" : "10TestModule21TestModule_RenderableP_SS",
                   "moduleName" : "TestModule",
                   "parameters" : [
                     {
                       "swiftProtocol" : {
-                        "_0" : "Renderable"
+                        "_0" : "TestModule.Renderable"
                       }
                     }
                   ],
@@ -102,7 +102,7 @@
         }
       },
       {
-        "abiName" : "bjs_makeRenderableFactory",
+        "abiName" : "bjs_TestModule_makeRenderableFactory",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -125,14 +125,14 @@
             "_0" : {
               "isAsync" : false,
               "isThrows" : false,
-              "mangleName" : "10TestModuley_10RenderableP",
+              "mangleName" : "10TestModuley_21TestModule_RenderableP",
               "moduleName" : "TestModule",
               "parameters" : [
 
               ],
               "returnType" : {
                 "swiftProtocol" : {
-                  "_0" : "Renderable"
+                  "_0" : "TestModule.Renderable"
                 }
               },
               "sendingParameters" : false
@@ -142,7 +142,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundtripRenderable",
+        "abiName" : "bjs_TestModule_roundtripRenderable",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -158,18 +158,18 @@
                 "_0" : {
                   "isAsync" : false,
                   "isThrows" : false,
-                  "mangleName" : "10TestModule10RenderableP_10RenderableP",
+                  "mangleName" : "10TestModule21TestModule_RenderableP_21TestModule_RenderableP",
                   "moduleName" : "TestModule",
                   "parameters" : [
                     {
                       "swiftProtocol" : {
-                        "_0" : "Renderable"
+                        "_0" : "TestModule.Renderable"
                       }
                     }
                   ],
                   "returnType" : {
                     "swiftProtocol" : {
-                      "_0" : "Renderable"
+                      "_0" : "TestModule.Renderable"
                     }
                   },
                   "sendingParameters" : false
@@ -184,18 +184,18 @@
             "_0" : {
               "isAsync" : false,
               "isThrows" : false,
-              "mangleName" : "10TestModule10RenderableP_10RenderableP",
+              "mangleName" : "10TestModule21TestModule_RenderableP_21TestModule_RenderableP",
               "moduleName" : "TestModule",
               "parameters" : [
                 {
                   "swiftProtocol" : {
-                    "_0" : "Renderable"
+                    "_0" : "TestModule.Renderable"
                   }
                 }
               ],
               "returnType" : {
                 "swiftProtocol" : {
-                  "_0" : "Renderable"
+                  "_0" : "TestModule.Renderable"
                 }
               },
               "sendingParameters" : false
@@ -205,7 +205,7 @@
         }
       },
       {
-        "abiName" : "bjs_processOptionalRenderable",
+        "abiName" : "bjs_TestModule_processOptionalRenderable",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -221,14 +221,14 @@
                 "_0" : {
                   "isAsync" : false,
                   "isThrows" : false,
-                  "mangleName" : "10TestModuleSq10RenderableP_SS",
+                  "mangleName" : "10TestModuleSq21TestModule_RenderableP_SS",
                   "moduleName" : "TestModule",
                   "parameters" : [
                     {
                       "nullable" : {
                         "_0" : {
                           "swiftProtocol" : {
-                            "_0" : "Renderable"
+                            "_0" : "TestModule.Renderable"
                           }
                         },
                         "_1" : "null"

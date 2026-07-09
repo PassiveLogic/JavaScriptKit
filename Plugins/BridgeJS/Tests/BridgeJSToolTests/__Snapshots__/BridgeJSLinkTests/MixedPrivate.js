@@ -207,7 +207,7 @@ export async function createInstantiator(options, swift) {
             if (!importObject["TestModule"]) {
                 importObject["TestModule"] = {};
             }
-            importObject["TestModule"]["bjs_PrivateAPI_PrivateClass_wrap"] = function(pointer) {
+            importObject["TestModule"]["bjs_TestModule_PrivateClass_wrap"] = function(pointer) {
                 const obj = _exports.PrivateAPI.PrivateClass.__construct(pointer);
                 return swift.memory.retain(obj);
             };
@@ -279,15 +279,15 @@ export async function createInstantiator(options, swift) {
             }
             class PrivateClass extends SwiftHeapObject {
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_PrivateAPI_PrivateClass_deinit, PrivateClass.prototype, null);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_TestModule_PrivateClass_deinit, PrivateClass.prototype, null);
                 }
 
                 constructor() {
-                    const ret = instance.exports.bjs_PrivateAPI_PrivateClass_init();
+                    const ret = instance.exports.bjs_TestModule_PrivateClass_init();
                     return PrivateClass.__construct(ret);
                 }
                 greet() {
-                    instance.exports.bjs_PrivateAPI_PrivateClass_greet(this.pointer);
+                    instance.exports.bjs_TestModule_PrivateClass_greet(this.pointer);
                     const ret = tmpRetString;
                     tmpRetString = undefined;
                     return ret;
@@ -295,8 +295,8 @@ export async function createInstantiator(options, swift) {
             }
             const exports = {
                 PrivateAPI: {
-                    privateFunction: function bjs_PrivateAPI_privateFunction() {
-                        instance.exports.bjs_PrivateAPI_privateFunction();
+                    privateFunction: function bjs_TestModule_PrivateAPI_privateFunction() {
+                        instance.exports.bjs_TestModule_PrivateAPI_privateFunction();
                         const ret = tmpRetString;
                         tmpRetString = undefined;
                         return ret;

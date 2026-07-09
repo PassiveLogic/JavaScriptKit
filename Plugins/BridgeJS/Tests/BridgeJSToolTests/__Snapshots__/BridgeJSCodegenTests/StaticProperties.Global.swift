@@ -1,12 +1,12 @@
-extension PropertyEnum: _BridgedSwiftCaseEnum {
+extension TestModule.PropertyEnum: _BridgedSwiftCaseEnum {
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSLowerParameter() -> Int32 {
         return bridgeJSRawValue
     }
-    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftReturn(_ value: Int32) -> PropertyEnum {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftReturn(_ value: Int32) -> TestModule.PropertyEnum {
         return bridgeJSLiftParameter(value)
     }
-    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftParameter(_ value: Int32) -> PropertyEnum {
-        return PropertyEnum(bridgeJSRawValue: value)!
+    @_spi(BridgeJS) @_transparent public static func bridgeJSLiftParameter(_ value: Int32) -> TestModule.PropertyEnum {
+        return TestModule.PropertyEnum(bridgeJSRawValue: value)!
     }
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSLowerReturn() -> Int32 {
         return bridgeJSLowerParameter()
@@ -33,309 +33,309 @@ extension PropertyEnum: _BridgedSwiftCaseEnum {
     }
 }
 
-@_expose(wasm, "bjs_PropertyEnum_static_enumProperty_get")
-@_cdecl("bjs_PropertyEnum_static_enumProperty_get")
-public func _bjs_PropertyEnum_static_enumProperty_get() -> Void {
+@_expose(wasm, "bjs_TestModule_PropertyEnum_static_enumProperty_get")
+@_cdecl("bjs_TestModule_PropertyEnum_static_enumProperty_get")
+public func _bjs_TestModule_PropertyEnum_static_enumProperty_get() -> Void {
     #if arch(wasm32)
-    let ret = PropertyEnum.enumProperty
+    let ret = TestModule.PropertyEnum.enumProperty
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PropertyEnum_static_enumProperty_set")
-@_cdecl("bjs_PropertyEnum_static_enumProperty_set")
-public func _bjs_PropertyEnum_static_enumProperty_set(_ valueBytes: Int32, _ valueLength: Int32) -> Void {
+@_expose(wasm, "bjs_TestModule_PropertyEnum_static_enumProperty_set")
+@_cdecl("bjs_TestModule_PropertyEnum_static_enumProperty_set")
+public func _bjs_TestModule_PropertyEnum_static_enumProperty_set(_ valueBytes: Int32, _ valueLength: Int32) -> Void {
     #if arch(wasm32)
-    PropertyEnum.enumProperty = String.bridgeJSLiftParameter(valueBytes, valueLength)
+    TestModule.PropertyEnum.enumProperty = String.bridgeJSLiftParameter(valueBytes, valueLength)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PropertyEnum_static_enumConstant_get")
-@_cdecl("bjs_PropertyEnum_static_enumConstant_get")
-public func _bjs_PropertyEnum_static_enumConstant_get() -> Int32 {
+@_expose(wasm, "bjs_TestModule_PropertyEnum_static_enumConstant_get")
+@_cdecl("bjs_TestModule_PropertyEnum_static_enumConstant_get")
+public func _bjs_TestModule_PropertyEnum_static_enumConstant_get() -> Int32 {
     #if arch(wasm32)
-    let ret = PropertyEnum.enumConstant
+    let ret = TestModule.PropertyEnum.enumConstant
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PropertyEnum_static_computedEnum_get")
-@_cdecl("bjs_PropertyEnum_static_computedEnum_get")
-public func _bjs_PropertyEnum_static_computedEnum_get() -> Void {
+@_expose(wasm, "bjs_TestModule_PropertyEnum_static_computedEnum_get")
+@_cdecl("bjs_TestModule_PropertyEnum_static_computedEnum_get")
+public func _bjs_TestModule_PropertyEnum_static_computedEnum_get() -> Void {
     #if arch(wasm32)
-    let ret = PropertyEnum.computedEnum
+    let ret = TestModule.PropertyEnum.computedEnum
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PropertyEnum_static_computedEnum_set")
-@_cdecl("bjs_PropertyEnum_static_computedEnum_set")
-public func _bjs_PropertyEnum_static_computedEnum_set(_ valueBytes: Int32, _ valueLength: Int32) -> Void {
+@_expose(wasm, "bjs_TestModule_PropertyEnum_static_computedEnum_set")
+@_cdecl("bjs_TestModule_PropertyEnum_static_computedEnum_set")
+public func _bjs_TestModule_PropertyEnum_static_computedEnum_set(_ valueBytes: Int32, _ valueLength: Int32) -> Void {
     #if arch(wasm32)
-    PropertyEnum.computedEnum = String.bridgeJSLiftParameter(valueBytes, valueLength)
+    TestModule.PropertyEnum.computedEnum = String.bridgeJSLiftParameter(valueBytes, valueLength)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PropertyNamespace_static_namespaceProperty_get")
-@_cdecl("bjs_PropertyNamespace_static_namespaceProperty_get")
-public func _bjs_PropertyNamespace_static_namespaceProperty_get() -> Void {
+@_expose(wasm, "bjs_TestModule_PropertyNamespace_static_namespaceProperty_get")
+@_cdecl("bjs_TestModule_PropertyNamespace_static_namespaceProperty_get")
+public func _bjs_TestModule_PropertyNamespace_static_namespaceProperty_get() -> Void {
     #if arch(wasm32)
-    let ret = PropertyNamespace.namespaceProperty
+    let ret = TestModule.PropertyNamespace.namespaceProperty
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PropertyNamespace_static_namespaceProperty_set")
-@_cdecl("bjs_PropertyNamespace_static_namespaceProperty_set")
-public func _bjs_PropertyNamespace_static_namespaceProperty_set(_ valueBytes: Int32, _ valueLength: Int32) -> Void {
+@_expose(wasm, "bjs_TestModule_PropertyNamespace_static_namespaceProperty_set")
+@_cdecl("bjs_TestModule_PropertyNamespace_static_namespaceProperty_set")
+public func _bjs_TestModule_PropertyNamespace_static_namespaceProperty_set(_ valueBytes: Int32, _ valueLength: Int32) -> Void {
     #if arch(wasm32)
-    PropertyNamespace.namespaceProperty = String.bridgeJSLiftParameter(valueBytes, valueLength)
+    TestModule.PropertyNamespace.namespaceProperty = String.bridgeJSLiftParameter(valueBytes, valueLength)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PropertyNamespace_static_namespaceConstant_get")
-@_cdecl("bjs_PropertyNamespace_static_namespaceConstant_get")
-public func _bjs_PropertyNamespace_static_namespaceConstant_get() -> Void {
+@_expose(wasm, "bjs_TestModule_PropertyNamespace_static_namespaceConstant_get")
+@_cdecl("bjs_TestModule_PropertyNamespace_static_namespaceConstant_get")
+public func _bjs_TestModule_PropertyNamespace_static_namespaceConstant_get() -> Void {
     #if arch(wasm32)
-    let ret = PropertyNamespace.namespaceConstant
+    let ret = TestModule.PropertyNamespace.namespaceConstant
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PropertyNamespace_Nested_static_nestedProperty_get")
-@_cdecl("bjs_PropertyNamespace_Nested_static_nestedProperty_get")
-public func _bjs_PropertyNamespace_Nested_static_nestedProperty_get() -> Int32 {
+@_expose(wasm, "bjs_TestModule_PropertyNamespace_Nested_static_nestedProperty_get")
+@_cdecl("bjs_TestModule_PropertyNamespace_Nested_static_nestedProperty_get")
+public func _bjs_TestModule_PropertyNamespace_Nested_static_nestedProperty_get() -> Int32 {
     #if arch(wasm32)
-    let ret = PropertyNamespace.Nested.nestedProperty
+    let ret = TestModule.PropertyNamespace.Nested.nestedProperty
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PropertyNamespace_Nested_static_nestedProperty_set")
-@_cdecl("bjs_PropertyNamespace_Nested_static_nestedProperty_set")
-public func _bjs_PropertyNamespace_Nested_static_nestedProperty_set(_ value: Int32) -> Void {
+@_expose(wasm, "bjs_TestModule_PropertyNamespace_Nested_static_nestedProperty_set")
+@_cdecl("bjs_TestModule_PropertyNamespace_Nested_static_nestedProperty_set")
+public func _bjs_TestModule_PropertyNamespace_Nested_static_nestedProperty_set(_ value: Int32) -> Void {
     #if arch(wasm32)
-    PropertyNamespace.Nested.nestedProperty = Int.bridgeJSLiftParameter(value)
+    TestModule.PropertyNamespace.Nested.nestedProperty = Int.bridgeJSLiftParameter(value)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PropertyNamespace_Nested_static_nestedConstant_get")
-@_cdecl("bjs_PropertyNamespace_Nested_static_nestedConstant_get")
-public func _bjs_PropertyNamespace_Nested_static_nestedConstant_get() -> Void {
+@_expose(wasm, "bjs_TestModule_PropertyNamespace_Nested_static_nestedConstant_get")
+@_cdecl("bjs_TestModule_PropertyNamespace_Nested_static_nestedConstant_get")
+public func _bjs_TestModule_PropertyNamespace_Nested_static_nestedConstant_get() -> Void {
     #if arch(wasm32)
-    let ret = PropertyNamespace.Nested.nestedConstant
+    let ret = TestModule.PropertyNamespace.Nested.nestedConstant
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PropertyNamespace_Nested_static_nestedDouble_get")
-@_cdecl("bjs_PropertyNamespace_Nested_static_nestedDouble_get")
-public func _bjs_PropertyNamespace_Nested_static_nestedDouble_get() -> Float64 {
+@_expose(wasm, "bjs_TestModule_PropertyNamespace_Nested_static_nestedDouble_get")
+@_cdecl("bjs_TestModule_PropertyNamespace_Nested_static_nestedDouble_get")
+public func _bjs_TestModule_PropertyNamespace_Nested_static_nestedDouble_get() -> Float64 {
     #if arch(wasm32)
-    let ret = PropertyNamespace.Nested.nestedDouble
+    let ret = TestModule.PropertyNamespace.Nested.nestedDouble
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PropertyNamespace_Nested_static_nestedDouble_set")
-@_cdecl("bjs_PropertyNamespace_Nested_static_nestedDouble_set")
-public func _bjs_PropertyNamespace_Nested_static_nestedDouble_set(_ value: Float64) -> Void {
+@_expose(wasm, "bjs_TestModule_PropertyNamespace_Nested_static_nestedDouble_set")
+@_cdecl("bjs_TestModule_PropertyNamespace_Nested_static_nestedDouble_set")
+public func _bjs_TestModule_PropertyNamespace_Nested_static_nestedDouble_set(_ value: Float64) -> Void {
     #if arch(wasm32)
-    PropertyNamespace.Nested.nestedDouble = Double.bridgeJSLiftParameter(value)
+    TestModule.PropertyNamespace.Nested.nestedDouble = Double.bridgeJSLiftParameter(value)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PropertyClass_init")
-@_cdecl("bjs_PropertyClass_init")
-public func _bjs_PropertyClass_init() -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_TestModule_PropertyClass_init")
+@_cdecl("bjs_TestModule_PropertyClass_init")
+public func _bjs_TestModule_PropertyClass_init() -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = PropertyClass()
+    let ret = TestModule.PropertyClass()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PropertyClass_static_staticConstant_get")
-@_cdecl("bjs_PropertyClass_static_staticConstant_get")
-public func _bjs_PropertyClass_static_staticConstant_get() -> Void {
+@_expose(wasm, "bjs_TestModule_PropertyClass_static_staticConstant_get")
+@_cdecl("bjs_TestModule_PropertyClass_static_staticConstant_get")
+public func _bjs_TestModule_PropertyClass_static_staticConstant_get() -> Void {
     #if arch(wasm32)
-    let ret = PropertyClass.staticConstant
+    let ret = TestModule.PropertyClass.staticConstant
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PropertyClass_static_staticVariable_get")
-@_cdecl("bjs_PropertyClass_static_staticVariable_get")
-public func _bjs_PropertyClass_static_staticVariable_get() -> Int32 {
+@_expose(wasm, "bjs_TestModule_PropertyClass_static_staticVariable_get")
+@_cdecl("bjs_TestModule_PropertyClass_static_staticVariable_get")
+public func _bjs_TestModule_PropertyClass_static_staticVariable_get() -> Int32 {
     #if arch(wasm32)
-    let ret = PropertyClass.staticVariable
+    let ret = TestModule.PropertyClass.staticVariable
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PropertyClass_static_staticVariable_set")
-@_cdecl("bjs_PropertyClass_static_staticVariable_set")
-public func _bjs_PropertyClass_static_staticVariable_set(_ value: Int32) -> Void {
+@_expose(wasm, "bjs_TestModule_PropertyClass_static_staticVariable_set")
+@_cdecl("bjs_TestModule_PropertyClass_static_staticVariable_set")
+public func _bjs_TestModule_PropertyClass_static_staticVariable_set(_ value: Int32) -> Void {
     #if arch(wasm32)
-    PropertyClass.staticVariable = Int.bridgeJSLiftParameter(value)
+    TestModule.PropertyClass.staticVariable = Int.bridgeJSLiftParameter(value)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PropertyClass_static_jsObjectProperty_get")
-@_cdecl("bjs_PropertyClass_static_jsObjectProperty_get")
-public func _bjs_PropertyClass_static_jsObjectProperty_get() -> Int32 {
+@_expose(wasm, "bjs_TestModule_PropertyClass_static_jsObjectProperty_get")
+@_cdecl("bjs_TestModule_PropertyClass_static_jsObjectProperty_get")
+public func _bjs_TestModule_PropertyClass_static_jsObjectProperty_get() -> Int32 {
     #if arch(wasm32)
-    let ret = PropertyClass.jsObjectProperty
+    let ret = TestModule.PropertyClass.jsObjectProperty
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PropertyClass_static_jsObjectProperty_set")
-@_cdecl("bjs_PropertyClass_static_jsObjectProperty_set")
-public func _bjs_PropertyClass_static_jsObjectProperty_set(_ value: Int32) -> Void {
+@_expose(wasm, "bjs_TestModule_PropertyClass_static_jsObjectProperty_set")
+@_cdecl("bjs_TestModule_PropertyClass_static_jsObjectProperty_set")
+public func _bjs_TestModule_PropertyClass_static_jsObjectProperty_set(_ value: Int32) -> Void {
     #if arch(wasm32)
-    PropertyClass.jsObjectProperty = JSObject.bridgeJSLiftParameter(value)
+    TestModule.PropertyClass.jsObjectProperty = JSObject.bridgeJSLiftParameter(value)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PropertyClass_static_classVariable_get")
-@_cdecl("bjs_PropertyClass_static_classVariable_get")
-public func _bjs_PropertyClass_static_classVariable_get() -> Void {
+@_expose(wasm, "bjs_TestModule_PropertyClass_static_classVariable_get")
+@_cdecl("bjs_TestModule_PropertyClass_static_classVariable_get")
+public func _bjs_TestModule_PropertyClass_static_classVariable_get() -> Void {
     #if arch(wasm32)
-    let ret = PropertyClass.classVariable
+    let ret = TestModule.PropertyClass.classVariable
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PropertyClass_static_classVariable_set")
-@_cdecl("bjs_PropertyClass_static_classVariable_set")
-public func _bjs_PropertyClass_static_classVariable_set(_ valueBytes: Int32, _ valueLength: Int32) -> Void {
+@_expose(wasm, "bjs_TestModule_PropertyClass_static_classVariable_set")
+@_cdecl("bjs_TestModule_PropertyClass_static_classVariable_set")
+public func _bjs_TestModule_PropertyClass_static_classVariable_set(_ valueBytes: Int32, _ valueLength: Int32) -> Void {
     #if arch(wasm32)
-    PropertyClass.classVariable = String.bridgeJSLiftParameter(valueBytes, valueLength)
+    TestModule.PropertyClass.classVariable = String.bridgeJSLiftParameter(valueBytes, valueLength)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PropertyClass_static_computedProperty_get")
-@_cdecl("bjs_PropertyClass_static_computedProperty_get")
-public func _bjs_PropertyClass_static_computedProperty_get() -> Void {
+@_expose(wasm, "bjs_TestModule_PropertyClass_static_computedProperty_get")
+@_cdecl("bjs_TestModule_PropertyClass_static_computedProperty_get")
+public func _bjs_TestModule_PropertyClass_static_computedProperty_get() -> Void {
     #if arch(wasm32)
-    let ret = PropertyClass.computedProperty
+    let ret = TestModule.PropertyClass.computedProperty
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PropertyClass_static_computedProperty_set")
-@_cdecl("bjs_PropertyClass_static_computedProperty_set")
-public func _bjs_PropertyClass_static_computedProperty_set(_ valueBytes: Int32, _ valueLength: Int32) -> Void {
+@_expose(wasm, "bjs_TestModule_PropertyClass_static_computedProperty_set")
+@_cdecl("bjs_TestModule_PropertyClass_static_computedProperty_set")
+public func _bjs_TestModule_PropertyClass_static_computedProperty_set(_ valueBytes: Int32, _ valueLength: Int32) -> Void {
     #if arch(wasm32)
-    PropertyClass.computedProperty = String.bridgeJSLiftParameter(valueBytes, valueLength)
+    TestModule.PropertyClass.computedProperty = String.bridgeJSLiftParameter(valueBytes, valueLength)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PropertyClass_static_readOnlyComputed_get")
-@_cdecl("bjs_PropertyClass_static_readOnlyComputed_get")
-public func _bjs_PropertyClass_static_readOnlyComputed_get() -> Int32 {
+@_expose(wasm, "bjs_TestModule_PropertyClass_static_readOnlyComputed_get")
+@_cdecl("bjs_TestModule_PropertyClass_static_readOnlyComputed_get")
+public func _bjs_TestModule_PropertyClass_static_readOnlyComputed_get() -> Int32 {
     #if arch(wasm32)
-    let ret = PropertyClass.readOnlyComputed
+    let ret = TestModule.PropertyClass.readOnlyComputed
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PropertyClass_static_optionalProperty_get")
-@_cdecl("bjs_PropertyClass_static_optionalProperty_get")
-public func _bjs_PropertyClass_static_optionalProperty_get() -> Void {
+@_expose(wasm, "bjs_TestModule_PropertyClass_static_optionalProperty_get")
+@_cdecl("bjs_TestModule_PropertyClass_static_optionalProperty_get")
+public func _bjs_TestModule_PropertyClass_static_optionalProperty_get() -> Void {
     #if arch(wasm32)
-    let ret = PropertyClass.optionalProperty
+    let ret = TestModule.PropertyClass.optionalProperty
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PropertyClass_static_optionalProperty_set")
-@_cdecl("bjs_PropertyClass_static_optionalProperty_set")
-public func _bjs_PropertyClass_static_optionalProperty_set(_ valueIsSome: Int32, _ valueBytes: Int32, _ valueLength: Int32) -> Void {
+@_expose(wasm, "bjs_TestModule_PropertyClass_static_optionalProperty_set")
+@_cdecl("bjs_TestModule_PropertyClass_static_optionalProperty_set")
+public func _bjs_TestModule_PropertyClass_static_optionalProperty_set(_ valueIsSome: Int32, _ valueBytes: Int32, _ valueLength: Int32) -> Void {
     #if arch(wasm32)
-    PropertyClass.optionalProperty = Optional<String>.bridgeJSLiftParameter(valueIsSome, valueBytes, valueLength)
+    TestModule.PropertyClass.optionalProperty = Optional<String>.bridgeJSLiftParameter(valueIsSome, valueBytes, valueLength)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_PropertyClass_deinit")
-@_cdecl("bjs_PropertyClass_deinit")
-public func _bjs_PropertyClass_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_TestModule_PropertyClass_deinit")
+@_cdecl("bjs_TestModule_PropertyClass_deinit")
+public func _bjs_TestModule_PropertyClass_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    Unmanaged<PropertyClass>.fromOpaque(pointer).release()
+    Unmanaged<TestModule.PropertyClass>.fromOpaque(pointer).release()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension PropertyClass: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
+extension TestModule.PropertyClass: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
     var jsValue: JSValue {
-        return .object(JSObject(id: UInt32(bitPattern: _bjs_PropertyClass_wrap(Unmanaged.passRetained(self).toOpaque()))))
+        return .object(JSObject(id: UInt32(bitPattern: _bjs_TestModule_PropertyClass_wrap(Unmanaged.passRetained(self).toOpaque()))))
     }
     consuming func bridgeJSLowerAsProtocolReturn() -> Int32 {
-        _bjs_PropertyClass_wrap(Unmanaged.passRetained(self).toOpaque())
+        _bjs_TestModule_PropertyClass_wrap(Unmanaged.passRetained(self).toOpaque())
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "TestModule", name: "bjs_PropertyClass_wrap")
-fileprivate func _bjs_PropertyClass_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
+@_extern(wasm, module: "TestModule", name: "bjs_TestModule_PropertyClass_wrap")
+fileprivate func _bjs_TestModule_PropertyClass_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
 #else
-fileprivate func _bjs_PropertyClass_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+fileprivate func _bjs_TestModule_PropertyClass_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_PropertyClass_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
-    return _bjs_PropertyClass_wrap_extern(pointer)
+@inline(never) fileprivate func _bjs_TestModule_PropertyClass_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+    return _bjs_TestModule_PropertyClass_wrap_extern(pointer)
 }

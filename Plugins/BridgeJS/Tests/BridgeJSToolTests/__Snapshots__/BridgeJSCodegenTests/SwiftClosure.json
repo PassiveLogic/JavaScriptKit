@@ -6,7 +6,7 @@
     "classes" : [
       {
         "constructor" : {
-          "abiName" : "bjs_Person_init",
+          "abiName" : "bjs_TestModule_Person_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -32,11 +32,11 @@
         "properties" : [
 
         ],
-        "swiftCallName" : "Person"
+        "swiftCallName" : "TestModule.Person"
       },
       {
         "constructor" : {
-          "abiName" : "bjs_TestProcessor_init",
+          "abiName" : "bjs_TestModule_TestProcessor_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -80,7 +80,7 @@
         "properties" : [
 
         ],
-        "swiftCallName" : "TestProcessor"
+        "swiftCallName" : "TestModule.TestProcessor"
       }
     ],
     "enums" : [
@@ -119,7 +119,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "Direction",
+        "swiftCallName" : "TestModule.Direction",
         "tsFullPath" : "Direction"
       },
       {
@@ -155,7 +155,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "Theme",
+        "swiftCallName" : "TestModule.Theme",
         "tsFullPath" : "Theme"
       },
       {
@@ -198,7 +198,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "HttpStatus",
+        "swiftCallName" : "TestModule.HttpStatus",
         "tsFullPath" : "HttpStatus"
       },
       {
@@ -281,14 +281,14 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "APIResult",
+        "swiftCallName" : "TestModule.APIResult",
         "tsFullPath" : "APIResult"
       }
     ],
     "exposeToGlobal" : false,
     "functions" : [
       {
-        "abiName" : "bjs_roundtripAnimal",
+        "abiName" : "bjs_TestModule_roundtripAnimal",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -304,18 +304,18 @@
                 "_0" : {
                   "isAsync" : false,
                   "isThrows" : false,
-                  "mangleName" : "10TestModule6AnimalV_6AnimalV",
+                  "mangleName" : "10TestModule17TestModule_AnimalV_17TestModule_AnimalV",
                   "moduleName" : "TestModule",
                   "parameters" : [
                     {
                       "swiftStruct" : {
-                        "_0" : "Animal"
+                        "_0" : "TestModule.Animal"
                       }
                     }
                   ],
                   "returnType" : {
                     "swiftStruct" : {
-                      "_0" : "Animal"
+                      "_0" : "TestModule.Animal"
                     }
                   },
                   "sendingParameters" : false
@@ -330,18 +330,18 @@
             "_0" : {
               "isAsync" : false,
               "isThrows" : false,
-              "mangleName" : "10TestModule6AnimalV_6AnimalV",
+              "mangleName" : "10TestModule17TestModule_AnimalV_17TestModule_AnimalV",
               "moduleName" : "TestModule",
               "parameters" : [
                 {
                   "swiftStruct" : {
-                    "_0" : "Animal"
+                    "_0" : "TestModule.Animal"
                   }
                 }
               ],
               "returnType" : {
                 "swiftStruct" : {
-                  "_0" : "Animal"
+                  "_0" : "TestModule.Animal"
                 }
               },
               "sendingParameters" : false
@@ -351,7 +351,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundtripOptionalAnimal",
+        "abiName" : "bjs_TestModule_roundtripOptionalAnimal",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -367,14 +367,14 @@
                 "_0" : {
                   "isAsync" : false,
                   "isThrows" : false,
-                  "mangleName" : "10TestModuleSq6AnimalV_Sq6AnimalV",
+                  "mangleName" : "10TestModuleSq17TestModule_AnimalV_Sq17TestModule_AnimalV",
                   "moduleName" : "TestModule",
                   "parameters" : [
                     {
                       "nullable" : {
                         "_0" : {
                           "swiftStruct" : {
-                            "_0" : "Animal"
+                            "_0" : "TestModule.Animal"
                           }
                         },
                         "_1" : "null"
@@ -385,7 +385,7 @@
                     "nullable" : {
                       "_0" : {
                         "swiftStruct" : {
-                          "_0" : "Animal"
+                          "_0" : "TestModule.Animal"
                         }
                       },
                       "_1" : "null"
@@ -403,14 +403,14 @@
             "_0" : {
               "isAsync" : false,
               "isThrows" : false,
-              "mangleName" : "10TestModuleSq6AnimalV_Sq6AnimalV",
+              "mangleName" : "10TestModuleSq17TestModule_AnimalV_Sq17TestModule_AnimalV",
               "moduleName" : "TestModule",
               "parameters" : [
                 {
                   "nullable" : {
                     "_0" : {
                       "swiftStruct" : {
-                        "_0" : "Animal"
+                        "_0" : "TestModule.Animal"
                       }
                     },
                     "_1" : "null"
@@ -421,7 +421,7 @@
                 "nullable" : {
                   "_0" : {
                     "swiftStruct" : {
-                      "_0" : "Animal"
+                      "_0" : "TestModule.Animal"
                     }
                   },
                   "_1" : "null"
@@ -434,7 +434,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundtripString",
+        "abiName" : "bjs_TestModule_roundtripString",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -497,7 +497,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundtripInt",
+        "abiName" : "bjs_TestModule_roundtripInt",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -572,7 +572,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundtripBool",
+        "abiName" : "bjs_TestModule_roundtripBool",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -635,7 +635,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundtripFloat",
+        "abiName" : "bjs_TestModule_roundtripFloat",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -698,7 +698,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundtripDouble",
+        "abiName" : "bjs_TestModule_roundtripDouble",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -761,7 +761,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundtripOptionalString",
+        "abiName" : "bjs_TestModule_roundtripOptionalString",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -844,7 +844,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundtripOptionalInt",
+        "abiName" : "bjs_TestModule_roundtripOptionalInt",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -939,7 +939,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundtripOptionalBool",
+        "abiName" : "bjs_TestModule_roundtripOptionalBool",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1022,7 +1022,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundtripOptionalFloat",
+        "abiName" : "bjs_TestModule_roundtripOptionalFloat",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1105,7 +1105,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundtripOptionalDouble",
+        "abiName" : "bjs_TestModule_roundtripOptionalDouble",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1188,7 +1188,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundtripPerson",
+        "abiName" : "bjs_TestModule_roundtripPerson",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1204,18 +1204,18 @@
                 "_0" : {
                   "isAsync" : false,
                   "isThrows" : false,
-                  "mangleName" : "10TestModule6PersonC_6PersonC",
+                  "mangleName" : "10TestModule17TestModule_PersonC_17TestModule_PersonC",
                   "moduleName" : "TestModule",
                   "parameters" : [
                     {
                       "swiftHeapObject" : {
-                        "_0" : "Person"
+                        "_0" : "TestModule.Person"
                       }
                     }
                   ],
                   "returnType" : {
                     "swiftHeapObject" : {
-                      "_0" : "Person"
+                      "_0" : "TestModule.Person"
                     }
                   },
                   "sendingParameters" : false
@@ -1230,18 +1230,18 @@
             "_0" : {
               "isAsync" : false,
               "isThrows" : false,
-              "mangleName" : "10TestModule6PersonC_6PersonC",
+              "mangleName" : "10TestModule17TestModule_PersonC_17TestModule_PersonC",
               "moduleName" : "TestModule",
               "parameters" : [
                 {
                   "swiftHeapObject" : {
-                    "_0" : "Person"
+                    "_0" : "TestModule.Person"
                   }
                 }
               ],
               "returnType" : {
                 "swiftHeapObject" : {
-                  "_0" : "Person"
+                  "_0" : "TestModule.Person"
                 }
               },
               "sendingParameters" : false
@@ -1251,7 +1251,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundtripOptionalPerson",
+        "abiName" : "bjs_TestModule_roundtripOptionalPerson",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1267,14 +1267,14 @@
                 "_0" : {
                   "isAsync" : false,
                   "isThrows" : false,
-                  "mangleName" : "10TestModuleSq6PersonC_Sq6PersonC",
+                  "mangleName" : "10TestModuleSq17TestModule_PersonC_Sq17TestModule_PersonC",
                   "moduleName" : "TestModule",
                   "parameters" : [
                     {
                       "nullable" : {
                         "_0" : {
                           "swiftHeapObject" : {
-                            "_0" : "Person"
+                            "_0" : "TestModule.Person"
                           }
                         },
                         "_1" : "null"
@@ -1285,7 +1285,7 @@
                     "nullable" : {
                       "_0" : {
                         "swiftHeapObject" : {
-                          "_0" : "Person"
+                          "_0" : "TestModule.Person"
                         }
                       },
                       "_1" : "null"
@@ -1303,14 +1303,14 @@
             "_0" : {
               "isAsync" : false,
               "isThrows" : false,
-              "mangleName" : "10TestModuleSq6PersonC_Sq6PersonC",
+              "mangleName" : "10TestModuleSq17TestModule_PersonC_Sq17TestModule_PersonC",
               "moduleName" : "TestModule",
               "parameters" : [
                 {
                   "nullable" : {
                     "_0" : {
                       "swiftHeapObject" : {
-                        "_0" : "Person"
+                        "_0" : "TestModule.Person"
                       }
                     },
                     "_1" : "null"
@@ -1321,7 +1321,7 @@
                 "nullable" : {
                   "_0" : {
                     "swiftHeapObject" : {
-                      "_0" : "Person"
+                      "_0" : "TestModule.Person"
                     }
                   },
                   "_1" : "null"
@@ -1334,7 +1334,7 @@
         }
       },
       {
-        "abiName" : "bjs_makeThrowingParser",
+        "abiName" : "bjs_TestModule_makeThrowingParser",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1373,7 +1373,7 @@
         }
       },
       {
-        "abiName" : "bjs_validateWith",
+        "abiName" : "bjs_TestModule_validateWith",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1417,7 +1417,7 @@
         }
       },
       {
-        "abiName" : "bjs_makeFetcher",
+        "abiName" : "bjs_TestModule_makeFetcher",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1453,7 +1453,7 @@
         }
       },
       {
-        "abiName" : "bjs_makeAsyncEcho",
+        "abiName" : "bjs_TestModule_makeAsyncEcho",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1489,7 +1489,7 @@
         }
       },
       {
-        "abiName" : "bjs_makeAnimalLoader",
+        "abiName" : "bjs_TestModule_makeAnimalLoader",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1504,7 +1504,7 @@
             "_0" : {
               "isAsync" : true,
               "isThrows" : false,
-              "mangleName" : "10TestModuleYaSS_6AnimalV",
+              "mangleName" : "10TestModuleYaSS_17TestModule_AnimalV",
               "moduleName" : "TestModule",
               "parameters" : [
                 {
@@ -1515,7 +1515,7 @@
               ],
               "returnType" : {
                 "swiftStruct" : {
-                  "_0" : "Animal"
+                  "_0" : "TestModule.Animal"
                 }
               },
               "sendingParameters" : false
@@ -1525,7 +1525,7 @@
         }
       },
       {
-        "abiName" : "bjs_makeResultLoader",
+        "abiName" : "bjs_TestModule_makeResultLoader",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1540,7 +1540,7 @@
             "_0" : {
               "isAsync" : true,
               "isThrows" : true,
-              "mangleName" : "10TestModuleYaKSb_9APIResultO",
+              "mangleName" : "10TestModuleYaKSb_20TestModule_APIResultO",
               "moduleName" : "TestModule",
               "parameters" : [
                 {
@@ -1551,7 +1551,7 @@
               ],
               "returnType" : {
                 "associatedValueEnum" : {
-                  "_0" : "APIResult"
+                  "_0" : "TestModule.APIResult"
                 }
               },
               "sendingParameters" : false
@@ -1561,7 +1561,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundtripDirection",
+        "abiName" : "bjs_TestModule_roundtripDirection",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1577,18 +1577,18 @@
                 "_0" : {
                   "isAsync" : false,
                   "isThrows" : false,
-                  "mangleName" : "10TestModule9DirectionO_9DirectionO",
+                  "mangleName" : "10TestModule20TestModule_DirectionO_20TestModule_DirectionO",
                   "moduleName" : "TestModule",
                   "parameters" : [
                     {
                       "caseEnum" : {
-                        "_0" : "Direction"
+                        "_0" : "TestModule.Direction"
                       }
                     }
                   ],
                   "returnType" : {
                     "caseEnum" : {
-                      "_0" : "Direction"
+                      "_0" : "TestModule.Direction"
                     }
                   },
                   "sendingParameters" : false
@@ -1603,18 +1603,18 @@
             "_0" : {
               "isAsync" : false,
               "isThrows" : false,
-              "mangleName" : "10TestModule9DirectionO_9DirectionO",
+              "mangleName" : "10TestModule20TestModule_DirectionO_20TestModule_DirectionO",
               "moduleName" : "TestModule",
               "parameters" : [
                 {
                   "caseEnum" : {
-                    "_0" : "Direction"
+                    "_0" : "TestModule.Direction"
                   }
                 }
               ],
               "returnType" : {
                 "caseEnum" : {
-                  "_0" : "Direction"
+                  "_0" : "TestModule.Direction"
                 }
               },
               "sendingParameters" : false
@@ -1624,7 +1624,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundtripTheme",
+        "abiName" : "bjs_TestModule_roundtripTheme",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1640,19 +1640,19 @@
                 "_0" : {
                   "isAsync" : false,
                   "isThrows" : false,
-                  "mangleName" : "10TestModule5ThemeO_5ThemeO",
+                  "mangleName" : "10TestModule16TestModule_ThemeO_16TestModule_ThemeO",
                   "moduleName" : "TestModule",
                   "parameters" : [
                     {
                       "rawValueEnum" : {
-                        "_0" : "Theme",
+                        "_0" : "TestModule.Theme",
                         "_1" : "String"
                       }
                     }
                   ],
                   "returnType" : {
                     "rawValueEnum" : {
-                      "_0" : "Theme",
+                      "_0" : "TestModule.Theme",
                       "_1" : "String"
                     }
                   },
@@ -1668,19 +1668,19 @@
             "_0" : {
               "isAsync" : false,
               "isThrows" : false,
-              "mangleName" : "10TestModule5ThemeO_5ThemeO",
+              "mangleName" : "10TestModule16TestModule_ThemeO_16TestModule_ThemeO",
               "moduleName" : "TestModule",
               "parameters" : [
                 {
                   "rawValueEnum" : {
-                    "_0" : "Theme",
+                    "_0" : "TestModule.Theme",
                     "_1" : "String"
                   }
                 }
               ],
               "returnType" : {
                 "rawValueEnum" : {
-                  "_0" : "Theme",
+                  "_0" : "TestModule.Theme",
                   "_1" : "String"
                 }
               },
@@ -1691,7 +1691,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundtripHttpStatus",
+        "abiName" : "bjs_TestModule_roundtripHttpStatus",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1707,19 +1707,19 @@
                 "_0" : {
                   "isAsync" : false,
                   "isThrows" : false,
-                  "mangleName" : "10TestModule10HttpStatusO_10HttpStatusO",
+                  "mangleName" : "10TestModule21TestModule_HttpStatusO_21TestModule_HttpStatusO",
                   "moduleName" : "TestModule",
                   "parameters" : [
                     {
                       "rawValueEnum" : {
-                        "_0" : "HttpStatus",
+                        "_0" : "TestModule.HttpStatus",
                         "_1" : "Int"
                       }
                     }
                   ],
                   "returnType" : {
                     "rawValueEnum" : {
-                      "_0" : "HttpStatus",
+                      "_0" : "TestModule.HttpStatus",
                       "_1" : "Int"
                     }
                   },
@@ -1735,19 +1735,19 @@
             "_0" : {
               "isAsync" : false,
               "isThrows" : false,
-              "mangleName" : "10TestModule10HttpStatusO_10HttpStatusO",
+              "mangleName" : "10TestModule21TestModule_HttpStatusO_21TestModule_HttpStatusO",
               "moduleName" : "TestModule",
               "parameters" : [
                 {
                   "rawValueEnum" : {
-                    "_0" : "HttpStatus",
+                    "_0" : "TestModule.HttpStatus",
                     "_1" : "Int"
                   }
                 }
               ],
               "returnType" : {
                 "rawValueEnum" : {
-                  "_0" : "HttpStatus",
+                  "_0" : "TestModule.HttpStatus",
                   "_1" : "Int"
                 }
               },
@@ -1758,7 +1758,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundtripAPIResult",
+        "abiName" : "bjs_TestModule_roundtripAPIResult",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1774,18 +1774,18 @@
                 "_0" : {
                   "isAsync" : false,
                   "isThrows" : false,
-                  "mangleName" : "10TestModule9APIResultO_9APIResultO",
+                  "mangleName" : "10TestModule20TestModule_APIResultO_20TestModule_APIResultO",
                   "moduleName" : "TestModule",
                   "parameters" : [
                     {
                       "associatedValueEnum" : {
-                        "_0" : "APIResult"
+                        "_0" : "TestModule.APIResult"
                       }
                     }
                   ],
                   "returnType" : {
                     "associatedValueEnum" : {
-                      "_0" : "APIResult"
+                      "_0" : "TestModule.APIResult"
                     }
                   },
                   "sendingParameters" : false
@@ -1800,18 +1800,18 @@
             "_0" : {
               "isAsync" : false,
               "isThrows" : false,
-              "mangleName" : "10TestModule9APIResultO_9APIResultO",
+              "mangleName" : "10TestModule20TestModule_APIResultO_20TestModule_APIResultO",
               "moduleName" : "TestModule",
               "parameters" : [
                 {
                   "associatedValueEnum" : {
-                    "_0" : "APIResult"
+                    "_0" : "TestModule.APIResult"
                   }
                 }
               ],
               "returnType" : {
                 "associatedValueEnum" : {
-                  "_0" : "APIResult"
+                  "_0" : "TestModule.APIResult"
                 }
               },
               "sendingParameters" : false
@@ -1821,7 +1821,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundtripOptionalDirection",
+        "abiName" : "bjs_TestModule_roundtripOptionalDirection",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1837,14 +1837,14 @@
                 "_0" : {
                   "isAsync" : false,
                   "isThrows" : false,
-                  "mangleName" : "10TestModuleSq9DirectionO_Sq9DirectionO",
+                  "mangleName" : "10TestModuleSq20TestModule_DirectionO_Sq20TestModule_DirectionO",
                   "moduleName" : "TestModule",
                   "parameters" : [
                     {
                       "nullable" : {
                         "_0" : {
                           "caseEnum" : {
-                            "_0" : "Direction"
+                            "_0" : "TestModule.Direction"
                           }
                         },
                         "_1" : "null"
@@ -1855,7 +1855,7 @@
                     "nullable" : {
                       "_0" : {
                         "caseEnum" : {
-                          "_0" : "Direction"
+                          "_0" : "TestModule.Direction"
                         }
                       },
                       "_1" : "null"
@@ -1873,14 +1873,14 @@
             "_0" : {
               "isAsync" : false,
               "isThrows" : false,
-              "mangleName" : "10TestModuleSq9DirectionO_Sq9DirectionO",
+              "mangleName" : "10TestModuleSq20TestModule_DirectionO_Sq20TestModule_DirectionO",
               "moduleName" : "TestModule",
               "parameters" : [
                 {
                   "nullable" : {
                     "_0" : {
                       "caseEnum" : {
-                        "_0" : "Direction"
+                        "_0" : "TestModule.Direction"
                       }
                     },
                     "_1" : "null"
@@ -1891,7 +1891,7 @@
                 "nullable" : {
                   "_0" : {
                     "caseEnum" : {
-                      "_0" : "Direction"
+                      "_0" : "TestModule.Direction"
                     }
                   },
                   "_1" : "null"
@@ -1904,7 +1904,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundtripOptionalTheme",
+        "abiName" : "bjs_TestModule_roundtripOptionalTheme",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -1920,14 +1920,14 @@
                 "_0" : {
                   "isAsync" : false,
                   "isThrows" : false,
-                  "mangleName" : "10TestModuleSq5ThemeO_Sq5ThemeO",
+                  "mangleName" : "10TestModuleSq16TestModule_ThemeO_Sq16TestModule_ThemeO",
                   "moduleName" : "TestModule",
                   "parameters" : [
                     {
                       "nullable" : {
                         "_0" : {
                           "rawValueEnum" : {
-                            "_0" : "Theme",
+                            "_0" : "TestModule.Theme",
                             "_1" : "String"
                           }
                         },
@@ -1939,7 +1939,7 @@
                     "nullable" : {
                       "_0" : {
                         "rawValueEnum" : {
-                          "_0" : "Theme",
+                          "_0" : "TestModule.Theme",
                           "_1" : "String"
                         }
                       },
@@ -1958,14 +1958,14 @@
             "_0" : {
               "isAsync" : false,
               "isThrows" : false,
-              "mangleName" : "10TestModuleSq5ThemeO_Sq5ThemeO",
+              "mangleName" : "10TestModuleSq16TestModule_ThemeO_Sq16TestModule_ThemeO",
               "moduleName" : "TestModule",
               "parameters" : [
                 {
                   "nullable" : {
                     "_0" : {
                       "rawValueEnum" : {
-                        "_0" : "Theme",
+                        "_0" : "TestModule.Theme",
                         "_1" : "String"
                       }
                     },
@@ -1977,7 +1977,7 @@
                 "nullable" : {
                   "_0" : {
                     "rawValueEnum" : {
-                      "_0" : "Theme",
+                      "_0" : "TestModule.Theme",
                       "_1" : "String"
                     }
                   },
@@ -1991,7 +1991,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundtripOptionalHttpStatus",
+        "abiName" : "bjs_TestModule_roundtripOptionalHttpStatus",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -2007,14 +2007,14 @@
                 "_0" : {
                   "isAsync" : false,
                   "isThrows" : false,
-                  "mangleName" : "10TestModuleSq10HttpStatusO_Sq10HttpStatusO",
+                  "mangleName" : "10TestModuleSq21TestModule_HttpStatusO_Sq21TestModule_HttpStatusO",
                   "moduleName" : "TestModule",
                   "parameters" : [
                     {
                       "nullable" : {
                         "_0" : {
                           "rawValueEnum" : {
-                            "_0" : "HttpStatus",
+                            "_0" : "TestModule.HttpStatus",
                             "_1" : "Int"
                           }
                         },
@@ -2026,7 +2026,7 @@
                     "nullable" : {
                       "_0" : {
                         "rawValueEnum" : {
-                          "_0" : "HttpStatus",
+                          "_0" : "TestModule.HttpStatus",
                           "_1" : "Int"
                         }
                       },
@@ -2045,14 +2045,14 @@
             "_0" : {
               "isAsync" : false,
               "isThrows" : false,
-              "mangleName" : "10TestModuleSq10HttpStatusO_Sq10HttpStatusO",
+              "mangleName" : "10TestModuleSq21TestModule_HttpStatusO_Sq21TestModule_HttpStatusO",
               "moduleName" : "TestModule",
               "parameters" : [
                 {
                   "nullable" : {
                     "_0" : {
                       "rawValueEnum" : {
-                        "_0" : "HttpStatus",
+                        "_0" : "TestModule.HttpStatus",
                         "_1" : "Int"
                       }
                     },
@@ -2064,7 +2064,7 @@
                 "nullable" : {
                   "_0" : {
                     "rawValueEnum" : {
-                      "_0" : "HttpStatus",
+                      "_0" : "TestModule.HttpStatus",
                       "_1" : "Int"
                     }
                   },
@@ -2078,7 +2078,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundtripOptionalAPIResult",
+        "abiName" : "bjs_TestModule_roundtripOptionalAPIResult",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -2094,14 +2094,14 @@
                 "_0" : {
                   "isAsync" : false,
                   "isThrows" : false,
-                  "mangleName" : "10TestModuleSq9APIResultO_Sq9APIResultO",
+                  "mangleName" : "10TestModuleSq20TestModule_APIResultO_Sq20TestModule_APIResultO",
                   "moduleName" : "TestModule",
                   "parameters" : [
                     {
                       "nullable" : {
                         "_0" : {
                           "associatedValueEnum" : {
-                            "_0" : "APIResult"
+                            "_0" : "TestModule.APIResult"
                           }
                         },
                         "_1" : "null"
@@ -2112,7 +2112,7 @@
                     "nullable" : {
                       "_0" : {
                         "associatedValueEnum" : {
-                          "_0" : "APIResult"
+                          "_0" : "TestModule.APIResult"
                         }
                       },
                       "_1" : "null"
@@ -2130,14 +2130,14 @@
             "_0" : {
               "isAsync" : false,
               "isThrows" : false,
-              "mangleName" : "10TestModuleSq9APIResultO_Sq9APIResultO",
+              "mangleName" : "10TestModuleSq20TestModule_APIResultO_Sq20TestModule_APIResultO",
               "moduleName" : "TestModule",
               "parameters" : [
                 {
                   "nullable" : {
                     "_0" : {
                       "associatedValueEnum" : {
-                        "_0" : "APIResult"
+                        "_0" : "TestModule.APIResult"
                       }
                     },
                     "_1" : "null"
@@ -2148,7 +2148,7 @@
                 "nullable" : {
                   "_0" : {
                     "associatedValueEnum" : {
-                      "_0" : "APIResult"
+                      "_0" : "TestModule.APIResult"
                     }
                   },
                   "_1" : "null"
@@ -2161,7 +2161,7 @@
         }
       },
       {
-        "abiName" : "bjs_roundtripOptionalDirection",
+        "abiName" : "bjs_TestModule_roundtripOptionalDirection",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -2177,14 +2177,14 @@
                 "_0" : {
                   "isAsync" : false,
                   "isThrows" : false,
-                  "mangleName" : "10TestModuleSq9DirectionO_Sq9DirectionO",
+                  "mangleName" : "10TestModuleSq20TestModule_DirectionO_Sq20TestModule_DirectionO",
                   "moduleName" : "TestModule",
                   "parameters" : [
                     {
                       "nullable" : {
                         "_0" : {
                           "caseEnum" : {
-                            "_0" : "Direction"
+                            "_0" : "TestModule.Direction"
                           }
                         },
                         "_1" : "null"
@@ -2195,7 +2195,7 @@
                     "nullable" : {
                       "_0" : {
                         "caseEnum" : {
-                          "_0" : "Direction"
+                          "_0" : "TestModule.Direction"
                         }
                       },
                       "_1" : "null"
@@ -2213,14 +2213,14 @@
             "_0" : {
               "isAsync" : false,
               "isThrows" : false,
-              "mangleName" : "10TestModuleSq9DirectionO_Sq9DirectionO",
+              "mangleName" : "10TestModuleSq20TestModule_DirectionO_Sq20TestModule_DirectionO",
               "moduleName" : "TestModule",
               "parameters" : [
                 {
                   "nullable" : {
                     "_0" : {
                       "caseEnum" : {
-                        "_0" : "Direction"
+                        "_0" : "TestModule.Direction"
                       }
                     },
                     "_1" : "null"
@@ -2231,7 +2231,7 @@
                 "nullable" : {
                   "_0" : {
                     "caseEnum" : {
-                      "_0" : "Direction"
+                      "_0" : "TestModule.Direction"
                     }
                   },
                   "_1" : "null"
@@ -2250,7 +2250,7 @@
     "structs" : [
       {
         "constructor" : {
-          "abiName" : "bjs_Animal_init",
+          "abiName" : "bjs_TestModule_Animal_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -2285,7 +2285,7 @@
             }
           }
         ],
-        "swiftCallName" : "Animal"
+        "swiftCallName" : "TestModule.Animal"
       }
     ]
   },

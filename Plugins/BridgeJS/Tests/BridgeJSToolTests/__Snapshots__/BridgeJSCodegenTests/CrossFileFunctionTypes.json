@@ -6,7 +6,7 @@
     "classes" : [
       {
         "constructor" : {
-          "abiName" : "bjs_FunctionB_init",
+          "abiName" : "bjs_TestModule_FunctionB_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -40,11 +40,11 @@
             }
           }
         ],
-        "swiftCallName" : "FunctionB"
+        "swiftCallName" : "TestModule.FunctionB"
       },
       {
         "constructor" : {
-          "abiName" : "bjs_FunctionA_init",
+          "abiName" : "bjs_TestModule_FunctionA_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -56,7 +56,7 @@
         },
         "methods" : [
           {
-            "abiName" : "bjs_FunctionA_processB",
+            "abiName" : "bjs_TestModule_FunctionA_processB",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -69,7 +69,7 @@
                 "name" : "b",
                 "type" : {
                   "swiftHeapObject" : {
-                    "_0" : "FunctionB"
+                    "_0" : "TestModule.FunctionB"
                   }
                 }
               }
@@ -81,7 +81,7 @@
             }
           },
           {
-            "abiName" : "bjs_FunctionA_createB",
+            "abiName" : "bjs_TestModule_FunctionA_createB",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -101,7 +101,7 @@
             ],
             "returnType" : {
               "swiftHeapObject" : {
-                "_0" : "FunctionB"
+                "_0" : "TestModule.FunctionB"
               }
             }
           }
@@ -110,7 +110,7 @@
         "properties" : [
 
         ],
-        "swiftCallName" : "FunctionA"
+        "swiftCallName" : "TestModule.FunctionA"
       }
     ],
     "enums" : [
@@ -119,7 +119,7 @@
     "exposeToGlobal" : false,
     "functions" : [
       {
-        "abiName" : "bjs_standaloneFunction",
+        "abiName" : "bjs_TestModule_standaloneFunction",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -132,14 +132,14 @@
             "name" : "b",
             "type" : {
               "swiftHeapObject" : {
-                "_0" : "FunctionB"
+                "_0" : "TestModule.FunctionB"
               }
             }
           }
         ],
         "returnType" : {
           "swiftHeapObject" : {
-            "_0" : "FunctionB"
+            "_0" : "TestModule.FunctionB"
           }
         }
       }

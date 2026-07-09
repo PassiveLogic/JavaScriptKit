@@ -51,7 +51,7 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "PayloadSignal",
+        "swiftCallName" : "TestModule.PayloadSignal",
         "tsFullPath" : "PayloadSignal"
       }
     ],
@@ -92,7 +92,7 @@
                     "name" : "signal",
                     "type" : {
                       "associatedValueEnum" : {
-                        "_0" : "PayloadSignal"
+                        "_0" : "TestModule.PayloadSignal"
                       }
                     }
                   }
@@ -116,7 +116,7 @@
                 ],
                 "returnType" : {
                   "associatedValueEnum" : {
-                    "_0" : "PayloadSignal"
+                    "_0" : "TestModule.PayloadSignal"
                   }
                 }
               },
@@ -135,7 +135,7 @@
                       "nullable" : {
                         "_0" : {
                           "associatedValueEnum" : {
-                            "_0" : "PayloadSignal"
+                            "_0" : "TestModule.PayloadSignal"
                           }
                         },
                         "_1" : "null"
@@ -147,7 +147,7 @@
                   "nullable" : {
                     "_0" : {
                       "associatedValueEnum" : {
-                        "_0" : "PayloadSignal"
+                        "_0" : "TestModule.PayloadSignal"
                       }
                     },
                     "_1" : "null"
@@ -173,14 +173,14 @@
                     "name" : "signal",
                     "type" : {
                       "associatedValueEnum" : {
-                        "_0" : "PayloadSignal"
+                        "_0" : "TestModule.PayloadSignal"
                       }
                     }
                   }
                 ],
                 "returnType" : {
                   "associatedValueEnum" : {
-                    "_0" : "PayloadSignal"
+                    "_0" : "TestModule.PayloadSignal"
                   }
                 }
               }

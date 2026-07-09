@@ -6,7 +6,7 @@
     "classes" : [
       {
         "constructor" : {
-          "abiName" : "bjs_Greeter_init",
+          "abiName" : "bjs_TestModule_Greeter_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -26,7 +26,7 @@
         },
         "methods" : [
           {
-            "abiName" : "bjs_Greeter_greet",
+            "abiName" : "bjs_TestModule_Greeter_greet",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -56,7 +56,7 @@
             }
           }
         ],
-        "swiftCallName" : "Greeter"
+        "swiftCallName" : "TestModule.Greeter"
       }
     ],
     "enums" : [
@@ -86,14 +86,14 @@
         "staticProperties" : [
 
         ],
-        "swiftCallName" : "Precision",
+        "swiftCallName" : "TestModule.Precision",
         "tsFullPath" : "Precision"
       }
     ],
     "exposeToGlobal" : false,
     "functions" : [
       {
-        "abiName" : "bjs_roundtrip",
+        "abiName" : "bjs_TestModule_roundtrip",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -106,19 +106,19 @@
             "name" : "session",
             "type" : {
               "swiftStruct" : {
-                "_0" : "Person"
+                "_0" : "TestModule.Person"
               }
             }
           }
         ],
         "returnType" : {
           "swiftStruct" : {
-            "_0" : "Person"
+            "_0" : "TestModule.Person"
           }
         }
       },
       {
-        "abiName" : "bjs_roundtripContainer",
+        "abiName" : "bjs_TestModule_roundtripContainer",
         "effects" : {
           "isAsync" : false,
           "isStatic" : false,
@@ -131,14 +131,14 @@
             "name" : "container",
             "type" : {
               "swiftStruct" : {
-                "_0" : "Container"
+                "_0" : "TestModule.Container"
               }
             }
           }
         ],
         "returnType" : {
           "swiftStruct" : {
-            "_0" : "Container"
+            "_0" : "TestModule.Container"
           }
         }
       }
@@ -149,7 +149,7 @@
     "structs" : [
       {
         "constructor" : {
-          "abiName" : "bjs_DataPoint_init",
+          "abiName" : "bjs_TestModule_DataPoint_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -218,7 +218,7 @@
         },
         "methods" : [
           {
-            "abiName" : "bjs_DataPoint_static_origin",
+            "abiName" : "bjs_TestModule_DataPoint_static_origin",
             "effects" : {
               "isAsync" : false,
               "isStatic" : true,
@@ -230,12 +230,12 @@
             ],
             "returnType" : {
               "swiftStruct" : {
-                "_0" : "DataPoint"
+                "_0" : "TestModule.DataPoint"
               }
             },
             "staticContext" : {
               "structName" : {
-                "_0" : "DataPoint"
+                "_0" : "TestModule_DataPoint"
               }
             }
           }
@@ -311,7 +311,7 @@
             "name" : "dimensions",
             "staticContext" : {
               "structName" : {
-                "_0" : "DataPoint"
+                "_0" : "TestModule_DataPoint"
               }
             },
             "type" : {
@@ -324,7 +324,7 @@
             }
           }
         ],
-        "swiftCallName" : "DataPoint"
+        "swiftCallName" : "TestModule.DataPoint"
       },
       {
         "methods" : [
@@ -371,7 +371,7 @@
             }
           }
         ],
-        "swiftCallName" : "Address"
+        "swiftCallName" : "TestModule.Address"
       },
       {
         "methods" : [
@@ -408,7 +408,7 @@
             "name" : "address",
             "type" : {
               "swiftStruct" : {
-                "_0" : "Address"
+                "_0" : "TestModule.Address"
               }
             }
           },
@@ -428,7 +428,7 @@
             }
           }
         ],
-        "swiftCallName" : "Person"
+        "swiftCallName" : "TestModule.Person"
       },
       {
         "methods" : [
@@ -455,12 +455,12 @@
             "name" : "owner",
             "type" : {
               "swiftHeapObject" : {
-                "_0" : "Greeter"
+                "_0" : "TestModule.Greeter"
               }
             }
           }
         ],
-        "swiftCallName" : "Session"
+        "swiftCallName" : "TestModule.Session"
       },
       {
         "methods" : [
@@ -484,7 +484,7 @@
             "name" : "precision",
             "type" : {
               "rawValueEnum" : {
-                "_0" : "Precision",
+                "_0" : "TestModule.Precision",
                 "_1" : "Float"
               }
             }
@@ -497,7 +497,7 @@
               "nullable" : {
                 "_0" : {
                   "rawValueEnum" : {
-                    "_0" : "Precision",
+                    "_0" : "TestModule.Precision",
                     "_1" : "Float"
                   }
                 },
@@ -506,12 +506,12 @@
             }
           }
         ],
-        "swiftCallName" : "Measurement"
+        "swiftCallName" : "TestModule.Measurement"
       },
       {
         "methods" : [
           {
-            "abiName" : "bjs_ConfigStruct_static_update",
+            "abiName" : "bjs_TestModule_ConfigStruct_static_update",
             "effects" : {
               "isAsync" : false,
               "isStatic" : true,
@@ -536,7 +536,7 @@
             },
             "staticContext" : {
               "structName" : {
-                "_0" : "ConfigStruct"
+                "_0" : "TestModule_ConfigStruct"
               }
             }
           }
@@ -549,7 +549,7 @@
             "name" : "maxRetries",
             "staticContext" : {
               "structName" : {
-                "_0" : "ConfigStruct"
+                "_0" : "TestModule_ConfigStruct"
               }
             },
             "type" : {
@@ -567,7 +567,7 @@
             "name" : "defaultConfig",
             "staticContext" : {
               "structName" : {
-                "_0" : "ConfigStruct"
+                "_0" : "TestModule_ConfigStruct"
               }
             },
             "type" : {
@@ -582,7 +582,7 @@
             "name" : "timeout",
             "staticContext" : {
               "structName" : {
-                "_0" : "ConfigStruct"
+                "_0" : "TestModule_ConfigStruct"
               }
             },
             "type" : {
@@ -597,7 +597,7 @@
             "name" : "computedSetting",
             "staticContext" : {
               "structName" : {
-                "_0" : "ConfigStruct"
+                "_0" : "TestModule_ConfigStruct"
               }
             },
             "type" : {
@@ -607,7 +607,7 @@
             }
           }
         ],
-        "swiftCallName" : "ConfigStruct"
+        "swiftCallName" : "TestModule.ConfigStruct"
       },
       {
         "methods" : [
@@ -641,12 +641,12 @@
             }
           }
         ],
-        "swiftCallName" : "Container"
+        "swiftCallName" : "TestModule.Container"
       },
       {
         "methods" : [
           {
-            "abiName" : "bjs_Vector2D_magnitude",
+            "abiName" : "bjs_TestModule_Vector2D_magnitude",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -663,7 +663,7 @@
             }
           },
           {
-            "abiName" : "bjs_Vector2D_scaled",
+            "abiName" : "bjs_TestModule_Vector2D_scaled",
             "effects" : {
               "isAsync" : false,
               "isStatic" : false,
@@ -683,7 +683,7 @@
             ],
             "returnType" : {
               "swiftStruct" : {
-                "_0" : "Vector2D"
+                "_0" : "TestModule.Vector2D"
               }
             }
           }
@@ -711,7 +711,7 @@
             }
           }
         ],
-        "swiftCallName" : "Vector2D"
+        "swiftCallName" : "TestModule.Vector2D"
       }
     ]
   },

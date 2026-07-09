@@ -1,28 +1,28 @@
-@_expose(wasm, "bjs_roundTripOptionalClass")
-@_cdecl("bjs_roundTripOptionalClass")
-public func _bjs_roundTripOptionalClass(_ valueIsSome: Int32, _ valueValue: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_TestModule_roundTripOptionalClass")
+@_cdecl("bjs_TestModule_roundTripOptionalClass")
+public func _bjs_TestModule_roundTripOptionalClass(_ valueIsSome: Int32, _ valueValue: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = roundTripOptionalClass(value: Optional<Greeter>.bridgeJSLiftParameter(valueIsSome, valueValue))
+    let ret = roundTripOptionalClass(value: Optional<TestModule.Greeter>.bridgeJSLiftParameter(valueIsSome, valueValue))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_testOptionalPropertyRoundtrip")
-@_cdecl("bjs_testOptionalPropertyRoundtrip")
-public func _bjs_testOptionalPropertyRoundtrip(_ holderIsSome: Int32, _ holderValue: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_TestModule_testOptionalPropertyRoundtrip")
+@_cdecl("bjs_TestModule_testOptionalPropertyRoundtrip")
+public func _bjs_TestModule_testOptionalPropertyRoundtrip(_ holderIsSome: Int32, _ holderValue: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = testOptionalPropertyRoundtrip(_: Optional<OptionalPropertyHolder>.bridgeJSLiftParameter(holderIsSome, holderValue))
+    let ret = testOptionalPropertyRoundtrip(_: Optional<TestModule.OptionalPropertyHolder>.bridgeJSLiftParameter(holderIsSome, holderValue))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripExportedOptionalJSObject")
-@_cdecl("bjs_roundTripExportedOptionalJSObject")
-public func _bjs_roundTripExportedOptionalJSObject(_ valueIsSome: Int32, _ valueValue: Int32) -> Void {
+@_expose(wasm, "bjs_TestModule_roundTripExportedOptionalJSObject")
+@_cdecl("bjs_TestModule_roundTripExportedOptionalJSObject")
+public func _bjs_TestModule_roundTripExportedOptionalJSObject(_ valueIsSome: Int32, _ valueValue: Int32) -> Void {
     #if arch(wasm32)
     let ret = roundTripExportedOptionalJSObject(value: Optional<JSObject>.bridgeJSLiftParameter(valueIsSome, valueValue))
     return ret.bridgeJSLowerReturn()
@@ -31,9 +31,9 @@ public func _bjs_roundTripExportedOptionalJSObject(_ valueIsSome: Int32, _ value
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripExportedOptionalJSClass")
-@_cdecl("bjs_roundTripExportedOptionalJSClass")
-public func _bjs_roundTripExportedOptionalJSClass(_ valueIsSome: Int32, _ valueValue: Int32) -> Void {
+@_expose(wasm, "bjs_TestModule_roundTripExportedOptionalJSClass")
+@_cdecl("bjs_TestModule_roundTripExportedOptionalJSClass")
+public func _bjs_TestModule_roundTripExportedOptionalJSClass(_ valueIsSome: Int32, _ valueValue: Int32) -> Void {
     #if arch(wasm32)
     let ret = roundTripExportedOptionalJSClass(value: Optional<WithOptionalJSClass>.bridgeJSLiftParameter(valueIsSome, valueValue))
     return ret.bridgeJSLowerReturn()
@@ -42,9 +42,9 @@ public func _bjs_roundTripExportedOptionalJSClass(_ valueIsSome: Int32, _ valueV
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripString")
-@_cdecl("bjs_roundTripString")
-public func _bjs_roundTripString(_ nameIsSome: Int32, _ nameBytes: Int32, _ nameLength: Int32) -> Void {
+@_expose(wasm, "bjs_TestModule_roundTripString")
+@_cdecl("bjs_TestModule_roundTripString")
+public func _bjs_TestModule_roundTripString(_ nameIsSome: Int32, _ nameBytes: Int32, _ nameLength: Int32) -> Void {
     #if arch(wasm32)
     let ret = roundTripString(name: Optional<String>.bridgeJSLiftParameter(nameIsSome, nameBytes, nameLength))
     return ret.bridgeJSLowerReturn()
@@ -53,9 +53,9 @@ public func _bjs_roundTripString(_ nameIsSome: Int32, _ nameBytes: Int32, _ name
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripInt")
-@_cdecl("bjs_roundTripInt")
-public func _bjs_roundTripInt(_ valueIsSome: Int32, _ valueValue: Int32) -> Void {
+@_expose(wasm, "bjs_TestModule_roundTripInt")
+@_cdecl("bjs_TestModule_roundTripInt")
+public func _bjs_TestModule_roundTripInt(_ valueIsSome: Int32, _ valueValue: Int32) -> Void {
     #if arch(wasm32)
     let ret = roundTripInt(value: Optional<Int>.bridgeJSLiftParameter(valueIsSome, valueValue))
     return ret.bridgeJSLowerReturn()
@@ -64,9 +64,9 @@ public func _bjs_roundTripInt(_ valueIsSome: Int32, _ valueValue: Int32) -> Void
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripInt8")
-@_cdecl("bjs_roundTripInt8")
-public func _bjs_roundTripInt8(_ valueIsSome: Int32, _ valueValue: Int32) -> Void {
+@_expose(wasm, "bjs_TestModule_roundTripInt8")
+@_cdecl("bjs_TestModule_roundTripInt8")
+public func _bjs_TestModule_roundTripInt8(_ valueIsSome: Int32, _ valueValue: Int32) -> Void {
     #if arch(wasm32)
     let ret = roundTripInt8(value: Optional<Int8>.bridgeJSLiftParameter(valueIsSome, valueValue))
     return ret.bridgeJSLowerReturn()
@@ -75,9 +75,9 @@ public func _bjs_roundTripInt8(_ valueIsSome: Int32, _ valueValue: Int32) -> Voi
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripUInt8")
-@_cdecl("bjs_roundTripUInt8")
-public func _bjs_roundTripUInt8(_ valueIsSome: Int32, _ valueValue: Int32) -> Void {
+@_expose(wasm, "bjs_TestModule_roundTripUInt8")
+@_cdecl("bjs_TestModule_roundTripUInt8")
+public func _bjs_TestModule_roundTripUInt8(_ valueIsSome: Int32, _ valueValue: Int32) -> Void {
     #if arch(wasm32)
     let ret = roundTripUInt8(value: Optional<UInt8>.bridgeJSLiftParameter(valueIsSome, valueValue))
     return ret.bridgeJSLowerReturn()
@@ -86,9 +86,9 @@ public func _bjs_roundTripUInt8(_ valueIsSome: Int32, _ valueValue: Int32) -> Vo
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripInt16")
-@_cdecl("bjs_roundTripInt16")
-public func _bjs_roundTripInt16(_ valueIsSome: Int32, _ valueValue: Int32) -> Void {
+@_expose(wasm, "bjs_TestModule_roundTripInt16")
+@_cdecl("bjs_TestModule_roundTripInt16")
+public func _bjs_TestModule_roundTripInt16(_ valueIsSome: Int32, _ valueValue: Int32) -> Void {
     #if arch(wasm32)
     let ret = roundTripInt16(value: Optional<Int16>.bridgeJSLiftParameter(valueIsSome, valueValue))
     return ret.bridgeJSLowerReturn()
@@ -97,9 +97,9 @@ public func _bjs_roundTripInt16(_ valueIsSome: Int32, _ valueValue: Int32) -> Vo
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripUInt16")
-@_cdecl("bjs_roundTripUInt16")
-public func _bjs_roundTripUInt16(_ valueIsSome: Int32, _ valueValue: Int32) -> Void {
+@_expose(wasm, "bjs_TestModule_roundTripUInt16")
+@_cdecl("bjs_TestModule_roundTripUInt16")
+public func _bjs_TestModule_roundTripUInt16(_ valueIsSome: Int32, _ valueValue: Int32) -> Void {
     #if arch(wasm32)
     let ret = roundTripUInt16(value: Optional<UInt16>.bridgeJSLiftParameter(valueIsSome, valueValue))
     return ret.bridgeJSLowerReturn()
@@ -108,9 +108,9 @@ public func _bjs_roundTripUInt16(_ valueIsSome: Int32, _ valueValue: Int32) -> V
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripInt32")
-@_cdecl("bjs_roundTripInt32")
-public func _bjs_roundTripInt32(_ valueIsSome: Int32, _ valueValue: Int32) -> Void {
+@_expose(wasm, "bjs_TestModule_roundTripInt32")
+@_cdecl("bjs_TestModule_roundTripInt32")
+public func _bjs_TestModule_roundTripInt32(_ valueIsSome: Int32, _ valueValue: Int32) -> Void {
     #if arch(wasm32)
     let ret = roundTripInt32(value: Optional<Int32>.bridgeJSLiftParameter(valueIsSome, valueValue))
     return ret.bridgeJSLowerReturn()
@@ -119,9 +119,9 @@ public func _bjs_roundTripInt32(_ valueIsSome: Int32, _ valueValue: Int32) -> Vo
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripUInt32")
-@_cdecl("bjs_roundTripUInt32")
-public func _bjs_roundTripUInt32(_ valueIsSome: Int32, _ valueValue: Int32) -> Void {
+@_expose(wasm, "bjs_TestModule_roundTripUInt32")
+@_cdecl("bjs_TestModule_roundTripUInt32")
+public func _bjs_TestModule_roundTripUInt32(_ valueIsSome: Int32, _ valueValue: Int32) -> Void {
     #if arch(wasm32)
     let ret = roundTripUInt32(value: Optional<UInt32>.bridgeJSLiftParameter(valueIsSome, valueValue))
     return ret.bridgeJSLowerReturn()
@@ -130,9 +130,9 @@ public func _bjs_roundTripUInt32(_ valueIsSome: Int32, _ valueValue: Int32) -> V
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripBool")
-@_cdecl("bjs_roundTripBool")
-public func _bjs_roundTripBool(_ flagIsSome: Int32, _ flagValue: Int32) -> Void {
+@_expose(wasm, "bjs_TestModule_roundTripBool")
+@_cdecl("bjs_TestModule_roundTripBool")
+public func _bjs_TestModule_roundTripBool(_ flagIsSome: Int32, _ flagValue: Int32) -> Void {
     #if arch(wasm32)
     let ret = roundTripBool(flag: Optional<Bool>.bridgeJSLiftParameter(flagIsSome, flagValue))
     return ret.bridgeJSLowerReturn()
@@ -141,9 +141,9 @@ public func _bjs_roundTripBool(_ flagIsSome: Int32, _ flagValue: Int32) -> Void 
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripFloat")
-@_cdecl("bjs_roundTripFloat")
-public func _bjs_roundTripFloat(_ numberIsSome: Int32, _ numberValue: Float32) -> Void {
+@_expose(wasm, "bjs_TestModule_roundTripFloat")
+@_cdecl("bjs_TestModule_roundTripFloat")
+public func _bjs_TestModule_roundTripFloat(_ numberIsSome: Int32, _ numberValue: Float32) -> Void {
     #if arch(wasm32)
     let ret = roundTripFloat(number: Optional<Float>.bridgeJSLiftParameter(numberIsSome, numberValue))
     return ret.bridgeJSLowerReturn()
@@ -152,9 +152,9 @@ public func _bjs_roundTripFloat(_ numberIsSome: Int32, _ numberValue: Float32) -
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripDouble")
-@_cdecl("bjs_roundTripDouble")
-public func _bjs_roundTripDouble(_ precisionIsSome: Int32, _ precisionValue: Float64) -> Void {
+@_expose(wasm, "bjs_TestModule_roundTripDouble")
+@_cdecl("bjs_TestModule_roundTripDouble")
+public func _bjs_TestModule_roundTripDouble(_ precisionIsSome: Int32, _ precisionValue: Float64) -> Void {
     #if arch(wasm32)
     let ret = roundTripDouble(precision: Optional<Double>.bridgeJSLiftParameter(precisionIsSome, precisionValue))
     return ret.bridgeJSLowerReturn()
@@ -163,9 +163,9 @@ public func _bjs_roundTripDouble(_ precisionIsSome: Int32, _ precisionValue: Flo
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripSyntax")
-@_cdecl("bjs_roundTripSyntax")
-public func _bjs_roundTripSyntax(_ nameIsSome: Int32, _ nameBytes: Int32, _ nameLength: Int32) -> Void {
+@_expose(wasm, "bjs_TestModule_roundTripSyntax")
+@_cdecl("bjs_TestModule_roundTripSyntax")
+public func _bjs_TestModule_roundTripSyntax(_ nameIsSome: Int32, _ nameBytes: Int32, _ nameLength: Int32) -> Void {
     #if arch(wasm32)
     let ret = roundTripSyntax(name: Optional<String>.bridgeJSLiftParameter(nameIsSome, nameBytes, nameLength))
     return ret.bridgeJSLowerReturn()
@@ -174,9 +174,9 @@ public func _bjs_roundTripSyntax(_ nameIsSome: Int32, _ nameBytes: Int32, _ name
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripMixSyntax")
-@_cdecl("bjs_roundTripMixSyntax")
-public func _bjs_roundTripMixSyntax(_ nameIsSome: Int32, _ nameBytes: Int32, _ nameLength: Int32) -> Void {
+@_expose(wasm, "bjs_TestModule_roundTripMixSyntax")
+@_cdecl("bjs_TestModule_roundTripMixSyntax")
+public func _bjs_TestModule_roundTripMixSyntax(_ nameIsSome: Int32, _ nameBytes: Int32, _ nameLength: Int32) -> Void {
     #if arch(wasm32)
     let ret = roundTripMixSyntax(name: Optional<String>.bridgeJSLiftParameter(nameIsSome, nameBytes, nameLength))
     return ret.bridgeJSLowerReturn()
@@ -185,9 +185,9 @@ public func _bjs_roundTripMixSyntax(_ nameIsSome: Int32, _ nameBytes: Int32, _ n
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripSwiftSyntax")
-@_cdecl("bjs_roundTripSwiftSyntax")
-public func _bjs_roundTripSwiftSyntax(_ nameIsSome: Int32, _ nameBytes: Int32, _ nameLength: Int32) -> Void {
+@_expose(wasm, "bjs_TestModule_roundTripSwiftSyntax")
+@_cdecl("bjs_TestModule_roundTripSwiftSyntax")
+public func _bjs_TestModule_roundTripSwiftSyntax(_ nameIsSome: Int32, _ nameBytes: Int32, _ nameLength: Int32) -> Void {
     #if arch(wasm32)
     let ret = roundTripSwiftSyntax(name: Optional<String>.bridgeJSLiftParameter(nameIsSome, nameBytes, nameLength))
     return ret.bridgeJSLowerReturn()
@@ -196,9 +196,9 @@ public func _bjs_roundTripSwiftSyntax(_ nameIsSome: Int32, _ nameBytes: Int32, _
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripMixedSwiftSyntax")
-@_cdecl("bjs_roundTripMixedSwiftSyntax")
-public func _bjs_roundTripMixedSwiftSyntax(_ nameIsSome: Int32, _ nameBytes: Int32, _ nameLength: Int32) -> Void {
+@_expose(wasm, "bjs_TestModule_roundTripMixedSwiftSyntax")
+@_cdecl("bjs_TestModule_roundTripMixedSwiftSyntax")
+public func _bjs_TestModule_roundTripMixedSwiftSyntax(_ nameIsSome: Int32, _ nameBytes: Int32, _ nameLength: Int32) -> Void {
     #if arch(wasm32)
     let ret = roundTripMixedSwiftSyntax(name: Optional<String>.bridgeJSLiftParameter(nameIsSome, nameBytes, nameLength))
     return ret.bridgeJSLowerReturn()
@@ -207,9 +207,9 @@ public func _bjs_roundTripMixedSwiftSyntax(_ nameIsSome: Int32, _ nameBytes: Int
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripWithSpaces")
-@_cdecl("bjs_roundTripWithSpaces")
-public func _bjs_roundTripWithSpaces(_ valueIsSome: Int32, _ valueValue: Float64) -> Void {
+@_expose(wasm, "bjs_TestModule_roundTripWithSpaces")
+@_cdecl("bjs_TestModule_roundTripWithSpaces")
+public func _bjs_TestModule_roundTripWithSpaces(_ valueIsSome: Int32, _ valueValue: Float64) -> Void {
     #if arch(wasm32)
     let ret = roundTripWithSpaces(value: Optional<Double>.bridgeJSLiftParameter(valueIsSome, valueValue))
     return ret.bridgeJSLowerReturn()
@@ -218,9 +218,9 @@ public func _bjs_roundTripWithSpaces(_ valueIsSome: Int32, _ valueValue: Float64
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripAlias")
-@_cdecl("bjs_roundTripAlias")
-public func _bjs_roundTripAlias(_ ageIsSome: Int32, _ ageValue: Int32) -> Void {
+@_expose(wasm, "bjs_TestModule_roundTripAlias")
+@_cdecl("bjs_TestModule_roundTripAlias")
+public func _bjs_TestModule_roundTripAlias(_ ageIsSome: Int32, _ ageValue: Int32) -> Void {
     #if arch(wasm32)
     let ret = roundTripAlias(age: Optional<Int>.bridgeJSLiftParameter(ageIsSome, ageValue))
     return ret.bridgeJSLowerReturn()
@@ -229,9 +229,9 @@ public func _bjs_roundTripAlias(_ ageIsSome: Int32, _ ageValue: Int32) -> Void {
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripOptionalAlias")
-@_cdecl("bjs_roundTripOptionalAlias")
-public func _bjs_roundTripOptionalAlias(_ nameIsSome: Int32, _ nameBytes: Int32, _ nameLength: Int32) -> Void {
+@_expose(wasm, "bjs_TestModule_roundTripOptionalAlias")
+@_cdecl("bjs_TestModule_roundTripOptionalAlias")
+public func _bjs_TestModule_roundTripOptionalAlias(_ nameIsSome: Int32, _ nameBytes: Int32, _ nameLength: Int32) -> Void {
     #if arch(wasm32)
     let ret = roundTripOptionalAlias(name: Optional<String>.bridgeJSLiftParameter(nameIsSome, nameBytes, nameLength))
     return ret.bridgeJSLowerReturn()
@@ -240,9 +240,9 @@ public func _bjs_roundTripOptionalAlias(_ nameIsSome: Int32, _ nameBytes: Int32,
     #endif
 }
 
-@_expose(wasm, "bjs_testMixedOptionals")
-@_cdecl("bjs_testMixedOptionals")
-public func _bjs_testMixedOptionals(_ firstNameIsSome: Int32, _ firstNameBytes: Int32, _ firstNameLength: Int32, _ lastNameIsSome: Int32, _ lastNameBytes: Int32, _ lastNameLength: Int32, _ ageIsSome: Int32, _ ageValue: Int32, _ active: Int32) -> Void {
+@_expose(wasm, "bjs_TestModule_testMixedOptionals")
+@_cdecl("bjs_TestModule_testMixedOptionals")
+public func _bjs_TestModule_testMixedOptionals(_ firstNameIsSome: Int32, _ firstNameBytes: Int32, _ firstNameLength: Int32, _ lastNameIsSome: Int32, _ lastNameBytes: Int32, _ lastNameLength: Int32, _ ageIsSome: Int32, _ ageValue: Int32, _ active: Int32) -> Void {
     #if arch(wasm32)
     let ret = testMixedOptionals(firstName: Optional<String>.bridgeJSLiftParameter(firstNameIsSome, firstNameBytes, firstNameLength), lastName: Optional<String>.bridgeJSLiftParameter(lastNameIsSome, lastNameBytes, lastNameLength), age: Optional<Int>.bridgeJSLiftParameter(ageIsSome, ageValue), active: Bool.bridgeJSLiftParameter(active))
     return ret.bridgeJSLowerReturn()
@@ -251,193 +251,193 @@ public func _bjs_testMixedOptionals(_ firstNameIsSome: Int32, _ firstNameBytes: 
     #endif
 }
 
-@_expose(wasm, "bjs_Greeter_init")
-@_cdecl("bjs_Greeter_init")
-public func _bjs_Greeter_init(_ nameIsSome: Int32, _ nameBytes: Int32, _ nameLength: Int32) -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_TestModule_Greeter_init")
+@_cdecl("bjs_TestModule_Greeter_init")
+public func _bjs_TestModule_Greeter_init(_ nameIsSome: Int32, _ nameBytes: Int32, _ nameLength: Int32) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = Greeter(name: Optional<String>.bridgeJSLiftParameter(nameIsSome, nameBytes, nameLength))
+    let ret = TestModule.Greeter(name: Optional<String>.bridgeJSLiftParameter(nameIsSome, nameBytes, nameLength))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Greeter_greet")
-@_cdecl("bjs_Greeter_greet")
-public func _bjs_Greeter_greet(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_TestModule_Greeter_greet")
+@_cdecl("bjs_TestModule_Greeter_greet")
+public func _bjs_TestModule_Greeter_greet(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = Greeter.bridgeJSLiftParameter(_self).greet()
+    let ret = TestModule.Greeter.bridgeJSLiftParameter(_self).greet()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Greeter_changeName")
-@_cdecl("bjs_Greeter_changeName")
-public func _bjs_Greeter_changeName(_ _self: UnsafeMutableRawPointer, _ nameIsSome: Int32, _ nameBytes: Int32, _ nameLength: Int32) -> Void {
+@_expose(wasm, "bjs_TestModule_Greeter_changeName")
+@_cdecl("bjs_TestModule_Greeter_changeName")
+public func _bjs_TestModule_Greeter_changeName(_ _self: UnsafeMutableRawPointer, _ nameIsSome: Int32, _ nameBytes: Int32, _ nameLength: Int32) -> Void {
     #if arch(wasm32)
-    Greeter.bridgeJSLiftParameter(_self).changeName(name: Optional<String>.bridgeJSLiftParameter(nameIsSome, nameBytes, nameLength))
+    TestModule.Greeter.bridgeJSLiftParameter(_self).changeName(name: Optional<String>.bridgeJSLiftParameter(nameIsSome, nameBytes, nameLength))
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Greeter_name_get")
-@_cdecl("bjs_Greeter_name_get")
-public func _bjs_Greeter_name_get(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_TestModule_Greeter_name_get")
+@_cdecl("bjs_TestModule_Greeter_name_get")
+public func _bjs_TestModule_Greeter_name_get(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = Greeter.bridgeJSLiftParameter(_self).name
+    let ret = TestModule.Greeter.bridgeJSLiftParameter(_self).name
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Greeter_name_set")
-@_cdecl("bjs_Greeter_name_set")
-public func _bjs_Greeter_name_set(_ _self: UnsafeMutableRawPointer, _ valueIsSome: Int32, _ valueBytes: Int32, _ valueLength: Int32) -> Void {
+@_expose(wasm, "bjs_TestModule_Greeter_name_set")
+@_cdecl("bjs_TestModule_Greeter_name_set")
+public func _bjs_TestModule_Greeter_name_set(_ _self: UnsafeMutableRawPointer, _ valueIsSome: Int32, _ valueBytes: Int32, _ valueLength: Int32) -> Void {
     #if arch(wasm32)
-    Greeter.bridgeJSLiftParameter(_self).name = Optional<String>.bridgeJSLiftParameter(valueIsSome, valueBytes, valueLength)
+    TestModule.Greeter.bridgeJSLiftParameter(_self).name = Optional<String>.bridgeJSLiftParameter(valueIsSome, valueBytes, valueLength)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_Greeter_deinit")
-@_cdecl("bjs_Greeter_deinit")
-public func _bjs_Greeter_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_TestModule_Greeter_deinit")
+@_cdecl("bjs_TestModule_Greeter_deinit")
+public func _bjs_TestModule_Greeter_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    Unmanaged<Greeter>.fromOpaque(pointer).release()
+    Unmanaged<TestModule.Greeter>.fromOpaque(pointer).release()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension Greeter: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
+extension TestModule.Greeter: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
     var jsValue: JSValue {
-        return .object(JSObject(id: UInt32(bitPattern: _bjs_Greeter_wrap(Unmanaged.passRetained(self).toOpaque()))))
+        return .object(JSObject(id: UInt32(bitPattern: _bjs_TestModule_Greeter_wrap(Unmanaged.passRetained(self).toOpaque()))))
     }
     consuming func bridgeJSLowerAsProtocolReturn() -> Int32 {
-        _bjs_Greeter_wrap(Unmanaged.passRetained(self).toOpaque())
+        _bjs_TestModule_Greeter_wrap(Unmanaged.passRetained(self).toOpaque())
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "TestModule", name: "bjs_Greeter_wrap")
-fileprivate func _bjs_Greeter_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
+@_extern(wasm, module: "TestModule", name: "bjs_TestModule_Greeter_wrap")
+fileprivate func _bjs_TestModule_Greeter_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
 #else
-fileprivate func _bjs_Greeter_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+fileprivate func _bjs_TestModule_Greeter_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_Greeter_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
-    return _bjs_Greeter_wrap_extern(pointer)
+@inline(never) fileprivate func _bjs_TestModule_Greeter_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+    return _bjs_TestModule_Greeter_wrap_extern(pointer)
 }
 
-@_expose(wasm, "bjs_OptionalPropertyHolder_init")
-@_cdecl("bjs_OptionalPropertyHolder_init")
-public func _bjs_OptionalPropertyHolder_init() -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_TestModule_OptionalPropertyHolder_init")
+@_cdecl("bjs_TestModule_OptionalPropertyHolder_init")
+public func _bjs_TestModule_OptionalPropertyHolder_init() -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = OptionalPropertyHolder()
+    let ret = TestModule.OptionalPropertyHolder()
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_OptionalPropertyHolder_optionalName_get")
-@_cdecl("bjs_OptionalPropertyHolder_optionalName_get")
-public func _bjs_OptionalPropertyHolder_optionalName_get(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_TestModule_OptionalPropertyHolder_optionalName_get")
+@_cdecl("bjs_TestModule_OptionalPropertyHolder_optionalName_get")
+public func _bjs_TestModule_OptionalPropertyHolder_optionalName_get(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = OptionalPropertyHolder.bridgeJSLiftParameter(_self).optionalName
+    let ret = TestModule.OptionalPropertyHolder.bridgeJSLiftParameter(_self).optionalName
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_OptionalPropertyHolder_optionalName_set")
-@_cdecl("bjs_OptionalPropertyHolder_optionalName_set")
-public func _bjs_OptionalPropertyHolder_optionalName_set(_ _self: UnsafeMutableRawPointer, _ valueIsSome: Int32, _ valueBytes: Int32, _ valueLength: Int32) -> Void {
+@_expose(wasm, "bjs_TestModule_OptionalPropertyHolder_optionalName_set")
+@_cdecl("bjs_TestModule_OptionalPropertyHolder_optionalName_set")
+public func _bjs_TestModule_OptionalPropertyHolder_optionalName_set(_ _self: UnsafeMutableRawPointer, _ valueIsSome: Int32, _ valueBytes: Int32, _ valueLength: Int32) -> Void {
     #if arch(wasm32)
-    OptionalPropertyHolder.bridgeJSLiftParameter(_self).optionalName = Optional<String>.bridgeJSLiftParameter(valueIsSome, valueBytes, valueLength)
+    TestModule.OptionalPropertyHolder.bridgeJSLiftParameter(_self).optionalName = Optional<String>.bridgeJSLiftParameter(valueIsSome, valueBytes, valueLength)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_OptionalPropertyHolder_optionalAge_get")
-@_cdecl("bjs_OptionalPropertyHolder_optionalAge_get")
-public func _bjs_OptionalPropertyHolder_optionalAge_get(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_TestModule_OptionalPropertyHolder_optionalAge_get")
+@_cdecl("bjs_TestModule_OptionalPropertyHolder_optionalAge_get")
+public func _bjs_TestModule_OptionalPropertyHolder_optionalAge_get(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = OptionalPropertyHolder.bridgeJSLiftParameter(_self).optionalAge
+    let ret = TestModule.OptionalPropertyHolder.bridgeJSLiftParameter(_self).optionalAge
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_OptionalPropertyHolder_optionalAge_set")
-@_cdecl("bjs_OptionalPropertyHolder_optionalAge_set")
-public func _bjs_OptionalPropertyHolder_optionalAge_set(_ _self: UnsafeMutableRawPointer, _ valueIsSome: Int32, _ valueValue: Int32) -> Void {
+@_expose(wasm, "bjs_TestModule_OptionalPropertyHolder_optionalAge_set")
+@_cdecl("bjs_TestModule_OptionalPropertyHolder_optionalAge_set")
+public func _bjs_TestModule_OptionalPropertyHolder_optionalAge_set(_ _self: UnsafeMutableRawPointer, _ valueIsSome: Int32, _ valueValue: Int32) -> Void {
     #if arch(wasm32)
-    OptionalPropertyHolder.bridgeJSLiftParameter(_self).optionalAge = Optional<Int>.bridgeJSLiftParameter(valueIsSome, valueValue)
+    TestModule.OptionalPropertyHolder.bridgeJSLiftParameter(_self).optionalAge = Optional<Int>.bridgeJSLiftParameter(valueIsSome, valueValue)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_OptionalPropertyHolder_optionalGreeter_get")
-@_cdecl("bjs_OptionalPropertyHolder_optionalGreeter_get")
-public func _bjs_OptionalPropertyHolder_optionalGreeter_get(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_TestModule_OptionalPropertyHolder_optionalGreeter_get")
+@_cdecl("bjs_TestModule_OptionalPropertyHolder_optionalGreeter_get")
+public func _bjs_TestModule_OptionalPropertyHolder_optionalGreeter_get(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = OptionalPropertyHolder.bridgeJSLiftParameter(_self).optionalGreeter
+    let ret = TestModule.OptionalPropertyHolder.bridgeJSLiftParameter(_self).optionalGreeter
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_OptionalPropertyHolder_optionalGreeter_set")
-@_cdecl("bjs_OptionalPropertyHolder_optionalGreeter_set")
-public func _bjs_OptionalPropertyHolder_optionalGreeter_set(_ _self: UnsafeMutableRawPointer, _ valueIsSome: Int32, _ valueValue: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_TestModule_OptionalPropertyHolder_optionalGreeter_set")
+@_cdecl("bjs_TestModule_OptionalPropertyHolder_optionalGreeter_set")
+public func _bjs_TestModule_OptionalPropertyHolder_optionalGreeter_set(_ _self: UnsafeMutableRawPointer, _ valueIsSome: Int32, _ valueValue: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    OptionalPropertyHolder.bridgeJSLiftParameter(_self).optionalGreeter = Optional<Greeter>.bridgeJSLiftParameter(valueIsSome, valueValue)
+    TestModule.OptionalPropertyHolder.bridgeJSLiftParameter(_self).optionalGreeter = Optional<TestModule.Greeter>.bridgeJSLiftParameter(valueIsSome, valueValue)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_OptionalPropertyHolder_deinit")
-@_cdecl("bjs_OptionalPropertyHolder_deinit")
-public func _bjs_OptionalPropertyHolder_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_TestModule_OptionalPropertyHolder_deinit")
+@_cdecl("bjs_TestModule_OptionalPropertyHolder_deinit")
+public func _bjs_TestModule_OptionalPropertyHolder_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    Unmanaged<OptionalPropertyHolder>.fromOpaque(pointer).release()
+    Unmanaged<TestModule.OptionalPropertyHolder>.fromOpaque(pointer).release()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension OptionalPropertyHolder: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
+extension TestModule.OptionalPropertyHolder: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
     var jsValue: JSValue {
-        return .object(JSObject(id: UInt32(bitPattern: _bjs_OptionalPropertyHolder_wrap(Unmanaged.passRetained(self).toOpaque()))))
+        return .object(JSObject(id: UInt32(bitPattern: _bjs_TestModule_OptionalPropertyHolder_wrap(Unmanaged.passRetained(self).toOpaque()))))
     }
     consuming func bridgeJSLowerAsProtocolReturn() -> Int32 {
-        _bjs_OptionalPropertyHolder_wrap(Unmanaged.passRetained(self).toOpaque())
+        _bjs_TestModule_OptionalPropertyHolder_wrap(Unmanaged.passRetained(self).toOpaque())
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "TestModule", name: "bjs_OptionalPropertyHolder_wrap")
-fileprivate func _bjs_OptionalPropertyHolder_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
+@_extern(wasm, module: "TestModule", name: "bjs_TestModule_OptionalPropertyHolder_wrap")
+fileprivate func _bjs_TestModule_OptionalPropertyHolder_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
 #else
-fileprivate func _bjs_OptionalPropertyHolder_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+fileprivate func _bjs_TestModule_OptionalPropertyHolder_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_OptionalPropertyHolder_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
-    return _bjs_OptionalPropertyHolder_wrap_extern(pointer)
+@inline(never) fileprivate func _bjs_TestModule_OptionalPropertyHolder_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+    return _bjs_TestModule_OptionalPropertyHolder_wrap_extern(pointer)
 }
 
 #if arch(wasm32)

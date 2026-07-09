@@ -212,7 +212,7 @@ export async function createInstantiator(options, swift) {
             if (!importObject["TestModule"]) {
                 importObject["TestModule"] = {};
             }
-            importObject["TestModule"]["bjs_PropertyClass_wrap"] = function(pointer) {
+            importObject["TestModule"]["bjs_TestModule_PropertyClass_wrap"] = function(pointer) {
                 const obj = _exports['PropertyClass'].__construct(pointer);
                 return swift.memory.retain(obj);
             };
@@ -284,37 +284,37 @@ export async function createInstantiator(options, swift) {
             }
             class PropertyClass extends SwiftHeapObject {
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_PropertyClass_deinit, PropertyClass.prototype, null);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_TestModule_PropertyClass_deinit, PropertyClass.prototype, null);
                 }
 
                 constructor() {
-                    const ret = instance.exports.bjs_PropertyClass_init();
+                    const ret = instance.exports.bjs_TestModule_PropertyClass_init();
                     return PropertyClass.__construct(ret);
                 }
                 static get staticConstant() {
-                    instance.exports.bjs_PropertyClass_static_staticConstant_get();
+                    instance.exports.bjs_TestModule_PropertyClass_static_staticConstant_get();
                     const ret = tmpRetString;
                     tmpRetString = undefined;
                     return ret;
                 }
                 static get staticVariable() {
-                    const ret = instance.exports.bjs_PropertyClass_static_staticVariable_get();
+                    const ret = instance.exports.bjs_TestModule_PropertyClass_static_staticVariable_get();
                     return ret;
                 }
                 static set staticVariable(value) {
-                    instance.exports.bjs_PropertyClass_static_staticVariable_set(value);
+                    instance.exports.bjs_TestModule_PropertyClass_static_staticVariable_set(value);
                 }
                 static get jsObjectProperty() {
-                    const ret = instance.exports.bjs_PropertyClass_static_jsObjectProperty_get();
+                    const ret = instance.exports.bjs_TestModule_PropertyClass_static_jsObjectProperty_get();
                     const ret1 = swift.memory.getObject(ret);
                     swift.memory.release(ret);
                     return ret1;
                 }
                 static set jsObjectProperty(value) {
-                    instance.exports.bjs_PropertyClass_static_jsObjectProperty_set(swift.memory.retain(value));
+                    instance.exports.bjs_TestModule_PropertyClass_static_jsObjectProperty_set(swift.memory.retain(value));
                 }
                 static get classVariable() {
-                    instance.exports.bjs_PropertyClass_static_classVariable_get();
+                    instance.exports.bjs_TestModule_PropertyClass_static_classVariable_get();
                     const ret = tmpRetString;
                     tmpRetString = undefined;
                     return ret;
@@ -322,10 +322,10 @@ export async function createInstantiator(options, swift) {
                 static set classVariable(value) {
                     const valueBytes = textEncoder.encode(value);
                     const valueId = swift.memory.retain(valueBytes);
-                    instance.exports.bjs_PropertyClass_static_classVariable_set(valueId, valueBytes.length);
+                    instance.exports.bjs_TestModule_PropertyClass_static_classVariable_set(valueId, valueBytes.length);
                 }
                 static get computedProperty() {
-                    instance.exports.bjs_PropertyClass_static_computedProperty_get();
+                    instance.exports.bjs_TestModule_PropertyClass_static_computedProperty_get();
                     const ret = tmpRetString;
                     tmpRetString = undefined;
                     return ret;
@@ -333,14 +333,14 @@ export async function createInstantiator(options, swift) {
                 static set computedProperty(value) {
                     const valueBytes = textEncoder.encode(value);
                     const valueId = swift.memory.retain(valueBytes);
-                    instance.exports.bjs_PropertyClass_static_computedProperty_set(valueId, valueBytes.length);
+                    instance.exports.bjs_TestModule_PropertyClass_static_computedProperty_set(valueId, valueBytes.length);
                 }
                 static get readOnlyComputed() {
-                    const ret = instance.exports.bjs_PropertyClass_static_readOnlyComputed_get();
+                    const ret = instance.exports.bjs_TestModule_PropertyClass_static_readOnlyComputed_get();
                     return ret;
                 }
                 static get optionalProperty() {
-                    instance.exports.bjs_PropertyClass_static_optionalProperty_get();
+                    instance.exports.bjs_TestModule_PropertyClass_static_optionalProperty_get();
                     const optResult = tmpRetString;
                     tmpRetString = undefined;
                     return optResult;
@@ -357,7 +357,7 @@ export async function createInstantiator(options, swift) {
                         result = 0;
                         result1 = 0;
                     }
-                    instance.exports.bjs_PropertyClass_static_optionalProperty_set(+isSome, result, result1);
+                    instance.exports.bjs_TestModule_PropertyClass_static_optionalProperty_set(+isSome, result, result1);
                 }
             }
             if (typeof globalThis.PropertyNamespace === 'undefined') {
@@ -370,7 +370,7 @@ export async function createInstantiator(options, swift) {
                 PropertyEnum: {
                     ...PropertyEnumValues,
                     get enumProperty() {
-                        instance.exports.bjs_PropertyEnum_static_enumProperty_get();
+                        instance.exports.bjs_TestModule_PropertyEnum_static_enumProperty_get();
                         const ret = tmpRetString;
                         tmpRetString = undefined;
                         return ret;
@@ -378,14 +378,14 @@ export async function createInstantiator(options, swift) {
                     set enumProperty(value) {
                         const valueBytes = textEncoder.encode(value);
                         const valueId = swift.memory.retain(valueBytes);
-                        instance.exports.bjs_PropertyEnum_static_enumProperty_set(valueId, valueBytes.length);
+                        instance.exports.bjs_TestModule_PropertyEnum_static_enumProperty_set(valueId, valueBytes.length);
                     },
                     get enumConstant() {
-                        const ret = instance.exports.bjs_PropertyEnum_static_enumConstant_get();
+                        const ret = instance.exports.bjs_TestModule_PropertyEnum_static_enumConstant_get();
                         return ret;
                     },
                     get computedEnum() {
-                        instance.exports.bjs_PropertyEnum_static_computedEnum_get();
+                        instance.exports.bjs_TestModule_PropertyEnum_static_computedEnum_get();
                         const ret = tmpRetString;
                         tmpRetString = undefined;
                         return ret;
@@ -393,13 +393,13 @@ export async function createInstantiator(options, swift) {
                     set computedEnum(value) {
                         const valueBytes = textEncoder.encode(value);
                         const valueId = swift.memory.retain(valueBytes);
-                        instance.exports.bjs_PropertyEnum_static_computedEnum_set(valueId, valueBytes.length);
+                        instance.exports.bjs_TestModule_PropertyEnum_static_computedEnum_set(valueId, valueBytes.length);
                     }
                 },
                 PropertyClass,
                 PropertyNamespace: {
                     get namespaceProperty() {
-                        instance.exports.bjs_PropertyNamespace_static_namespaceProperty_get();
+                        instance.exports.bjs_TestModule_PropertyNamespace_static_namespaceProperty_get();
                         const ret = tmpRetString;
                         tmpRetString = undefined;
                         return ret;
@@ -407,34 +407,34 @@ export async function createInstantiator(options, swift) {
                     set namespaceProperty(value) {
                         const valueBytes = textEncoder.encode(value);
                         const valueId = swift.memory.retain(valueBytes);
-                        instance.exports.bjs_PropertyNamespace_static_namespaceProperty_set(valueId, valueBytes.length);
+                        instance.exports.bjs_TestModule_PropertyNamespace_static_namespaceProperty_set(valueId, valueBytes.length);
                     },
                     get namespaceConstant() {
-                        instance.exports.bjs_PropertyNamespace_static_namespaceConstant_get();
+                        instance.exports.bjs_TestModule_PropertyNamespace_static_namespaceConstant_get();
                         const ret = tmpRetString;
                         tmpRetString = undefined;
                         return ret;
                     },
                     Nested: {
                         get nestedProperty() {
-                            const ret = instance.exports.bjs_PropertyNamespace_Nested_static_nestedProperty_get();
+                            const ret = instance.exports.bjs_TestModule_PropertyNamespace_Nested_static_nestedProperty_get();
                             return ret;
                         },
                         set nestedProperty(value) {
-                            instance.exports.bjs_PropertyNamespace_Nested_static_nestedProperty_set(value);
+                            instance.exports.bjs_TestModule_PropertyNamespace_Nested_static_nestedProperty_set(value);
                         },
                         get nestedConstant() {
-                            instance.exports.bjs_PropertyNamespace_Nested_static_nestedConstant_get();
+                            instance.exports.bjs_TestModule_PropertyNamespace_Nested_static_nestedConstant_get();
                             const ret = tmpRetString;
                             tmpRetString = undefined;
                             return ret;
                         },
                         get nestedDouble() {
-                            const ret = instance.exports.bjs_PropertyNamespace_Nested_static_nestedDouble_get();
+                            const ret = instance.exports.bjs_TestModule_PropertyNamespace_Nested_static_nestedDouble_get();
                             return ret;
                         },
                         set nestedDouble(value) {
-                            instance.exports.bjs_PropertyNamespace_Nested_static_nestedDouble_set(value);
+                            instance.exports.bjs_TestModule_PropertyNamespace_Nested_static_nestedDouble_set(value);
                         },
                     },
                 },

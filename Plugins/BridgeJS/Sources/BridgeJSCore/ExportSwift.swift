@@ -789,7 +789,7 @@ public class ExportSwift {
                 try renderSingleExportedConstructor(
                     constructor: constructor,
                     callName: klass.swiftCallName,
-                    returnType: .swiftHeapObject(klass.name)
+                    returnType: .swiftHeapObject(klass.swiftCallName)
                 )
             )
         }
@@ -1614,7 +1614,11 @@ extension BridgeType {
         case .jsObject(let name?): return name
         case .swiftHeapObject(let name): return name
         case .unsafePointer(let ptr): return ptr.swiftType
-        case .swiftProtocol(let name): return "Any\(name)"
+        case .swiftProtocol(let name):
+            // The `Any<Proto>` wrapper struct is declared with the bare protocol name in
+            // the defining module's glue, so strip any module/namespace qualification.
+            let bareName = name.split(separator: ".").last.map(String.init) ?? name
+            return "Any\(bareName)"
         case .void: return "Void"
         case .nullable(let wrappedType, let kind):
             return kind == .null ? "Optional<\(wrappedType.swiftType)>" : "JSUndefinedOr<\(wrappedType.swiftType)>"

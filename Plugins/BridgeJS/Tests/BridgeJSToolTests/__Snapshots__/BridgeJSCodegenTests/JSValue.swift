@@ -1,6 +1,6 @@
-@_expose(wasm, "bjs_roundTripJSValue")
-@_cdecl("bjs_roundTripJSValue")
-public func _bjs_roundTripJSValue(_ valueKind: Int32, _ valuePayload1: Int32, _ valuePayload2: Float64) -> Void {
+@_expose(wasm, "bjs_TestModule_roundTripJSValue")
+@_cdecl("bjs_TestModule_roundTripJSValue")
+public func _bjs_TestModule_roundTripJSValue(_ valueKind: Int32, _ valuePayload1: Int32, _ valuePayload2: Float64) -> Void {
     #if arch(wasm32)
     let ret = roundTripJSValue(_: JSValue.bridgeJSLiftParameter(valueKind, valuePayload1, valuePayload2))
     return ret.bridgeJSLowerReturn()
@@ -9,9 +9,9 @@ public func _bjs_roundTripJSValue(_ valueKind: Int32, _ valuePayload1: Int32, _ 
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripOptionalJSValue")
-@_cdecl("bjs_roundTripOptionalJSValue")
-public func _bjs_roundTripOptionalJSValue(_ valueIsSome: Int32, _ valueKind: Int32, _ valuePayload1: Int32, _ valuePayload2: Float64) -> Void {
+@_expose(wasm, "bjs_TestModule_roundTripOptionalJSValue")
+@_cdecl("bjs_TestModule_roundTripOptionalJSValue")
+public func _bjs_TestModule_roundTripOptionalJSValue(_ valueIsSome: Int32, _ valueKind: Int32, _ valuePayload1: Int32, _ valuePayload2: Float64) -> Void {
     #if arch(wasm32)
     let ret = roundTripOptionalJSValue(_: Optional<JSValue>.bridgeJSLiftParameter(valueIsSome, valueKind, valuePayload1, valuePayload2))
     return ret.bridgeJSLowerReturn()
@@ -20,9 +20,9 @@ public func _bjs_roundTripOptionalJSValue(_ valueIsSome: Int32, _ valueKind: Int
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripJSValueArray")
-@_cdecl("bjs_roundTripJSValueArray")
-public func _bjs_roundTripJSValueArray() -> Void {
+@_expose(wasm, "bjs_TestModule_roundTripJSValueArray")
+@_cdecl("bjs_TestModule_roundTripJSValueArray")
+public func _bjs_TestModule_roundTripJSValueArray() -> Void {
     #if arch(wasm32)
     let ret = roundTripJSValueArray(_: [JSValue].bridgeJSStackPop())
     ret.bridgeJSStackPush()
@@ -31,9 +31,9 @@ public func _bjs_roundTripJSValueArray() -> Void {
     #endif
 }
 
-@_expose(wasm, "bjs_roundTripOptionalJSValueArray")
-@_cdecl("bjs_roundTripOptionalJSValueArray")
-public func _bjs_roundTripOptionalJSValueArray() -> Void {
+@_expose(wasm, "bjs_TestModule_roundTripOptionalJSValueArray")
+@_cdecl("bjs_TestModule_roundTripOptionalJSValueArray")
+public func _bjs_TestModule_roundTripOptionalJSValueArray() -> Void {
     #if arch(wasm32)
     let ret = roundTripOptionalJSValueArray(_: Optional<[JSValue]>.bridgeJSLiftParameter())
     ret.bridgeJSStackPush()
@@ -42,120 +42,120 @@ public func _bjs_roundTripOptionalJSValueArray() -> Void {
     #endif
 }
 
-@_expose(wasm, "bjs_JSValueHolder_init")
-@_cdecl("bjs_JSValueHolder_init")
-public func _bjs_JSValueHolder_init(_ valueKind: Int32, _ valuePayload1: Int32, _ valuePayload2: Float64, _ optionalValueIsSome: Int32, _ optionalValueKind: Int32, _ optionalValuePayload1: Int32, _ optionalValuePayload2: Float64) -> UnsafeMutableRawPointer {
+@_expose(wasm, "bjs_TestModule_JSValueHolder_init")
+@_cdecl("bjs_TestModule_JSValueHolder_init")
+public func _bjs_TestModule_JSValueHolder_init(_ valueKind: Int32, _ valuePayload1: Int32, _ valuePayload2: Float64, _ optionalValueIsSome: Int32, _ optionalValueKind: Int32, _ optionalValuePayload1: Int32, _ optionalValuePayload2: Float64) -> UnsafeMutableRawPointer {
     #if arch(wasm32)
-    let ret = JSValueHolder(value: JSValue.bridgeJSLiftParameter(valueKind, valuePayload1, valuePayload2), optionalValue: Optional<JSValue>.bridgeJSLiftParameter(optionalValueIsSome, optionalValueKind, optionalValuePayload1, optionalValuePayload2))
+    let ret = TestModule.JSValueHolder(value: JSValue.bridgeJSLiftParameter(valueKind, valuePayload1, valuePayload2), optionalValue: Optional<JSValue>.bridgeJSLiftParameter(optionalValueIsSome, optionalValueKind, optionalValuePayload1, optionalValuePayload2))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_JSValueHolder_update")
-@_cdecl("bjs_JSValueHolder_update")
-public func _bjs_JSValueHolder_update(_ _self: UnsafeMutableRawPointer, _ valueKind: Int32, _ valuePayload1: Int32, _ valuePayload2: Float64, _ optionalValueIsSome: Int32, _ optionalValueKind: Int32, _ optionalValuePayload1: Int32, _ optionalValuePayload2: Float64) -> Void {
+@_expose(wasm, "bjs_TestModule_JSValueHolder_update")
+@_cdecl("bjs_TestModule_JSValueHolder_update")
+public func _bjs_TestModule_JSValueHolder_update(_ _self: UnsafeMutableRawPointer, _ valueKind: Int32, _ valuePayload1: Int32, _ valuePayload2: Float64, _ optionalValueIsSome: Int32, _ optionalValueKind: Int32, _ optionalValuePayload1: Int32, _ optionalValuePayload2: Float64) -> Void {
     #if arch(wasm32)
-    JSValueHolder.bridgeJSLiftParameter(_self).update(value: JSValue.bridgeJSLiftParameter(valueKind, valuePayload1, valuePayload2), optionalValue: Optional<JSValue>.bridgeJSLiftParameter(optionalValueIsSome, optionalValueKind, optionalValuePayload1, optionalValuePayload2))
+    TestModule.JSValueHolder.bridgeJSLiftParameter(_self).update(value: JSValue.bridgeJSLiftParameter(valueKind, valuePayload1, valuePayload2), optionalValue: Optional<JSValue>.bridgeJSLiftParameter(optionalValueIsSome, optionalValueKind, optionalValuePayload1, optionalValuePayload2))
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_JSValueHolder_echo")
-@_cdecl("bjs_JSValueHolder_echo")
-public func _bjs_JSValueHolder_echo(_ _self: UnsafeMutableRawPointer, _ valueKind: Int32, _ valuePayload1: Int32, _ valuePayload2: Float64) -> Void {
+@_expose(wasm, "bjs_TestModule_JSValueHolder_echo")
+@_cdecl("bjs_TestModule_JSValueHolder_echo")
+public func _bjs_TestModule_JSValueHolder_echo(_ _self: UnsafeMutableRawPointer, _ valueKind: Int32, _ valuePayload1: Int32, _ valuePayload2: Float64) -> Void {
     #if arch(wasm32)
-    let ret = JSValueHolder.bridgeJSLiftParameter(_self).echo(value: JSValue.bridgeJSLiftParameter(valueKind, valuePayload1, valuePayload2))
+    let ret = TestModule.JSValueHolder.bridgeJSLiftParameter(_self).echo(value: JSValue.bridgeJSLiftParameter(valueKind, valuePayload1, valuePayload2))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_JSValueHolder_echoOptional")
-@_cdecl("bjs_JSValueHolder_echoOptional")
-public func _bjs_JSValueHolder_echoOptional(_ _self: UnsafeMutableRawPointer, _ valueIsSome: Int32, _ valueKind: Int32, _ valuePayload1: Int32, _ valuePayload2: Float64) -> Void {
+@_expose(wasm, "bjs_TestModule_JSValueHolder_echoOptional")
+@_cdecl("bjs_TestModule_JSValueHolder_echoOptional")
+public func _bjs_TestModule_JSValueHolder_echoOptional(_ _self: UnsafeMutableRawPointer, _ valueIsSome: Int32, _ valueKind: Int32, _ valuePayload1: Int32, _ valuePayload2: Float64) -> Void {
     #if arch(wasm32)
-    let ret = JSValueHolder.bridgeJSLiftParameter(_self).echoOptional(_: Optional<JSValue>.bridgeJSLiftParameter(valueIsSome, valueKind, valuePayload1, valuePayload2))
+    let ret = TestModule.JSValueHolder.bridgeJSLiftParameter(_self).echoOptional(_: Optional<JSValue>.bridgeJSLiftParameter(valueIsSome, valueKind, valuePayload1, valuePayload2))
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_JSValueHolder_value_get")
-@_cdecl("bjs_JSValueHolder_value_get")
-public func _bjs_JSValueHolder_value_get(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_TestModule_JSValueHolder_value_get")
+@_cdecl("bjs_TestModule_JSValueHolder_value_get")
+public func _bjs_TestModule_JSValueHolder_value_get(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = JSValueHolder.bridgeJSLiftParameter(_self).value
+    let ret = TestModule.JSValueHolder.bridgeJSLiftParameter(_self).value
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_JSValueHolder_value_set")
-@_cdecl("bjs_JSValueHolder_value_set")
-public func _bjs_JSValueHolder_value_set(_ _self: UnsafeMutableRawPointer, _ valueKind: Int32, _ valuePayload1: Int32, _ valuePayload2: Float64) -> Void {
+@_expose(wasm, "bjs_TestModule_JSValueHolder_value_set")
+@_cdecl("bjs_TestModule_JSValueHolder_value_set")
+public func _bjs_TestModule_JSValueHolder_value_set(_ _self: UnsafeMutableRawPointer, _ valueKind: Int32, _ valuePayload1: Int32, _ valuePayload2: Float64) -> Void {
     #if arch(wasm32)
-    JSValueHolder.bridgeJSLiftParameter(_self).value = JSValue.bridgeJSLiftParameter(valueKind, valuePayload1, valuePayload2)
+    TestModule.JSValueHolder.bridgeJSLiftParameter(_self).value = JSValue.bridgeJSLiftParameter(valueKind, valuePayload1, valuePayload2)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_JSValueHolder_optionalValue_get")
-@_cdecl("bjs_JSValueHolder_optionalValue_get")
-public func _bjs_JSValueHolder_optionalValue_get(_ _self: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_TestModule_JSValueHolder_optionalValue_get")
+@_cdecl("bjs_TestModule_JSValueHolder_optionalValue_get")
+public func _bjs_TestModule_JSValueHolder_optionalValue_get(_ _self: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    let ret = JSValueHolder.bridgeJSLiftParameter(_self).optionalValue
+    let ret = TestModule.JSValueHolder.bridgeJSLiftParameter(_self).optionalValue
     return ret.bridgeJSLowerReturn()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_JSValueHolder_optionalValue_set")
-@_cdecl("bjs_JSValueHolder_optionalValue_set")
-public func _bjs_JSValueHolder_optionalValue_set(_ _self: UnsafeMutableRawPointer, _ valueIsSome: Int32, _ valueKind: Int32, _ valuePayload1: Int32, _ valuePayload2: Float64) -> Void {
+@_expose(wasm, "bjs_TestModule_JSValueHolder_optionalValue_set")
+@_cdecl("bjs_TestModule_JSValueHolder_optionalValue_set")
+public func _bjs_TestModule_JSValueHolder_optionalValue_set(_ _self: UnsafeMutableRawPointer, _ valueIsSome: Int32, _ valueKind: Int32, _ valuePayload1: Int32, _ valuePayload2: Float64) -> Void {
     #if arch(wasm32)
-    JSValueHolder.bridgeJSLiftParameter(_self).optionalValue = Optional<JSValue>.bridgeJSLiftParameter(valueIsSome, valueKind, valuePayload1, valuePayload2)
+    TestModule.JSValueHolder.bridgeJSLiftParameter(_self).optionalValue = Optional<JSValue>.bridgeJSLiftParameter(valueIsSome, valueKind, valuePayload1, valuePayload2)
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-@_expose(wasm, "bjs_JSValueHolder_deinit")
-@_cdecl("bjs_JSValueHolder_deinit")
-public func _bjs_JSValueHolder_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
+@_expose(wasm, "bjs_TestModule_JSValueHolder_deinit")
+@_cdecl("bjs_TestModule_JSValueHolder_deinit")
+public func _bjs_TestModule_JSValueHolder_deinit(_ pointer: UnsafeMutableRawPointer) -> Void {
     #if arch(wasm32)
-    Unmanaged<JSValueHolder>.fromOpaque(pointer).release()
+    Unmanaged<TestModule.JSValueHolder>.fromOpaque(pointer).release()
     #else
     fatalError("Only available on WebAssembly")
     #endif
 }
 
-extension JSValueHolder: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
+extension TestModule.JSValueHolder: ConvertibleToJSValue, _BridgedSwiftHeapObject, _BridgedSwiftProtocolExportable {
     var jsValue: JSValue {
-        return .object(JSObject(id: UInt32(bitPattern: _bjs_JSValueHolder_wrap(Unmanaged.passRetained(self).toOpaque()))))
+        return .object(JSObject(id: UInt32(bitPattern: _bjs_TestModule_JSValueHolder_wrap(Unmanaged.passRetained(self).toOpaque()))))
     }
     consuming func bridgeJSLowerAsProtocolReturn() -> Int32 {
-        _bjs_JSValueHolder_wrap(Unmanaged.passRetained(self).toOpaque())
+        _bjs_TestModule_JSValueHolder_wrap(Unmanaged.passRetained(self).toOpaque())
     }
 }
 
 #if arch(wasm32)
-@_extern(wasm, module: "TestModule", name: "bjs_JSValueHolder_wrap")
-fileprivate func _bjs_JSValueHolder_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
+@_extern(wasm, module: "TestModule", name: "bjs_TestModule_JSValueHolder_wrap")
+fileprivate func _bjs_TestModule_JSValueHolder_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32
 #else
-fileprivate func _bjs_JSValueHolder_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+fileprivate func _bjs_TestModule_JSValueHolder_wrap_extern(_ pointer: UnsafeMutableRawPointer) -> Int32 {
     fatalError("Only available on WebAssembly")
 }
 #endif
-@inline(never) fileprivate func _bjs_JSValueHolder_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
-    return _bjs_JSValueHolder_wrap_extern(pointer)
+@inline(never) fileprivate func _bjs_TestModule_JSValueHolder_wrap(_ pointer: UnsafeMutableRawPointer) -> Int32 {
+    return _bjs_TestModule_JSValueHolder_wrap_extern(pointer)
 }
 
 #if arch(wasm32)

@@ -6,7 +6,7 @@
     "classes" : [
       {
         "constructor" : {
-          "abiName" : "bjs_PropertyClass_init",
+          "abiName" : "bjs_TestModule_PropertyClass_init",
           "effects" : {
             "isAsync" : false,
             "isStatic" : false,
@@ -27,7 +27,7 @@
             "name" : "staticConstant",
             "staticContext" : {
               "className" : {
-                "_0" : "PropertyClass"
+                "_0" : "TestModule_PropertyClass"
               }
             },
             "type" : {
@@ -42,7 +42,7 @@
             "name" : "staticVariable",
             "staticContext" : {
               "className" : {
-                "_0" : "PropertyClass"
+                "_0" : "TestModule_PropertyClass"
               }
             },
             "type" : {
@@ -60,7 +60,7 @@
             "name" : "jsObjectProperty",
             "staticContext" : {
               "className" : {
-                "_0" : "PropertyClass"
+                "_0" : "TestModule_PropertyClass"
               }
             },
             "type" : {
@@ -75,7 +75,7 @@
             "name" : "classVariable",
             "staticContext" : {
               "className" : {
-                "_0" : "PropertyClass"
+                "_0" : "TestModule_PropertyClass"
               }
             },
             "type" : {
@@ -90,7 +90,7 @@
             "name" : "computedProperty",
             "staticContext" : {
               "className" : {
-                "_0" : "PropertyClass"
+                "_0" : "TestModule_PropertyClass"
               }
             },
             "type" : {
@@ -105,7 +105,7 @@
             "name" : "readOnlyComputed",
             "staticContext" : {
               "className" : {
-                "_0" : "PropertyClass"
+                "_0" : "TestModule_PropertyClass"
               }
             },
             "type" : {
@@ -123,7 +123,7 @@
             "name" : "optionalProperty",
             "staticContext" : {
               "className" : {
-                "_0" : "PropertyClass"
+                "_0" : "TestModule_PropertyClass"
               }
             },
             "type" : {
@@ -138,7 +138,7 @@
             }
           }
         ],
-        "swiftCallName" : "PropertyClass"
+        "swiftCallName" : "TestModule.PropertyClass"
       }
     ],
     "enums" : [
@@ -169,7 +169,7 @@
             "name" : "enumProperty",
             "staticContext" : {
               "enumName" : {
-                "_0" : "PropertyEnum"
+                "_0" : "TestModule.PropertyEnum"
               }
             },
             "type" : {
@@ -184,7 +184,7 @@
             "name" : "enumConstant",
             "staticContext" : {
               "enumName" : {
-                "_0" : "PropertyEnum"
+                "_0" : "TestModule.PropertyEnum"
               }
             },
             "type" : {
@@ -202,7 +202,7 @@
             "name" : "computedEnum",
             "staticContext" : {
               "enumName" : {
-                "_0" : "PropertyEnum"
+                "_0" : "TestModule.PropertyEnum"
               }
             },
             "type" : {
@@ -212,7 +212,7 @@
             }
           }
         ],
-        "swiftCallName" : "PropertyEnum",
+        "swiftCallName" : "TestModule.PropertyEnum",
         "tsFullPath" : "PropertyEnum"
       },
       {
@@ -234,7 +234,7 @@
             ],
             "staticContext" : {
               "namespaceEnum" : {
-                "_0" : "PropertyNamespace"
+                "_0" : "TestModule.PropertyNamespace"
               }
             },
             "type" : {
@@ -252,7 +252,7 @@
             ],
             "staticContext" : {
               "namespaceEnum" : {
-                "_0" : "PropertyNamespace"
+                "_0" : "TestModule.PropertyNamespace"
               }
             },
             "type" : {
@@ -262,7 +262,7 @@
             }
           }
         ],
-        "swiftCallName" : "PropertyNamespace",
+        "swiftCallName" : "TestModule.PropertyNamespace",
         "tsFullPath" : "PropertyNamespace"
       },
       {
@@ -288,7 +288,7 @@
             ],
             "staticContext" : {
               "namespaceEnum" : {
-                "_0" : "PropertyNamespace.Nested"
+                "_0" : "TestModule.PropertyNamespace.Nested"
               }
             },
             "type" : {
@@ -310,7 +310,7 @@
             ],
             "staticContext" : {
               "namespaceEnum" : {
-                "_0" : "PropertyNamespace.Nested"
+                "_0" : "TestModule.PropertyNamespace.Nested"
               }
             },
             "type" : {
@@ -329,7 +329,7 @@
             ],
             "staticContext" : {
               "namespaceEnum" : {
-                "_0" : "PropertyNamespace.Nested"
+                "_0" : "TestModule.PropertyNamespace.Nested"
               }
             },
             "type" : {
@@ -339,7 +339,7 @@
             }
           }
         ],
-        "swiftCallName" : "PropertyNamespace.Nested",
+        "swiftCallName" : "TestModule.PropertyNamespace.Nested",
         "tsFullPath" : "PropertyNamespace.Nested"
       }
     ],
