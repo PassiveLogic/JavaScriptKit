@@ -126,6 +126,127 @@ import Testing
         try snapshot(bridgeJSLink: bridgeJSLink, name: "MixedModules")
     }
 
+    private func buildSkeleton(
+        moduleName: String,
+        source: String,
+        inputFilePath: String = "input.swift"
+    ) throws -> BridgeJSSkeleton {
+        let swiftAPI = SwiftToSkeleton(
+            progress: .silent,
+            moduleName: moduleName,
+            exposeToGlobal: false,
+            externalModuleIndex: .empty
+        )
+        swiftAPI.addSourceFile(Parser.parse(source: source), inputFilePath: inputFilePath)
+        return try swiftAPI.finalize()
+    }
+
+    @Test
+    func sameNamedTypesAcrossModulesLinkWithDistinctABINames() throws {
+        // Both modules export a `Point` struct and a `run` function with identical Swift
+        // names but different public JS names (one is namespaced). The module-qualified
+        // ABI names must keep the generated glue (struct hooks, helper keys, and
+        // function thunk names) distinct, while the public JS/TS surface stays flat.
+        let moduleA = try buildSkeleton(
+            moduleName: "ModuleA",
+            source: """
+                @JS public struct Point {
+                    public let x: Double
+                    public let y: Double
+                    @JS public init(x: Double, y: Double) {
+                        self.x = x
+                        self.y = y
+                    }
+                }
+                @JS public enum Validation {
+                    case valid
+                    case invalid(reason: String)
+                }
+                @JS public func run(point: Point, validation: Validation) -> Point {
+                    point
+                }
+                """
+        )
+        let moduleB = try buildSkeleton(
+            moduleName: "ModuleB",
+            source: """
+                @JS(namespace: "Inner") public struct Point {
+                    public let x: Double
+                    public let y: Double
+                    @JS public init(x: Double, y: Double) {
+                        self.x = x
+                        self.y = y
+                    }
+                }
+                @JS(namespace: "Inner") public func run() {
+                }
+                """
+        )
+        let bridgeJSLink = BridgeJSLink(skeletons: [moduleA, moduleB], sharedMemory: false)
+
+        let (outputJs, outputDts) = try bridgeJSLink.link()
+
+        // Struct hooks and helper keys are module-qualified and distinct.
+        #expect(outputJs.contains("swift_js_struct_lower_ModuleA_Point"))
+        #expect(outputJs.contains("swift_js_struct_lower_ModuleB_Point"))
+        #expect(outputJs.contains("structHelpers.ModuleA_Point"))
+        #expect(outputJs.contains("structHelpers.ModuleB_Point"))
+        // Associated-value enum helper keys are module-qualified.
+        #expect(outputJs.contains("enumHelpers.ModuleA_Validation"))
+        // Exported function thunk names are module-qualified and distinct.
+        #expect(outputJs.contains("instance.exports.bjs_ModuleA_run"))
+        #expect(outputJs.contains("instance.exports.bjs_ModuleB_Inner_run"))
+        // The public TS surface stays flat (no module prefixes).
+        #expect(!outputDts.contains("ModuleA"))
+        #expect(!outputDts.contains("ModuleB"))
+
+        try snapshot(bridgeJSLink: bridgeJSLink, name: "SameNamedTypesAcrossModules")
+    }
+
+    @Test
+    func duplicatePublicNamesAcrossModulesProduceDiagnostic() throws {
+        let source = """
+            @JS public struct Point {
+                public let x: Double
+                @JS public init(x: Double) {
+                    self.x = x
+                }
+            }
+            """
+        let moduleA = try buildSkeleton(moduleName: "ModuleA", source: source)
+        let moduleB = try buildSkeleton(moduleName: "ModuleB", source: source)
+        let bridgeJSLink = BridgeJSLink(skeletons: [moduleA, moduleB], sharedMemory: false)
+
+        do {
+            _ = try bridgeJSLink.link()
+            Issue.record("Expected duplicate public export name diagnostic, but linking succeeded")
+        } catch let error as BridgeJSLinkError {
+            #expect(error.message.contains("Duplicate exported name 'Point'"))
+            #expect(error.message.contains("ModuleA"))
+            #expect(error.message.contains("ModuleB"))
+        }
+    }
+
+    @Test
+    func duplicatePublicFunctionNamesAcrossModulesProduceDiagnostic() throws {
+        let moduleA = try buildSkeleton(
+            moduleName: "ModuleA",
+            source: "@JS public func run() {}"
+        )
+        let moduleB = try buildSkeleton(
+            moduleName: "ModuleB",
+            source: "@JS public func run() {}"
+        )
+        let bridgeJSLink = BridgeJSLink(skeletons: [moduleA, moduleB], sharedMemory: false)
+
+        do {
+            _ = try bridgeJSLink.link()
+            Issue.record("Expected duplicate public export name diagnostic, but linking succeeded")
+        } catch let error as BridgeJSLinkError {
+            #expect(error.message.contains("Duplicate exported name 'run'"))
+        }
+    }
+
     @Test
     func perClassIdentityModeFromAnnotation() throws {
         let url = Self.inputsDirectory.appendingPathComponent("IdentityModeClass.swift")
