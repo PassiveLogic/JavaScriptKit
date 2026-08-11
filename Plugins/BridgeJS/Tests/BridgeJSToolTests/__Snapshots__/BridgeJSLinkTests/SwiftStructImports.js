@@ -232,21 +232,22 @@ export async function createInstantiator(options, swift) {
                     setException(error);
                 }
             }
-            TestModule["bjs_roundTripOptional"] = function bjs_roundTripOptional(point) {
+            TestModule["bjs_roundTripOptional"] = function bjs_roundTripOptional() {
                 try {
-                    let optResult;
-                    if (point) {
-                        const struct = structHelpers.Point.lift();
-                        optResult = struct;
+                    const isSome = i32Stack.pop();
+                    let optValue;
+                    if (isSome === 0) {
+                        optValue = null;
                     } else {
-                        optResult = null;
+                        const struct = structHelpers.Point.lift();
+                        optValue = struct;
                     }
-                    let ret = imports.roundTripOptional(optResult);
-                    const isSome = ret != null;
-                    if (isSome) {
+                    let ret = imports.roundTripOptional(optValue);
+                    const isSome1 = ret != null;
+                    if (isSome1) {
                         structHelpers.Point.lower(ret);
                     }
-                    i32Stack.push(isSome ? 1 : 0);
+                    i32Stack.push(isSome1 ? 1 : 0);
                 } catch (error) {
                     setException(error);
                 }

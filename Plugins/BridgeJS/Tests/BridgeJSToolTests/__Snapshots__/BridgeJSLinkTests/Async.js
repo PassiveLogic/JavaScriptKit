@@ -324,16 +324,17 @@ export async function createInstantiator(options, swift) {
                     setException(error);
                 }
             }
-            bjs["promise_resolve_TestModule_Sq10AsyncPointV"] = function(promise, value) {
+            bjs["promise_resolve_TestModule_Sq10AsyncPointV"] = function(promise) {
                 try {
-                    let optResult;
-                    if (value) {
-                        const struct = structHelpers.AsyncPoint.lift();
-                        optResult = struct;
+                    const isSome = i32Stack.pop();
+                    let optValue;
+                    if (isSome === 0) {
+                        optValue = null;
                     } else {
-                        optResult = null;
+                        const struct = structHelpers.AsyncPoint.lift();
+                        optValue = struct;
                     }
-                    swift.memory.getObject(promise)[__bjs_promiseSettlers].resolve(optResult);
+                    swift.memory.getObject(promise)[__bjs_promiseSettlers].resolve(optValue);
                 } catch (error) {
                     setException(error);
                 }

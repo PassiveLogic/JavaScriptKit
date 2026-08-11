@@ -247,10 +247,13 @@ export async function createInstantiator(options, swift) {
                     setException(error);
                 }
             }
-            TestModule["bjs_optionalArrayThenArray"] = function bjs_optionalArrayThenArray(a) {
+            TestModule["bjs_optionalArrayThenArray"] = function bjs_optionalArrayThenArray() {
                 try {
-                    let optResult;
-                    if (a) {
+                    const isSome = i32Stack.pop();
+                    let optValue;
+                    if (isSome === 0) {
+                        optValue = null;
+                    } else {
                         const arrayLen = i32Stack.pop();
                         let arrayResult;
                         if (arrayLen === -1) {
@@ -263,9 +266,7 @@ export async function createInstantiator(options, swift) {
                             }
                             arrayResult.reverse();
                         }
-                        optResult = arrayResult;
-                    } else {
-                        optResult = null;
+                        optValue = arrayResult;
                     }
                     const arrayLen1 = i32Stack.pop();
                     let arrayResult1;
@@ -279,18 +280,21 @@ export async function createInstantiator(options, swift) {
                         }
                         arrayResult1.reverse();
                     }
-                    let ret = imports.optionalArrayThenArray(optResult, arrayResult1);
+                    let ret = imports.optionalArrayThenArray(optValue, arrayResult1);
                     return ret;
                 } catch (error) {
                     setException(error);
                     return 0
                 }
             }
-            TestModule["bjs_borrowedStringAroundStackParams"] = function bjs_borrowedStringAroundStackParams(sBytes, sCount, a) {
+            TestModule["bjs_borrowedStringAroundStackParams"] = function bjs_borrowedStringAroundStackParams(sBytes, sCount) {
                 try {
                     const string = decodeString(sBytes, sCount);
-                    let optResult;
-                    if (a) {
+                    const isSome = i32Stack.pop();
+                    let optValue;
+                    if (isSome === 0) {
+                        optValue = null;
+                    } else {
                         const arrayLen = i32Stack.pop();
                         let arrayResult;
                         if (arrayLen === -1) {
@@ -303,9 +307,7 @@ export async function createInstantiator(options, swift) {
                             }
                             arrayResult.reverse();
                         }
-                        optResult = arrayResult;
-                    } else {
-                        optResult = null;
+                        optValue = arrayResult;
                     }
                     const arrayLen1 = i32Stack.pop();
                     let arrayResult1;
@@ -319,7 +321,7 @@ export async function createInstantiator(options, swift) {
                         }
                         arrayResult1.reverse();
                     }
-                    let ret = imports.borrowedStringAroundStackParams(string, optResult, arrayResult1);
+                    let ret = imports.borrowedStringAroundStackParams(string, optValue, arrayResult1);
                     return ret;
                 } catch (error) {
                     setException(error);

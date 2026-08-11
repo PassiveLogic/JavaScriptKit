@@ -852,22 +852,23 @@ export async function createInstantiator(options, swift) {
                 };
                 return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModuleSq5ThemeO_Sq5ThemeO);
             }
-            bjs["invoke_js_callback_TestModule_10TestModuleSq6AnimalV_Sq6AnimalV"] = function(callbackId, param0) {
+            bjs["invoke_js_callback_TestModule_10TestModuleSq6AnimalV_Sq6AnimalV"] = function(callbackId) {
                 try {
                     const callback = swift.memory.getObject(callbackId);
-                    let optResult;
-                    if (param0) {
-                        const struct = structHelpers.Animal.lift();
-                        optResult = struct;
+                    const isSome = i32Stack.pop();
+                    let optValue;
+                    if (isSome === 0) {
+                        optValue = null;
                     } else {
-                        optResult = null;
+                        const struct = structHelpers.Animal.lift();
+                        optValue = struct;
                     }
-                    let ret = callback(optResult);
-                    const isSome = ret != null;
-                    if (isSome) {
+                    let ret = callback(optValue);
+                    const isSome1 = ret != null;
+                    if (isSome1) {
                         structHelpers.Animal.lower(ret);
                     }
-                    i32Stack.push(isSome ? 1 : 0);
+                    i32Stack.push(isSome1 ? 1 : 0);
                 } catch (error) {
                     setException(error);
                 }
