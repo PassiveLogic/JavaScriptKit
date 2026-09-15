@@ -5,7 +5,8 @@ import BridgeJSUtilities
 /// Registry for JS helper intrinsics used during code generation.
 final class JSIntrinsicRegistry {
     private var entries: [String: [String]] = [:]
-    var classNamespaces: [String: [String]] = [:]
+    var classPaths: [String: [String]] = [:]
+    var renamedEnumNames: [String: (value: String, type: String)] = [:]
 
     var typeOwnerModules: [String: String] = [:]
 
@@ -42,7 +43,8 @@ final class JSIntrinsicRegistry {
 
     func reset() {
         entries.removeAll()
-        classNamespaces.removeAll()
+        classPaths.removeAll()
+        renamedEnumNames.removeAll()
         typeOwnerModules.removeAll()
         codecNameOrder.removeAll()
         codecBodies.removeAll()

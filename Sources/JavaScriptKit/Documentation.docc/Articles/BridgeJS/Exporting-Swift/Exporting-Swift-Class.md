@@ -77,6 +77,48 @@ export type Exports = {
 }
 ```
 
+## Choosing an Exported Name
+
+Pass a name to `@JS` to expose a class under a different JavaScript and TypeScript name while keeping its Swift identifier:
+
+```swift
+@JS("Counter") class InternalCounter {
+    @JS var value: Int
+
+    @JS init(value: Int) {
+        self.value = value
+    }
+
+    @JS static func make(_ value: Int) -> InternalCounter {
+        InternalCounter(value: value)
+    }
+
+    @JS func roundTrip(_ other: InternalCounter?) -> InternalCounter? {
+        other
+    }
+}
+```
+
+After initializing the package, use the constructor and static factory on that WASM instance's `exports` object:
+
+```javascript
+const counter = new exports.Counter(1);
+const other = exports.Counter.make(2);
+const returned = counter.roundTrip(other);
+console.log(returned.value); // 2
+returned.release();
+other.release();
+counter.release();
+```
+
+The generated TypeScript interface is named `Counter`, and signatures refer to `Counter`, including in optionals, arrays, and callbacks. For example, `roundTrip` accepts and returns `Counter | null`. The old name `InternalCounter` is not also exported. Swift code continues to use `InternalCounter`, including in extensions and return types.
+
+The constructor remains instance-owned: use `exports.Counter`, not a named JavaScript module import such as `import { Counter } from "./bridge-js.js"`. A TypeScript type-only import of `Counter` refers to the generated interface, not a constructor value. Renaming does not change reference semantics, `release()`, or identity mode.
+
+This naming option also applies to structs, enums, and protocols. For namespace composition and nested types, see <doc:Using-Namespace>.
+
+> Important: `@JS("Counter")` only changes the exported symbol. `@JS(as: Other.self)` instead changes the JavaScript representation through `bridgeToJS()` and `bridgeFromJS(_:)`. Combining a name override with `as:` on the same declaration produces a diagnostic.
+
 ## Adding Members via Extensions
 
 You can add exported methods, computed properties, and static members to a `@JS` class using extensions. The extension block itself does not need `@JS` - only the individual members do:

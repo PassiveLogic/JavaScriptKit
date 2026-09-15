@@ -110,6 +110,14 @@ final class JSGlueVariableScope {
         intrinsicRegistry.typeOwnerModules[typeName]
     }
 
+    func exportedClassPath(forSwiftName name: String) -> [String]? {
+        intrinsicRegistry.classPaths[name]
+    }
+
+    func renamedEnumNames(forSwiftName name: String) -> (value: String, type: String)? {
+        intrinsicRegistry.renamedEnumNames[name]
+    }
+
     func makeChildScope() -> JSGlueVariableScope {
         JSGlueVariableScope(intrinsicRegistry: intrinsicRegistry)
     }
@@ -532,8 +540,6 @@ struct IntrinsicJSFragment: Sendable {
         /// Whether the fragment has direct access to the SwiftHeapObject classes.
         /// If false, the fragment needs to use `_exports` to access the class.
         var hasDirectAccessToSwiftClass: Bool = true
-        /// Maps class names to their namespace path components for resolving `_exports` access.
-        var classNamespaces: [String: [String]] = [:]
 
         func with<T>(_ keyPath: WritableKeyPath<PrintCodeContext, T>, _ value: T) -> PrintCodeContext {
             var new = self
@@ -545,20 +551,30 @@ struct IntrinsicJSFragment: Sendable {
             qualifiedName.split(separator: ".").last.map(String.init) ?? qualifiedName
         }
 
-        private func exportsAccess(forClass name: String) -> String {
-            if let namespace = classNamespaces[name], !namespace.isEmpty {
-                let path = namespace.map { ".\($0)" }.joined()
-                return "_exports\(path).\(name)"
-            }
-            return "_exports['\(name)']"
-        }
-
         func classReference(forQualifiedName qualifiedName: String) -> String {
+            if let path = scope.exportedClassPath(forSwiftName: qualifiedName), let name = path.last {
+                if hasDirectAccessToSwiftClass {
+                    return name
+                }
+                return path.count == 1 ? "_exports['\(name)']" : "_exports.\(path.joined(separator: "."))"
+            }
             if hasDirectAccessToSwiftClass {
                 return unqualifiedClassName(for: qualifiedName)
             }
-            let unqualified = unqualifiedClassName(for: qualifiedName)
-            return exportsAccess(forClass: unqualified)
+            return "_exports['\(unqualifiedClassName(for: qualifiedName))']"
+        }
+
+        func defaultValueTypeName(_ type: BridgeType, _ format: DefaultValueUtils.OutputFormat) -> String? {
+            switch type {
+            case .swiftHeapObject(let name):
+                guard let jsName = scope.exportedClassPath(forSwiftName: name)?.last else { return nil }
+                return format == .javascript ? classReference(forQualifiedName: name) : jsName
+            case .caseEnum(let name):
+                guard let renamed = scope.renamedEnumNames(forSwiftName: name) else { return nil }
+                return format == .javascript ? renamed.value : renamed.type
+            default:
+                return nil
+            }
         }
     }
 
@@ -2565,7 +2581,10 @@ struct IntrinsicJSFragment: Sendable {
 
             // Attach instance methods to the struct instance
             for method in structDef.methods where !method.effects.isStatic {
-                let paramList = DefaultValueUtils.formatParameterList(method.parameters)
+                let paramList = DefaultValueUtils.formatParameterList(
+                    method.parameters,
+                    resolveTypeName: context.defaultValueTypeName
+                )
                 printer.write(
                     "\(instanceVar).\(method.resolvedJSName) = function(\(paramList)) {"
                 )

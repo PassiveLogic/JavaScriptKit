@@ -19,6 +19,35 @@ BridgeJS generates separate objects with descriptive naming for `.const` enums:
 - **`EnumNameTag`**: Represents the union type for enums
 - **`EnumNameObject`**: Object type for all const-style enums, contains static members for enums with methods/properties or references the values type for simple enums
 
+### Choosing an Exported Name
+
+A name passed to `@JS` changes the generated naming stem, not the Swift enum or its representation:
+
+```swift
+@JS("TaskState") enum InternalTaskState: String {
+    case pending
+    case complete
+}
+
+@JS func roundTripState(_ state: InternalTaskState) -> InternalTaskState {
+    state
+}
+```
+
+With the default `.const` style, this generates `TaskStateValues`, `TaskStateTag`, and `TaskStateObject` instead of names beginning with `InternalTaskState`. The instance export is `exports.TaskState`, and function signatures use `TaskStateTag`:
+
+```typescript
+import { TaskStateValues } from "./bridge-js.js";
+import type { TaskStateTag } from "./bridge-js.js";
+
+const state: TaskStateTag = exports.roundTripState(TaskStateValues.Pending);
+console.log(state === exports.TaskState.Pending); // true
+```
+
+The same naming rule applies to associated-value enums, including their payload type references. With `@JS("TaskState", enumStyle: .tsEnum)`, the TypeScript enum itself is named `TaskState`. Case names, raw values, and associated-value layouts are unchanged.
+
+For empty enums used as namespaces, the override names the namespace object. Nested declarations use that renamed parent in their export paths; see <doc:Using-Namespace>.
+
 ### Case Enums
 
 ```swift

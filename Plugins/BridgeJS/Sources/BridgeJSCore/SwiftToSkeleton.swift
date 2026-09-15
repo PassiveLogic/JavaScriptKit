@@ -1068,6 +1068,7 @@ private final class ExportSwiftAPICollector: SyntaxAnyVisitor {
 
     struct NamespaceResolution {
         let namespace: [String]?
+        var jsNamespace: [String]? = nil
         let isValid: Bool
     }
 
@@ -1079,7 +1080,7 @@ private final class ExportSwiftAPICollector: SyntaxAnyVisitor {
         declarationType: String
     ) -> NamespaceResolution {
         let attributeNamespace = extractNamespace(from: jsAttribute)
-        let computedNamespace = computeNamespace(for: node)
+        let computedNamespace = computeNamespace(for: node, includeParentTypes: true)
 
         if computedNamespace != nil && attributeNamespace != nil {
             diagnose(
@@ -1091,7 +1092,12 @@ private final class ExportSwiftAPICollector: SyntaxAnyVisitor {
             return NamespaceResolution(namespace: nil, isValid: false)
         }
 
-        return NamespaceResolution(namespace: computedNamespace ?? attributeNamespace, isValid: true)
+        let jsNamespace = computeNamespace(for: node, includeParentTypes: true, useJSNames: true)
+        return NamespaceResolution(
+            namespace: computedNamespace ?? attributeNamespace,
+            jsNamespace: jsNamespace != computedNamespace ? jsNamespace : nil,
+            isValid: true
+        )
     }
 
     enum State {
@@ -1288,10 +1294,10 @@ private final class ExportSwiftAPICollector: SyntaxAnyVisitor {
         switch type {
         case .swiftStruct(let name), .nullable(.swiftStruct(let name), _):
             isStructType = true
-            expectedTypeName = name.split(separator: ".").last.map(String.init)
+            expectedTypeName = name
         case .swiftHeapObject(let name), .nullable(.swiftHeapObject(let name), _):
             isStructType = false
-            expectedTypeName = name.split(separator: ".").last.map(String.init)
+            expectedTypeName = name
         default:
             diagnose(
                 node: funcCall,
@@ -1301,7 +1307,9 @@ private final class ExportSwiftAPICollector: SyntaxAnyVisitor {
             return nil
         }
 
-        guard let expectedTypeName = expectedTypeName, typeName == expectedTypeName else {
+        guard let expectedTypeName = expectedTypeName,
+            typeName == expectedTypeName.split(separator: ".").last.map(String.init)
+        else {
             diagnose(
                 node: funcCall,
                 message: "Constructor type name '\(typeName)' doesn't match parameter type",
@@ -1335,7 +1343,7 @@ private final class ExportSwiftAPICollector: SyntaxAnyVisitor {
             return .structLiteral(typeName, fields)
         } else {
             if funcCall.arguments.isEmpty {
-                return .object(typeName)
+                return .object(expectedTypeName)
             }
 
             var constructorArgs: [DefaultValue] = []
@@ -1350,7 +1358,7 @@ private final class ExportSwiftAPICollector: SyntaxAnyVisitor {
                 }
                 constructorArgs.append(argValue)
             }
-            return .objectWithArguments(typeName, constructorArgs)
+            return .objectWithArguments(expectedTypeName, constructorArgs)
         }
     }
 
@@ -2017,7 +2025,7 @@ private final class ExportSwiftAPICollector: SyntaxAnyVisitor {
             return .skipChildren
         }
 
-        diagnoseUnsupportedJSName(from: jsAttribute)
+        let jsName = extractValidatedJSName(from: jsAttribute)
 
         if let aliasTarget = parent.extractAliasTarget(from: jsAttribute) {
             recordAlias(node: node, jsAttribute: jsAttribute, aliasTarget: aliasTarget)
@@ -2028,10 +2036,7 @@ private final class ExportSwiftAPICollector: SyntaxAnyVisitor {
         guard namespaceResult.isValid else {
             return .skipChildren
         }
-        let effectiveNamespace = effectiveNamespace(
-            resolvedNamespace: namespaceResult.namespace,
-            parentTypeNamespace: computeParentTypeNamespace(for: node)
-        )
+        let effectiveNamespace = namespaceResult.namespace
         let swiftCallName = parent.computeSwiftCallName(for: node, itemName: name)
         let explicitAccessControl = computeExplicitAtLeastInternalAccessControl(
             for: node,
@@ -2041,12 +2046,14 @@ private final class ExportSwiftAPICollector: SyntaxAnyVisitor {
         let isFinal = node.modifiers.contains { $0.name.tokenKind == .keyword(.final) } ? true : nil
         let exportedClass = ExportedClass(
             name: name,
+            jsName: jsName,
             swiftCallName: swiftCallName,
             explicitAccessControl: explicitAccessControl,
             constructor: nil,
             methods: [],
             properties: [],
             namespace: effectiveNamespace,
+            jsNamespace: namespaceResult.jsNamespace,
             identityMode: classIdentityMode,
             documentation: extractDocumentation(from: node),
             isFinal: isFinal
@@ -2126,6 +2133,14 @@ private final class ExportSwiftAPICollector: SyntaxAnyVisitor {
         aliasTarget: TypeSyntax
     ) {
         let swiftCallName = parent.computeSwiftCallName(for: node, itemName: node.name.text)
+        if extractJSName(from: jsAttribute) != nil {
+            diagnose(
+                node: jsAttribute,
+                message: "A separate name for JavaScript is not supported on `@JS(as:)` types",
+                hint: "Remove the name argument; an alias adopts its target's representation"
+            )
+            return
+        }
         if extractNamespace(from: jsAttribute) != nil {
             errors.append(
                 DiagnosticError(
@@ -2167,7 +2182,7 @@ private final class ExportSwiftAPICollector: SyntaxAnyVisitor {
             return .skipChildren
         }
 
-        diagnoseUnsupportedJSName(from: jsAttribute)
+        let jsName = extractValidatedJSName(from: jsAttribute)
 
         if let aliasTarget = parent.extractAliasTarget(from: jsAttribute) {
             recordAlias(node: node, jsAttribute: jsAttribute, aliasTarget: aliasTarget)
@@ -2185,10 +2200,7 @@ private final class ExportSwiftAPICollector: SyntaxAnyVisitor {
         guard namespaceResult.isValid else {
             return .skipChildren
         }
-        let effectiveNamespace = effectiveNamespace(
-            resolvedNamespace: namespaceResult.namespace,
-            parentTypeNamespace: computeParentTypeNamespace(for: node)
-        )
+        let effectiveNamespace = namespaceResult.namespace
         let emitStyle = extractEnumStyle(from: jsAttribute) ?? .const
         let swiftCallName = parent.computeSwiftCallName(for: node, itemName: name)
         let explicitAccessControl = computeExplicitAtLeastInternalAccessControl(
@@ -2196,22 +2208,16 @@ private final class ExportSwiftAPICollector: SyntaxAnyVisitor {
             message: "Enum visibility must be at least internal"
         )
 
-        let tsFullPath: String
-        if let namespace = effectiveNamespace, !namespace.isEmpty {
-            tsFullPath = namespace.joined(separator: ".") + "." + name
-        } else {
-            tsFullPath = name
-        }
-
         // Create enum directly in dictionary
         let exportedEnum = ExportedEnum(
             name: name,
+            jsName: jsName,
             swiftCallName: swiftCallName,
-            tsFullPath: tsFullPath,
             explicitAccessControl: explicitAccessControl,
             cases: [],  // Will be populated in visit(EnumCaseDeclSyntax)
             rawType: SwiftEnumRawType(rawType),
             namespace: effectiveNamespace,
+            jsNamespace: namespaceResult.jsNamespace,
             emitStyle: emitStyle,
             staticMethods: [],
             staticProperties: [],
@@ -2294,7 +2300,12 @@ private final class ExportSwiftAPICollector: SyntaxAnyVisitor {
             return .skipChildren
         }
 
-        diagnoseUnsupportedJSName(from: jsAttribute)
+        let jsName = extractValidatedJSName(from: jsAttribute)
+
+        if let aliasTarget = parent.extractAliasTarget(from: jsAttribute), jsName != nil {
+            recordAlias(node: node, jsAttribute: jsAttribute, aliasTarget: aliasTarget)
+            return .skipChildren
+        }
 
         let name = node.name.text
 
@@ -2302,10 +2313,7 @@ private final class ExportSwiftAPICollector: SyntaxAnyVisitor {
         guard namespaceResult.isValid else {
             return .skipChildren
         }
-        let effectiveNamespace = effectiveNamespace(
-            resolvedNamespace: namespaceResult.namespace,
-            parentTypeNamespace: computeParentTypeNamespace(for: node)
-        )
+        let effectiveNamespace = namespaceResult.namespace
         _ = computeExplicitAtLeastInternalAccessControl(
             for: node,
             message: "Protocol visibility must be at least internal"
@@ -2315,9 +2323,11 @@ private final class ExportSwiftAPICollector: SyntaxAnyVisitor {
 
         exportedProtocolByName[protocolUniqueKey] = ExportedProtocol(
             name: name,
+            jsName: jsName,
             methods: [],
             properties: [],
             namespace: effectiveNamespace,
+            jsNamespace: namespaceResult.jsNamespace,
             documentation: extractDocumentation(from: node)
         )
 
@@ -2340,9 +2350,11 @@ private final class ExportSwiftAPICollector: SyntaxAnyVisitor {
 
         let exportedProtocol = ExportedProtocol(
             name: name,
+            jsName: jsName,
             methods: methods,
             properties: exportedProtocolByName[protocolUniqueKey]?.properties ?? [],
             namespace: effectiveNamespace,
+            jsNamespace: namespaceResult.jsNamespace,
             documentation: extractDocumentation(from: node)
         )
 
@@ -2359,7 +2371,7 @@ private final class ExportSwiftAPICollector: SyntaxAnyVisitor {
             return .skipChildren
         }
 
-        diagnoseUnsupportedJSName(from: jsAttribute)
+        let jsName = extractValidatedJSName(from: jsAttribute)
 
         if let aliasTarget = parent.extractAliasTarget(from: jsAttribute) {
             recordAlias(node: node, jsAttribute: jsAttribute, aliasTarget: aliasTarget)
@@ -2372,10 +2384,7 @@ private final class ExportSwiftAPICollector: SyntaxAnyVisitor {
         guard namespaceResult.isValid else {
             return .skipChildren
         }
-        let effectiveNamespace = effectiveNamespace(
-            resolvedNamespace: namespaceResult.namespace,
-            parentTypeNamespace: computeParentTypeNamespace(for: node)
-        )
+        let effectiveNamespace = namespaceResult.namespace
         let swiftCallName = parent.computeSwiftCallName(for: node, itemName: name)
         let explicitAccessControl = computeExplicitAtLeastInternalAccessControl(
             for: node,
@@ -2437,11 +2446,13 @@ private final class ExportSwiftAPICollector: SyntaxAnyVisitor {
         let structUniqueKey = makeKey(name: name, namespace: effectiveNamespace)
         let exportedStruct = ExportedStruct(
             name: name,
+            jsName: jsName,
             swiftCallName: swiftCallName,
             explicitAccessControl: explicitAccessControl,
             properties: properties,
             methods: [],
             namespace: effectiveNamespace,
+            jsNamespace: namespaceResult.jsNamespace,
             documentation: extractDocumentation(from: node)
         )
 
@@ -2595,9 +2606,11 @@ private final class ExportSwiftAPICollector: SyntaxAnyVisitor {
 
                 currentProtocol = ExportedProtocol(
                     name: currentProtocol.name,
+                    jsName: currentProtocol.jsName,
                     methods: currentProtocol.methods,
                     properties: properties,
                     namespace: currentProtocol.namespace,
+                    jsNamespace: currentProtocol.jsNamespace,
                     documentation: currentProtocol.documentation
                 )
                 exportedProtocolByName[protocolKey] = currentProtocol
@@ -2684,61 +2697,44 @@ private final class ExportSwiftAPICollector: SyntaxAnyVisitor {
         return .visitChildren
     }
 
-    /// Computes namespace by walking up the AST hierarchy to find parent namespace enums
-    /// If parent enum is a namespace enum (no cases) then it will be used as part of namespace for given node
-    ///
-    ///
-    /// Method allows for explicit namespace for top level enum, it will be used as base namespace and will concat enum name
-    private func computeNamespace(for node: some SyntaxProtocol) -> [String]? {
+    /// Computes inherited namespaces using Swift names for ABI generation or public names for exports.
+    private func computeNamespace(
+        for node: some SyntaxProtocol,
+        includeParentTypes: Bool = false,
+        useJSNames: Bool = false
+    ) -> [String]? {
         var namespace: [String] = []
 
         for declaration in parent.enclosingDeclarations(of: node) {
+            let name: String
+            let jsAttribute: AttributeSyntax
             if let enumDecl = declaration.as(EnumDeclSyntax.self),
-                enumDecl.attributes.hasJSAttribute()
+                let attribute = enumDecl.attributes.firstJSAttribute,
+                !enumDecl.memberBlock.members.contains(where: { $0.decl.is(EnumCaseDeclSyntax.self) })
             {
-                let isNamespaceEnum = !enumDecl.memberBlock.members.contains { member in
-                    member.decl.is(EnumCaseDeclSyntax.self)
-                }
-                if isNamespaceEnum {
-                    namespace.insert(enumDecl.name.text, at: 0)
-
-                    if let jsAttribute = enumDecl.attributes.firstJSAttribute,
-                        let explicitNamespace = extractNamespace(from: jsAttribute)
-                    {
-                        namespace = explicitNamespace + namespace
-                        break
-                    }
-                }
+                name = enumDecl.name.text
+                jsAttribute = attribute
+            } else if includeParentTypes, let structDecl = declaration.as(StructDeclSyntax.self),
+                let attribute = structDecl.attributes.firstJSAttribute
+            {
+                name = structDecl.name.text
+                jsAttribute = attribute
+            } else if includeParentTypes, let classDecl = declaration.as(ClassDeclSyntax.self),
+                let attribute = classDecl.attributes.firstJSAttribute
+            {
+                name = classDecl.name.text
+                jsAttribute = attribute
+            } else {
+                continue
+            }
+            namespace.insert(useJSNames ? extractJSName(from: jsAttribute) ?? name : name, at: 0)
+            if let explicitNamespace = extractNamespace(from: jsAttribute) {
+                namespace = explicitNamespace + namespace
+                break
             }
         }
 
         return namespace.isEmpty ? nil : namespace
-    }
-
-    private func computeParentTypeNamespace(for node: some SyntaxProtocol) -> [String]? {
-        var path: [String] = []
-
-        for declaration in parent.enclosingDeclarations(of: node) {
-            if let structDecl = declaration.as(StructDeclSyntax.self),
-                structDecl.attributes.hasJSAttribute()
-            {
-                path.insert(structDecl.name.text, at: 0)
-            } else if let classDecl = declaration.as(ClassDeclSyntax.self),
-                classDecl.attributes.hasJSAttribute()
-            {
-                path.insert(classDecl.name.text, at: 0)
-            }
-        }
-
-        return path.isEmpty ? nil : path
-    }
-
-    private func effectiveNamespace(
-        resolvedNamespace: [String]?,
-        parentTypeNamespace: [String]?
-    ) -> [String]? {
-        let combined = (parentTypeNamespace ?? []) + (resolvedNamespace ?? [])
-        return combined.isEmpty ? nil : combined
     }
 
     /// Requires the node to have at least internal access control.
