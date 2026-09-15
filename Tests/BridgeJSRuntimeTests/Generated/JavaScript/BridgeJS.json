@@ -5143,6 +5143,7 @@
             }
           ]
         },
+        "jsName" : "NamedCounter",
         "methods" : [
           {
             "abiName" : "bjs_JSNameRenamedClass_doubled",
@@ -11287,6 +11288,73 @@
         ],
         "swiftCallName" : "IntegerTypesSupportExports",
         "tsFullPath" : "IntegerTypesSupportExports"
+      },
+      {
+        "cases" : [
+
+        ],
+        "emitStyle" : "const",
+        "jsName" : "CounterTools",
+        "name" : "JSNameTools",
+        "namespace" : [
+          "Renaming"
+        ],
+        "staticMethods" : [
+          {
+            "abiName" : "bjs_Renaming_JSNameTools_static_apply",
+            "effects" : {
+              "isAsync" : false,
+              "isStatic" : true,
+              "isThrows" : false
+            },
+            "name" : "apply",
+            "namespace" : [
+              "Renaming",
+              "JSNameTools"
+            ],
+            "parameters" : [
+              {
+                "label" : "_",
+                "name" : "transformer",
+                "type" : {
+                  "swiftProtocol" : {
+                    "_0" : "JSNameTransformer"
+                  }
+                }
+              },
+              {
+                "label" : "_",
+                "name" : "value",
+                "type" : {
+                  "integer" : {
+                    "_0" : {
+                      "isSigned" : true,
+                      "width" : "word"
+                    }
+                  }
+                }
+              }
+            ],
+            "returnType" : {
+              "integer" : {
+                "_0" : {
+                  "isSigned" : true,
+                  "width" : "word"
+                }
+              }
+            },
+            "staticContext" : {
+              "namespaceEnum" : {
+                "_0" : "JSNameTools"
+              }
+            }
+          }
+        ],
+        "staticProperties" : [
+
+        ],
+        "swiftCallName" : "JSNameTools",
+        "tsFullPath" : "Renaming.CounterTools"
       },
       {
         "cases" : [
@@ -18915,6 +18983,46 @@
             }
           }
         ]
+      },
+      {
+        "jsName" : "CounterTransform",
+        "methods" : [
+          {
+            "abiName" : "bjs_JSNameTransformer_apply",
+            "effects" : {
+              "isAsync" : false,
+              "isStatic" : false,
+              "isThrows" : false
+            },
+            "name" : "apply",
+            "parameters" : [
+              {
+                "label" : "_",
+                "name" : "value",
+                "type" : {
+                  "integer" : {
+                    "_0" : {
+                      "isSigned" : true,
+                      "width" : "word"
+                    }
+                  }
+                }
+              }
+            ],
+            "returnType" : {
+              "integer" : {
+                "_0" : {
+                  "isSigned" : true,
+                  "width" : "word"
+                }
+              }
+            }
+          }
+        ],
+        "name" : "JSNameTransformer",
+        "properties" : [
+
+        ]
       }
     ],
     "structs" : [
@@ -19377,6 +19485,51 @@
           }
         ],
         "swiftCallName" : "Point"
+      },
+      {
+        "constructor" : {
+          "abiName" : "bjs_JSNameSnapshot_init",
+          "effects" : {
+            "isAsync" : false,
+            "isStatic" : false,
+            "isThrows" : false
+          },
+          "parameters" : [
+            {
+              "label" : "value",
+              "name" : "value",
+              "type" : {
+                "integer" : {
+                  "_0" : {
+                    "isSigned" : true,
+                    "width" : "word"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "jsName" : "CounterSnapshot",
+        "methods" : [
+
+        ],
+        "name" : "JSNameSnapshot",
+        "properties" : [
+          {
+            "isReadonly" : true,
+            "isStatic" : false,
+            "name" : "value",
+            "type" : {
+              "integer" : {
+                "_0" : {
+                  "isSigned" : true,
+                  "width" : "word"
+                }
+              }
+            }
+          }
+        ],
+        "swiftCallName" : "JSNameSnapshot"
       },
       {
         "constructor" : {

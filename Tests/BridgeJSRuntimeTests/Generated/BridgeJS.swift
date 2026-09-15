@@ -4858,6 +4858,33 @@ fileprivate func bjs_DataProcessor_optionalHelper_set_extern(_ jsObject: Int32, 
     return bjs_DataProcessor_optionalHelper_set_extern(jsObject, newValueIsSome, newValuePointer)
 }
 
+struct AnyJSNameTransformer: JSNameTransformer, _BridgedSwiftProtocolWrapper {
+    let jsObject: JSObject
+
+    func apply(_ value: Int) -> Int {
+        let valueValue = value.bridgeJSLowerParameter()
+        let jsObjectValue = jsObject.bridgeJSLowerParameter()
+        let ret = _extern_apply(jsObjectValue, valueValue)
+        return Int.bridgeJSLiftReturn(ret)
+    }
+
+    static func bridgeJSLiftParameter(_ value: Int32) -> Self {
+        return AnyJSNameTransformer(jsObject: JSObject(id: UInt32(bitPattern: value)))
+    }
+}
+
+#if arch(wasm32)
+@_extern(wasm, module: "BridgeJSRuntimeTests", name: "bjs_JSNameTransformer_apply")
+fileprivate func _extern_apply_extern(_ jsObject: Int32, _ value: Int32) -> Int32
+#else
+fileprivate func _extern_apply_extern(_ jsObject: Int32, _ value: Int32) -> Int32 {
+    fatalError("Only available on WebAssembly")
+}
+#endif
+@inline(never) fileprivate func _extern_apply(_ jsObject: Int32, _ value: Int32) -> Int32 {
+    return _extern_apply_extern(jsObject, value)
+}
+
 extension Severity: _BridgedSwiftCaseEnum {
     @_spi(BridgeJS) @_transparent public consuming func bridgeJSLowerParameter() -> Int32 {
         return bridgeJSRawValue
@@ -6899,6 +6926,19 @@ public func _bjs_IntegerTypesSupportExports_static_roundTripUInt64(_ v: Int64) -
     #endif
 }
 
+@_expose(wasm, "bjs_Renaming_JSNameTools_static_apply")
+@_cdecl("bjs_Renaming_JSNameTools_static_apply")
+public func _bjs_Renaming_JSNameTools_static_apply(_ transformer: Int32, _ value: Int32) -> Int32 {
+    #if arch(wasm32)
+    let value = Int.bridgeJSLiftParameter(value)
+    let transformer = AnyJSNameTransformer.bridgeJSLiftParameter(transformer)
+    let ret = JSNameTools.apply(_: transformer, _: value)
+    return ret.bridgeJSLowerReturn()
+    #else
+    fatalError("Only available on WebAssembly")
+    #endif
+}
+
 @_expose(wasm, "bjs_JSTypedArrayExports_static_roundTripUint8Array")
 @_cdecl("bjs_JSTypedArrayExports_static_roundTripUint8Array")
 public func _bjs_JSTypedArrayExports_static_roundTripUint8Array(_ v: Int32) -> Int32 {
@@ -7895,6 +7935,64 @@ fileprivate func _bjs_struct_lift_Point_extern() -> Int32 {
 #endif
 @inline(never) fileprivate func _bjs_struct_lift_Point() -> Int32 {
     return _bjs_struct_lift_Point_extern()
+}
+
+extension JSNameSnapshot: _BridgedSwiftStruct {
+    @_spi(BridgeJS) @_transparent public static func bridgeJSStackPop() -> JSNameSnapshot {
+        let value = Int.bridgeJSStackPop()
+        return JSNameSnapshot(value: value)
+    }
+
+    @_spi(BridgeJS) @_transparent public consuming func bridgeJSStackPush() {
+        self.value.bridgeJSStackPush()
+    }
+
+    init(unsafelyCopying jsObject: JSObject) {
+        _bjs_struct_lower_JSNameSnapshot(jsObject.bridgeJSLowerParameter())
+        self = Self.bridgeJSStackPop()
+    }
+
+    func toJSObject() -> JSObject {
+        let __bjs_self = self
+        __bjs_self.bridgeJSStackPush()
+        return JSObject(id: UInt32(bitPattern: _bjs_struct_lift_JSNameSnapshot()))
+    }
+}
+
+#if arch(wasm32)
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lower_JSNameSnapshot")
+fileprivate func _bjs_struct_lower_JSNameSnapshot_extern(_ objectId: Int32) -> Void
+#else
+fileprivate func _bjs_struct_lower_JSNameSnapshot_extern(_ objectId: Int32) -> Void {
+    fatalError("Only available on WebAssembly")
+}
+#endif
+@inline(never) fileprivate func _bjs_struct_lower_JSNameSnapshot(_ objectId: Int32) -> Void {
+    return _bjs_struct_lower_JSNameSnapshot_extern(objectId)
+}
+
+#if arch(wasm32)
+@_extern(wasm, module: "bjs", name: "swift_js_struct_lift_JSNameSnapshot")
+fileprivate func _bjs_struct_lift_JSNameSnapshot_extern() -> Int32
+#else
+fileprivate func _bjs_struct_lift_JSNameSnapshot_extern() -> Int32 {
+    fatalError("Only available on WebAssembly")
+}
+#endif
+@inline(never) fileprivate func _bjs_struct_lift_JSNameSnapshot() -> Int32 {
+    return _bjs_struct_lift_JSNameSnapshot_extern()
+}
+
+@_expose(wasm, "bjs_JSNameSnapshot_init")
+@_cdecl("bjs_JSNameSnapshot_init")
+public func _bjs_JSNameSnapshot_init(_ value: Int32) -> Void {
+    #if arch(wasm32)
+    let value = Int.bridgeJSLiftParameter(value)
+    let ret = JSNameSnapshot(value: value)
+    return ret.bridgeJSLowerReturn()
+    #else
+    fatalError("Only available on WebAssembly")
+    #endif
 }
 
 extension PointerFields: _BridgedSwiftStruct {
@@ -15552,6 +15650,10 @@ extension Point: BridgedSwiftGenericBridgeable {
     @_spi(BridgeJS) public static let bridgeJSTypeHandle = Point.bridgeJSMakeTypeHandle()
 }
 
+extension JSNameSnapshot: BridgedSwiftGenericBridgeable {
+    @_spi(BridgeJS) public static let bridgeJSTypeHandle = JSNameSnapshot.bridgeJSMakeTypeHandle()
+}
+
 extension PointerFields: BridgedSwiftGenericBridgeable {
     @_spi(BridgeJS) public static let bridgeJSTypeHandle = PointerFields.bridgeJSMakeTypeHandle()
 }
@@ -20859,6 +20961,7 @@ public func _bjs_BridgeJSRuntimeTests_register_type_handles() {
         GenericRTPoint.bridgeJSTypeID,
         GenericRTNamespace.Metadata.bridgeJSTypeID,
         Point.bridgeJSTypeID,
+        JSNameSnapshot.bridgeJSTypeID,
         PointerFields.bridgeJSTypeID,
         DataPoint.bridgeJSTypeID,
         PublicPoint.bridgeJSTypeID,

@@ -697,42 +697,6 @@ import Testing
     }
 
     @Test
-    func jsNameOnClassDiagnostic() throws {
-        let source = """
-            @JS("Renamed") class Box { @JS init() {} }
-            """
-        let diagnostics = try #require(moduleDiagnostics(source: source))
-        #expect(diagnostics.description.contains("A separate name for JavaScript is not supported here"))
-    }
-
-    @Test
-    func jsNameOnStructDiagnostic() throws {
-        let source = """
-            @JS("Renamed") struct Box { var x: Int }
-            """
-        let diagnostics = try #require(moduleDiagnostics(source: source))
-        #expect(diagnostics.description.contains("A separate name for JavaScript is not supported here"))
-    }
-
-    @Test
-    func jsNameOnEnumDiagnostic() throws {
-        let source = """
-            @JS("Renamed") enum Box { case a }
-            """
-        let diagnostics = try #require(moduleDiagnostics(source: source))
-        #expect(diagnostics.description.contains("A separate name for JavaScript is not supported here"))
-    }
-
-    @Test
-    func jsNameOnProtocolDiagnostic() throws {
-        let source = """
-            @JS("Renamed") protocol Box { func run() }
-            """
-        let diagnostics = try #require(moduleDiagnostics(source: source))
-        #expect(diagnostics.description.contains("A separate name for JavaScript is not supported here"))
-    }
-
-    @Test
     func jsNameOnInitializerDiagnostic() throws {
         let source = """
             @JS class Box { @JS("create") init() {} }
