@@ -6,7 +6,9 @@ Learn how to export Swift structs to JavaScript.
 
 > Tip: You can quickly preview what interfaces will be exposed on the Swift/JavaScript/TypeScript sides using the [BridgeJS Playground](https://swiftwasm.org/JavaScriptKit/PlayBridgeJS/).
 
-To export a Swift struct, mark it with `@JS`:
+To export a Swift struct, mark it with `@JS`.
+
+Use `@JS("PublicName")` to choose a different JavaScript and TypeScript name while keeping the Swift struct name. Generated interfaces, type references, and the instance export containing any exported initializer or static members use the chosen name. This does not change copy semantics or field names. Unlike `@JS(as: Other.self)`, it does not change the representation; the two options cannot be combined. See <doc:Exporting-Swift-Class> for an example of naming an exported type.
 
 ```swift
 import JavaScriptKit

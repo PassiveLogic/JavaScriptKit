@@ -12,7 +12,7 @@ import JavaScriptKit
     return "Hello, \(count) people!"
 }
 
-@JS class JSNameRenamedClass {
+@JS("NamedCounter") class JSNameRenamedClass {
     private var storage: Int
 
     @JS init(value: Int) {
@@ -30,5 +30,23 @@ import JavaScriptKit
 
     @JS("makeWithValue") static func create(value: Int) -> JSNameRenamedClass {
         return JSNameRenamedClass(value: value)
+    }
+}
+
+@JS("CounterSnapshot") struct JSNameSnapshot {
+    var value: Int
+
+    @JS init(value: Int) {
+        self.value = value
+    }
+}
+
+@JS("CounterTransform") protocol JSNameTransformer {
+    func apply(_ value: Int) -> Int
+}
+
+@JS("CounterTools", namespace: "Renaming") enum JSNameTools {
+    @JS static func apply(_ transformer: JSNameTransformer, _ value: Int) -> Int {
+        transformer.apply(value)
     }
 }

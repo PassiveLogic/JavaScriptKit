@@ -50,7 +50,7 @@ public enum JSName: ExpressibleByStringLiteral {
     }
 }
 
-/// A macro that exposes Swift functions, classes, and methods to JavaScript.
+/// A macro that exposes Swift declarations to JavaScript and TypeScript.
 ///
 /// Apply this macro to Swift declarations that you want to make callable from JavaScript:
 ///
@@ -138,9 +138,26 @@ public enum JSName: ExpressibleByStringLiteral {
 /// accessible from JavaScript, and TypeScript declaration files (`.d.ts`) will be
 /// automatically generated to provide type safety.
 ///
+/// Use the first argument to choose a JavaScript and TypeScript name without changing
+/// the Swift identifier: `@JS("Counter") class InternalCounter`. This also works on
+/// structs, enums, and protocols. Generated type references use the chosen name,
+/// including references in optional, array, and callback signatures. Nested exported
+/// declarations inherit their enclosing types' exported names in their namespace paths.
+/// For const-style enums, the chosen name is the stem of the generated `Values`, `Tag`,
+/// and `Object` names.
+///
+/// A renamed class constructor is still accessed through the WASM instance's exports
+/// object, such as `exports.Counter`, not as a named JavaScript module export.
+/// Renaming does not change bridging or memory-management semantics. In contrast,
+/// `@JS(as: Other.self)` changes the JavaScript representation using conversion methods.
+/// Combining a custom name with `as:` on the same declaration is not supported.
+///
 /// For detailed usage information, see the article <doc:Exporting-Swift-to-JavaScript>.
 ///
-/// - Parameter name: A different name to use in the exported JavaScript.
+/// - Parameter name: A different JavaScript and TypeScript name for the exported declaration.
+///                   Does not rename the Swift declaration or change its representation.
+/// - Parameter aliasOf: A different JavaScript representation, supplied as `as: Other.self`.
+///                      Requires `bridgeToJS()` and `bridgeFromJS(_:)` conversions and cannot be combined with `name`.
 /// - Parameter namespace: A dot-separated string that defines the namespace hierarchy in JavaScript.
 ///                        Each segment becomes a nested object in the resulting JavaScript structure.
 /// - Parameter enumStyle: Controls how enums are emitted to TypeScript for this declaration:

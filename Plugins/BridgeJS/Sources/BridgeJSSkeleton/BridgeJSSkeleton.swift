@@ -4,10 +4,17 @@
 
 public protocol NamespacedExportedType {
     var name: String { get }
+    var jsName: String? { get }
+    /// The namespace using Swift declaration names, retained for ABI generation.
     var namespace: [String]? { get }
+    /// The public namespace when an enclosing declaration has an exported name override.
+    var jsNamespace: [String]? { get }
 }
 
 extension NamespacedExportedType {
+    public var resolvedJSName: String { jsName ?? name }
+    public var resolvedJSNamespace: [String]? { jsNamespace ?? namespace }
+
     public var abiName: String {
         if let namespace = namespace, !namespace.isEmpty {
             return (namespace + [name]).joined(separator: "_")
@@ -16,7 +23,7 @@ extension NamespacedExportedType {
     }
 
     public var tsPathComponents: [String] {
-        (namespace ?? []) + [name]
+        (resolvedJSNamespace ?? []) + [resolvedJSName]
     }
 
     public var tsFullPath: String {
@@ -778,31 +785,37 @@ public struct StructField: Codable, Equatable, Sendable {
 
 public struct ExportedStruct: Codable, Equatable, Sendable, NamespacedExportedType {
     public let name: String
+    public let jsName: String?
     public let swiftCallName: String
     public let explicitAccessControl: String?
     public var properties: [ExportedProperty]
     public var constructor: ExportedConstructor?
     public var methods: [ExportedFunction]
     public let namespace: [String]?
+    public let jsNamespace: [String]?
     public var documentation: String?
 
     public init(
         name: String,
+        jsName: String? = nil,
         swiftCallName: String,
         explicitAccessControl: String?,
         properties: [ExportedProperty] = [],
         constructor: ExportedConstructor? = nil,
         methods: [ExportedFunction] = [],
         namespace: [String]?,
+        jsNamespace: [String]? = nil,
         documentation: String? = nil
     ) {
         self.name = name
+        self.jsName = jsName
         self.swiftCallName = swiftCallName
         self.explicitAccessControl = explicitAccessControl
         self.properties = properties
         self.constructor = constructor
         self.methods = methods
         self.namespace = namespace
+        self.jsNamespace = jsNamespace
         self.documentation = documentation
     }
 }
@@ -864,12 +877,14 @@ public struct ExportedEnum: Codable, Equatable, Sendable, NamespacedExportedType
     public static let objectSuffix = "Object"
 
     public let name: String
+    public let jsName: String?
     public let swiftCallName: String
     public let tsFullPath: String
     public let explicitAccessControl: String?
     public var cases: [EnumCase]
     public let rawType: SwiftEnumRawType?
     public let namespace: [String]?
+    public let jsNamespace: [String]?
     public let emitStyle: EnumEmitStyle
     public var staticMethods: [ExportedFunction]
     public var staticProperties: [ExportedProperty] = []
@@ -885,33 +900,36 @@ public struct ExportedEnum: Codable, Equatable, Sendable, NamespacedExportedType
     }
 
     public var valuesName: String {
-        emitStyle == .tsEnum ? name : "\(name)\(Self.valuesSuffix)"
+        emitStyle == .tsEnum ? resolvedJSName : "\(resolvedJSName)\(Self.valuesSuffix)"
     }
 
     public var objectTypeName: String {
-        "\(name)\(Self.objectSuffix)"
+        "\(resolvedJSName)\(Self.objectSuffix)"
     }
 
     public init(
         name: String,
+        jsName: String? = nil,
         swiftCallName: String,
-        tsFullPath: String,
         explicitAccessControl: String?,
         cases: [EnumCase],
         rawType: SwiftEnumRawType?,
         namespace: [String]?,
+        jsNamespace: [String]? = nil,
         emitStyle: EnumEmitStyle,
         staticMethods: [ExportedFunction] = [],
         staticProperties: [ExportedProperty] = [],
         documentation: String? = nil
     ) {
         self.name = name
+        self.jsName = jsName
         self.swiftCallName = swiftCallName
-        self.tsFullPath = tsFullPath
+        self.tsFullPath = ((jsNamespace ?? namespace ?? []) + [jsName ?? name]).joined(separator: ".")
         self.explicitAccessControl = explicitAccessControl
         self.cases = cases
         self.rawType = rawType
         self.namespace = namespace
+        self.jsNamespace = jsNamespace
         self.emitStyle = emitStyle
         self.staticMethods = staticMethods
         self.staticProperties = staticProperties
@@ -947,24 +965,30 @@ public struct ExportedProtocolProperty: Codable, Equatable, Sendable {
     }
 }
 
-public struct ExportedProtocol: Codable, Equatable {
+public struct ExportedProtocol: Codable, Equatable, NamespacedExportedType {
     public let name: String
+    public let jsName: String?
     public let methods: [ExportedFunction]
     public let properties: [ExportedProtocolProperty]
     public let namespace: [String]?
+    public let jsNamespace: [String]?
     public var documentation: String?
 
     public init(
         name: String,
+        jsName: String? = nil,
         methods: [ExportedFunction],
         properties: [ExportedProtocolProperty] = [],
         namespace: [String]? = nil,
+        jsNamespace: [String]? = nil,
         documentation: String? = nil
     ) {
         self.name = name
+        self.jsName = jsName
         self.methods = methods
         self.properties = properties
         self.namespace = namespace
+        self.jsNamespace = jsNamespace
         self.documentation = documentation
     }
 }
@@ -1007,35 +1031,41 @@ public struct ExportedFunction: Codable, Equatable, Sendable {
 
 public struct ExportedClass: Codable, NamespacedExportedType {
     public var name: String
+    public var jsName: String?
     public var swiftCallName: String
     public var explicitAccessControl: String?
     public var constructor: ExportedConstructor?
     public var methods: [ExportedFunction]
     public var properties: [ExportedProperty]
     public var namespace: [String]?
+    public var jsNamespace: [String]?
     public var identityMode: Bool?  // nil = use config default, true/false = override
     public var documentation: String?
     public var isFinal: Bool?
 
     public init(
         name: String,
+        jsName: String? = nil,
         swiftCallName: String,
         explicitAccessControl: String?,
         constructor: ExportedConstructor? = nil,
         methods: [ExportedFunction],
         properties: [ExportedProperty] = [],
         namespace: [String]? = nil,
+        jsNamespace: [String]? = nil,
         identityMode: Bool? = nil,
         documentation: String? = nil,
         isFinal: Bool? = nil
     ) {
         self.name = name
+        self.jsName = jsName
         self.swiftCallName = swiftCallName
         self.explicitAccessControl = explicitAccessControl
         self.constructor = constructor
         self.methods = methods
         self.properties = properties
         self.namespace = namespace
+        self.jsNamespace = jsNamespace
         self.identityMode = identityMode
         self.documentation = documentation
         self.isFinal = isFinal

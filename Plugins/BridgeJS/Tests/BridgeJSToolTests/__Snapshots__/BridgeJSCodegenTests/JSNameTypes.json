@@ -1,0 +1,115 @@
+{
+  "exported" : {
+    "aliases" : [
+
+    ],
+    "classes" : [
+      {
+        "constructor" : {
+          "abiName" : "bjs_SwiftBox_init",
+          "effects" : {
+            "isAsync" : false,
+            "isStatic" : false,
+            "isThrows" : false
+          },
+          "parameters" : [
+
+          ]
+        },
+        "isFinal" : true,
+        "jsName" : "PublicBox",
+        "methods" : [
+          {
+            "abiName" : "bjs_SwiftBox_copy",
+            "effects" : {
+              "isAsync" : false,
+              "isStatic" : false,
+              "isThrows" : false
+            },
+            "name" : "copy",
+            "parameters" : [
+
+            ],
+            "returnType" : {
+              "swiftHeapObject" : {
+                "_0" : "SwiftBox"
+              }
+            }
+          }
+        ],
+        "name" : "SwiftBox",
+        "properties" : [
+
+        ],
+        "swiftCallName" : "SwiftBox"
+      }
+    ],
+    "enums" : [
+      {
+        "cases" : [
+          {
+            "associatedValues" : [
+
+            ],
+            "name" : "first"
+          },
+          {
+            "associatedValues" : [
+
+            ],
+            "name" : "second"
+          }
+        ],
+        "emitStyle" : "const",
+        "jsName" : "PublicChoice",
+        "name" : "SwiftChoice",
+        "staticMethods" : [
+
+        ],
+        "staticProperties" : [
+
+        ],
+        "swiftCallName" : "SwiftChoice",
+        "tsFullPath" : "PublicChoice"
+      }
+    ],
+    "exposeToGlobal" : false,
+    "functions" : [
+      {
+        "abiName" : "bjs_renamedChoice",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "name" : "renamedChoice",
+        "parameters" : [
+          {
+            "label" : "_",
+            "name" : "value",
+            "type" : {
+              "caseEnum" : {
+                "_0" : "SwiftChoice"
+              }
+            }
+          }
+        ],
+        "returnType" : {
+          "caseEnum" : {
+            "_0" : "SwiftChoice"
+          }
+        }
+      }
+    ],
+    "protocols" : [
+
+    ],
+    "structs" : [
+
+    ]
+  },
+  "moduleName" : "TestModule",
+  "usedExternalModules" : [
+
+  ]
+}

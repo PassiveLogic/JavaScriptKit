@@ -226,7 +226,7 @@ public struct BridgeJSLink {
                 }
             }
 
-            for structDefinition in skeleton.structs where structDefinition.namespace == nil {
+            for structDefinition in skeleton.structs where structDefinition.resolvedJSNamespace == nil {
                 data.topLevelDtsTypeLines.append(
                     contentsOf: renderExportedStructInterface(structDefinition)
                 )
@@ -405,7 +405,6 @@ public struct BridgeJSLink {
             scope: JSGlueVariableScope(intrinsicRegistry: intrinsicRegistry),
             printer: printer,
             hasDirectAccessToSwiftClass: false,
-            classNamespaces: intrinsicRegistry.classNamespaces
         )
     }
 
@@ -1022,7 +1021,7 @@ public struct BridgeJSLink {
         for skeleton in exportedSkeletons {
             for proto in skeleton.protocols {
                 printer.write(lines: renderJSDoc(documentation: proto.documentation, parameters: []))
-                printer.write("export interface \(proto.name) {")
+                printer.write("export interface \(proto.resolvedJSName) {")
                 printer.indent {
                     for method in proto.methods {
                         printer.write(
@@ -1057,7 +1056,7 @@ public struct BridgeJSLink {
 
                 // Use fully-qualified path for namespaced enums
                 let fullEnumValuesPath: String
-                if let namespace = enumDefinition.namespace, !namespace.isEmpty {
+                if let namespace = enumDefinition.resolvedJSNamespace, !namespace.isEmpty {
                     fullEnumValuesPath = namespace.joined(separator: ".") + "." + enumValuesName
                 } else {
                     fullEnumValuesPath = enumValuesName
@@ -1134,7 +1133,7 @@ public struct BridgeJSLink {
             renderPropertyEntry: { property in
                 let readonly = property.isReadonly ? "readonly " : ""
                 return self.renderJSDoc(documentation: property.documentation, parameters: [])
-                    + ["\(readonly)\(property.resolvedJSName): \(property.type.tsType);"]
+                    + ["\(readonly)\(property.resolvedJSName): \(self.resolveTypeScriptType(property.type));"]
             }
         )
         printer.write("export type Exports = {")
@@ -1226,7 +1225,6 @@ public struct BridgeJSLink {
                         scope: structScope,
                         printer: structPrinter,
                         hasDirectAccessToSwiftClass: false,
-                        classNamespaces: intrinsicRegistry.classNamespaces
                     )
                 )
                 bodyPrinter.write(lines: structPrinter.lines)
@@ -1248,7 +1246,6 @@ public struct BridgeJSLink {
                         scope: enumScope,
                         printer: enumPrinter,
                         hasDirectAccessToSwiftClass: false,
-                        classNamespaces: intrinsicRegistry.classNamespaces
                     )
                 )
                 bodyPrinter.write(lines: enumPrinter.lines)
@@ -1348,12 +1345,14 @@ public struct BridgeJSLink {
     public func link(sharedMemory: Bool = false) throws -> (outputJs: String, outputDts: String) {
         intrinsicRegistry.reset()
         importedModuleRegistry.configure(skeletons: skeletons)
-        intrinsicRegistry.classNamespaces = skeletons.reduce(into: [:]) { result, unified in
-            guard let skeleton = unified.exported else { return }
-            for klass in skeleton.classes {
-                if let namespace = klass.namespace {
-                    result[klass.name] = namespace
-                }
+        intrinsicRegistry.classPaths = skeletons.reduce(into: [:]) { result, unified in
+            for klass in unified.exported?.classes ?? [] {
+                result[klass.swiftCallName] = klass.tsPathComponents
+            }
+        }
+        intrinsicRegistry.renamedEnumNames = skeletons.reduce(into: [:]) { result, unified in
+            for enumDef in unified.exported?.enums ?? [] where enumDef.resolvedJSName != enumDef.name {
+                result[enumDef.swiftCallName] = (value: enumDef.valuesName, type: enumDef.resolvedJSName)
             }
         }
         intrinsicRegistry.typeOwnerModules = collectTypeOwnerModules()
@@ -1454,9 +1453,10 @@ public struct BridgeJSLink {
 
             for klass in classes.sorted(by: { $0.name < $1.name }) {
                 let wrapperFunctionName = "bjs_\(klass.abiName)_wrap"
-                let namespacePath = (klass.namespace ?? []).map { ".\($0)" }.joined()
+                let namespacePath = (klass.resolvedJSNamespace ?? []).map { ".\($0)" }.joined()
                 let exportsPath =
-                    namespacePath.isEmpty ? "_exports['\(klass.name)']" : "_exports\(namespacePath).\(klass.name)"
+                    namespacePath.isEmpty
+                    ? "_exports['\(klass.resolvedJSName)']" : "_exports\(namespacePath).\(klass.resolvedJSName)"
                 wrapperLines.append("importObject[\"\(moduleName)\"][\"\(wrapperFunctionName)\"] = function(pointer) {")
                 wrapperLines.append("    const obj = \(exportsPath).__construct(pointer);")
                 wrapperLines.append("    return \(JSGlueVariableScope.reservedSwift).memory.retain(obj);")
@@ -1570,7 +1570,6 @@ public struct BridgeJSLink {
                 scope: scope,
                 printer: body,
                 hasDirectAccessToSwiftClass: hasDirectAccessToSwiftClass,
-                classNamespaces: intrinsicRegistry.classNamespaces
             )
         }
 
@@ -1665,7 +1664,10 @@ public struct BridgeJSLink {
         ) -> [String] {
             let printer = CodeFragmentPrinter()
 
-            let parameterList = DefaultValueUtils.formatParameterList(parameters)
+            let parameterList = DefaultValueUtils.formatParameterList(
+                parameters,
+                resolveTypeName: context.defaultValueTypeName
+            )
 
             printer.write(
                 "\(declarationPrefixKeyword.map { "\($0) "} ?? "")\(name)(\(parameterList)) {"
@@ -1679,15 +1681,12 @@ public struct BridgeJSLink {
         }
     }
 
-    /// Returns TypeScript type string for a BridgeType, using full paths for enums
-    /// If the type is an enum, looks up the ExportedEnum and uses its tsFullPath
-    /// Otherwise, uses the default tsType property
+    /// Resolves public TypeScript names without changing the skeleton's Swift type identities.
     private func resolveTypeScriptType(_ type: BridgeType) -> String {
         return Self.resolveTypeScriptType(type, exportedSkeletons: skeletons.compactMap(\.exported))
     }
 
-    /// Static helper for resolving TypeScript types with full enum paths
-    /// Can be used by both BridgeJSLink and NamespaceBuilder
+    /// Recursively resolves nominal types in signatures shared by the linker and namespace builder.
     fileprivate static func resolveTypeScriptType(_ type: BridgeType, exportedSkeletons: [ExportedSkeleton]) -> String {
         switch type {
         case .caseEnum(let name), .rawValueEnum(let name, _),
@@ -1723,8 +1722,15 @@ public struct BridgeJSLink {
             for skeleton in exportedSkeletons {
                 for klass in skeleton.classes {
                     if klass.swiftCallName == name {
-                        return klass.name
+                        return klass.resolvedJSName
                     }
+                }
+            }
+            return type.tsType
+        case .swiftProtocol(let name):
+            for skeleton in exportedSkeletons {
+                if let proto = skeleton.protocols.first(where: { $0.name == name }) {
+                    return proto.resolvedJSName
                 }
             }
             return type.tsType
@@ -1790,7 +1796,7 @@ public struct BridgeJSLink {
         for line in renderJSDoc(documentation: structDefinition.documentation, parameters: []) {
             dtsTypePrinter.write(line)
         }
-        dtsTypePrinter.write("export interface \(structDefinition.name) {")
+        dtsTypePrinter.write("export interface \(structDefinition.resolvedJSName) {")
         dtsTypePrinter.indent {
             for property in structDefinition.properties where !property.isStatic {
                 let tsType = resolveTypeScriptType(property.type)
@@ -1865,7 +1871,10 @@ public struct BridgeJSLink {
             )
 
             let constructorPrinter = CodeFragmentPrinter()
-            let paramList = DefaultValueUtils.formatParameterList(constructor.parameters)
+            let paramList = DefaultValueUtils.formatParameterList(
+                constructor.parameters,
+                resolveTypeName: thunkBuilder.context.defaultValueTypeName
+            )
             constructorPrinter.write("init: function(\(paramList)) {")
             constructorPrinter.indent {
                 thunkBuilder.renderFunctionBody(into: constructorPrinter, returnExpr: returnExpr)
@@ -1924,7 +1933,7 @@ public struct BridgeJSLink {
             break
         }
 
-        if enumDefinition.namespace == nil {
+        if enumDefinition.resolvedJSNamespace == nil {
             dtsTypeLines.append(contentsOf: generateDeclarations(enumDefinition: enumDefinition))
         }
 
@@ -1933,7 +1942,7 @@ public struct BridgeJSLink {
 
         if enumDefinition.enumType != .namespace
             && enumDefinition.emitStyle != .tsEnum
-            && enumDefinition.namespace == nil
+            && enumDefinition.resolvedJSNamespace == nil
         {
             var enumMethodLines: [String] = []
             for function in enumDefinition.staticMethods {
@@ -1953,7 +1962,7 @@ public struct BridgeJSLink {
             let exportsPrinter = CodeFragmentPrinter()
 
             if !enumMethodLines.isEmpty || !enumPropertyLines.isEmpty {
-                exportsPrinter.write("\(enumDefinition.name): {")
+                exportsPrinter.write("\(enumDefinition.resolvedJSName): {")
                 exportsPrinter.indent {
                     exportsPrinter.write("...\(enumValuesName),")
                     var allLines = enumMethodLines + enumPropertyLines
@@ -1964,11 +1973,11 @@ public struct BridgeJSLink {
                 }
                 exportsPrinter.write("},")
             } else {
-                exportsPrinter.write("\(enumDefinition.name): \(enumValuesName),")
+                exportsPrinter.write("\(enumDefinition.resolvedJSName): \(enumValuesName),")
             }
 
             jsExportEntryLines = exportsPrinter.lines
-            dtsExportEntryLines = ["\(enumDefinition.name): \(enumDefinition.objectTypeName)"]
+            dtsExportEntryLines = ["\(enumDefinition.resolvedJSName): \(enumDefinition.objectTypeName)"]
         }
 
         return (jsTopLevelLines, jsExportEntryLines, dtsTypeLines, dtsExportEntryLines)
@@ -1986,7 +1995,7 @@ public struct BridgeJSLink {
         case .tsEnum:
             switch enumDefinition.enumType {
             case .simple, .rawValue:
-                printer.write("export enum \(enumDefinition.name) {")
+                printer.write("export enum \(enumDefinition.resolvedJSName) {")
                 printer.indent {
                     for (index, enumCase) in enumDefinition.cases.enumerated() {
                         let caseName = enumCase.name.capitalizedFirstLetter
@@ -2020,7 +2029,7 @@ public struct BridgeJSLink {
                 }
                 printer.write("};")
                 printer.write(
-                    "export type \(enumDefinition.name)Tag = typeof \(enumValuesName)[keyof typeof \(enumValuesName)];"
+                    "export type \(enumDefinition.resolvedJSName)Tag = typeof \(enumValuesName)[keyof typeof \(enumValuesName)];"
                 )
                 printer.nextLine()
             case .associatedValue:
@@ -2057,7 +2066,8 @@ public struct BridgeJSLink {
                 }
 
                 let unionTypeName =
-                    enumDefinition.emitStyle == .tsEnum ? enumDefinition.name : "\(enumDefinition.name)Tag"
+                    enumDefinition.emitStyle == .tsEnum
+                    ? enumDefinition.resolvedJSName : "\(enumDefinition.resolvedJSName)Tag"
                 printer.write("export type \(unionTypeName) =")
                 printer.write("  " + unionParts.joined(separator: " | "))
                 printer.nextLine()
@@ -2170,7 +2180,11 @@ extension BridgeJSLink {
         let returnExpr = try thunkBuilder.call(abiName: function.abiName, returnType: function.returnType)
 
         let printer = CodeFragmentPrinter()
-        printer.write("\(function.resolvedJSName)(\(DefaultValueUtils.formatParameterList(function.parameters))) {")
+        let parameterList = DefaultValueUtils.formatParameterList(
+            function.parameters,
+            resolveTypeName: thunkBuilder.context.defaultValueTypeName
+        )
+        printer.write("\(function.resolvedJSName)(\(parameterList)) {")
         printer.indent {
             thunkBuilder.renderFunctionBody(into: printer, returnExpr: returnExpr)
         }
@@ -2226,8 +2240,12 @@ extension BridgeJSLink {
         let returnExpr = try thunkBuilder.call(abiName: method.abiName, returnType: method.returnType)
 
         let methodPrinter = CodeFragmentPrinter()
+        let parameterList = DefaultValueUtils.formatParameterList(
+            method.parameters,
+            resolveTypeName: thunkBuilder.context.defaultValueTypeName
+        )
         methodPrinter.write(
-            "\(method.resolvedJSName): function(\(DefaultValueUtils.formatParameterList(method.parameters))) {"
+            "\(method.resolvedJSName): function(\(parameterList)) {"
         )
         methodPrinter.indent {
             thunkBuilder.renderFunctionBody(into: methodPrinter, returnExpr: returnExpr)
@@ -2296,8 +2314,8 @@ extension BridgeJSLink {
         for line in renderJSDoc(documentation: klass.documentation, parameters: []) {
             dtsTypePrinter.write(line)
         }
-        dtsTypePrinter.write("export interface \(klass.name) extends SwiftHeapObject {")
-        jsPrinter.write("class \(klass.name) extends SwiftHeapObject {")
+        dtsTypePrinter.write("export interface \(klass.resolvedJSName) extends SwiftHeapObject {")
+        jsPrinter.write("class \(klass.resolvedJSName) extends SwiftHeapObject {")
 
         // Per-class identity mode: determine at codegen time whether this class uses identity caching
         let useIdentity = shouldUseIdentityCache(for: klass)
@@ -2310,11 +2328,11 @@ extension BridgeJSLink {
             jsPrinter.indent {
                 if useIdentity {
                     jsPrinter.write(
-                        "return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_\(klass.abiName)_deinit, \(klass.name).prototype, \(klass.name).__identityCache);"
+                        "return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_\(klass.abiName)_deinit, \(klass.resolvedJSName).prototype, \(klass.resolvedJSName).__identityCache);"
                     )
                 } else {
                     jsPrinter.write(
-                        "return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_\(klass.abiName)_deinit, \(klass.name).prototype, null);"
+                        "return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_\(klass.abiName)_deinit, \(klass.resolvedJSName).prototype, null);"
                     )
                 }
             }
@@ -2331,12 +2349,15 @@ extension BridgeJSLink {
                 try thunkBuilder.lowerParameter(param: param)
             }
 
-            let constructorParamList = DefaultValueUtils.formatParameterList(constructor.parameters)
+            let constructorParamList = DefaultValueUtils.formatParameterList(
+                constructor.parameters,
+                resolveTypeName: thunkBuilder.context.defaultValueTypeName
+            )
 
             jsPrinter.indent {
                 jsPrinter.write("constructor(\(constructorParamList)) {")
                 let returnExpr = thunkBuilder.callConstructor(abiName: constructor.abiName)
-                let constructCall = "\(klass.name).__construct(\(returnExpr))"
+                let constructCall = "\(klass.resolvedJSName).__construct(\(returnExpr))"
                 jsPrinter.indent {
                     thunkBuilder.renderFunctionBody(
                         into: jsPrinter,
@@ -2430,7 +2451,7 @@ extension BridgeJSLink {
                 lines: renderJSDoc(documentation: constructor.documentation, parameters: constructor.parameters)
             )
             printer.write(
-                "new\(renderTSSignature(parameters: constructor.parameters, returnType: .swiftHeapObject(klass.name), effects: constructor.effects));"
+                "new\(renderTSSignature(parameters: constructor.parameters, returnType: .swiftHeapObject(klass.swiftCallName), effects: constructor.effects));"
             )
         }
         for method in klass.methods where method.effects.isStatic {
@@ -2452,12 +2473,12 @@ extension BridgeJSLink {
     ) -> [String] {
         let printer = CodeFragmentPrinter()
         printer.write(lines: renderJSDoc(documentation: klass.documentation, parameters: []))
-        printer.write("class \(klass.name) {")
+        printer.write("class \(klass.resolvedJSName) {")
         printer.indent {
             if let constructor = klass.constructor {
                 let paramSignatures = constructor.parameters.map { param in
                     let optional = param.hasDefault ? "?" : ""
-                    return "\(param.name)\(optional): \(param.type.tsType)"
+                    return "\(param.name)\(optional): \(resolveTypeScriptType(param.type))"
                 }
                 printer.write(
                     lines: renderJSDoc(documentation: constructor.documentation, parameters: constructor.parameters)
@@ -2584,7 +2605,6 @@ extension BridgeJSLink {
                 scope: scope,
                 printer: body,
                 hasDirectAccessToSwiftClass: false,
-                classNamespaces: intrinsicRegistry.classNamespaces
             )
         }
 
@@ -2922,9 +2942,9 @@ extension BridgeJSLink {
             return Set(
                 exportedSkeletons.flatMap { skeleton in
                     let itemNamespaces =
-                        (skeleton.functions.compactMap(\.namespace) + skeleton.classes.compactMap(\.namespace)
-                            + skeleton.enums.filter { $0.namespace != nil && $0.enumType != .namespace }
-                            .compactMap(\.namespace))
+                        (skeleton.functions.compactMap(\.namespace) + skeleton.classes.compactMap(\.resolvedJSNamespace)
+                            + skeleton.enums.filter { $0.resolvedJSNamespace != nil && $0.enumType != .namespace }
+                            .compactMap(\.resolvedJSNamespace))
 
                     let namespaceEnumPaths = skeleton.enums
                         .filter { $0.enumType == .namespace }
@@ -2951,8 +2971,9 @@ extension BridgeJSLink {
 
             var namespacedEnumPaths: Set<[String]> = []
             for skeleton in globalSkeletons {
-                for enumDef in skeleton.enums where enumDef.namespace != nil && enumDef.enumType != .namespace {
-                    namespacedEnumPaths.insert(enumDef.namespace!)
+                for enumDef in skeleton.enums where enumDef.resolvedJSNamespace != nil && enumDef.enumType != .namespace
+                {
+                    namespacedEnumPaths.insert(enumDef.resolvedJSNamespace!)
                 }
             }
 
@@ -2962,8 +2983,9 @@ extension BridgeJSLink {
             printer.write(lines: initCode)
 
             for skeleton in globalSkeletons {
-                for enumDef in skeleton.enums where enumDef.namespace != nil && enumDef.enumType != .namespace {
-                    let namespacePath = enumDef.namespace!.joined(separator: ".")
+                for enumDef in skeleton.enums where enumDef.resolvedJSNamespace != nil && enumDef.enumType != .namespace
+                {
+                    let namespacePath = enumDef.resolvedJSNamespace!.joined(separator: ".")
                     printer.write("globalThis.\(namespacePath).\(enumDef.valuesName) = \(enumDef.valuesName);")
                 }
             }
@@ -2975,9 +2997,11 @@ extension BridgeJSLink {
             let printer = CodeFragmentPrinter()
 
             for skeleton in exportedSkeletons where skeleton.exposeToGlobal {
-                for klass in skeleton.classes where klass.namespace != nil {
-                    let namespacePath = klass.namespace!.joined(separator: ".")
-                    printer.write("globalThis.\(namespacePath).\(klass.name) = exports.\(namespacePath).\(klass.name);")
+                for klass in skeleton.classes where klass.resolvedJSNamespace != nil {
+                    let namespacePath = klass.resolvedJSNamespace!.joined(separator: ".")
+                    printer.write(
+                        "globalThis.\(namespacePath).\(klass.resolvedJSName) = exports.\(namespacePath).\(klass.resolvedJSName);"
+                    )
                 }
                 for function in skeleton.functions where function.namespace != nil {
                     let namespacePath = function.namespace!.joined(separator: ".")
@@ -3120,9 +3144,10 @@ extension BridgeJSLink {
                     currentNode.content.declaration = .structType(structDef)
                 }
 
-                for enumDef in skeleton.enums where enumDef.namespace != nil && enumDef.enumType != .namespace {
+                for enumDef in skeleton.enums where enumDef.resolvedJSNamespace != nil && enumDef.enumType != .namespace
+                {
                     var currentNode = rootNode
-                    for part in enumDef.namespace! {
+                    for part in enumDef.resolvedJSNamespace! {
                         currentNode = currentNode.addChild(part)
                     }
                     currentNode.content.enums.append(enumDef)
@@ -3199,7 +3224,9 @@ extension BridgeJSLink {
             }
 
             for enumDef in node.content.enums {
-                node.content.enumDtsLines.append((enumDef.name, "\(enumDef.name): \(enumDef.objectTypeName)"))
+                node.content.enumDtsLines.append(
+                    (enumDef.resolvedJSName, "\(enumDef.resolvedJSName): \(enumDef.objectTypeName)")
+                )
             }
 
             for (_, childNode) in node.children {
@@ -3410,7 +3437,7 @@ extension BridgeJSLink {
             printer.write(lines: node.content.structJsLines)
 
             for enumDef in node.content.enums.sorted(by: { $0.name < $1.name }) {
-                printer.write("\(enumDef.name): \(enumDef.valuesName),")
+                printer.write("\(enumDef.resolvedJSName): \(enumDef.valuesName),")
             }
 
             // Print function and property implementations
@@ -3573,7 +3600,7 @@ extension BridgeJSLink {
                         case .simple:
                             switch style {
                             case .tsEnum:
-                                printer.write("enum \(enumDefinition.name) {")
+                                printer.write("enum \(enumDefinition.resolvedJSName) {")
                                 printer.indent {
                                     for (index, enumCase) in enumDefinition.cases.enumerated() {
                                         let caseName = enumCase.name.capitalizedFirstLetter
@@ -3591,14 +3618,14 @@ extension BridgeJSLink {
                                 }
                                 printer.write("};")
                                 printer.write(
-                                    "type \(enumDefinition.name)Tag = typeof \(enumValuesName)[keyof typeof \(enumValuesName)];"
+                                    "type \(enumDefinition.resolvedJSName)Tag = typeof \(enumValuesName)[keyof typeof \(enumValuesName)];"
                                 )
                             }
                         case .rawValue:
                             guard let rawType = enumDefinition.rawType else { continue }
                             switch style {
                             case .tsEnum:
-                                printer.write("enum \(enumDefinition.name) {")
+                                printer.write("enum \(enumDefinition.resolvedJSName) {")
                                 printer.indent {
                                     for (index, enumCase) in enumDefinition.cases.enumerated() {
                                         let caseName = enumCase.name.capitalizedFirstLetter
@@ -3624,7 +3651,7 @@ extension BridgeJSLink {
                                 }
                                 printer.write("};")
                                 printer.write(
-                                    "type \(enumDefinition.name)Tag = typeof \(enumValuesName)[keyof typeof \(enumValuesName)];"
+                                    "type \(enumDefinition.resolvedJSName)Tag = typeof \(enumValuesName)[keyof typeof \(enumValuesName)];"
                                 )
                             }
                         case .associatedValue:
@@ -3663,7 +3690,8 @@ extension BridgeJSLink {
                                 }
                             }
                             let unionTypeName =
-                                enumDefinition.emitStyle == .tsEnum ? enumDefinition.name : "\(enumDefinition.name)Tag"
+                                enumDefinition.emitStyle == .tsEnum
+                                ? enumDefinition.resolvedJSName : "\(enumDefinition.resolvedJSName)Tag"
                             printer.write("type \(unionTypeName) =")
                             printer.write("  " + unionParts.joined(separator: " | "))
                         case .namespace:
@@ -3688,7 +3716,9 @@ extension BridgeJSLink {
                         for property in sortedProperties {
                             let readonly = property.isReadonly ? "var " : "let "
                             printer.write(lines: renderDocCallback(property.documentation, []))
-                            printer.write("\(readonly)\(property.resolvedJSName): \(property.type.tsType);")
+                            printer.write(
+                                "\(readonly)\(property.resolvedJSName): \(BridgeJSLink.resolveTypeScriptType(property.type, exportedSkeletons: exportedSkeletons));"
+                            )
                         }
                     }
 
@@ -3769,7 +3799,8 @@ extension BridgeJSLink {
         let abiName = getter.abiName(context: nil)
         let funcLines = thunkBuilder.renderFunction(name: abiName)
         if getter.from == nil {
-            importObjectBuilder.appendDts(["readonly \(renderTSPropertyName(jsName)): \(getter.type.tsType);"]
+            importObjectBuilder.appendDts(
+                ["readonly \(renderTSPropertyName(jsName)): \(resolveTypeScriptType(getter.type));"]
             )
         }
         importObjectBuilder.assignToImportObject(name: abiName, function: funcLines)
@@ -4036,7 +4067,11 @@ enum DefaultValueUtils {
     }
 
     /// Generates default value representation for JavaScript or TypeScript
-    static func format(_ defaultValue: DefaultValue, as format: OutputFormat) -> String {
+    static func format(
+        _ defaultValue: DefaultValue,
+        as format: OutputFormat,
+        resolveTypeName: (BridgeType, OutputFormat) -> String? = { _, _ in nil }
+    ) -> String {
         switch defaultValue {
         case .string(let value):
             let escapedValue =
@@ -4056,23 +4091,26 @@ enum DefaultValueUtils {
             return "null"
         case .enumCase(let enumName, let caseName):
             let simpleName = enumName.components(separatedBy: ".").last ?? enumName
-            let jsEnumName = format == .javascript ? "\(simpleName)\(ExportedEnum.valuesSuffix)" : simpleName
+            let jsEnumName =
+                resolveTypeName(.caseEnum(enumName), format)
+                ?? (format == .javascript ? "\(simpleName)\(ExportedEnum.valuesSuffix)" : simpleName)
             return "\(jsEnumName).\(caseName.capitalizedFirstLetter)"
         case .object(let className):
-            return "new \(className)()"
+            return "new \(resolveTypeName(.swiftHeapObject(className), format) ?? className)()"
         case .objectWithArguments(let className, let args):
             let argStrings = args.map { arg in
-                Self.format(arg, as: format)
+                Self.format(arg, as: format, resolveTypeName: resolveTypeName)
             }
-            return "new \(className)(\(argStrings.joined(separator: ", ")))"
+            let name = resolveTypeName(.swiftHeapObject(className), format) ?? className
+            return "new \(name)(\(argStrings.joined(separator: ", ")))"
         case .structLiteral(_, let fields):
             let fieldStrings = fields.map { field in
-                "\(field.name): \(Self.format(field.value, as: format))"
+                "\(field.name): \(Self.format(field.value, as: format, resolveTypeName: resolveTypeName))"
             }
             return "{ \(fieldStrings.joined(separator: ", ")) }"
         case .array(let elements):
             let elementStrings = elements.map { element in
-                DefaultValueUtils.format(element, as: format)
+                DefaultValueUtils.format(element, as: format, resolveTypeName: resolveTypeName)
             }
             return "[\(elementStrings.joined(separator: ", "))]"
         }
@@ -4086,10 +4124,13 @@ enum DefaultValueUtils {
     }
 
     /// Generates a JavaScript parameter list with default values
-    static func formatParameterList(_ parameters: [Parameter]) -> String {
+    static func formatParameterList(
+        _ parameters: [Parameter],
+        resolveTypeName: (BridgeType, OutputFormat) -> String? = { _, _ in nil }
+    ) -> String {
         return parameters.map { param in
             if let defaultValue = param.defaultValue {
-                let defaultJs = format(defaultValue, as: .javascript)
+                let defaultJs = format(defaultValue, as: .javascript, resolveTypeName: resolveTypeName)
                 return "\(param.name) = \(defaultJs)"
             }
             return param.name
@@ -4104,10 +4145,17 @@ extension BridgeJSLink {
     fileprivate func renderJSDoc(documentation: String?, parameters: [Parameter]) -> [String] {
         let parsed = documentation.map(DocCComment.init(parsing:)) ?? DocCComment()
 
+        let resolveTypeName = makeCodecPrintContext(printer: CodeFragmentPrinter()).defaultValueTypeName
         var tagLines: [String] = []
         for parameter in parameters {
             let docText = parsed.parameter(named: parameter.name)
-            let defaultValue = parameter.defaultValue.map { DefaultValueUtils.format($0, as: .typescript) }
+            let defaultValue = parameter.defaultValue.map {
+                DefaultValueUtils.format(
+                    $0,
+                    as: .typescript,
+                    resolveTypeName: resolveTypeName
+                )
+            }
             switch (docText, defaultValue) {
             case let (.some(text), .some(value)):
                 tagLines.append("@param \(parameter.name) \(text) (default: \(value))")

@@ -13,6 +13,8 @@ When you mark a protocol with `@JS`, BridgeJS generates:
 - A TypeScript interface with the protocol's method signatures
 - A Swift wrapper struct (`Any{ProtocolName}`) that conforms to the protocol and bridges calls to JavaScript objects
 
+Use `@JS("PublicName")` on a protocol to rename its TypeScript interface and generated type references. Swift still uses the original protocol name for conformances and signatures. JavaScript objects still satisfy the interface structurally; renaming does not create a protocol constructor or change how callbacks and protocol values cross the boundary. Unlike `@JS(as: Other.self)`, it does not change the representation, and combining the two options is not supported.
+
 ## Example: Counter Protocol
 
 Mark a Swift protocol with `@JS` to expose it:
