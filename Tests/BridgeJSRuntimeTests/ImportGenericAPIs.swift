@@ -79,7 +79,34 @@ import JavaScriptKit
     @JSFunction func unwrap<T: BridgedSwiftGenericBridgeable>() throws(JSException) -> T
 }
 
+@JS protocol GenericRTPosition: BridgedSwiftGenericBridgeable {
+    var x: Int { get }
+    func sum() -> Int
+}
+
+@JS protocol GenericRTNode: GenericRTPosition {
+    var y: Int { get }
+}
+
+extension GenericRTPoint: GenericRTNode {
+    @JS func sum() -> Int { x + y }
+}
+
+@JSFunction func jsGenericNodeRoundTrip<T: GenericRTNode>(_ value: T) throws(JSException) -> T
+@JSFunction func jsGenericMakeNode<T: BridgedSwiftGenericBridgeable & GenericRTPosition & GenericRTNode>()
+    throws(JSException) -> T
+
 @Suite struct ImportGenericAPITests {
+    @Test func constrainedProtocolRoundTrip() throws {
+        let point = try jsGenericNodeRoundTrip(GenericRTPoint(x: 1, y: 2))
+        #expect(point.sum() == 3)
+        let node: AnyGenericRTNode = try jsGenericMakeNode()
+        #expect(node.x == 3)
+        #expect(node.y == 4)
+        #expect(node.sum() == 7)
+        #expect(try jsGenericNodeRoundTrip(node).jsObject == node.jsObject)
+    }
+
     @Test func genericRoundTripScalars() throws {
         #expect(try jsGenericRoundTrip(42) == 42)
         #expect(try jsGenericRoundTrip(-7) == -7)
@@ -277,4 +304,42 @@ import JavaScriptKit
         let color = try ImportGenericConsumer.box(GenericRTColor.green)
         #expect(color == .green)
     }
+}
+
+// Protocol refinement is resolved by Swift, not by copying members: the
+// wrapper for a refining protocol picks up inherited requirements from the
+// base protocols' constrained extensions. This fixture covers the shapes
+// that used to need special handling in the generator: two parents, a
+// member re-declared by the refiner, and a `{ get set }` requirement
+// inherited unchanged. (Re-declaring an inherited `{ get set }` as `{ get }`
+// is rejected by Swift itself, so the generator never sees it.)
+@JS protocol RefineIdentified {
+    var id: String { get }
+    var score: Int { get set }
+}
+
+@JS protocol RefineNamed {
+    var name: String { get }
+    func label() -> String
+}
+
+@JS protocol RefineEntity: RefineIdentified, RefineNamed {
+    var id: String { get }
+    func label() -> String
+}
+
+@JS func describeRefinedEntity(_ entity: RefineEntity) -> String {
+    // `id` and `label()` resolve to RefineEntity's extension (most specific);
+    // `score` and its setter come from RefineIdentified's.
+    var identified: any RefineIdentified = entity
+    identified.score = entity.score + 1
+    return "\(entity.id):\(entity.name):\(entity.label()):\(identified.score)"
+}
+
+// A refining protocol with no requirements of its own emits no extension;
+// its wrapper still conforms through the parents' extensions.
+@JS protocol RefineTagged: RefineEntity {}
+
+@JS func describeTaggedEntity(_ entity: RefineTagged) -> String {
+    "\(entity.id)/\(entity.name)/\(entity.score)"
 }

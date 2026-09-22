@@ -1425,7 +1425,7 @@ struct ProtocolCodegen {
         for method in proto.methods {
             let builder = try ImportTS.CallJSEmission(
                 moduleName: moduleName,
-                abiName: "_extern_\(method.name)",
+                abiName: method.abiName,
                 effects: method.effects,
                 returnType: method.returnType,
                 context: .exportSwift
@@ -1450,7 +1450,7 @@ struct ProtocolCodegen {
                 printer: externDeclPrinter,
                 moduleName: moduleName,
                 abiName: method.abiName,
-                functionName: "_extern_\(method.name)",
+                functionName: method.abiName,
                 abiParameters: builder.abiParameterSignatures,
                 returnType: builder.abiReturnType
             )
@@ -1478,32 +1478,42 @@ struct ProtocolCodegen {
             externDecls.append(contentsOf: propertyExternDecls)
         }
 
-        let structDeclPrinter = CodeFragmentPrinter()
-        structDeclPrinter.write("struct \(wrapperName): \(protocolName), _BridgedSwiftProtocolWrapper {")
-        structDeclPrinter.indent {
-            structDeclPrinter.write("let jsObject: JSObject")
-            structDeclPrinter.nextLine()
-
-            for methodDecl in methodDecls {
-                structDeclPrinter.write(lines: methodDecl.lines)
-                structDeclPrinter.nextLine()
+        // The JS-backed implementations live on the protocol itself, constrained
+        // to wrapper types. A refining protocol's wrapper (`AnyC` for
+        // `C: A, B`) then satisfies A's and B's requirements through their
+        // extensions: Swift's conformance resolution does the "flattening",
+        // every extern stays owned by the protocol that declares the member,
+        // and a member the refining protocol re-declares resolves to the more
+        // specific extension. User conformers never see these defaults - they
+        // do not conform to `_BridgedSwiftProtocolWrapper`.
+        var decls: [DeclSyntax] = []
+        if !methodDecls.isEmpty || !propertyDecls.isEmpty {
+            let extensionPrinter = CodeFragmentPrinter()
+            extensionPrinter.write("extension \(protocolName) where Self: _BridgedSwiftProtocolWrapper {")
+            extensionPrinter.indent {
+                var first = true
+                for decl in methodDecls + propertyDecls {
+                    if !first { extensionPrinter.nextLine() }
+                    first = false
+                    extensionPrinter.write(lines: decl.lines)
+                }
             }
-
-            for decl in propertyDecls {
-                structDeclPrinter.write(lines: decl.lines)
-                structDeclPrinter.nextLine()
-            }
-            structDeclPrinter.write(
-                multilineString: """
-                    static func bridgeJSLiftParameter(_ value: Int32) -> Self {
-                        return \(wrapperName)(jsObject: JSObject(id: UInt32(bitPattern: value)))
-                    }
-                    """
-            )
+            extensionPrinter.write("}")
+            decls.append("\(raw: extensionPrinter.lines.joined(separator: "\n"))")
         }
-        structDeclPrinter.write("}")
 
-        return ["\(raw: structDeclPrinter.lines.joined(separator: "\n"))"] + externDecls
+        decls.append(
+            """
+            struct \(raw: wrapperName): \(raw: protocolName), _BridgedSwiftProtocolWrapper {
+                let jsObject: JSObject
+
+                static func bridgeJSLiftParameter(_ value: Int32) -> Self {
+                    return \(raw: wrapperName)(jsObject: JSObject(id: UInt32(bitPattern: value)))
+                }
+            }
+            """
+        )
+        return decls + externDecls
     }
 
     private func renderProtocolProperty(
