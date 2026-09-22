@@ -169,6 +169,6 @@ export type Exports = {
 | Throwing JS exception: `func x() throws(JSException)` | ✅ |
 | Throwing any exception: `func x() throws` | ❌ |
 | Async methods: `func x() async` | ✅ |
-| Generics | ❌ |
+| Generic functions (see <doc:Exporting-Swift-Generics>) | ✅ |
 | Opaque types: `func x() -> some P`, `func y(_: some P)` | ❌ |
 | Default parameter values: `func x(_ foo: String = "")` | ✅ (See <doc:Exporting-Swift-Default-Parameters>) |

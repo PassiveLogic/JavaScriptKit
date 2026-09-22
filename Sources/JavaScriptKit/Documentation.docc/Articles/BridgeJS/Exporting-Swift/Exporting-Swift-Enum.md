@@ -544,4 +544,5 @@ This differs from classes, which use reference semantics and share state across 
 | Associated values: Arrays | ✅ |
 | Associated values: Optionals of all supported types | ✅ |
 | Extension static functions/properties | ✅ |
-| Generics | ❌ |
+| Generic static methods (see <doc:Exporting-Swift-Generics>) | ✅ |
+| Generic enums: `enum Result<T>` | ❌ |

@@ -15,6 +15,7 @@ Configure your package and build for JavaScript as described in <doc:Setting-up-
 ## Topics
 
 - <doc:Exporting-Swift-Function>
+- <doc:Exporting-Swift-Generics>
 - <doc:Exporting-Swift-Class>
 - <doc:Exporting-Swift-Struct>
 - <doc:Exporting-Swift-Array>

@@ -55,3 +55,13 @@ While using `@JS` types from another Swift module is supported, it is not possib
 ### Exporting Swift: types from another Swift package
 
 Types defined in a separate Swift package cannot yet be referenced from `@JS` declarations in your package.
+
+## Generic exports
+
+<doc:Exporting-Swift-Generics> supports functions and methods, not generic initializers, generic nominal types, or generic protocol requirements. Other unsupported forms:
+
+- Embedded Swift, `where` clauses, default parameter values, unused generic parameters, and constraints lacking bridgeability or using non-`@JS` protocols.
+- Returned, nested, `@Sendable`, or `inout` generic callbacks, including callbacks with `inout` parameters.
+- Generic metatypes (`T.Type`), associated types (`T.Element`), and containers beyond `T`, `[T]`, `T?`, or `[String: T]`. Use `JSValue`, not `JSObject`, as a generic argument.
+
+Type tokens, Swift type names, and protocol names must be unique across linked modules; JavaScript namespaces do not disambiguate them. Direct WebAssembly calls with arbitrary type IDs are unsupported. For import support, including generic `@JSClass` initializers, see <doc:Importing-JS-Function>.
