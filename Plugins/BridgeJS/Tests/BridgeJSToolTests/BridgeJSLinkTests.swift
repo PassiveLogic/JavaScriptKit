@@ -158,6 +158,84 @@ import Testing
     }
 
     @Test
+    func genericRuntimeIsGatedToGenericBuilds() throws {
+        let genericJS = try linkedJS(forFixture: "GenericImports.swift")
+        #expect(genericJS.contains("__bjs_codecByTypeId"))
+        #expect(genericJS.contains("function __bjs_codecForTypeId(typeId) {"))
+        #expect(genericJS.contains("bjs[\"bjs_TestModule_register_type_handles\"] = function(base, count) {"))
+        #expect(genericJS.contains("instance.exports[\"bjs_TestModule_register_type_handles\"]();"))
+
+        let nonGenericJS = try linkedJS(forFixture: "SwiftStructImports.swift")
+        #expect(!nonGenericJS.contains("__bjs_codecByTypeId"))
+        #expect(!nonGenericJS.contains("__bjs_codecForTypeId"))
+        #expect(nonGenericJS.contains("bjs[\"bjs_core_register_type_handles\"] = function() {};"))
+        #expect(nonGenericJS.contains("bjs[\"bjs_TestModule_register_type_handles\"] = function() {};"))
+        #expect(!nonGenericJS.contains("instance.exports[\"bjs_TestModule_register_type_handles\"]();"))
+    }
+
+    @Test(arguments: [
+        "@JS func identity<T: BridgedSwiftGenericBridgeable>(_ value: T) -> T { value }",
+        "@JS class Box { @JS func identity<T: BridgedSwiftGenericBridgeable>(_ value: T) -> T { value } }",
+    ])
+    func genericExportsEnableCoreTypeRegistration(source: String) throws {
+        let js = try BridgeJSLink(skeletons: [makeSkeleton(source)]).link().outputJs
+        #expect(js.contains("__bjs_typeIdByToken.set(tokens[i], typeIds[i]);"))
+        #expect(js.contains("instance.exports[\"bjs_core_register_type_handles\"]();"))
+    }
+
+    @Test
+    func sameTypeNameAcrossModulesLinksWithHandleIdentity() throws {
+        let structSource = """
+            @JS public struct Point {
+                public var x: Int
+                @JS public init(x: Int) { self.x = x }
+            }
+            """
+        let first = try makeSkeleton(
+            structSource + """
+
+                @JSFunction func identity<T: BridgedSwiftGenericBridgeable>(_ value: T) throws(JSException) -> T
+                """,
+            moduleName: "FirstModule"
+        )
+        let second = try makeSkeleton(structSource, moduleName: "SecondModule")
+        let bridgeJSLink = BridgeJSLink(skeletons: [first, second])
+        let js = try bridgeJSLink.link().outputJs
+        #expect(js.contains("bjs[\"bjs_FirstModule_register_type_handles\"] = function(base, count) {"))
+        #expect(js.contains("bjs[\"bjs_SecondModule_register_type_handles\"] = function(base, count) {"))
+    }
+
+    @Test(arguments: [false, true])
+    func sameTypeNameAcrossModulesFailsWithGenericExports(distinctNamespaces: Bool) throws {
+        let structSource = """
+            @JS public struct Point {
+                public var x: Int
+                @JS public init(x: Int) { self.x = x }
+            }
+            """
+        let first = try makeSkeleton(
+            structSource + """
+
+                @JS public func identity<T: BridgedSwiftGenericBridgeable>(_ value: T) -> T { value }
+                """,
+            moduleName: "FirstModule"
+        )
+        let second = try makeSkeleton(
+            distinctNamespaces
+                ? structSource.replacingOccurrences(
+                    of: "@JS public struct",
+                    with: "@JS(namespace: \"Other\") public struct"
+                )
+                : structSource,
+            moduleName: "SecondModule"
+        )
+        let bridgeJSLink = BridgeJSLink(skeletons: [first, second])
+        #expect(throws: BridgeJSLinkError.self) {
+            _ = try bridgeJSLink.link()
+        }
+    }
+
+    @Test
     func perClassIdentityModeFromAnnotation() throws {
         let url = Self.inputsDirectory.appendingPathComponent("IdentityModeClass.swift")
         let sourceFile = Parser.parse(source: try String(contentsOf: url, encoding: .utf8))

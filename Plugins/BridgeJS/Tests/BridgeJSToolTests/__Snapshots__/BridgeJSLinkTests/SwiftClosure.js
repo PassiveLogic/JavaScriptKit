@@ -749,14 +749,14 @@ export async function createInstantiator(options, swift) {
                     const param0Bytes = textEncoder.encode(param0);
                     const param0Id = swift.memory.retain(param0Bytes);
                     instance.exports.invoke_swift_closure_TestModule_10TestModule5ThemeO_5ThemeO(boxPtr, param0Id, param0Bytes.length);
-                    const ret = tmpRetString;
-                    tmpRetString = undefined;
                     if (tmpRetException) {
                         const error = swift.memory.getObject(tmpRetException);
                         swift.memory.release(tmpRetException);
                         tmpRetException = undefined;
                         throw error;
                     }
+                    const ret = tmpRetString;
+                    tmpRetString = undefined;
                     return ret;
                 };
                 return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModule5ThemeO_5ThemeO);
@@ -775,13 +775,13 @@ export async function createInstantiator(options, swift) {
                 const lower_closure_TestModule_10TestModule6AnimalV_6AnimalV = function(param0) {
                     structHelpers.M10TestModuleT6Animal.lower(param0);
                     instance.exports.invoke_swift_closure_TestModule_10TestModule6AnimalV_6AnimalV(boxPtr);
-                    const structValue = structHelpers.M10TestModuleT6Animal.lift();
                     if (tmpRetException) {
                         const error = swift.memory.getObject(tmpRetException);
                         swift.memory.release(tmpRetException);
                         tmpRetException = undefined;
                         throw error;
                     }
+                    const structValue = structHelpers.M10TestModuleT6Animal.lift();
                     return structValue;
                 };
                 return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModule6AnimalV_6AnimalV);
@@ -824,13 +824,13 @@ export async function createInstantiator(options, swift) {
                 const lower_closure_TestModule_10TestModule9APIResultO_9APIResultO = function(param0) {
                     const param0CaseId = enumHelpers.M10TestModuleT9APIResult.lower(param0);
                     instance.exports.invoke_swift_closure_TestModule_10TestModule9APIResultO_9APIResultO(boxPtr, param0CaseId);
-                    const ret = enumHelpers.M10TestModuleT9APIResult.lift(i32Stack.pop());
                     if (tmpRetException) {
                         const error = swift.memory.getObject(tmpRetException);
                         swift.memory.release(tmpRetException);
                         tmpRetException = undefined;
                         throw error;
                     }
+                    const ret = enumHelpers.M10TestModuleT9APIResult.lift(i32Stack.pop());
                     return ret;
                 };
                 return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModule9APIResultO_9APIResultO);
@@ -926,14 +926,14 @@ export async function createInstantiator(options, swift) {
                     const param0Bytes = textEncoder.encode(param0);
                     const param0Id = swift.memory.retain(param0Bytes);
                     instance.exports.invoke_swift_closure_TestModule_10TestModuleSS_SS(boxPtr, param0Id, param0Bytes.length);
-                    const ret = tmpRetString;
-                    tmpRetString = undefined;
                     if (tmpRetException) {
                         const error = swift.memory.getObject(tmpRetException);
                         swift.memory.release(tmpRetException);
                         tmpRetException = undefined;
                         throw error;
                     }
+                    const ret = tmpRetString;
+                    tmpRetString = undefined;
                     return ret;
                 };
                 return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModuleSS_SS);
@@ -1044,14 +1044,14 @@ export async function createInstantiator(options, swift) {
                 const lower_closure_TestModule_10TestModuleSq10HttpStatusO_Sq10HttpStatusO = function(param0) {
                     const isSome = param0 != null;
                     instance.exports.invoke_swift_closure_TestModule_10TestModuleSq10HttpStatusO_Sq10HttpStatusO(boxPtr, +isSome, isSome ? param0 : 0);
-                    const optResult = tmpRetOptionalInt;
-                    tmpRetOptionalInt = undefined;
                     if (tmpRetException) {
                         const error = swift.memory.getObject(tmpRetException);
                         swift.memory.release(tmpRetException);
                         tmpRetException = undefined;
                         throw error;
                     }
+                    const optResult = tmpRetOptionalInt;
+                    tmpRetOptionalInt = undefined;
                     return optResult;
                 };
                 return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModuleSq10HttpStatusO_Sq10HttpStatusO);
@@ -1087,14 +1087,14 @@ export async function createInstantiator(options, swift) {
                         result1 = 0;
                     }
                     instance.exports.invoke_swift_closure_TestModule_10TestModuleSq5ThemeO_Sq5ThemeO(boxPtr, +isSome, result, result1);
-                    const optResult = tmpRetString;
-                    tmpRetString = undefined;
                     if (tmpRetException) {
                         const error = swift.memory.getObject(tmpRetException);
                         swift.memory.release(tmpRetException);
                         tmpRetException = undefined;
                         throw error;
                     }
+                    const optResult = tmpRetString;
+                    tmpRetString = undefined;
                     return optResult;
                 };
                 return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModuleSq5ThemeO_Sq5ThemeO);
@@ -1113,13 +1113,13 @@ export async function createInstantiator(options, swift) {
                 const lower_closure_TestModule_10TestModuleSq6AnimalV_Sq6AnimalV = function(param0) {
                     __bjs_codec_Optional_M10TestModuleT6Animal.lower(param0);
                     instance.exports.invoke_swift_closure_TestModule_10TestModuleSq6AnimalV_Sq6AnimalV(boxPtr);
-                    const optValue = __bjs_codec_Optional_M10TestModuleT6Animal.lift();
                     if (tmpRetException) {
                         const error = swift.memory.getObject(tmpRetException);
                         swift.memory.release(tmpRetException);
                         tmpRetException = undefined;
                         throw error;
                     }
+                    const optValue = __bjs_codec_Optional_M10TestModuleT6Animal.lift();
                     return optValue;
                 };
                 return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModuleSq6AnimalV_Sq6AnimalV);
@@ -1144,15 +1144,15 @@ export async function createInstantiator(options, swift) {
                         result = 0;
                     }
                     instance.exports.invoke_swift_closure_TestModule_10TestModuleSq6PersonC_Sq6PersonC(boxPtr, +isSome, result);
-                    const pointer = tmpRetOptionalHeapObject;
-                    tmpRetOptionalHeapObject = undefined;
-                    const optResult = pointer === null ? null : _exports['Person'].__construct(pointer);
                     if (tmpRetException) {
                         const error = swift.memory.getObject(tmpRetException);
                         swift.memory.release(tmpRetException);
                         tmpRetException = undefined;
                         throw error;
                     }
+                    const pointer = tmpRetOptionalHeapObject;
+                    tmpRetOptionalHeapObject = undefined;
+                    const optResult = pointer === null ? null : _exports['Person'].__construct(pointer);
                     return optResult;
                 };
                 return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModuleSq6PersonC_Sq6PersonC);
@@ -1190,14 +1190,14 @@ export async function createInstantiator(options, swift) {
                         result = 0;
                     }
                     instance.exports.invoke_swift_closure_TestModule_10TestModuleSq9APIResultO_Sq9APIResultO(boxPtr, +isSome, result);
-                    const tag = i32Stack.pop();
-                    const optResult = tag === -1 ? null : enumHelpers.M10TestModuleT9APIResult.lift(tag);
                     if (tmpRetException) {
                         const error = swift.memory.getObject(tmpRetException);
                         swift.memory.release(tmpRetException);
                         tmpRetException = undefined;
                         throw error;
                     }
+                    const tag = i32Stack.pop();
+                    const optResult = tag === -1 ? null : enumHelpers.M10TestModuleT9APIResult.lift(tag);
                     return optResult;
                 };
                 return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModuleSq9APIResultO_Sq9APIResultO);
@@ -1216,14 +1216,14 @@ export async function createInstantiator(options, swift) {
                 const lower_closure_TestModule_10TestModuleSq9DirectionO_Sq9DirectionO = function(param0) {
                     const isSome = param0 != null;
                     instance.exports.invoke_swift_closure_TestModule_10TestModuleSq9DirectionO_Sq9DirectionO(boxPtr, +isSome, isSome ? param0 : 0);
-                    const optResult = tmpRetOptionalInt;
-                    tmpRetOptionalInt = undefined;
                     if (tmpRetException) {
                         const error = swift.memory.getObject(tmpRetException);
                         swift.memory.release(tmpRetException);
                         tmpRetException = undefined;
                         throw error;
                     }
+                    const optResult = tmpRetOptionalInt;
+                    tmpRetOptionalInt = undefined;
                     return optResult;
                 };
                 return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModuleSq9DirectionO_Sq9DirectionO);
@@ -1259,14 +1259,14 @@ export async function createInstantiator(options, swift) {
                         result1 = 0;
                     }
                     instance.exports.invoke_swift_closure_TestModule_10TestModuleSqSS_SqSS(boxPtr, +isSome, result, result1);
-                    const optResult = tmpRetString;
-                    tmpRetString = undefined;
                     if (tmpRetException) {
                         const error = swift.memory.getObject(tmpRetException);
                         swift.memory.release(tmpRetException);
                         tmpRetException = undefined;
                         throw error;
                     }
+                    const optResult = tmpRetString;
+                    tmpRetString = undefined;
                     return optResult;
                 };
                 return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModuleSqSS_SqSS);
@@ -1285,14 +1285,14 @@ export async function createInstantiator(options, swift) {
                 const lower_closure_TestModule_10TestModuleSqSb_SqSb = function(param0) {
                     const isSome = param0 != null;
                     instance.exports.invoke_swift_closure_TestModule_10TestModuleSqSb_SqSb(boxPtr, +isSome, isSome ? param0 ? 1 : 0 : 0);
-                    const optResult = tmpRetOptionalBool;
-                    tmpRetOptionalBool = undefined;
                     if (tmpRetException) {
                         const error = swift.memory.getObject(tmpRetException);
                         swift.memory.release(tmpRetException);
                         tmpRetException = undefined;
                         throw error;
                     }
+                    const optResult = tmpRetOptionalBool;
+                    tmpRetOptionalBool = undefined;
                     return optResult;
                 };
                 return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModuleSqSb_SqSb);
@@ -1311,14 +1311,14 @@ export async function createInstantiator(options, swift) {
                 const lower_closure_TestModule_10TestModuleSqSd_SqSd = function(param0) {
                     const isSome = param0 != null;
                     instance.exports.invoke_swift_closure_TestModule_10TestModuleSqSd_SqSd(boxPtr, +isSome, isSome ? param0 : 0.0);
-                    const optResult = tmpRetOptionalDouble;
-                    tmpRetOptionalDouble = undefined;
                     if (tmpRetException) {
                         const error = swift.memory.getObject(tmpRetException);
                         swift.memory.release(tmpRetException);
                         tmpRetException = undefined;
                         throw error;
                     }
+                    const optResult = tmpRetOptionalDouble;
+                    tmpRetOptionalDouble = undefined;
                     return optResult;
                 };
                 return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModuleSqSd_SqSd);
@@ -1337,14 +1337,14 @@ export async function createInstantiator(options, swift) {
                 const lower_closure_TestModule_10TestModuleSqSf_SqSf = function(param0) {
                     const isSome = param0 != null;
                     instance.exports.invoke_swift_closure_TestModule_10TestModuleSqSf_SqSf(boxPtr, +isSome, isSome ? param0 : 0.0);
-                    const optResult = tmpRetOptionalFloat;
-                    tmpRetOptionalFloat = undefined;
                     if (tmpRetException) {
                         const error = swift.memory.getObject(tmpRetException);
                         swift.memory.release(tmpRetException);
                         tmpRetException = undefined;
                         throw error;
                     }
+                    const optResult = tmpRetOptionalFloat;
+                    tmpRetOptionalFloat = undefined;
                     return optResult;
                 };
                 return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModuleSqSf_SqSf);
@@ -1363,14 +1363,14 @@ export async function createInstantiator(options, swift) {
                 const lower_closure_TestModule_10TestModuleSqSi_SqSi = function(param0) {
                     const isSome = param0 != null;
                     instance.exports.invoke_swift_closure_TestModule_10TestModuleSqSi_SqSi(boxPtr, +isSome, isSome ? param0 : 0);
-                    const optResult = tmpRetOptionalInt;
-                    tmpRetOptionalInt = undefined;
                     if (tmpRetException) {
                         const error = swift.memory.getObject(tmpRetException);
                         swift.memory.release(tmpRetException);
                         tmpRetException = undefined;
                         throw error;
                     }
+                    const optResult = tmpRetOptionalInt;
+                    tmpRetOptionalInt = undefined;
                     return optResult;
                 };
                 return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModuleSqSi_SqSi);
@@ -1387,14 +1387,14 @@ export async function createInstantiator(options, swift) {
                     const param0Bytes = textEncoder.encode(param0);
                     const param0Id = swift.memory.retain(param0Bytes);
                     const ret = instance.exports.invoke_swift_closure_TestModule_10TestModuleYaKSS_SS(boxPtr, param0Id, param0Bytes.length);
-                    const ret1 = swift.memory.getObject(ret);
-                    swift.memory.release(ret);
                     if (tmpRetException) {
                         const error = swift.memory.getObject(tmpRetException);
                         swift.memory.release(tmpRetException);
                         tmpRetException = undefined;
                         throw error;
                     }
+                    const ret1 = swift.memory.getObject(ret);
+                    swift.memory.release(ret);
                     return ret1;
                 };
                 return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModuleYaKSS_SS);
@@ -1408,14 +1408,14 @@ export async function createInstantiator(options, swift) {
             bjs["make_swift_closure_TestModule_10TestModuleYaKSb_9APIResultO"] = function(boxPtr, file, line) {
                 const lower_closure_TestModule_10TestModuleYaKSb_9APIResultO = function(param0) {
                     const ret = instance.exports.invoke_swift_closure_TestModule_10TestModuleYaKSb_9APIResultO(boxPtr, param0);
-                    const ret1 = swift.memory.getObject(ret);
-                    swift.memory.release(ret);
                     if (tmpRetException) {
                         const error = swift.memory.getObject(tmpRetException);
                         swift.memory.release(tmpRetException);
                         tmpRetException = undefined;
                         throw error;
                     }
+                    const ret1 = swift.memory.getObject(ret);
+                    swift.memory.release(ret);
                     return ret1;
                 };
                 return makeClosure(boxPtr, file, line, lower_closure_TestModule_10TestModuleYaKSb_9APIResultO);

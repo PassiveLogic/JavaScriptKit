@@ -792,7 +792,8 @@ import Testing
                 struct MyImpl: P { func ok() -> Int { 42 } }
                 \(declaration)
                 """,
-            contains: "'MyImpl' conforms to 'P'"
+            contains: declaration.hasPrefix("@JS protocol")
+                ? "Protocol-valued requirements" : "'MyImpl' conforms to 'P'"
         )
     }
 
