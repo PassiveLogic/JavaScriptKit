@@ -346,7 +346,7 @@ public struct ImportTS {
                     "\(tryKeyword) await _bjs_awaitPromise(\(resolveFactory), \(rejectFactory)) { resolveRef, rejectRef in"
                 )
             } else {
-                let resolveSwiftType = returnType.closureSwiftType
+                let resolveSwiftType = returnType.usesGenericParameter ? "JSValue" : returnType.closureSwiftType
                 let resolveFactory =
                     "makeResolveClosure: { JSTypedClosure<(sending \(resolveSwiftType)) -> Void>.sending($0) }"
                 body.write(
@@ -359,7 +359,11 @@ public struct ImportTS {
             body.write("}")
 
             if returnType != .void {
-                body.write("return resolved")
+                if returnType.usesGenericParameter {
+                    body.write("return \(tryKeyword) _bjs_async_result_\(returnType.mangleTypeName)(resolved)")
+                } else {
+                    body.write("return resolved")
+                }
             }
         }
 

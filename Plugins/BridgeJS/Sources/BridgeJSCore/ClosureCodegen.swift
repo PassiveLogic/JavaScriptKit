@@ -47,6 +47,7 @@ public struct ClosureCodegen {
         for (index, paramType) in signature.parameters.enumerated() {
             try builder.lowerParameter(param: Parameter(label: nil, name: "param\(index)", type: paramType))
         }
+        builder.appendTypeIDParameters(signature.genericParameterNames)
 
         // Generate the call and return value lifting
         try builder.call()
@@ -69,7 +70,14 @@ public struct ClosureCodegen {
         let helperEnumDeclPrinter = CodeFragmentPrinter()
         helperEnumDeclPrinter.write("private enum \(helperName) {")
         helperEnumDeclPrinter.indent {
-            helperEnumDeclPrinter.write("static func bridgeJSLift(_ callbackId: Int32) -> \(swiftClosureType) {")
+            let genericNames = signature.genericParameterNames
+            let genericClause =
+                genericNames.isEmpty
+                ? "" : "<\(genericNames.map { "\($0): BridgedSwiftGenericBridgeable" }.joined(separator: ", "))>"
+            let parameters = (["_ callbackId: Int32"] + genericNames.map { "_: \($0).Type" }).joined(separator: ", ")
+            helperEnumDeclPrinter.write(
+                "static func bridgeJSLift\(genericClause)(\(parameters)) -> \(swiftClosureType) {"
+            )
             helperEnumDeclPrinter.indent {
                 helperEnumDeclPrinter.write("let callback = JSObject.bridgeJSLiftParameter(callbackId)")
                 let parameters: String
@@ -111,6 +119,10 @@ public struct ClosureCodegen {
         helperEnumDeclPrinter.write("}")
 
         let helperEnumDecl: DeclSyntax = "\(raw: helperEnumDeclPrinter.lines.joined(separator: "\n"))"
+
+        if !signature.genericParameterNames.isEmpty {
+            return [externDecl, helperEnumDecl]
+        }
 
         let accessModifier = accessLevel.modifierKeyword.map { "\($0) " } ?? ""
         let declaration = signature.sendingParameters ? "static func sending" : "init"
@@ -164,10 +176,38 @@ public struct ClosureCodegen {
         guard !signatureAccessLevels.isEmpty else { return nil }
 
         var decls: [DeclSyntax] = []
+        var asyncGenericResults = Set<BridgeType>()
         for signature in signatureAccessLevels.keys.sorted(by: { $0.mangleName < $1.mangleName }) {
             let accessLevel = signatureAccessLevels[signature] ?? .internal
             decls.append(contentsOf: try renderClosureHelpers(signature, accessLevel: accessLevel))
-            decls.append(try renderClosureInvokeHandler(signature))
+            if signature.genericParameterNames.isEmpty {
+                decls.append(try renderClosureInvokeHandler(signature))
+            }
+            let returnType = signature.returnType
+            if signature.isAsync, returnType.usesGenericParameter, asyncGenericResults.insert(returnType).inserted {
+                let parameter = Parameter(label: nil, name: "value", type: .jsValue)
+                let effects = Effects(isAsync: false, isThrows: true)
+                let builder = try ImportTS.CallJSEmission(
+                    moduleName: "bjs",
+                    abiName: "async_callback_result_\(signature.moduleName)_\(returnType.mangleTypeName)",
+                    effects: effects,
+                    returnType: returnType
+                )
+                try builder.lowerParameter(param: parameter)
+                builder.appendTypeIDParameters(returnType.referencedGenericNames)
+                try builder.call()
+                try builder.liftReturnValue()
+                decls.append(builder.renderImportDecl())
+                decls.append(
+                    builder.renderThunkDecl(
+                        name: "_bjs_async_result_\(returnType.mangleTypeName)",
+                        parameters: [parameter],
+                        returnType: returnType,
+                        effects: effects,
+                        genericParameters: returnType.referencedGenericNames.map { GenericParameter(name: $0) }
+                    )
+                )
+            }
         }
 
         return withSpan("Format Closure Glue") {

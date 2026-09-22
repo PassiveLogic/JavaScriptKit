@@ -20,6 +20,7 @@ import { getImports as getAsyncImportImports, runAsyncWorksTests } from './Bridg
 import { getImports as getJSTypedArrayImports } from './BridgeJSRuntimeTests/JavaScript/JSTypedArrayTests.mjs';
 import { getImports as getIdentityModeTestImports } from './BridgeJSIdentityTests/JavaScript/IdentityModeTests.mjs';
 import { runJSNameTests } from './BridgeJSRuntimeTests/JavaScript/JSNameTests.mjs';
+import { runExportGenericTests, runExportGenericAsyncTests } from './BridgeJSRuntimeTests/JavaScript/ExportGenericTests.mjs';
 
 /** @type {import('../.build/plugins/PackageToJS/outputs/PackageTests/test.d.ts').SetupOptionsFn} */
 export async function setupOptions(options, context) {
@@ -146,6 +147,11 @@ export async function setupOptions(options, context) {
                     await runAsyncWorksTests(exports);
                     return;
                 },
+                runExportGenericAsyncTests: async () => {
+                    const exports = importsContext.getExports();
+                    if (!exports) { throw new Error("No exports!?"); }
+                    await runExportGenericAsyncTests(exports);
+                },
                 AsyncImportImports: getAsyncImportImports(importsContext),
                 fetchWeatherData: (city) => {
                     return Promise.resolve({
@@ -249,6 +255,11 @@ export async function setupOptions(options, context) {
                     throw new Error("No exports!?");
                 }
                 runAliasWorks(exports);
+            }
+            bridgeJSRuntimeTests["runExportGenericTests"] = () => {
+                const exports = getExports();
+                if (!exports) { throw new Error("No exports!?"); }
+                runExportGenericTests(exports);
             }
             const bridgeJSGlobalTests = importObject["BridgeJSGlobalTests"] || {};
             bridgeJSGlobalTests["runJsWorksGlobal"] = () => {

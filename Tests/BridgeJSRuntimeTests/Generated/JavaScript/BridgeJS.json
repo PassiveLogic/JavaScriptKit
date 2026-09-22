@@ -3052,6 +3052,9 @@
         "swiftCallName" : "DataProcessorManager"
       },
       {
+        "conformedJSProtocols" : [
+          "DataProcessor"
+        ],
         "constructor" : {
           "abiName" : "bjs_SwiftDataProcessor_init",
           "effects" : {
@@ -4951,6 +4954,283 @@
 
         ],
         "swiftCallName" : "NestedTypeHost"
+      },
+      {
+        "constructor" : {
+          "abiName" : "bjs_ExportGenericMethodBox_init",
+          "effects" : {
+            "isAsync" : false,
+            "isStatic" : false,
+            "isThrows" : false
+          },
+          "parameters" : [
+
+          ]
+        },
+        "explicitAccessControl" : "public",
+        "isFinal" : true,
+        "methods" : [
+          {
+            "abiName" : "bjs_ExportGenericMethodBox_store",
+            "effects" : {
+              "isAsync" : false,
+              "isStatic" : false,
+              "isThrows" : false
+            },
+            "genericParameters" : [
+              {
+                "name" : "T"
+              },
+              {
+                "name" : "U"
+              }
+            ],
+            "name" : "store",
+            "parameters" : [
+              {
+                "label" : "_",
+                "name" : "value",
+                "type" : {
+                  "generic" : {
+                    "_0" : "T"
+                  }
+                }
+              },
+              {
+                "label" : "_",
+                "name" : "callback",
+                "type" : {
+                  "closure" : {
+                    "_0" : {
+                      "isAsync" : false,
+                      "isThrows" : true,
+                      "mangleName" : "20BridgeJSRuntimeTestsK1TT_1UT",
+                      "moduleName" : "BridgeJSRuntimeTests",
+                      "parameters" : [
+                        {
+                          "generic" : {
+                            "_0" : "T"
+                          }
+                        }
+                      ],
+                      "returnType" : {
+                        "generic" : {
+                          "_0" : "U"
+                        }
+                      },
+                      "sendingParameters" : false
+                    },
+                    "useJSTypedClosure" : false
+                  }
+                }
+              }
+            ],
+            "returnType" : {
+              "void" : {
+
+              }
+            }
+          },
+          {
+            "abiName" : "bjs_ExportGenericMethodBox_invoke",
+            "effects" : {
+              "isAsync" : false,
+              "isStatic" : false,
+              "isThrows" : true
+            },
+            "genericParameters" : [
+              {
+                "name" : "T"
+              }
+            ],
+            "name" : "invoke",
+            "parameters" : [
+
+            ],
+            "returnType" : {
+              "nullable" : {
+                "_0" : {
+                  "generic" : {
+                    "_0" : "T"
+                  }
+                },
+                "_1" : "null"
+              }
+            }
+          },
+          {
+            "abiName" : "bjs_ExportGenericMethodBox_storeAsync",
+            "effects" : {
+              "isAsync" : false,
+              "isStatic" : false,
+              "isThrows" : false
+            },
+            "genericParameters" : [
+              {
+                "name" : "T"
+              },
+              {
+                "name" : "U"
+              }
+            ],
+            "name" : "storeAsync",
+            "parameters" : [
+              {
+                "label" : "_",
+                "name" : "value",
+                "type" : {
+                  "generic" : {
+                    "_0" : "T"
+                  }
+                }
+              },
+              {
+                "label" : "_",
+                "name" : "callback",
+                "type" : {
+                  "closure" : {
+                    "_0" : {
+                      "isAsync" : true,
+                      "isThrows" : true,
+                      "mangleName" : "20BridgeJSRuntimeTestsYaK1TT_1UT",
+                      "moduleName" : "BridgeJSRuntimeTests",
+                      "parameters" : [
+                        {
+                          "generic" : {
+                            "_0" : "T"
+                          }
+                        }
+                      ],
+                      "returnType" : {
+                        "generic" : {
+                          "_0" : "U"
+                        }
+                      },
+                      "sendingParameters" : false
+                    },
+                    "useJSTypedClosure" : false
+                  }
+                }
+              }
+            ],
+            "returnType" : {
+              "void" : {
+
+              }
+            }
+          },
+          {
+            "abiName" : "bjs_ExportGenericMethodBox_run",
+            "effects" : {
+              "isAsync" : true,
+              "isStatic" : false,
+              "isThrows" : true
+            },
+            "genericParameters" : [
+              {
+                "name" : "T"
+              }
+            ],
+            "name" : "run",
+            "parameters" : [
+
+            ],
+            "returnType" : {
+              "nullable" : {
+                "_0" : {
+                  "generic" : {
+                    "_0" : "T"
+                  }
+                },
+                "_1" : "null"
+              }
+            }
+          },
+          {
+            "abiName" : "bjs_ExportGenericMethodBox_clear",
+            "effects" : {
+              "isAsync" : false,
+              "isStatic" : false,
+              "isThrows" : false
+            },
+            "name" : "clear",
+            "parameters" : [
+
+            ],
+            "returnType" : {
+              "void" : {
+
+              }
+            }
+          },
+          {
+            "abiName" : "bjs_ExportGenericMethodBox_static_produce",
+            "effects" : {
+              "isAsync" : false,
+              "isStatic" : true,
+              "isThrows" : false
+            },
+            "genericParameters" : [
+              {
+                "name" : "T"
+              }
+            ],
+            "name" : "produce",
+            "parameters" : [
+              {
+                "label" : "_",
+                "name" : "body",
+                "type" : {
+                  "closure" : {
+                    "_0" : {
+                      "isAsync" : false,
+                      "isThrows" : false,
+                      "mangleName" : "20BridgeJSRuntimeTestsy_1TT",
+                      "moduleName" : "BridgeJSRuntimeTests",
+                      "parameters" : [
+
+                      ],
+                      "returnType" : {
+                        "generic" : {
+                          "_0" : "T"
+                        }
+                      },
+                      "sendingParameters" : false
+                    },
+                    "useJSTypedClosure" : false
+                  }
+                }
+              }
+            ],
+            "returnType" : {
+              "generic" : {
+                "_0" : "T"
+              }
+            },
+            "staticContext" : {
+              "className" : {
+                "_0" : "ExportGenericMethodBox"
+              }
+            }
+          }
+        ],
+        "name" : "ExportGenericMethodBox",
+        "properties" : [
+          {
+            "isReadonly" : false,
+            "isStatic" : false,
+            "name" : "value",
+            "type" : {
+              "integer" : {
+                "_0" : {
+                  "isSigned" : true,
+                  "width" : "word"
+                }
+              }
+            }
+          }
+        ],
+        "swiftCallName" : "ExportGenericMethodBox"
       },
       {
         "constructor" : {
@@ -10571,6 +10851,114 @@
         ],
         "swiftCallName" : "NestedTypeHost.Variant",
         "tsFullPath" : "NestedTypeHost.Variant"
+      },
+      {
+        "cases" : [
+          {
+            "associatedValues" : [
+
+            ],
+            "name" : "primary"
+          }
+        ],
+        "emitStyle" : "const",
+        "explicitAccessControl" : "public",
+        "name" : "ExportGenericMethodFactory",
+        "staticMethods" : [
+          {
+            "abiName" : "bjs_ExportGenericMethodFactory_static_one",
+            "effects" : {
+              "isAsync" : false,
+              "isStatic" : true,
+              "isThrows" : false
+            },
+            "genericParameters" : [
+              {
+                "name" : "T"
+              }
+            ],
+            "name" : "one",
+            "parameters" : [
+              {
+                "label" : "_",
+                "name" : "value",
+                "type" : {
+                  "generic" : {
+                    "_0" : "T"
+                  }
+                }
+              }
+            ],
+            "returnType" : {
+              "generic" : {
+                "_0" : "T"
+              }
+            },
+            "staticContext" : {
+              "enumName" : {
+                "_0" : "ExportGenericMethodFactory"
+              }
+            }
+          }
+        ],
+        "staticProperties" : [
+
+        ],
+        "swiftCallName" : "ExportGenericMethodFactory",
+        "tsFullPath" : "ExportGenericMethodFactory"
+      },
+      {
+        "cases" : [
+
+        ],
+        "emitStyle" : "const",
+        "explicitAccessControl" : "public",
+        "name" : "ExportGenericMethodNamespace",
+        "staticMethods" : [
+          {
+            "abiName" : "bjs_ExportGenericMethodNamespace_static_make",
+            "effects" : {
+              "isAsync" : false,
+              "isStatic" : true,
+              "isThrows" : false
+            },
+            "genericParameters" : [
+              {
+                "name" : "T"
+              }
+            ],
+            "name" : "make",
+            "namespace" : [
+              "ExportGenericMethodNamespace"
+            ],
+            "parameters" : [
+              {
+                "label" : "_",
+                "name" : "value",
+                "type" : {
+                  "generic" : {
+                    "_0" : "T"
+                  }
+                }
+              }
+            ],
+            "returnType" : {
+              "generic" : {
+                "_0" : "T"
+              }
+            },
+            "staticContext" : {
+              "namespaceEnum" : {
+                "_0" : "ExportGenericMethodNamespace"
+              }
+            }
+          }
+        ],
+        "staticProperties" : [
+
+        ],
+        "swiftCallName" : "ExportGenericMethodNamespace",
+        "tsFullPath" : "ExportGenericMethodNamespace"
       },
       {
         "cases" : [
@@ -17647,6 +18035,703 @@
         }
       },
       {
+        "abiName" : "bjs_exportGenericIdentity",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "genericParameters" : [
+          {
+            "name" : "T"
+          }
+        ],
+        "name" : "exportGenericIdentity",
+        "parameters" : [
+          {
+            "label" : "_",
+            "name" : "value",
+            "type" : {
+              "generic" : {
+                "_0" : "T"
+              }
+            }
+          }
+        ],
+        "returnType" : {
+          "generic" : {
+            "_0" : "T"
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_exportGenericArrayIdentity",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "genericParameters" : [
+          {
+            "name" : "T"
+          }
+        ],
+        "name" : "exportGenericArrayIdentity",
+        "parameters" : [
+          {
+            "label" : "_",
+            "name" : "values",
+            "type" : {
+              "array" : {
+                "_0" : {
+                  "generic" : {
+                    "_0" : "T"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "returnType" : {
+          "array" : {
+            "_0" : {
+              "generic" : {
+                "_0" : "T"
+              }
+            }
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_exportGenericOptionalIdentity",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "genericParameters" : [
+          {
+            "name" : "T"
+          }
+        ],
+        "name" : "exportGenericOptionalIdentity",
+        "parameters" : [
+          {
+            "label" : "_",
+            "name" : "value",
+            "type" : {
+              "nullable" : {
+                "_0" : {
+                  "generic" : {
+                    "_0" : "T"
+                  }
+                },
+                "_1" : "null"
+              }
+            }
+          }
+        ],
+        "returnType" : {
+          "nullable" : {
+            "_0" : {
+              "generic" : {
+                "_0" : "T"
+              }
+            },
+            "_1" : "null"
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_exportGenericDictIdentity",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "genericParameters" : [
+          {
+            "name" : "T"
+          }
+        ],
+        "name" : "exportGenericDictIdentity",
+        "parameters" : [
+          {
+            "label" : "_",
+            "name" : "values",
+            "type" : {
+              "dictionary" : {
+                "_0" : {
+                  "generic" : {
+                    "_0" : "T"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "returnType" : {
+          "dictionary" : {
+            "_0" : {
+              "generic" : {
+                "_0" : "T"
+              }
+            }
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_exportGenericCount",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : true
+        },
+        "genericParameters" : [
+          {
+            "name" : "T"
+          },
+          {
+            "name" : "U"
+          },
+          {
+            "name" : "V"
+          }
+        ],
+        "name" : "exportGenericCount",
+        "parameters" : [
+          {
+            "label" : "_",
+            "name" : "values",
+            "type" : {
+              "array" : {
+                "_0" : {
+                  "generic" : {
+                    "_0" : "T"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "label" : "_",
+            "name" : "other",
+            "type" : {
+              "generic" : {
+                "_0" : "U"
+              }
+            }
+          },
+          {
+            "label" : "_",
+            "name" : "extra",
+            "type" : {
+              "generic" : {
+                "_0" : "V"
+              }
+            }
+          },
+          {
+            "label" : "_",
+            "name" : "fail",
+            "type" : {
+              "bool" : {
+
+              }
+            }
+          }
+        ],
+        "returnType" : {
+          "integer" : {
+            "_0" : {
+              "isSigned" : true,
+              "width" : "w64"
+            }
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_exportGenericOptionalCount",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "genericParameters" : [
+          {
+            "name" : "T"
+          }
+        ],
+        "name" : "exportGenericOptionalCount",
+        "parameters" : [
+          {
+            "label" : "_",
+            "name" : "values",
+            "type" : {
+              "array" : {
+                "_0" : {
+                  "generic" : {
+                    "_0" : "T"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "returnType" : {
+          "nullable" : {
+            "_0" : {
+              "integer" : {
+                "_0" : {
+                  "isSigned" : true,
+                  "width" : "word"
+                }
+              }
+            },
+            "_1" : "null"
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_exportGenericTransform",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : true
+        },
+        "genericParameters" : [
+          {
+            "name" : "T"
+          },
+          {
+            "name" : "U"
+          }
+        ],
+        "name" : "exportGenericTransform",
+        "parameters" : [
+          {
+            "label" : "_",
+            "name" : "value",
+            "type" : {
+              "generic" : {
+                "_0" : "T"
+              }
+            }
+          },
+          {
+            "label" : "_",
+            "name" : "transform",
+            "type" : {
+              "closure" : {
+                "_0" : {
+                  "isAsync" : false,
+                  "isThrows" : true,
+                  "mangleName" : "20BridgeJSRuntimeTestsK1TT_1UT",
+                  "moduleName" : "BridgeJSRuntimeTests",
+                  "parameters" : [
+                    {
+                      "generic" : {
+                        "_0" : "T"
+                      }
+                    }
+                  ],
+                  "returnType" : {
+                    "generic" : {
+                      "_0" : "U"
+                    }
+                  },
+                  "sendingParameters" : false
+                },
+                "useJSTypedClosure" : false
+              }
+            }
+          }
+        ],
+        "returnType" : {
+          "generic" : {
+            "_0" : "U"
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_exportGenericSelect",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "genericParameters" : [
+          {
+            "name" : "T"
+          }
+        ],
+        "name" : "exportGenericSelect",
+        "parameters" : [
+          {
+            "label" : "_",
+            "name" : "values",
+            "type" : {
+              "array" : {
+                "_0" : {
+                  "generic" : {
+                    "_0" : "T"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "label" : "_",
+            "name" : "select",
+            "type" : {
+              "closure" : {
+                "_0" : {
+                  "isAsync" : false,
+                  "isThrows" : false,
+                  "mangleName" : "20BridgeJSRuntimeTestsSa1TT_Sq1TT",
+                  "moduleName" : "BridgeJSRuntimeTests",
+                  "parameters" : [
+                    {
+                      "array" : {
+                        "_0" : {
+                          "generic" : {
+                            "_0" : "T"
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "returnType" : {
+                    "nullable" : {
+                      "_0" : {
+                        "generic" : {
+                          "_0" : "T"
+                        }
+                      },
+                      "_1" : "null"
+                    }
+                  },
+                  "sendingParameters" : false
+                },
+                "useJSTypedClosure" : false
+              }
+            }
+          }
+        ],
+        "returnType" : {
+          "nullable" : {
+            "_0" : {
+              "generic" : {
+                "_0" : "T"
+              }
+            },
+            "_1" : "null"
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_exportGenericAsyncTransform",
+        "effects" : {
+          "isAsync" : true,
+          "isStatic" : false,
+          "isThrows" : true
+        },
+        "genericParameters" : [
+          {
+            "name" : "T"
+          },
+          {
+            "name" : "U"
+          }
+        ],
+        "name" : "exportGenericAsyncTransform",
+        "parameters" : [
+          {
+            "label" : "_",
+            "name" : "value",
+            "type" : {
+              "generic" : {
+                "_0" : "T"
+              }
+            }
+          },
+          {
+            "label" : "_",
+            "name" : "transform",
+            "type" : {
+              "closure" : {
+                "_0" : {
+                  "isAsync" : true,
+                  "isThrows" : true,
+                  "mangleName" : "20BridgeJSRuntimeTestsYaK1TT_1UT",
+                  "moduleName" : "BridgeJSRuntimeTests",
+                  "parameters" : [
+                    {
+                      "generic" : {
+                        "_0" : "T"
+                      }
+                    }
+                  ],
+                  "returnType" : {
+                    "generic" : {
+                      "_0" : "U"
+                    }
+                  },
+                  "sendingParameters" : false
+                },
+                "useJSTypedClosure" : false
+              }
+            }
+          }
+        ],
+        "returnType" : {
+          "generic" : {
+            "_0" : "U"
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_exportGenericWrapPointAndTag",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "genericParameters" : [
+          {
+            "name" : "T"
+          }
+        ],
+        "name" : "exportGenericWrapPointAndTag",
+        "parameters" : [
+          {
+            "label" : "_",
+            "name" : "p",
+            "type" : {
+              "swiftStruct" : {
+                "_0" : "ExportGenericPoint"
+              }
+            }
+          },
+          {
+            "label" : "tag",
+            "name" : "tag",
+            "type" : {
+              "integer" : {
+                "_0" : {
+                  "isSigned" : true,
+                  "width" : "word"
+                }
+              }
+            }
+          },
+          {
+            "label" : "_",
+            "name" : "value",
+            "type" : {
+              "generic" : {
+                "_0" : "T"
+              }
+            }
+          }
+        ],
+        "returnType" : {
+          "generic" : {
+            "_0" : "T"
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_lastWrappedPointX",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "name" : "lastWrappedPointX",
+        "parameters" : [
+
+        ],
+        "returnType" : {
+          "integer" : {
+            "_0" : {
+              "isSigned" : true,
+              "width" : "word"
+            }
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_lastWrappedPointY",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "name" : "lastWrappedPointY",
+        "parameters" : [
+
+        ],
+        "returnType" : {
+          "integer" : {
+            "_0" : {
+              "isSigned" : true,
+              "width" : "word"
+            }
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_lastTag",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "name" : "lastTag",
+        "parameters" : [
+
+        ],
+        "returnType" : {
+          "integer" : {
+            "_0" : {
+              "isSigned" : true,
+              "width" : "word"
+            }
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_exportGenericStoreNode",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "genericParameters" : [
+          {
+            "constraints" : [
+              "ExportGenericGraphNode"
+            ],
+            "name" : "T"
+          }
+        ],
+        "name" : "exportGenericStoreNode",
+        "parameters" : [
+          {
+            "label" : "_",
+            "name" : "node",
+            "type" : {
+              "generic" : {
+                "_0" : "T"
+              }
+            }
+          }
+        ],
+        "returnType" : {
+          "generic" : {
+            "_0" : "T"
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_exportGenericLoadNode",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "genericParameters" : [
+          {
+            "constraints" : [
+              "ExportGenericGraphNode"
+            ],
+            "name" : "T"
+          }
+        ],
+        "name" : "exportGenericLoadNode",
+        "parameters" : [
+          {
+            "label" : "_",
+            "name" : "key",
+            "type" : {
+              "string" : {
+
+              }
+            }
+          }
+        ],
+        "returnType" : {
+          "nullable" : {
+            "_0" : {
+              "generic" : {
+                "_0" : "T"
+              }
+            },
+            "_1" : "null"
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_exportGenericSaveNode",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "genericParameters" : [
+          {
+            "constraints" : [
+              "ExportGenericGraphNode"
+            ],
+            "name" : "T"
+          }
+        ],
+        "name" : "exportGenericSaveNode",
+        "parameters" : [
+          {
+            "label" : "_",
+            "name" : "key",
+            "type" : {
+              "string" : {
+
+              }
+            }
+          },
+          {
+            "label" : "_",
+            "name" : "node",
+            "type" : {
+              "generic" : {
+                "_0" : "T"
+              }
+            }
+          }
+        ],
+        "returnType" : {
+          "void" : {
+
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_lastStoredNodeID",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "name" : "lastStoredNodeID",
+        "parameters" : [
+
+        ],
+        "returnType" : {
+          "string" : {
+
+          }
+        }
+      },
+      {
         "abiName" : "bjs_roundTripMessage",
         "effects" : {
           "isAsync" : false,
@@ -19037,6 +20122,46 @@
       {
         "isGenericBridgeable" : true,
         "methods" : [
+
+        ],
+        "name" : "ExportGenericGraphNode",
+        "properties" : [
+          {
+            "isReadonly" : true,
+            "name" : "id",
+            "type" : {
+              "string" : {
+
+              }
+            }
+          }
+        ]
+      },
+      {
+        "inheritedJSProtocols" : [
+          "ExportGenericGraphNode"
+        ],
+        "isGenericBridgeable" : true,
+        "jsName" : "ExportSite",
+        "methods" : [
+
+        ],
+        "name" : "ExportGenericSite",
+        "properties" : [
+          {
+            "isReadonly" : true,
+            "name" : "region",
+            "type" : {
+              "string" : {
+
+              }
+            }
+          }
+        ]
+      },
+      {
+        "isGenericBridgeable" : true,
+        "methods" : [
           {
             "abiName" : "bjs_GenericRTPosition_sum",
             "effects" : {
@@ -19471,6 +20596,324 @@
         "swiftCallName" : "NestedTypeHost.Label"
       },
       {
+        "explicitAccessControl" : "public",
+        "methods" : [
+
+        ],
+        "name" : "ExportGenericPoint",
+        "properties" : [
+          {
+            "isReadonly" : true,
+            "isStatic" : false,
+            "name" : "x",
+            "type" : {
+              "integer" : {
+                "_0" : {
+                  "isSigned" : true,
+                  "width" : "word"
+                }
+              }
+            }
+          },
+          {
+            "isReadonly" : true,
+            "isStatic" : false,
+            "name" : "y",
+            "type" : {
+              "integer" : {
+                "_0" : {
+                  "isSigned" : true,
+                  "width" : "word"
+                }
+              }
+            }
+          }
+        ],
+        "swiftCallName" : "ExportGenericPoint"
+      },
+      {
+        "constructor" : {
+          "abiName" : "bjs_ExportGenericMethodPair_init",
+          "effects" : {
+            "isAsync" : false,
+            "isStatic" : false,
+            "isThrows" : false
+          },
+          "parameters" : [
+
+          ]
+        },
+        "explicitAccessControl" : "public",
+        "methods" : [
+          {
+            "abiName" : "bjs_ExportGenericMethodPair_static_wrap",
+            "effects" : {
+              "isAsync" : false,
+              "isStatic" : true,
+              "isThrows" : false
+            },
+            "genericParameters" : [
+              {
+                "name" : "T"
+              }
+            ],
+            "name" : "wrap",
+            "parameters" : [
+              {
+                "label" : "_",
+                "name" : "value",
+                "type" : {
+                  "generic" : {
+                    "_0" : "T"
+                  }
+                }
+              }
+            ],
+            "returnType" : {
+              "array" : {
+                "_0" : {
+                  "generic" : {
+                    "_0" : "T"
+                  }
+                }
+              }
+            },
+            "staticContext" : {
+              "structName" : {
+                "_0" : "ExportGenericMethodPair"
+              }
+            }
+          },
+          {
+            "abiName" : "bjs_ExportGenericMethodPair_summary",
+            "effects" : {
+              "isAsync" : false,
+              "isStatic" : false,
+              "isThrows" : true
+            },
+            "genericParameters" : [
+              {
+                "name" : "T"
+              }
+            ],
+            "name" : "summary",
+            "parameters" : [
+              {
+                "label" : "_",
+                "name" : "values",
+                "type" : {
+                  "array" : {
+                    "_0" : {
+                      "generic" : {
+                        "_0" : "T"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "label" : "_",
+                "name" : "fail",
+                "type" : {
+                  "bool" : {
+
+                  }
+                }
+              }
+            ],
+            "returnType" : {
+              "swiftStruct" : {
+                "_0" : "ExportGenericPoint"
+              }
+            }
+          },
+          {
+            "abiName" : "bjs_ExportGenericMethodPair_map",
+            "effects" : {
+              "isAsync" : false,
+              "isStatic" : false,
+              "isThrows" : false
+            },
+            "genericParameters" : [
+              {
+                "name" : "T"
+              },
+              {
+                "name" : "U"
+              }
+            ],
+            "name" : "map",
+            "parameters" : [
+              {
+                "label" : "_",
+                "name" : "values",
+                "type" : {
+                  "array" : {
+                    "_0" : {
+                      "generic" : {
+                        "_0" : "T"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "label" : "_",
+                "name" : "transform",
+                "type" : {
+                  "closure" : {
+                    "_0" : {
+                      "isAsync" : false,
+                      "isThrows" : false,
+                      "mangleName" : "20BridgeJSRuntimeTests1TTSi_1UT",
+                      "moduleName" : "BridgeJSRuntimeTests",
+                      "parameters" : [
+                        {
+                          "generic" : {
+                            "_0" : "T"
+                          }
+                        },
+                        {
+                          "integer" : {
+                            "_0" : {
+                              "isSigned" : true,
+                              "width" : "word"
+                            }
+                          }
+                        }
+                      ],
+                      "returnType" : {
+                        "generic" : {
+                          "_0" : "U"
+                        }
+                      },
+                      "sendingParameters" : false
+                    },
+                    "useJSTypedClosure" : false
+                  }
+                }
+              }
+            ],
+            "returnType" : {
+              "array" : {
+                "_0" : {
+                  "generic" : {
+                    "_0" : "U"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "abiName" : "bjs_ExportGenericMethodPair_mapAsync",
+            "effects" : {
+              "isAsync" : true,
+              "isStatic" : false,
+              "isThrows" : false
+            },
+            "genericParameters" : [
+              {
+                "name" : "T"
+              },
+              {
+                "name" : "U"
+              }
+            ],
+            "name" : "mapAsync",
+            "parameters" : [
+              {
+                "label" : "_",
+                "name" : "values",
+                "type" : {
+                  "array" : {
+                    "_0" : {
+                      "generic" : {
+                        "_0" : "T"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "label" : "_",
+                "name" : "transform",
+                "type" : {
+                  "closure" : {
+                    "_0" : {
+                      "isAsync" : true,
+                      "isThrows" : false,
+                      "mangleName" : "20BridgeJSRuntimeTestsYa1TT_1UT",
+                      "moduleName" : "BridgeJSRuntimeTests",
+                      "parameters" : [
+                        {
+                          "generic" : {
+                            "_0" : "T"
+                          }
+                        }
+                      ],
+                      "returnType" : {
+                        "generic" : {
+                          "_0" : "U"
+                        }
+                      },
+                      "sendingParameters" : false
+                    },
+                    "useJSTypedClosure" : false
+                  }
+                }
+              }
+            ],
+            "returnType" : {
+              "array" : {
+                "_0" : {
+                  "generic" : {
+                    "_0" : "U"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "name" : "ExportGenericMethodPair",
+        "properties" : [
+
+        ],
+        "swiftCallName" : "ExportGenericMethodPair"
+      },
+      {
+        "conformedJSProtocols" : [
+          "ExportGenericSite"
+        ],
+        "explicitAccessControl" : "public",
+        "methods" : [
+
+        ],
+        "name" : "ExportGenericCampus",
+        "properties" : [
+          {
+            "isReadonly" : true,
+            "isStatic" : false,
+            "name" : "id",
+            "type" : {
+              "string" : {
+
+              }
+            }
+          },
+          {
+            "isReadonly" : true,
+            "isStatic" : false,
+            "name" : "region",
+            "type" : {
+              "string" : {
+
+              }
+            }
+          }
+        ],
+        "swiftCallName" : "ExportGenericCampus"
+      },
+      {
         "constructor" : {
           "abiName" : "bjs_Library_Shelf_init",
           "effects" : {
@@ -19601,6 +21044,9 @@
         "swiftCallName" : "Library.Shelf.Divider"
       },
       {
+        "conformedJSProtocols" : [
+          "GenericRTNode"
+        ],
         "methods" : [
           {
             "abiName" : "bjs_GenericRTPoint_sum",
@@ -24402,6 +25848,30 @@
 
             ]
           }
+        ]
+      },
+      {
+        "functions" : [
+          {
+            "accessLevel" : "internal",
+            "effects" : {
+              "isAsync" : true,
+              "isStatic" : false,
+              "isThrows" : true
+            },
+            "name" : "runExportGenericAsyncTests",
+            "parameters" : [
+
+            ],
+            "returnType" : {
+              "void" : {
+
+              }
+            }
+          }
+        ],
+        "types" : [
+
         ]
       },
       {

@@ -300,6 +300,8 @@ public final class SwiftToSkeleton {
             collector.finalize(&exported)
         }
 
+        mergeExtensionDeclaredJSProtocolConformances(into: &exported)
+
         perSourceErrors.append(contentsOf: diagnoseProtocolConformances(in: exported))
 
         if !perSourceErrors.isEmpty {
@@ -418,6 +420,74 @@ public final class SwiftToSkeleton {
         return diagnostics
     }
 
+    private func mergeExtensionDeclaredJSProtocolConformances(into exported: inout ExportedSkeleton) {
+        var targets: [(name: String, type: TypeSyntax, protocols: [String])] = []
+        for declaration in typeDeclResolver.declarationsWithInheritance {
+            guard let extensionDecl = declaration.as(ExtensionDeclSyntax.self) else { continue }
+            let protocols = (extensionDecl.inheritanceClause?.inheritedTypes ?? []).compactMap {
+                resolveJSProtocolConstraint(for: $0.type)
+            }
+            if !protocols.isEmpty {
+                targets.append((extensionDecl.extendedType.trimmedDescription, extensionDecl.extendedType, protocols))
+            }
+        }
+        guard !targets.isEmpty else { return }
+        var protocolsByTarget: [String: [String]] = [:]
+        for target in targets {
+            protocolsByTarget[target.name, default: []].append(contentsOf: target.protocols)
+        }
+
+        func merge(_ existing: inout [String]?, additions: [String]) {
+            var result = existing ?? []
+            for name in additions where !result.contains(name) {
+                result.append(name)
+            }
+            existing = result.isEmpty ? nil : result
+        }
+
+        var matchedTargets: Set<String> = []
+        for index in exported.structs.indices {
+            if let additions = protocolsByTarget[exported.structs[index].swiftCallName] {
+                merge(&exported.structs[index].conformedJSProtocols, additions: additions)
+                matchedTargets.insert(exported.structs[index].swiftCallName)
+            }
+        }
+        for index in exported.classes.indices {
+            if let additions = protocolsByTarget[exported.classes[index].swiftCallName] {
+                merge(&exported.classes[index].conformedJSProtocols, additions: additions)
+                matchedTargets.insert(exported.classes[index].swiftCallName)
+            }
+        }
+        for index in exported.enums.indices {
+            if let additions = protocolsByTarget[exported.enums[index].swiftCallName] {
+                merge(&exported.enums[index].conformedJSProtocols, additions: additions)
+                matchedTargets.insert(exported.enums[index].swiftCallName)
+            }
+        }
+
+        var externalConformances: [String: [String]] = [:]
+        for target in targets where !matchedTargets.contains(target.name) {
+            var scratchErrors: [DiagnosticError] = []
+            guard let externalType = resolveExternal(for: target.type, errors: &scratchErrors) else { continue }
+            let externalName: String?
+            switch externalType {
+            case .swiftStruct(let name), .swiftHeapObject(let name),
+                .caseEnum(let name), .rawValueEnum(let name, _), .associatedValueEnum(let name):
+                externalName = name
+            default:
+                externalName = nil
+            }
+            guard let externalName else { continue }
+            for protocolName in target.protocols
+            where !(externalConformances[externalName] ?? []).contains(protocolName) {
+                externalConformances[externalName, default: []].append(protocolName)
+            }
+        }
+        if !externalConformances.isEmpty {
+            exported.externalJSProtocolConformances = externalConformances
+        }
+    }
+
     private static let jsTypedArrayTypealiasNames: [String: String] = [
         "Int8": "JSInt8Array",
         "UInt8": "JSUint8Array",
@@ -431,9 +501,30 @@ public final class SwiftToSkeleton {
         "Float64": "JSFloat64Array",
     ]
 
-    func lookupType(for type: TypeSyntax, errors: inout [DiagnosticError]) -> BridgeType? {
+    func lookupType(
+        for type: TypeSyntax,
+        errors: inout [DiagnosticError],
+        genericParameterNames: [String] = []
+    ) -> BridgeType? {
+        if !genericParameterNames.isEmpty, !type.is(FunctionTypeSyntax.self) {
+            switch resolveGenericTypeReference(for: type, genericParameterNames: genericParameterNames) {
+            case .resolved(let bridgeType): return bridgeType
+            case .rejected(let message):
+                if let message {
+                    errors.append(DiagnosticError(node: type, message: message))
+                    return nil
+                }
+            }
+        }
         if let attributedType = type.as(AttributedTypeSyntax.self) {
             return lookupType(for: attributedType.baseType, errors: &errors)
+        }
+        if let existential = type.as(SomeOrAnyTypeSyntax.self),
+            existential.someOrAnySpecifier.tokenKind == .keyword(.any),
+            let resolved = lookupType(for: existential.constraint, errors: &errors),
+            case .swiftProtocol = resolved
+        {
+            return resolved
         }
 
         // JSTypedArray<T>
@@ -462,13 +553,25 @@ public final class SwiftToSkeleton {
         if let functionType = type.as(FunctionTypeSyntax.self) {
             var parameters: [BridgeType] = []
             for param in functionType.parameters {
-                guard let paramType = lookupType(for: param.type, errors: &errors) else {
+                guard
+                    let paramType = lookupType(
+                        for: param.type,
+                        errors: &errors,
+                        genericParameterNames: genericParameterNames
+                    )
+                else {
                     return nil
                 }
                 parameters.append(paramType)
             }
 
-            guard let returnType = lookupType(for: functionType.returnClause.type, errors: &errors) else {
+            guard
+                let returnType = lookupType(
+                    for: functionType.returnClause.type,
+                    errors: &errors,
+                    genericParameterNames: genericParameterNames
+                )
+            else {
                 return nil
             }
 
@@ -1555,15 +1658,103 @@ private final class ExportSwiftAPICollector: SyntaxAnyVisitor {
         return .array(elements)
     }
 
+    private func lookupTypeWithGenerics(
+        for type: TypeSyntax,
+        genericParameterNames: [String],
+        allowGenericCallback: Bool = false,
+        errors: inout [DiagnosticError]
+    ) -> BridgeType? {
+        if wrappedGenericParameter(in: type, genericParameterNames: genericParameterNames) != nil,
+            type.is(FunctionTypeSyntax.self)
+                || type.as(AttributedTypeSyntax.self)?.baseType.is(FunctionTypeSyntax.self) == true
+        {
+            var callbackType = type
+            if let attributed = type.as(AttributedTypeSyntax.self),
+                attributed.specifiers.isEmpty,
+                attributed.attributes.allSatisfy({
+                    $0.as(AttributeSyntax.self)?.attributeName.trimmedDescription == "escaping"
+                })
+            {
+                callbackType = attributed.baseType
+            }
+            guard allowGenericCallback, let functionType = callbackType.as(FunctionTypeSyntax.self)
+            else {
+                errors.append(
+                    DiagnosticError(
+                        node: type,
+                        message:
+                            "Generic callbacks must be parameters of @JS functions, optionally marked @escaping."
+                    )
+                )
+                return nil
+            }
+            if functionType.parameters.contains(where: {
+                $0.type.as(AttributedTypeSyntax.self)?.specifiers.isEmpty == false || $0.ellipsis != nil
+            }) {
+                errors.append(
+                    DiagnosticError(
+                        node: type,
+                        message: "Generic callbacks cannot have inout, ownership, or variadic parameters."
+                    )
+                )
+                return nil
+            }
+            guard
+                let resolved = parent.lookupType(
+                    for: callbackType,
+                    errors: &errors,
+                    genericParameterNames: genericParameterNames
+                ),
+                case .closure(let signature, _) = resolved
+            else { return nil }
+            guard !(signature.parameters + [signature.returnType]).contains(where: \.isClosureType) else {
+                errors.append(
+                    DiagnosticError(node: type, message: "Generic callbacks cannot take or return other closures yet.")
+                )
+                return nil
+            }
+            return resolved
+        }
+        switch resolveGenericTypeReference(for: type, genericParameterNames: genericParameterNames) {
+        case .resolved(let bridgeType):
+            return bridgeType
+        case .rejected(let message):
+            if let message {
+                errors.append(DiagnosticError(node: Syntax(type), message: message))
+                return nil
+            }
+            return parent.lookupType(for: type, errors: &errors)
+        }
+    }
+
+    private func collectConformedJSProtocols(from inheritanceClause: InheritanceClauseSyntax?) -> [String]? {
+        guard let inheritanceClause else { return nil }
+        var names: [String] = []
+        for inherited in inheritanceClause.inheritedTypes {
+            if let name = parent.resolveJSProtocolConstraint(for: inherited.type), !names.contains(name) {
+                names.append(name)
+            }
+        }
+        return names.isEmpty ? nil : names
+    }
+
     /// Shared parameter parsing logic used by functions, initializers, and protocol methods
     private func parseParameters(
         from parameterClause: FunctionParameterClauseSyntax,
-        allowDefaults: Bool = true
+        allowDefaults: Bool = true,
+        genericParameterNames: [String] = []
     ) -> [Parameter] {
         var parameters: [Parameter] = []
 
         for param in parameterClause.parameters {
-            let resolvedType = withLookupErrors { self.parent.lookupType(for: param.type, errors: &$0) }
+            let resolvedType = withLookupErrors {
+                self.lookupTypeWithGenerics(
+                    for: param.type,
+                    genericParameterNames: genericParameterNames,
+                    allowGenericCallback: true,
+                    errors: &$0
+                )
+            }
             guard let type = resolvedType else {
                 continue  // Skip unsupported types
             }
@@ -1655,14 +1846,26 @@ private final class ExportSwiftAPICollector: SyntaxAnyVisitor {
             return nil
         }
 
-        if let genericClause = node.genericParameterClause, let firstGenericParam = genericClause.parameters.first {
-            diagnose(
-                node: firstGenericParam,
-                message:
-                    "Generic parameters on exported @JS functions are not supported yet. Generic functions are currently only supported on imported @JSFunction declarations."
-            )
-            return nil
+        var genericParameters: [GenericParameter] = []
+        if let genericClause = node.genericParameterClause {
+            for genericParam in genericClause.parameters {
+                switch parent.parseGenericParameterConstraints(genericParam, attributeName: "@JS") {
+                case .failed(let message):
+                    diagnose(node: node, message: message)
+                    return nil
+                case .parsed(let genericParameter):
+                    genericParameters.append(genericParameter)
+                }
+            }
+            if node.genericWhereClause != nil {
+                diagnose(
+                    node: node,
+                    message: "'where' clauses are not supported on generic @JS functions."
+                )
+                return nil
+            }
         }
+        let genericParameterNames = genericParameters.map(\.name)
 
         let name = node.name.text
         let jsName = extractValidatedJSName(from: jsAttribute)
@@ -1694,10 +1897,20 @@ private final class ExportSwiftAPICollector: SyntaxAnyVisitor {
             )
         }
 
-        let parameters = parseParameters(from: node.signature.parameterClause, allowDefaults: true)
+        let parameters = parseParameters(
+            from: node.signature.parameterClause,
+            allowDefaults: true,
+            genericParameterNames: genericParameterNames
+        )
         let returnType: BridgeType
         if let returnClause = node.signature.returnClause {
-            let resolvedType = withLookupErrors { self.parent.lookupType(for: returnClause.type, errors: &$0) }
+            let resolvedType = withLookupErrors {
+                self.lookupTypeWithGenerics(
+                    for: returnClause.type,
+                    genericParameterNames: genericParameterNames,
+                    errors: &$0
+                )
+            }
 
             if let type = resolvedType, case .nullable(let wrappedType, _) = type, wrappedType.isOptional {
                 diagnoseNestedOptional(node: returnClause.type, type: returnClause.type.trimmedDescription)
@@ -1708,6 +1921,30 @@ private final class ExportSwiftAPICollector: SyntaxAnyVisitor {
             returnType = type
         } else {
             returnType = .void
+        }
+
+        if !genericParameterNames.isEmpty {
+            if parameters.contains(where: { $0.defaultValue != nil }) {
+                diagnose(
+                    node: node,
+                    message: "Default parameter values are not supported on generic @JS functions.",
+                    hint:
+                        "JavaScript callers pass a trailing BridgeType token after the declared parameters, so a defaulted parameter could never be omitted. Remove the default value or provide a non-generic overload."
+                )
+                return nil
+            }
+            for genericName in genericParameterNames {
+                let usedInParameter = parameters.contains { $0.type.referencedGenericNames.contains(genericName) }
+                let usedInReturn = returnType.referencedGenericName == genericName
+                if !usedInParameter && !usedInReturn {
+                    diagnose(
+                        node: node,
+                        message:
+                            "The generic parameter '\(genericName)' must be used in at least one parameter or the return type of a generic @JS function."
+                    )
+                    return nil
+                }
+            }
         }
 
         let abiName: String
@@ -1772,7 +2009,8 @@ private final class ExportSwiftAPICollector: SyntaxAnyVisitor {
             effects: effects,
             namespace: finalNamespace,
             staticContext: staticContext,
-            documentation: extractDocumentation(from: node)
+            documentation: extractDocumentation(from: node),
+            genericParameters: genericParameters.isEmpty ? nil : genericParameters
         )
     }
 
@@ -1931,6 +2169,11 @@ private final class ExportSwiftAPICollector: SyntaxAnyVisitor {
         guard let jsAttribute = node.attributes.firstJSAttribute else { return .skipChildren }
 
         diagnoseUnsupportedJSName(from: jsAttribute)
+
+        if node.genericParameterClause != nil || node.genericWhereClause != nil {
+            diagnose(node: node, message: "Generic @JS initializers are not supported.")
+            return .skipChildren
+        }
 
         switch state {
         case .classBody(_, let classKey):
@@ -2151,7 +2394,8 @@ private final class ExportSwiftAPICollector: SyntaxAnyVisitor {
             jsNamespace: namespaceResult.jsNamespace,
             identityMode: classIdentityMode,
             documentation: extractDocumentation(from: node),
-            isFinal: isFinal
+            isFinal: isFinal,
+            conformedJSProtocols: collectConformedJSProtocols(from: node.inheritanceClause)
         )
         let uniqueKey = makeKey(name: name, namespace: effectiveNamespace)
 
@@ -2316,7 +2560,8 @@ private final class ExportSwiftAPICollector: SyntaxAnyVisitor {
             emitStyle: emitStyle,
             staticMethods: [],
             staticProperties: [],
-            documentation: extractDocumentation(from: node)
+            documentation: extractDocumentation(from: node),
+            conformedJSProtocols: collectConformedJSProtocols(from: node.inheritanceClause)
         )
 
         let enumUniqueKey = makeKey(name: name, namespace: effectiveNamespace)
@@ -2569,7 +2814,8 @@ private final class ExportSwiftAPICollector: SyntaxAnyVisitor {
             methods: [],
             namespace: effectiveNamespace,
             jsNamespace: namespaceResult.jsNamespace,
-            documentation: extractDocumentation(from: node)
+            documentation: extractDocumentation(from: node),
+            conformedJSProtocols: collectConformedJSProtocols(from: node.inheritanceClause)
         )
 
         exportedStructByName[structUniqueKey] = exportedStruct
@@ -2630,6 +2876,16 @@ private final class ExportSwiftAPICollector: SyntaxAnyVisitor {
             diagnoseUnsupportedJSName(from: jsAttribute)
         }
 
+        if node.genericParameterClause != nil || node.genericWhereClause != nil {
+            diagnose(
+                node: node,
+                message: "Generic requirements are not supported on @JS protocols yet.",
+                hint:
+                    "Constrain a generic @JS function or method to the protocol instead: '<T: BridgedSwiftGenericBridgeable & \(protocolName)>'."
+            )
+            return nil
+        }
+
         let name = node.name.text
 
         let parameters = parseParameters(from: node.signature.parameterClause, allowDefaults: false)
@@ -2648,6 +2904,12 @@ private final class ExportSwiftAPICollector: SyntaxAnyVisitor {
         } else {
             returnType = .void
         }
+
+        guard
+            (parameters.map(\.type) + [returnType]).allSatisfy({
+                validateProtocolRequirementType($0, node: node)
+            })
+        else { return nil }
 
         let abiName = ABINameGenerator.generateABIName(
             baseName: name,
@@ -2697,6 +2959,7 @@ private final class ExportSwiftAPICollector: SyntaxAnyVisitor {
             else {
                 continue
             }
+            guard validateProtocolRequirementType(propertyType, node: typeAnnotation.type) else { continue }
 
             guard let accessorBlock = binding.accessorBlock else {
                 diagnose(
@@ -2734,6 +2997,22 @@ private final class ExportSwiftAPICollector: SyntaxAnyVisitor {
         }
 
         return .skipChildren
+    }
+
+    private func validateProtocolRequirementType(_ type: BridgeType, node: some SyntaxProtocol) -> Bool {
+        switch type {
+        case .swiftProtocol:
+            diagnose(node: node, message: "Protocol-valued requirements are not supported on @JS protocols yet.")
+            return false
+        case .nullable(let element, _), .array(let element), .dictionary(let element), .alias(_, let element):
+            return validateProtocolRequirementType(element, node: node)
+        case .closure(let signature, _):
+            return (signature.parameters + [signature.returnType]).allSatisfy {
+                validateProtocolRequirementType($0, node: node)
+            }
+        default:
+            return true
+        }
     }
 
     private func hasOnlyGetter(_ accessorBlock: AccessorBlockSyntax?) -> Bool {
@@ -3680,7 +3959,6 @@ private final class ImportSwiftMacrosAPICollector: SyntaxAnyVisitor {
         else {
             return nil
         }
-
         let genericParameterNames = genericParameters.map(\.name)
 
         let baseName = SwiftToSkeleton.normalizeIdentifier(node.name.text)

@@ -36,6 +36,7 @@ final class JSGlueVariableScope {
     static let reservedMakeSwiftClosure = "makeClosure"
     static let reservedTaStack = "taStack"
     static let reservedCodecByTypeId = "__bjs_codecByTypeId"
+    static let reservedTypeIdByToken = "__bjs_typeIdByToken"
     static let reservedPrimitiveCodecs = "__bjs_primitiveCodecs"
     static let reservedStringCodec = "__bjs_stringCodec"
     static let reservedTypeHandlesRegistered = "__bjs_typeHandlesRegistered"
@@ -71,6 +72,7 @@ final class JSGlueVariableScope {
         reservedMakeSwiftClosure,
         reservedTaStack,
         reservedCodecByTypeId,
+        reservedTypeIdByToken,
         reservedPrimitiveCodecs,
         reservedStringCodec,
         reservedTypeHandlesRegistered,
@@ -224,6 +226,39 @@ enum GenericJSCodegen {
 
     static func genericCodecLiftExpression(type: BridgeType, codec: String) -> String? {
         genericCodecExpression(type: type, codec: codec).map { "\($0).lift()" }
+    }
+
+    static func genericTokenParameterNames(
+        parameters: [Parameter],
+        genericNames: [String],
+        scope: JSGlueVariableScope
+    ) -> [String] {
+        for parameter in parameters {
+            _ = scope.variable(parameter.name)
+        }
+        return genericNames.map { scope.variable("type\($0)") }
+    }
+
+    static func exportRuntimeHelperDeclarations() -> [String] {
+        let typeIdByToken = JSGlueVariableScope.reservedTypeIdByToken
+        return [
+            "function __bjs_typeIdForToken(token, requiredProtocols) {",
+            "    \(JSGlueVariableScope.reservedRegisterTypeHandles)();",
+            "    const typeId = \(typeIdByToken).get(token);",
+            "    if (typeId === undefined) {",
+            "        throw new TypeError(\"BridgeJS: unknown BridgeType token '\" + token + \"'\");",
+            "    }",
+            "    if (requiredProtocols) {",
+            "        const conformances = __bjs_tokenConformances[token] || [];",
+            "        for (const requiredProtocol of requiredProtocols) {",
+            "            if (!conformances.includes(requiredProtocol)) {",
+            "                throw new TypeError(\"BridgeJS: type '\" + token + \"' does not conform to required protocol '\" + requiredProtocol + \"'\");",
+            "            }",
+            "        }",
+            "    }",
+            "    return typeId;",
+            "}",
+        ]
     }
 
     static func runtimeHelperDeclarations() -> [String] {
@@ -2581,6 +2616,15 @@ struct IntrinsicJSFragment: Sendable {
 
             // Attach instance methods to the struct instance
             for method in structDef.methods where !method.effects.isStatic {
+                if method.isGeneric {
+                    try attachGenericStructInstanceMethod(
+                        method: method,
+                        structDef: structDef,
+                        instanceVar: instanceVar,
+                        context: context
+                    )
+                    continue
+                }
                 let paramList = DefaultValueUtils.formatParameterList(
                     method.parameters,
                     resolveTypeName: context.defaultValueTypeName
@@ -2609,6 +2653,28 @@ struct IntrinsicJSFragment: Sendable {
         } else {
             printer.write("return { \(reconstructedFields.joined(separator: ", ")) };")
         }
+    }
+
+    private static func attachGenericStructInstanceMethod(
+        method: ExportedFunction,
+        structDef: ExportedStruct,
+        instanceVar: String,
+        context: IntrinsicJSFragment.PrintCodeContext
+    ) throws {
+        let printer = context.printer
+        let builder = BridgeJSLink.ExportedThunkBuilder(effects: method.effects, context: context)
+        try builder.lowerParametersAndGenericTokens(
+            parameters: method.parameters,
+            genericParameters: method.genericParameters ?? [],
+            selfType: .swiftStruct(structDef.swiftCallName)
+        )
+        let returnExpr = try builder.call(abiName: method.abiName, returnType: method.returnType)
+        let paramList = builder.parameterList(method.parameters)
+        printer.write("\(instanceVar).\(method.resolvedJSName) = function(\(paramList)) {")
+        printer.indent {
+            builder.renderFunctionBody(into: printer, returnExpr: returnExpr)
+        }
+        printer.write("}.bind(\(instanceVar));")
     }
 
     private static func structFieldLowerFragment(
