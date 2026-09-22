@@ -161,6 +161,12 @@ public struct ClosureSignature: Codable, Equatable, Hashable, Sendable {
     /// transferred through a continuation.
     public let sendingParameters: Bool
 
+    public var genericParameterNames: [String] {
+        (parameters + [returnType]).compactMap(\.referencedGenericName).reduce(into: []) { names, name in
+            if !names.contains(name) { names.append(name) }
+        }
+    }
+
     public init(
         parameters: [BridgeType],
         returnType: BridgeType,
@@ -312,6 +318,13 @@ extension BridgeType {
         }
     }
 
+    public var usesGenericParameter: Bool { referencedGenericName != nil }
+
+    public var referencedGenericNames: [String] {
+        if case .closure(let signature, _) = self { return signature.genericParameterNames }
+        return referencedGenericName.map { [$0] } ?? []
+    }
+
     public static let genericBridgeablePrimitives: [(token: String, type: BridgeType)] = [
         ("Bool", .bool),
         ("Int", .integer(.int)),
@@ -335,10 +348,12 @@ extension BridgeType {
 public struct GenericBridgeableTypeEntry: Sendable {
     public let swiftName: String
     public let bridgeType: BridgeType
+    public let token: String
 
-    public init(swiftName: String, bridgeType: BridgeType) {
+    public init(swiftName: String, bridgeType: BridgeType, token: String) {
         self.swiftName = swiftName
         self.bridgeType = bridgeType
+        self.token = token
     }
 }
 
@@ -366,7 +381,8 @@ extension ExportedSkeleton {
             entries.append(
                 GenericBridgeableTypeEntry(
                     swiftName: structDef.swiftCallName,
-                    bridgeType: .swiftStruct(structDef.swiftCallName)
+                    bridgeType: .swiftStruct(structDef.swiftCallName),
+                    token: structDef.abiName
                 )
             )
         }
@@ -374,23 +390,38 @@ extension ExportedSkeleton {
             entries.append(
                 GenericBridgeableTypeEntry(
                     swiftName: klass.swiftCallName,
-                    bridgeType: .swiftHeapObject(klass.swiftCallName)
+                    bridgeType: .swiftHeapObject(klass.swiftCallName),
+                    token: klass.abiName
                 )
             )
         }
         for enumDef in enums {
             guard let bridgeType = enumDef.genericBridgeType else { continue }
-            entries.append(GenericBridgeableTypeEntry(swiftName: enumDef.swiftCallName, bridgeType: bridgeType))
+            entries.append(
+                GenericBridgeableTypeEntry(
+                    swiftName: enumDef.swiftCallName,
+                    bridgeType: bridgeType,
+                    token: enumDef.abiName
+                )
+            )
         }
         for proto in protocols where proto.isGenericBridgeable == true {
             entries.append(
                 GenericBridgeableTypeEntry(
                     swiftName: "Any\(proto.name)",
-                    bridgeType: .swiftProtocol(proto.name)
+                    bridgeType: .swiftProtocol(proto.name),
+                    token: proto.abiName
                 )
             )
         }
         return entries
+    }
+
+    public var hasGenericDeclarations: Bool {
+        functions.contains(where: \.isGeneric)
+            || classes.contains { $0.methods.contains(where: \.isGeneric) }
+            || structs.contains { $0.methods.contains(where: \.isGeneric) }
+            || enums.contains { $0.staticMethods.contains(where: \.isGeneric) }
     }
 }
 
@@ -840,6 +871,7 @@ public struct ExportedStruct: Codable, Equatable, Sendable, NamespacedExportedTy
     public let namespace: [String]?
     public let jsNamespace: [String]?
     public var documentation: String?
+    public var conformedJSProtocols: [String]?
 
     public init(
         name: String,
@@ -851,7 +883,8 @@ public struct ExportedStruct: Codable, Equatable, Sendable, NamespacedExportedTy
         methods: [ExportedFunction] = [],
         namespace: [String]?,
         jsNamespace: [String]? = nil,
-        documentation: String? = nil
+        documentation: String? = nil,
+        conformedJSProtocols: [String]? = nil
     ) {
         self.name = name
         self.jsName = jsName
@@ -863,6 +896,7 @@ public struct ExportedStruct: Codable, Equatable, Sendable, NamespacedExportedTy
         self.namespace = namespace
         self.jsNamespace = jsNamespace
         self.documentation = documentation
+        self.conformedJSProtocols = conformedJSProtocols
     }
 }
 
@@ -935,6 +969,7 @@ public struct ExportedEnum: Codable, Equatable, Sendable, NamespacedExportedType
     public var staticMethods: [ExportedFunction]
     public var staticProperties: [ExportedProperty] = []
     public var documentation: String?
+    public var conformedJSProtocols: [String]?
     public var enumType: EnumType {
         if cases.isEmpty {
             return .namespace
@@ -965,7 +1000,8 @@ public struct ExportedEnum: Codable, Equatable, Sendable, NamespacedExportedType
         emitStyle: EnumEmitStyle,
         staticMethods: [ExportedFunction] = [],
         staticProperties: [ExportedProperty] = [],
-        documentation: String? = nil
+        documentation: String? = nil,
+        conformedJSProtocols: [String]? = nil
     ) {
         self.name = name
         self.jsName = jsName
@@ -980,6 +1016,7 @@ public struct ExportedEnum: Codable, Equatable, Sendable, NamespacedExportedType
         self.staticMethods = staticMethods
         self.staticProperties = staticProperties
         self.documentation = documentation
+        self.conformedJSProtocols = conformedJSProtocols
     }
 }
 
@@ -1055,6 +1092,9 @@ public struct ExportedFunction: Codable, Equatable, Sendable {
     public var namespace: [String]?
     public var staticContext: StaticContext?
     public var documentation: String?
+    public var genericParameters: [GenericParameter]?
+    public var genericParameterNames: [String] { (genericParameters ?? []).map(\.name) }
+    public var isGeneric: Bool { !genericParameterNames.isEmpty }
 
     public var resolvedJSName: String { jsName ?? name }
 
@@ -1067,7 +1107,8 @@ public struct ExportedFunction: Codable, Equatable, Sendable {
         effects: Effects,
         namespace: [String]? = nil,
         staticContext: StaticContext? = nil,
-        documentation: String? = nil
+        documentation: String? = nil,
+        genericParameters: [GenericParameter]? = nil
     ) {
         self.name = name
         self.jsName = jsName
@@ -1078,6 +1119,7 @@ public struct ExportedFunction: Codable, Equatable, Sendable {
         self.namespace = namespace
         self.staticContext = staticContext
         self.documentation = documentation
+        self.genericParameters = genericParameters
     }
 }
 
@@ -1094,6 +1136,7 @@ public struct ExportedClass: Codable, NamespacedExportedType {
     public var identityMode: Bool?  // nil = use config default, true/false = override
     public var documentation: String?
     public var isFinal: Bool?
+    public var conformedJSProtocols: [String]?
 
     public init(
         name: String,
@@ -1107,7 +1150,8 @@ public struct ExportedClass: Codable, NamespacedExportedType {
         jsNamespace: [String]? = nil,
         identityMode: Bool? = nil,
         documentation: String? = nil,
-        isFinal: Bool? = nil
+        isFinal: Bool? = nil,
+        conformedJSProtocols: [String]? = nil
     ) {
         self.name = name
         self.jsName = jsName
@@ -1121,6 +1165,7 @@ public struct ExportedClass: Codable, NamespacedExportedType {
         self.identityMode = identityMode
         self.documentation = documentation
         self.isFinal = isFinal
+        self.conformedJSProtocols = conformedJSProtocols
     }
 }
 
@@ -1242,6 +1287,8 @@ public struct ExportedSkeleton: Codable {
     /// When `"pointer"`, Swift heap objects are tracked by pointer identity.
     /// When `"none"` or `nil`, no identity tracking is performed.
     public var identityMode: String?
+
+    public var externalJSProtocolConformances: [String: [String]]?
 
     public init(
         functions: [ExportedFunction],
@@ -1840,7 +1887,7 @@ public struct ClosureSignatureCollectorVisitor: BridgeSkeletonVisitor {
 
         if signature.isAsync {
             recordInjectedSignatures(
-                forReturnType: signature.returnType,
+                forReturnType: signature.returnType.usesGenericParameter ? .jsValue : signature.returnType,
                 accessLevel: accessLevel
             )
         }
