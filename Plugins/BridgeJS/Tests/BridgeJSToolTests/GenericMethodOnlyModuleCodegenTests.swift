@@ -13,7 +13,7 @@ import Testing
         ).js
         #expect(js.contains("const __bjs_codecByTypeId = new Map();"))
         #expect(js.contains("const __bjs_typeIdByToken = new Map();"))
-        #expect(js.contains("function __bjs_typeIdForToken(token) {"))
+        #expect(js.contains("function __bjs_typeIdForToken(token, requiredProtocols) {"))
         #expect(js.contains("export const BridgeTypes = {"))
         #expect(js.contains("bjs[\"bjs_TestModule_register_type_handles\"] = function(base, count) {"))
     }

@@ -163,6 +163,81 @@ nonisolated(unsafe) private var _genericStore: [String: any BridgedSwiftGenericB
 @JS public func lastWrappedPointY() -> Int { _lastWrappedPoint.y }
 @JS public func lastTag() -> Int { _lastTag }
 
+@JS public protocol ExportGenericGraphNode {
+    var id: String { get }
+}
+
+@JS public struct ExportGenericBuilding: ExportGenericGraphNode {
+    public var id: String
+    public var floors: Int
+
+    @JS public init(id: String, floors: Int) {
+        self.id = id
+        self.floors = floors
+    }
+}
+
+nonisolated(unsafe) var _lastStoredNodeID = ""
+
+@JS public func exportGenericStoreNode<T: BridgedSwiftGenericBridgeable & ExportGenericGraphNode>(_ node: T) -> T {
+    // The protocol constraint is usable in the function body.
+    _lastStoredNodeID = node.id
+    return node
+}
+
+// The bridging protocol may appear anywhere in the composition.
+@JS
+public func exportGenericNodeRoundTrip<
+    T: ExportGenericGraphNode & BridgedSwiftGenericBridgeable
+>(_ node: T) -> T {
+    return node
+}
+
+@JS
+public func exportGenericStoreNodeWithExtra<
+    T: BridgedSwiftGenericBridgeable & ExportGenericGraphNode,
+    U: BridgedSwiftGenericBridgeable
+>(_ node: T, _ extra: U) -> U {
+    _lastStoredNodeID = node.id
+    return extra
+}
+
+nonisolated(unsafe) private var _nodeStore: [String: any BridgedSwiftGenericBridgeable] = [:]
+
+// Return-only generic export with a protocol constraint: T appears only in the
+// result, so the thunk pops nothing for it and the JS caller picks T via the token.
+@JS
+public func exportGenericLoadNode<
+    T: BridgedSwiftGenericBridgeable & ExportGenericGraphNode
+>(_ key: String) -> T? {
+    _nodeStore[key] as? T
+}
+
+@JS
+public func exportGenericSaveNode<
+    T: BridgedSwiftGenericBridgeable & ExportGenericGraphNode
+>(_ key: String, _ node: T) {
+    _nodeStore[key] = node
+}
+
+@JS public func lastStoredNodeID() -> String { _lastStoredNodeID }
+
+// Protocol refinement: a conformer of the refined protocol must satisfy a
+// constraint on the base protocol, both in Swift and in the JS-side token check.
+@JS public protocol ExportGenericSite: ExportGenericGraphNode {
+    var region: String { get }
+}
+
+@JS public struct ExportGenericCampus: ExportGenericSite {
+    public var id: String
+    public var region: String
+
+    @JS public init(id: String, region: String) {
+        self.id = id
+        self.region = region
+    }
+}
+
 @_extern(wasm, module: "BridgeJSRuntimeTests", name: "runExportGenericTests")
 @_extern(c)
 func runExportGenericTests() -> Void

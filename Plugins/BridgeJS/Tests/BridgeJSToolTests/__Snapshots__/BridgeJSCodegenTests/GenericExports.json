@@ -90,7 +90,9 @@
               "isThrows" : false
             },
             "genericParameters" : [
-              "T"
+              {
+                "name" : "T"
+              }
             ],
             "name" : "wrap",
             "parameters" : [
@@ -118,8 +120,12 @@
               "isThrows" : false
             },
             "genericParameters" : [
-              "T",
-              "t"
+              {
+                "name" : "T"
+              },
+              {
+                "name" : "t"
+              }
             ],
             "name" : "combine",
             "parameters" : [
@@ -156,7 +162,9 @@
               "isThrows" : false
             },
             "genericParameters" : [
-              "T"
+              {
+                "name" : "T"
+              }
             ],
             "name" : "makeArray",
             "parameters" : [
@@ -193,7 +201,9 @@
               "isThrows" : false
             },
             "genericParameters" : [
-              "T"
+              {
+                "name" : "T"
+              }
             ],
             "name" : "load",
             "parameters" : [
@@ -415,7 +425,9 @@
               "isThrows" : false
             },
             "genericParameters" : [
-              "T"
+              {
+                "name" : "T"
+              }
             ],
             "name" : "one",
             "parameters" : [
@@ -462,7 +474,9 @@
               "isThrows" : false
             },
             "genericParameters" : [
-              "T"
+              {
+                "name" : "T"
+              }
             ],
             "name" : "make",
             "namespace" : [
@@ -523,7 +537,9 @@
           "isThrows" : false
         },
         "genericParameters" : [
-          "T"
+          {
+            "name" : "T"
+          }
         ],
         "name" : "genericExportIdentity",
         "parameters" : [
@@ -551,7 +567,9 @@
           "isThrows" : false
         },
         "genericParameters" : [
-          "T"
+          {
+            "name" : "T"
+          }
         ],
         "name" : "genericExportArray",
         "parameters" : [
@@ -587,7 +605,9 @@
           "isThrows" : false
         },
         "genericParameters" : [
-          "T"
+          {
+            "name" : "T"
+          }
         ],
         "name" : "genericExportOptional",
         "parameters" : [
@@ -625,7 +645,9 @@
           "isThrows" : false
         },
         "genericParameters" : [
-          "T"
+          {
+            "name" : "T"
+          }
         ],
         "name" : "genericExportDictionary",
         "parameters" : [
@@ -661,7 +683,9 @@
           "isThrows" : false
         },
         "genericParameters" : [
-          "T"
+          {
+            "name" : "T"
+          }
         ],
         "name" : "genericExportEcho",
         "parameters" : [
@@ -701,7 +725,9 @@
           "isThrows" : false
         },
         "genericParameters" : [
-          "T"
+          {
+            "name" : "T"
+          }
         ],
         "name" : "genericExportStore",
         "parameters" : [
@@ -738,7 +764,9 @@
           "isThrows" : false
         },
         "genericParameters" : [
-          "T"
+          {
+            "name" : "T"
+          }
         ],
         "name" : "genericExportLoad",
         "parameters" : [
@@ -771,7 +799,9 @@
           "isThrows" : false
         },
         "genericParameters" : [
-          "T"
+          {
+            "name" : "T"
+          }
         ],
         "name" : "genericExportStructConcreteLeading",
         "parameters" : [
@@ -808,7 +838,9 @@
           "isThrows" : false
         },
         "genericParameters" : [
-          "T"
+          {
+            "name" : "T"
+          }
         ],
         "name" : "genericExportStructAndScalar",
         "parameters" : [
@@ -857,7 +889,9 @@
           "isThrows" : false
         },
         "genericParameters" : [
-          "T"
+          {
+            "name" : "T"
+          }
         ],
         "name" : "genericExportPair",
         "parameters" : [
@@ -894,8 +928,12 @@
           "isThrows" : false
         },
         "genericParameters" : [
-          "T",
-          "U"
+          {
+            "name" : "T"
+          },
+          {
+            "name" : "U"
+          }
         ],
         "name" : "genericExportCombine",
         "parameters" : [
@@ -932,8 +970,12 @@
           "isThrows" : false
         },
         "genericParameters" : [
-          "T",
-          "U"
+          {
+            "name" : "T"
+          },
+          {
+            "name" : "U"
+          }
         ],
         "name" : "genericExportCombineReturnU",
         "parameters" : [
@@ -970,8 +1012,12 @@
           "isThrows" : false
         },
         "genericParameters" : [
-          "T",
-          "t"
+          {
+            "name" : "T"
+          },
+          {
+            "name" : "t"
+          }
         ],
         "name" : "genericExportCaseDistinct",
         "parameters" : [
@@ -1102,7 +1148,9 @@
               "isThrows" : false
             },
             "genericParameters" : [
-              "T"
+              {
+                "name" : "T"
+              }
             ],
             "name" : "first",
             "parameters" : [
@@ -1130,8 +1178,12 @@
               "isThrows" : false
             },
             "genericParameters" : [
-              "T",
-              "t"
+              {
+                "name" : "T"
+              },
+              {
+                "name" : "t"
+              }
             ],
             "name" : "combine",
             "parameters" : [
@@ -1168,7 +1220,9 @@
               "isThrows" : false
             },
             "genericParameters" : [
-              "T"
+              {
+                "name" : "T"
+              }
             ],
             "name" : "maybe",
             "parameters" : [
@@ -1201,7 +1255,9 @@
               "isThrows" : false
             },
             "genericParameters" : [
-              "T"
+              {
+                "name" : "T"
+              }
             ],
             "name" : "dict",
             "parameters" : [
@@ -1233,7 +1289,9 @@
               "isThrows" : false
             },
             "genericParameters" : [
-              "T"
+              {
+                "name" : "T"
+              }
             ],
             "name" : "wrap",
             "parameters" : [

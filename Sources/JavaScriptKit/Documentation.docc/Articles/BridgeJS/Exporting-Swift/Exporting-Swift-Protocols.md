@@ -227,5 +227,6 @@ struct AnyCounter: Counter, _BridgedSwiftProtocolWrapper {
 | Existential protocol composition: `any Protocol1 & Protocol2` | ❌ |
 | Generic requirements | ❌ |
 | Protocol-valued properties, parameters, or results in requirements | ❌ |
+| Use as a generic constraint: `<T: BridgedSwiftGenericBridgeable & MyProtocol>` (see <doc:Exporting-Swift-Function>) | ✅ |
 
 > Note: For supported requirement types, see <doc:Exporting-Swift-Function>, <doc:Exporting-Swift-Optional>, and <doc:Exporting-Swift-Enum>.

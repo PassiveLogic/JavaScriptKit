@@ -181,4 +181,80 @@ export function runExportGenericTests(exports) {
         TypeError
     );
     assert.equal(exports.exportGenericIdentity(7, BridgeTypes.Int), 7);
+
+    // Generic exports constrained to a @JS protocol composition: the Swift thunk
+    // reifies T through `any (BridgedSwiftGenericBridgeable & P).Type` and the
+    // function body can use the protocol members of the value.
+    const storedBuilding = exports.exportGenericStoreNode(
+        { id: "hq", floors: 3 },
+        BridgeTypes.ExportGenericBuilding
+    );
+    assert.equal(storedBuilding.id, "hq");
+    assert.equal(storedBuilding.floors, 3);
+    assert.equal(exports.lastStoredNodeID(), "hq");
+
+    const roundTrippedBuilding = exports.exportGenericNodeRoundTrip(
+        { id: "annex", floors: 1 },
+        BridgeTypes.ExportGenericBuilding
+    );
+    assert.equal(roundTrippedBuilding.id, "annex");
+    assert.equal(roundTrippedBuilding.floors, 1);
+
+    // Mixed constrained + unconstrained generic parameters.
+    assert.equal(
+        exports.exportGenericStoreNodeWithExtra(
+            { id: "depot", floors: 2 },
+            42,
+            BridgeTypes.ExportGenericBuilding,
+            BridgeTypes.Int
+        ),
+        42
+    );
+    assert.equal(exports.lastStoredNodeID(), "depot");
+
+    // Return-only constrained generic export: T appears only in the result, so
+    // the thunk performs the composed-existential cast, opens T, pops no generic
+    // argument, and lowers the optional return via the token's codec.
+    exports.exportGenericSaveNode(
+        "vault",
+        { id: "vault", floors: 9 },
+        BridgeTypes.ExportGenericBuilding
+    );
+    const loadedNode = exports.exportGenericLoadNode(
+        "vault",
+        BridgeTypes.ExportGenericBuilding
+    );
+    assert.equal(loadedNode.id, "vault");
+    assert.equal(loadedNode.floors, 9);
+    assert.equal(
+        exports.exportGenericLoadNode("missing", BridgeTypes.ExportGenericBuilding),
+        null
+    );
+
+    // A token for a type that does NOT conform to the required protocols throws
+    // a catchable TypeError from the JS wrapper BEFORE entering wasm: the link
+    // layer knows every type's @JS protocol conformances, so the check runs
+    // against the token and nothing is lowered (balanced stack, no wasm trap).
+    // The Swift-side conditional cast still exists as defense-in-depth, but it
+    // is unreachable through the generated wrapper (only a raw wasm caller
+    // could hit it), so there is no trap-based test here.
+    assert.throws(
+        () => exports.exportGenericStoreNode(5, BridgeTypes.Int),
+        TypeError
+    );
+    // The failed call left the stacks balanced; constrained calls still work.
+    assert.equal(
+        exports.exportGenericNodeRoundTrip({ id: "after", floors: 4 }, BridgeTypes.ExportGenericBuilding).id,
+        "after"
+    );
+
+    // Protocol refinement: ExportGenericCampus conforms to ExportGenericSite,
+    // which refines ExportGenericGraphNode, so its token satisfies constraints
+    // on the base protocol too - exactly as the Swift type system does.
+    const campus = exports.exportGenericStoreNode(
+        { id: "campus-1", region: "north" },
+        BridgeTypes.ExportGenericCampus
+    );
+    assert.equal(campus.region, "north");
+    assert.equal(exports.lastStoredNodeID(), "campus-1");
 }

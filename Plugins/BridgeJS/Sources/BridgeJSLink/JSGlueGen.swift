@@ -247,16 +247,27 @@ enum GenericJSCodegen {
 
     /// Runtime helpers used only by generic *exports*: the JS wrapper resolves
     /// the caller's `BridgeTypes` token to a runtime type ID before entering
-    /// wasm, throwing a catchable `TypeError` for unknown tokens (the wasm side
-    /// treats an invalid ID as undefined behavior, so it must never see one).
+    /// wasm, throwing a catchable `TypeError` for unknown tokens and for tokens
+    /// whose type does not conform to the generic parameter's `@JS protocol`
+    /// constraints (the wasm side treats an invalid ID as undefined behavior
+    /// and enforces constraints only as a defense-in-depth trap, so neither
+    /// must be reachable from JS).
     static func exportRuntimeHelperDeclarations() -> [String] {
         let typeIdByToken = JSGlueVariableScope.reservedTypeIdByToken
         return [
-            "function __bjs_typeIdForToken(token) {",
+            "function __bjs_typeIdForToken(token, requiredProtocols) {",
             "    \(JSGlueVariableScope.reservedRegisterTypeHandles)();",
             "    const typeId = \(typeIdByToken).get(token);",
             "    if (typeId === undefined) {",
             "        throw new TypeError(\"BridgeJS: unknown BridgeType token '\" + token + \"'\");",
+            "    }",
+            "    if (requiredProtocols) {",
+            "        const conformances = __bjs_tokenConformances[token] || [];",
+            "        for (const requiredProtocol of requiredProtocols) {",
+            "            if (!conformances.includes(requiredProtocol)) {",
+            "                throw new TypeError(\"BridgeJS: type '\" + token + \"' does not conform to required protocol '\" + requiredProtocol + \"'\");",
+            "            }",
+            "        }",
             "    }",
             "    return typeId;",
             "}",
@@ -2675,10 +2686,10 @@ struct IntrinsicJSFragment: Sendable {
     ) throws {
         let printer = context.printer
         let methodScope = context.scope.makeChildScope()
-        let genericNames = method.genericParameterNames
+        let genericParameters = method.genericParameters ?? []
         let tokenNames = GenericJSCodegen.genericTokenParameterNames(
             parameters: method.parameters,
-            genericNames: genericNames,
+            genericNames: method.genericParameterNames,
             scope: methodScope
         )
         let methodContext = context.with(\.scope, methodScope)
@@ -2688,10 +2699,13 @@ struct IntrinsicJSFragment: Sendable {
         try printer.indent {
             var codecVariables: [String: String] = [:]
             var typeIdVariables: [String: String] = [:]
-            for (genericName, tokenName) in zip(genericNames, tokenNames) {
+            for (genericParameter, tokenName) in zip(genericParameters, tokenNames) {
+                let genericName = genericParameter.name
                 let typeIdVariable = methodScope.variable("typeId\(genericName)")
                 let codecVariable = methodScope.variable("codec\(genericName)")
-                printer.write("const \(typeIdVariable) = __bjs_typeIdForToken(\(tokenName));")
+                printer.write(
+                    "const \(typeIdVariable) = __bjs_typeIdForToken(\(tokenName)\(BridgeJSLink.ExportedThunkBuilder.requiredProtocolsArgument(genericParameter)));"
+                )
                 printer.write("const \(codecVariable) = __bjs_codecForTypeId(\(typeIdVariable));")
                 typeIdVariables[genericName] = typeIdVariable
                 codecVariables[genericName] = codecVariable
@@ -2717,7 +2731,7 @@ struct IntrinsicJSFragment: Sendable {
                     paramForwardings.append(contentsOf: loweredValues)
                 }
             }
-            paramForwardings.append(contentsOf: genericNames.compactMap { typeIdVariables[$0] })
+            paramForwardings.append(contentsOf: method.genericParameterNames.compactMap { typeIdVariables[$0] })
             printer.write("instance.exports.\(method.abiName)(\(paramForwardings.joined(separator: ", ")));")
             if let returnGenericName = method.returnType.referencedGenericName,
                 let codecVariable = codecVariables[returnGenericName],

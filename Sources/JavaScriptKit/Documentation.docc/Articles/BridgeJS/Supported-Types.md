@@ -43,6 +43,8 @@ You do not write the conformance by hand: marking a type `@JS` (or using a built
 
 The generic parameter may be used bare (`T`) or wrapped in `[T]`, `T?`, or `[String: T]`. Other or nested wrappings (for example `[T?]`, `[[T]]`, or `[Int: T]`) are not supported. `JSObject` cannot be used as the generic argument; use `JSValue` instead.
 
+A generic parameter may additionally be constrained to one or more `@JS` protocols by composing them with `BridgedSwiftGenericBridgeable`, for example `<T: BridgedSwiftGenericBridgeable & GraphNode>`. See <doc:Importing-JS-Function> and <doc:Exporting-Swift-Function> for details, including the runtime enforcement behavior on exports.
+
 ## See Also
 
 - <doc:Generating-from-TypeScript>

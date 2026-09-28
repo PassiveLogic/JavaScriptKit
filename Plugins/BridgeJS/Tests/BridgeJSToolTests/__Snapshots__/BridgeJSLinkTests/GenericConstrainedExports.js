@@ -4,32 +4,7 @@
 // To update this file, just rebuild your project or run
 // `swift package bridge-js`.
 
-export const LevelValues = {
-    Low: 1,
-    High: 9,
-};
-
-export const ExportModeValues = {
-    On: "on",
-    Off: "off",
-};
-
-export const ExportColorValues = {
-    Red: 0,
-    Green: 1,
-};
-
-export const ExportTaggedValues = {
-    Tag: {
-        Number: 0,
-        Text: 1,
-    },
-};
-export const GenericFactoryValues = {
-    Primary: 0,
-};
-
-export const BridgeTypes = { Bool: "Bool", Int: "Int", Int8: "Int8", UInt8: "UInt8", Int16: "Int16", UInt16: "UInt16", Int32: "Int32", UInt32: "UInt32", UInt: "UInt", Int64: "Int64", UInt64: "UInt64", Float: "Float", Double: "Double", String: "String", JSValue: "JSValue", ExportPoint: "ExportPoint", ExportNamespace_Metadata: "ExportNamespace_Metadata", GenericPair: "GenericPair", ExportBox: "ExportBox", GenericBox: "GenericBox", ExportGenericNamespace_Handle: "ExportGenericNamespace_Handle", ExportNamespace_Level: "ExportNamespace_Level", ExportMode: "ExportMode", ExportColor: "ExportColor", ExportTagged: "ExportTagged", GenericFactory: "GenericFactory" };
+export const BridgeTypes = { Bool: "Bool", Int: "Int", Int8: "Int8", UInt8: "UInt8", Int16: "Int16", UInt16: "UInt16", Int32: "Int32", UInt32: "UInt32", UInt: "UInt", Int64: "Int64", UInt64: "UInt64", Float: "Float", Double: "Double", String: "String", JSValue: "JSValue", ExportGraphBuilding: "ExportGraphBuilding", GraphRegistry: "GraphRegistry", ExportLabeledNode: "ExportLabeledNode" };
 export async function createInstantiator(options, swift) {
     let instance;
     let memory;
@@ -73,7 +48,7 @@ export async function createInstantiator(options, swift) {
         }
         return codec;
     }
-    const __bjs_tokenConformances = {  };
+    const __bjs_tokenConformances = { "ExportGraphBuilding": ["ExportGraphNode"], "ExportLabeledNode": ["ExportLabeledNode", "ExportGraphNode"] };
     function __bjs_typeIdForToken(token, requiredProtocols) {
         __bjs_registerTypeHandles();
         const typeId = __bjs_typeIdByToken.get(token);
@@ -416,200 +391,50 @@ export async function createInstantiator(options, swift) {
         return jsValue;
     }
 
-    const __bjs_codec_M10TestModuleT11ExportPoint = {
+    const __bjs_codec_M10TestModuleT19ExportGraphBuilding = {
         lower: (v) => {
-            structHelpers.M10TestModuleT11ExportPoint.lower(v);
+            structHelpers.M10TestModuleT19ExportGraphBuilding.lower(v);
         },
         lift: () => {
-            const struct = structHelpers.M10TestModuleT11ExportPoint.lift();
+            const struct = structHelpers.M10TestModuleT19ExportGraphBuilding.lift();
             return struct;
         },
     };
-    const __bjs_codec_M10TestModuleT15ExportNamespaceT8Metadata = {
-        lower: (v) => {
-            structHelpers.M10TestModuleT15ExportNamespaceT8Metadata.lower(v);
-        },
-        lift: () => {
-            const struct = structHelpers.M10TestModuleT15ExportNamespaceT8Metadata.lift();
-            return struct;
-        },
-    };
-    const __bjs_codec_M10TestModuleT11GenericPair = {
-        lower: (v) => {
-            structHelpers.M10TestModuleT11GenericPair.lower(v);
-        },
-        lift: () => {
-            const struct = structHelpers.M10TestModuleT11GenericPair.lift();
-            return struct;
-        },
-    };
-    const __bjs_codec_M10TestModuleT9ExportBox = {
+    const __bjs_codec_M10TestModuleT13GraphRegistry = {
         lower: (v) => {
             ptrStack.push(v.pointer);
         },
         lift: () => {
             const ptr = ptrStack.pop();
-            const obj = _exports['ExportBox'].__construct(ptr);
+            const obj = _exports['GraphRegistry'].__construct(ptr);
             return obj;
         },
     };
-    const __bjs_codec_M10TestModuleT10GenericBox = {
+    const __bjs_codec_M10TestModuleT17ExportLabeledNode = {
         lower: (v) => {
-            ptrStack.push(v.pointer);
+            const objId = swift.memory.retain(v);
+            i32Stack.push(objId);
         },
         lift: () => {
-            const ptr = ptrStack.pop();
-            const obj = _exports['GenericBox'].__construct(ptr);
+            const objId = i32Stack.pop();
+            const obj = swift.memory.getObject(objId);
+            swift.memory.release(objId);
             return obj;
-        },
-    };
-    const __bjs_codec_T22ExportGenericNamespaceT6Handle = {
-        lower: (v) => {
-            ptrStack.push(v.pointer);
-        },
-        lift: () => {
-            const ptr = ptrStack.pop();
-            const obj = _exports.ExportGenericNamespace.Handle.__construct(ptr);
-            return obj;
-        },
-    };
-    const __bjs_codec_M10TestModuleT15ExportNamespaceT5Level = {
-        lower: (v) => {
-            i32Stack.push((v | 0));
-        },
-        lift: () => {
-            const rawValue = i32Stack.pop();
-            return rawValue;
-        },
-    };
-    const __bjs_codec_M10TestModuleT11ExportColor = {
-        lower: (v) => {
-            i32Stack.push((v | 0));
-        },
-        lift: () => {
-            const caseId = i32Stack.pop();
-            return caseId;
-        },
-    };
-    const __bjs_codec_M10TestModuleT12ExportTagged = {
-        lower: (v) => {
-            const caseId = enumHelpers.M10TestModuleT12ExportTagged.lower(v);
-            i32Stack.push(caseId);
-        },
-        lift: () => {
-            const enumValue = enumHelpers.M10TestModuleT12ExportTagged.lift(i32Stack.pop());
-            return enumValue;
-        },
-    };
-    const __bjs_codec_M10TestModuleT14GenericFactory = {
-        lower: (v) => {
-            i32Stack.push((v | 0));
-        },
-        lift: () => {
-            const caseId = i32Stack.pop();
-            return caseId;
         },
     };
 
-    const __bjs_createStructHelpers_M10TestModuleT11ExportPoint = () => ({
+    const __bjs_createStructHelpers_M10TestModuleT19ExportGraphBuilding = () => ({
         lower: (value) => {
-            i32Stack.push((value.x | 0));
-            i32Stack.push((value.y | 0));
-        },
-        lift: () => {
-            const int = i32Stack.pop();
-            const int1 = i32Stack.pop();
-            return { x: int1, y: int };
-        }
-    });
-    const __bjs_createStructHelpers_M10TestModuleT15ExportNamespaceT8Metadata = () => ({
-        lower: (value) => {
-            const bytes = textEncoder.encode(value.label);
+            const bytes = textEncoder.encode(value.id);
             const id = swift.memory.retain(bytes);
             i32Stack.push(bytes.length);
             i32Stack.push(id);
-            i32Stack.push((value.count | 0));
+            i32Stack.push((value.floors | 0));
         },
         lift: () => {
             const int = i32Stack.pop();
             const string = strStack.pop();
-            return { label: string, count: int };
-        }
-    });
-    const __bjs_createStructHelpers_M10TestModuleT11GenericPair = () => ({
-        lower: (value) => {
-        },
-        lift: () => {
-            const instance1 = {  };
-            instance1.first = function(value, typeT) {
-                const typeIdT = __bjs_typeIdForToken(typeT);
-                const codecT = __bjs_codecForTypeId(typeIdT);
-                structHelpers.M10TestModuleT11GenericPair.lower(this);
-                codecT.lower(value);
-                instance.exports.bjs_GenericPair_first(typeIdT);
-                return codecT.lift();
-            }.bind(instance1);
-            instance1.combine = function(a, b, typeT, typet) {
-                const typeIdT = __bjs_typeIdForToken(typeT);
-                const codecT = __bjs_codecForTypeId(typeIdT);
-                const typeIdt = __bjs_typeIdForToken(typet);
-                const codect = __bjs_codecForTypeId(typeIdt);
-                structHelpers.M10TestModuleT11GenericPair.lower(this);
-                codecT.lower(a);
-                codect.lower(b);
-                instance.exports.bjs_GenericPair_combine(typeIdT, typeIdt);
-                return codecT.lift();
-            }.bind(instance1);
-            instance1.maybe = function(value, typeT) {
-                const typeIdT = __bjs_typeIdForToken(typeT);
-                const codecT = __bjs_codecForTypeId(typeIdT);
-                structHelpers.M10TestModuleT11GenericPair.lower(this);
-                codecT.lower(value);
-                instance.exports.bjs_GenericPair_maybe(typeIdT);
-                return __bjs_optionalCodec(codecT).lift();
-            }.bind(instance1);
-            instance1.dict = function(value, typeT) {
-                const typeIdT = __bjs_typeIdForToken(typeT);
-                const codecT = __bjs_codecForTypeId(typeIdT);
-                structHelpers.M10TestModuleT11GenericPair.lower(this);
-                codecT.lower(value);
-                instance.exports.bjs_GenericPair_dict(typeIdT);
-                return __bjs_dictCodec(codecT).lift();
-            }.bind(instance1);
-            return instance1;
-        }
-    });
-    const __bjs_createEnumHelpers_M10TestModuleT12ExportTagged = () => ({
-        lower: (value) => {
-            const enumTag = value.tag;
-            switch (enumTag) {
-                case ExportTaggedValues.Tag.Number: {
-                    i32Stack.push((value.value | 0));
-                    return ExportTaggedValues.Tag.Number;
-                }
-                case ExportTaggedValues.Tag.Text: {
-                    const bytes = textEncoder.encode(value.value);
-                    const id = swift.memory.retain(bytes);
-                    i32Stack.push(bytes.length);
-                    i32Stack.push(id);
-                    return ExportTaggedValues.Tag.Text;
-                }
-                default: throw new Error("Unknown ExportTaggedValues tag: " + String(enumTag));
-            }
-        },
-        lift: (tag) => {
-            tag = tag | 0;
-            switch (tag) {
-                case ExportTaggedValues.Tag.Number: {
-                    const int = i32Stack.pop();
-                    return { tag: ExportTaggedValues.Tag.Number, value: int };
-                }
-                case ExportTaggedValues.Tag.Text: {
-                    const string = strStack.pop();
-                    return { tag: ExportTaggedValues.Tag.Text, value: string };
-                }
-                default: throw new Error("Unknown ExportTaggedValues tag returned from Swift: " + String(tag));
-            }
+            return { id: string, floors: int };
         }
     });
 
@@ -687,25 +512,11 @@ export async function createInstantiator(options, swift) {
                 const copy = memory.buffer.slice(ptr, ptr + byteLen);
                 taStack.push(Array.from(new Ctor(copy)));
             }
-            bjs["swift_js_struct_lower_ExportPoint"] = function(objectId) {
-                structHelpers.M10TestModuleT11ExportPoint.lower(swift.memory.getObject(objectId));
+            bjs["swift_js_struct_lower_ExportGraphBuilding"] = function(objectId) {
+                structHelpers.M10TestModuleT19ExportGraphBuilding.lower(swift.memory.getObject(objectId));
             }
-            bjs["swift_js_struct_lift_ExportPoint"] = function() {
-                const value = structHelpers.M10TestModuleT11ExportPoint.lift();
-                return swift.memory.retain(value);
-            }
-            bjs["swift_js_struct_lower_ExportNamespace_Metadata"] = function(objectId) {
-                structHelpers.M10TestModuleT15ExportNamespaceT8Metadata.lower(swift.memory.getObject(objectId));
-            }
-            bjs["swift_js_struct_lift_ExportNamespace_Metadata"] = function() {
-                const value = structHelpers.M10TestModuleT15ExportNamespaceT8Metadata.lift();
-                return swift.memory.retain(value);
-            }
-            bjs["swift_js_struct_lower_GenericPair"] = function(objectId) {
-                structHelpers.M10TestModuleT11GenericPair.lower(swift.memory.getObject(objectId));
-            }
-            bjs["swift_js_struct_lift_GenericPair"] = function() {
-                const value = structHelpers.M10TestModuleT11GenericPair.lift();
+            bjs["swift_js_struct_lift_ExportGraphBuilding"] = function() {
+                const value = structHelpers.M10TestModuleT19ExportGraphBuilding.lift();
                 return swift.memory.retain(value);
             }
             bjs["bjs_core_register_type_handles"] = function(base, count) {
@@ -735,19 +546,11 @@ export async function createInstantiator(options, swift) {
             }
             bjs["bjs_TestModule_register_type_handles"] = function(base, count) {
                 const codecs = [
-                    __bjs_codec_M10TestModuleT11ExportPoint,
-                    __bjs_codec_M10TestModuleT15ExportNamespaceT8Metadata,
-                    __bjs_codec_M10TestModuleT11GenericPair,
-                    __bjs_codec_M10TestModuleT9ExportBox,
-                    __bjs_codec_M10TestModuleT10GenericBox,
-                    __bjs_codec_T22ExportGenericNamespaceT6Handle,
-                    __bjs_codec_M10TestModuleT15ExportNamespaceT5Level,
-                    __bjs_stringCodec,
-                    __bjs_codec_M10TestModuleT11ExportColor,
-                    __bjs_codec_M10TestModuleT12ExportTagged,
-                    __bjs_codec_M10TestModuleT14GenericFactory,
+                    __bjs_codec_M10TestModuleT19ExportGraphBuilding,
+                    __bjs_codec_M10TestModuleT13GraphRegistry,
+                    __bjs_codec_M10TestModuleT17ExportLabeledNode,
                 ];
-                const tokens = ["ExportPoint", "ExportNamespace_Metadata", "GenericPair", "ExportBox", "GenericBox", "ExportGenericNamespace_Handle", "ExportNamespace_Level", "ExportMode", "ExportColor", "ExportTagged", "GenericFactory"];
+                const tokens = ["ExportGraphBuilding", "GraphRegistry", "ExportLabeledNode"];
                 const typeIds = new Int32Array(memory.buffer, base >>> 0, count >>> 0);
                 for (let i = 0; i < count; i++) {
                     __bjs_codecByTypeId.set(typeIds[i], codecs[i]);
@@ -855,18 +658,38 @@ export async function createInstantiator(options, swift) {
             if (!importObject["TestModule"]) {
                 importObject["TestModule"] = {};
             }
-            importObject["TestModule"]["bjs_ExportBox_wrap"] = function(pointer) {
-                const obj = _exports['ExportBox'].__construct(pointer);
+            importObject["TestModule"]["bjs_GraphRegistry_wrap"] = function(pointer) {
+                const obj = _exports['GraphRegistry'].__construct(pointer);
                 return swift.memory.retain(obj);
             };
-            importObject["TestModule"]["bjs_GenericBox_wrap"] = function(pointer) {
-                const obj = _exports['GenericBox'].__construct(pointer);
-                return swift.memory.retain(obj);
-            };
-            importObject["TestModule"]["bjs_ExportGenericNamespace_Handle_wrap"] = function(pointer) {
-                const obj = _exports.ExportGenericNamespace.Handle.__construct(pointer);
-                return swift.memory.retain(obj);
-            };
+            const TestModule = importObject["TestModule"] = importObject["TestModule"] || {};
+            TestModule["bjs_ExportGraphNode_id_get"] = function bjs_ExportGraphNode_id_get(self) {
+                try {
+                    let ret = swift.memory.getObject(self).id;
+                    tmpRetBytes = textEncoder.encode(ret);
+                    return tmpRetBytes.length;
+                } catch (error) {
+                    setException(error);
+                }
+            }
+            TestModule["bjs_ExportLabeled_label_get"] = function bjs_ExportLabeled_label_get(self) {
+                try {
+                    let ret = swift.memory.getObject(self).label;
+                    tmpRetBytes = textEncoder.encode(ret);
+                    return tmpRetBytes.length;
+                } catch (error) {
+                    setException(error);
+                }
+            }
+            TestModule["bjs_ExportLabeledNode_label_get"] = function bjs_ExportLabeledNode_label_get(self) {
+                try {
+                    let ret = swift.memory.getObject(self).label;
+                    tmpRetBytes = textEncoder.encode(ret);
+                    return tmpRetBytes.length;
+                } catch (error) {
+                    setException(error);
+                }
+            }
         },
         setInstance: (i) => {
             instance = i;
@@ -933,241 +756,74 @@ export async function createInstantiator(options, swift) {
                     state.deinit(state.pointer);
                 }
             }
-            class ExportBox extends SwiftHeapObject {
+            class GraphRegistry extends SwiftHeapObject {
                 static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_ExportBox_deinit, ExportBox.prototype, null);
-                }
-
-                constructor(value) {
-                    const ret = instance.exports.bjs_ExportBox_init(value);
-                    return ExportBox.__construct(ret);
-                }
-                get() {
-                    const ret = instance.exports.bjs_ExportBox_get(this.pointer);
-                    return ret;
-                }
-                get value() {
-                    const ret = instance.exports.bjs_ExportBox_value_get(this.pointer);
-                    return ret;
-                }
-                set value(value) {
-                    instance.exports.bjs_ExportBox_value_set(this.pointer, value);
-                }
-            }
-            class GenericBox extends SwiftHeapObject {
-                static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_GenericBox_deinit, GenericBox.prototype, null);
+                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_GraphRegistry_deinit, GraphRegistry.prototype, null);
                 }
 
                 constructor() {
-                    const ret = instance.exports.bjs_GenericBox_init();
-                    return GenericBox.__construct(ret);
+                    const ret = instance.exports.bjs_GraphRegistry_init();
+                    return GraphRegistry.__construct(ret);
                 }
-                wrap(value, typeT) {
-                    const typeIdT = __bjs_typeIdForToken(typeT);
+                register(node, typeT) {
+                    const typeIdT = __bjs_typeIdForToken(typeT, ["ExportGraphNode"]);
                     const codecT = __bjs_codecForTypeId(typeIdT);
-                    codecT.lower(value);
-                    instance.exports.bjs_GenericBox_wrap(this.pointer, typeIdT);
+                    codecT.lower(node);
+                    instance.exports.bjs_GraphRegistry_register(this.pointer, typeIdT);
                     return codecT.lift();
                 }
-                combine(a, b, typeT, typet) {
-                    const typeIdT = __bjs_typeIdForToken(typeT);
+                static pin(node, typeT) {
+                    const typeIdT = __bjs_typeIdForToken(typeT, ["ExportGraphNode"]);
                     const codecT = __bjs_codecForTypeId(typeIdT);
-                    const typeIdt = __bjs_typeIdForToken(typet);
-                    const codect = __bjs_codecForTypeId(typeIdt);
-                    codecT.lower(a);
-                    codect.lower(b);
-                    instance.exports.bjs_GenericBox_combine(this.pointer, typeIdT, typeIdt);
+                    codecT.lower(node);
+                    instance.exports.bjs_GraphRegistry_static_pin(typeIdT);
                     return codecT.lift();
                 }
-                static makeArray(value, typeT) {
-                    const typeIdT = __bjs_typeIdForToken(typeT);
-                    const codecT = __bjs_codecForTypeId(typeIdT);
-                    codecT.lower(value);
-                    instance.exports.bjs_GenericBox_static_makeArray(typeIdT);
-                    return __bjs_arrayCodec(codecT).lift();
-                }
-                load(key, typeT) {
-                    const typeIdT = __bjs_typeIdForToken(typeT);
-                    const codecT = __bjs_codecForTypeId(typeIdT);
-                    const keyBytes = textEncoder.encode(key);
-                    const keyId = swift.memory.retain(keyBytes);
-                    instance.exports.bjs_GenericBox_load(this.pointer, keyId, keyBytes.length, typeIdT);
-                    return __bjs_optionalCodec(codecT).lift();
-                }
             }
-            class Handle extends SwiftHeapObject {
-                static __construct(ptr) {
-                    return SwiftHeapObject.__wrap(ptr, instance.exports.bjs_ExportGenericNamespace_Handle_deinit, Handle.prototype, null);
-                }
-
-                constructor() {
-                    const ret = instance.exports.bjs_ExportGenericNamespace_Handle_init();
-                    return Handle.__construct(ret);
-                }
-            }
-            const __bjs_helpers_M10TestModuleT11ExportPoint = __bjs_createStructHelpers_M10TestModuleT11ExportPoint();
-            structHelpers.M10TestModuleT11ExportPoint = __bjs_helpers_M10TestModuleT11ExportPoint;
-
-            const __bjs_helpers_M10TestModuleT15ExportNamespaceT8Metadata = __bjs_createStructHelpers_M10TestModuleT15ExportNamespaceT8Metadata();
-            structHelpers.M10TestModuleT15ExportNamespaceT8Metadata = __bjs_helpers_M10TestModuleT15ExportNamespaceT8Metadata;
-
-            const __bjs_helpers_M10TestModuleT11GenericPair = __bjs_createStructHelpers_M10TestModuleT11GenericPair();
-            structHelpers.M10TestModuleT11GenericPair = __bjs_helpers_M10TestModuleT11GenericPair;
-
-            const __bjs_helpers_M10TestModuleT12ExportTagged = __bjs_createEnumHelpers_M10TestModuleT12ExportTagged();
-            enumHelpers.M10TestModuleT12ExportTagged = __bjs_helpers_M10TestModuleT12ExportTagged;
+            const __bjs_helpers_M10TestModuleT19ExportGraphBuilding = __bjs_createStructHelpers_M10TestModuleT19ExportGraphBuilding();
+            structHelpers.M10TestModuleT19ExportGraphBuilding = __bjs_helpers_M10TestModuleT19ExportGraphBuilding;
 
             const exports = {
-                genericExportIdentity: function bjs_genericExportIdentity(value, typeT) {
-                    const typeIdT = __bjs_typeIdForToken(typeT);
+                storeGraphNode: function bjs_storeGraphNode(node, typeT) {
+                    const typeIdT = __bjs_typeIdForToken(typeT, ["ExportGraphNode"]);
                     const codecT = __bjs_codecForTypeId(typeIdT);
-                    codecT.lower(value);
-                    instance.exports.bjs_genericExportIdentity(typeIdT);
+                    codecT.lower(node);
+                    instance.exports.bjs_storeGraphNode(typeIdT);
                     return codecT.lift();
                 },
-                genericExportArray: function bjs_genericExportArray(values, typeT) {
-                    const typeIdT = __bjs_typeIdForToken(typeT);
+                storeLabeledGraphNode: function bjs_storeLabeledGraphNode(node, typeT) {
+                    const typeIdT = __bjs_typeIdForToken(typeT, ["ExportGraphNode", "ExportLabeled"]);
                     const codecT = __bjs_codecForTypeId(typeIdT);
-                    __bjs_arrayCodec(codecT).lower(values);
-                    instance.exports.bjs_genericExportArray(typeIdT);
-                    return __bjs_arrayCodec(codecT).lift();
-                },
-                genericExportOptional: function bjs_genericExportOptional(value, typeT) {
-                    const typeIdT = __bjs_typeIdForToken(typeT);
-                    const codecT = __bjs_codecForTypeId(typeIdT);
-                    __bjs_optionalCodec(codecT).lower(value);
-                    instance.exports.bjs_genericExportOptional(typeIdT);
-                    return __bjs_optionalCodec(codecT).lift();
-                },
-                genericExportDictionary: function bjs_genericExportDictionary(values, typeT) {
-                    const typeIdT = __bjs_typeIdForToken(typeT);
-                    const codecT = __bjs_codecForTypeId(typeIdT);
-                    __bjs_dictCodec(codecT).lower(values);
-                    instance.exports.bjs_genericExportDictionary(typeIdT);
-                    return __bjs_dictCodec(codecT).lift();
-                },
-                genericExportEcho: function bjs_genericExportEcho(value, tag, typeT) {
-                    const typeIdT = __bjs_typeIdForToken(typeT);
-                    const codecT = __bjs_codecForTypeId(typeIdT);
-                    codecT.lower(value);
-                    instance.exports.bjs_genericExportEcho(tag, typeIdT);
+                    codecT.lower(node);
+                    instance.exports.bjs_storeLabeledGraphNode(typeIdT);
                     return codecT.lift();
                 },
-                genericExportStore: function bjs_genericExportStore(key, value, typeT) {
-                    const typeIdT = __bjs_typeIdForToken(typeT);
-                    const codecT = __bjs_codecForTypeId(typeIdT);
-                    const keyBytes = textEncoder.encode(key);
-                    const keyId = swift.memory.retain(keyBytes);
-                    codecT.lower(value);
-                    instance.exports.bjs_genericExportStore(keyId, keyBytes.length, typeIdT);
-                },
-                genericExportLoad: function bjs_genericExportLoad(key, typeT) {
-                    const typeIdT = __bjs_typeIdForToken(typeT);
-                    const codecT = __bjs_codecForTypeId(typeIdT);
-                    const keyBytes = textEncoder.encode(key);
-                    const keyId = swift.memory.retain(keyBytes);
-                    instance.exports.bjs_genericExportLoad(keyId, keyBytes.length, typeIdT);
-                    return __bjs_optionalCodec(codecT).lift();
-                },
-                genericExportStructConcreteLeading: function bjs_genericExportStructConcreteLeading(v, p, typeT) {
-                    const typeIdT = __bjs_typeIdForToken(typeT);
-                    const codecT = __bjs_codecForTypeId(typeIdT);
-                    codecT.lower(v);
-                    structHelpers.M10TestModuleT11ExportPoint.lower(p);
-                    instance.exports.bjs_genericExportStructConcreteLeading(typeIdT);
-                    return codecT.lift();
-                },
-                genericExportStructAndScalar: function bjs_genericExportStructAndScalar(p, tag, v, typeT) {
-                    const typeIdT = __bjs_typeIdForToken(typeT);
-                    const codecT = __bjs_codecForTypeId(typeIdT);
-                    structHelpers.M10TestModuleT11ExportPoint.lower(p);
-                    codecT.lower(v);
-                    instance.exports.bjs_genericExportStructAndScalar(tag, typeIdT);
-                    return codecT.lift();
-                },
-                genericExportPair: function bjs_genericExportPair(a, b, typeT) {
-                    const typeIdT = __bjs_typeIdForToken(typeT);
-                    const codecT = __bjs_codecForTypeId(typeIdT);
-                    codecT.lower(a);
-                    codecT.lower(b);
-                    instance.exports.bjs_genericExportPair(typeIdT);
-                    return codecT.lift();
-                },
-                genericExportCombine: function bjs_genericExportCombine(a, b, typeT, typeU) {
-                    const typeIdT = __bjs_typeIdForToken(typeT);
+                pairGraphNodes: function bjs_pairGraphNodes(a, b, typeT, typeU) {
+                    const typeIdT = __bjs_typeIdForToken(typeT, ["ExportGraphNode"]);
                     const codecT = __bjs_codecForTypeId(typeIdT);
                     const typeIdU = __bjs_typeIdForToken(typeU);
                     const codecU = __bjs_codecForTypeId(typeIdU);
                     codecT.lower(a);
                     codecU.lower(b);
-                    instance.exports.bjs_genericExportCombine(typeIdT, typeIdU);
-                    return codecT.lift();
-                },
-                genericExportCombineReturnU: function bjs_genericExportCombineReturnU(a, b, typeT, typeU) {
-                    const typeIdT = __bjs_typeIdForToken(typeT);
-                    const codecT = __bjs_codecForTypeId(typeIdT);
-                    const typeIdU = __bjs_typeIdForToken(typeU);
-                    const codecU = __bjs_codecForTypeId(typeIdU);
-                    codecT.lower(a);
-                    codecU.lower(b);
-                    instance.exports.bjs_genericExportCombineReturnU(typeIdT, typeIdU);
+                    instance.exports.bjs_pairGraphNodes(typeIdT, typeIdU);
                     return codecU.lift();
                 },
-                genericExportCaseDistinct: function bjs_genericExportCaseDistinct(a, b, typeT, typet) {
-                    const typeIdT = __bjs_typeIdForToken(typeT);
+                loadGraphNode: function bjs_loadGraphNode(key, typeT) {
+                    const typeIdT = __bjs_typeIdForToken(typeT, ["ExportGraphNode"]);
                     const codecT = __bjs_codecForTypeId(typeIdT);
-                    const typeIdt = __bjs_typeIdForToken(typet);
-                    const codect = __bjs_codecForTypeId(typeIdt);
-                    codecT.lower(a);
-                    codect.lower(b);
-                    instance.exports.bjs_genericExportCaseDistinct(typeIdT, typeIdt);
+                    const keyBytes = textEncoder.encode(key);
+                    const keyId = swift.memory.retain(keyBytes);
+                    instance.exports.bjs_loadGraphNode(keyId, keyBytes.length, typeIdT);
+                    return __bjs_optionalCodec(codecT).lift();
+                },
+                storeAnyLabeled: function bjs_storeAnyLabeled(node, typeT) {
+                    const typeIdT = __bjs_typeIdForToken(typeT, ["ExportGraphNode"]);
+                    const codecT = __bjs_codecForTypeId(typeIdT);
+                    codecT.lower(node);
+                    instance.exports.bjs_storeAnyLabeled(typeIdT);
                     return codecT.lift();
                 },
-                ExportMode: ExportModeValues,
-                ExportColor: ExportColorValues,
-                ExportTagged: ExportTaggedValues,
-                GenericFactory: {
-                    ...GenericFactoryValues,
-                    one: function(value, typeT) {
-                        const typeIdT = __bjs_typeIdForToken(typeT);
-                        const codecT = __bjs_codecForTypeId(typeIdT);
-                        codecT.lower(value);
-                        instance.exports.bjs_GenericFactory_static_one(typeIdT);
-                        return codecT.lift();
-                    }
-                },
-                ExportBox,
-                ExportGenericNamespace: {
-                    Handle,
-                },
-                ExportNamespace: {
-                    Level: LevelValues,
-                },
-                GenericBox,
-                GenericNamespace: {
-                    make: function bjs_GenericNamespace_static_make(value, typeT) {
-                        const typeIdT = __bjs_typeIdForToken(typeT);
-                        const codecT = __bjs_codecForTypeId(typeIdT);
-                        codecT.lower(value);
-                        instance.exports.bjs_GenericNamespace_static_make(typeIdT);
-                        return codecT.lift();
-                    },
-                },
-                GenericPair: {
-                    init: function() {
-                        instance.exports.bjs_GenericPair_init();
-                        const structValue = structHelpers.M10TestModuleT11GenericPair.lift();
-                        return structValue;
-                    },
-                    wrap: function(value, typeT) {
-                        const typeIdT = __bjs_typeIdForToken(typeT);
-                        const codecT = __bjs_codecForTypeId(typeIdT);
-                        codecT.lower(value);
-                        instance.exports.bjs_GenericPair_static_wrap(typeIdT);
-                        return __bjs_arrayCodec(codecT).lift();
-                    },
-                },
+                GraphRegistry,
             };
             _exports = exports;
             return exports;

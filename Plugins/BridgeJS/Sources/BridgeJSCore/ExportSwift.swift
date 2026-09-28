@@ -189,10 +189,12 @@ public class ExportSwift {
         /// When non-empty, `render(abiName:)` wraps the standard body in a
         /// generics prologue: the entry thunk takes one trailing type-ID ABI
         /// parameter per generic, recovers the concrete types from their
-        /// `BridgeJSTypeHandle`s, and opens them into a chain of helper
+        /// `BridgeJSTypeHandle`s (enforcing any `@JS protocol` constraints via
+        /// a conditional metatype cast), and opens them into a chain of helper
         /// functions; the innermost helper runs the standard body with the
         /// generic parameters bound.
-        let genericParameterNames: [String]
+        let genericParameters: [GenericParameter]
+        var genericParameterNames: [String] { genericParameters.map(\.name) }
 
         /// The async return type settled through `_bjs_makePromise`'s `Promise_resolve_<mangled>`
         /// helper. Set for every `async` thunk.
@@ -200,11 +202,11 @@ public class ExportSwift {
 
         var parameterBindings: [CodeBlockItemSyntax] = []
 
-        init(effects: Effects, returnType: BridgeType, genericParameterNames: [String] = []) throws {
+        init(effects: Effects, returnType: BridgeType, genericParameters: [GenericParameter] = []) throws {
             self.effects = effects
-            self.genericParameterNames = genericParameterNames
+            self.genericParameters = genericParameters
             guard effects.isAsync else { return }
-            guard genericParameterNames.isEmpty else {
+            guard genericParameters.isEmpty else {
                 throw BridgeJSCoreError("Generic exported functions cannot be 'async' yet")
             }
             guard returnType.isAsyncResolvable else {
@@ -528,16 +530,29 @@ public class ExportSwift {
             return abiReturnType?.swiftReturnPlaceholderStmt ?? "return"
         }
 
+        /// Swift spellings of a generic parameter's `@JS protocol` constraints,
+        /// qualified as written in source (`GraphKit.Node`) so the generated
+        /// generic clause resolves; the JS-side check keys on the bare names.
+        func protocolConstraints(_ genericName: String) -> [String] {
+            guard let parameter = genericParameters.first(where: { $0.name == genericName }) else { return [] }
+            return parameter.swiftConstraints ?? parameter.constraints
+        }
+
         /// The constraint composition a generic parameter is opened under, e.g.
-        /// `BridgedSwiftGenericBridgeable`. A hook for protocol constraints.
+        /// `BridgedSwiftGenericBridgeable & GraphNode`.
         func constraintComposition(_ genericName: String) -> String {
-            "BridgedSwiftGenericBridgeable"
+            (["BridgedSwiftGenericBridgeable"] + protocolConstraints(genericName)).joined(separator: " & ")
         }
 
         /// The existential metatype spelling used to thread a not-yet-opened
-        /// generic parameter through the open chain.
+        /// generic parameter through the open chain, e.g.
+        /// `any (BridgedSwiftGenericBridgeable & GraphNode).Type`.
         func existentialMetatype(_ genericName: String) -> String {
-            "any BridgedSwiftGenericBridgeable.Type"
+            let constraints = protocolConstraints(genericName)
+            if constraints.isEmpty {
+                return "any BridgedSwiftGenericBridgeable.Type"
+            }
+            return "any (\(constraintComposition(genericName))).Type"
         }
 
         /// Renders the wasm entry point for a generic exported function.
@@ -591,12 +606,29 @@ public class ExportSwift {
                     // `BridgeJSTypeHandle`; recover the type from it. A raw wasm
                     // caller passing a garbage ID is undefined behavior — the
                     // generated JS wrapper validates tokens before calling in.
+                    let constraints = protocolConstraints(genericName)
+                    let recoveredName =
+                        constraints.isEmpty ? metatypeName(genericName) : "\(metatypeName(genericName))Base"
                     printer.write(
-                        "let \(metatypeName(genericName)) = "
+                        "let \(recoveredName) = "
                             + "Unmanaged<BridgeJSTypeHandle>.fromOpaque("
                             + "UnsafeRawPointer(bitPattern: UInt(UInt32(bitPattern: \(typeIdName(genericName)))))!"
                             + ").takeUnretainedValue().type"
                     )
+                    if !constraints.isEmpty {
+                        // Defense-in-depth: the generated JS wrapper already
+                        // rejects non-conforming tokens with a TypeError, so
+                        // this cast can only fail for a raw wasm caller.
+                        printer.write(
+                            "guard let \(metatypeName(genericName)) = \(recoveredName) as? \(existentialMetatype(genericName)) else {"
+                        )
+                        printer.indent {
+                            printer.write(
+                                "fatalError(\"BridgeJS: type '\\(\(recoveredName))' does not conform to required protocol(s): \(constraints.joined(separator: ", "))\")"
+                            )
+                        }
+                        printer.write("}")
+                    }
                 }
                 let open1Arguments = genericNames.map { metatypeName($0) } + concreteABINames
                 printer.write("_\(abiName)_open1(\(open1Arguments.joined(separator: ", ")))")
@@ -776,7 +808,7 @@ public class ExportSwift {
         let builder = try ExportedThunkBuilder(
             effects: function.effects,
             returnType: function.returnType,
-            genericParameterNames: function.genericParameterNames
+            genericParameters: function.genericParameters ?? []
         )
         for param in function.parameters {
             try builder.liftParameter(param: param)
@@ -823,7 +855,7 @@ public class ExportSwift {
         let builder = try ExportedThunkBuilder(
             effects: method.effects,
             returnType: method.returnType,
-            genericParameterNames: method.genericParameterNames
+            genericParameters: method.genericParameters ?? []
         )
         if !method.effects.isStatic {
             try builder.liftParameter(param: Parameter(label: nil, name: "_self", type: instanceSelfType))

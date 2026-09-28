@@ -300,6 +300,8 @@ public final class SwiftToSkeleton {
             collector.finalize(&exported)
         }
 
+        mergeExtensionDeclaredJSProtocolConformances(into: &exported)
+
         perSourceErrors.append(contentsOf: diagnoseProtocolConformances(in: exported))
 
         if !perSourceErrors.isEmpty {
@@ -416,6 +418,50 @@ public final class SwiftToSkeleton {
             }
         }
         return diagnostics
+    }
+
+    /// Folds `extension Foo: SomeJSProtocol {}` conformances into the exported
+    /// skeleton's `conformedJSProtocols` lists.
+    ///
+    /// The per-declaration collectors only see the type's own inheritance
+    /// clause, but declaring the conformance in an extension is common Swift
+    /// style, and the JS-side generic constraint check
+    /// (`__bjs_tokenConformances`) must not reject a type that genuinely
+    /// conforms.
+    private func mergeExtensionDeclaredJSProtocolConformances(into exported: inout ExportedSkeleton) {
+        var protocolsByTarget: [String: [String]] = [:]
+        for (sourceFile, _) in sourceFiles {
+            let collector = ExtensionConformanceCollector(parent: self)
+            collector.walk(sourceFile)
+            for (target, protocols) in collector.protocolsByTarget {
+                protocolsByTarget[target, default: []].append(contentsOf: protocols)
+            }
+        }
+        guard !protocolsByTarget.isEmpty else { return }
+
+        func merge(_ existing: inout [String]?, additions: [String]) {
+            var result = existing ?? []
+            for name in additions where !result.contains(name) {
+                result.append(name)
+            }
+            existing = result.isEmpty ? nil : result
+        }
+
+        for index in exported.structs.indices {
+            if let additions = protocolsByTarget[exported.structs[index].swiftCallName] {
+                merge(&exported.structs[index].conformedJSProtocols, additions: additions)
+            }
+        }
+        for index in exported.classes.indices {
+            if let additions = protocolsByTarget[exported.classes[index].swiftCallName] {
+                merge(&exported.classes[index].conformedJSProtocols, additions: additions)
+            }
+        }
+        for index in exported.enums.indices {
+            if let additions = protocolsByTarget[exported.enums[index].swiftCallName] {
+                merge(&exported.enums[index].conformedJSProtocols, additions: additions)
+            }
+        }
     }
 
     private static let jsTypedArrayTypealiasNames: [String: String] = [
@@ -1575,6 +1621,20 @@ private final class ExportSwiftAPICollector: SyntaxAnyVisitor {
         }
     }
 
+    /// Names of the `@JS protocol`s a type's inheritance clause declares
+    /// conformance to. Non-protocol entries (raw types, plain Swift protocols)
+    /// are ignored.
+    private func collectConformedJSProtocols(from inheritanceClause: InheritanceClauseSyntax?) -> [String]? {
+        guard let inheritanceClause else { return nil }
+        var names: [String] = []
+        for inherited in inheritanceClause.inheritedTypes {
+            if let name = parent.resolveJSProtocolConstraint(for: inherited.type), !names.contains(name) {
+                names.append(name)
+            }
+        }
+        return names.isEmpty ? nil : names
+    }
+
     /// Shared parameter parsing logic used by functions, initializers, and protocol methods
     private func parseParameters(
         from parameterClause: FunctionParameterClauseSyntax,
@@ -1682,19 +1742,16 @@ private final class ExportSwiftAPICollector: SyntaxAnyVisitor {
             return nil
         }
 
-        var genericParameterNames: [String] = []
+        var genericParameters: [GenericParameter] = []
         if let genericClause = node.genericParameterClause {
             for genericParam in genericClause.parameters {
-                let constraint = genericParam.inheritedType?.trimmedDescription ?? ""
-                guard SwiftToSkeleton.isBridgeableGenericConstraint(constraint) else {
-                    diagnose(
-                        node: node,
-                        message:
-                            "Generic parameter '\(genericParam.name.text)' must be constrained to 'BridgedSwiftGenericBridgeable' to be used with @JS."
-                    )
+                switch parent.parseGenericParameterConstraints(genericParam, attributeName: "@JS") {
+                case .failed(let message):
+                    diagnose(node: node, message: message)
                     return nil
+                case .parsed(let genericParameter):
+                    genericParameters.append(genericParameter)
                 }
-                genericParameterNames.append(genericParam.name.text)
             }
             if node.genericWhereClause != nil {
                 diagnose(
@@ -1718,6 +1775,8 @@ private final class ExportSwiftAPICollector: SyntaxAnyVisitor {
                 return nil
             }
         }
+
+        let genericParameterNames = genericParameters.map(\.name)
 
         let name = node.name.text
         let jsName = extractValidatedJSName(from: jsAttribute)
@@ -1883,7 +1942,7 @@ private final class ExportSwiftAPICollector: SyntaxAnyVisitor {
             namespace: finalNamespace,
             staticContext: staticContext,
             documentation: extractDocumentation(from: node),
-            genericParameters: genericParameterNames.isEmpty ? nil : genericParameterNames
+            genericParameters: genericParameters.isEmpty ? nil : genericParameters
         )
     }
 
@@ -2275,7 +2334,8 @@ private final class ExportSwiftAPICollector: SyntaxAnyVisitor {
             jsNamespace: namespaceResult.jsNamespace,
             identityMode: classIdentityMode,
             documentation: extractDocumentation(from: node),
-            isFinal: isFinal
+            isFinal: isFinal,
+            conformedJSProtocols: collectConformedJSProtocols(from: node.inheritanceClause)
         )
         let uniqueKey = makeKey(name: name, namespace: effectiveNamespace)
 
@@ -2440,7 +2500,8 @@ private final class ExportSwiftAPICollector: SyntaxAnyVisitor {
             emitStyle: emitStyle,
             staticMethods: [],
             staticProperties: [],
-            documentation: extractDocumentation(from: node)
+            documentation: extractDocumentation(from: node),
+            conformedJSProtocols: collectConformedJSProtocols(from: node.inheritanceClause)
         )
 
         let enumUniqueKey = makeKey(name: name, namespace: effectiveNamespace)
@@ -2693,7 +2754,8 @@ private final class ExportSwiftAPICollector: SyntaxAnyVisitor {
             methods: [],
             namespace: effectiveNamespace,
             jsNamespace: namespaceResult.jsNamespace,
-            documentation: extractDocumentation(from: node)
+            documentation: extractDocumentation(from: node),
+            conformedJSProtocols: collectConformedJSProtocols(from: node.inheritanceClause)
         )
 
         exportedStructByName[structUniqueKey] = exportedStruct
@@ -4074,5 +4136,29 @@ extension GenericArgumentListSyntax {
         #else
         return TypeSyntax(first.argument)
         #endif
+    }
+}
+
+/// Collects `@JS protocol` conformances declared through extensions, keyed by
+/// the extended type's (possibly qualified) name as written in source, which
+/// matches the skeleton's `swiftCallName` for both top-level and nested types.
+private final class ExtensionConformanceCollector: SyntaxVisitor {
+    private let parent: SwiftToSkeleton
+    var protocolsByTarget: [String: [String]] = [:]
+
+    init(parent: SwiftToSkeleton) {
+        self.parent = parent
+        super.init(viewMode: .sourceAccurate)
+    }
+
+    override func visit(_ node: ExtensionDeclSyntax) -> SyntaxVisitorContinueKind {
+        guard let inheritanceClause = node.inheritanceClause else { return .visitChildren }
+        let target = node.extendedType.trimmedDescription
+        for inherited in inheritanceClause.inheritedTypes {
+            if let name = parent.resolveJSProtocolConstraint(for: inherited.type) {
+                protocolsByTarget[target, default: []].append(name)
+            }
+        }
+        return .visitChildren
     }
 }

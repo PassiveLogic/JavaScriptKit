@@ -876,6 +876,9 @@ public struct ExportedStruct: Codable, Equatable, Sendable, NamespacedExportedTy
     public let namespace: [String]?
     public let jsNamespace: [String]?
     public var documentation: String?
+    /// Names of the `@JS protocol`s this type declares conformance to, used by
+    /// the JS link layer to validate constrained generic-export tokens.
+    public var conformedJSProtocols: [String]?
 
     public init(
         name: String,
@@ -887,7 +890,8 @@ public struct ExportedStruct: Codable, Equatable, Sendable, NamespacedExportedTy
         methods: [ExportedFunction] = [],
         namespace: [String]?,
         jsNamespace: [String]? = nil,
-        documentation: String? = nil
+        documentation: String? = nil,
+        conformedJSProtocols: [String]? = nil
     ) {
         self.name = name
         self.jsName = jsName
@@ -899,6 +903,7 @@ public struct ExportedStruct: Codable, Equatable, Sendable, NamespacedExportedTy
         self.namespace = namespace
         self.jsNamespace = jsNamespace
         self.documentation = documentation
+        self.conformedJSProtocols = conformedJSProtocols
     }
 }
 
@@ -971,6 +976,9 @@ public struct ExportedEnum: Codable, Equatable, Sendable, NamespacedExportedType
     public var staticMethods: [ExportedFunction]
     public var staticProperties: [ExportedProperty] = []
     public var documentation: String?
+    /// Names of the `@JS protocol`s this type declares conformance to, used by
+    /// the JS link layer to validate constrained generic-export tokens.
+    public var conformedJSProtocols: [String]?
     public var enumType: EnumType {
         if cases.isEmpty {
             return .namespace
@@ -1001,7 +1009,8 @@ public struct ExportedEnum: Codable, Equatable, Sendable, NamespacedExportedType
         emitStyle: EnumEmitStyle,
         staticMethods: [ExportedFunction] = [],
         staticProperties: [ExportedProperty] = [],
-        documentation: String? = nil
+        documentation: String? = nil,
+        conformedJSProtocols: [String]? = nil
     ) {
         self.name = name
         self.jsName = jsName
@@ -1016,6 +1025,7 @@ public struct ExportedEnum: Codable, Equatable, Sendable, NamespacedExportedType
         self.staticMethods = staticMethods
         self.staticProperties = staticProperties
         self.documentation = documentation
+        self.conformedJSProtocols = conformedJSProtocols
     }
 }
 
@@ -1091,8 +1101,8 @@ public struct ExportedFunction: Codable, Equatable, Sendable {
     public var namespace: [String]?
     public var staticContext: StaticContext?
     public var documentation: String?
-    public var genericParameters: [String]?
-    public var genericParameterNames: [String] { genericParameters ?? [] }
+    public var genericParameters: [GenericParameter]?
+    public var genericParameterNames: [String] { (genericParameters ?? []).map(\.name) }
     public var isGeneric: Bool { !genericParameterNames.isEmpty }
     /// Parameters whose type references a generic parameter; they cross the
     /// bridge on the shared value stack via the type's codec.
@@ -1112,7 +1122,7 @@ public struct ExportedFunction: Codable, Equatable, Sendable {
         namespace: [String]? = nil,
         staticContext: StaticContext? = nil,
         documentation: String? = nil,
-        genericParameters: [String]? = nil
+        genericParameters: [GenericParameter]? = nil
     ) {
         self.name = name
         self.jsName = jsName
@@ -1140,6 +1150,9 @@ public struct ExportedClass: Codable, NamespacedExportedType {
     public var identityMode: Bool?  // nil = use config default, true/false = override
     public var documentation: String?
     public var isFinal: Bool?
+    /// Names of the `@JS protocol`s this type declares conformance to, used by
+    /// the JS link layer to validate constrained generic-export tokens.
+    public var conformedJSProtocols: [String]?
 
     public init(
         name: String,
@@ -1153,7 +1166,8 @@ public struct ExportedClass: Codable, NamespacedExportedType {
         jsNamespace: [String]? = nil,
         identityMode: Bool? = nil,
         documentation: String? = nil,
-        isFinal: Bool? = nil
+        isFinal: Bool? = nil,
+        conformedJSProtocols: [String]? = nil
     ) {
         self.name = name
         self.jsName = jsName
@@ -1167,6 +1181,7 @@ public struct ExportedClass: Codable, NamespacedExportedType {
         self.identityMode = identityMode
         self.documentation = documentation
         self.isFinal = isFinal
+        self.conformedJSProtocols = conformedJSProtocols
     }
 }
 

@@ -371,6 +371,7 @@ public struct BridgeJSLink {
             declarations.append("}")
             declarations.append(contentsOf: GenericJSCodegen.runtimeHelperDeclarations())
             if hasGenericExports {
+                declarations.append(generateTokenConformancesDeclaration())
                 declarations.append(contentsOf: GenericJSCodegen.exportRuntimeHelperDeclarations())
             }
         }
@@ -505,6 +506,65 @@ public struct BridgeJSLink {
         }
     }
 
+    /// The token → `@JS protocol` conformance map used by
+    /// `__bjs_typeIdForToken` to reject non-conforming tokens with a catchable
+    /// `TypeError` before a constrained generic export enters wasm. The link
+    /// layer knows every type's declared conformances from the skeletons, so
+    /// the check needs no runtime metadata.
+    ///
+    /// Conformance sets are closed over protocol refinement: a type conforming
+    /// to `@JS protocol Refined: Base` satisfies a constraint on `Base` in
+    /// Swift, so the JS-side check must agree.
+    private func generateTokenConformancesDeclaration() -> String {
+        var inheritedByProtocol: [String: [String]] = [:]
+        for unified in skeletons {
+            for protocolDef in unified.exported?.protocols ?? [] {
+                if let inherited = protocolDef.inheritedJSProtocols, !inherited.isEmpty {
+                    inheritedByProtocol[protocolDef.name] = inherited
+                }
+            }
+        }
+        func transitiveClosure(of protocols: [String]) -> [String] {
+            var seen: [String] = []
+            var worklist = protocols
+            while let name = worklist.popLast() {
+                guard !seen.contains(name) else { continue }
+                seen.append(name)
+                worklist.append(contentsOf: inheritedByProtocol[name] ?? [])
+            }
+            return seen
+        }
+        var entries: [String] = []
+        func append(token: String, protocols: [String]?) {
+            guard let protocols, !protocols.isEmpty else { return }
+            let list = transitiveClosure(of: protocols).map { "\"\($0)\"" }.joined(separator: ", ")
+            entries.append("\"\(token)\": [\(list)]")
+        }
+        for unified in skeletons {
+            guard let exported = unified.exported else { continue }
+            for structDef in exported.structs {
+                append(token: structDef.abiName, protocols: structDef.conformedJSProtocols)
+            }
+            for klass in exported.classes where klass.isFinal == true {
+                append(token: klass.abiName, protocols: klass.conformedJSProtocols)
+            }
+            for enumDef in exported.enums where enumDef.genericBridgeType != nil {
+                append(token: enumDef.abiName, protocols: enumDef.conformedJSProtocols)
+            }
+            // A bridgeable protocol's own token selects its `Any<P>` wrapper,
+            // which conforms to `P` (and, through the closure, to everything
+            // `P` refines), so the JS-side check must accept it where the
+            // Swift metatype cast would.
+            for proto in exported.protocols where proto.isGenericBridgeable == true {
+                append(
+                    token: ((proto.namespace ?? []) + [proto.name]).joined(separator: "_"),
+                    protocols: [proto.name]
+                )
+            }
+        }
+        return "const __bjs_tokenConformances = { \(entries.joined(separator: ", ")) };"
+    }
+
     /// One `BridgeTypes` entry per bridgeable type across all linked modules.
     /// Tokens are unqualified type names, so a name shared by two modules must
     /// fail the build (the JS-facing token could not distinguish them).
@@ -534,6 +594,22 @@ public struct BridgeJSLink {
             for entry in exported.genericBridgeableTypeEntries {
                 try claim(entry.token, module: unified.moduleName)
                 entries.append((token: entry.token, tsType: resolveTypeScriptType(entry.bridgeType)))
+            }
+        }
+        // The JS-side constraint check identifies @JS protocols by unqualified
+        // name, like tokens identify types. Two modules defining a same-named
+        // @JS protocol would let a conformer of one pass the check for the
+        // other and reach the Swift metatype-cast trap, so reject it here.
+        var definingModuleByProtocol: [String: String] = [:]
+        for unified in skeletons {
+            for protocolDef in unified.exported?.protocols ?? [] {
+                if let existing = definingModuleByProtocol[protocolDef.name], existing != unified.moduleName {
+                    throw BridgeJSLinkError(
+                        message:
+                            "@JS protocol '\(protocolDef.name)' is defined by both '\(existing)' and '\(unified.moduleName)'; protocol names used as generic constraints must be unique across linked modules"
+                    )
+                }
+                definingModuleByProtocol[protocolDef.name] = unified.moduleName
             }
         }
         return entries
@@ -1700,7 +1776,7 @@ public struct BridgeJSLink {
         /// declaration-order pops of the Swift entry thunk.
         func lowerParametersAndGenericTokens(
             parameters: [Parameter],
-            genericParameters: [String]
+            genericParameters: [GenericParameter]
         ) throws {
             guard !genericParameters.isEmpty else {
                 for param in parameters {
@@ -1713,16 +1789,18 @@ public struct BridgeJSLink {
             // the three emitters cannot drift apart.
             genericTokenParameterNames = GenericJSCodegen.genericTokenParameterNames(
                 parameters: parameters,
-                genericNames: genericParameters,
+                genericNames: genericParameters.map(\.name),
                 scope: scope
             )
             for (genericParam, tokenName) in zip(genericParameters, genericTokenParameterNames) {
-                let typeIdVariable = scope.variable("typeId\(genericParam)")
-                let codecVariable = scope.variable("codec\(genericParam)")
-                body.write("const \(typeIdVariable) = __bjs_typeIdForToken(\(tokenName));")
+                let typeIdVariable = scope.variable("typeId\(genericParam.name)")
+                let codecVariable = scope.variable("codec\(genericParam.name)")
+                body.write(
+                    "const \(typeIdVariable) = __bjs_typeIdForToken(\(tokenName)\(Self.requiredProtocolsArgument(genericParam)));"
+                )
                 body.write("const \(codecVariable) = __bjs_codecForTypeId(\(typeIdVariable));")
-                genericTypeIdVariables[genericParam] = typeIdVariable
-                genericCodecVariables[genericParam] = codecVariable
+                genericTypeIdVariables[genericParam.name] = typeIdVariable
+                genericCodecVariables[genericParam.name] = codecVariable
             }
             // Lower under the declared parameter name: `parameterList(_:)`
             // declares `param.name`, so that is the identifier in scope.
@@ -1748,10 +1826,18 @@ public struct BridgeJSLink {
                 }
             }
             for genericParam in genericParameters {
-                if let typeIdVariable = genericTypeIdVariables[genericParam] {
+                if let typeIdVariable = genericTypeIdVariables[genericParam.name] {
                     parameterForwardings.append(typeIdVariable)
                 }
             }
+        }
+
+        /// The trailing `requiredProtocols` argument of `__bjs_typeIdForToken`
+        /// for a constrained generic parameter, or empty when unconstrained.
+        static func requiredProtocolsArgument(_ genericParameter: GenericParameter) -> String {
+            guard !genericParameter.constraints.isEmpty else { return "" }
+            let list = genericParameter.constraints.map { "\"\($0)\"" }.joined(separator: ", ")
+            return ", [\(list)]"
         }
 
         /// The JS parameter list of the wrapper: the user-facing parameters
@@ -2000,7 +2086,7 @@ public struct BridgeJSLink {
         for (genericName, tokenName) in zip(genericNames, tokenNames) {
             parameterSignatures.append("\(tokenName): BridgeType<\(genericName)>")
         }
-        let genericClause = renderGenericClause(genericNames.map { GenericParameter(name: $0) })
+        let genericClause = renderGenericClause(function.genericParameters ?? [])
         let returnSignature = resolveTypeScriptType(function.returnType)
         return
             "\(function.resolvedJSName)\(genericClause)(\(parameterSignatures.joined(separator: ", "))): \(returnSignature)"
@@ -2319,7 +2405,7 @@ extension BridgeJSLink {
         )
         try thunkBuilder.lowerParametersAndGenericTokens(
             parameters: function.parameters,
-            genericParameters: function.genericParameterNames
+            genericParameters: function.genericParameters ?? []
         )
         let returnExpr = try thunkBuilder.call(abiName: function.abiName, returnType: function.returnType)
         let funcLines = thunkBuilder.renderFunction(
@@ -2368,7 +2454,7 @@ extension BridgeJSLink {
         )
         try thunkBuilder.lowerParametersAndGenericTokens(
             parameters: function.parameters,
-            genericParameters: function.genericParameterNames
+            genericParameters: function.genericParameters ?? []
         )
         let returnExpr = try thunkBuilder.call(abiName: function.abiName, returnType: function.returnType)
 
@@ -2398,7 +2484,7 @@ extension BridgeJSLink {
         )
         try thunkBuilder.lowerParametersAndGenericTokens(
             parameters: function.parameters,
-            genericParameters: function.genericParameterNames
+            genericParameters: function.genericParameters ?? []
         )
         let returnExpr = try thunkBuilder.call(abiName: function.abiName, returnType: function.returnType)
 
@@ -2428,7 +2514,7 @@ extension BridgeJSLink {
         )
         try thunkBuilder.lowerParametersAndGenericTokens(
             parameters: function.parameters,
-            genericParameters: function.genericParameterNames
+            genericParameters: function.genericParameters ?? []
         )
         let returnExpr = try thunkBuilder.call(abiName: function.abiName, returnType: function.returnType)
 
@@ -2454,7 +2540,7 @@ extension BridgeJSLink {
         )
         try thunkBuilder.lowerParametersAndGenericTokens(
             parameters: method.parameters,
-            genericParameters: method.genericParameterNames
+            genericParameters: method.genericParameters ?? []
         )
         let returnExpr = try thunkBuilder.call(abiName: method.abiName, returnType: method.returnType)
 
@@ -2595,7 +2681,7 @@ extension BridgeJSLink {
                 )
                 try thunkBuilder.lowerParametersAndGenericTokens(
                     parameters: method.parameters,
-                    genericParameters: method.genericParameterNames
+                    genericParameters: method.genericParameters ?? []
                 )
                 let returnExpr = try thunkBuilder.call(abiName: method.abiName, returnType: method.returnType)
 
@@ -2617,7 +2703,7 @@ extension BridgeJSLink {
                 thunkBuilder.lowerSelf()
                 try thunkBuilder.lowerParametersAndGenericTokens(
                     parameters: method.parameters,
-                    genericParameters: method.genericParameterNames
+                    genericParameters: method.genericParameters ?? []
                 )
                 let returnExpr = try thunkBuilder.call(abiName: method.abiName, returnType: method.returnType)
 
