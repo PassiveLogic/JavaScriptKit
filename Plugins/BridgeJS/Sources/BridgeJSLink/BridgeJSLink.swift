@@ -517,10 +517,30 @@ public struct BridgeJSLink {
     /// Swift, so the JS-side check must agree.
     private func generateTokenConformancesDeclaration() -> String {
         var inheritedByProtocol: [String: [String]] = [:]
+        // Every bridgeable type's token, keyed by its Swift dot path: external
+        // conformance records name the type by dot path (the only spelling the
+        // declaring module knows), and only the defining module's skeleton can
+        // turn that into the token (`Models.Building` -> `Models_Building`).
+        var tokenBySwiftCallName: [String: String] = [:]
+        for unified in skeletons {
+            guard let exported = unified.exported else { continue }
+            for structDef in exported.structs { tokenBySwiftCallName[structDef.swiftCallName] = structDef.abiName }
+            for klass in exported.classes { tokenBySwiftCallName[klass.swiftCallName] = klass.abiName }
+            for enumDef in exported.enums { tokenBySwiftCallName[enumDef.swiftCallName] = enumDef.abiName }
+        }
+        // Conformances a module declares through extensions on another
+        // module's @JS types, keyed by the conformer's token.
+        var externalByToken: [String: [String]] = [:]
         for unified in skeletons {
             for protocolDef in unified.exported?.protocols ?? [] {
                 if let inherited = protocolDef.inheritedJSProtocols, !inherited.isEmpty {
                     inheritedByProtocol[protocolDef.name] = inherited
+                }
+            }
+            for (swiftCallName, protocols) in unified.exported?.externalJSProtocolConformances ?? [:] {
+                guard let token = tokenBySwiftCallName[swiftCallName] else { continue }
+                for protocolName in protocols where !(externalByToken[token] ?? []).contains(protocolName) {
+                    externalByToken[token, default: []].append(protocolName)
                 }
             }
         }
@@ -536,8 +556,12 @@ public struct BridgeJSLink {
         }
         var entries: [String] = []
         func append(token: String, protocols: [String]?) {
-            guard let protocols, !protocols.isEmpty else { return }
-            let list = transitiveClosure(of: protocols).map { "\"\($0)\"" }.joined(separator: ", ")
+            var combined = protocols ?? []
+            for protocolName in externalByToken[token] ?? [] where !combined.contains(protocolName) {
+                combined.append(protocolName)
+            }
+            guard !combined.isEmpty else { return }
+            let list = transitiveClosure(of: combined).map { "\"\($0)\"" }.joined(separator: ", ")
             entries.append("\"\(token)\": [\(list)]")
         }
         for unified in skeletons {

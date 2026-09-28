@@ -428,16 +428,25 @@ public final class SwiftToSkeleton {
     /// style, and the JS-side generic constraint check
     /// (`__bjs_tokenConformances`) must not reject a type that genuinely
     /// conforms.
+    ///
+    /// An extension may also target a `@JS` type exported by a *dependency*
+    /// module. The Swift compiler sees that retroactive conformance directly,
+    /// so the generic thunk accepts the type; those conformances are recorded
+    /// in `externalJSProtocolConformances` (keyed by the type's Swift dot
+    /// path) for the link layer to merge into the defining module's token
+    /// entry.
     private func mergeExtensionDeclaredJSProtocolConformances(into exported: inout ExportedSkeleton) {
-        var protocolsByTarget: [String: [String]] = [:]
+        var targets: [(name: String, type: TypeSyntax, protocols: [String])] = []
         for (sourceFile, _) in sourceFiles {
             let collector = ExtensionConformanceCollector(parent: self)
             collector.walk(sourceFile)
-            for (target, protocols) in collector.protocolsByTarget {
-                protocolsByTarget[target, default: []].append(contentsOf: protocols)
-            }
+            targets.append(contentsOf: collector.targets)
         }
-        guard !protocolsByTarget.isEmpty else { return }
+        guard !targets.isEmpty else { return }
+        var protocolsByTarget: [String: [String]] = [:]
+        for target in targets {
+            protocolsByTarget[target.name, default: []].append(contentsOf: target.protocols)
+        }
 
         func merge(_ existing: inout [String]?, additions: [String]) {
             var result = existing ?? []
@@ -447,20 +456,53 @@ public final class SwiftToSkeleton {
             existing = result.isEmpty ? nil : result
         }
 
+        var matchedTargets: Set<String> = []
         for index in exported.structs.indices {
             if let additions = protocolsByTarget[exported.structs[index].swiftCallName] {
                 merge(&exported.structs[index].conformedJSProtocols, additions: additions)
+                matchedTargets.insert(exported.structs[index].swiftCallName)
             }
         }
         for index in exported.classes.indices {
             if let additions = protocolsByTarget[exported.classes[index].swiftCallName] {
                 merge(&exported.classes[index].conformedJSProtocols, additions: additions)
+                matchedTargets.insert(exported.classes[index].swiftCallName)
             }
         }
         for index in exported.enums.indices {
             if let additions = protocolsByTarget[exported.enums[index].swiftCallName] {
                 merge(&exported.enums[index].conformedJSProtocols, additions: additions)
+                matchedTargets.insert(exported.enums[index].swiftCallName)
             }
+        }
+
+        // Whatever did not match an in-module type may be a bridged type from a
+        // dependency module; record the conformance under the dependency type's
+        // Swift dot path for the link layer to resolve to its token.
+        var externalConformances: [String: [String]] = [:]
+        for target in targets where !matchedTargets.contains(target.name) {
+            var scratchErrors: [DiagnosticError] = []
+            guard let externalType = resolveExternal(for: target.type, errors: &scratchErrors) else { continue }
+            // Key by the dependency type's Swift dot path (its `swiftCallName`);
+            // the link layer resolves that to the type's token, which for a
+            // namespaced type (`Models.Building` -> `Models_Building`) is not
+            // the last name component.
+            let externalName: String?
+            switch externalType {
+            case .swiftStruct(let name), .swiftHeapObject(let name),
+                .caseEnum(let name), .rawValueEnum(let name, _), .associatedValueEnum(let name):
+                externalName = name
+            default:
+                externalName = nil
+            }
+            guard let externalName else { continue }
+            for protocolName in target.protocols
+            where !(externalConformances[externalName] ?? []).contains(protocolName) {
+                externalConformances[externalName, default: []].append(protocolName)
+            }
+        }
+        if !externalConformances.isEmpty {
+            exported.externalJSProtocolConformances = externalConformances
         }
     }
 
@@ -4137,7 +4179,7 @@ extension GenericArgumentListSyntax {
 /// matches the skeleton's `swiftCallName` for both top-level and nested types.
 private final class ExtensionConformanceCollector: SyntaxVisitor {
     private let parent: SwiftToSkeleton
-    var protocolsByTarget: [String: [String]] = [:]
+    var targets: [(name: String, type: TypeSyntax, protocols: [String])] = []
 
     init(parent: SwiftToSkeleton) {
         self.parent = parent
@@ -4146,11 +4188,16 @@ private final class ExtensionConformanceCollector: SyntaxVisitor {
 
     override func visit(_ node: ExtensionDeclSyntax) -> SyntaxVisitorContinueKind {
         guard let inheritanceClause = node.inheritanceClause else { return .visitChildren }
-        let target = node.extendedType.trimmedDescription
+        var protocols: [String] = []
         for inherited in inheritanceClause.inheritedTypes {
             if let name = parent.resolveJSProtocolConstraint(for: inherited.type) {
-                protocolsByTarget[target, default: []].append(name)
+                protocols.append(name)
             }
+        }
+        if !protocols.isEmpty {
+            targets.append(
+                (name: node.extendedType.trimmedDescription, type: node.extendedType, protocols: protocols)
+            )
         }
         return .visitChildren
     }

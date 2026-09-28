@@ -1304,6 +1304,13 @@ public struct ExportedSkeleton: Codable {
     /// When `"none"` or `nil`, no identity tracking is performed.
     public var identityMode: String?
 
+    /// `@JS protocol` conformances this module declares through extensions on
+    /// `@JS` types exported by *other* modules, keyed by the conformer's Swift
+    /// dot path (`swiftCallName`, e.g. `Models.Building`). The Swift compiler
+    /// sees the retroactive conformance directly; this record lets the link
+    /// layer teach the JS-side token conformance check about it too.
+    public var externalJSProtocolConformances: [String: [String]]?
+
     public init(
         functions: [ExportedFunction],
         classes: [ExportedClass],

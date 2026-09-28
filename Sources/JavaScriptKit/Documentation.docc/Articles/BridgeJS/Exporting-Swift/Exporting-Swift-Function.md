@@ -297,6 +297,23 @@ export type Exports = {
 
 TypeScript checks the constraint at compile time, but `BridgeType` tokens are erased at runtime, so the generated JavaScript wrapper enforces it again when the call crosses the bridge: the token's type is validated against the required protocols and a non-conforming token throws a catchable `TypeError` *before* the call enters WebAssembly, e.g. `BridgeJS: type 'Int' does not conform to required protocol 'GraphNode'`. Because nothing has been lowered yet, the shared value stack stays balanced and later calls are unaffected. (The Swift entry thunk repeats the check with a conditional metatype cast as defense-in-depth, but through the generated wrapper that trap is unreachable.)
 
+Conformances count no matter how they are declared: on the type itself, in an extension in the same module, or in an extension on a `@JS` type exported by a dependency module (a retroactive conformance). Protocol refinement is honored too — a conformer of `@JS protocol Refined: Base` satisfies a constraint on `Base`, exactly as it does in Swift (see <doc:Exporting-Swift-Protocols>):
+
+```swift
+@JS protocol Site: GraphNode {          // Site refines GraphNode
+    var region: String { get }
+}
+
+@JS struct Campus: Site {               // conforms to Site, and therefore GraphNode
+    var id: String
+    var region: String
+}
+```
+
+```javascript
+exports.store({ id: "campus-1", region: "north" }, BridgeTypes.Campus); // satisfies T: GraphNode
+```
+
 Generics also work on methods. On a `@JS` class or struct they apply to both instance and static methods. A `@JS enum` (including a namespace-style enum) has no instance methods in BridgeJS, so generics there apply to static methods only. The constraint, the trailing `BridgeType` token, and the generic-or-`Void` return rule all carry over unchanged.
 
 ## Supported Features

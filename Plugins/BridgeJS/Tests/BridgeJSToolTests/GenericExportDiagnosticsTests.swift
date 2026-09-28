@@ -167,6 +167,48 @@ import Testing
     }
 
     @Test
+    func crossModuleExtensionConformanceReachesTokenConformances() throws {
+        // A conformance declared in this module on a @JS type exported by a
+        // dependency is a real retroactive conformance in Swift, so the
+        // JS-side token check must accept the dependency type's token.
+        let moduleA = try makeSkeleton(
+            """
+            @JS public struct Building {
+                public var id: String
+                @JS public init(id: String) { self.id = id }
+            }
+            @JS(namespace: "Models") public struct Site {
+                public var id: String
+                @JS public init(id: String) { self.id = id }
+            }
+            """,
+            moduleName: "ModuleA"
+        )
+        let moduleB = try makeSkeleton(
+            """
+            @JS protocol GraphNode { var id: String { get } }
+            extension Building: GraphNode {}
+            // `Models` is a JS namespace, not a Swift scope: the Swift type is
+            // `Site`, but its token is the ABI name `Models_Site`.
+            extension Site: GraphNode {}
+            @JS public func store<T: BridgedSwiftGenericBridgeable & GraphNode>(_ n: T) -> T { n }
+            """,
+            moduleName: "ModuleB",
+            dependencies: [(moduleName: "ModuleA", skeleton: moduleA)]
+        )
+        var link = BridgeJSLink()
+        let encoder = JSONEncoder()
+        try link.addSkeletonFile(data: encoder.encode(moduleA))
+        try link.addSkeletonFile(data: encoder.encode(moduleB))
+        let js = try link.link().outputJs
+        #expect(
+            js.contains(
+                #"const __bjs_tokenConformances = { "Building": ["GraphNode"], "Models_Site": ["GraphNode"] };"#
+            )
+        )
+    }
+
+    @Test
     func compositionConstraintIsParsed() throws {
         let skeleton = try makeSkeleton(
             """
