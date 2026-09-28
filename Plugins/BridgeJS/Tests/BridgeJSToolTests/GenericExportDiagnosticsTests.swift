@@ -13,6 +13,19 @@ import Testing
     }
 
     @Test
+    func genericProtocolRequirementIsRejectedWithTargetedDiagnostic() {
+        // Falls through to "Unsupported type 'T'" without the early check.
+        expectDiagnostic(
+            source: """
+                @JS protocol Mapper {
+                    func map<T: BridgedSwiftGenericBridgeable>(_ v: T) -> T
+                }
+                """,
+            contains: "Generic requirements are not supported on @JS protocols yet."
+        )
+    }
+
+    @Test
     func genericExportedInitializerIsRejectedWithTargetedDiagnostic() {
         // Falls through to "Unsupported type 'T'" without the early check;
         // imported generic initializers work, so users will try this spelling.

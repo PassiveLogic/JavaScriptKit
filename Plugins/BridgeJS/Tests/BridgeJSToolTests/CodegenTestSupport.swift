@@ -22,6 +22,31 @@ func makeSkeleton(
     return try swiftAPI.finalize()
 }
 
+func renderExportGlue(
+    _ source: String,
+    moduleName: String = "TestModule"
+) throws -> String {
+    let skeleton = try makeSkeleton(source, moduleName: moduleName)
+    let exported = try #require(skeleton.exported)
+    let exportSwift = ExportSwift(
+        progress: .silent,
+        moduleName: skeleton.moduleName,
+        skeleton: exported
+    )
+    return try #require(try exportSwift.finalize())
+}
+
+func linkSource(_ source: String, moduleName: String = "TestModule") throws -> (js: String, dts: String) {
+    let skeleton = try makeSkeleton(source, moduleName: moduleName)
+    var bridgeJSLink = BridgeJSLink()
+    let encoder = JSONEncoder()
+    encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
+    let unifiedData = try encoder.encode(skeleton)
+    try bridgeJSLink.addSkeletonFile(data: unifiedData)
+    let result = try bridgeJSLink.link()
+    return (result.outputJs, result.outputDts)
+}
+
 func expectDiagnostic(
     source: String,
     moduleName: String = "App",
