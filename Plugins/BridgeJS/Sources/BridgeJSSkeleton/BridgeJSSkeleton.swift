@@ -312,6 +312,8 @@ extension BridgeType {
         }
     }
 
+    public var usesGenericParameter: Bool { referencedGenericName != nil }
+
     public static let genericBridgeablePrimitives: [(token: String, type: BridgeType)] = [
         ("Bool", .bool),
         ("Int", .integer(.int)),
@@ -332,13 +334,23 @@ extension BridgeType {
 
 }
 
+// MARK: - Generic type registration
+
+/// One `BridgedSwiftGenericBridgeable` type participating in generic bridging.
+///
+/// `swiftName` is the Swift expression naming the type (used by Swift codegen to
+/// read `<swiftName>.bridgeJSTypeID`); `bridgeType` describes the stack ABI (used
+/// by the JS link layer to emit the matching codec); `token` is the JS-facing
+/// `BridgeTypes` key a generic-export caller passes to select this type.
 public struct GenericBridgeableTypeEntry: Sendable {
     public let swiftName: String
     public let bridgeType: BridgeType
+    public let token: String
 
-    public init(swiftName: String, bridgeType: BridgeType) {
+    public init(swiftName: String, bridgeType: BridgeType, token: String) {
         self.swiftName = swiftName
         self.bridgeType = bridgeType
+        self.token = token
     }
 }
 
@@ -366,7 +378,8 @@ extension ExportedSkeleton {
             entries.append(
                 GenericBridgeableTypeEntry(
                     swiftName: structDef.swiftCallName,
-                    bridgeType: .swiftStruct(structDef.swiftCallName)
+                    bridgeType: .swiftStruct(structDef.swiftCallName),
+                    token: structDef.abiName
                 )
             )
         }
@@ -374,27 +387,50 @@ extension ExportedSkeleton {
             entries.append(
                 GenericBridgeableTypeEntry(
                     swiftName: klass.swiftCallName,
-                    bridgeType: .swiftHeapObject(klass.swiftCallName)
+                    bridgeType: .swiftHeapObject(klass.swiftCallName),
+                    token: klass.abiName
                 )
             )
         }
         for enumDef in enums {
             guard let bridgeType = enumDef.genericBridgeType else { continue }
-            entries.append(GenericBridgeableTypeEntry(swiftName: enumDef.swiftCallName, bridgeType: bridgeType))
+            entries.append(
+                GenericBridgeableTypeEntry(
+                    swiftName: enumDef.swiftCallName,
+                    bridgeType: bridgeType,
+                    token: enumDef.abiName
+                )
+            )
         }
         for proto in protocols where proto.isGenericBridgeable == true {
             entries.append(
                 GenericBridgeableTypeEntry(
                     swiftName: "Any\(proto.name)",
-                    bridgeType: .swiftProtocol(proto.name)
+                    bridgeType: .swiftProtocol(proto.name),
+                    // Same shape as type tokens: the namespace path joined with '_'.
+                    token: ((proto.namespace ?? []) + [proto.name]).joined(separator: "_")
                 )
             )
         }
         return entries
     }
+
+    public var hasGenericDeclarations: Bool {
+        functions.contains(where: \.isGeneric)
+            || classes.contains { $0.methods.contains(where: \.isGeneric) }
+            || structs.contains { $0.methods.contains(where: \.isGeneric) }
+            || enums.contains { $0.staticMethods.contains(where: \.isGeneric) }
+    }
 }
 
 extension BridgeJSSkeleton {
+    /// The ordered list of types this module registers type handles for, or `nil`
+    /// when the module does not emit a registration function.
+    ///
+    /// Every module that defines bridgeable `@JS` types registers them (a module
+    /// cannot know whether a dependent module will pass its types to a generic
+    /// function). Primitive handles are singletons owned by JavaScriptKit and are
+    /// registered once by the core hook, so they are not repeated here.
     public var typeRegistrationEntries: [GenericBridgeableTypeEntry]? {
         let exportedEntries = exported?.genericBridgeableTypeEntries ?? []
         guard !exportedEntries.isEmpty else { return nil }
@@ -1055,6 +1091,14 @@ public struct ExportedFunction: Codable, Equatable, Sendable {
     public var namespace: [String]?
     public var staticContext: StaticContext?
     public var documentation: String?
+    public var genericParameters: [String]?
+    public var genericParameterNames: [String] { genericParameters ?? [] }
+    public var isGeneric: Bool { !genericParameterNames.isEmpty }
+    /// Parameters whose type references a generic parameter; they cross the
+    /// bridge on the shared value stack via the type's codec.
+    public var genericValueParameters: [Parameter] { parameters.filter { $0.type.usesGenericParameter } }
+    /// Parameters with concrete types; they use the standard per-type ABI.
+    public var concreteParameters: [Parameter] { parameters.filter { !$0.type.usesGenericParameter } }
 
     public var resolvedJSName: String { jsName ?? name }
 
@@ -1067,7 +1111,8 @@ public struct ExportedFunction: Codable, Equatable, Sendable {
         effects: Effects,
         namespace: [String]? = nil,
         staticContext: StaticContext? = nil,
-        documentation: String? = nil
+        documentation: String? = nil,
+        genericParameters: [String]? = nil
     ) {
         self.name = name
         self.jsName = jsName
@@ -1078,6 +1123,7 @@ public struct ExportedFunction: Codable, Equatable, Sendable {
         self.namespace = namespace
         self.staticContext = staticContext
         self.documentation = documentation
+        self.genericParameters = genericParameters
     }
 }
 

@@ -28,8 +28,12 @@ public struct BridgeJSLink {
         skeletons.compactMap(\.exported).compactMap(\.identityMode).first ?? "none"
     }
 
+    var hasGenericExports: Bool {
+        skeletons.contains { $0.exported?.hasGenericDeclarations ?? false }
+    }
+
     var hasGenerics: Bool {
-        skeletons.contains { $0.imported?.hasGenericDeclarations ?? false }
+        hasGenericExports || skeletons.contains { $0.imported?.hasGenericDeclarations ?? false }
     }
 
     /// Whether a class should use identity caching based on its annotation and the config default.
@@ -249,6 +253,12 @@ public struct BridgeJSLink {
             }
         }
 
+        if hasGenericExports {
+            let tokens = try generateBridgeTypeTokens()
+            data.topLevelTypeLines.append(contentsOf: tokens.js)
+            data.topLevelDtsTypeLines.append(contentsOf: tokens.dts)
+        }
+
         // Process imported skeletons
         for unified in skeletons {
             guard let imported = unified.imported else { continue }
@@ -341,6 +351,9 @@ public struct BridgeJSLink {
         ]
         if hasGenerics {
             declarations.append("const \(JSGlueVariableScope.reservedCodecByTypeId) = new Map();")
+            if hasGenericExports {
+                declarations.append("const \(JSGlueVariableScope.reservedTypeIdByToken) = new Map();")
+            }
             declarations.append("let __bjs_typeHandlesRegistered = false;")
             declarations.append("function __bjs_registerTypeHandles() {")
             declarations.append("    if (__bjs_typeHandlesRegistered) {")
@@ -357,6 +370,9 @@ public struct BridgeJSLink {
             }
             declarations.append("}")
             declarations.append(contentsOf: GenericJSCodegen.runtimeHelperDeclarations())
+            if hasGenericExports {
+                declarations.append(contentsOf: GenericJSCodegen.exportRuntimeHelperDeclarations())
+            }
         }
         declarations.append(contentsOf: [
             "",
@@ -412,13 +428,25 @@ public struct BridgeJSLink {
         try ContainerCodecJS.codecExpression(for: type, context: makeCodecPrintContext(printer: printer))
     }
 
-    private func writeTypeHandleRegistrationBody(into printer: CodeFragmentPrinter) {
+    /// Emits the shared tail of a type-handle registration hook: pair the wasm-provided
+    /// type IDs with the codec table built by the caller, index by index.
+    ///
+    /// When `tokens` is non-nil the same index-by-index pairing also binds the JS-facing
+    /// `BridgeTypes` tokens to their IDs. Generic export wrappers resolve tokens through
+    /// that map and throw before entering wasm when a token is unknown.
+    private func writeTypeHandleRegistrationBody(tokens: [String]?, into printer: CodeFragmentPrinter) {
+        if let tokens {
+            printer.write("const tokens = [\(tokens.map { "\"\($0)\"" }.joined(separator: ", "))];")
+        }
         printer.write(
             "const typeIds = new Int32Array(\(JSGlueVariableScope.reservedMemory).buffer, base >>> 0, count >>> 0);"
         )
         printer.write("for (let i = 0; i < count; i++) {")
         printer.indent {
             printer.write("\(JSGlueVariableScope.reservedCodecByTypeId).set(typeIds[i], codecs[i]);")
+            if tokens != nil {
+                printer.write("\(JSGlueVariableScope.reservedTypeIdByToken).set(tokens[i], typeIds[i]);")
+            }
         }
         printer.write("}")
     }
@@ -439,7 +467,10 @@ public struct BridgeJSLink {
                 }
             }
             printer.write("];")
-            writeTypeHandleRegistrationBody(into: printer)
+            writeTypeHandleRegistrationBody(
+                tokens: hasGenericExports ? BridgeType.genericBridgeablePrimitives.map(\.token) : nil,
+                into: printer
+            )
         }
         printer.write("}")
     }
@@ -465,10 +496,69 @@ public struct BridgeJSLink {
                     }
                 }
                 printer.write("];")
-                writeTypeHandleRegistrationBody(into: printer)
+                writeTypeHandleRegistrationBody(
+                    tokens: hasGenericExports ? moduleEntries.map(\.token) : nil,
+                    into: printer
+                )
             }
             printer.write("}")
         }
+    }
+
+    /// One `BridgeTypes` entry per bridgeable type across all linked modules.
+    /// Tokens are unqualified type names, so a name shared by two modules must
+    /// fail the build (the JS-facing token could not distinguish them).
+    private func bridgeTypeTokenEntries() throws -> [(token: String, tsType: String)] {
+        var entries: [(token: String, tsType: String)] = BridgeType.genericBridgeablePrimitives.map {
+            (token: $0.token, tsType: $0.type.tsType)
+        }
+        var definingModuleByToken: [String: String] = Dictionary(
+            uniqueKeysWithValues: BridgeType.genericBridgeablePrimitives.map { ($0.token, "JavaScriptKit") }
+        )
+        func claim(_ token: String, module: String) throws {
+            if let existing = definingModuleByToken[token], existing != module {
+                throw BridgeJSLinkError(
+                    message:
+                        "Generic type token '\(token)' is defined by both '\(existing)' and '\(module)'; type names used with generics must be unique across linked modules"
+                )
+            }
+            definingModuleByToken[token] = module
+        }
+        // Build the table from the same canonical list that drives type-handle
+        // registration, and resolve TypeScript names the way every other
+        // signature in the d.ts does (class interfaces are emitted at the top
+        // level even for namespaced classes, so a hand-qualified `API.Node`
+        // would reference a namespace member that is never declared).
+        for unified in skeletons {
+            guard let exported = unified.exported else { continue }
+            for entry in exported.genericBridgeableTypeEntries {
+                try claim(entry.token, module: unified.moduleName)
+                entries.append((token: entry.token, tsType: resolveTypeScriptType(entry.bridgeType)))
+            }
+        }
+        return entries
+    }
+
+    /// The top-level `BridgeTypes` token map generic-export callers pass their
+    /// type selections through, plus its branded d.ts typing.
+    private func generateBridgeTypeTokens() throws -> (js: [String], dts: [String]) {
+        let entries = try bridgeTypeTokenEntries()
+
+        let jsEntries = entries.map { "\($0.token): \"\($0.token)\"" }
+        let jsLines = ["export const BridgeTypes = { \(jsEntries.joined(separator: ", ")) };"]
+
+        // A required `unique symbol` brand: a raw string literal such as "Int"
+        // must not satisfy `BridgeType<number>`, only `BridgeTypes.Int` does.
+        // (An optional phantom property would let any string through.)
+        var dtsLines: [String] = []
+        dtsLines.append("declare const bridgeTypeBrand: unique symbol;")
+        dtsLines.append(
+            "export type BridgeType<T> = string & { readonly [bridgeTypeBrand]: (value: T) => void };"
+        )
+        let dtsEntries = entries.map { "readonly \($0.token): BridgeType<\($0.tsType)>;" }
+        dtsLines.append("export const BridgeTypes: { \(dtsEntries.joined(separator: " ")) };")
+
+        return (js: jsLines, dts: dtsLines)
     }
 
     private func generateAddImports(needsImportsObject: Bool) throws -> CodeFragmentPrinter {
@@ -1075,9 +1165,7 @@ public struct BridgeJSLink {
                                     parameters: function.parameters
                                 )
                             )
-                            printer.write(
-                                "\(function.resolvedJSName)\(renderTSSignature(parameters: function.parameters, returnType: function.returnType, effects: function.effects));"
-                            )
+                            printer.write("\(renderExportMemberTSSignature(function: function));")
                         }
                         for property in enumDefinition.staticProperties {
                             let readonly = property.isReadonly ? "readonly " : ""
@@ -1129,9 +1217,7 @@ public struct BridgeJSLink {
             },
             renderFunctionEntry: { function in
                 return self.renderJSDoc(documentation: function.documentation, parameters: function.parameters)
-                    + [
-                        "\(function.resolvedJSName)\(self.renderTSSignature(parameters: function.parameters, returnType: function.returnType, effects: function.effects));"
-                    ]
+                    + ["\(self.renderExportMemberTSSignature(function: function));"]
             },
             renderPropertyEntry: { property in
                 let readonly = property.isReadonly ? "readonly " : ""
@@ -1564,6 +1650,15 @@ public struct BridgeJSLink {
         let effects: Effects
         let scope: JSGlueVariableScope
         let context: IntrinsicJSFragment.PrintCodeContext
+        /// Codec variable per generic parameter name, resolved from the
+        /// caller's `BridgeTypes` token before any value is lowered.
+        var genericCodecVariables: [String: String] = [:]
+        /// Type-ID variable per generic parameter name; forwarded to wasm as
+        /// the trailing type-ID ABI arguments.
+        var genericTypeIdVariables: [String: String] = [:]
+        /// JS parameter names for the trailing `BridgeType` tokens, in generic
+        /// parameter declaration order.
+        var genericTokenParameterNames: [String] = []
 
         init(effects: Effects, hasDirectAccessToSwiftClass: Bool = true, intrinsicRegistry: JSIntrinsicRegistry) {
             self.effects = effects
@@ -1594,6 +1689,83 @@ public struct BridgeJSLink {
             parameterForwardings.append(contentsOf: loweredValues)
         }
 
+        /// Lowers the parameters of a (possibly generic) exported function.
+        ///
+        /// Token resolution runs first, so an unknown `BridgeTypes` token
+        /// throws a `TypeError` before anything is lowered onto the shared
+        /// stacks or into wasm (balanced stack, catchable error). Values are
+        /// then lowered in declaration order — generic ones through the
+        /// resolved codec (possibly wrapped by a combinator), concrete ones
+        /// through the standard per-type fragments — matching the reverse
+        /// declaration-order pops of the Swift entry thunk.
+        func lowerParametersAndGenericTokens(
+            parameters: [Parameter],
+            genericParameters: [String]
+        ) throws {
+            guard !genericParameters.isEmpty else {
+                for param in parameters {
+                    try lowerParameter(param: param)
+                }
+                return
+            }
+            // One source of truth for the token parameter names: the same
+            // helper the d.ts emission and the struct-instance path use, so
+            // the three emitters cannot drift apart.
+            genericTokenParameterNames = GenericJSCodegen.genericTokenParameterNames(
+                parameters: parameters,
+                genericNames: genericParameters,
+                scope: scope
+            )
+            for (genericParam, tokenName) in zip(genericParameters, genericTokenParameterNames) {
+                let typeIdVariable = scope.variable("typeId\(genericParam)")
+                let codecVariable = scope.variable("codec\(genericParam)")
+                body.write("const \(typeIdVariable) = __bjs_typeIdForToken(\(tokenName));")
+                body.write("const \(codecVariable) = __bjs_codecForTypeId(\(typeIdVariable));")
+                genericTypeIdVariables[genericParam] = typeIdVariable
+                genericCodecVariables[genericParam] = codecVariable
+            }
+            // Lower under the declared parameter name: `parameterList(_:)`
+            // declares `param.name`, so that is the identifier in scope.
+            for param in parameters {
+                if let genericName = param.type.referencedGenericName {
+                    guard let codecVariable = genericCodecVariables[genericName],
+                        let lowerStatement = GenericJSCodegen.genericCodecLowerStatement(
+                            type: param.type,
+                            codec: codecVariable,
+                            value: param.name
+                        )
+                    else {
+                        throw BridgeJSLinkError(
+                            message:
+                                "Generic codec for '\(genericName)' was not declared before lowering parameter '\(param.name)'"
+                        )
+                    }
+                    body.write(lowerStatement)
+                } else {
+                    let loweringFragment = try IntrinsicJSFragment.lowerParameter(type: param.type)
+                    let loweredValues = try loweringFragment.printCode([param.name], context)
+                    parameterForwardings.append(contentsOf: loweredValues)
+                }
+            }
+            for genericParam in genericParameters {
+                if let typeIdVariable = genericTypeIdVariables[genericParam] {
+                    parameterForwardings.append(typeIdVariable)
+                }
+            }
+        }
+
+        /// The JS parameter list of the wrapper: the user-facing parameters
+        /// followed by one `BridgeType` token per generic parameter.
+        func parameterList(_ parameters: [Parameter]) -> String {
+            let base = DefaultValueUtils.formatParameterList(
+                parameters,
+                resolveTypeName: context.defaultValueTypeName
+            )
+            guard !genericTokenParameterNames.isEmpty else { return base }
+            let tokens = genericTokenParameterNames.joined(separator: ", ")
+            return base.isEmpty ? tokens : "\(base), \(tokens)"
+        }
+
         func lowerSelf() {
             parameterForwardings.append("this.pointer")
         }
@@ -1608,6 +1780,20 @@ public struct BridgeJSLink {
 
         private func _call(abiName: String, returnType: BridgeType) throws -> String? {
             let call = "instance.exports.\(abiName)(\(parameterForwardings.joined(separator: ", ")))"
+            if let genericName = returnType.referencedGenericName {
+                guard let codecVariable = genericCodecVariables[genericName],
+                    let liftExpression = GenericJSCodegen.genericCodecLiftExpression(
+                        type: returnType,
+                        codec: codecVariable
+                    )
+                else {
+                    throw BridgeJSLinkError(
+                        message: "Generic codec for return type '\(genericName)' was not declared before the call"
+                    )
+                }
+                body.write("\(call);")
+                return liftExpression
+            }
             let liftingFragment = try IntrinsicJSFragment.liftReturn(type: returnType)
             assert(
                 liftingFragment.parameters.count <= 1,
@@ -1667,10 +1853,7 @@ public struct BridgeJSLink {
         ) -> [String] {
             let printer = CodeFragmentPrinter()
 
-            let parameterList = DefaultValueUtils.formatParameterList(
-                parameters,
-                resolveTypeName: context.defaultValueTypeName
-            )
+            let parameterList = self.parameterList(parameters)
 
             printer.write(
                 "\(declarationPrefixKeyword.map { "\($0) "} ?? "")\(name)(\(parameterList)) {"
@@ -1797,6 +1980,32 @@ public struct BridgeJSLink {
         return "<\(renderedParameters.joined(separator: ", "))>"
     }
 
+    /// The d.ts member signature of an exported function; generic functions
+    /// take one trailing `BridgeType<T>` token per generic parameter, named to
+    /// match the generated wrapper's parameter list.
+    private func renderExportMemberTSSignature(function: ExportedFunction) -> String {
+        guard function.isGeneric else {
+            return
+                "\(function.resolvedJSName)\(renderTSSignature(parameters: function.parameters, returnType: function.returnType, effects: function.effects))"
+        }
+        let genericNames = function.genericParameterNames
+        let tokenNames = GenericJSCodegen.genericTokenParameterNames(
+            parameters: function.parameters,
+            genericNames: genericNames,
+            scope: JSGlueVariableScope(intrinsicRegistry: intrinsicRegistry)
+        )
+        var parameterSignatures = function.parameters.map { param in
+            "\(param.name): \(resolveTypeScriptType(param.type))"
+        }
+        for (genericName, tokenName) in zip(genericNames, tokenNames) {
+            parameterSignatures.append("\(tokenName): BridgeType<\(genericName)>")
+        }
+        let genericClause = renderGenericClause(genericNames.map { GenericParameter(name: $0) })
+        let returnSignature = resolveTypeScriptType(function.returnType)
+        return
+            "\(function.resolvedJSName)\(genericClause)(\(parameterSignatures.joined(separator: ", "))): \(returnSignature)"
+    }
+
     private func renderTSPropertyName(_ name: String) -> String {
         // TypeScript allows quoted property names for keys that aren't valid identifiers.
         if name.range(of: #"^[$A-Z_][0-9A-Z_$]*$"#, options: [.regularExpression, .caseInsensitive]) != nil {
@@ -1833,12 +2042,7 @@ public struct BridgeJSLink {
                     parameters: method.parameters
                 )
                 dtsTypePrinter.write(lines: jsDocLines)
-                let signature = renderTSSignature(
-                    parameters: method.parameters,
-                    returnType: method.returnType,
-                    effects: method.effects
-                )
-                dtsTypePrinter.write("\(method.resolvedJSName)\(signature);")
+                dtsTypePrinter.write("\(renderExportMemberTSSignature(function: method));")
             }
         }
         dtsTypePrinter.write("}")
@@ -1866,9 +2070,7 @@ public struct BridgeJSLink {
         for method in structDefinition.methods where method.effects.isStatic {
             let jsDocLines = renderJSDoc(documentation: method.documentation, parameters: method.parameters)
             dtsExportEntryPrinter.write(lines: jsDocLines)
-            dtsExportEntryPrinter.write(
-                "\(method.resolvedJSName)\(renderTSSignature(parameters: method.parameters, returnType: method.returnType, effects: method.effects));"
-            )
+            dtsExportEntryPrinter.write("\(renderExportMemberTSSignature(function: method));")
         }
 
         return dtsExportEntryPrinter.lines
@@ -2115,9 +2317,10 @@ extension BridgeJSLink {
             effects: function.effects,
             intrinsicRegistry: intrinsicRegistry
         )
-        for param in function.parameters {
-            try thunkBuilder.lowerParameter(param: param)
-        }
+        try thunkBuilder.lowerParametersAndGenericTokens(
+            parameters: function.parameters,
+            genericParameters: function.genericParameterNames
+        )
         let returnExpr = try thunkBuilder.call(abiName: function.abiName, returnType: function.returnType)
         let funcLines = thunkBuilder.renderFunction(
             name: function.abiName,
@@ -2129,9 +2332,7 @@ extension BridgeJSLink {
 
         dtsLines.append(contentsOf: renderJSDoc(documentation: function.documentation, parameters: function.parameters))
 
-        dtsLines.append(
-            "\(function.resolvedJSName)\(renderTSSignature(parameters: function.parameters, returnType: function.returnType, effects: function.effects));"
-        )
+        dtsLines.append("\(renderExportMemberTSSignature(function: function));")
 
         return (funcLines, dtsLines)
     }
@@ -2165,9 +2366,10 @@ extension BridgeJSLink {
             effects: function.effects,
             intrinsicRegistry: intrinsicRegistry
         )
-        for param in function.parameters {
-            try thunkBuilder.lowerParameter(param: param)
-        }
+        try thunkBuilder.lowerParametersAndGenericTokens(
+            parameters: function.parameters,
+            genericParameters: function.genericParameterNames
+        )
         let returnExpr = try thunkBuilder.call(abiName: function.abiName, returnType: function.returnType)
 
         let funcLines = thunkBuilder.renderFunction(
@@ -2181,9 +2383,7 @@ extension BridgeJSLink {
 
         dtsLines.append(contentsOf: renderJSDoc(documentation: function.documentation, parameters: function.parameters))
 
-        dtsLines.append(
-            "static \(function.resolvedJSName)\(renderTSSignature(parameters: function.parameters, returnType: function.returnType, effects: function.effects));"
-        )
+        dtsLines.append("static \(renderExportMemberTSSignature(function: function));")
 
         return (funcLines, dtsLines)
     }
@@ -2196,17 +2396,14 @@ extension BridgeJSLink {
             effects: function.effects,
             intrinsicRegistry: intrinsicRegistry
         )
-        for param in function.parameters {
-            try thunkBuilder.lowerParameter(param: param)
-        }
+        try thunkBuilder.lowerParametersAndGenericTokens(
+            parameters: function.parameters,
+            genericParameters: function.genericParameterNames
+        )
         let returnExpr = try thunkBuilder.call(abiName: function.abiName, returnType: function.returnType)
 
         let printer = CodeFragmentPrinter()
-        let parameterList = DefaultValueUtils.formatParameterList(
-            function.parameters,
-            resolveTypeName: thunkBuilder.context.defaultValueTypeName
-        )
-        printer.write("\(function.resolvedJSName)(\(parameterList)) {")
+        printer.write("\(function.resolvedJSName)(\(thunkBuilder.parameterList(function.parameters))) {")
         printer.indent {
             thunkBuilder.renderFunctionBody(into: printer, returnExpr: returnExpr)
         }
@@ -2216,9 +2413,7 @@ extension BridgeJSLink {
 
         dtsLines.append(contentsOf: renderJSDoc(documentation: function.documentation, parameters: function.parameters))
 
-        dtsLines.append(
-            "\(function.resolvedJSName)\(renderTSSignature(parameters: function.parameters, returnType: function.returnType, effects: function.effects));"
-        )
+        dtsLines.append("\(renderExportMemberTSSignature(function: function));")
 
         return (printer.lines, dtsLines)
     }
@@ -2231,9 +2426,10 @@ extension BridgeJSLink {
             effects: function.effects,
             intrinsicRegistry: intrinsicRegistry
         )
-        for param in function.parameters {
-            try thunkBuilder.lowerParameter(param: param)
-        }
+        try thunkBuilder.lowerParametersAndGenericTokens(
+            parameters: function.parameters,
+            genericParameters: function.genericParameterNames
+        )
         let returnExpr = try thunkBuilder.call(abiName: function.abiName, returnType: function.returnType)
 
         let funcLines = thunkBuilder.renderFunction(
@@ -2256,9 +2452,10 @@ extension BridgeJSLink {
             effects: method.effects,
             intrinsicRegistry: intrinsicRegistry
         )
-        for param in method.parameters {
-            try thunkBuilder.lowerParameter(param: param)
-        }
+        try thunkBuilder.lowerParametersAndGenericTokens(
+            parameters: method.parameters,
+            genericParameters: method.genericParameterNames
+        )
         let returnExpr = try thunkBuilder.call(abiName: method.abiName, returnType: method.returnType)
 
         let methodPrinter = CodeFragmentPrinter()
@@ -2267,7 +2464,7 @@ extension BridgeJSLink {
             resolveTypeName: thunkBuilder.context.defaultValueTypeName
         )
         methodPrinter.write(
-            "\(method.resolvedJSName): function(\(parameterList)) {"
+            "\(method.resolvedJSName): function(\(thunkBuilder.parameterList(method.parameters))) {"
         )
         methodPrinter.indent {
             thunkBuilder.renderFunctionBody(into: methodPrinter, returnExpr: returnExpr)
@@ -2396,9 +2593,10 @@ extension BridgeJSLink {
                     effects: method.effects,
                     intrinsicRegistry: intrinsicRegistry
                 )
-                for param in method.parameters {
-                    try thunkBuilder.lowerParameter(param: param)
-                }
+                try thunkBuilder.lowerParametersAndGenericTokens(
+                    parameters: method.parameters,
+                    genericParameters: method.genericParameterNames
+                )
                 let returnExpr = try thunkBuilder.call(abiName: method.abiName, returnType: method.returnType)
 
                 jsPrinter.indent {
@@ -2417,9 +2615,10 @@ extension BridgeJSLink {
                     intrinsicRegistry: intrinsicRegistry
                 )
                 thunkBuilder.lowerSelf()
-                for param in method.parameters {
-                    try thunkBuilder.lowerParameter(param: param)
-                }
+                try thunkBuilder.lowerParametersAndGenericTokens(
+                    parameters: method.parameters,
+                    genericParameters: method.genericParameterNames
+                )
                 let returnExpr = try thunkBuilder.call(abiName: method.abiName, returnType: method.returnType)
 
                 jsPrinter.indent {
@@ -2440,9 +2639,7 @@ extension BridgeJSLink {
                     ) {
                         dtsTypePrinter.write(line)
                     }
-                    dtsTypePrinter.write(
-                        "\(method.resolvedJSName)\(renderTSSignature(parameters: method.parameters, returnType: method.returnType, effects: method.effects));"
-                    )
+                    dtsTypePrinter.write("\(renderExportMemberTSSignature(function: method));")
                 }
             }
         }
@@ -2478,9 +2675,7 @@ extension BridgeJSLink {
         }
         for method in klass.methods where method.effects.isStatic {
             printer.write(lines: renderJSDoc(documentation: method.documentation, parameters: method.parameters))
-            printer.write(
-                "\(method.resolvedJSName)\(renderTSSignature(parameters: method.parameters, returnType: method.returnType, effects: method.effects));"
-            )
+            printer.write("\(renderExportMemberTSSignature(function: method));")
         }
         for property in klass.properties where property.isStatic {
             let readonly = property.isReadonly ? "readonly " : ""
@@ -2510,9 +2705,7 @@ extension BridgeJSLink {
             for method in klass.methods.sorted(by: { $0.resolvedJSName < $1.resolvedJSName }) {
                 let staticKeyword = method.effects.isStatic ? "static " : ""
                 printer.write(lines: renderJSDoc(documentation: method.documentation, parameters: method.parameters))
-                printer.write(
-                    "\(staticKeyword)\(method.resolvedJSName)\(renderTSSignature(parameters: method.parameters, returnType: method.returnType, effects: method.effects));"
-                )
+                printer.write("\(staticKeyword)\(renderExportMemberTSSignature(function: method));")
             }
             for property in klass.properties.sorted(by: { $0.resolvedJSName < $1.resolvedJSName }) {
                 let staticKeyword = property.isStatic ? "static " : ""

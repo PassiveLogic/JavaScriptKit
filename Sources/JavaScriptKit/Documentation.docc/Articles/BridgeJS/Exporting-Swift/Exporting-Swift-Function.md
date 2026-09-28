@@ -157,6 +157,97 @@ export type Exports = {
 }
 ```
 
+### Generic functions
+
+A `@JS` function or method can be generic over a type parameter constrained to `BridgedSwiftGenericBridgeable`. The concrete type chosen at the JavaScript call site crosses the bridge, so one Swift implementation can transport many bridgeable types. A typical use is a typed payload slot: the Swift body stores and retrieves values opaquely while each call site keeps its concrete type:
+
+```swift
+import JavaScriptKit
+
+@JS public final class GraphNode {
+    private var attributes: [String: any BridgedSwiftGenericBridgeable] = [:]
+
+    @JS public init() {}
+
+    @JS public func setAttribute<T: BridgedSwiftGenericBridgeable>(_ key: String, _ value: T) {
+        attributes[key] = value
+    }
+
+    @JS public func attribute<T: BridgedSwiftGenericBridgeable>(_ key: String) -> T? {
+        attributes[key] as? T
+    }
+}
+```
+
+`T` must be a bridgeable type: a supported primitive (`Bool`, any fixed-width integer such as `Int`/`UInt`/`Int8`…`UInt64`, `Float`, `Double`, `String`, or `JSValue`), or a `@JS` struct, `final @JS class`, or `@JS enum`. You do not write any conformance yourself; marking a type `@JS` makes it usable as `T` (see <doc:Supported-Types>).
+
+Because TypeScript erases generics, the JavaScript caller passes a `BridgeType<T>` token as the last argument so the bridge can select the right type at runtime. The tokens come from a generated `BridgeTypes` map exported at the top level of `bridge-js.js`; import it directly rather than reading it from the `exports` object. The token for a type declared inside a namespace joins the path with underscores, so `API.Building` is `BridgeTypes.API_Building`:
+
+```javascript
+import { BridgeTypes } from "./bridge-js.js";
+
+const node = new exports.GraphNode();
+node.setAttribute("weight", 42, BridgeTypes.Int);
+node.setAttribute("label", "primary", BridgeTypes.String);
+
+const weight = node.attribute("weight", BridgeTypes.Int);       // 42
+const label = node.attribute("label", BridgeTypes.String);      // "primary"
+const missing = node.attribute("missing", BridgeTypes.Int);     // null
+```
+
+Note that `attribute` uses its generic parameter only in the return type: the token alone tells the bridge which type to produce. This completes the store/load idiom — `setAttribute` consumes a generic value, `attribute` produces one. Passing a token that is not in `BridgeTypes` throws a `TypeError` before the call reaches Swift.
+
+Concrete parameters keep their positions; the token is always appended last. The non-generic parameters of a generic `@JS` function may be any supported bridged type, including value types such as `@JS` structs, arrays, dictionaries, and associated-value enums alongside the generic parameter. The generated TypeScript declarations look like:
+
+```typescript
+export type BridgeType<T> = string & { readonly __bridgeType?: (value: T) => void };
+export const BridgeTypes: { Bool: BridgeType<boolean>; Int: BridgeType<number>; Float: BridgeType<number>; Double: BridgeType<number>; String: BridgeType<string>; MyPoint: BridgeType<MyPoint>; };
+export interface GraphNode extends SwiftHeapObject {
+    setAttribute<T>(key: string, value: T, typeT: BridgeType<T>): void;
+    attribute<T>(key: string, typeT: BridgeType<T>): T | null;
+}
+```
+
+The same works for a minimal top-level function — `identity` is the simplest possible shape:
+
+```swift
+@JS public func identity<T: BridgedSwiftGenericBridgeable>(_ value: T) -> T {
+    return value
+}
+```
+
+```typescript
+export type Exports = {
+    identity<T>(value: T, typeT: BridgeType<T>): T;
+}
+```
+
+A single `T` may be used in more than one parameter, and a function may declare multiple distinct generic parameters. Each distinct generic parameter takes its own `BridgeType` token, appended after the regular arguments in declaration order:
+
+```swift
+@JS public func combine<T: BridgedSwiftGenericBridgeable, U: BridgedSwiftGenericBridgeable>(_ a: T, _ b: U) -> T {
+    a
+}
+```
+
+```typescript
+export type Exports = {
+    combine<T, U>(a: T, b: U, typeT: BridgeType<T>, typeU: BridgeType<U>): T;
+}
+```
+
+The generic parameter may also be wrapped as `[T]`, `T?`, or `[String: T]` in parameters and the result:
+
+```swift
+@JS public func firstOrNil<T: BridgedSwiftGenericBridgeable>(_ values: [T]) -> T? {
+    values.first
+}
+```
+
+Every declared generic parameter must be used in at least one parameter or the return type; a fully unused generic parameter is rejected. The result must be one of the declared generic parameters (such as `T` or `U`), a supported wrapper of one (`[T]`, `T?`, `[String: T]`), or `Void` — returning a concrete non-`Void` type from a generic `@JS` function is not supported. Generic `@JS` functions must be synchronous (see <doc:Unsupported-Features>).
+
+Generics also work on methods. On a `@JS` class or struct they apply to both instance and static methods. A `@JS enum` (including a namespace-style enum) has no instance methods in BridgeJS, so generics there apply to static methods only. The constraint, the trailing `BridgeType` token, and the generic-or-`Void` return rule all carry over unchanged.
+
 ## Supported Features
 
 | Swift Feature | Status |
@@ -169,6 +260,6 @@ export type Exports = {
 | Throwing JS exception: `func x() throws(JSException)` | ✅ |
 | Throwing any exception: `func x() throws` | ❌ |
 | Async methods: `func x() async` | ✅ |
-| Generics | ❌ |
+| Generic parameter/result types (constrained to `BridgedSwiftGenericBridgeable`) | ✅ |
 | Opaque types: `func x() -> some P`, `func y(_: some P)` | ❌ |
 | Default parameter values: `func x(_ foo: String = "")` | ✅ (See <doc:Exporting-Swift-Default-Parameters>) |

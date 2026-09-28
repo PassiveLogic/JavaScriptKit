@@ -32,6 +32,16 @@ So even if you cache the property name (e.g. with `CachedJSStrings`), you are st
 
 BridgeJS avoids this by generating **separate** access paths per property or method. Each generated getter/setter or function call has a stable shape at the engine level, so the IC can stay monomorphic or polymorphic and the fast path is used.
 
+## Generic imports
+
+An imported generic `@JSFunction` (`func parse<T: BridgedSwiftGenericBridgeable>(...)`) lets one piece of glue serve many concrete types. The generic value crosses using the type's own stack ABI, and a runtime type ID selects the matching JS codec, so the type-agnostic glue can lower and lift the right representation without a specialized path per call site.
+
+Type identity is pointer-based rather than name-based: every conforming type owns a unique `BridgeJSTypeHandle` instance, and the handle object's address is the type ID. This makes IDs unique across all linked modules for free (type-name strings would be fragile and could collide). During initialization each module's `bjs_<Module>_register_type_handles` export lowers its handle IDs — in a canonical order shared with the JS glue — and the glue pairs them index-by-index with its codec array, so a generic call site resolves its codec with a single map lookup. Because this path avoids existentials entirely, it also works under Embedded Swift; the Embedded example (`Examples/Embedded`) exercises a generic import, including a `@JS struct` round-trip.
+
+## Generic exports
+
+An exported generic `@JS` function reuses the same stack ABI, codec table, and handle-based type identity, with the dispatch reversed. The WebAssembly entry point is a concrete `@_expose` thunk that takes the runtime type ID as a trailing `Int32`. Because the ID is the address of the type's `BridgeJSTypeHandle`, the thunk recovers the concrete type directly — `Unmanaged<BridgeJSTypeHandle>.fromOpaque(...).takeUnretainedValue().type` — with no per-module registry, reifies `T` through an opened existential, and runs the same unspecialized body a concrete export would run: pop the arguments from the stack, call your function, push the result. The JavaScript wrapper resolves the caller's `BridgeType` token through the map built during type-handle registration and passes the resulting ID; an unknown token throws a `TypeError` *before* entering wasm, so the shared value stack stays balanced and the error is catchable. Pointer recovery means the wasm entry point trusts its caller: a raw wasm caller passing a garbage type ID is undefined behavior, which is acceptable because the generated JS wrapper is the only supported caller and it validates every token first. Because recovery depends on the handle's metatype storage (an existential), generic exports are excluded under Embedded Swift.
+
 ## What to read next
 
 - ABI and binary interface details will be documented in this section as they stabilize.
