@@ -55,3 +55,22 @@ While using `@JS` types from another Swift module is supported, it is not possib
 ### Exporting Swift: types from another Swift package
 
 Types defined in a separate Swift package cannot yet be referenced from `@JS` declarations in your package.
+
+## Generics
+
+Generic functions are supported in both directions, through a type parameter constrained to `BridgedSwiftGenericBridgeable`: an imported `@JSFunction` (see <doc:Importing-JS-Function>) and an exported `@JS` function (see <doc:Exporting-Swift-Function>). Generics also work on methods of an exported `@JS` class or struct (both instance and static), on static methods of an exported `@JS` enum or namespace enum, and on imported `@JSClass` methods. A function may declare one or more distinct generic parameters, such as `combine<T, U>(_ a: T, _ b: U) -> T`, and a return-only generic (such as `load<T>(_ key: String) -> T?`) is supported in both directions. A generic parameter may additionally be constrained to one or more `@JS` protocols by composing them with `BridgedSwiftGenericBridgeable`, such as `<T: BridgedSwiftGenericBridgeable & GraphNode>`; a conformer of a refined protocol (`@JS protocol Refined: Base`) satisfies constraints on the protocols it inherits from. Generic declarations may be `throws(JSException)` in both directions. The following forms are not supported and produce build-time diagnostics:
+
+- `async` generic functions. (`throws(JSException)` is supported; plain `throws` is unsupported on every export, generic or not.)
+- `where` clauses on a generic declaration.
+- A generic parameter constrained to a bare protocol without `BridgedSwiftGenericBridgeable` in the composition (such as `<T: GraphNode>`), or composed with a protocol that is not a `@JS protocol` (such as `Comparable`).
+- An exported generic function with a declared generic parameter that is not used in any parameter or the return type.
+- A generic initializer on an exported `@JS` class or struct. Use a generic `@JS` method, or a generic `@JSFunction` initializer on an imported `@JSClass`.
+- Default parameter values on a generic exported `@JS` function. The trailing `BridgeType` token is always required, so a defaulted parameter could never be omitted.
+- A generic requirement on a `@JS` protocol (`func map<T>(_ v: T)`). Constrain a generic `@JS` function or method to the protocol instead.
+- An exported generic function that returns a concrete, non-`Void` type. The result of an exported generic function must be one of the declared generic parameters (optionally wrapped in `[T]`, `T?`, or `[String: T]`) or `Void`.
+
+The generic parameter may be used bare (`T`) or wrapped in `[T]`, `T?`, or `[String: T]`. Nested or other wrappings, such as `[T?]`, `[[T]]`, `T??`, or `[Int: T]`, are not supported and produce build-time diagnostics. `JSObject` cannot be used as the generic argument (it is a non-final class); use `JSValue` instead.
+
+Passing an unknown `BridgeTypes` token to an exported generic function throws a catchable `TypeError` from the generated JavaScript wrapper before the call enters WebAssembly.
+
+Exported generic functions additionally require runtime existential support, so they are not available under Embedded Swift. Imported generics remain available there and are exercised by the Embedded example (`Examples/Embedded`).

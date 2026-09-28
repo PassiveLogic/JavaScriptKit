@@ -169,7 +169,9 @@ This differs from classes, which use reference semantics and share state across 
 | Static properties | ✅ |
 | Extension methods/properties | ✅ |
 | Property observers (`willSet`, `didSet`) | ❌ |
-| Generics | ❌ |
+| Generic methods (instance and static) (see <doc:Exporting-Swift-Function>) | ✅ |
+| Generic structs: `struct Pair<T>` | ❌ |
+| Generic initializers | ❌ |
 | Conformances | ❌ |
 
 ## See Also

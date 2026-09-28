@@ -833,6 +833,16 @@ import Testing
         )
     }
 
+    @Test func constraintOnlyJSProtocolConformer() throws {
+        _ = try makeSkeleton(
+            """
+            @JS protocol GraphNode { var id: String { get } }
+            @JS struct Building: GraphNode { var id: String }
+            @JS func store<T: BridgedSwiftGenericBridgeable & GraphNode>(_ node: T) -> T { node }
+            """
+        )
+    }
+
     @Test func protocolRefinementIsNotAConcreteConformance() throws {
         _ = try makeSkeleton(
             """

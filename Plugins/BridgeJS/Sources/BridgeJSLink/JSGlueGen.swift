@@ -36,6 +36,7 @@ final class JSGlueVariableScope {
     static let reservedMakeSwiftClosure = "makeClosure"
     static let reservedTaStack = "taStack"
     static let reservedCodecByTypeId = "__bjs_codecByTypeId"
+    static let reservedTypeIdByToken = "__bjs_typeIdByToken"
     static let reservedPrimitiveCodecs = "__bjs_primitiveCodecs"
     static let reservedStringCodec = "__bjs_stringCodec"
     static let reservedTypeHandlesRegistered = "__bjs_typeHandlesRegistered"
@@ -71,6 +72,7 @@ final class JSGlueVariableScope {
         reservedMakeSwiftClosure,
         reservedTaStack,
         reservedCodecByTypeId,
+        reservedTypeIdByToken,
         reservedPrimitiveCodecs,
         reservedStringCodec,
         reservedTypeHandlesRegistered,
@@ -226,6 +228,71 @@ enum GenericJSCodegen {
         genericCodecExpression(type: type, codec: codec).map { "\($0).lift()" }
     }
 
+    /// JS parameter names for the trailing `BridgeType` tokens of a generic
+    /// exported function, deduplicated around the user-facing parameter names.
+    ///
+    /// The wrapper emission and the d.ts emission both derive the names from
+    /// this function (same fresh scope, same registration order), so the two
+    /// always agree.
+    static func genericTokenParameterNames(
+        parameters: [Parameter],
+        genericNames: [String],
+        scope: JSGlueVariableScope
+    ) -> [String] {
+        for parameter in parameters {
+            _ = scope.variable(parameter.name)
+        }
+        return genericNames.map { scope.variable("type\($0)") }
+    }
+
+    /// Runtime helpers used only by generic *exports*: the JS wrapper resolves
+    /// the caller's `BridgeTypes` token to a runtime type ID before entering
+    /// wasm, throwing a catchable `TypeError` for unknown tokens and for tokens
+    /// whose type does not conform to the generic parameter's `@JS protocol`
+    /// constraints (the wasm side treats an invalid ID as undefined behavior
+    /// and enforces constraints only as a defense-in-depth trap, so neither
+    /// must be reachable from JS).
+    static func exportRuntimeHelperDeclarations() -> [String] {
+        let typeIdByToken = JSGlueVariableScope.reservedTypeIdByToken
+        return [
+            "function __bjs_typeIdForToken(token, requiredProtocols) {",
+            "    \(JSGlueVariableScope.reservedRegisterTypeHandles)();",
+            "    const typeId = \(typeIdByToken).get(token);",
+            "    if (typeId === undefined) {",
+            "        throw new TypeError(\"BridgeJS: unknown BridgeType token '\" + token + \"'\");",
+            "    }",
+            "    if (requiredProtocols) {",
+            "        const conformances = __bjs_tokenConformances[token] || [];",
+            "        for (const requiredProtocol of requiredProtocols) {",
+            "            if (!conformances.includes(requiredProtocol)) {",
+            "                throw new TypeError(\"BridgeJS: type '\" + token + \"' does not conform to required protocol '\" + requiredProtocol + \"'\");",
+            "            }",
+            "        }",
+            "    }",
+            "    return typeId;",
+            "}",
+        ]
+    }
+
+    /// The rethrow sequence a throwing export's wrapper runs right after the
+    /// wasm call, mirroring `ExportedThunkBuilder.checkExceptionLines()` for
+    /// glue emitted outside the thunk builder.
+    static func checkExceptionLines() -> [String] {
+        let exceptionVariable = JSGlueVariableScope.reservedStorageToReturnException
+        return [
+            "if (\(exceptionVariable)) {",
+            "    const error = \(JSGlueVariableScope.reservedSwift).memory.getObject(\(exceptionVariable));",
+            "    \(JSGlueVariableScope.reservedSwift).memory.release(\(exceptionVariable));",
+            "    \(exceptionVariable) = undefined;",
+            "    throw error;",
+            "}",
+        ]
+    }
+
+    /// Shared generic runtime: a type-ID-keyed codec table plus codec
+    /// combinators. Each container shape's stack ABI is described once here and
+    /// instantiated with an element codec, instead of cloning the lowering and
+    /// lifting logic per shape.
     static func runtimeHelperDeclarations() -> [String] {
         let codecByTypeId = JSGlueVariableScope.reservedCodecByTypeId
         return [
@@ -2581,6 +2648,15 @@ struct IntrinsicJSFragment: Sendable {
 
             // Attach instance methods to the struct instance
             for method in structDef.methods where !method.effects.isStatic {
+                if method.isGeneric {
+                    try attachGenericStructInstanceMethod(
+                        method: method,
+                        structDef: structDef,
+                        instanceVar: instanceVar,
+                        context: context
+                    )
+                    continue
+                }
                 let paramList = DefaultValueUtils.formatParameterList(
                     method.parameters,
                     resolveTypeName: context.defaultValueTypeName
@@ -2609,6 +2685,89 @@ struct IntrinsicJSFragment: Sendable {
         } else {
             printer.write("return { \(reconstructedFields.joined(separator: ", ")) };")
         }
+    }
+
+    /// Attaches a generic instance method to a lifted struct instance.
+    ///
+    /// Mirrors `ExportedThunkBuilder.lowerParametersAndGenericTokens`: tokens
+    /// resolve first (an unknown token throws before anything is pushed), the
+    /// struct `self` lowers next, then the parameters in declaration order,
+    /// and the trailing type IDs select the concrete types on the Swift side.
+    private static func attachGenericStructInstanceMethod(
+        method: ExportedFunction,
+        structDef: ExportedStruct,
+        instanceVar: String,
+        context: IntrinsicJSFragment.PrintCodeContext
+    ) throws {
+        let printer = context.printer
+        let methodScope = context.scope.makeChildScope()
+        let genericParameters = method.genericParameters ?? []
+        let tokenNames = GenericJSCodegen.genericTokenParameterNames(
+            parameters: method.parameters,
+            genericNames: method.genericParameterNames,
+            scope: methodScope
+        )
+        let methodContext = context.with(\.scope, methodScope)
+
+        let paramList = (method.parameters.map { $0.name } + tokenNames).joined(separator: ", ")
+        printer.write("\(instanceVar).\(method.resolvedJSName) = function(\(paramList)) {")
+        try printer.indent {
+            var codecVariables: [String: String] = [:]
+            var typeIdVariables: [String: String] = [:]
+            for (genericParameter, tokenName) in zip(genericParameters, tokenNames) {
+                let genericName = genericParameter.name
+                let typeIdVariable = methodScope.variable("typeId\(genericName)")
+                let codecVariable = methodScope.variable("codec\(genericName)")
+                printer.write(
+                    "const \(typeIdVariable) = __bjs_typeIdForToken(\(tokenName)\(BridgeJSLink.ExportedThunkBuilder.requiredProtocolsArgument(genericParameter)));"
+                )
+                printer.write("const \(codecVariable) = __bjs_codecForTypeId(\(typeIdVariable));")
+                typeIdVariables[genericName] = typeIdVariable
+                codecVariables[genericName] = codecVariable
+            }
+            printer.write(
+                "\(JSGlueVariableScope.reservedStructHelpers).\(context.scope.helperKey(forTypeNamed: structDef.swiftCallName)).lower(this);"
+            )
+            var paramForwardings: [String] = []
+            for param in method.parameters {
+                if let genericName = param.type.referencedGenericName {
+                    guard let codecVariable = codecVariables[genericName],
+                        let lowerStatement = GenericJSCodegen.genericCodecLowerStatement(
+                            type: param.type,
+                            codec: codecVariable,
+                            value: param.name
+                        )
+                    else {
+                        throw BridgeJSLinkError(
+                            message:
+                                "Generic codec for '\(genericName)' was not declared before lowering parameter '\(param.name)'"
+                        )
+                    }
+                    printer.write(lowerStatement)
+                } else {
+                    let fragment = try IntrinsicJSFragment.lowerParameter(type: param.type)
+                    let loweredValues = try fragment.printCode([param.name], methodContext)
+                    paramForwardings.append(contentsOf: loweredValues)
+                }
+            }
+            paramForwardings.append(contentsOf: method.genericParameterNames.compactMap { typeIdVariables[$0] })
+            printer.write("instance.exports.\(method.abiName)(\(paramForwardings.joined(separator: ", ")));")
+            if method.effects.isThrows {
+                // Rethrow before lifting: a thrown call pushed nothing onto the
+                // shared value stack, so the lift below must not run.
+                printer.write(lines: GenericJSCodegen.checkExceptionLines())
+            }
+            if let returnGenericName = method.returnType.referencedGenericName,
+                let codecVariable = codecVariables[returnGenericName],
+                let liftExpression = GenericJSCodegen.genericCodecLiftExpression(
+                    type: method.returnType,
+                    codec: codecVariable
+                )
+            {
+                printer.write("return \(liftExpression);")
+            }
+        }
+        printer.write("}.bind(\(instanceVar));")
     }
 
     private static func structFieldLowerFragment(

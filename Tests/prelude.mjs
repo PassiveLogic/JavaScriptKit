@@ -6,6 +6,7 @@ import {
 import { ImportedFoo } from './BridgeJSRuntimeTests/JavaScript/Types.mjs';
 import { runJsOptionalSupportTests } from './BridgeJSRuntimeTests/JavaScript/OptionalSupportTests.mjs';
 import { runAliasWorks, getImports as getAliasImports, Surface } from './BridgeJSRuntimeTests/JavaScript/AliasTests.mjs';
+import { runExportGenericTests } from './BridgeJSRuntimeTests/JavaScript/ExportGenericTests.mjs';
 import { getImports as getClosureSupportImports } from './BridgeJSRuntimeTests/JavaScript/ClosureSupportTests.mjs';
 import { getImports as getClosureThrowsImports } from './BridgeJSRuntimeTests/JavaScript/ClosureThrowsTests.mjs';
 import { getImports as getClosureAsyncImports } from './BridgeJSRuntimeTests/JavaScript/ClosureAsyncTests.mjs';
@@ -249,6 +250,13 @@ export async function setupOptions(options, context) {
                     throw new Error("No exports!?");
                 }
                 runAliasWorks(exports);
+            }
+            bridgeJSRuntimeTests["runExportGenericTests"] = () => {
+                const exports = getExports();
+                if (!exports) {
+                    throw new Error("No exports!?");
+                }
+                return runExportGenericTests(exports);
             }
             const bridgeJSGlobalTests = importObject["BridgeJSGlobalTests"] || {};
             bridgeJSGlobalTests["runJsWorksGlobal"] = () => {

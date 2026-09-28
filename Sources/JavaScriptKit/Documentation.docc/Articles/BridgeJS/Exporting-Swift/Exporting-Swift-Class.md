@@ -234,4 +234,6 @@ Identity mode improves performance for reuse-heavy workloads (same objects cross
 | Static/class methods: `static func`, `class func` | ✅ (See <doc:Exporting-Swift-Static-Functions> ) |
 | Extension methods/properties | ✅ |
 | Subscripts: `subscript()` | ❌ |
-| Generics | ❌ |
+| Generic methods (instance and static): `func wrap<T: BridgedSwiftGenericBridgeable>(_ v: T) -> T` (see <doc:Exporting-Swift-Function>) | ✅ |
+| Generic classes: `class Box<T>` | ❌ |
+| Generic initializers | ❌ |

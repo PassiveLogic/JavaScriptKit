@@ -158,6 +158,99 @@ import Testing
     }
 
     @Test
+    func genericRuntimeIsGatedToGenericBuilds() throws {
+        let genericJS = try linkedJS(forFixture: "GenericImports.swift")
+        #expect(genericJS.contains("__bjs_codecByTypeId"))
+        #expect(genericJS.contains("function __bjs_codecForTypeId(typeId) {"))
+        #expect(genericJS.contains("bjs[\"bjs_TestModule_register_type_handles\"] = function(base, count) {"))
+        #expect(genericJS.contains("instance.exports[\"bjs_TestModule_register_type_handles\"]();"))
+
+        // Modules with @JS types but no generic declarations still emit a Swift
+        // registration export (their types may be used by a dependent module's
+        // generic function), so the link layer must install a no-op hook for the
+        // wasm import — but the generic runtime itself must be omitted. The
+        // primitive codec table is not part of that runtime: the non-generic
+        // array and dictionary paths share it too.
+        let nonGenericJS = try linkedJS(forFixture: "SwiftStructImports.swift")
+        #expect(!nonGenericJS.contains("__bjs_codecByTypeId"))
+        #expect(!nonGenericJS.contains("__bjs_codecForTypeId"))
+        #expect(nonGenericJS.contains("bjs[\"bjs_core_register_type_handles\"] = function() {};"))
+        #expect(nonGenericJS.contains("bjs[\"bjs_TestModule_register_type_handles\"] = function() {};"))
+        #expect(!nonGenericJS.contains("instance.exports[\"bjs_TestModule_register_type_handles\"]();"))
+    }
+
+    @Test
+    func sameTypeNameAcrossModulesLinksWithHandleIdentity() throws {
+        // Type identity is pointer-based (each type owns a BridgeJSTypeHandle),
+        // so two modules defining a same-named @JS type must link fine: each
+        // module registers its own handle IDs against its own codec array.
+        func makeSkeleton(moduleName: String, source: String) throws -> BridgeJSSkeleton {
+            let swiftAPI = SwiftToSkeleton(
+                progress: .silent,
+                moduleName: moduleName,
+                exposeToGlobal: false,
+                externalModuleIndex: .empty
+            )
+            swiftAPI.addSourceFile(Parser.parse(source: source), inputFilePath: "\(moduleName).swift")
+            return try swiftAPI.finalize()
+        }
+        let structSource = """
+            @JS public struct Point {
+                public var x: Int
+                @JS public init(x: Int) { self.x = x }
+            }
+            """
+        let first = try makeSkeleton(
+            moduleName: "FirstModule",
+            source: structSource + """
+
+                @JSFunction func identity<T: BridgedSwiftGenericBridgeable>(_ value: T) throws(JSException) -> T
+                """
+        )
+        let second = try makeSkeleton(moduleName: "SecondModule", source: structSource)
+        let bridgeJSLink = BridgeJSLink(skeletons: [first, second])
+        let js = try bridgeJSLink.link().outputJs
+        #expect(js.contains("bjs[\"bjs_FirstModule_register_type_handles\"] = function(base, count) {"))
+        #expect(js.contains("bjs[\"bjs_SecondModule_register_type_handles\"] = function(base, count) {"))
+    }
+
+    @Test
+    func sameTypeNameAcrossModulesFailsWithGenericExports() throws {
+        // Generic exports surface types to JS through unqualified `BridgeTypes`
+        // tokens, so a type name shared by two modules cannot be represented
+        // and must fail the build — unlike imports, where pointer-based handle
+        // identity keeps same-named types apart.
+        func makeSkeleton(moduleName: String, source: String) throws -> BridgeJSSkeleton {
+            let swiftAPI = SwiftToSkeleton(
+                progress: .silent,
+                moduleName: moduleName,
+                exposeToGlobal: false,
+                externalModuleIndex: .empty
+            )
+            swiftAPI.addSourceFile(Parser.parse(source: source), inputFilePath: "\(moduleName).swift")
+            return try swiftAPI.finalize()
+        }
+        let structSource = """
+            @JS public struct Point {
+                public var x: Int
+                @JS public init(x: Int) { self.x = x }
+            }
+            """
+        let first = try makeSkeleton(
+            moduleName: "FirstModule",
+            source: structSource + """
+
+                @JS public func identity<T: BridgedSwiftGenericBridgeable>(_ value: T) -> T { value }
+                """
+        )
+        let second = try makeSkeleton(moduleName: "SecondModule", source: structSource)
+        let bridgeJSLink = BridgeJSLink(skeletons: [first, second])
+        #expect(throws: (any Error).self) {
+            _ = try bridgeJSLink.link()
+        }
+    }
+
+    @Test
     func perClassIdentityModeFromAnnotation() throws {
         let url = Self.inputsDirectory.appendingPathComponent("IdentityModeClass.swift")
         let sourceFile = Parser.parse(source: try String(contentsOf: url, encoding: .utf8))

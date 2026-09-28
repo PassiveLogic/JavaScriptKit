@@ -3052,6 +3052,9 @@
         "swiftCallName" : "DataProcessorManager"
       },
       {
+        "conformedJSProtocols" : [
+          "DataProcessor"
+        ],
         "constructor" : {
           "abiName" : "bjs_SwiftDataProcessor_init",
           "effects" : {
@@ -4951,6 +4954,204 @@
 
         ],
         "swiftCallName" : "NestedTypeHost"
+      },
+      {
+        "constructor" : {
+          "abiName" : "bjs_ExportGenericBox_init",
+          "effects" : {
+            "isAsync" : false,
+            "isStatic" : false,
+            "isThrows" : false
+          },
+          "parameters" : [
+            {
+              "label" : "value",
+              "name" : "value",
+              "type" : {
+                "integer" : {
+                  "_0" : {
+                    "isSigned" : true,
+                    "width" : "word"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "explicitAccessControl" : "public",
+        "isFinal" : true,
+        "methods" : [
+          {
+            "abiName" : "bjs_ExportGenericBox_get",
+            "effects" : {
+              "isAsync" : false,
+              "isStatic" : false,
+              "isThrows" : false
+            },
+            "name" : "get",
+            "parameters" : [
+
+            ],
+            "returnType" : {
+              "integer" : {
+                "_0" : {
+                  "isSigned" : true,
+                  "width" : "word"
+                }
+              }
+            }
+          }
+        ],
+        "name" : "ExportGenericBox",
+        "properties" : [
+          {
+            "isReadonly" : false,
+            "isStatic" : false,
+            "name" : "value",
+            "type" : {
+              "integer" : {
+                "_0" : {
+                  "isSigned" : true,
+                  "width" : "word"
+                }
+              }
+            }
+          }
+        ],
+        "swiftCallName" : "ExportGenericBox"
+      },
+      {
+        "constructor" : {
+          "abiName" : "bjs_ExportGenericMethodBox_init",
+          "effects" : {
+            "isAsync" : false,
+            "isStatic" : false,
+            "isThrows" : false
+          },
+          "parameters" : [
+
+          ]
+        },
+        "explicitAccessControl" : "public",
+        "isFinal" : true,
+        "methods" : [
+          {
+            "abiName" : "bjs_ExportGenericMethodBox_echo",
+            "effects" : {
+              "isAsync" : false,
+              "isStatic" : false,
+              "isThrows" : false
+            },
+            "genericParameters" : [
+              {
+                "name" : "T"
+              }
+            ],
+            "name" : "echo",
+            "parameters" : [
+              {
+                "label" : "_",
+                "name" : "value",
+                "type" : {
+                  "generic" : {
+                    "_0" : "T"
+                  }
+                }
+              }
+            ],
+            "returnType" : {
+              "generic" : {
+                "_0" : "T"
+              }
+            }
+          },
+          {
+            "abiName" : "bjs_ExportGenericMethodBox_combine",
+            "effects" : {
+              "isAsync" : false,
+              "isStatic" : false,
+              "isThrows" : false
+            },
+            "genericParameters" : [
+              {
+                "name" : "T"
+              },
+              {
+                "name" : "U"
+              }
+            ],
+            "name" : "combine",
+            "parameters" : [
+              {
+                "label" : "_",
+                "name" : "a",
+                "type" : {
+                  "generic" : {
+                    "_0" : "T"
+                  }
+                }
+              },
+              {
+                "label" : "_",
+                "name" : "b",
+                "type" : {
+                  "generic" : {
+                    "_0" : "U"
+                  }
+                }
+              }
+            ],
+            "returnType" : {
+              "generic" : {
+                "_0" : "U"
+              }
+            }
+          },
+          {
+            "abiName" : "bjs_ExportGenericMethodBox_static_wrapArray",
+            "effects" : {
+              "isAsync" : false,
+              "isStatic" : true,
+              "isThrows" : false
+            },
+            "genericParameters" : [
+              {
+                "name" : "T"
+              }
+            ],
+            "name" : "wrapArray",
+            "parameters" : [
+              {
+                "label" : "_",
+                "name" : "value",
+                "type" : {
+                  "generic" : {
+                    "_0" : "T"
+                  }
+                }
+              }
+            ],
+            "returnType" : {
+              "array" : {
+                "_0" : {
+                  "generic" : {
+                    "_0" : "T"
+                  }
+                }
+              }
+            },
+            "staticContext" : {
+              "className" : {
+                "_0" : "ExportGenericMethodBox"
+              }
+            }
+          }
+        ],
+        "name" : "ExportGenericMethodBox",
+        "properties" : [
+
+        ],
+        "swiftCallName" : "ExportGenericMethodBox"
       },
       {
         "constructor" : {
@@ -10571,6 +10772,158 @@
         ],
         "swiftCallName" : "NestedTypeHost.Variant",
         "tsFullPath" : "NestedTypeHost.Variant"
+      },
+      {
+        "cases" : [
+          {
+            "associatedValues" : [
+              {
+                "label" : "value",
+                "type" : {
+                  "integer" : {
+                    "_0" : {
+                      "isSigned" : true,
+                      "width" : "word"
+                    }
+                  }
+                }
+              }
+            ],
+            "name" : "ok"
+          },
+          {
+            "associatedValues" : [
+              {
+                "label" : "reason",
+                "type" : {
+                  "string" : {
+
+                  }
+                }
+              }
+            ],
+            "name" : "fail"
+          }
+        ],
+        "emitStyle" : "const",
+        "explicitAccessControl" : "public",
+        "name" : "ExportGenericOutcome",
+        "staticMethods" : [
+
+        ],
+        "staticProperties" : [
+
+        ],
+        "swiftCallName" : "ExportGenericOutcome",
+        "tsFullPath" : "ExportGenericOutcome"
+      },
+      {
+        "cases" : [
+          {
+            "associatedValues" : [
+
+            ],
+            "name" : "primary"
+          }
+        ],
+        "emitStyle" : "const",
+        "explicitAccessControl" : "public",
+        "name" : "ExportGenericMethodFactory",
+        "staticMethods" : [
+          {
+            "abiName" : "bjs_ExportGenericMethodFactory_static_one",
+            "effects" : {
+              "isAsync" : false,
+              "isStatic" : true,
+              "isThrows" : false
+            },
+            "genericParameters" : [
+              {
+                "name" : "T"
+              }
+            ],
+            "name" : "one",
+            "parameters" : [
+              {
+                "label" : "_",
+                "name" : "value",
+                "type" : {
+                  "generic" : {
+                    "_0" : "T"
+                  }
+                }
+              }
+            ],
+            "returnType" : {
+              "generic" : {
+                "_0" : "T"
+              }
+            },
+            "staticContext" : {
+              "enumName" : {
+                "_0" : "ExportGenericMethodFactory"
+              }
+            }
+          }
+        ],
+        "staticProperties" : [
+
+        ],
+        "swiftCallName" : "ExportGenericMethodFactory",
+        "tsFullPath" : "ExportGenericMethodFactory"
+      },
+      {
+        "cases" : [
+
+        ],
+        "emitStyle" : "const",
+        "explicitAccessControl" : "public",
+        "name" : "ExportGenericMethodNamespace",
+        "staticMethods" : [
+          {
+            "abiName" : "bjs_ExportGenericMethodNamespace_static_make",
+            "effects" : {
+              "isAsync" : false,
+              "isStatic" : true,
+              "isThrows" : false
+            },
+            "genericParameters" : [
+              {
+                "name" : "T"
+              }
+            ],
+            "name" : "make",
+            "namespace" : [
+              "ExportGenericMethodNamespace"
+            ],
+            "parameters" : [
+              {
+                "label" : "_",
+                "name" : "value",
+                "type" : {
+                  "generic" : {
+                    "_0" : "T"
+                  }
+                }
+              }
+            ],
+            "returnType" : {
+              "generic" : {
+                "_0" : "T"
+              }
+            },
+            "staticContext" : {
+              "namespaceEnum" : {
+                "_0" : "ExportGenericMethodNamespace"
+              }
+            }
+          }
+        ],
+        "staticProperties" : [
+
+        ],
+        "swiftCallName" : "ExportGenericMethodNamespace",
+        "tsFullPath" : "ExportGenericMethodNamespace"
       },
       {
         "cases" : [
@@ -17647,6 +18000,898 @@
         }
       },
       {
+        "abiName" : "bjs_exportGenericIdentity",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "genericParameters" : [
+          {
+            "name" : "T"
+          }
+        ],
+        "name" : "exportGenericIdentity",
+        "parameters" : [
+          {
+            "label" : "_",
+            "name" : "value",
+            "type" : {
+              "generic" : {
+                "_0" : "T"
+              }
+            }
+          }
+        ],
+        "returnType" : {
+          "generic" : {
+            "_0" : "T"
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_exportGenericEcho",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "genericParameters" : [
+          {
+            "name" : "T"
+          }
+        ],
+        "name" : "exportGenericEcho",
+        "parameters" : [
+          {
+            "label" : "_",
+            "name" : "value",
+            "type" : {
+              "generic" : {
+                "_0" : "T"
+              }
+            }
+          },
+          {
+            "label" : "tag",
+            "name" : "tag",
+            "type" : {
+              "integer" : {
+                "_0" : {
+                  "isSigned" : true,
+                  "width" : "word"
+                }
+              }
+            }
+          }
+        ],
+        "returnType" : {
+          "generic" : {
+            "_0" : "T"
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_exportGenericPickFirst",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "genericParameters" : [
+          {
+            "name" : "T"
+          }
+        ],
+        "name" : "exportGenericPickFirst",
+        "parameters" : [
+          {
+            "label" : "_",
+            "name" : "a",
+            "type" : {
+              "generic" : {
+                "_0" : "T"
+              }
+            }
+          },
+          {
+            "label" : "_",
+            "name" : "b",
+            "type" : {
+              "generic" : {
+                "_0" : "T"
+              }
+            }
+          }
+        ],
+        "returnType" : {
+          "generic" : {
+            "_0" : "T"
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_exportGenericPickSecond",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "genericParameters" : [
+          {
+            "name" : "T"
+          }
+        ],
+        "name" : "exportGenericPickSecond",
+        "parameters" : [
+          {
+            "label" : "_",
+            "name" : "a",
+            "type" : {
+              "generic" : {
+                "_0" : "T"
+              }
+            }
+          },
+          {
+            "label" : "_",
+            "name" : "b",
+            "type" : {
+              "generic" : {
+                "_0" : "T"
+              }
+            }
+          }
+        ],
+        "returnType" : {
+          "generic" : {
+            "_0" : "T"
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_makeExportGenericOutcome",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "name" : "makeExportGenericOutcome",
+        "parameters" : [
+          {
+            "label" : "_",
+            "name" : "value",
+            "type" : {
+              "integer" : {
+                "_0" : {
+                  "isSigned" : true,
+                  "width" : "word"
+                }
+              }
+            }
+          }
+        ],
+        "returnType" : {
+          "associatedValueEnum" : {
+            "_0" : "ExportGenericOutcome"
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_exportGenericOutcomeValue",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "name" : "exportGenericOutcomeValue",
+        "parameters" : [
+          {
+            "label" : "_",
+            "name" : "outcome",
+            "type" : {
+              "associatedValueEnum" : {
+                "_0" : "ExportGenericOutcome"
+              }
+            }
+          }
+        ],
+        "returnType" : {
+          "integer" : {
+            "_0" : {
+              "isSigned" : true,
+              "width" : "word"
+            }
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_exportGenericArrayIdentity",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "genericParameters" : [
+          {
+            "name" : "T"
+          }
+        ],
+        "name" : "exportGenericArrayIdentity",
+        "parameters" : [
+          {
+            "label" : "_",
+            "name" : "values",
+            "type" : {
+              "array" : {
+                "_0" : {
+                  "generic" : {
+                    "_0" : "T"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "returnType" : {
+          "array" : {
+            "_0" : {
+              "generic" : {
+                "_0" : "T"
+              }
+            }
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_exportGenericOptionalIdentity",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "genericParameters" : [
+          {
+            "name" : "T"
+          }
+        ],
+        "name" : "exportGenericOptionalIdentity",
+        "parameters" : [
+          {
+            "label" : "_",
+            "name" : "value",
+            "type" : {
+              "nullable" : {
+                "_0" : {
+                  "generic" : {
+                    "_0" : "T"
+                  }
+                },
+                "_1" : "null"
+              }
+            }
+          }
+        ],
+        "returnType" : {
+          "nullable" : {
+            "_0" : {
+              "generic" : {
+                "_0" : "T"
+              }
+            },
+            "_1" : "null"
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_exportGenericDictIdentity",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "genericParameters" : [
+          {
+            "name" : "T"
+          }
+        ],
+        "name" : "exportGenericDictIdentity",
+        "parameters" : [
+          {
+            "label" : "_",
+            "name" : "values",
+            "type" : {
+              "dictionary" : {
+                "_0" : {
+                  "generic" : {
+                    "_0" : "T"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "returnType" : {
+          "dictionary" : {
+            "_0" : {
+              "generic" : {
+                "_0" : "T"
+              }
+            }
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_exportGenericWrapPointAndTag",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "genericParameters" : [
+          {
+            "name" : "T"
+          }
+        ],
+        "name" : "exportGenericWrapPointAndTag",
+        "parameters" : [
+          {
+            "label" : "_",
+            "name" : "p",
+            "type" : {
+              "swiftStruct" : {
+                "_0" : "ExportGenericPoint"
+              }
+            }
+          },
+          {
+            "label" : "tag",
+            "name" : "tag",
+            "type" : {
+              "integer" : {
+                "_0" : {
+                  "isSigned" : true,
+                  "width" : "word"
+                }
+              }
+            }
+          },
+          {
+            "label" : "_",
+            "name" : "value",
+            "type" : {
+              "generic" : {
+                "_0" : "T"
+              }
+            }
+          }
+        ],
+        "returnType" : {
+          "generic" : {
+            "_0" : "T"
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_exportGenericCombineFirst",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "genericParameters" : [
+          {
+            "name" : "T"
+          },
+          {
+            "name" : "U"
+          }
+        ],
+        "name" : "exportGenericCombineFirst",
+        "parameters" : [
+          {
+            "label" : "_",
+            "name" : "a",
+            "type" : {
+              "generic" : {
+                "_0" : "T"
+              }
+            }
+          },
+          {
+            "label" : "_",
+            "name" : "b",
+            "type" : {
+              "generic" : {
+                "_0" : "U"
+              }
+            }
+          }
+        ],
+        "returnType" : {
+          "generic" : {
+            "_0" : "T"
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_exportGenericCombineSecond",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "genericParameters" : [
+          {
+            "name" : "T"
+          },
+          {
+            "name" : "U"
+          }
+        ],
+        "name" : "exportGenericCombineSecond",
+        "parameters" : [
+          {
+            "label" : "_",
+            "name" : "a",
+            "type" : {
+              "generic" : {
+                "_0" : "T"
+              }
+            }
+          },
+          {
+            "label" : "_",
+            "name" : "b",
+            "type" : {
+              "generic" : {
+                "_0" : "U"
+              }
+            }
+          }
+        ],
+        "returnType" : {
+          "generic" : {
+            "_0" : "U"
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_exportGenericCombineTripleLast",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "genericParameters" : [
+          {
+            "name" : "T"
+          },
+          {
+            "name" : "U"
+          },
+          {
+            "name" : "V"
+          }
+        ],
+        "name" : "exportGenericCombineTripleLast",
+        "parameters" : [
+          {
+            "label" : "_",
+            "name" : "a",
+            "type" : {
+              "generic" : {
+                "_0" : "T"
+              }
+            }
+          },
+          {
+            "label" : "_",
+            "name" : "b",
+            "type" : {
+              "generic" : {
+                "_0" : "U"
+              }
+            }
+          },
+          {
+            "label" : "_",
+            "name" : "c",
+            "type" : {
+              "generic" : {
+                "_0" : "V"
+              }
+            }
+          }
+        ],
+        "returnType" : {
+          "generic" : {
+            "_0" : "V"
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_exportGenericStore",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "genericParameters" : [
+          {
+            "name" : "T"
+          }
+        ],
+        "name" : "exportGenericStore",
+        "parameters" : [
+          {
+            "label" : "_",
+            "name" : "key",
+            "type" : {
+              "string" : {
+
+              }
+            }
+          },
+          {
+            "label" : "_",
+            "name" : "value",
+            "type" : {
+              "generic" : {
+                "_0" : "T"
+              }
+            }
+          }
+        ],
+        "returnType" : {
+          "void" : {
+
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_exportGenericLoad",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "genericParameters" : [
+          {
+            "name" : "T"
+          }
+        ],
+        "name" : "exportGenericLoad",
+        "parameters" : [
+          {
+            "label" : "_",
+            "name" : "key",
+            "type" : {
+              "string" : {
+
+              }
+            }
+          }
+        ],
+        "returnType" : {
+          "nullable" : {
+            "_0" : {
+              "generic" : {
+                "_0" : "T"
+              }
+            },
+            "_1" : "null"
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_lastWrappedPointX",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "name" : "lastWrappedPointX",
+        "parameters" : [
+
+        ],
+        "returnType" : {
+          "integer" : {
+            "_0" : {
+              "isSigned" : true,
+              "width" : "word"
+            }
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_lastWrappedPointY",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "name" : "lastWrappedPointY",
+        "parameters" : [
+
+        ],
+        "returnType" : {
+          "integer" : {
+            "_0" : {
+              "isSigned" : true,
+              "width" : "word"
+            }
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_lastTag",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "name" : "lastTag",
+        "parameters" : [
+
+        ],
+        "returnType" : {
+          "integer" : {
+            "_0" : {
+              "isSigned" : true,
+              "width" : "word"
+            }
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_exportGenericStoreNode",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "genericParameters" : [
+          {
+            "constraints" : [
+              "ExportGenericGraphNode"
+            ],
+            "name" : "T"
+          }
+        ],
+        "name" : "exportGenericStoreNode",
+        "parameters" : [
+          {
+            "label" : "_",
+            "name" : "node",
+            "type" : {
+              "generic" : {
+                "_0" : "T"
+              }
+            }
+          }
+        ],
+        "returnType" : {
+          "generic" : {
+            "_0" : "T"
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_exportGenericNodeRoundTrip",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "genericParameters" : [
+          {
+            "constraints" : [
+              "ExportGenericGraphNode"
+            ],
+            "name" : "T"
+          }
+        ],
+        "name" : "exportGenericNodeRoundTrip",
+        "parameters" : [
+          {
+            "label" : "_",
+            "name" : "node",
+            "type" : {
+              "generic" : {
+                "_0" : "T"
+              }
+            }
+          }
+        ],
+        "returnType" : {
+          "generic" : {
+            "_0" : "T"
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_exportGenericStoreNodeWithExtra",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "genericParameters" : [
+          {
+            "constraints" : [
+              "ExportGenericGraphNode"
+            ],
+            "name" : "T"
+          },
+          {
+            "name" : "U"
+          }
+        ],
+        "name" : "exportGenericStoreNodeWithExtra",
+        "parameters" : [
+          {
+            "label" : "_",
+            "name" : "node",
+            "type" : {
+              "generic" : {
+                "_0" : "T"
+              }
+            }
+          },
+          {
+            "label" : "_",
+            "name" : "extra",
+            "type" : {
+              "generic" : {
+                "_0" : "U"
+              }
+            }
+          }
+        ],
+        "returnType" : {
+          "generic" : {
+            "_0" : "U"
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_exportGenericLoadNode",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "genericParameters" : [
+          {
+            "constraints" : [
+              "ExportGenericGraphNode"
+            ],
+            "name" : "T"
+          }
+        ],
+        "name" : "exportGenericLoadNode",
+        "parameters" : [
+          {
+            "label" : "_",
+            "name" : "key",
+            "type" : {
+              "string" : {
+
+              }
+            }
+          }
+        ],
+        "returnType" : {
+          "nullable" : {
+            "_0" : {
+              "generic" : {
+                "_0" : "T"
+              }
+            },
+            "_1" : "null"
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_exportGenericSaveNode",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "genericParameters" : [
+          {
+            "constraints" : [
+              "ExportGenericGraphNode"
+            ],
+            "name" : "T"
+          }
+        ],
+        "name" : "exportGenericSaveNode",
+        "parameters" : [
+          {
+            "label" : "_",
+            "name" : "key",
+            "type" : {
+              "string" : {
+
+              }
+            }
+          },
+          {
+            "label" : "_",
+            "name" : "node",
+            "type" : {
+              "generic" : {
+                "_0" : "T"
+              }
+            }
+          }
+        ],
+        "returnType" : {
+          "void" : {
+
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_lastStoredNodeID",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "name" : "lastStoredNodeID",
+        "parameters" : [
+
+        ],
+        "returnType" : {
+          "string" : {
+
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_exportGenericThrowOrRoundTrip",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : true
+        },
+        "genericParameters" : [
+          {
+            "name" : "T"
+          }
+        ],
+        "name" : "exportGenericThrowOrRoundTrip",
+        "parameters" : [
+          {
+            "label" : "_",
+            "name" : "shouldThrow",
+            "type" : {
+              "bool" : {
+
+              }
+            }
+          },
+          {
+            "label" : "_",
+            "name" : "value",
+            "type" : {
+              "generic" : {
+                "_0" : "T"
+              }
+            }
+          }
+        ],
+        "returnType" : {
+          "generic" : {
+            "_0" : "T"
+          }
+        }
+      },
+      {
         "abiName" : "bjs_roundTripMessage",
         "effects" : {
           "isAsync" : false,
@@ -19035,6 +20280,43 @@
         ]
       },
       {
+        "methods" : [
+
+        ],
+        "name" : "ExportGenericGraphNode",
+        "properties" : [
+          {
+            "isReadonly" : true,
+            "name" : "id",
+            "type" : {
+              "string" : {
+
+              }
+            }
+          }
+        ]
+      },
+      {
+        "inheritedJSProtocols" : [
+          "ExportGenericGraphNode"
+        ],
+        "methods" : [
+
+        ],
+        "name" : "ExportGenericSite",
+        "properties" : [
+          {
+            "isReadonly" : true,
+            "name" : "region",
+            "type" : {
+              "string" : {
+
+              }
+            }
+          }
+        ]
+      },
+      {
         "isGenericBridgeable" : true,
         "methods" : [
           {
@@ -19472,6 +20754,372 @@
       },
       {
         "constructor" : {
+          "abiName" : "bjs_ExportGenericPoint_init",
+          "effects" : {
+            "isAsync" : false,
+            "isStatic" : false,
+            "isThrows" : false
+          },
+          "parameters" : [
+            {
+              "label" : "x",
+              "name" : "x",
+              "type" : {
+                "integer" : {
+                  "_0" : {
+                    "isSigned" : true,
+                    "width" : "word"
+                  }
+                }
+              }
+            },
+            {
+              "label" : "y",
+              "name" : "y",
+              "type" : {
+                "integer" : {
+                  "_0" : {
+                    "isSigned" : true,
+                    "width" : "word"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "explicitAccessControl" : "public",
+        "methods" : [
+
+        ],
+        "name" : "ExportGenericPoint",
+        "properties" : [
+          {
+            "isReadonly" : true,
+            "isStatic" : false,
+            "name" : "x",
+            "type" : {
+              "integer" : {
+                "_0" : {
+                  "isSigned" : true,
+                  "width" : "word"
+                }
+              }
+            }
+          },
+          {
+            "isReadonly" : true,
+            "isStatic" : false,
+            "name" : "y",
+            "type" : {
+              "integer" : {
+                "_0" : {
+                  "isSigned" : true,
+                  "width" : "word"
+                }
+              }
+            }
+          }
+        ],
+        "swiftCallName" : "ExportGenericPoint"
+      },
+      {
+        "constructor" : {
+          "abiName" : "bjs_ExportGenericMethodPair_init",
+          "effects" : {
+            "isAsync" : false,
+            "isStatic" : false,
+            "isThrows" : false
+          },
+          "parameters" : [
+
+          ]
+        },
+        "explicitAccessControl" : "public",
+        "methods" : [
+          {
+            "abiName" : "bjs_ExportGenericMethodPair_first",
+            "effects" : {
+              "isAsync" : false,
+              "isStatic" : false,
+              "isThrows" : false
+            },
+            "genericParameters" : [
+              {
+                "name" : "T"
+              }
+            ],
+            "name" : "first",
+            "parameters" : [
+              {
+                "label" : "_",
+                "name" : "value",
+                "type" : {
+                  "generic" : {
+                    "_0" : "T"
+                  }
+                }
+              }
+            ],
+            "returnType" : {
+              "generic" : {
+                "_0" : "T"
+              }
+            }
+          },
+          {
+            "abiName" : "bjs_ExportGenericMethodPair_maybe",
+            "effects" : {
+              "isAsync" : false,
+              "isStatic" : false,
+              "isThrows" : false
+            },
+            "genericParameters" : [
+              {
+                "name" : "T"
+              }
+            ],
+            "name" : "maybe",
+            "parameters" : [
+              {
+                "label" : "_",
+                "name" : "value",
+                "type" : {
+                  "generic" : {
+                    "_0" : "T"
+                  }
+                }
+              },
+              {
+                "label" : "present",
+                "name" : "present",
+                "type" : {
+                  "bool" : {
+
+                  }
+                }
+              }
+            ],
+            "returnType" : {
+              "nullable" : {
+                "_0" : {
+                  "generic" : {
+                    "_0" : "T"
+                  }
+                },
+                "_1" : "null"
+              }
+            }
+          },
+          {
+            "abiName" : "bjs_ExportGenericMethodPair_dict",
+            "effects" : {
+              "isAsync" : false,
+              "isStatic" : false,
+              "isThrows" : false
+            },
+            "genericParameters" : [
+              {
+                "name" : "T"
+              }
+            ],
+            "name" : "dict",
+            "parameters" : [
+              {
+                "label" : "_",
+                "name" : "value",
+                "type" : {
+                  "generic" : {
+                    "_0" : "T"
+                  }
+                }
+              }
+            ],
+            "returnType" : {
+              "dictionary" : {
+                "_0" : {
+                  "generic" : {
+                    "_0" : "T"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "abiName" : "bjs_ExportGenericMethodPair_static_wrap",
+            "effects" : {
+              "isAsync" : false,
+              "isStatic" : true,
+              "isThrows" : false
+            },
+            "genericParameters" : [
+              {
+                "name" : "T"
+              }
+            ],
+            "name" : "wrap",
+            "parameters" : [
+              {
+                "label" : "_",
+                "name" : "value",
+                "type" : {
+                  "generic" : {
+                    "_0" : "T"
+                  }
+                }
+              }
+            ],
+            "returnType" : {
+              "array" : {
+                "_0" : {
+                  "generic" : {
+                    "_0" : "T"
+                  }
+                }
+              }
+            },
+            "staticContext" : {
+              "structName" : {
+                "_0" : "ExportGenericMethodPair"
+              }
+            }
+          }
+        ],
+        "name" : "ExportGenericMethodPair",
+        "properties" : [
+
+        ],
+        "swiftCallName" : "ExportGenericMethodPair"
+      },
+      {
+        "conformedJSProtocols" : [
+          "ExportGenericGraphNode"
+        ],
+        "constructor" : {
+          "abiName" : "bjs_ExportGenericBuilding_init",
+          "effects" : {
+            "isAsync" : false,
+            "isStatic" : false,
+            "isThrows" : false
+          },
+          "parameters" : [
+            {
+              "label" : "id",
+              "name" : "id",
+              "type" : {
+                "string" : {
+
+                }
+              }
+            },
+            {
+              "label" : "floors",
+              "name" : "floors",
+              "type" : {
+                "integer" : {
+                  "_0" : {
+                    "isSigned" : true,
+                    "width" : "word"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "explicitAccessControl" : "public",
+        "methods" : [
+
+        ],
+        "name" : "ExportGenericBuilding",
+        "properties" : [
+          {
+            "isReadonly" : true,
+            "isStatic" : false,
+            "name" : "id",
+            "type" : {
+              "string" : {
+
+              }
+            }
+          },
+          {
+            "isReadonly" : true,
+            "isStatic" : false,
+            "name" : "floors",
+            "type" : {
+              "integer" : {
+                "_0" : {
+                  "isSigned" : true,
+                  "width" : "word"
+                }
+              }
+            }
+          }
+        ],
+        "swiftCallName" : "ExportGenericBuilding"
+      },
+      {
+        "conformedJSProtocols" : [
+          "ExportGenericSite"
+        ],
+        "constructor" : {
+          "abiName" : "bjs_ExportGenericCampus_init",
+          "effects" : {
+            "isAsync" : false,
+            "isStatic" : false,
+            "isThrows" : false
+          },
+          "parameters" : [
+            {
+              "label" : "id",
+              "name" : "id",
+              "type" : {
+                "string" : {
+
+                }
+              }
+            },
+            {
+              "label" : "region",
+              "name" : "region",
+              "type" : {
+                "string" : {
+
+                }
+              }
+            }
+          ]
+        },
+        "explicitAccessControl" : "public",
+        "methods" : [
+
+        ],
+        "name" : "ExportGenericCampus",
+        "properties" : [
+          {
+            "isReadonly" : true,
+            "isStatic" : false,
+            "name" : "id",
+            "type" : {
+              "string" : {
+
+              }
+            }
+          },
+          {
+            "isReadonly" : true,
+            "isStatic" : false,
+            "name" : "region",
+            "type" : {
+              "string" : {
+
+              }
+            }
+          }
+        ],
+        "swiftCallName" : "ExportGenericCampus"
+      },
+      {
+        "constructor" : {
           "abiName" : "bjs_Library_Shelf_init",
           "effects" : {
             "isAsync" : false,
@@ -19601,6 +21249,9 @@
         "swiftCallName" : "Library.Shelf.Divider"
       },
       {
+        "conformedJSProtocols" : [
+          "GenericRTNode"
+        ],
         "methods" : [
           {
             "abiName" : "bjs_GenericRTPoint_sum",
