@@ -160,6 +160,32 @@ public func genericExportCaseDistinct<
     }
 }
 
+// Throwing generic exports: the exception crosses through the side channel and
+// the JS wrapper rethrows it before lifting anything from the value stack.
+@JS public func genericPickOrThrow<T: BridgedSwiftGenericBridgeable>(
+    _ value: T,
+    _ shouldThrow: Bool
+) throws(JSException) -> T {
+    if shouldThrow {
+        throw JSException(JSError(message: "generic pick failed").jsValue)
+    }
+    return value
+}
+
+@JS struct GenericThrowingBox {
+    @JS init() {}
+
+    @JS func reject<T: BridgedSwiftGenericBridgeable>(_ value: T) throws(JSException) -> T {
+        throw JSException(JSError(message: "boxed rejection").jsValue)
+    }
+
+    // A renamed generic struct method must be attached under its JS name, the
+    // same name the d.ts declares.
+    @JS("passThrough") func forward<T: BridgedSwiftGenericBridgeable>(_ value: T) -> T {
+        value
+    }
+}
+
 // A namespaced final class: its token is `ExportGenericNamespace_Handle`, but
 // its d.ts interface is emitted at the top level, so the token table must not
 // spell the type as `ExportGenericNamespace.Handle`.

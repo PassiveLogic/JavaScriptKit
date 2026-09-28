@@ -631,7 +631,38 @@ public class ExportSwift {
                     }
                 }
                 let open1Arguments = genericNames.map { metatypeName($0) } + concreteABINames
-                printer.write("_\(abiName)_open1(\(open1Arguments.joined(separator: ", ")))")
+                let open1Call = "_\(abiName)_open1(\(open1Arguments.joined(separator: ", ")))"
+                if effects.isThrows {
+                    // Same throw-to-JS convention as concrete throwing exports:
+                    // the exception crosses through the side channel and the JS
+                    // wrapper rethrows it before lifting anything, so a thrown
+                    // call leaves the shared value stack balanced.
+                    printer.write("do {")
+                    printer.indent {
+                        printer.write("try \(open1Call)")
+                    }
+                    printer.write("} catch let error {")
+                    printer.indent {
+                        printer.write(
+                            multilineString: """
+                                if let error = error.thrownValue.object {
+                                    withExtendedLifetime(error) {
+                                        _swift_js_throw(Int32(bitPattern: $0.id))
+                                    }
+                                } else {
+                                    let jsError = JSError(message: error.description)
+                                    withExtendedLifetime(jsError.jsObject) {
+                                        _swift_js_throw(Int32(bitPattern: $0.id))
+                                    }
+                                }
+                                \(returnPlaceholderStmt())
+                                """
+                        )
+                    }
+                    printer.write("}")
+                } else {
+                    printer.write(open1Call)
+                }
             }
             printer.write(multilineString: entryDecl.description)
 
@@ -657,7 +688,10 @@ public class ExportSwift {
                     params.append("_ \(abiParam.name): \(abiParam.type.swiftType)")
                 }
 
-                printer.write("private func \(openName)\(genericClause)(\(params.joined(separator: ", "))) {")
+                let effectsClause = effects.isThrows ? " throws(JSException)" : ""
+                printer.write(
+                    "private func \(openName)\(genericClause)(\(params.joined(separator: ", ")))\(effectsClause) {"
+                )
                 printer.indent {
                     if k < count {
                         let nextOpenedName = genericNames[k]
@@ -669,7 +703,8 @@ public class ExportSwift {
                             callArguments.append(metatypeName(remainingName))
                         }
                         callArguments.append(contentsOf: concreteABINames)
-                        printer.write("_\(abiName)_open\(k + 1)(\(callArguments.joined(separator: ", ")))")
+                        let tryPrefix = effects.isThrows ? "try " : ""
+                        printer.write("\(tryPrefix)_\(abiName)_open\(k + 1)(\(callArguments.joined(separator: ", ")))")
                     } else {
                         // The standard builder-emitted body: `T` behaves like
                         // any other bridged type via its protocol requirements.

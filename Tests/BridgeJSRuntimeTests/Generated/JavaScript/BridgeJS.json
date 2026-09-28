@@ -18853,6 +18853,45 @@
         }
       },
       {
+        "abiName" : "bjs_exportGenericThrowOrRoundTrip",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : true
+        },
+        "genericParameters" : [
+          {
+            "name" : "T"
+          }
+        ],
+        "name" : "exportGenericThrowOrRoundTrip",
+        "parameters" : [
+          {
+            "label" : "_",
+            "name" : "shouldThrow",
+            "type" : {
+              "bool" : {
+
+              }
+            }
+          },
+          {
+            "label" : "_",
+            "name" : "value",
+            "type" : {
+              "generic" : {
+                "_0" : "T"
+              }
+            }
+          }
+        ],
+        "returnType" : {
+          "generic" : {
+            "_0" : "T"
+          }
+        }
+      },
+      {
         "abiName" : "bjs_roundTripMessage",
         "effects" : {
           "isAsync" : false,

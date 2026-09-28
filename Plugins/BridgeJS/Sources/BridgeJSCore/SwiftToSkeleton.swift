@@ -1767,13 +1767,6 @@ private final class ExportSwiftAPICollector: SyntaxAnyVisitor {
                 )
                 return nil
             }
-            if node.signature.effectSpecifiers?.throwsClause != nil {
-                diagnose(
-                    node: node,
-                    message: "Generic @JS functions cannot be 'throws' yet."
-                )
-                return nil
-            }
         }
 
         let genericParameterNames = genericParameters.map(\.name)

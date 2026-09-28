@@ -29,7 +29,7 @@ export const GenericFactoryValues = {
     Primary: 0,
 };
 
-export const BridgeTypes = { Bool: "Bool", Int: "Int", Int8: "Int8", UInt8: "UInt8", Int16: "Int16", UInt16: "UInt16", Int32: "Int32", UInt32: "UInt32", UInt: "UInt", Int64: "Int64", UInt64: "UInt64", Float: "Float", Double: "Double", String: "String", JSValue: "JSValue", ExportPoint: "ExportPoint", ExportNamespace_Metadata: "ExportNamespace_Metadata", GenericPair: "GenericPair", ExportBox: "ExportBox", GenericBox: "GenericBox", ExportGenericNamespace_Handle: "ExportGenericNamespace_Handle", ExportNamespace_Level: "ExportNamespace_Level", ExportMode: "ExportMode", ExportColor: "ExportColor", ExportTagged: "ExportTagged", GenericFactory: "GenericFactory" };
+export const BridgeTypes = { Bool: "Bool", Int: "Int", Int8: "Int8", UInt8: "UInt8", Int16: "Int16", UInt16: "UInt16", Int32: "Int32", UInt32: "UInt32", UInt: "UInt", Int64: "Int64", UInt64: "UInt64", Float: "Float", Double: "Double", String: "String", JSValue: "JSValue", ExportPoint: "ExportPoint", ExportNamespace_Metadata: "ExportNamespace_Metadata", GenericPair: "GenericPair", GenericThrowingBox: "GenericThrowingBox", ExportBox: "ExportBox", GenericBox: "GenericBox", ExportGenericNamespace_Handle: "ExportGenericNamespace_Handle", ExportNamespace_Level: "ExportNamespace_Level", ExportMode: "ExportMode", ExportColor: "ExportColor", ExportTagged: "ExportTagged", GenericFactory: "GenericFactory" };
 export async function createInstantiator(options, swift) {
     let instance;
     let memory;
@@ -443,6 +443,15 @@ export async function createInstantiator(options, swift) {
             return struct;
         },
     };
+    const __bjs_codec_M10TestModuleT18GenericThrowingBox = {
+        lower: (v) => {
+            structHelpers.M10TestModuleT18GenericThrowingBox.lower(v);
+        },
+        lift: () => {
+            const struct = structHelpers.M10TestModuleT18GenericThrowingBox.lift();
+            return struct;
+        },
+    };
     const __bjs_codec_M10TestModuleT9ExportBox = {
         lower: (v) => {
             ptrStack.push(v.pointer);
@@ -579,6 +588,36 @@ export async function createInstantiator(options, swift) {
             return instance1;
         }
     });
+    const __bjs_createStructHelpers_M10TestModuleT18GenericThrowingBox = () => ({
+        lower: (value) => {
+        },
+        lift: () => {
+            const instance1 = {  };
+            instance1.reject = function(value, typeT) {
+                const typeIdT = __bjs_typeIdForToken(typeT);
+                const codecT = __bjs_codecForTypeId(typeIdT);
+                structHelpers.M10TestModuleT18GenericThrowingBox.lower(this);
+                codecT.lower(value);
+                instance.exports.bjs_GenericThrowingBox_reject(typeIdT);
+                if (tmpRetException) {
+                    const error = swift.memory.getObject(tmpRetException);
+                    swift.memory.release(tmpRetException);
+                    tmpRetException = undefined;
+                    throw error;
+                }
+                return codecT.lift();
+            }.bind(instance1);
+            instance1.passThrough = function(value, typeT) {
+                const typeIdT = __bjs_typeIdForToken(typeT);
+                const codecT = __bjs_codecForTypeId(typeIdT);
+                structHelpers.M10TestModuleT18GenericThrowingBox.lower(this);
+                codecT.lower(value);
+                instance.exports.bjs_GenericThrowingBox_passThrough(typeIdT);
+                return codecT.lift();
+            }.bind(instance1);
+            return instance1;
+        }
+    });
     const __bjs_createEnumHelpers_M10TestModuleT12ExportTagged = () => ({
         lower: (value) => {
             const enumTag = value.tag;
@@ -708,6 +747,13 @@ export async function createInstantiator(options, swift) {
                 const value = structHelpers.M10TestModuleT11GenericPair.lift();
                 return swift.memory.retain(value);
             }
+            bjs["swift_js_struct_lower_GenericThrowingBox"] = function(objectId) {
+                structHelpers.M10TestModuleT18GenericThrowingBox.lower(swift.memory.getObject(objectId));
+            }
+            bjs["swift_js_struct_lift_GenericThrowingBox"] = function() {
+                const value = structHelpers.M10TestModuleT18GenericThrowingBox.lift();
+                return swift.memory.retain(value);
+            }
             bjs["bjs_core_register_type_handles"] = function(base, count) {
                 const codecs = [
                     __bjs_primitiveCodecs.Bool,
@@ -738,6 +784,7 @@ export async function createInstantiator(options, swift) {
                     __bjs_codec_M10TestModuleT11ExportPoint,
                     __bjs_codec_M10TestModuleT15ExportNamespaceT8Metadata,
                     __bjs_codec_M10TestModuleT11GenericPair,
+                    __bjs_codec_M10TestModuleT18GenericThrowingBox,
                     __bjs_codec_M10TestModuleT9ExportBox,
                     __bjs_codec_M10TestModuleT10GenericBox,
                     __bjs_codec_T22ExportGenericNamespaceT6Handle,
@@ -747,7 +794,7 @@ export async function createInstantiator(options, swift) {
                     __bjs_codec_M10TestModuleT12ExportTagged,
                     __bjs_codec_M10TestModuleT14GenericFactory,
                 ];
-                const tokens = ["ExportPoint", "ExportNamespace_Metadata", "GenericPair", "ExportBox", "GenericBox", "ExportGenericNamespace_Handle", "ExportNamespace_Level", "ExportMode", "ExportColor", "ExportTagged", "GenericFactory"];
+                const tokens = ["ExportPoint", "ExportNamespace_Metadata", "GenericPair", "GenericThrowingBox", "ExportBox", "GenericBox", "ExportGenericNamespace_Handle", "ExportNamespace_Level", "ExportMode", "ExportColor", "ExportTagged", "GenericFactory"];
                 const typeIds = new Int32Array(memory.buffer, base >>> 0, count >>> 0);
                 for (let i = 0; i < count; i++) {
                     __bjs_codecByTypeId.set(typeIds[i], codecs[i]);
@@ -1015,6 +1062,9 @@ export async function createInstantiator(options, swift) {
             const __bjs_helpers_M10TestModuleT11GenericPair = __bjs_createStructHelpers_M10TestModuleT11GenericPair();
             structHelpers.M10TestModuleT11GenericPair = __bjs_helpers_M10TestModuleT11GenericPair;
 
+            const __bjs_helpers_M10TestModuleT18GenericThrowingBox = __bjs_createStructHelpers_M10TestModuleT18GenericThrowingBox();
+            structHelpers.M10TestModuleT18GenericThrowingBox = __bjs_helpers_M10TestModuleT18GenericThrowingBox;
+
             const __bjs_helpers_M10TestModuleT12ExportTagged = __bjs_createEnumHelpers_M10TestModuleT12ExportTagged();
             enumHelpers.M10TestModuleT12ExportTagged = __bjs_helpers_M10TestModuleT12ExportTagged;
 
@@ -1124,6 +1174,19 @@ export async function createInstantiator(options, swift) {
                     instance.exports.bjs_genericExportCaseDistinct(typeIdT, typeIdt);
                     return codecT.lift();
                 },
+                genericPickOrThrow: function bjs_genericPickOrThrow(value, shouldThrow, typeT) {
+                    const typeIdT = __bjs_typeIdForToken(typeT);
+                    const codecT = __bjs_codecForTypeId(typeIdT);
+                    codecT.lower(value);
+                    instance.exports.bjs_genericPickOrThrow(shouldThrow, typeIdT);
+                    if (tmpRetException) {
+                        const error = swift.memory.getObject(tmpRetException);
+                        swift.memory.release(tmpRetException);
+                        tmpRetException = undefined;
+                        throw error;
+                    }
+                    return codecT.lift();
+                },
                 ExportMode: ExportModeValues,
                 ExportColor: ExportColorValues,
                 ExportTagged: ExportTaggedValues,
@@ -1166,6 +1229,13 @@ export async function createInstantiator(options, swift) {
                         codecT.lower(value);
                         instance.exports.bjs_GenericPair_static_wrap(typeIdT);
                         return __bjs_arrayCodec(codecT).lift();
+                    },
+                },
+                GenericThrowingBox: {
+                    init: function() {
+                        instance.exports.bjs_GenericThrowingBox_init();
+                        const structValue = structHelpers.M10TestModuleT18GenericThrowingBox.lift();
+                        return structValue;
                     },
                 },
             };

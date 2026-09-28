@@ -41,9 +41,13 @@ export interface GenericPair {
     maybe<T>(value: T, typeT: BridgeType<T>): T | null;
     dict<T>(value: T, typeT: BridgeType<T>): Record<string, T>;
 }
+export interface GenericThrowingBox {
+    reject<T>(value: T, typeT: BridgeType<T>): T;
+    passThrough<T>(value: T, typeT: BridgeType<T>): T;
+}
 declare const bridgeTypeBrand: unique symbol;
 export type BridgeType<T> = string & { readonly [bridgeTypeBrand]: (value: T) => void };
-export const BridgeTypes: { readonly Bool: BridgeType<boolean>; readonly Int: BridgeType<number>; readonly Int8: BridgeType<number>; readonly UInt8: BridgeType<number>; readonly Int16: BridgeType<number>; readonly UInt16: BridgeType<number>; readonly Int32: BridgeType<number>; readonly UInt32: BridgeType<number>; readonly UInt: BridgeType<number>; readonly Int64: BridgeType<bigint>; readonly UInt64: BridgeType<bigint>; readonly Float: BridgeType<number>; readonly Double: BridgeType<number>; readonly String: BridgeType<string>; readonly JSValue: BridgeType<any>; readonly ExportPoint: BridgeType<ExportPoint>; readonly ExportNamespace_Metadata: BridgeType<ExportNamespace.Metadata>; readonly GenericPair: BridgeType<GenericPair>; readonly ExportBox: BridgeType<ExportBox>; readonly GenericBox: BridgeType<GenericBox>; readonly ExportGenericNamespace_Handle: BridgeType<Handle>; readonly ExportNamespace_Level: BridgeType<ExportNamespace.LevelTag>; readonly ExportMode: BridgeType<ExportModeTag>; readonly ExportColor: BridgeType<ExportColorTag>; readonly ExportTagged: BridgeType<ExportTaggedTag>; readonly GenericFactory: BridgeType<GenericFactoryTag>; };
+export const BridgeTypes: { readonly Bool: BridgeType<boolean>; readonly Int: BridgeType<number>; readonly Int8: BridgeType<number>; readonly UInt8: BridgeType<number>; readonly Int16: BridgeType<number>; readonly UInt16: BridgeType<number>; readonly Int32: BridgeType<number>; readonly UInt32: BridgeType<number>; readonly UInt: BridgeType<number>; readonly Int64: BridgeType<bigint>; readonly UInt64: BridgeType<bigint>; readonly Float: BridgeType<number>; readonly Double: BridgeType<number>; readonly String: BridgeType<string>; readonly JSValue: BridgeType<any>; readonly ExportPoint: BridgeType<ExportPoint>; readonly ExportNamespace_Metadata: BridgeType<ExportNamespace.Metadata>; readonly GenericPair: BridgeType<GenericPair>; readonly GenericThrowingBox: BridgeType<GenericThrowingBox>; readonly ExportBox: BridgeType<ExportBox>; readonly GenericBox: BridgeType<GenericBox>; readonly ExportGenericNamespace_Handle: BridgeType<Handle>; readonly ExportNamespace_Level: BridgeType<ExportNamespace.LevelTag>; readonly ExportMode: BridgeType<ExportModeTag>; readonly ExportColor: BridgeType<ExportColorTag>; readonly ExportTagged: BridgeType<ExportTaggedTag>; readonly GenericFactory: BridgeType<GenericFactoryTag>; };
 export type LevelObject = typeof ExportNamespace.LevelValues;
 
 export type ExportModeObject = typeof ExportModeValues;
@@ -99,6 +103,7 @@ export type Exports = {
     genericExportCombine<T, U>(a: T, b: U, typeT: BridgeType<T>, typeU: BridgeType<U>): T;
     genericExportCombineReturnU<T, U>(a: T, b: U, typeT: BridgeType<T>, typeU: BridgeType<U>): U;
     genericExportCaseDistinct<T, t>(a: T, b: t, typeT: BridgeType<T>, typet: BridgeType<t>): T;
+    genericPickOrThrow<T>(value: T, shouldThrow: boolean, typeT: BridgeType<T>): T;
     ExportMode: ExportModeObject
     ExportColor: ExportColorObject
     ExportTagged: ExportTaggedObject
@@ -124,6 +129,9 @@ export type Exports = {
     GenericPair: {
         init(): GenericPair;
         wrap<T>(value: T, typeT: BridgeType<T>): T[];
+    },
+    GenericThrowingBox: {
+        init(): GenericThrowingBox;
     },
 }
 export type Imports = {

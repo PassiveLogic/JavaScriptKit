@@ -222,6 +222,18 @@ public func exportGenericSaveNode<
 
 @JS public func lastStoredNodeID() -> String { _lastStoredNodeID }
 
+// Throwing generic exports: the exception crosses through the side channel and
+// the JS wrapper rethrows it before lifting anything from the value stack.
+@JS public func exportGenericThrowOrRoundTrip<T: BridgedSwiftGenericBridgeable>(
+    _ shouldThrow: Bool,
+    _ value: T
+) throws(JSException) -> T {
+    if shouldThrow {
+        throw JSException(JSError(message: "ExportTestError").jsValue)
+    }
+    return value
+}
+
 // Protocol refinement: a conformer of the refined protocol must satisfy a
 // constraint on the base protocol, both in Swift and in the JS-side token check.
 @JS public protocol ExportGenericSite: ExportGenericGraphNode {

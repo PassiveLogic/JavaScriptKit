@@ -238,13 +238,15 @@ import Testing
     }
 
     @Test
-    func throwsGenericExportUnsupported() {
-        expectDiagnostic(
-            source: """
-                @JS public func f<T: BridgedSwiftGenericBridgeable>(_ v: T) throws(JSException) -> T { v }
-                """,
-            contains: "Generic @JS functions cannot be 'throws' yet."
+    func throwsGenericExportIsAccepted() throws {
+        let skeleton = try makeSkeleton(
+            """
+            @JS public func f<T: BridgedSwiftGenericBridgeable>(_ v: T) throws(JSException) -> T { v }
+            """
         )
+        let function = try #require(skeleton.exported?.functions.first)
+        #expect(function.effects.isThrows)
+        #expect(function.genericParameterNames == ["T"])
     }
 
     @Test(arguments: [
@@ -307,16 +309,18 @@ import Testing
     }
 
     @Test
-    func genericInstanceMethodThrowsIsRejected() {
-        expectDiagnostic(
-            source: """
-                @JS class Box {
-                    @JS init() {}
-                    @JS func wrap<T: BridgedSwiftGenericBridgeable>(_ v: T) throws(JSException) -> T { v }
-                }
-                """,
-            contains: "Generic @JS functions cannot be 'throws' yet."
+    func genericInstanceMethodThrowsIsAccepted() throws {
+        let skeleton = try makeSkeleton(
+            """
+            @JS class Box {
+                @JS init() {}
+                @JS func wrap<T: BridgedSwiftGenericBridgeable>(_ v: T) throws(JSException) -> T { v }
+            }
+            """
         )
+        let method = try #require(skeleton.exported?.classes.first?.methods.first)
+        #expect(method.effects.isThrows)
+        #expect(method.genericParameterNames == ["T"])
     }
 
     @Test

@@ -245,7 +245,27 @@ The generic parameter may also be wrapped as `[T]`, `T?`, or `[String: T]` in pa
 }
 ```
 
-Every declared generic parameter must be used in at least one parameter or the return type; a fully unused generic parameter is rejected. The result must be one of the declared generic parameters (such as `T` or `U`), a supported wrapper of one (`[T]`, `T?`, `[String: T]`), or `Void` — returning a concrete non-`Void` type from a generic `@JS` function is not supported. Generic `@JS` functions must be synchronous (see <doc:Unsupported-Features>).
+Every declared generic parameter must be used in at least one parameter or the return type; a fully unused generic parameter is rejected. The result must be one of the declared generic parameters (such as `T` or `U`), a supported wrapper of one (`[T]`, `T?`, `[String: T]`), or `Void` — returning a concrete non-`Void` type from a generic `@JS` function is not supported. Generic `@JS` functions may be `throws(JSException)` but not `async` (see <doc:Unsupported-Features>).
+
+A throwing generic function follows the same error convention as any other throwing export — the exception surfaces as a catchable JavaScript error, thrown by the generated wrapper before any result is read back:
+
+```swift
+@JS public func pickOrThrow<T: BridgedSwiftGenericBridgeable>(_ value: T, _ fail: Bool) throws(JSException) -> T {
+    if fail {
+        throw JSException(JSError(message: "pick failed").jsValue)
+    }
+    return value
+}
+```
+
+```javascript
+exports.pickOrThrow(42, false, BridgeTypes.Int); // 42
+try {
+    exports.pickOrThrow(42, true, BridgeTypes.Int);
+} catch (error) {
+    console.log(error.message); // "pick failed"
+}
+```
 
 #### Constraining a generic parameter to `@JS` protocols
 

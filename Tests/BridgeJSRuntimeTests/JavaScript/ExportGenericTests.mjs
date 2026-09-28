@@ -257,4 +257,33 @@ export function runExportGenericTests(exports) {
     );
     assert.equal(campus.region, "north");
     assert.equal(exports.lastStoredNodeID(), "campus-1");
+
+    // Throwing generic exports: the Swift exception surfaces as a catchable JS
+    // error from the wrapper, thrown before any lift runs.
+    assert.equal(
+        exports.exportGenericThrowOrRoundTrip(false, 42, BridgeTypes.Int),
+        42
+    );
+    assert.equal(
+        exports.exportGenericThrowOrRoundTrip(
+            false,
+            { x: 5, y: 6 },
+            BridgeTypes.ExportGenericPoint
+        ).y,
+        6
+    );
+    assert.throws(
+        () => exports.exportGenericThrowOrRoundTrip(true, 7, BridgeTypes.Int),
+        /ExportTestError/
+    );
+    // A thrown call must not strand values on the shared stacks: the next
+    // generic call has to read its own arguments and result back.
+    assert.equal(
+        exports.exportGenericThrowOrRoundTrip(
+            false,
+            { x: 8, y: 9 },
+            BridgeTypes.ExportGenericPoint
+        ).x,
+        8
+    );
 }

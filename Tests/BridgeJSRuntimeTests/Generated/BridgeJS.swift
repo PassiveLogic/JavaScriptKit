@@ -12555,6 +12555,45 @@ public func _bjs_lastStoredNodeID() -> Void {
     #endif
 }
 
+#if hasFeature(Embedded)
+@_expose(wasm, "bjs_exportGenericThrowOrRoundTrip")
+@_cdecl("bjs_exportGenericThrowOrRoundTrip")
+public func _bjs_exportGenericThrowOrRoundTrip(_ shouldThrow: Int32, _ _generic0TypeId: Int32) -> Void {
+    fatalError("Generic @JS exported functions are not supported in Embedded Swift")
+}
+#else
+@_expose(wasm, "bjs_exportGenericThrowOrRoundTrip")
+@_cdecl("bjs_exportGenericThrowOrRoundTrip")
+public func _bjs_exportGenericThrowOrRoundTrip(_ shouldThrow: Int32, _ _generic0TypeId: Int32) -> Void {
+    #if arch(wasm32)
+    let _generic0Type = Unmanaged<BridgeJSTypeHandle>.fromOpaque(UnsafeRawPointer(bitPattern: UInt(UInt32(bitPattern: _generic0TypeId)))!).takeUnretainedValue().type
+    do {
+        try _bjs_exportGenericThrowOrRoundTrip_open1(_generic0Type, shouldThrow)
+    } catch let error {
+        if let error = error.thrownValue.object {
+            withExtendedLifetime(error) {
+                _swift_js_throw(Int32(bitPattern: $0.id))
+            }
+        } else {
+            let jsError = JSError(message: error.description)
+            withExtendedLifetime(jsError.jsObject) {
+                _swift_js_throw(Int32(bitPattern: $0.id))
+            }
+        }
+        return
+    }
+    #else
+    fatalError("Only available on WebAssembly")
+    #endif
+}
+private func _bjs_exportGenericThrowOrRoundTrip_open1<T: BridgedSwiftGenericBridgeable>(_ _generic0Type: T.Type, _ shouldThrow: Int32) throws(JSException) {
+    let value = T.bridgeJSStackPop()
+    let shouldThrow = Bool.bridgeJSLiftParameter(shouldThrow)
+    let ret: T = try exportGenericThrowOrRoundTrip(_: shouldThrow, _: value)
+    ret.bridgeJSStackPush()
+}
+#endif
+
 @_expose(wasm, "bjs_roundTripMessage")
 @_cdecl("bjs_roundTripMessage")
 public func _bjs_roundTripMessage(_ message: Int32) -> Void {

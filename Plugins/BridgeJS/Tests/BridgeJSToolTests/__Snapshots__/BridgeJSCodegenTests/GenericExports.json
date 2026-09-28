@@ -1045,6 +1045,45 @@
             "_0" : "T"
           }
         }
+      },
+      {
+        "abiName" : "bjs_genericPickOrThrow",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : true
+        },
+        "genericParameters" : [
+          {
+            "name" : "T"
+          }
+        ],
+        "name" : "genericPickOrThrow",
+        "parameters" : [
+          {
+            "label" : "_",
+            "name" : "value",
+            "type" : {
+              "generic" : {
+                "_0" : "T"
+              }
+            }
+          },
+          {
+            "label" : "_",
+            "name" : "shouldThrow",
+            "type" : {
+              "bool" : {
+
+              }
+            }
+          }
+        ],
+        "returnType" : {
+          "generic" : {
+            "_0" : "T"
+          }
+        }
       }
     ],
     "protocols" : [
@@ -1326,6 +1365,87 @@
 
         ],
         "swiftCallName" : "GenericPair"
+      },
+      {
+        "constructor" : {
+          "abiName" : "bjs_GenericThrowingBox_init",
+          "effects" : {
+            "isAsync" : false,
+            "isStatic" : false,
+            "isThrows" : false
+          },
+          "parameters" : [
+
+          ]
+        },
+        "methods" : [
+          {
+            "abiName" : "bjs_GenericThrowingBox_reject",
+            "effects" : {
+              "isAsync" : false,
+              "isStatic" : false,
+              "isThrows" : true
+            },
+            "genericParameters" : [
+              {
+                "name" : "T"
+              }
+            ],
+            "name" : "reject",
+            "parameters" : [
+              {
+                "label" : "_",
+                "name" : "value",
+                "type" : {
+                  "generic" : {
+                    "_0" : "T"
+                  }
+                }
+              }
+            ],
+            "returnType" : {
+              "generic" : {
+                "_0" : "T"
+              }
+            }
+          },
+          {
+            "abiName" : "bjs_GenericThrowingBox_passThrough",
+            "effects" : {
+              "isAsync" : false,
+              "isStatic" : false,
+              "isThrows" : false
+            },
+            "genericParameters" : [
+              {
+                "name" : "T"
+              }
+            ],
+            "jsName" : "passThrough",
+            "name" : "forward",
+            "parameters" : [
+              {
+                "label" : "_",
+                "name" : "value",
+                "type" : {
+                  "generic" : {
+                    "_0" : "T"
+                  }
+                }
+              }
+            ],
+            "returnType" : {
+              "generic" : {
+                "_0" : "T"
+              }
+            }
+          }
+        ],
+        "name" : "GenericThrowingBox",
+        "properties" : [
+
+        ],
+        "swiftCallName" : "GenericThrowingBox"
       }
     ]
   },

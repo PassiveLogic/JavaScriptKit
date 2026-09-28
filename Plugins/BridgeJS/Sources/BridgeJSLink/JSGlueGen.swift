@@ -274,6 +274,21 @@ enum GenericJSCodegen {
         ]
     }
 
+    /// The rethrow sequence a throwing export's wrapper runs right after the
+    /// wasm call, mirroring `ExportedThunkBuilder.checkExceptionLines()` for
+    /// glue emitted outside the thunk builder.
+    static func checkExceptionLines() -> [String] {
+        let exceptionVariable = JSGlueVariableScope.reservedStorageToReturnException
+        return [
+            "if (\(exceptionVariable)) {",
+            "    const error = \(JSGlueVariableScope.reservedSwift).memory.getObject(\(exceptionVariable));",
+            "    \(JSGlueVariableScope.reservedSwift).memory.release(\(exceptionVariable));",
+            "    \(exceptionVariable) = undefined;",
+            "    throw error;",
+            "}",
+        ]
+    }
+
     /// Shared generic runtime: a type-ID-keyed codec table plus codec
     /// combinators. Each container shape's stack ABI is described once here and
     /// instantiated with an element codec, instead of cloning the lowering and
@@ -2716,15 +2731,19 @@ struct IntrinsicJSFragment: Sendable {
             var paramForwardings: [String] = []
             for param in method.parameters {
                 if let genericName = param.type.referencedGenericName {
-                    if let codecVariable = codecVariables[genericName],
+                    guard let codecVariable = codecVariables[genericName],
                         let lowerStatement = GenericJSCodegen.genericCodecLowerStatement(
                             type: param.type,
                             codec: codecVariable,
                             value: param.name
                         )
-                    {
-                        printer.write(lowerStatement)
+                    else {
+                        throw BridgeJSLinkError(
+                            message:
+                                "Generic codec for '\(genericName)' was not declared before lowering parameter '\(param.name)'"
+                        )
                     }
+                    printer.write(lowerStatement)
                 } else {
                     let fragment = try IntrinsicJSFragment.lowerParameter(type: param.type)
                     let loweredValues = try fragment.printCode([param.name], methodContext)
@@ -2733,6 +2752,11 @@ struct IntrinsicJSFragment: Sendable {
             }
             paramForwardings.append(contentsOf: method.genericParameterNames.compactMap { typeIdVariables[$0] })
             printer.write("instance.exports.\(method.abiName)(\(paramForwardings.joined(separator: ", ")));")
+            if method.effects.isThrows {
+                // Rethrow before lifting: a thrown call pushed nothing onto the
+                // shared value stack, so the lift below must not run.
+                printer.write(lines: GenericJSCodegen.checkExceptionLines())
+            }
             if let returnGenericName = method.returnType.referencedGenericName,
                 let codecVariable = codecVariables[returnGenericName],
                 let liftExpression = GenericJSCodegen.genericCodecLiftExpression(
