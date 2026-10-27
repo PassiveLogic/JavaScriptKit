@@ -10,25 +10,41 @@ import _CJavaScriptEventLoop
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 struct QueueState: Sendable {
     fileprivate var headJob: UnownedJob? = nil
+    /// The last job in the queue, which has the lowest priority. `nil` when the queue is empty.
+    fileprivate var tailJob: UnownedJob? = nil
     fileprivate var isSpinning: Bool = false
 }
 
 @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
 extension JavaScriptEventLoop {
 
+    /// Inserts `newJob` after every queued job of the same or a higher priority.
+    ///
+    /// The queue is ordered by descending priority, so a job whose priority is not higher than the
+    /// tail's goes right after the tail, without a scan from the head.
     func insertJobQueue(job newJob: UnownedJob) {
-        withUnsafeMutablePointer(to: &queueState.headJob) { headJobPtr in
-            var position: UnsafeMutablePointer<UnownedJob?> = headJobPtr
-            while let cur = position.pointee {
-                if cur.rawPriority < newJob.rawPriority {
-                    newJob.nextInQueue().pointee = cur
-                    position.pointee = newJob
-                    return
-                }
-                position = cur.nextInQueue()
-            }
+        if let tailJob = queueState.tailJob, newJob.rawPriority <= tailJob.rawPriority {
             newJob.nextInQueue().pointee = nil
-            position.pointee = newJob
+            tailJob.nextInQueue().pointee = newJob
+            queueState.tailJob = newJob
+        } else {
+            let isLast = withUnsafeMutablePointer(to: &queueState.headJob) { headJobPtr -> Bool in
+                var position: UnsafeMutablePointer<UnownedJob?> = headJobPtr
+                while let cur = position.pointee {
+                    if cur.rawPriority < newJob.rawPriority {
+                        newJob.nextInQueue().pointee = cur
+                        position.pointee = newJob
+                        return false
+                    }
+                    position = cur.nextInQueue()
+                }
+                newJob.nextInQueue().pointee = nil
+                position.pointee = newJob
+                return true
+            }
+            if isLast {
+                queueState.tailJob = newJob
+            }
         }
 
         // TODO: use CAS when supporting multi-threaded environment
@@ -82,6 +98,9 @@ extension JavaScriptEventLoop {
     func claimNextFromQueue() -> UnownedJob? {
         if let job = self.queueState.headJob {
             self.queueState.headJob = job.nextInQueue().pointee
+            if self.queueState.headJob == nil {
+                self.queueState.tailJob = nil
+            }
             return job
         }
         return nil

@@ -113,6 +113,77 @@ final class JavaScriptEventLoopTests: XCTestCase {
         XCTAssertEqual(context.completed, ["t4", "t3", "t5"])
     }
 
+    func testTaskPriorityOrderWithMixedPriorities() async throws {
+        final class Context: @unchecked Sendable {
+            var completed: [String] = []
+            var expectedCount = 0
+            var continuation: CheckedContinuation<Void, Never>?
+
+            func record(_ name: String) {
+                completed.append(name)
+                if completed.count == expectedCount {
+                    continuation?.resume()
+                    continuation = nil
+                }
+            }
+        }
+        /// Starts tasks without awaiting them, so no await raises the priority of a queued task.
+        func run(expectedCount: Int, _ start: @escaping (Context) -> Void) async -> [String] {
+            let context = Context()
+            context.expectedCount = expectedCount
+            await withCheckedContinuation { continuation in
+                context.continuation = continuation
+                start(context)
+            }
+            return context.completed
+        }
+
+        let burst: [(String, TaskPriority)] = [
+            ("low1", .low), ("medium1", .medium), ("low2", .low), ("high1", .high),
+            ("medium2", .medium), ("low3", .low), ("high2", .high), ("medium3", .medium),
+        ]
+        let burstOrder = await run(expectedCount: burst.count) { context in
+            for (name, priority) in burst {
+                Task(priority: priority) { context.record(name) }
+            }
+        }
+        XCTAssertEqual(burstOrder, ["high1", "high2", "medium1", "medium2", "medium3", "low1", "low2", "low3"])
+
+        let nestedOrder = await run(expectedCount: 7) { context in
+            Task(priority: .medium) {
+                context.record("outer")
+                let nested: [(String, TaskPriority)] = [
+                    ("nestedLow1", .low), ("nestedHigh", .high), ("nestedMedium", .medium), ("nestedLow2", .low),
+                ]
+                for (name, priority) in nested {
+                    Task(priority: priority) { context.record(name) }
+                }
+            }
+            Task(priority: .medium) { context.record("medium") }
+            Task(priority: .low) { context.record("low") }
+        }
+        XCTAssertEqual(
+            nestedOrder,
+            ["outer", "nestedHigh", "medium", "nestedMedium", "low", "nestedLow1", "nestedLow2"]
+        )
+
+        let priorities: [TaskPriority] = [.low, .high, .background, .medium, .utility, .userInitiated]
+        let many = (0..<600).map { index in ("\(index)", priorities[index % priorities.count]) }
+        let manyOrder = await run(expectedCount: many.count) { context in
+            for (name, priority) in many {
+                Task(priority: priority) { context.record(name) }
+            }
+        }
+        let expectedManyOrder = many.enumerated()
+            .sorted { lhs, rhs in
+                lhs.element.1.rawValue != rhs.element.1.rawValue
+                    ? lhs.element.1.rawValue > rhs.element.1.rawValue
+                    : lhs.offset < rhs.offset
+            }
+            .map(\.element.0)
+        XCTAssertEqual(manyOrder, expectedManyOrder)
+    }
+
     // MARK: - Promise Tests
 
     func testPromiseResolution() async throws {
