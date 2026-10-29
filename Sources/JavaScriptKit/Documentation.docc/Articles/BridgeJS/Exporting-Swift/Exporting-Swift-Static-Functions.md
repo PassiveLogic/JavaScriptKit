@@ -162,5 +162,5 @@ const result: string = Utils.String.uppercase("world");
 | Class `class func` | ✅ |
 | Enum `static func` | ✅ |
 | Namespace enum `static func` | ✅ |
-| Generic static functions | ❌ |
+| Generic static functions: `static func make<T: BridgedSwiftGenericBridgeable>(_ v: T) -> T` (see <doc:Exporting-Swift-Function>) | ✅ |
 | Protocol static requirements | ❌ |

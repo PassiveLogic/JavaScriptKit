@@ -1,0 +1,388 @@
+{
+  "exported" : {
+    "aliases" : [
+
+    ],
+    "classes" : [
+      {
+        "constructor" : {
+          "abiName" : "bjs_GraphRegistry_init",
+          "effects" : {
+            "isAsync" : false,
+            "isStatic" : false,
+            "isThrows" : false
+          },
+          "parameters" : [
+
+          ]
+        },
+        "isFinal" : true,
+        "methods" : [
+          {
+            "abiName" : "bjs_GraphRegistry_register",
+            "effects" : {
+              "isAsync" : false,
+              "isStatic" : false,
+              "isThrows" : false
+            },
+            "genericParameters" : [
+              {
+                "constraints" : [
+                  "ExportGraphNode"
+                ],
+                "name" : "T"
+              }
+            ],
+            "name" : "register",
+            "parameters" : [
+              {
+                "label" : "_",
+                "name" : "node",
+                "type" : {
+                  "generic" : {
+                    "_0" : "T"
+                  }
+                }
+              }
+            ],
+            "returnType" : {
+              "generic" : {
+                "_0" : "T"
+              }
+            }
+          },
+          {
+            "abiName" : "bjs_GraphRegistry_static_pin",
+            "effects" : {
+              "isAsync" : false,
+              "isStatic" : true,
+              "isThrows" : false
+            },
+            "genericParameters" : [
+              {
+                "constraints" : [
+                  "ExportGraphNode"
+                ],
+                "name" : "T"
+              }
+            ],
+            "name" : "pin",
+            "parameters" : [
+              {
+                "label" : "_",
+                "name" : "node",
+                "type" : {
+                  "generic" : {
+                    "_0" : "T"
+                  }
+                }
+              }
+            ],
+            "returnType" : {
+              "generic" : {
+                "_0" : "T"
+              }
+            },
+            "staticContext" : {
+              "className" : {
+                "_0" : "GraphRegistry"
+              }
+            }
+          }
+        ],
+        "name" : "GraphRegistry",
+        "properties" : [
+
+        ],
+        "swiftCallName" : "GraphRegistry"
+      }
+    ],
+    "enums" : [
+
+    ],
+    "exposeToGlobal" : false,
+    "functions" : [
+      {
+        "abiName" : "bjs_storeGraphNode",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "genericParameters" : [
+          {
+            "constraints" : [
+              "ExportGraphNode"
+            ],
+            "name" : "T"
+          }
+        ],
+        "name" : "storeGraphNode",
+        "parameters" : [
+          {
+            "label" : "_",
+            "name" : "node",
+            "type" : {
+              "generic" : {
+                "_0" : "T"
+              }
+            }
+          }
+        ],
+        "returnType" : {
+          "generic" : {
+            "_0" : "T"
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_storeLabeledGraphNode",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "genericParameters" : [
+          {
+            "constraints" : [
+              "ExportGraphNode",
+              "ExportLabeled"
+            ],
+            "name" : "T"
+          }
+        ],
+        "name" : "storeLabeledGraphNode",
+        "parameters" : [
+          {
+            "label" : "_",
+            "name" : "node",
+            "type" : {
+              "generic" : {
+                "_0" : "T"
+              }
+            }
+          }
+        ],
+        "returnType" : {
+          "generic" : {
+            "_0" : "T"
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_pairGraphNodes",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "genericParameters" : [
+          {
+            "constraints" : [
+              "ExportGraphNode"
+            ],
+            "name" : "T"
+          },
+          {
+            "name" : "U"
+          }
+        ],
+        "name" : "pairGraphNodes",
+        "parameters" : [
+          {
+            "label" : "_",
+            "name" : "a",
+            "type" : {
+              "generic" : {
+                "_0" : "T"
+              }
+            }
+          },
+          {
+            "label" : "_",
+            "name" : "b",
+            "type" : {
+              "generic" : {
+                "_0" : "U"
+              }
+            }
+          }
+        ],
+        "returnType" : {
+          "generic" : {
+            "_0" : "U"
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_loadGraphNode",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "genericParameters" : [
+          {
+            "constraints" : [
+              "ExportGraphNode"
+            ],
+            "name" : "T"
+          }
+        ],
+        "name" : "loadGraphNode",
+        "parameters" : [
+          {
+            "label" : "_",
+            "name" : "key",
+            "type" : {
+              "string" : {
+
+              }
+            }
+          }
+        ],
+        "returnType" : {
+          "nullable" : {
+            "_0" : {
+              "generic" : {
+                "_0" : "T"
+              }
+            },
+            "_1" : "null"
+          }
+        }
+      },
+      {
+        "abiName" : "bjs_storeAnyLabeled",
+        "effects" : {
+          "isAsync" : false,
+          "isStatic" : false,
+          "isThrows" : false
+        },
+        "genericParameters" : [
+          {
+            "constraints" : [
+              "ExportGraphNode"
+            ],
+            "name" : "T"
+          }
+        ],
+        "name" : "storeAnyLabeled",
+        "parameters" : [
+          {
+            "label" : "_",
+            "name" : "node",
+            "type" : {
+              "generic" : {
+                "_0" : "T"
+              }
+            }
+          }
+        ],
+        "returnType" : {
+          "generic" : {
+            "_0" : "T"
+          }
+        }
+      }
+    ],
+    "protocols" : [
+      {
+        "methods" : [
+
+        ],
+        "name" : "ExportGraphNode",
+        "properties" : [
+          {
+            "isReadonly" : true,
+            "name" : "id",
+            "type" : {
+              "string" : {
+
+              }
+            }
+          }
+        ]
+      },
+      {
+        "methods" : [
+
+        ],
+        "name" : "ExportLabeled",
+        "properties" : [
+          {
+            "isReadonly" : true,
+            "name" : "label",
+            "type" : {
+              "string" : {
+
+              }
+            }
+          }
+        ]
+      },
+      {
+        "inheritedJSProtocols" : [
+          "ExportGraphNode"
+        ],
+        "isGenericBridgeable" : true,
+        "methods" : [
+
+        ],
+        "name" : "ExportLabeledNode",
+        "properties" : [
+          {
+            "isReadonly" : true,
+            "name" : "label",
+            "type" : {
+              "string" : {
+
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "structs" : [
+      {
+        "conformedJSProtocols" : [
+          "ExportGraphNode"
+        ],
+        "methods" : [
+
+        ],
+        "name" : "ExportGraphBuilding",
+        "properties" : [
+          {
+            "isReadonly" : true,
+            "isStatic" : false,
+            "name" : "id",
+            "type" : {
+              "string" : {
+
+              }
+            }
+          },
+          {
+            "isReadonly" : true,
+            "isStatic" : false,
+            "name" : "floors",
+            "type" : {
+              "integer" : {
+                "_0" : {
+                  "isSigned" : true,
+                  "width" : "word"
+                }
+              }
+            }
+          }
+        ],
+        "swiftCallName" : "ExportGraphBuilding"
+      }
+    ]
+  },
+  "moduleName" : "TestModule",
+  "usedExternalModules" : [
+
+  ]
+}
